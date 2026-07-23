@@ -1,0 +1,229 @@
+import { Routes, Route, Navigate, Outlet, Link, useParams } from "react-router-dom";
+import { ChevronLeft, Play, Lock } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { AppShell } from "@/components/AppShell";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { useAuth } from "@/context/AuthContext";
+import { supabase } from "@/lib/supabase";
+import type { Workout, WorkoutProgram } from "@donatellox/types";
+
+import LoginPage from "@/pages/LoginPage";
+import RegisterPage from "@/pages/RegisterPage";
+import ForgotPasswordPage from "@/pages/ForgotPasswordPage";
+import VerifyEmailPage from "@/pages/VerifyEmailPage";
+import OnboardingPage from "@/pages/OnboardingPage";
+import DashboardPage from "@/pages/DashboardPage";
+import ProgramsPage from "@/pages/ProgramsPage";
+import ProgressPage from "@/pages/ProgressPage";
+import ProfilePage from "@/pages/ProfilePage";
+import SubscriptionPage from "@/pages/SubscriptionPage";
+import WorkoutPlayerPage from "@/pages/WorkoutPlayerPage";
+import NotFoundPage from "@/pages/NotFoundPage";
+
+/**
+ * Полноэкранный загрузчик, пока восстанавливается сессия Supabase.
+ * Используется до того, как AuthProvider определится с наличием сессии.
+ */
+function SplashScreen() {
+  return (
+    <div className="flex min-h-dvh items-center justify-center bg-ink-950">
+      <div className="h-8 w-8 animate-spin rounded-full border-2 border-ink-600 border-t-volt-400" />
+    </div>
+  );
+}
+
+/** Корневой "/" — маршрутизирует в зависимости от того, вошёл ли пользователь и заполнил ли анкету. */
+function RootRedirect() {
+  const { session, profile, loading } = useAuth();
+
+  if (loading) return <SplashScreen />;
+  if (!session) return <Navigate to="/login" replace />;
+  if (profile && !profile.onboardingCompleted) return <Navigate to="/onboarding" replace />;
+  return <Navigate to="/dashboard" replace />;
+}
+
+/** Layout для основных вкладок (нижняя навигация видна на этих страницах). */
+function TabsLayout() {
+  return (
+    <AppShell>
+      <Outlet />
+    </AppShell>
+  );
+}
+
+/**
+ * Детальная страница программы тренировок: список тренировок программы.
+ * Премиум-программы без активной подписки показывают пейволл вместо списка.
+ */
+function ProgramDetailPage() {
+  const { slug } = useParams<{ slug: string }>();
+
+  const { data: program, isLoading } = useQuery({
+    queryKey: ["program", slug],
+    queryFn: async (): Promise<WorkoutProgram> => {
+      const { data, error } = await supabase
+        .from("workout_programs")
+        .select("*")
+        .eq("slug", slug)
+        .single();
+      if (error) throw error;
+      return data as unknown as WorkoutProgram;
+    },
+    enabled: !!slug,
+  });
+
+  const { data: workouts, isLoading: workoutsLoading } = useQuery({
+    queryKey: ["program-workouts", program?.id],
+    queryFn: async (): Promise<Workout[]> => {
+      const { data, error } = await supabase
+        .from("workouts")
+        .select("*, sets:workout_sets(*)")
+        .eq("program_id", program!.id)
+        .order("order", { ascending: true });
+      if (error) throw error;
+      return (data ?? []) as unknown as Workout[];
+    },
+    enabled: !!program?.id,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="px-5 pt-8">
+        <div className="card h-24 animate-pulse bg-ink-800" />
+      </div>
+    );
+  }
+
+  if (!program) {
+    return (
+      <div className="px-5 pt-8 text-center text-neutral-400">Программа не найдена.</div>
+    );
+  }
+
+  return (
+    <div className="px-5 pt-8">
+      <Link to="/programs" className="mb-4 inline-flex items-center gap-1 text-sm text-neutral-400">
+        <ChevronLeft size={16} /> Все программы
+      </Link>
+
+      <h1 className="font-display text-2xl font-bold">{program.title}</h1>
+      <p className="mt-1 text-neutral-400">{program.description}</p>
+      <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium uppercase tracking-wide text-volt-400">
+        <span className="rounded-full border border-volt-400/30 px-2.5 py-1">
+          {program.durationWeeks} недель
+        </span>
+        <span className="rounded-full border border-volt-400/30 px-2.5 py-1">
+          {program.workoutsPerWeek}x в неделю
+        </span>
+        <span className="rounded-full border border-volt-400/30 px-2.5 py-1">
+          {program.difficulty}
+        </span>
+      </div>
+
+      <div className="mt-6 space-y-3">
+        {workoutsLoading &&
+          Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="card h-20 animate-pulse bg-ink-800" />
+          ))}
+
+        {workouts?.map((workout, index) =>
+          program.isPremium ? (
+            <Link
+              key={workout.id}
+              to="/subscription"
+              className="card flex items-center justify-between opacity-70 hover:opacity-100"
+            >
+              <div>
+                <p className="text-xs text-neutral-500">Тренировка {index + 1}</p>
+                <p className="font-semibold">{workout.title}</p>
+              </div>
+              <Lock size={18} className="text-neutral-500" />
+            </Link>
+          ) : (
+            <Link
+              key={workout.id}
+              to={`/workout/${workout.id}`}
+              className="card flex items-center justify-between hover:border-ink-500"
+            >
+              <div>
+                <p className="text-xs text-neutral-500">Тренировка {index + 1}</p>
+                <p className="font-semibold">{workout.title}</p>
+                <p className="mt-0.5 text-sm text-neutral-400">
+                  {workout.estimatedDurationMinutes} мин · {workout.sets.length} упражнений
+                </p>
+              </div>
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-volt-400 text-ink-950">
+                <Play size={16} fill="currentColor" />
+              </span>
+            </Link>
+          ),
+        )}
+
+        {!workoutsLoading && workouts?.length === 0 && (
+          <p className="py-8 text-center text-neutral-500">
+            Тренировки для этой программы скоро появятся.
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<RootRedirect />} />
+
+      {/* Публичные маршруты авторизации */}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/verify-email" element={<VerifyEmailPage />} />
+
+      {/* Анкета — отдельно от табов, доступна сразу после регистрации */}
+      <Route
+        path="/onboarding"
+        element={
+          <ProtectedRoute>
+            <OnboardingPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Полноэкранные защищённые страницы без нижней навигации */}
+      <Route
+        path="/workout/:workoutId"
+        element={
+          <ProtectedRoute>
+            <WorkoutPlayerPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/subscription"
+        element={
+          <ProtectedRoute>
+            <SubscriptionPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Основные вкладки приложения (с нижней навигацией) */}
+      <Route
+        element={
+          <ProtectedRoute>
+            <TabsLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/programs" element={<ProgramsPage />} />
+        <Route path="/programs/:slug" element={<ProgramDetailPage />} />
+        <Route path="/progress" element={<ProgressPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+      </Route>
+
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
+  );
+}

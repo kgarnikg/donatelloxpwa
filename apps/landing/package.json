@@ -1,0 +1,40 @@
+{
+  "name": "@donatellox/landing",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DonatelloX \u2014 \u043c\u0430\u0440\u043a\u0435\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0439 \u043b\u0435\u043d\u0434\u0438\u043d\u0433",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5175",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --port 4175",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "type-check": "tsc -b",
+    "clean": "rimraf dist .turbo"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^6.28.0",
+    "lucide-react": "^0.462.0",
+    "clsx": "^2.1.1",
+    "@donatellox/types": "workspace:*",
+    "@donatellox/theme": "workspace:*"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "vite": "^6.0.1",
+    "typescript": "^5.7.2",
+    "tailwindcss": "^3.4.17",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "eslint": "^8.57.1",
+    "rimraf": "^6.0.1",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.16"
+  }
+}

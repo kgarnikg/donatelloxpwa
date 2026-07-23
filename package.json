@@ -1,0 +1,39 @@
+{
+  "name": "donatellox",
+  "version": "0.1.0",
+  "private": true,
+  "description": "DonatelloX — фитнес-платформа: PWA, админ-панель и лендинг на монорепозитории",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "turbo run dev",
+    "dev:web": "turbo run dev --filter=@donatellox/web",
+    "dev:admin": "turbo run dev --filter=@donatellox/admin",
+    "dev:landing": "turbo run dev --filter=@donatellox/landing",
+    "build": "turbo run build",
+    "build:web": "turbo run build --filter=@donatellox/web",
+    "build:admin": "turbo run build --filter=@donatellox/admin",
+    "build:landing": "turbo run build --filter=@donatellox/landing",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rimraf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,css}\"",
+    "prepare": "husky || true"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2",
+    "prettier": "^3.4.2",
+    "rimraf": "^6.0.1",
+    "husky": "^9.1.7",
+    "@types/node": "^22.10.2"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

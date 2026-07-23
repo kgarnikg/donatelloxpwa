@@ -1,0 +1,39 @@
+@import "@donatellox/theme/fonts.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-ink-700;
+  }
+  body {
+    @apply bg-ink-950 text-neutral-0;
+  }
+  ::selection {
+    @apply bg-volt-400/30 text-neutral-0;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md bg-volt-400 px-5 py-3
+      font-semibold text-ink-950 transition hover:bg-volt-300 active:scale-[0.98]
+      disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-md border border-ink-600 bg-ink-800
+      px-5 py-3 font-medium text-neutral-0 transition hover:bg-ink-700 active:scale-[0.98];
+  }
+  .card {
+    @apply rounded-lg border border-ink-700 bg-ink-900 p-5 shadow-card;
+  }
+  .input-field {
+    @apply w-full rounded-md border border-ink-600 bg-ink-800 px-4 py-3 text-neutral-0
+      placeholder:text-neutral-500 focus:border-volt-400 focus:outline-none focus:ring-1 focus:ring-volt-400;
+  }
+  .field-error {
+    @apply mt-1 text-sm text-danger;
+  }
+}

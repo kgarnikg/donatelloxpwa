@@ -1,0 +1,23 @@
+{
+  "name": "@donatellox/theme",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Общая конфигурация Tailwind CSS и дизайн-система DonatelloX",
+  "type": "module",
+  "main": "./tailwind.config.js",
+  "exports": {
+    "./tailwind.config": "./tailwind.config.js",
+    "./tokens": "./src/tokens.ts",
+    "./fonts.css": "./src/fonts.css"
+  },
+  "scripts": {
+    "lint": "echo \"@donatellox/theme: nothing to lint\""
+  },
+  "dependencies": {
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
+  }
+}

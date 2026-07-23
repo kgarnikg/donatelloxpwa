@@ -1,0 +1,18 @@
+/**
+ * @donatellox/theme/fonts.css
+ * Подключить один раз в апп-энтри (main.tsx) каждого приложения.
+ * Manrope — через Google Fonts CDN (Fontsource можно подключить позже для self-hosting).
+ */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --font-body: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
