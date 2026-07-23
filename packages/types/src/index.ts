@@ -83,7 +83,7 @@ export interface UserProfile {
 // Подписки и платежи
 // ---------------------------------------------------------------------------
 
-export type SubscriptionPlan = "monthly" | "quarterly" | "annual" | "lifetime";
+export type SubscriptionPlan = "monthly" | "quarterly" | "semiannual" | "annual";
 
 export type SubscriptionStatus =
   | "trialing"

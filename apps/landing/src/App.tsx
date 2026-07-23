@@ -4,7 +4,9 @@ import { Footer } from "@/components/Footer";
 import { LegalPage } from "@/components/LegalPage";
 import { Hero } from "@/sections/Hero";
 import { Modules } from "@/sections/Modules";
+import { WeeklyPlan } from "@/sections/WeeklyPlan";
 import { Pricing } from "@/sections/Pricing";
+import { Steps } from "@/sections/Steps";
 import { Faq } from "@/sections/Faq";
 import { CallToAction } from "@/sections/CallToAction";
 
@@ -13,7 +15,9 @@ function HomePage() {
     <>
       <Hero />
       <Modules />
+      <WeeklyPlan />
       <Pricing />
+      <Steps />
       <Faq />
       <CallToAction />
     </>

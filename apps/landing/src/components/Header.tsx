@@ -3,8 +3,10 @@ import { Menu, X } from "lucide-react";
 import clsx from "clsx";
 
 const NAV_LINKS = [
-  { href: "#modules", label: "Возможности" },
-  { href: "#pricing", label: "Тарифы" },
+  { href: "#modules", label: "О программе" },
+  { href: "#plan", label: "Твой план" },
+  { href: "#pricing", label: "Цены" },
+  { href: "#how-it-works", label: "Как начать" },
   { href: "#faq", label: "Вопросы" },
 ];
 

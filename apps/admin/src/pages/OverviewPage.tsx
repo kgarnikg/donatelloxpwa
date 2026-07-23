@@ -100,7 +100,7 @@ export default function OverviewPage() {
         <StatCard
           icon={TrendingUp}
           label="Доход за 30 дней"
-          value={isLoading ? "…" : `${(data?.revenueLast30Days ?? 0).toFixed(2)} €`}
+          value={isLoading ? "…" : `$${(data?.revenueLast30Days ?? 0).toFixed(2)}`}
         />
       </div>
 

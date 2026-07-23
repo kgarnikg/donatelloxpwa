@@ -7,9 +7,10 @@ import { supabase } from "@/lib/supabase";
 import { useActiveSubscription } from "@/lib/queries";
 
 const PLANS: { value: SubscriptionPlan; label: string; price: string; note?: string }[] = [
-  { value: "monthly", label: "Месяц", price: "9,90 €" },
-  { value: "quarterly", label: "3 месяца", price: "24,90 €", note: "Экономия 16%" },
-  { value: "annual", label: "Год", price: "79,90 €", note: "Экономия 33%" },
+  { value: "monthly", label: "1 месяц", price: "19,99 $" },
+  { value: "quarterly", label: "3 месяца", price: "45 $", note: "15 $/мес · экономия 25%" },
+  { value: "semiannual", label: "6 месяцев", price: "71,9 $", note: "11,9 $/мес · экономия 40%" },
+  { value: "annual", label: "12 месяцев", price: "96,9 $", note: "8,08 $/мес · экономия 60%" },
 ];
 
 const PROVIDERS: { value: PaymentProvider; label: string; hint: string }[] = [
