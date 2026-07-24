@@ -10,7 +10,7 @@ const NAV_LINKS = [
   { href: "#faq", label: "Вопросы" },
 ];
 
-const APP_URL = import.meta.env.VITE_WEB_APP_URL || "/";
+const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -53,7 +53,7 @@ export function Header() {
           <a href={APP_URL} className="text-sm font-medium text-neutral-300 hover:text-neutral-0">
             Войти
           </a>
-          <a href={`${APP_URL}#/register`} className="btn-primary py-2.5 text-sm">
+          <a href={`${APP_URL}/register`} className="btn-primary py-2.5 text-sm">
             Начать бесплатно
           </a>
         </div>
@@ -83,7 +83,7 @@ export function Header() {
             <a href={APP_URL} className="text-sm font-medium text-neutral-300">
               Войти
             </a>
-            <a href={`${APP_URL}#/register`} className="btn-primary text-sm">
+            <a href={`${APP_URL}/register`} className="btn-primary text-sm">
               Начать бесплатно
             </a>
           </nav>

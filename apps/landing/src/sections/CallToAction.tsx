@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 
-const APP_URL = import.meta.env.VITE_WEB_APP_URL || "/";
+const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
 
 export function CallToAction() {
   return (
@@ -13,7 +13,7 @@ export function CallToAction() {
           <p className="mx-auto mt-4 max-w-md text-neutral-400">
             Заполни короткую анкету, получи персональную программу и сделай первый шаг уже сегодня.
           </p>
-          <a href={`${APP_URL}#/register`} className="btn-primary mx-auto mt-8 w-fit">
+          <a href={`${APP_URL}/register`} className="btn-primary mx-auto mt-8 w-fit">
             Начать бесплатно <ArrowRight size={18} />
           </a>
         </div>

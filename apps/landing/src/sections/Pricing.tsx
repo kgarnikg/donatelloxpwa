@@ -2,7 +2,7 @@ import { Check, Flame } from "lucide-react";
 import clsx from "clsx";
 import type { SubscriptionPlan } from "@donatellox/types";
 
-const APP_URL = import.meta.env.VITE_WEB_APP_URL || "/";
+const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
 
 interface PlanCard {
   value: SubscriptionPlan;
@@ -127,7 +127,7 @@ export function Pricing() {
               </ul>
 
               <a
-                href={`${APP_URL}#/register`}
+                href={`${APP_URL}/register`}
                 className={clsx(
                   "mt-8 w-full",
                   plan.highlightBadge ? "btn-primary" : "btn-secondary",

@@ -1,6 +1,6 @@
 import { ArrowRight, PlayCircle } from "lucide-react";
 
-const APP_URL = import.meta.env.VITE_WEB_APP_URL || "/";
+const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
 
 export function Hero() {
   return (
@@ -33,7 +33,7 @@ export function Hero() {
         </p>
 
         <div className="mt-8 flex animate-fade-in flex-col gap-3 sm:flex-row">
-          <a href={`${APP_URL}#/register`} className="btn-primary">
+          <a href={`${APP_URL}/register`} className="btn-primary">
             Начать сейчас <ArrowRight size={18} />
           </a>
           <a href="#modules" className="btn-secondary">
