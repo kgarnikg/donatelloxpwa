@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
-import { Flame, Trophy, ChevronRight } from "lucide-react";
+import { Flame, Trophy, ChevronRight, Sparkles, Star } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
-import { useActiveSubscription, usePrograms } from "@/lib/queries";
+import { useActiveSubscription, usePrograms, useWorkoutStats, useRecommendedProgram } from "@/lib/queries";
+import { getDailyQuote } from "@/lib/quotes";
 
 export default function DashboardPage() {
   const { profile } = useAuth();
   const { data: subscription } = useActiveSubscription();
   const { data: programs, isLoading } = usePrograms();
+  const { data: stats } = useWorkoutStats();
+  const { data: recommended } = useRecommendedProgram();
 
   const firstName = profile?.fullName?.split(" ")[0] ?? "спортсмен";
+  const otherPrograms = programs?.filter((p) => p.id !== recommended?.id) ?? [];
 
   return (
     <div className="px-5 pt-8">
@@ -16,6 +20,11 @@ export default function DashboardPage() {
         <p className="text-neutral-400">Привет, {firstName} 👋</p>
         <h1 className="font-display text-2xl font-bold">Готовы к тренировке?</h1>
       </header>
+
+      <div className="card mb-6 flex items-start gap-3 border-ink-700 bg-ink-900">
+        <Sparkles size={18} className="mt-0.5 shrink-0 text-volt-400" />
+        <p className="text-sm italic text-neutral-300">{getDailyQuote()}</p>
+      </div>
 
       {!subscription && (
         <Link
@@ -36,7 +45,7 @@ export default function DashboardPage() {
             <Flame size={20} />
           </div>
           <div>
-            <p className="text-xl font-bold">0</p>
+            <p className="text-xl font-bold">{stats?.currentStreakDays ?? 0}</p>
             <p className="text-xs text-neutral-400">дней подряд</p>
           </div>
         </div>
@@ -45,11 +54,32 @@ export default function DashboardPage() {
             <Trophy size={20} />
           </div>
           <div>
-            <p className="text-xl font-bold">0</p>
+            <p className="text-xl font-bold">{stats?.totalWorkouts ?? 0}</p>
             <p className="text-xs text-neutral-400">тренировок</p>
           </div>
         </div>
       </div>
+
+      {recommended && (
+        <div className="mb-6">
+          <div className="mb-3 flex items-center gap-1.5">
+            <Star size={16} className="text-volt-400" fill="currentColor" />
+            <h2 className="font-display text-lg font-semibold">Рекомендовано для вас</h2>
+          </div>
+          <Link
+            to={`/programs/${recommended.slug}`}
+            className="card flex items-center justify-between border-volt-400/40 hover:border-volt-400"
+          >
+            <div>
+              <p className="font-semibold">{recommended.title}</p>
+              <p className="mt-1 text-sm text-neutral-400">
+                {recommended.durationWeeks} нед · {recommended.workoutsPerWeek}×/нед · {recommended.difficulty}
+              </p>
+            </div>
+            <ChevronRight className="shrink-0 text-neutral-500" />
+          </Link>
+        </div>
+      )}
 
       <div className="mb-4 flex items-center justify-between">
         <h2 className="font-display text-lg font-semibold">Программы для вас</h2>
@@ -70,7 +100,7 @@ export default function DashboardPage() {
           </p>
         )}
 
-        {programs?.slice(0, 4).map((program) => (
+        {otherPrograms.slice(0, 3).map((program) => (
           <Link
             key={program.id}
             to={`/programs/${program.slug}`}

@@ -24,6 +24,13 @@ const ACTIVITY_LEVELS = [
   { value: "very_active", label: "Очень активный" },
 ] as const;
 
+const TRAINING_FORMATS = [
+  { value: "gym", label: "В зале" },
+  { value: "home", label: "Дома" },
+] as const;
+
+const DAYS_OPTIONS = [2, 3, 4, 5, 6] as const;
+
 export default function OnboardingPage() {
   const navigate = useNavigate();
   const { authUser, refreshProfile } = useAuth();
@@ -38,10 +45,20 @@ export default function OnboardingPage() {
     formState: { errors, isSubmitting },
   } = useForm<OnboardingInput>({
     resolver: zodResolver(onboardingSchema),
-    defaultValues: { gender: "unspecified", activityLevel: "moderate", goals: [], preferredLanguage: "ru" },
+    defaultValues: {
+      gender: "unspecified",
+      activityLevel: "moderate",
+      goals: [],
+      trainingFormat: "gym",
+      daysPerWeek: 3,
+      preferredLanguage: "ru",
+    },
   });
 
   const selectedGoals = watch("goals");
+  const trainingFormat = watch("trainingFormat");
+  const daysPerWeek = watch("daysPerWeek");
+  const gender = watch("gender");
 
   function toggleGoal(goal: FitnessGoal) {
     const next = selectedGoals?.includes(goal)
@@ -62,6 +79,8 @@ export default function OnboardingPage() {
       weight_kg: values.weightKg ?? null,
       activity_level: values.activityLevel,
       goals: values.goals,
+      training_format: values.trainingFormat,
+      days_per_week: values.daysPerWeek ?? null,
       health_notes: values.healthNotes ?? null,
       preferred_language: values.preferredLanguage,
       updated_at: new Date().toISOString(),
@@ -77,7 +96,7 @@ export default function OnboardingPage() {
     navigate("/dashboard", { replace: true });
   }
 
-  const steps = ["Цели", "О себе", "Готово"];
+  const steps = ["Цели", "О себе", "Формат", "Готово"];
 
   return (
     <div className="min-h-dvh bg-ink-950 px-6 py-10">
@@ -132,14 +151,48 @@ export default function OnboardingPage() {
           {step === 1 && (
             <fieldset className="space-y-4">
               <h1 className="font-display text-2xl font-bold">Расскажите о себе</h1>
+
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-neutral-300">Пол</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { value: "male", label: "Мужской" },
+                    { value: "female", label: "Женский" },
+                    { value: "unspecified", label: "Не указывать" },
+                  ].map((g) => (
+                    <button
+                      type="button"
+                      key={g.value}
+                      onClick={() => setValue("gender", g.value as typeof gender)}
+                      className={clsx(
+                        "rounded-md border px-2 py-2.5 text-sm font-medium transition",
+                        gender === g.value
+                          ? "border-volt-400 bg-volt-400/10 text-volt-300"
+                          : "border-ink-600 bg-ink-800 text-neutral-300",
+                      )}
+                    >
+                      {g.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-neutral-300">Дата рождения</label>
+                <input type="date" className="input-field" {...register("birthDate")} />
+                {errors.birthDate && <p className="field-error">{errors.birthDate.message}</p>}
+              </div>
+
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-neutral-300">Рост, см</label>
                   <input type="number" className="input-field" {...register("heightCm")} />
+                  {errors.heightCm && <p className="field-error">{errors.heightCm.message}</p>}
                 </div>
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-neutral-300">Вес, кг</label>
                   <input type="number" className="input-field" {...register("weightKg")} />
+                  {errors.weightKg && <p className="field-error">{errors.weightKg.message}</p>}
                 </div>
               </div>
 
@@ -173,6 +226,65 @@ export default function OnboardingPage() {
           )}
 
           {step === 2 && (
+            <fieldset className="space-y-5">
+              <h1 className="font-display text-2xl font-bold">Как вам удобно тренироваться?</h1>
+
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-neutral-300">Формат тренировок</label>
+                <div className="grid grid-cols-2 gap-3">
+                  {TRAINING_FORMATS.map((f) => (
+                    <button
+                      type="button"
+                      key={f.value}
+                      onClick={() => setValue("trainingFormat", f.value)}
+                      className={clsx(
+                        "rounded-md border px-4 py-3.5 text-center font-medium transition",
+                        trainingFormat === f.value
+                          ? "border-volt-400 bg-volt-400/10 text-volt-300"
+                          : "border-ink-600 bg-ink-800 text-neutral-200 hover:border-ink-500",
+                      )}
+                    >
+                      {f.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-neutral-300">
+                  Сколько дней в неделю готовы тренироваться?
+                </label>
+                <div className="grid grid-cols-5 gap-2">
+                  {DAYS_OPTIONS.map((d) => (
+                    <button
+                      type="button"
+                      key={d}
+                      onClick={() => setValue("daysPerWeek", d)}
+                      className={clsx(
+                        "rounded-md border py-2.5 text-sm font-semibold transition",
+                        daysPerWeek === d
+                          ? "border-volt-400 bg-volt-400/10 text-volt-300"
+                          : "border-ink-600 bg-ink-800 text-neutral-300",
+                      )}
+                    >
+                      {d}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <button type="button" onClick={() => setStep(1)} className="btn-secondary flex-1">
+                  Назад
+                </button>
+                <button type="button" onClick={() => setStep(3)} className="btn-primary flex-1">
+                  Далее
+                </button>
+              </div>
+            </fieldset>
+          )}
+
+          {step === 3 && (
             <fieldset>
               <h1 className="font-display text-2xl font-bold">Всё готово!</h1>
               <p className="mt-1 text-neutral-400">
@@ -184,7 +296,7 @@ export default function OnboardingPage() {
                 </div>
               )}
               <div className="mt-8 flex gap-3">
-                <button type="button" onClick={() => setStep(1)} className="btn-secondary flex-1">
+                <button type="button" onClick={() => setStep(2)} className="btn-secondary flex-1">
                   Назад
                 </button>
                 <button type="submit" disabled={isSubmitting} className="btn-primary flex-1">

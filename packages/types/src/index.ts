@@ -49,6 +49,8 @@ export type FitnessGoal =
 
 export type ActivityLevel = "sedentary" | "light" | "moderate" | "active" | "very_active";
 
+export type TrainingFormat = "gym" | "home";
+
 export interface User {
   id: UUID;
   email: string;
@@ -74,6 +76,8 @@ export interface UserProfile {
   weightKg?: number;
   activityLevel: ActivityLevel;
   goals: FitnessGoal[];
+  trainingFormat: TrainingFormat;
+  daysPerWeek?: number;
   healthNotes?: string;
   preferredLanguage: LocaleCode;
   updatedAt: ISODateString;

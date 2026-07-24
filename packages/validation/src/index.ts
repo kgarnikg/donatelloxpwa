@@ -119,6 +119,8 @@ export const onboardingSchema = z.object({
   weightKg: z.coerce.number().min(30, "Минимум 30 кг").max(300, "Максимум 300 кг").optional(),
   activityLevel: activityLevelSchema,
   goals: z.array(fitnessGoalSchema).min(1, "Выберите хотя бы одну цель"),
+  trainingFormat: z.enum(["gym", "home"]),
+  daysPerWeek: z.coerce.number().min(1).max(7).optional(),
   healthNotes: z.string().max(1000).optional(),
   preferredLanguage: localeSchema,
 });
@@ -129,7 +131,7 @@ export type OnboardingInput = z.infer<typeof onboardingSchema>;
 // Подписки и платежи
 // ---------------------------------------------------------------------------
 
-export const subscriptionPlanSchema = z.enum(["monthly", "quarterly", "annual", "lifetime"]);
+export const subscriptionPlanSchema = z.enum(["monthly", "quarterly", "semiannual", "annual"]);
 
 export const paymentProviderSchema = z.enum(["stripe", "paypal", "yookassa", "usdt"]);
 

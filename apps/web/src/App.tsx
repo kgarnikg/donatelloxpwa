@@ -14,6 +14,7 @@ import VerifyEmailPage from "@/pages/VerifyEmailPage";
 import OnboardingPage from "@/pages/OnboardingPage";
 import DashboardPage from "@/pages/DashboardPage";
 import ProgramsPage from "@/pages/ProgramsPage";
+import NutritionPage from "@/pages/NutritionPage";
 import ProgressPage from "@/pages/ProgressPage";
 import ProfilePage from "@/pages/ProfilePage";
 import SubscriptionPage from "@/pages/SubscriptionPage";
@@ -219,6 +220,7 @@ export default function App() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/programs" element={<ProgramsPage />} />
         <Route path="/programs/:slug" element={<ProgramDetailPage />} />
+        <Route path="/nutrition" element={<NutritionPage />} />
         <Route path="/progress" element={<ProgressPage />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Route>

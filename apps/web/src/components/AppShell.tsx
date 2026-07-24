@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
-import { Home, Dumbbell, LineChart, User } from "lucide-react";
+import { Home, Dumbbell, Apple, LineChart, User } from "lucide-react";
 import clsx from "clsx";
 
 const NAV_ITEMS = [
   { to: "/dashboard", label: "Главная", icon: Home },
   { to: "/programs", label: "Программы", icon: Dumbbell },
+  { to: "/nutrition", label: "Питание", icon: Apple },
   { to: "/progress", label: "Прогресс", icon: LineChart },
   { to: "/profile", label: "Профиль", icon: User },
 ];
