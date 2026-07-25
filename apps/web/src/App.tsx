@@ -17,6 +17,8 @@ import ProgramsPage from "@/pages/ProgramsPage";
 import NutritionPage from "@/pages/NutritionPage";
 import ProgressPage from "@/pages/ProgressPage";
 import ProfilePage from "@/pages/ProfilePage";
+import LanguageSettingsPage from "@/pages/LanguageSettingsPage";
+import NotificationsSettingsPage from "@/pages/NotificationsSettingsPage";
 import SubscriptionPage from "@/pages/SubscriptionPage";
 import WorkoutPlayerPage from "@/pages/WorkoutPlayerPage";
 import NotFoundPage from "@/pages/NotFoundPage";
@@ -224,6 +226,23 @@ export default function App() {
         <Route path="/progress" element={<ProgressPage />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Route>
+
+      <Route
+        path="/profile/language"
+        element={
+          <ProtectedRoute>
+            <LanguageSettingsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile/notifications"
+        element={
+          <ProtectedRoute>
+            <NotificationsSettingsPage />
+          </ProtectedRoute>
+        }
+      />
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, LogOut, CreditCard, Globe, Bell, Pencil, Check, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 
 export default function ProfilePage() {
+  const { t } = useTranslation();
   const { profile, authUser, signOut, refreshProfile } = useAuth();
   const [editing, setEditing] = useState(false);
   const [nameDraft, setNameDraft] = useState(profile?.fullName ?? "");
@@ -13,9 +15,9 @@ export default function ProfilePage() {
   const displayName = profile?.fullName?.trim() || authUser?.email?.split("@")[0] || "Пользователь";
 
   const menuItems = [
-    { to: "/subscription", label: "Подписка и оплата", icon: CreditCard },
-    { to: "/profile/language", label: "Язык интерфейса", icon: Globe },
-    { to: "/profile/notifications", label: "Уведомления", icon: Bell },
+    { to: "/subscription", label: t("profile.subscription"), icon: CreditCard },
+    { to: "/profile/language", label: t("profile.language"), icon: Globe },
+    { to: "/profile/notifications", label: t("profile.notifications"), icon: Bell },
   ];
 
   async function saveName() {
@@ -34,7 +36,7 @@ export default function ProfilePage() {
 
   return (
     <div className="px-5 pt-8">
-      <h1 className="mb-6 font-display text-2xl font-bold">Профиль</h1>
+      <h1 className="mb-6 font-display text-2xl font-bold">{t("profile.title")}</h1>
 
       <div className="card mb-6 flex items-center gap-4">
         {profile?.avatarUrl ? (
@@ -104,7 +106,7 @@ export default function ProfilePage() {
         className="mt-6 flex w-full items-center justify-center gap-2 rounded-md border border-danger/30 px-5 py-3 font-medium text-danger transition hover:bg-danger/10"
       >
         <LogOut size={18} />
-        Выйти
+        {t("profile.logout")}
       </button>
     </div>
   );

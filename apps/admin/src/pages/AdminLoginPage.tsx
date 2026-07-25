@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginInput } from "@donatellox/validation";
 import { supabase } from "@/lib/supabase";
+import { PasswordInput } from "@/components/PasswordInput";
 
 export default function AdminLoginPage() {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ export default function AdminLoginPage() {
 
           <div>
             <label className="mb-1.5 block text-sm font-medium text-neutral-300">Пароль</label>
-            <input type="password" className="input-field" {...register("password")} />
+            <PasswordInput {...register("password")} />
             {errors.password && <p className="field-error">{errors.password.message}</p>}
           </div>
 

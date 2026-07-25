@@ -2,36 +2,27 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
 import { onboardingSchema, type OnboardingInput } from "@donatellox/validation";
 import type { FitnessGoal } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 import clsx from "clsx";
 
-const GOALS: { value: FitnessGoal; label: string }[] = [
-  { value: "lose_weight", label: "Похудеть" },
-  { value: "build_muscle", label: "Набрать мышечную массу" },
-  { value: "improve_endurance", label: "Улучшить выносливость" },
-  { value: "general_fitness", label: "Общая физическая форма" },
-  { value: "rehabilitation", label: "Реабилитация" },
+const GOALS: FitnessGoal[] = [
+  "lose_weight",
+  "build_muscle",
+  "improve_endurance",
+  "general_fitness",
+  "rehabilitation",
 ];
 
-const ACTIVITY_LEVELS = [
-  { value: "sedentary", label: "Малоподвижный" },
-  { value: "light", label: "Лёгкая активность" },
-  { value: "moderate", label: "Умеренная активность" },
-  { value: "active", label: "Активный" },
-  { value: "very_active", label: "Очень активный" },
-] as const;
-
-const TRAINING_FORMATS = [
-  { value: "gym", label: "В зале" },
-  { value: "home", label: "Дома" },
-] as const;
-
+const ACTIVITY_LEVELS = ["sedentary", "light", "moderate", "active", "very_active"] as const;
+const TRAINING_FORMATS = ["gym", "home"] as const;
 const DAYS_OPTIONS = [2, 3, 4, 5, 6] as const;
 
 export default function OnboardingPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { authUser, refreshProfile } = useAuth();
   const [step, setStep] = useState(0);
@@ -96,7 +87,7 @@ export default function OnboardingPage() {
     navigate("/dashboard", { replace: true });
   }
 
-  const steps = ["Цели", "О себе", "Формат", "Готово"];
+  const steps = t("onboarding.steps", { returnObjects: true }) as string[];
 
   return (
     <div className="min-h-dvh bg-ink-950 px-6 py-10">
@@ -117,22 +108,22 @@ export default function OnboardingPage() {
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           {step === 0 && (
             <fieldset>
-              <h1 className="font-display text-2xl font-bold">Какая у вас цель?</h1>
-              <p className="mt-1 text-neutral-400">Можно выбрать несколько</p>
+              <h1 className="font-display text-2xl font-bold">{t("onboarding.goalsTitle")}</h1>
+              <p className="mt-1 text-neutral-400">{t("onboarding.goalsSubtitle")}</p>
               <div className="mt-6 grid grid-cols-1 gap-3">
                 {GOALS.map((goal) => (
                   <button
                     type="button"
-                    key={goal.value}
-                    onClick={() => toggleGoal(goal.value)}
+                    key={goal}
+                    onClick={() => toggleGoal(goal)}
                     className={clsx(
                       "rounded-md border px-4 py-3.5 text-left font-medium transition",
-                      selectedGoals?.includes(goal.value)
+                      selectedGoals?.includes(goal)
                         ? "border-volt-400 bg-volt-400/10 text-volt-300"
                         : "border-ink-600 bg-ink-800 text-neutral-200 hover:border-ink-500",
                     )}
                   >
-                    {goal.label}
+                    {t(`onboarding.goals.${goal}`)}
                   </button>
                 ))}
               </div>
@@ -143,65 +134,71 @@ export default function OnboardingPage() {
                 disabled={!selectedGoals?.length}
                 className="btn-primary mt-8 w-full"
               >
-                Далее
+                {t("common.next")}
               </button>
             </fieldset>
           )}
 
           {step === 1 && (
             <fieldset className="space-y-4">
-              <h1 className="font-display text-2xl font-bold">Расскажите о себе</h1>
+              <h1 className="font-display text-2xl font-bold">{t("onboarding.aboutTitle")}</h1>
 
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-neutral-300">Пол</label>
+                <label className="mb-1.5 block text-sm font-medium text-neutral-300">
+                  {t("onboarding.gender")}
+                </label>
                 <div className="grid grid-cols-3 gap-2">
-                  {[
-                    { value: "male", label: "Мужской" },
-                    { value: "female", label: "Женский" },
-                    { value: "unspecified", label: "Не указывать" },
-                  ].map((g) => (
+                  {(["male", "female", "unspecified"] as const).map((g) => (
                     <button
                       type="button"
-                      key={g.value}
-                      onClick={() => setValue("gender", g.value as typeof gender)}
+                      key={g}
+                      onClick={() => setValue("gender", g)}
                       className={clsx(
                         "rounded-md border px-2 py-2.5 text-sm font-medium transition",
-                        gender === g.value
+                        gender === g
                           ? "border-volt-400 bg-volt-400/10 text-volt-300"
                           : "border-ink-600 bg-ink-800 text-neutral-300",
                       )}
                     >
-                      {g.label}
+                      {t(`onboarding.genderOptions.${g}`)}
                     </button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-neutral-300">Дата рождения</label>
+                <label className="mb-1.5 block text-sm font-medium text-neutral-300">
+                  {t("onboarding.birthDate")}
+                </label>
                 <input type="date" className="input-field" {...register("birthDate")} />
                 {errors.birthDate && <p className="field-error">{errors.birthDate.message}</p>}
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-neutral-300">Рост, см</label>
+                  <label className="mb-1.5 block text-sm font-medium text-neutral-300">
+                    {t("onboarding.height")}
+                  </label>
                   <input type="number" className="input-field" {...register("heightCm")} />
                   {errors.heightCm && <p className="field-error">{errors.heightCm.message}</p>}
                 </div>
                 <div>
-                  <label className="mb-1.5 block text-sm font-medium text-neutral-300">Вес, кг</label>
+                  <label className="mb-1.5 block text-sm font-medium text-neutral-300">
+                    {t("onboarding.weight")}
+                  </label>
                   <input type="number" className="input-field" {...register("weightKg")} />
                   {errors.weightKg && <p className="field-error">{errors.weightKg.message}</p>}
                 </div>
               </div>
 
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-neutral-300">Уровень активности</label>
+                <label className="mb-1.5 block text-sm font-medium text-neutral-300">
+                  {t("onboarding.activityLevel")}
+                </label>
                 <select className="input-field" {...register("activityLevel")}>
                   {ACTIVITY_LEVELS.map((l) => (
-                    <option key={l.value} value={l.value}>
-                      {l.label}
+                    <option key={l} value={l}>
+                      {t(`onboarding.activityOptions.${l}`)}
                     </option>
                   ))}
                 </select>
@@ -209,17 +206,17 @@ export default function OnboardingPage() {
 
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-neutral-300">
-                  Особенности здоровья (необязательно)
+                  {t("onboarding.healthNotes")}
                 </label>
                 <textarea rows={3} className="input-field resize-none" {...register("healthNotes")} />
               </div>
 
               <div className="flex gap-3 pt-2">
                 <button type="button" onClick={() => setStep(0)} className="btn-secondary flex-1">
-                  Назад
+                  {t("common.back")}
                 </button>
                 <button type="button" onClick={() => setStep(2)} className="btn-primary flex-1">
-                  Далее
+                  {t("common.next")}
                 </button>
               </div>
             </fieldset>
@@ -227,24 +224,26 @@ export default function OnboardingPage() {
 
           {step === 2 && (
             <fieldset className="space-y-5">
-              <h1 className="font-display text-2xl font-bold">Как вам удобно тренироваться?</h1>
+              <h1 className="font-display text-2xl font-bold">{t("onboarding.formatTitle")}</h1>
 
               <div>
-                <label className="mb-1.5 block text-sm font-medium text-neutral-300">Формат тренировок</label>
+                <label className="mb-1.5 block text-sm font-medium text-neutral-300">
+                  {t("onboarding.trainingFormat")}
+                </label>
                 <div className="grid grid-cols-2 gap-3">
                   {TRAINING_FORMATS.map((f) => (
                     <button
                       type="button"
-                      key={f.value}
-                      onClick={() => setValue("trainingFormat", f.value)}
+                      key={f}
+                      onClick={() => setValue("trainingFormat", f)}
                       className={clsx(
                         "rounded-md border px-4 py-3.5 text-center font-medium transition",
-                        trainingFormat === f.value
+                        trainingFormat === f
                           ? "border-volt-400 bg-volt-400/10 text-volt-300"
                           : "border-ink-600 bg-ink-800 text-neutral-200 hover:border-ink-500",
                       )}
                     >
-                      {f.label}
+                      {t(`onboarding.formatOptions.${f}`)}
                     </button>
                   ))}
                 </div>
@@ -252,7 +251,7 @@ export default function OnboardingPage() {
 
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-neutral-300">
-                  Сколько дней в неделю готовы тренироваться?
+                  {t("onboarding.daysPerWeek")}
                 </label>
                 <div className="grid grid-cols-5 gap-2">
                   {DAYS_OPTIONS.map((d) => (
@@ -275,10 +274,10 @@ export default function OnboardingPage() {
 
               <div className="flex gap-3 pt-2">
                 <button type="button" onClick={() => setStep(1)} className="btn-secondary flex-1">
-                  Назад
+                  {t("common.back")}
                 </button>
                 <button type="button" onClick={() => setStep(3)} className="btn-primary flex-1">
-                  Далее
+                  {t("common.next")}
                 </button>
               </div>
             </fieldset>
@@ -286,10 +285,8 @@ export default function OnboardingPage() {
 
           {step === 3 && (
             <fieldset>
-              <h1 className="font-display text-2xl font-bold">Всё готово!</h1>
-              <p className="mt-1 text-neutral-400">
-                Мы подберём программу тренировок под ваши цели и уровень подготовки.
-              </p>
+              <h1 className="font-display text-2xl font-bold">{t("onboarding.doneTitle")}</h1>
+              <p className="mt-1 text-neutral-400">{t("onboarding.doneSubtitle")}</p>
               {serverError && (
                 <div className="mt-4 rounded-md border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">
                   {serverError}
@@ -297,10 +294,10 @@ export default function OnboardingPage() {
               )}
               <div className="mt-8 flex gap-3">
                 <button type="button" onClick={() => setStep(2)} className="btn-secondary flex-1">
-                  Назад
+                  {t("common.back")}
                 </button>
                 <button type="submit" disabled={isSubmitting} className="btn-primary flex-1">
-                  {isSubmitting ? "Сохраняем…" : "Начать тренировки"}
+                  {isSubmitting ? t("onboarding.savingButton") : t("onboarding.startButton")}
                 </button>
               </div>
             </fieldset>

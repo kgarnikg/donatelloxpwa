@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { Beef, Wheat, Droplet, Info, Lock } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 import { useActiveSubscription } from "@/lib/queries";
@@ -91,6 +92,7 @@ const GUIDANCE_BY_GOAL: Record<FitnessGoal, NutritionGuidance> = {
 };
 
 export default function NutritionPage() {
+  const { t } = useTranslation();
   const { authUser } = useAuth();
   const { data: subscription, isLoading: subLoading } = useActiveSubscription();
 
@@ -122,17 +124,17 @@ export default function NutritionPage() {
   if (!subscription) {
     return (
       <div className="px-5 pt-8">
-        <h1 className="mb-6 font-display text-2xl font-bold">Питание</h1>
+        <h1 className="mb-6 font-display text-2xl font-bold">{t("nutrition.title")}</h1>
         <div className="card flex flex-col items-center py-10 text-center">
           <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-volt-400/10 text-volt-400">
             <Lock size={24} />
           </div>
-          <p className="font-semibold">Раздел доступен по подписке</p>
+          <p className="font-semibold">{t("nutrition.locked")}</p>
           <p className="mt-1.5 max-w-xs text-sm text-neutral-400">
-            Оформите подписку, чтобы получить персональные рекомендации по питанию под вашу цель.
+            {t("nutrition.lockedDesc")}
           </p>
           <Link to="/subscription" className="btn-primary mt-6">
-            Оформить подписку
+            {t("nutrition.subscribe")}
           </Link>
         </div>
       </div>
@@ -141,24 +143,21 @@ export default function NutritionPage() {
 
   return (
     <div className="px-5 pt-8 pb-6">
-      <h1 className="mb-1 font-display text-2xl font-bold">Питание</h1>
-      <p className="mb-6 text-neutral-400">Общие рекомендации под вашу цель: {guidance.title.toLowerCase()}</p>
+      <h1 className="mb-1 font-display text-2xl font-bold">{t("nutrition.title")}</h1>
+      <p className="mb-6 text-neutral-400">{t("nutrition.subtitle", { goal: guidance.title.toLowerCase() })}</p>
 
       <div className="card mb-4 flex items-start gap-3 border-info/30 bg-info/5">
         <Info size={18} className="mt-0.5 shrink-0 text-info" />
-        <p className="text-sm text-neutral-300">
-          Это ориентировочные рекомендации, а не медицинское назначение. При особых состояниях
-          здоровья проконсультируйтесь с врачом или диетологом.
-        </p>
+        <p className="text-sm text-neutral-300">{t("nutrition.disclaimer")}</p>
       </div>
 
       <div className="card mb-4">
-        <h2 className="font-semibold">Калорийность</h2>
+        <h2 className="font-semibold">{t("nutrition.calories")}</h2>
         <p className="mt-1 text-sm text-neutral-400">{guidance.calorieNote}</p>
       </div>
 
       <div className="card mb-4">
-        <h2 className="mb-3 font-semibold">Баланс нутриентов</h2>
+        <h2 className="mb-3 font-semibold">{t("nutrition.macros")}</h2>
         <div className="space-y-3">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-danger/10 text-danger">
@@ -182,7 +181,7 @@ export default function NutritionPage() {
       </div>
 
       <div className="card mb-4">
-        <h2 className="mb-3 font-semibold">Структура питания</h2>
+        <h2 className="mb-3 font-semibold">{t("nutrition.mealStructure")}</h2>
         <ul className="space-y-2">
           {guidance.mealStructure.map((item) => (
             <li key={item} className="flex items-start gap-2 text-sm text-neutral-300">
@@ -194,7 +193,7 @@ export default function NutritionPage() {
       </div>
 
       <div className="card">
-        <h2 className="mb-3 font-semibold">Советы</h2>
+        <h2 className="mb-3 font-semibold">{t("nutrition.tips")}</h2>
         <ul className="space-y-2">
           {guidance.tips.map((tip) => (
             <li key={tip} className="flex items-start gap-2 text-sm text-neutral-300">

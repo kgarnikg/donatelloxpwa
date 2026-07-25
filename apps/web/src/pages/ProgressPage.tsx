@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 import { useProgressHistory } from "@/lib/queries";
 
 export default function ProgressPage() {
+  const { t } = useTranslation();
   const { authUser } = useAuth();
   const queryClient = useQueryClient();
   const { data: entries, isLoading } = useProgressHistory();
@@ -40,8 +42,8 @@ export default function ProgressPage() {
     <div className="px-5 pt-8">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="font-display text-2xl font-bold">Прогресс</h1>
-          <p className="mt-1 text-neutral-400">Отслеживайте изменения веса и замеров</p>
+          <h1 className="font-display text-2xl font-bold">{t("progress.title")}</h1>
+          <p className="mt-1 text-neutral-400">{t("progress.subtitle")}</p>
         </div>
         <button onClick={() => setShowForm((s) => !s)} className="btn-primary !p-3">
           <Plus size={20} />
@@ -50,7 +52,7 @@ export default function ProgressPage() {
 
       {showForm && (
         <div className="card mb-6 animate-fade-in">
-          <label className="mb-1.5 block text-sm font-medium text-neutral-300">Текущий вес, кг</label>
+          <label className="mb-1.5 block text-sm font-medium text-neutral-300">{t("progress.currentWeight")}</label>
           <div className="flex gap-2">
             <input
               type="number"
@@ -66,7 +68,7 @@ export default function ProgressPage() {
               disabled={!weight || addEntry.isPending}
               className="btn-primary shrink-0"
             >
-              Сохранить
+              {t("common.save")}
             </button>
           </div>
         </div>
@@ -75,11 +77,11 @@ export default function ProgressPage() {
       {latest !== undefined && (
         <div className="mb-6 grid grid-cols-2 gap-3">
           <div className="card">
-            <p className="text-xs text-neutral-400">Текущий вес</p>
+            <p className="text-xs text-neutral-400">{t("progress.currentWeight")}</p>
             <p className="mt-1 text-2xl font-bold">{latest} кг</p>
           </div>
           <div className="card">
-            <p className="text-xs text-neutral-400">Изменение</p>
+            <p className="text-xs text-neutral-400">{t("progress.change")}</p>
             <p
               className={`mt-1 text-2xl font-bold ${
                 delta && delta < 0 ? "text-success" : delta && delta > 0 ? "text-ember-400" : ""
@@ -92,12 +94,12 @@ export default function ProgressPage() {
       )}
 
       <div className="card">
-        <p className="mb-4 text-sm font-medium text-neutral-300">Динамика веса</p>
+        <p className="mb-4 text-sm font-medium text-neutral-300">{t("progress.weightDynamics")}</p>
         {isLoading ? (
           <div className="h-40 animate-pulse rounded bg-ink-800" />
         ) : weights.length < 2 ? (
           <p className="py-10 text-center text-sm text-neutral-500">
-            Добавьте минимум 2 замера, чтобы увидеть график
+            {t("progress.needMoreEntries")}
           </p>
         ) : (
           <svg viewBox="0 0 300 120" className="h-32 w-full overflow-visible">

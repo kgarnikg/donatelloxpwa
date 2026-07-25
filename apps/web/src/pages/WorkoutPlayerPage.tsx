@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Check, ChevronLeft, PlayCircle, Video, TrendingUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
@@ -39,6 +40,7 @@ function groupByExercise(sets: SetRow[]) {
 }
 
 export default function WorkoutPlayerPage() {
+  const { t } = useTranslation();
   const { workoutId } = useParams<{ workoutId: string }>();
   const navigate = useNavigate();
   const { authUser } = useAuth();
@@ -136,11 +138,11 @@ export default function WorkoutPlayerPage() {
         onClick={() => navigate(-1)}
         className="mb-4 flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-200"
       >
-        <ChevronLeft size={18} /> Назад
+        <ChevronLeft size={18} /> {t("workout.back")}
       </button>
 
       <h1 className="font-display text-2xl font-bold">{workout.title}</h1>
-      <p className="mt-1 text-neutral-400">~{workout.estimatedDurationMinutes} мин</p>
+      <p className="mt-1 text-neutral-400">~{workout.estimatedDurationMinutes} {t("common.min")}</p>
 
       <div className="mt-6 space-y-4">
         {groups.map((group) => {
@@ -152,7 +154,7 @@ export default function WorkoutPlayerPage() {
                 <div>
                   <p className="font-semibold">{group.exercise.title}</p>
                   <p className="mt-0.5 text-xs text-neutral-500">
-                    {group.sets.length} {group.sets.length === 1 ? "подход" : "подхода/-ов"}
+                    {t("workout.sets", { count: group.sets.length })}
                     {group.sets[0].notes ? ` · ${group.sets[0].notes}` : ""}
                   </p>
                 </div>
@@ -162,11 +164,11 @@ export default function WorkoutPlayerPage() {
                     onClick={() => setActiveVideo(group.exercise)}
                     className="flex shrink-0 items-center gap-1.5 rounded-full bg-volt-400/10 px-3 py-1.5 text-xs font-semibold text-volt-400 transition hover:bg-volt-400/20"
                   >
-                    <PlayCircle size={14} /> Видео
+                    <PlayCircle size={14} /> {t("workout.video")}
                   </button>
                 ) : (
                   <span className="flex shrink-0 items-center gap-1.5 rounded-full bg-ink-800 px-3 py-1.5 text-xs font-medium text-neutral-500">
-                    <Video size={14} /> Видео скоро
+                    <Video size={14} /> {t("workout.videoSoon")}
                   </span>
                 )}
               </div>
@@ -192,9 +194,9 @@ export default function WorkoutPlayerPage() {
                       )}
                     >
                       <p className="text-sm">
-                        <span className="text-neutral-500">Подход {i + 1}:</span>{" "}
-                        {set.reps ? `${set.reps} повторений` : `${set.durationSeconds}с`}
-                        <span className="text-neutral-500"> · отдых {set.restSeconds}с</span>
+                        <span className="text-neutral-500">{t("workout.set", { number: i + 1 })}:</span>{" "}
+                        {set.reps ? t("workout.reps", { count: set.reps }) : `${set.durationSeconds}s`}
+                        <span className="text-neutral-500"> · {t("workout.rest", { count: set.restSeconds })}</span>
                       </p>
                       <div
                         className={clsx(
@@ -212,12 +214,12 @@ export default function WorkoutPlayerPage() {
               {isWeighted && (
                 <div className="mt-3 border-t border-ink-700 pt-3">
                   <label className="mb-1.5 block text-xs font-medium text-neutral-400">
-                    Рабочий вес, кг
+                    {t("workout.workingWeight")}
                   </label>
                   <input
                     type="number"
                     inputMode="decimal"
-                    placeholder={lastWeight ? String(lastWeight) : "например, 40"}
+                    placeholder={lastWeight ? String(lastWeight) : (t("workout.weightPlaceholder") as string)}
                     value={weights[group.exercise.id] ?? ""}
                     onChange={(e) =>
                       setWeights((prev) => ({ ...prev, [group.exercise.id]: e.target.value }))
@@ -226,8 +228,11 @@ export default function WorkoutPlayerPage() {
                   />
                   {lastWeight != null && (
                     <p className="mt-1.5 flex items-center gap-1 text-xs text-volt-400">
-                      <TrendingUp size={12} />В прошлый раз: {lastWeight} кг · попробуйте{" "}
-                      {(lastWeight + 2.5).toString().replace(".", ",")} кг
+                      <TrendingUp size={12} />
+                      {t("workout.lastTime", {
+                        weight: lastWeight,
+                        next: (lastWeight + 2.5).toString().replace(".", ","),
+                      })}
                     </p>
                   )}
                 </div>
@@ -268,10 +273,10 @@ export default function WorkoutPlayerPage() {
           className="btn-primary mx-auto block w-full max-w-md"
         >
           {finishMutation.isPending
-            ? "Сохраняем…"
+            ? t("workout.saving")
             : allDone
-              ? "Завершить тренировку"
-              : `Осталось ${workout.sets.length - completedIds.size}`}
+              ? t("workout.finishWorkout")
+              : t("workout.remaining", { count: workout.sets.length - completedIds.size })}
         </button>
       </div>
     </div>

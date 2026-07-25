@@ -1,24 +1,27 @@
 import { Link } from "react-router-dom";
 import { Flame, Trophy, ChevronRight, Sparkles, Star } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/AuthContext";
 import { useActiveSubscription, usePrograms, useWorkoutStats, useRecommendedProgram } from "@/lib/queries";
 import { getDailyQuote } from "@/lib/quotes";
 
 export default function DashboardPage() {
-  const { profile } = useAuth();
+  const { t } = useTranslation();
+  const { profile, authUser } = useAuth();
   const { data: subscription } = useActiveSubscription();
   const { data: programs, isLoading } = usePrograms();
   const { data: stats } = useWorkoutStats();
   const { data: recommended } = useRecommendedProgram();
 
-  const firstName = profile?.fullName?.split(" ")[0] ?? "спортсмен";
+  const firstName =
+    profile?.fullName?.trim().split(" ")[0] || authUser?.email?.split("@")[0] || "there";
   const otherPrograms = programs?.filter((p) => p.id !== recommended?.id) ?? [];
 
   return (
     <div className="px-5 pt-8">
       <header className="mb-6">
-        <p className="text-neutral-400">Привет, {firstName} 👋</p>
-        <h1 className="font-display text-2xl font-bold">Готовы к тренировке?</h1>
+        <p className="text-neutral-400">{t("dashboard.greeting", { name: firstName })} 👋</p>
+        <h1 className="font-display text-2xl font-bold">{t("dashboard.readyQuestion")}</h1>
       </header>
 
       <div className="card mb-6 flex items-start gap-3 border-ink-700 bg-ink-900">
@@ -32,8 +35,8 @@ export default function DashboardPage() {
           className="card mb-6 flex items-center justify-between border-volt-400/30 bg-gradient-to-br from-volt-400/10 to-transparent"
         >
           <div>
-            <p className="font-semibold text-volt-300">Активируйте подписку</p>
-            <p className="mt-1 text-sm text-neutral-400">Доступ ко всем программам и видео</p>
+            <p className="font-semibold text-volt-300">{t("dashboard.activateSubscription")}</p>
+            <p className="mt-1 text-sm text-neutral-400">{t("dashboard.subscriptionDesc")}</p>
           </div>
           <ChevronRight className="text-volt-400" />
         </Link>
@@ -46,7 +49,7 @@ export default function DashboardPage() {
           </div>
           <div>
             <p className="text-xl font-bold">{stats?.currentStreakDays ?? 0}</p>
-            <p className="text-xs text-neutral-400">дней подряд</p>
+            <p className="text-xs text-neutral-400">{t("dashboard.streakDays")}</p>
           </div>
         </div>
         <div className="card flex items-center gap-3">
@@ -55,7 +58,7 @@ export default function DashboardPage() {
           </div>
           <div>
             <p className="text-xl font-bold">{stats?.totalWorkouts ?? 0}</p>
-            <p className="text-xs text-neutral-400">тренировок</p>
+            <p className="text-xs text-neutral-400">{t("dashboard.totalWorkouts")}</p>
           </div>
         </div>
       </div>
@@ -64,7 +67,7 @@ export default function DashboardPage() {
         <div className="mb-6">
           <div className="mb-3 flex items-center gap-1.5">
             <Star size={16} className="text-volt-400" fill="currentColor" />
-            <h2 className="font-display text-lg font-semibold">Рекомендовано для вас</h2>
+            <h2 className="font-display text-lg font-semibold">{t("dashboard.recommendedForYou")}</h2>
           </div>
           <Link
             to={`/programs/${recommended.slug}`}
@@ -82,9 +85,9 @@ export default function DashboardPage() {
       )}
 
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="font-display text-lg font-semibold">Программы для вас</h2>
+        <h2 className="font-display text-lg font-semibold">{t("dashboard.programsForYou")}</h2>
         <Link to="/programs" className="text-sm font-medium text-volt-400">
-          Все программы
+          {t("dashboard.allPrograms")}
         </Link>
       </div>
 
@@ -96,7 +99,7 @@ export default function DashboardPage() {
 
         {!isLoading && !programs?.length && (
           <p className="card text-center text-neutral-400">
-            Программы скоро появятся — загляните позже.
+            {t("dashboard.noPrograms")}
           </p>
         )}
 

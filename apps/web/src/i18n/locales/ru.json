@@ -1,0 +1,148 @@
+{
+  "common": {
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "back": "Назад",
+    "next": "Далее",
+    "loading": "Загрузка…",
+    "comingSoon": "Скоро",
+    "min": "мин",
+    "kg": "кг",
+    "logout": "Выйти"
+  },
+  "nav": {
+    "home": "Главная",
+    "programs": "Программы",
+    "nutrition": "Питание",
+    "progress": "Прогресс",
+    "profile": "Профиль"
+  },
+  "auth": {
+    "login": {
+      "title": "С возвращением",
+      "subtitle": "Войдите, чтобы продолжить тренировки",
+      "email": "Email",
+      "password": "Пароль",
+      "forgotPassword": "Забыли пароль?",
+      "submit": "Войти",
+      "submitting": "Входим…",
+      "noAccount": "Нет аккаунта?",
+      "signUp": "Зарегистрироваться",
+      "or": "или",
+      "continueWithGoogle": "Продолжить с Google",
+      "continueWithApple": "Продолжить с Apple",
+      "openingGoogle": "Открываем Google…",
+      "openingApple": "Открываем Apple…"
+    },
+    "register": {
+      "title": "Создать аккаунт",
+      "subtitle": "Начните путь к своей лучшей форме",
+      "fullName": "Имя и фамилия",
+      "fullNamePlaceholder": "Иван Иванов",
+      "email": "Email",
+      "password": "Пароль",
+      "passwordPlaceholder": "Минимум 8 символов",
+      "passwordConfirm": "Повторите пароль",
+      "acceptTerms": "Я принимаю условия использования и политику конфиденциальности",
+      "submit": "Зарегистрироваться",
+      "submitting": "Создаём аккаунт…",
+      "haveAccount": "Уже есть аккаунт?",
+      "signIn": "Войти"
+    }
+  },
+  "onboarding": {
+    "steps": ["Цели", "О себе", "Формат", "Готово"],
+    "goalsTitle": "Какая у вас цель?",
+    "goalsSubtitle": "Можно выбрать несколько",
+    "goals": {
+      "lose_weight": "Похудеть",
+      "build_muscle": "Набрать мышечную массу",
+      "improve_endurance": "Улучшить выносливость",
+      "general_fitness": "Общая физическая форма",
+      "rehabilitation": "Реабилитация"
+    },
+    "aboutTitle": "Расскажите о себе",
+    "gender": "Пол",
+    "genderOptions": { "male": "Мужской", "female": "Женский", "unspecified": "Не указывать" },
+    "birthDate": "Дата рождения",
+    "height": "Рост, см",
+    "weight": "Вес, кг",
+    "activityLevel": "Уровень активности",
+    "activityOptions": {
+      "sedentary": "Малоподвижный",
+      "light": "Лёгкая активность",
+      "moderate": "Умеренная активность",
+      "active": "Активный",
+      "very_active": "Очень активный"
+    },
+    "healthNotes": "Особенности здоровья (необязательно)",
+    "formatTitle": "Как вам удобно тренироваться?",
+    "trainingFormat": "Формат тренировок",
+    "formatOptions": { "gym": "В зале", "home": "Дома" },
+    "daysPerWeek": "Сколько дней в неделю готовы тренироваться?",
+    "doneTitle": "Всё готово!",
+    "doneSubtitle": "Мы подберём программу тренировок под ваши цели и уровень подготовки.",
+    "startButton": "Начать тренировки",
+    "savingButton": "Сохраняем…"
+  },
+  "dashboard": {
+    "greeting": "Привет, {{name}}",
+    "readyQuestion": "Готовы к тренировке?",
+    "activateSubscription": "Активируйте подписку",
+    "subscriptionDesc": "Доступ ко всем программам и видео",
+    "streakDays": "дней подряд",
+    "totalWorkouts": "тренировок",
+    "recommendedForYou": "Рекомендовано для вас",
+    "programsForYou": "Программы для вас",
+    "allPrograms": "Все программы",
+    "noPrograms": "Программы скоро появятся — загляните позже."
+  },
+  "workout": {
+    "back": "Назад",
+    "sets_one": "{{count}} подход",
+    "sets_other": "{{count}} подхода/-ов",
+    "video": "Видео",
+    "videoSoon": "Видео скоро",
+    "set": "Подход {{number}}",
+    "reps": "{{count}} повторений",
+    "rest": "отдых {{count}}с",
+    "workingWeight": "Рабочий вес, кг",
+    "weightPlaceholder": "например, 40",
+    "lastTime": "В прошлый раз: {{weight}} кг · попробуйте {{next}} кг",
+    "remaining": "Осталось {{count}}",
+    "finishWorkout": "Завершить тренировку",
+    "saving": "Сохраняем…"
+  },
+  "nutrition": {
+    "title": "Питание",
+    "subtitle": "Общие рекомендации под вашу цель: {{goal}}",
+    "disclaimer": "Это ориентировочные рекомендации, а не медицинское назначение. При особых состояниях здоровья проконсультируйтесь с врачом или диетологом.",
+    "calories": "Калорийность",
+    "macros": "Баланс нутриентов",
+    "mealStructure": "Структура питания",
+    "tips": "Советы",
+    "locked": "Раздел доступен по подписке",
+    "lockedDesc": "Оформите подписку, чтобы получить персональные рекомендации по питанию под вашу цель.",
+    "subscribe": "Оформить подписку"
+  },
+  "progress": {
+    "title": "Прогресс",
+    "subtitle": "Отслеживайте изменения веса и замеров",
+    "currentWeight": "Текущий вес, кг",
+    "change": "Изменение",
+    "weightDynamics": "Динамика веса",
+    "needMoreEntries": "Добавьте минимум 2 замера, чтобы увидеть график"
+  },
+  "profile": {
+    "title": "Профиль",
+    "subscription": "Подписка и оплата",
+    "language": "Язык интерфейса",
+    "notifications": "Уведомления",
+    "logout": "Выйти"
+  },
+  "language": {
+    "title": "Язык интерфейса",
+    "subtitle": "Выберите язык приложения",
+    "auto": "Определять автоматически по устройству"
+  }
+}

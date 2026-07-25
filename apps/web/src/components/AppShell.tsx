@@ -1,17 +1,18 @@
 import type { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 import { Home, Dumbbell, Apple, LineChart, User } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 
-const NAV_ITEMS = [
-  { to: "/dashboard", label: "Главная", icon: Home },
-  { to: "/programs", label: "Программы", icon: Dumbbell },
-  { to: "/nutrition", label: "Питание", icon: Apple },
-  { to: "/progress", label: "Прогресс", icon: LineChart },
-  { to: "/profile", label: "Профиль", icon: User },
-];
-
 export function AppShell({ children }: { children: ReactNode }) {
+  const { t } = useTranslation();
+  const NAV_ITEMS = [
+    { to: "/dashboard", label: t("nav.home"), icon: Home },
+    { to: "/programs", label: t("nav.programs"), icon: Dumbbell },
+    { to: "/nutrition", label: t("nav.nutrition"), icon: Apple },
+    { to: "/progress", label: t("nav.progress"), icon: LineChart },
+    { to: "/profile", label: t("nav.profile"), icon: User },
+  ];
   return (
     <div className="flex min-h-dvh flex-col bg-ink-950">
       <main className="flex-1 pb-24">{children}</main>

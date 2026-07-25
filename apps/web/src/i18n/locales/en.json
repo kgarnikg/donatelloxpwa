@@ -1,0 +1,148 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "next": "Next",
+    "loading": "Loading…",
+    "comingSoon": "Coming soon",
+    "min": "min",
+    "kg": "kg",
+    "logout": "Log out"
+  },
+  "nav": {
+    "home": "Home",
+    "programs": "Programs",
+    "nutrition": "Nutrition",
+    "progress": "Progress",
+    "profile": "Profile"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to continue training",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "or": "or",
+      "continueWithGoogle": "Continue with Google",
+      "continueWithApple": "Continue with Apple",
+      "openingGoogle": "Opening Google…",
+      "openingApple": "Opening Apple…"
+    },
+    "register": {
+      "title": "Create account",
+      "subtitle": "Start your journey to a better you",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "John Smith",
+      "email": "Email",
+      "password": "Password",
+      "passwordPlaceholder": "At least 8 characters",
+      "passwordConfirm": "Confirm password",
+      "acceptTerms": "I accept the terms of use and privacy policy",
+      "submit": "Sign up",
+      "submitting": "Creating account…",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in"
+    }
+  },
+  "onboarding": {
+    "steps": ["Goals", "About you", "Format", "Done"],
+    "goalsTitle": "What's your goal?",
+    "goalsSubtitle": "You can pick more than one",
+    "goals": {
+      "lose_weight": "Lose weight",
+      "build_muscle": "Build muscle",
+      "improve_endurance": "Improve endurance",
+      "general_fitness": "General fitness",
+      "rehabilitation": "Rehabilitation"
+    },
+    "aboutTitle": "Tell us about yourself",
+    "gender": "Gender",
+    "genderOptions": { "male": "Male", "female": "Female", "unspecified": "Prefer not to say" },
+    "birthDate": "Date of birth",
+    "height": "Height, cm",
+    "weight": "Weight, kg",
+    "activityLevel": "Activity level",
+    "activityOptions": {
+      "sedentary": "Sedentary",
+      "light": "Lightly active",
+      "moderate": "Moderately active",
+      "active": "Active",
+      "very_active": "Very active"
+    },
+    "healthNotes": "Health notes (optional)",
+    "formatTitle": "How do you like to train?",
+    "trainingFormat": "Training format",
+    "formatOptions": { "gym": "At the gym", "home": "At home" },
+    "daysPerWeek": "How many days a week can you train?",
+    "doneTitle": "All set!",
+    "doneSubtitle": "We'll match a workout program to your goals and fitness level.",
+    "startButton": "Start training",
+    "savingButton": "Saving…"
+  },
+  "dashboard": {
+    "greeting": "Hi, {{name}}",
+    "readyQuestion": "Ready to train?",
+    "activateSubscription": "Activate subscription",
+    "subscriptionDesc": "Access to all programs and videos",
+    "streakDays": "day streak",
+    "totalWorkouts": "workouts",
+    "recommendedForYou": "Recommended for you",
+    "programsForYou": "Programs for you",
+    "allPrograms": "All programs",
+    "noPrograms": "Programs are coming soon — check back later."
+  },
+  "workout": {
+    "back": "Back",
+    "sets_one": "{{count}} set",
+    "sets_other": "{{count}} sets",
+    "video": "Video",
+    "videoSoon": "Video coming soon",
+    "set": "Set {{number}}",
+    "reps": "{{count}} reps",
+    "rest": "{{count}}s rest",
+    "workingWeight": "Working weight, kg",
+    "weightPlaceholder": "e.g. 40",
+    "lastTime": "Last time: {{weight}} kg · try {{next}} kg",
+    "remaining": "{{count}} left",
+    "finishWorkout": "Finish workout",
+    "saving": "Saving…"
+  },
+  "nutrition": {
+    "title": "Nutrition",
+    "subtitle": "General guidance for your goal: {{goal}}",
+    "disclaimer": "This is general guidance, not a medical prescription. If you have specific health conditions, consult a doctor or dietitian.",
+    "calories": "Calories",
+    "macros": "Macronutrient balance",
+    "mealStructure": "Meal structure",
+    "tips": "Tips",
+    "locked": "This section requires a subscription",
+    "lockedDesc": "Subscribe to get personal nutrition guidance for your goal.",
+    "subscribe": "Subscribe"
+  },
+  "progress": {
+    "title": "Progress",
+    "subtitle": "Track your weight and measurements",
+    "currentWeight": "Current weight, kg",
+    "change": "Change",
+    "weightDynamics": "Weight trend",
+    "needMoreEntries": "Add at least 2 entries to see the chart"
+  },
+  "profile": {
+    "title": "Profile",
+    "subscription": "Subscription & billing",
+    "language": "App language",
+    "notifications": "Notifications",
+    "logout": "Log out"
+  },
+  "language": {
+    "title": "App language",
+    "subtitle": "Choose your app language",
+    "auto": "Detect automatically from device"
+  }
+}

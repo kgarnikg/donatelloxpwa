@@ -1,0 +1,148 @@
+{
+  "common": {
+    "save": "Salva",
+    "cancel": "Annulla",
+    "back": "Indietro",
+    "next": "Avanti",
+    "loading": "Caricamento…",
+    "comingSoon": "Presto disponibile",
+    "min": "min",
+    "kg": "kg",
+    "logout": "Esci"
+  },
+  "nav": {
+    "home": "Home",
+    "programs": "Programmi",
+    "nutrition": "Alimentazione",
+    "progress": "Progressi",
+    "profile": "Profilo"
+  },
+  "auth": {
+    "login": {
+      "title": "Bentornato",
+      "subtitle": "Accedi per continuare ad allenarti",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Password dimenticata?",
+      "submit": "Accedi",
+      "submitting": "Accesso in corso…",
+      "noAccount": "Non hai un account?",
+      "signUp": "Registrati",
+      "or": "oppure",
+      "continueWithGoogle": "Continua con Google",
+      "continueWithApple": "Continua con Apple",
+      "openingGoogle": "Apertura di Google…",
+      "openingApple": "Apertura di Apple…"
+    },
+    "register": {
+      "title": "Crea account",
+      "subtitle": "Inizia il tuo percorso verso la forma migliore",
+      "fullName": "Nome e cognome",
+      "fullNamePlaceholder": "Mario Rossi",
+      "email": "Email",
+      "password": "Password",
+      "passwordPlaceholder": "Almeno 8 caratteri",
+      "passwordConfirm": "Conferma password",
+      "acceptTerms": "Accetto i termini di utilizzo e l'informativa sulla privacy",
+      "submit": "Registrati",
+      "submitting": "Creazione account…",
+      "haveAccount": "Hai già un account?",
+      "signIn": "Accedi"
+    }
+  },
+  "onboarding": {
+    "steps": ["Obiettivi", "Su di te", "Formato", "Fatto"],
+    "goalsTitle": "Qual è il tuo obiettivo?",
+    "goalsSubtitle": "Puoi selezionarne più di uno",
+    "goals": {
+      "lose_weight": "Perdere peso",
+      "build_muscle": "Aumentare la massa muscolare",
+      "improve_endurance": "Migliorare la resistenza",
+      "general_fitness": "Forma fisica generale",
+      "rehabilitation": "Riabilitazione"
+    },
+    "aboutTitle": "Parlaci di te",
+    "gender": "Sesso",
+    "genderOptions": { "male": "Maschile", "female": "Femminile", "unspecified": "Preferisco non dirlo" },
+    "birthDate": "Data di nascita",
+    "height": "Altezza, cm",
+    "weight": "Peso, kg",
+    "activityLevel": "Livello di attività",
+    "activityOptions": {
+      "sedentary": "Sedentario",
+      "light": "Leggermente attivo",
+      "moderate": "Moderatamente attivo",
+      "active": "Attivo",
+      "very_active": "Molto attivo"
+    },
+    "healthNotes": "Note sulla salute (facoltativo)",
+    "formatTitle": "Come preferisci allenarti?",
+    "trainingFormat": "Formato di allenamento",
+    "formatOptions": { "gym": "In palestra", "home": "A casa" },
+    "daysPerWeek": "Quanti giorni a settimana puoi allenarti?",
+    "doneTitle": "Tutto pronto!",
+    "doneSubtitle": "Ti proporremo un programma in base ai tuoi obiettivi e al tuo livello.",
+    "startButton": "Inizia ad allenarti",
+    "savingButton": "Salvataggio…"
+  },
+  "dashboard": {
+    "greeting": "Ciao, {{name}}",
+    "readyQuestion": "Pronto per allenarti?",
+    "activateSubscription": "Attiva l'abbonamento",
+    "subscriptionDesc": "Accesso a tutti i programmi e video",
+    "streakDays": "giorni consecutivi",
+    "totalWorkouts": "allenamenti",
+    "recommendedForYou": "Consigliato per te",
+    "programsForYou": "Programmi per te",
+    "allPrograms": "Tutti i programmi",
+    "noPrograms": "I programmi arriveranno presto — torna più tardi."
+  },
+  "workout": {
+    "back": "Indietro",
+    "sets_one": "{{count}} serie",
+    "sets_other": "{{count}} serie",
+    "video": "Video",
+    "videoSoon": "Video in arrivo",
+    "set": "Serie {{number}}",
+    "reps": "{{count}} ripetizioni",
+    "rest": "{{count}}s di recupero",
+    "workingWeight": "Peso di lavoro, kg",
+    "weightPlaceholder": "ad es. 40",
+    "lastTime": "L'ultima volta: {{weight}} kg · prova {{next}} kg",
+    "remaining": "Rimangono {{count}}",
+    "finishWorkout": "Termina allenamento",
+    "saving": "Salvataggio…"
+  },
+  "nutrition": {
+    "title": "Alimentazione",
+    "subtitle": "Indicazioni generali per il tuo obiettivo: {{goal}}",
+    "disclaimer": "Queste sono indicazioni generali, non una prescrizione medica. In caso di particolari condizioni di salute, consulta un medico o un nutrizionista.",
+    "calories": "Calorie",
+    "macros": "Bilancio dei macronutrienti",
+    "mealStructure": "Struttura dei pasti",
+    "tips": "Consigli",
+    "locked": "Questa sezione richiede un abbonamento",
+    "lockedDesc": "Abbonati per ricevere indicazioni nutrizionali personalizzate in base al tuo obiettivo.",
+    "subscribe": "Abbonati"
+  },
+  "progress": {
+    "title": "Progressi",
+    "subtitle": "Monitora i cambiamenti di peso e misure",
+    "currentWeight": "Peso attuale, kg",
+    "change": "Variazione",
+    "weightDynamics": "Andamento del peso",
+    "needMoreEntries": "Aggiungi almeno 2 rilevazioni per vedere il grafico"
+  },
+  "profile": {
+    "title": "Profilo",
+    "subscription": "Abbonamento e pagamento",
+    "language": "Lingua dell'app",
+    "notifications": "Notifiche",
+    "logout": "Esci"
+  },
+  "language": {
+    "title": "Lingua dell'app",
+    "subtitle": "Scegli la lingua dell'applicazione",
+    "auto": "Rileva automaticamente dal dispositivo"
+  }
+}
