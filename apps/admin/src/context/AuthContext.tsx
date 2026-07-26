@@ -9,6 +9,7 @@ import {
 import type { Session, User as SupabaseUser } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
 import type { User, UserRole } from "@donatellox/types";
+import { toCamelCase } from "@donatellox/types";
 
 const ADMIN_ROLES: UserRole[] = ["admin", "superadmin"];
 
@@ -42,7 +43,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setProfile(null);
       return;
     }
-    setProfile(data as unknown as User);
+    setProfile(toCamelCase<User>(data));
   }
 
   useEffect(() => {

@@ -1,0 +1,148 @@
+{
+  "common": {
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "back": "Назад",
+    "next": "Далі",
+    "loading": "Завантаження…",
+    "comingSoon": "Скоро",
+    "min": "хв",
+    "kg": "кг",
+    "logout": "Вийти"
+  },
+  "nav": {
+    "home": "Головна",
+    "programs": "Програми",
+    "nutrition": "Харчування",
+    "progress": "Прогрес",
+    "profile": "Профіль"
+  },
+  "auth": {
+    "login": {
+      "title": "З поверненням",
+      "subtitle": "Увійдіть, щоб продовжити тренування",
+      "email": "Email",
+      "password": "Пароль",
+      "forgotPassword": "Забули пароль?",
+      "submit": "Увійти",
+      "submitting": "Входимо…",
+      "noAccount": "Немає акаунта?",
+      "signUp": "Зареєструватися",
+      "or": "або",
+      "continueWithGoogle": "Продовжити з Google",
+      "continueWithApple": "Продовжити з Apple",
+      "openingGoogle": "Відкриваємо Google…",
+      "openingApple": "Відкриваємо Apple…"
+    },
+    "register": {
+      "title": "Створити акаунт",
+      "subtitle": "Почніть шлях до найкращої форми",
+      "fullName": "Ім'я та прізвище",
+      "fullNamePlaceholder": "Іван Іваненко",
+      "email": "Email",
+      "password": "Пароль",
+      "passwordPlaceholder": "Мінімум 8 символів",
+      "passwordConfirm": "Повторіть пароль",
+      "acceptTerms": "Я приймаю умови використання та політику конфіденційності",
+      "submit": "Зареєструватися",
+      "submitting": "Створюємо акаунт…",
+      "haveAccount": "Вже є акаунт?",
+      "signIn": "Увійти"
+    }
+  },
+  "onboarding": {
+    "steps": ["Цілі", "Про вас", "Формат", "Готово"],
+    "goalsTitle": "Яка ваша мета?",
+    "goalsSubtitle": "Можна обрати декілька",
+    "goals": {
+      "lose_weight": "Схуднути",
+      "build_muscle": "Набрати м'язову масу",
+      "improve_endurance": "Покращити витривалість",
+      "general_fitness": "Загальна фізична форма",
+      "rehabilitation": "Реабілітація"
+    },
+    "aboutTitle": "Розкажіть про себе",
+    "gender": "Стать",
+    "genderOptions": { "male": "Чоловіча", "female": "Жіноча", "unspecified": "Не вказувати" },
+    "birthDate": "Дата народження",
+    "height": "Зріст, см",
+    "weight": "Вага, кг",
+    "activityLevel": "Рівень активності",
+    "activityOptions": {
+      "sedentary": "Малорухливий",
+      "light": "Легка активність",
+      "moderate": "Помірна активність",
+      "active": "Активний",
+      "very_active": "Дуже активний"
+    },
+    "healthNotes": "Особливості здоров'я (необов'язково)",
+    "formatTitle": "Як вам зручно тренуватися?",
+    "trainingFormat": "Формат тренувань",
+    "formatOptions": { "gym": "У залі", "home": "Вдома" },
+    "daysPerWeek": "Скільки днів на тиждень готові тренуватися?",
+    "doneTitle": "Все готово!",
+    "doneSubtitle": "Ми підберемо програму тренувань під ваші цілі та рівень підготовки.",
+    "startButton": "Почати тренування",
+    "savingButton": "Зберігаємо…"
+  },
+  "dashboard": {
+    "greeting": "Привіт, {{name}}",
+    "readyQuestion": "Готові до тренування?",
+    "activateSubscription": "Активуйте підписку",
+    "subscriptionDesc": "Доступ до всіх програм і відео",
+    "streakDays": "днів поспіль",
+    "totalWorkouts": "тренувань",
+    "recommendedForYou": "Рекомендовано для вас",
+    "programsForYou": "Програми для вас",
+    "allPrograms": "Усі програми",
+    "noPrograms": "Програми скоро з'являться — зазирніть пізніше."
+  },
+  "workout": {
+    "back": "Назад",
+    "sets_one": "{{count}} підхід",
+    "sets_other": "{{count}} підходів",
+    "video": "Відео",
+    "videoSoon": "Відео скоро",
+    "set": "Підхід {{number}}",
+    "reps": "{{count}} повторень",
+    "rest": "відпочинок {{count}}с",
+    "workingWeight": "Робоча вага, кг",
+    "weightPlaceholder": "наприклад, 40",
+    "lastTime": "Минулого разу: {{weight}} кг · спробуйте {{next}} кг",
+    "remaining": "Залишилось {{count}}",
+    "finishWorkout": "Завершити тренування",
+    "saving": "Зберігаємо…"
+  },
+  "nutrition": {
+    "title": "Харчування",
+    "subtitle": "Загальні рекомендації під вашу мету: {{goal}}",
+    "disclaimer": "Це орієнтовні рекомендації, а не медичне призначення. За особливих станів здоров'я проконсультуйтеся з лікарем або дієтологом.",
+    "calories": "Калорійність",
+    "macros": "Баланс нутрієнтів",
+    "mealStructure": "Структура харчування",
+    "tips": "Поради",
+    "locked": "Розділ доступний за підпискою",
+    "lockedDesc": "Оформіть підписку, щоб отримати персональні рекомендації з харчування під вашу мету.",
+    "subscribe": "Оформити підписку"
+  },
+  "progress": {
+    "title": "Прогрес",
+    "subtitle": "Відстежуйте зміни ваги та замірів",
+    "currentWeight": "Поточна вага, кг",
+    "change": "Зміна",
+    "weightDynamics": "Динаміка ваги",
+    "needMoreEntries": "Додайте щонайменше 2 заміри, щоб побачити графік"
+  },
+  "profile": {
+    "title": "Профіль",
+    "subscription": "Підписка та оплата",
+    "language": "Мова інтерфейсу",
+    "notifications": "Сповіщення",
+    "logout": "Вийти"
+  },
+  "language": {
+    "title": "Мова інтерфейсу",
+    "subtitle": "Оберіть мову застосунку",
+    "auto": "Визначати автоматично за пристроєм"
+  }
+}

@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 import type { Exercise, WorkoutSet } from "@donatellox/types";
+import { toCamelCase } from "@donatellox/types";
 
 interface SetRow extends WorkoutSet {
   id: string;
@@ -59,7 +60,7 @@ export default function WorkoutPlayerPage() {
         .order("order", { referencedTable: "workout_sets", ascending: true })
         .single();
       if (error) throw error;
-      return data as unknown as WorkoutWithSets;
+      return toCamelCase<WorkoutWithSets>(data);
     },
     enabled: !!workoutId,
   });

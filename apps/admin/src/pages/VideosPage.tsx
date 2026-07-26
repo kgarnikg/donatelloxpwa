@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Plus, X, PlayCircle, Search } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import type { Exercise, MuscleGroup, ExerciseDifficulty } from "@donatellox/types";
+import { toCamelCase } from "@donatellox/types";
 
 interface ExerciseFormValues {
   title: string;
@@ -155,7 +156,7 @@ export default function VideosPage() {
         .select("*")
         .order("title", { ascending: true });
       if (error) throw error;
-      return (data ?? []) as unknown as Exercise[];
+      return toCamelCase<Exercise[]>(data ?? []);
     },
   });
 

@@ -32,6 +32,12 @@ export default defineConfig({
         ],
       },
       workbox: {
+        // Без этого браузер мог продолжать работать со старой закэшированной
+        // версией приложения даже после деплоя новой — из-за чего
+        // исправленные баги "возвращались" у пользователей со старой вкладкой.
+        skipWaiting: true,
+        clientsClaim: true,
+        cleanupOutdatedCaches: true,
         globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
         runtimeCaching: [
           {
@@ -44,6 +50,7 @@ export default defineConfig({
           },
           {
             urlPattern: ({ url }) => url.pathname.startsWith("/rest/v1/"),
+            method: "GET",
             handler: "NetworkFirst",
             options: { cacheName: "donatellox-api-cache" },
           },

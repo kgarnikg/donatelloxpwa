@@ -251,3 +251,33 @@ export interface Notification {
   read: boolean;
   createdAt: ISODateString;
 }
+
+// ---------------------------------------------------------------------------
+// Утилита: конвертация snake_case → camelCase
+// ---------------------------------------------------------------------------
+//
+// Supabase возвращает строки БД с колонками в snake_case (duration_weeks,
+// is_premium и т.д.), а все типы в этом пакете описаны в camelCase.
+// Использовать `as unknown as T` без реальной конвертации ключей — баг:
+// TypeScript "поверит" каста, но в рантайме поля вроде `durationWeeks`
+// будут `undefined`, потому что реальный ключ — `duration_weeks`.
+//
+// Всегда прогоняйте результат `.select()` через `toCamelCase<T>(data)`
+// перед тем, как использовать его как значение типа из этого пакета.
+function snakeToCamelKey(key: string): string {
+  return key.replace(/_([a-z0-9])/g, (_, char: string) => char.toUpperCase());
+}
+
+export function toCamelCase<T>(input: unknown): T {
+  if (Array.isArray(input)) {
+    return input.map((item) => toCamelCase(item)) as unknown as T;
+  }
+  if (input !== null && typeof input === "object" && !(input instanceof Date)) {
+    const out: Record<string, unknown> = {};
+    for (const [key, value] of Object.entries(input as Record<string, unknown>)) {
+      out[snakeToCamelKey(key)] = toCamelCase(value);
+    }
+    return out as T;
+  }
+  return input as T;
+}

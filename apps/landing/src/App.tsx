@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { LegalPage } from "@/components/LegalPage";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Hero } from "@/sections/Hero";
 import { Modules } from "@/sections/Modules";
 import { WeeklyPlan } from "@/sections/WeeklyPlan";
@@ -49,21 +50,24 @@ function PrivacyPage() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <div className="min-h-dvh bg-ink-950">
-            <Header />
-            <main>
-              <HomePage />
-            </main>
-            <Footer />
-          </div>
-        }
-      />
-      <Route path="/terms" element={<TermsPage />} />
-      <Route path="/privacy" element={<PrivacyPage />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className="min-h-dvh bg-ink-950">
+              <Header />
+              <main>
+                <HomePage />
+              </main>
+              <Footer />
+            </div>
+          }
+        />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+      </Routes>
+      <LanguageSwitcher />
+    </>
   );
 }

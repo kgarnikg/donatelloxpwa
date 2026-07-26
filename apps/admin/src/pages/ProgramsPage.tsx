@@ -5,6 +5,7 @@ import { Plus, X, Lock } from "lucide-react";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
 import type { WorkoutProgram, FitnessGoal, ExerciseDifficulty, LocaleCode } from "@donatellox/types";
+import { toCamelCase } from "@donatellox/types";
 
 interface ProgramFormValues {
   title: string;
@@ -182,7 +183,7 @@ export default function ProgramsPage() {
         .select("*")
         .order("created_at", { ascending: false });
       if (error) throw error;
-      return (data ?? []) as unknown as WorkoutProgram[];
+      return toCamelCase<WorkoutProgram[]>(data ?? []);
     },
   });
 

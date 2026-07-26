@@ -1,0 +1,148 @@
+{
+  "common": {
+    "save": "ਸੰਭਾਲੋ",
+    "cancel": "ਰੱਦ ਕਰੋ",
+    "back": "ਪਿੱਛੇ",
+    "next": "ਅੱਗੇ",
+    "loading": "ਲੋਡ ਹੋ ਰਿਹਾ ਹੈ…",
+    "comingSoon": "ਜਲਦੀ ਆ ਰਿਹਾ ਹੈ",
+    "min": "ਮਿੰਟ",
+    "kg": "ਕਿਲੋ",
+    "logout": "ਲੌਗ ਆਊਟ"
+  },
+  "nav": {
+    "home": "ਹੋਮ",
+    "programs": "ਪ੍ਰੋਗਰਾਮ",
+    "nutrition": "ਖੁਰਾਕ",
+    "progress": "ਤਰੱਕੀ",
+    "profile": "ਪ੍ਰੋਫਾਈਲ"
+  },
+  "auth": {
+    "login": {
+      "title": "ਵਾਪਸ ਆਉਣ ਤੇ ਸਵਾਗਤ ਹੈ",
+      "subtitle": "ਸਿਖਲਾਈ ਜਾਰੀ ਰੱਖਣ ਲਈ ਸਾਈਨ ਇਨ ਕਰੋ",
+      "email": "ਈਮੇਲ",
+      "password": "ਪਾਸਵਰਡ",
+      "forgotPassword": "ਪਾਸਵਰਡ ਭੁੱਲ ਗਏ?",
+      "submit": "ਸਾਈਨ ਇਨ ਕਰੋ",
+      "submitting": "ਸਾਈਨ ਇਨ ਹੋ ਰਿਹਾ ਹੈ…",
+      "noAccount": "ਖਾਤਾ ਨਹੀਂ ਹੈ?",
+      "signUp": "ਸਾਈਨ ਅੱਪ ਕਰੋ",
+      "or": "ਜਾਂ",
+      "continueWithGoogle": "Google ਨਾਲ ਜਾਰੀ ਰੱਖੋ",
+      "continueWithApple": "Apple ਨਾਲ ਜਾਰੀ ਰੱਖੋ",
+      "openingGoogle": "Google ਖੁੱਲ੍ਹ ਰਿਹਾ ਹੈ…",
+      "openingApple": "Apple ਖੁੱਲ੍ਹ ਰਿਹਾ ਹੈ…"
+    },
+    "register": {
+      "title": "ਖਾਤਾ ਬਣਾਓ",
+      "subtitle": "ਆਪਣੇ ਬਿਹਤਰ ਰੂਪ ਵੱਲ ਸਫ਼ਰ ਸ਼ੁਰੂ ਕਰੋ",
+      "fullName": "ਪੂਰਾ ਨਾਮ",
+      "fullNamePlaceholder": "ਗੁਰਪ੍ਰੀਤ ਸਿੰਘ",
+      "email": "ਈਮੇਲ",
+      "password": "ਪਾਸਵਰਡ",
+      "passwordPlaceholder": "ਘੱਟੋ-ਘੱਟ 8 ਅੱਖਰ",
+      "passwordConfirm": "ਪਾਸਵਰਡ ਦੁਹਰਾਓ",
+      "acceptTerms": "ਮੈਂ ਵਰਤੋਂ ਦੀਆਂ ਸ਼ਰਤਾਂ ਅਤੇ ਗੋਪਨੀਯਤਾ ਨੀਤੀ ਨਾਲ ਸਹਿਮਤ ਹਾਂ",
+      "submit": "ਸਾਈਨ ਅੱਪ ਕਰੋ",
+      "submitting": "ਖਾਤਾ ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ…",
+      "haveAccount": "ਪਹਿਲਾਂ ਹੀ ਖਾਤਾ ਹੈ?",
+      "signIn": "ਸਾਈਨ ਇਨ ਕਰੋ"
+    }
+  },
+  "onboarding": {
+    "steps": ["ਟੀਚੇ", "ਤੁਹਾਡੇ ਬਾਰੇ", "ਫਾਰਮੈਟ", "ਤਿਆਰ"],
+    "goalsTitle": "ਤੁਹਾਡਾ ਟੀਚਾ ਕੀ ਹੈ?",
+    "goalsSubtitle": "ਤੁਸੀਂ ਇੱਕ ਤੋਂ ਵੱਧ ਚੁਣ ਸਕਦੇ ਹੋ",
+    "goals": {
+      "lose_weight": "ਭਾਰ ਘਟਾਉਣਾ",
+      "build_muscle": "ਮਾਸਪੇਸ਼ੀਆਂ ਬਣਾਉਣਾ",
+      "improve_endurance": "ਸਹਿਣਸ਼ੀਲਤਾ ਵਧਾਉਣਾ",
+      "general_fitness": "ਆਮ ਫਿਟਨੈਸ",
+      "rehabilitation": "ਮੁੜ-ਵਸੇਬਾ"
+    },
+    "aboutTitle": "ਆਪਣੇ ਬਾਰੇ ਦੱਸੋ",
+    "gender": "ਲਿੰਗ",
+    "genderOptions": { "male": "ਮਰਦ", "female": "ਔਰਤ", "unspecified": "ਦੱਸਣਾ ਨਹੀਂ ਚਾਹੁੰਦੇ" },
+    "birthDate": "ਜਨਮ ਮਿਤੀ",
+    "height": "ਕੱਦ, ਸੈਮੀ",
+    "weight": "ਭਾਰ, ਕਿਲੋ",
+    "activityLevel": "ਗਤੀਵਿਧੀ ਪੱਧਰ",
+    "activityOptions": {
+      "sedentary": "ਬੈਠਵਾਂ ਜੀਵਨ",
+      "light": "ਹਲਕੀ ਗਤੀਵਿਧੀ",
+      "moderate": "ਦਰਮਿਆਨੀ ਗਤੀਵਿਧੀ",
+      "active": "ਸਰਗਰਮ",
+      "very_active": "ਬਹੁਤ ਸਰਗਰਮ"
+    },
+    "healthNotes": "ਸਿਹਤ ਸੰਬੰਧੀ ਟਿੱਪਣੀਆਂ (ਵਿਕਲਪਿਕ)",
+    "formatTitle": "ਤੁਸੀਂ ਕਿਵੇਂ ਸਿਖਲਾਈ ਲੈਣਾ ਪਸੰਦ ਕਰੋਗੇ?",
+    "trainingFormat": "ਸਿਖਲਾਈ ਫਾਰਮੈਟ",
+    "formatOptions": { "gym": "ਜਿੰਮ ਵਿੱਚ", "home": "ਘਰ ਵਿੱਚ" },
+    "daysPerWeek": "ਤੁਸੀਂ ਹਫ਼ਤੇ ਵਿੱਚ ਕਿੰਨੇ ਦਿਨ ਸਿਖਲਾਈ ਲੈ ਸਕਦੇ ਹੋ?",
+    "doneTitle": "ਸਭ ਕੁਝ ਤਿਆਰ ਹੈ!",
+    "doneSubtitle": "ਅਸੀਂ ਤੁਹਾਡੇ ਟੀਚਿਆਂ ਅਤੇ ਪੱਧਰ ਦੇ ਹਿਸਾਬ ਨਾਲ ਇੱਕ ਪ੍ਰੋਗਰਾਮ ਚੁਣਾਂਗੇ।",
+    "startButton": "ਸਿਖਲਾਈ ਸ਼ੁਰੂ ਕਰੋ",
+    "savingButton": "ਸੰਭਾਲਿਆ ਜਾ ਰਿਹਾ ਹੈ…"
+  },
+  "dashboard": {
+    "greeting": "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ, {{name}}",
+    "readyQuestion": "ਸਿਖਲਾਈ ਲਈ ਤਿਆਰ ਹੋ?",
+    "activateSubscription": "ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਸਰਗਰਮ ਕਰੋ",
+    "subscriptionDesc": "ਸਾਰੇ ਪ੍ਰੋਗਰਾਮਾਂ ਅਤੇ ਵੀਡੀਓ ਤੱਕ ਪਹੁੰਚ",
+    "streakDays": "ਦਿਨ ਲਗਾਤਾਰ",
+    "totalWorkouts": "ਵਰਕਆਊਟ",
+    "recommendedForYou": "ਤੁਹਾਡੇ ਲਈ ਸਿਫ਼ਾਰਸ਼ੀ",
+    "programsForYou": "ਤੁਹਾਡੇ ਲਈ ਪ੍ਰੋਗਰਾਮ",
+    "allPrograms": "ਸਾਰੇ ਪ੍ਰੋਗਰਾਮ",
+    "noPrograms": "ਪ੍ਰੋਗਰਾਮ ਜਲਦੀ ਆ ਰਹੇ ਹਨ — ਬਾਅਦ ਵਿੱਚ ਦੇਖੋ।"
+  },
+  "workout": {
+    "back": "ਪਿੱਛੇ",
+    "sets_one": "{{count}} ਸੈੱਟ",
+    "sets_other": "{{count}} ਸੈੱਟ",
+    "video": "ਵੀਡੀਓ",
+    "videoSoon": "ਵੀਡੀਓ ਜਲਦੀ ਆ ਰਿਹਾ ਹੈ",
+    "set": "ਸੈੱਟ {{number}}",
+    "reps": "{{count}} ਦੁਹਰਾਓ",
+    "rest": "{{count}} ਸਕਿੰਟ ਆਰਾਮ",
+    "workingWeight": "ਕੰਮ ਦਾ ਭਾਰ, ਕਿਲੋ",
+    "weightPlaceholder": "ਉਦਾਹਰਨ: 40",
+    "lastTime": "ਪਿਛਲੀ ਵਾਰ: {{weight}} ਕਿਲੋ · {{next}} ਕਿਲੋ ਅਜ਼ਮਾਓ",
+    "remaining": "{{count}} ਬਾਕੀ",
+    "finishWorkout": "ਵਰਕਆਊਟ ਖਤਮ ਕਰੋ",
+    "saving": "ਸੰਭਾਲਿਆ ਜਾ ਰਿਹਾ ਹੈ…"
+  },
+  "nutrition": {
+    "title": "ਖੁਰਾਕ",
+    "subtitle": "ਤੁਹਾਡੇ ਟੀਚੇ ਲਈ ਆਮ ਸੁਝਾਅ: {{goal}}",
+    "disclaimer": "ਇਹ ਆਮ ਸੁਝਾਅ ਹਨ, ਡਾਕਟਰੀ ਸਲਾਹ ਨਹੀਂ। ਖਾਸ ਸਿਹਤ ਸਥਿਤੀਆਂ ਵਿੱਚ ਡਾਕਟਰ ਜਾਂ ਖੁਰਾਕ ਮਾਹਿਰ ਨਾਲ ਸਲਾਹ ਕਰੋ।",
+    "calories": "ਕੈਲੋਰੀਆਂ",
+    "macros": "ਪੋਸ਼ਕ ਤੱਤਾਂ ਦਾ ਸੰਤੁਲਨ",
+    "mealStructure": "ਭੋਜਨ ਬਣਤਰ",
+    "tips": "ਸੁਝਾਅ",
+    "locked": "ਇਹ ਸੈਕਸ਼ਨ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਨਾਲ ਉਪਲਬਧ ਹੈ",
+    "lockedDesc": "ਆਪਣੇ ਟੀਚੇ ਲਈ ਨਿੱਜੀ ਖੁਰਾਕ ਸੁਝਾਅ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ।",
+    "subscribe": "ਸਬਸਕ੍ਰਾਈਬ ਕਰੋ"
+  },
+  "progress": {
+    "title": "ਤਰੱਕੀ",
+    "subtitle": "ਆਪਣੇ ਭਾਰ ਅਤੇ ਮਾਪਾਂ ਵਿੱਚ ਤਬਦੀਲੀਆਂ ਨੂੰ ਟਰੈਕ ਕਰੋ",
+    "currentWeight": "ਮੌਜੂਦਾ ਭਾਰ, ਕਿਲੋ",
+    "change": "ਬਦਲਾਅ",
+    "weightDynamics": "ਭਾਰ ਦਾ ਰੁਝਾਨ",
+    "needMoreEntries": "ਗ੍ਰਾਫ਼ ਦੇਖਣ ਲਈ ਘੱਟੋ-ਘੱਟ 2 ਐਂਟਰੀਆਂ ਸ਼ਾਮਲ ਕਰੋ"
+  },
+  "profile": {
+    "title": "ਪ੍ਰੋਫਾਈਲ",
+    "subscription": "ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਅਤੇ ਭੁਗਤਾਨ",
+    "language": "ਐਪ ਦੀ ਭਾਸ਼ਾ",
+    "notifications": "ਸੂਚਨਾਵਾਂ",
+    "logout": "ਲੌਗ ਆਊਟ"
+  },
+  "language": {
+    "title": "ਐਪ ਦੀ ਭਾਸ਼ਾ",
+    "subtitle": "ਐਪ ਦੀ ਭਾਸ਼ਾ ਚੁਣੋ",
+    "auto": "ਡਿਵਾਈਸ ਦੇ ਆਧਾਰ ਤੇ ਆਟੋਮੈਟਿਕ ਪਤਾ ਲਗਾਓ"
+  }
+}

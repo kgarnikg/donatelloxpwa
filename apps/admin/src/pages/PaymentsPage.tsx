@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
 import type { Payment, PaymentProvider, PaymentStatus } from "@donatellox/types";
+import { toCamelCase } from "@donatellox/types";
 
 const STATUS_BADGE: Record<PaymentStatus, string> = {
   pending: "bg-warning/10 text-warning",
@@ -41,7 +42,7 @@ export default function PaymentsPage() {
         .order("created_at", { ascending: false })
         .limit(200);
       if (error) throw error;
-      return (data ?? []) as unknown as Payment[];
+      return toCamelCase<Payment[]>(data ?? []);
     },
   });
 

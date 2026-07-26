@@ -1,0 +1,148 @@
+{
+  "common": {
+    "save": "Պահպանել",
+    "cancel": "Չեղարկել",
+    "back": "Հետ",
+    "next": "Հաջորդը",
+    "loading": "Բեռնվում է…",
+    "comingSoon": "Շուտով",
+    "min": "րոպե",
+    "kg": "կգ",
+    "logout": "Ելք"
+  },
+  "nav": {
+    "home": "Գլխավոր",
+    "programs": "Ծրագրեր",
+    "nutrition": "Սնունդ",
+    "progress": "Առաջընթաց",
+    "profile": "Պրոֆիլ"
+  },
+  "auth": {
+    "login": {
+      "title": "Բարի վերադարձ",
+      "subtitle": "Մուտք գործեք՝ շարունակելու համար",
+      "email": "Էլ. փոստ",
+      "password": "Գաղտնաբառ",
+      "forgotPassword": "Մոռացե՞լ եք գաղտնաբառը",
+      "submit": "Մուտք",
+      "submitting": "Մուտք է կատարվում…",
+      "noAccount": "Չունե՞ք հաշիվ",
+      "signUp": "Գրանցվել",
+      "or": "կամ",
+      "continueWithGoogle": "Շարունակել Google-ով",
+      "continueWithApple": "Շարունակել Apple-ով",
+      "openingGoogle": "Բացվում է Google…",
+      "openingApple": "Բացվում է Apple…"
+    },
+    "register": {
+      "title": "Ստեղծել հաշիվ",
+      "subtitle": "Սկսեք ձեր լավագույն ձևին հասնելու ճանապարհը",
+      "fullName": "Անուն և ազգանուն",
+      "fullNamePlaceholder": "Անի Հակոբյան",
+      "email": "Էլ. փոստ",
+      "password": "Գաղտնաբառ",
+      "passwordPlaceholder": "Նվազագույնը 8 նիշ",
+      "passwordConfirm": "Կրկնել գաղտնաբառը",
+      "acceptTerms": "Ընդունում եմ օգտագործման պայմանները և գաղտնիության քաղաքականությունը",
+      "submit": "Գրանցվել",
+      "submitting": "Հաշիվը ստեղծվում է…",
+      "haveAccount": "Արդեն ունե՞ք հաշիվ",
+      "signIn": "Մուտք"
+    }
+  },
+  "onboarding": {
+    "steps": ["Նպատակներ", "Ձեր մասին", "Ձևաչափ", "Պատրաստ է"],
+    "goalsTitle": "Որն է ձեր նպատակը",
+    "goalsSubtitle": "Կարող եք ընտրել մի քանիսը",
+    "goals": {
+      "lose_weight": "Նիհարել",
+      "build_muscle": "Մկանային զանգված հավաքել",
+      "improve_endurance": "Բարելավել դիմացկունությունը",
+      "general_fitness": "Ընդհանուր ֆիզիկական ձև",
+      "rehabilitation": "Վերականգնում"
+    },
+    "aboutTitle": "Պատմեք ձեր մասին",
+    "gender": "Սեռ",
+    "genderOptions": { "male": "Արական", "female": "Իգական", "unspecified": "Չնշել" },
+    "birthDate": "Ծննդյան ամսաթիվ",
+    "height": "Հասակ, սմ",
+    "weight": "Քաշ, կգ",
+    "activityLevel": "Ակտիվության մակարդակ",
+    "activityOptions": {
+      "sedentary": "Նստակյաց",
+      "light": "Թեթև ակտիվություն",
+      "moderate": "Չափավոր ակտիվություն",
+      "active": "Ակտիվ",
+      "very_active": "Շատ ակտիվ"
+    },
+    "healthNotes": "Առողջական առանձնահատկություններ (ցանկության դեպքում)",
+    "formatTitle": "Ինչպե՞ս է ձեզ հարմար մարզվել",
+    "trainingFormat": "Մարզումների ձևաչափ",
+    "formatOptions": { "gym": "Մարզասրահում", "home": "Տանը" },
+    "daysPerWeek": "Քանի՞ օր շաբաթում կարող եք մարզվել",
+    "doneTitle": "Ամեն ինչ պատրաստ է",
+    "doneSubtitle": "Կընտրենք մարզումների ծրագիր՝ ըստ ձեր նպատակների և մակարդակի։",
+    "startButton": "Սկսել մարզումները",
+    "savingButton": "Պահպանվում է…"
+  },
+  "dashboard": {
+    "greeting": "Բարև, {{name}}",
+    "readyQuestion": "Պատրա՞ստ եք մարզվելու",
+    "activateSubscription": "Ակտիվացնել բաժանորդագրությունը",
+    "subscriptionDesc": "Հասանելիություն բոլոր ծրագրերին և տեսանյութերին",
+    "streakDays": "օր անընդմեջ",
+    "totalWorkouts": "մարզումներ",
+    "recommendedForYou": "Առաջարկվում է ձեզ",
+    "programsForYou": "Ծրագրեր ձեզ համար",
+    "allPrograms": "Բոլոր ծրագրերը",
+    "noPrograms": "Ծրագրերը շուտով կհայտնվեն — ստուգեք ավելի ուշ։"
+  },
+  "workout": {
+    "back": "Հետ",
+    "sets_one": "{{count}} մոտեցում",
+    "sets_other": "{{count}} մոտեցում",
+    "video": "Տեսանյութ",
+    "videoSoon": "Տեսանյութը շուտով",
+    "set": "Մոտեցում {{number}}",
+    "reps": "{{count}} կրկնություն",
+    "rest": "հանգիստ {{count}}վ",
+    "workingWeight": "Աշխատանքային քաշ, կգ",
+    "weightPlaceholder": "օրինակ՝ 40",
+    "lastTime": "Անցյալ անգամ՝ {{weight}} կգ · փորձեք {{next}} կգ",
+    "remaining": "Մնացել է {{count}}",
+    "finishWorkout": "Ավարտել մարզումը",
+    "saving": "Պահպանվում է…"
+  },
+  "nutrition": {
+    "title": "Սնունդ",
+    "subtitle": "Ընդհանուր առաջարկություններ ձեր նպատակի համար՝ {{goal}}",
+    "disclaimer": "Սա ընդհանուր առաջարկություն է, ոչ թե բժշկական նշանակում։ Առողջական հատուկ խնդիրների դեպքում դիմեք բժշկի կամ դիետոլոգի։",
+    "calories": "Կալորիականություն",
+    "macros": "Սննդանյութերի հավասարակշռություն",
+    "mealStructure": "Սննդի կառուցվածք",
+    "tips": "Խորհուրդներ",
+    "locked": "Բաժինը հասանելի է բաժանորդագրությամբ",
+    "lockedDesc": "Ակտիվացրեք բաժանորդագրությունը՝ ձեր նպատակին հարմարեցված սննդային առաջարկություններ ստանալու համար։",
+    "subscribe": "Բաժանորդագրվել"
+  },
+  "progress": {
+    "title": "Առաջընթաց",
+    "subtitle": "Հետևեք քաշի և չափումների փոփոխություններին",
+    "currentWeight": "Ընթացիկ քաշ, կգ",
+    "change": "Փոփոխություն",
+    "weightDynamics": "Քաշի դինամիկա",
+    "needMoreEntries": "Ավելացրեք առնվազն 2 չափում՝ գրաֆիկը տեսնելու համար"
+  },
+  "profile": {
+    "title": "Պրոֆիլ",
+    "subscription": "Բաժանորդագրություն և վճարում",
+    "language": "Հավելվածի լեզու",
+    "notifications": "Ծանուցումներ",
+    "logout": "Ելք"
+  },
+  "language": {
+    "title": "Հավելվածի լեզու",
+    "subtitle": "Ընտրեք հավելվածի լեզուն",
+    "auto": "Ավտոմատ որոշել սարքի հիման վրա"
+  }
+}

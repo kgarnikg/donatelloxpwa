@@ -1,7 +1,48 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
-import type { Subscription, WorkoutProgram, ProgressEntry } from "@donatellox/types";
+import type { Subscription, WorkoutProgram, ProgressEntry, UserProfile } from "@donatellox/types";
+import { toCamelCase } from "@donatellox/types";
 import { useAuth } from "@/context/AuthContext";
+
+const FREE_TRIAL_DAYS = 7;
+
+export function useUserProfile() {
+  const { authUser } = useAuth();
+  return useQuery({
+    queryKey: ["user-profile", authUser?.id],
+    enabled: !!authUser,
+    queryFn: async (): Promise<UserProfile | null> => {
+      const { data, error } = await supabase
+        .from("user_profiles")
+        .select("*")
+        .eq("user_id", authUser!.id)
+        .maybeSingle();
+      if (error) throw error;
+      return data ? toCamelCase<UserProfile>(data) : null;
+    },
+  });
+}
+
+/**
+ * Первая программа ("Набор массы для начинающих") — бесплатный подарок на
+ * первую неделю для мужчин с целью набора массы, тренирующихся в зале.
+ * По истечении 7 дней с регистрации (или если профиль не подходит под
+ * условия) программа перестаёт быть бесплатной — нужна подписка.
+ */
+export function useFreeProgramAccess() {
+  const { profile } = useAuth();
+  const { data: userProfile } = useUserProfile();
+
+  const isEligible =
+    userProfile?.gender === "male" &&
+    userProfile?.trainingFormat === "gym" &&
+    (userProfile?.goals ?? []).includes("build_muscle");
+
+  const createdAtMs = profile?.createdAt ? new Date(profile.createdAt).getTime() : null;
+  const withinWindow = createdAtMs != null && Date.now() - createdAtMs < FREE_TRIAL_DAYS * 24 * 60 * 60 * 1000;
+
+  return { hasFreeAccess: Boolean(isEligible) && withinWindow };
+}
 
 export function usePrograms() {
   return useQuery({
@@ -12,7 +53,7 @@ export function usePrograms() {
         .select("*")
         .order("created_at", { ascending: false });
       if (error) throw error;
-      return (data ?? []) as unknown as WorkoutProgram[];
+      return toCamelCase<WorkoutProgram[]>(data ?? []);
     },
   });
 }
@@ -32,7 +73,7 @@ export function useActiveSubscription() {
         .limit(1)
         .maybeSingle();
       if (error) throw error;
-      return data as unknown as Subscription | null;
+      return data ? toCamelCase<Subscription>(data) : null;
     },
   });
 }
@@ -49,7 +90,7 @@ export function useProgressHistory() {
         .eq("user_id", authUser!.id)
         .order("recorded_at", { ascending: true });
       if (error) throw error;
-      return (data ?? []) as unknown as ProgressEntry[];
+      return toCamelCase<ProgressEntry[]>(data ?? []);
     },
   });
 }
@@ -117,7 +158,7 @@ export function useRecommendedProgram() {
         .eq("user_id", authProfile.id)
         .maybeSingle();
 
-      const goals = (userProfile as { goals?: string[] } | null)?.goals ?? [];
+      const goals = toCamelCase<{ goals?: string[] } | null>(userProfile)?.goals ?? [];
       const primaryGoal = goals[0];
 
       const match = primaryGoal ? programs.find((p) => p.goal === primaryGoal) : undefined;

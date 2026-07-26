@@ -5,11 +5,14 @@ import { AppShell } from "@/components/AppShell";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
+import { useFreeProgramAccess } from "@/lib/queries";
 import type { Workout, WorkoutProgram } from "@donatellox/types";
+import { toCamelCase } from "@donatellox/types";
 
 import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "@/pages/RegisterPage";
 import ForgotPasswordPage from "@/pages/ForgotPasswordPage";
+import ResetPasswordPage from "@/pages/ResetPasswordPage";
 import VerifyEmailPage from "@/pages/VerifyEmailPage";
 import OnboardingPage from "@/pages/OnboardingPage";
 import DashboardPage from "@/pages/DashboardPage";
@@ -60,6 +63,7 @@ function TabsLayout() {
  */
 function ProgramDetailPage() {
   const { slug } = useParams<{ slug: string }>();
+  const { hasFreeAccess } = useFreeProgramAccess();
 
   const { data: program, isLoading } = useQuery({
     queryKey: ["program", slug],
@@ -70,7 +74,7 @@ function ProgramDetailPage() {
         .eq("slug", slug)
         .single();
       if (error) throw error;
-      return data as unknown as WorkoutProgram;
+      return toCamelCase<WorkoutProgram>(data);
     },
     enabled: !!slug,
   });
@@ -84,7 +88,7 @@ function ProgramDetailPage() {
         .eq("program_id", program!.id)
         .order("order", { ascending: true });
       if (error) throw error;
-      return (data ?? []) as unknown as Workout[];
+      return toCamelCase<Workout[]>(data ?? []);
     },
     enabled: !!program?.id,
   });
@@ -123,6 +127,18 @@ function ProgramDetailPage() {
         </span>
       </div>
 
+      {!program.isPremium && !hasFreeAccess && (
+        <div className="card mt-4 border-volt-400/30 bg-volt-400/5">
+          <p className="text-sm text-neutral-300">
+            Бесплатный доступ к этой программе был доступен в первую неделю после регистрации.
+            Оформите подписку, чтобы продолжить тренировки по ней.
+          </p>
+          <Link to="/subscription" className="btn-primary mt-3 w-full">
+            Оформить подписку
+          </Link>
+        </div>
+      )}
+
       <div className="mt-6 space-y-3">
         {workoutsLoading &&
           Array.from({ length: 4 }).map((_, i) => (
@@ -130,7 +146,7 @@ function ProgramDetailPage() {
           ))}
 
         {workouts?.map((workout, index) =>
-          program.isPremium ? (
+          program.isPremium || !hasFreeAccess ? (
             <Link
               key={workout.id}
               to="/subscription"
@@ -181,6 +197,7 @@ export default function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/verify-email" element={<VerifyEmailPage />} />
 
       {/* Анкета — отдельно от табов, доступна сразу после регистрации */}

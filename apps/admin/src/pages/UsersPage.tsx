@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
 import type { User, UserRole } from "@donatellox/types";
+import { toCamelCase } from "@donatellox/types";
 
 const ROLE_BADGE: Record<UserRole, string> = {
   athlete: "bg-info/10 text-info",
@@ -32,7 +33,7 @@ export default function UsersPage() {
         .order("created_at", { ascending: false })
         .limit(200);
       if (error) throw error;
-      return (data ?? []) as unknown as User[];
+      return toCamelCase<User[]>(data ?? []);
     },
   });
 

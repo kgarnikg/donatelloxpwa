@@ -40,7 +40,7 @@ export default function RegisterPage() {
     if (data.session) {
       navigate("/onboarding", { replace: true });
     } else {
-      navigate("/verify-email", { replace: true });
+      navigate("/verify-email", { replace: true, state: { email: values.email } });
     }
   }
 

@@ -1,0 +1,148 @@
+{
+  "common": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "back": "رجوع",
+    "next": "التالي",
+    "loading": "جارٍ التحميل…",
+    "comingSoon": "قريبًا",
+    "min": "دقيقة",
+    "kg": "كغ",
+    "logout": "تسجيل الخروج"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "programs": "البرامج",
+    "nutrition": "التغذية",
+    "progress": "التقدم",
+    "profile": "الملف الشخصي"
+  },
+  "auth": {
+    "login": {
+      "title": "مرحبًا بعودتك",
+      "subtitle": "سجّل الدخول لمتابعة التمارين",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "forgotPassword": "هل نسيت كلمة المرور؟",
+      "submit": "تسجيل الدخول",
+      "submitting": "جارٍ تسجيل الدخول…",
+      "noAccount": "ليس لديك حساب؟",
+      "signUp": "إنشاء حساب",
+      "or": "أو",
+      "continueWithGoogle": "المتابعة عبر Google",
+      "continueWithApple": "المتابعة عبر Apple",
+      "openingGoogle": "جارٍ فتح Google…",
+      "openingApple": "جارٍ فتح Apple…"
+    },
+    "register": {
+      "title": "إنشاء حساب",
+      "subtitle": "ابدأ رحلتك نحو أفضل نسخة منك",
+      "fullName": "الاسم الكامل",
+      "fullNamePlaceholder": "محمد أحمد",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "passwordPlaceholder": "8 أحرف على الأقل",
+      "passwordConfirm": "تأكيد كلمة المرور",
+      "acceptTerms": "أوافق على شروط الاستخدام وسياسة الخصوصية",
+      "submit": "إنشاء حساب",
+      "submitting": "جارٍ إنشاء الحساب…",
+      "haveAccount": "لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول"
+    }
+  },
+  "onboarding": {
+    "steps": ["الأهداف", "عنك", "الصيغة", "تم"],
+    "goalsTitle": "ما هو هدفك؟",
+    "goalsSubtitle": "يمكنك اختيار أكثر من هدف",
+    "goals": {
+      "lose_weight": "إنقاص الوزن",
+      "build_muscle": "بناء العضلات",
+      "improve_endurance": "تحسين التحمل",
+      "general_fitness": "لياقة بدنية عامة",
+      "rehabilitation": "إعادة التأهيل"
+    },
+    "aboutTitle": "أخبرنا عن نفسك",
+    "gender": "الجنس",
+    "genderOptions": { "male": "ذكر", "female": "أنثى", "unspecified": "تفضيل عدم الذكر" },
+    "birthDate": "تاريخ الميلاد",
+    "height": "الطول، سم",
+    "weight": "الوزن، كغ",
+    "activityLevel": "مستوى النشاط",
+    "activityOptions": {
+      "sedentary": "خامل",
+      "light": "نشاط خفيف",
+      "moderate": "نشاط متوسط",
+      "active": "نشيط",
+      "very_active": "نشيط جدًا"
+    },
+    "healthNotes": "ملاحظات صحية (اختياري)",
+    "formatTitle": "كيف تفضل التمرين؟",
+    "trainingFormat": "صيغة التمرين",
+    "formatOptions": { "gym": "في الصالة الرياضية", "home": "في المنزل" },
+    "daysPerWeek": "كم يومًا في الأسبوع يمكنك التمرين؟",
+    "doneTitle": "كل شيء جاهز!",
+    "doneSubtitle": "سنختار لك برنامج تمارين يناسب أهدافك ومستواك.",
+    "startButton": "ابدأ التمرين",
+    "savingButton": "جارٍ الحفظ…"
+  },
+  "dashboard": {
+    "greeting": "مرحبًا، {{name}}",
+    "readyQuestion": "هل أنت مستعد للتمرين؟",
+    "activateSubscription": "فعّل اشتراكك",
+    "subscriptionDesc": "الوصول إلى جميع البرامج ومقاطع الفيديو",
+    "streakDays": "أيام متتالية",
+    "totalWorkouts": "تمارين",
+    "recommendedForYou": "موصى به لك",
+    "programsForYou": "برامج لك",
+    "allPrograms": "جميع البرامج",
+    "noPrograms": "البرامج قادمة قريبًا — تحقق لاحقًا."
+  },
+  "workout": {
+    "back": "رجوع",
+    "sets_one": "{{count}} مجموعة",
+    "sets_other": "{{count}} مجموعات",
+    "video": "فيديو",
+    "videoSoon": "الفيديو قريبًا",
+    "set": "المجموعة {{number}}",
+    "reps": "{{count}} تكرارات",
+    "rest": "راحة {{count}} ث",
+    "workingWeight": "وزن التمرين، كغ",
+    "weightPlaceholder": "مثال: 40",
+    "lastTime": "المرة الماضية: {{weight}} كغ · جرّب {{next}} كغ",
+    "remaining": "متبقٍّ {{count}}",
+    "finishWorkout": "إنهاء التمرين",
+    "saving": "جارٍ الحفظ…"
+  },
+  "nutrition": {
+    "title": "التغذية",
+    "subtitle": "إرشادات عامة لهدفك: {{goal}}",
+    "disclaimer": "هذه إرشادات عامة وليست وصفة طبية. إذا كانت لديك حالة صحية خاصة، استشر طبيبًا أو أخصائي تغذية.",
+    "calories": "السعرات الحرارية",
+    "macros": "توازن العناصر الغذائية",
+    "mealStructure": "هيكل الوجبات",
+    "tips": "نصائح",
+    "locked": "هذا القسم يتطلب اشتراكًا",
+    "lockedDesc": "اشترك للحصول على إرشادات تغذية شخصية تناسب هدفك.",
+    "subscribe": "اشترك الآن"
+  },
+  "progress": {
+    "title": "التقدم",
+    "subtitle": "تتبّع التغيرات في وزنك وقياساتك",
+    "currentWeight": "الوزن الحالي، كغ",
+    "change": "التغيّر",
+    "weightDynamics": "منحنى الوزن",
+    "needMoreEntries": "أضف قياسين على الأقل لعرض الرسم البياني"
+  },
+  "profile": {
+    "title": "الملف الشخصي",
+    "subscription": "الاشتراك والدفع",
+    "language": "لغة التطبيق",
+    "notifications": "الإشعارات",
+    "logout": "تسجيل الخروج"
+  },
+  "language": {
+    "title": "لغة التطبيق",
+    "subtitle": "اختر لغة التطبيق",
+    "auto": "الكشف التلقائي حسب الجهاز"
+  }
+}
