@@ -1,29 +1,15 @@
-const FOOTER_LINKS = [
-  {
-    title: "Продукт",
-    links: [
-      { label: "Возможности", href: "#modules" },
-      { label: "Тарифы", href: "#pricing" },
-      { label: "Вопросы", href: "#faq" },
-    ],
-  },
-  {
-    title: "Компания",
-    links: [
-      { label: "О нас", href: "#top" },
-      { label: "Контакты", href: "mailto:hello@donatellox.com" },
-    ],
-  },
-  {
-    title: "Правовая информация",
-    links: [
-      { label: "Условия использования", href: "/terms" },
-      { label: "Политика конфиденциальности", href: "/privacy" },
-    ],
-  },
-];
+import { useTranslation } from "react-i18next";
+
+const GROUP_KEYS = ["product", "company", "legal"] as const;
+const GROUP_LINK_HREFS: Record<(typeof GROUP_KEYS)[number], Record<string, string>> = {
+  product: { features: "#modules", pricing: "#pricing", faq: "#faq" },
+  company: { about: "#top", contact: "mailto:hello@donatellox.com" },
+  legal: { terms: "/terms", privacy: "/privacy" },
+};
 
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="border-t border-ink-800 bg-ink-950 py-12">
       <div className="section-container">
@@ -35,30 +21,37 @@ export function Footer() {
               </div>
               <span className="font-display text-lg font-bold">DonatelloX</span>
             </div>
-            <p className="mt-3 max-w-xs text-sm text-neutral-500">
-              Персональные программы тренировок, видео и дневник прогресса в одном приложении.
-            </p>
+            <p className="mt-3 max-w-xs text-sm text-neutral-500">{t("footer.description")}</p>
           </div>
 
-          {FOOTER_LINKS.map((group) => (
-            <div key={group.title}>
-              <h3 className="mb-3 text-sm font-semibold text-neutral-200">{group.title}</h3>
-              <ul className="space-y-2">
-                {group.links.map((link) => (
-                  <li key={link.label}>
-                    <a href={link.href} className="text-sm text-neutral-500 hover:text-neutral-300">
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {GROUP_KEYS.map((groupKey) => {
+            const group = t(`footer.groups.${groupKey}`, { returnObjects: true }) as {
+              title: string;
+              links: Record<string, string>;
+            };
+            return (
+              <div key={groupKey}>
+                <h3 className="mb-3 text-sm font-semibold text-neutral-200">{group.title}</h3>
+                <ul className="space-y-2">
+                  {Object.entries(group.links).map(([linkKey, label]) => (
+                    <li key={linkKey}>
+                      <a
+                        href={GROUP_LINK_HREFS[groupKey][linkKey]}
+                        className="text-sm text-neutral-500 hover:text-neutral-300"
+                      >
+                        {label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-ink-800 pt-6 text-sm text-neutral-600 sm:flex-row">
-          <p>© {new Date().getFullYear()} DonatelloX. Все права защищены.</p>
-          <p>Оплата: Stripe · PayPal · ЮKassa · USDT</p>
+          <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
+          <p>{t("footer.paymentLine")}</p>
         </div>
       </div>
     </footer>

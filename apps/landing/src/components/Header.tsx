@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
-
-const NAV_LINKS = [
-  { href: "#modules", label: "О программе" },
-  { href: "#plan", label: "Твой план" },
-  { href: "#pricing", label: "Цены" },
-  { href: "#how-it-works", label: "Как начать" },
-  { href: "#faq", label: "Вопросы" },
-];
 
 const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
 
 export function Header() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -21,6 +15,14 @@ export function Header() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const navLinks = [
+    { href: "#modules", label: t("header.nav.modules") },
+    { href: "#plan", label: t("header.nav.plan") },
+    { href: "#pricing", label: t("header.nav.pricing") },
+    { href: "#how-it-works", label: t("header.nav.howItWorks") },
+    { href: "#faq", label: t("header.nav.faq") },
+  ];
 
   return (
     <header
@@ -38,7 +40,7 @@ export function Header() {
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
-          {NAV_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -51,17 +53,17 @@ export function Header() {
 
         <div className="hidden items-center gap-3 md:flex">
           <a href={APP_URL} className="text-sm font-medium text-neutral-300 hover:text-neutral-0">
-            Войти
+            {t("header.login")}
           </a>
           <a href={`${APP_URL}/register`} className="btn-primary py-2.5 text-sm">
-            Начать бесплатно
+            {t("header.startFree")}
           </a>
         </div>
 
         <button
           className="text-neutral-300 md:hidden"
           onClick={() => setMenuOpen((v) => !v)}
-          aria-label="Меню"
+          aria-label={t("header.menuAriaLabel") ?? undefined}
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -70,7 +72,7 @@ export function Header() {
       {menuOpen && (
         <div className="border-t border-ink-700 bg-ink-950 px-6 py-4 md:hidden">
           <nav className="flex flex-col gap-4">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -81,10 +83,10 @@ export function Header() {
               </a>
             ))}
             <a href={APP_URL} className="text-sm font-medium text-neutral-300">
-              Войти
+              {t("header.login")}
             </a>
             <a href={`${APP_URL}/register`} className="btn-primary text-sm">
-              Начать бесплатно
+              {t("header.startFree")}
             </a>
           </nav>
         </div>

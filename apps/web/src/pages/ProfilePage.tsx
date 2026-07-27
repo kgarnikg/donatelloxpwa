@@ -11,6 +11,7 @@ export default function ProfilePage() {
   const [editing, setEditing] = useState(false);
   const [nameDraft, setNameDraft] = useState(profile?.fullName ?? "");
   const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const displayName = profile?.fullName?.trim() || authUser?.email?.split("@")[0] || "Пользователь";
 
@@ -23,15 +24,19 @@ export default function ProfilePage() {
   async function saveName() {
     if (!authUser || !nameDraft.trim()) return;
     setSaving(true);
+    setSaveError(null);
     const { error } = await supabase
       .from("users")
       .update({ full_name: nameDraft.trim() })
       .eq("id", authUser.id);
     setSaving(false);
-    if (!error) {
-      await refreshProfile();
-      setEditing(false);
+    if (error) {
+      console.error("Не удалось сохранить имя:", error);
+      setSaveError(error.message);
+      return;
     }
+    await refreshProfile();
+    setEditing(false);
   }
 
   return (
@@ -53,30 +58,34 @@ export default function ProfilePage() {
 
         <div className="min-w-0 flex-1">
           {editing ? (
-            <div className="flex items-center gap-2">
-              <input
-                autoFocus
-                value={nameDraft}
-                onChange={(e) => setNameDraft(e.target.value)}
-                className="input-field py-1.5 text-sm"
-                placeholder="Ваше имя"
-              />
-              <button
-                onClick={saveName}
-                disabled={saving}
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-volt-400 text-ink-950"
-              >
-                <Check size={16} />
-              </button>
-              <button
-                onClick={() => {
-                  setEditing(false);
-                  setNameDraft(profile?.fullName ?? "");
-                }}
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-ink-600 text-neutral-400"
-              >
-                <X size={16} />
-              </button>
+            <div>
+              <div className="flex items-center gap-2">
+                <input
+                  autoFocus
+                  value={nameDraft}
+                  onChange={(e) => setNameDraft(e.target.value)}
+                  className="input-field py-1.5 text-sm"
+                  placeholder="Ваше имя"
+                />
+                <button
+                  onClick={saveName}
+                  disabled={saving}
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-volt-400 text-ink-950"
+                >
+                  <Check size={16} />
+                </button>
+                <button
+                  onClick={() => {
+                    setEditing(false);
+                    setNameDraft(profile?.fullName ?? "");
+                    setSaveError(null);
+                  }}
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-ink-600 text-neutral-400"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              {saveError && <p className="field-error mt-1">{saveError}</p>}
             </div>
           ) : (
             <button

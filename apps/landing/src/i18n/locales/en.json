@@ -1,0 +1,169 @@
+{
+  "header": {
+    "nav": {
+      "modules": "About",
+      "plan": "Your plan",
+      "pricing": "Pricing",
+      "howItWorks": "How it works",
+      "faq": "FAQ"
+    },
+    "login": "Log in",
+    "startFree": "Start for free",
+    "menuAriaLabel": "Menu"
+  },
+  "hero": {
+    "eyebrow": "DonatelloX Fitness Training",
+    "titleLine1": "Everything to build",
+    "titleLine2": "your dream body",
+    "subtitle": "Structured workouts, video instructions, and a progress journal — all in one app. Train at home, at the gym, or on the go.",
+    "ctaPrimary": "Start now",
+    "ctaSecondary": "Learn more",
+    "disclaimer": "No card required to start · Cancel anytime"
+  },
+  "modules": {
+    "eyebrow": "Features",
+    "title": "Everything you need for results",
+    "subtitle": "From the first questionnaire to your progress journal — DonatelloX is with you every step of the way.",
+    "items": [
+      {
+        "title": "Questionnaire & program matching",
+        "description": "Tell us your goal, fitness level, and limitations — we'll match you with the right program."
+      },
+      {
+        "title": "Workout programs",
+        "description": "Structured programs weeks ahead: from weight loss to muscle gain and rehabilitation."
+      },
+      {
+        "title": "Video instructions",
+        "description": "Every exercise comes with clear video and technique guidance — no guessing."
+      },
+      {
+        "title": "Journal & progress",
+        "description": "Track weight, measurements, and workout results — see your progress clearly."
+      },
+      {
+        "title": "Personal account",
+        "description": "Subscription, language, and notification settings — all in one place."
+      },
+      {
+        "title": "Growing with you",
+        "description": "Nutrition, shop, courses, and an AI coach — in development, so the platform grows alongside you."
+      }
+    ]
+  },
+  "weeklyPlan": {
+    "eyebrow": "Your weekly plan",
+    "title": "Know exactly what to do every day",
+    "subtitle": "The first program — \"Muscle Gain for Beginners\": 4 strength workouts and 3 days of light cardio with abs. Every exercise comes with sets, reps, and video technique.",
+    "footerNote": "Recovery and sleep are part of the program, not a pause from it.",
+    "cardio": "Cardio",
+    "cardioAbs": "Cardio + abs",
+    "strength": "Strength",
+    "days": [
+      { "label": "Mon", "kind": "strength", "meta": "● 21 sets | 6 ex.", "detail": "Chest, triceps" },
+      { "label": "Tue", "kind": "cardio", "meta": "", "detail": "30 min" },
+      { "label": "Wed", "kind": "strength", "meta": "● 25 sets | 7 ex.", "detail": "Back, biceps, grip" },
+      { "label": "Thu", "kind": "cardio", "meta": "", "detail": "30 min" },
+      { "label": "Fri", "kind": "strength", "meta": "● 14 sets | 4 ex.", "detail": "Legs" },
+      { "label": "Sat", "kind": "cardio", "meta": "", "detail": "30 min" },
+      { "label": "Sun", "kind": "strength", "meta": "● 17 sets | 5 ex.", "detail": "Shoulders" }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Choose your plan",
+    "title": "First results in just a few weeks",
+    "subtitle": "Cancel your subscription anytime, right in the app.",
+    "popularBadge": "MOST POPULAR",
+    "bestValueBadge": "BEST VALUE",
+    "choosePlan": "Choose plan",
+    "paymentMethodsLabel": "We accept:",
+    "paymentMethods": ["Card · Stripe", "PayPal", "YuKassa (Russian cards)", "USDT"],
+    "baseFeatures": [
+      "All workout programs",
+      "Video instructions for every exercise",
+      "Progress journal",
+      "Personal program matching"
+    ],
+    "extraFeatures": {
+      "prioritySupport": "Priority support",
+      "earlyAccess": "Early access to new programs",
+      "maxSavings": "Maximum savings"
+    },
+    "plans": {
+      "monthly": { "label": "1 month", "perMonth": "per month" },
+      "quarterly": { "label": "3 months", "perMonth": "$15 / mo.", "originalTotal": "$60 for 3 mo." },
+      "semiannual": { "label": "6 months", "perMonth": "$11.9 / mo.", "originalTotal": "$119.9 for 6 mo." },
+      "annual": { "label": "12 months", "perMonth": "$8.08 / mo.", "originalTotal": "$240 per year" }
+    }
+  },
+  "steps": {
+    "eyebrow": "How to start",
+    "title": "Three simple steps",
+    "items": [
+      {
+        "title": "Define your starting point",
+        "description": "Tell us your level, goal, and available equipment — the program adapts to you from day one."
+      },
+      {
+        "title": "Get your personal plan",
+        "description": "A structured program built around your level and training schedule."
+      },
+      {
+        "title": "Train and progress",
+        "description": "Follow daily workouts, log weights and reps — the program grows with you."
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Frequently asked questions",
+    "items": [
+      {
+        "question": "Do I need special equipment?",
+        "answer": "No. Many programs are designed for bodyweight training. For programs with weights, we note what equipment you'll need before the workout starts."
+      },
+      {
+        "question": "Can I cancel my subscription?",
+        "answer": "Yes, anytime — right in the app's account settings, no need to contact support, no penalties."
+      },
+      {
+        "question": "What payment methods are supported?",
+        "answer": "Cards and local payment methods via Stripe and PayPal, YuKassa for Russian cards, and USDT via your own crypto wallet with automatic transaction verification."
+      },
+      {
+        "question": "Does the app work offline?",
+        "answer": "DonatelloX is a PWA (Progressive Web App): the interface and previously viewed workouts are available offline, and progress syncs once you're back online."
+      },
+      {
+        "question": "Is the app available in my language?",
+        "answer": "Yes, the interface and content are available in several languages."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Ready to start training?",
+    "subtitle": "Fill out a short questionnaire, get your personal program, and take the first step today.",
+    "button": "Start for free"
+  },
+  "footer": {
+    "description": "Personal workout programs, videos, and a progress journal in one app.",
+    "groups": {
+      "product": { "title": "Product", "links": { "features": "Features", "pricing": "Pricing", "faq": "FAQ" } },
+      "company": { "title": "Company", "links": { "about": "About us", "contact": "Contact" } },
+      "legal": { "title": "Legal", "links": { "terms": "Terms of use", "privacy": "Privacy policy" } }
+    },
+    "copyright": "© {{year}} DonatelloX. All rights reserved.",
+    "paymentLine": "Payments: Stripe · PayPal · YuKassa · USDT"
+  },
+  "legal": {
+    "back": "Back to home",
+    "terms": {
+      "title": "Terms of Use",
+      "body": "By using the DonatelloX app and website, you agree to these terms. The full terms of use will be published here before the platform's production launch."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "body": "DonatelloX processes personal data in accordance with applicable data protection law. The full privacy policy will be published here before the platform's production launch."
+    }
+  }
+}

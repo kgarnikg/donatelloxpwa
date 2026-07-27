@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { LegalPage } from "@/components/LegalPage";
@@ -26,24 +27,19 @@ function HomePage() {
 }
 
 function TermsPage() {
+  const { t } = useTranslation();
   return (
-    <LegalPage title="Условия использования">
-      <p>
-        Используя приложение и сайт DonatelloX, вы соглашаетесь с настоящими условиями. Полный
-        текст условий использования будет опубликован здесь до запуска платформы в продакшн.
-      </p>
+    <LegalPage title={t("legal.terms.title") as string}>
+      <p>{t("legal.terms.body")}</p>
     </LegalPage>
   );
 }
 
 function PrivacyPage() {
+  const { t } = useTranslation();
   return (
-    <LegalPage title="Политика конфиденциальности">
-      <p>
-        DonatelloX обрабатывает персональные данные пользователей в соответствии с применимым
-        законодательством о защите данных. Полный текст политики конфиденциальности будет
-        опубликован здесь до запуска платформы в продакшн.
-      </p>
+    <LegalPage title={t("legal.privacy.title") as string}>
+      <p>{t("legal.privacy.body")}</p>
     </LegalPage>
   );
 }
