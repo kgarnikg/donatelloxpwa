@@ -28,6 +28,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   async function loadProfile(userId: string) {
+    // Гарантируем, что строка в public.users существует, ДО попытки её
+    // прочитать — не полагаемся только на триггер регистрации, который
+    // на практике иногда не срабатывает. Идемпотентно, безопасно вызывать
+    // при каждой загрузке сессии.
+    const { error: ensureError } = await supabase.rpc("ensure_user_profile");
+    if (ensureError) {
+      console.error("Не удалось убедиться в наличии профиля:", ensureError.message);
+    }
+
     const { data, error } = await supabase
       .from("users")
       .select("*")
