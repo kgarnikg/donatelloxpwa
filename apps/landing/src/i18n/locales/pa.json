@@ -18,7 +18,7 @@
     "subtitle": "ਸੰਗਠਿਤ ਵਰਕਆਊਟ, ਵੀਡੀਓ ਹਦਾਇਤਾਂ ਅਤੇ ਤਰੱਕੀ ਡਾਇਰੀ — ਸਭ ਇੱਕ ਐਪ ਵਿੱਚ। ਘਰ, ਜਿੰਮ ਜਾਂ ਸਫ਼ਰ ਦੌਰਾਨ ਸਿਖਲਾਈ ਲਓ।",
     "ctaPrimary": "ਹੁਣੇ ਸ਼ੁਰੂ ਕਰੋ",
     "ctaSecondary": "ਹੋਰ ਜਾਣੋ",
-    "disclaimer": "ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਕਾਰਡ ਦੀ ਲੋੜ ਨਹੀਂ · ਕਿਸੇ ਵੀ ਸਮੇਂ ਰੱਦ ਕਰੋ"
+    "disclaimer": "ਪਹਿਲਾ ਹਫ਼ਤਾ ਅਤੇ ਪਹਿਲਾ ਪ੍ਰੋਗਰਾਮ ਮੁਫ਼ਤ · ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਕਾਰਡ ਦੀ ਲੋੜ ਨਹੀਂ"
   },
   "modules": {
     "eyebrow": "ਸੁਵਿਧਾਵਾਂ",
@@ -60,13 +60,48 @@
     "cardioAbs": "ਕਾਰਡੀਓ + ਪੇਟ",
     "strength": "ਤਾਕਤ",
     "days": [
-      { "label": "ਸੋਮ", "kind": "strength", "meta": "● 21 ਸੈੱਟ | 6 ਕਸਰਤਾਂ", "detail": "ਛਾਤੀ, ਟ੍ਰਾਈਸੈੱਪਸ" },
-      { "label": "ਮੰਗਲ", "kind": "cardio", "meta": "", "detail": "30 ਮਿੰਟ" },
-      { "label": "ਬੁੱਧ", "kind": "strength", "meta": "● 25 ਸੈੱਟ | 7 ਕਸਰਤਾਂ", "detail": "ਪਿੱਠ, ਬਾਈਸੈੱਪਸ, ਪਕੜ" },
-      { "label": "ਵੀਰ", "kind": "cardio", "meta": "", "detail": "30 ਮਿੰਟ" },
-      { "label": "ਸ਼ੁੱਕਰ", "kind": "strength", "meta": "● 14 ਸੈੱਟ | 4 ਕਸਰਤਾਂ", "detail": "ਲੱਤਾਂ" },
-      { "label": "ਸ਼ਨੀ", "kind": "cardio", "meta": "", "detail": "30 ਮਿੰਟ" },
-      { "label": "ਐਤ", "kind": "strength", "meta": "● 17 ਸੈੱਟ | 5 ਕਸਰਤਾਂ", "detail": "ਮੋਢੇ" }
+      {
+        "label": "ਸੋਮ",
+        "kind": "strength",
+        "meta": "● 21 ਸੈੱਟ | 6 ਕਸਰਤਾਂ",
+        "detail": "ਛਾਤੀ, ਟ੍ਰਾਈਸੈੱਪਸ"
+      },
+      {
+        "label": "ਮੰਗਲ",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 ਮਿੰਟ"
+      },
+      {
+        "label": "ਬੁੱਧ",
+        "kind": "strength",
+        "meta": "● 25 ਸੈੱਟ | 7 ਕਸਰਤਾਂ",
+        "detail": "ਪਿੱਠ, ਬਾਈਸੈੱਪਸ, ਪਕੜ"
+      },
+      {
+        "label": "ਵੀਰ",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 ਮਿੰਟ"
+      },
+      {
+        "label": "ਸ਼ੁੱਕਰ",
+        "kind": "strength",
+        "meta": "● 14 ਸੈੱਟ | 4 ਕਸਰਤਾਂ",
+        "detail": "ਲੱਤਾਂ"
+      },
+      {
+        "label": "ਸ਼ਨੀ",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 ਮਿੰਟ"
+      },
+      {
+        "label": "ਐਤ",
+        "kind": "strength",
+        "meta": "● 17 ਸੈੱਟ | 5 ਕਸਰਤਾਂ",
+        "detail": "ਮੋਢੇ"
+      }
     ]
   },
   "pricing": {
@@ -77,7 +112,12 @@
     "bestValueBadge": "ਸਭ ਤੋਂ ਵਧੀਆ ਮੁੱਲ",
     "choosePlan": "ਯੋਜਨਾ ਚੁਣੋ",
     "paymentMethodsLabel": "ਅਸੀਂ ਸਵੀਕਾਰ ਕਰਦੇ ਹਾਂ:",
-    "paymentMethods": ["ਕਾਰਡ · Stripe", "PayPal", "ЮKassa (ਰੂਸੀ ਕਾਰਡ)", "USDT"],
+    "paymentMethods": [
+      "ਕਾਰਡ · Stripe",
+      "PayPal",
+      "ЮKassa (ਰੂਸੀ ਕਾਰਡ)",
+      "USDT"
+    ],
     "baseFeatures": [
       "ਸਾਰੇ ਵਰਕਆਊਟ ਪ੍ਰੋਗਰਾਮ",
       "ਹਰ ਕਸਰਤ ਲਈ ਵੀਡੀਓ ਹਦਾਇਤਾਂ",
@@ -90,10 +130,25 @@
       "maxSavings": "ਵੱਧ ਤੋਂ ਵੱਧ ਬੱਚਤ"
     },
     "plans": {
-      "monthly": { "label": "1 ਮਹੀਨਾ", "perMonth": "ਪ੍ਰਤੀ ਮਹੀਨਾ" },
-      "quarterly": { "label": "3 ਮਹੀਨੇ", "perMonth": "15 $ / ਮਹੀਨਾ", "originalTotal": "3 ਮਹੀਨਿਆਂ ਲਈ 60 $" },
-      "semiannual": { "label": "6 ਮਹੀਨੇ", "perMonth": "11.9 $ / ਮਹੀਨਾ", "originalTotal": "6 ਮਹੀਨਿਆਂ ਲਈ 119.9 $" },
-      "annual": { "label": "12 ਮਹੀਨੇ", "perMonth": "8.08 $ / ਮਹੀਨਾ", "originalTotal": "ਸਾਲਾਨਾ 240 $" }
+      "monthly": {
+        "label": "1 ਮਹੀਨਾ",
+        "perMonth": "ਪ੍ਰਤੀ ਮਹੀਨਾ"
+      },
+      "quarterly": {
+        "label": "3 ਮਹੀਨੇ",
+        "perMonth": "{{amount}} / ਮਹੀਨਾ",
+        "originalTotal": "3 ਮਹੀਨਿਆਂ ਲਈ {{amount}}"
+      },
+      "semiannual": {
+        "label": "6 ਮਹੀਨੇ",
+        "perMonth": "{{amount}} / ਮਹੀਨਾ",
+        "originalTotal": "6 ਮਹੀਨਿਆਂ ਲਈ {{amount}}"
+      },
+      "annual": {
+        "label": "12 ਮਹੀਨੇ",
+        "perMonth": "{{amount}} / ਮਹੀਨਾ",
+        "originalTotal": "ਸਾਲਾਨਾ {{amount}}"
+      }
     }
   },
   "steps": {
@@ -148,9 +203,28 @@
   "footer": {
     "description": "ਇੱਕ ਐਪ ਵਿੱਚ ਨਿੱਜੀ ਵਰਕਆਊਟ ਪ੍ਰੋਗਰਾਮ, ਵੀਡੀਓ ਅਤੇ ਤਰੱਕੀ ਡਾਇਰੀ।",
     "groups": {
-      "product": { "title": "ਉਤਪਾਦ", "links": { "features": "ਸੁਵਿਧਾਵਾਂ", "pricing": "ਕੀਮਤਾਂ", "faq": "ਸਵਾਲ" } },
-      "company": { "title": "ਕੰਪਨੀ", "links": { "about": "ਸਾਡੇ ਬਾਰੇ", "contact": "ਸੰਪਰਕ ਕਰੋ" } },
-      "legal": { "title": "ਕਾਨੂੰਨੀ ਜਾਣਕਾਰੀ", "links": { "terms": "ਵਰਤੋਂ ਦੀਆਂ ਸ਼ਰਤਾਂ", "privacy": "ਗੋਪਨੀਯਤਾ ਨੀਤੀ" } }
+      "product": {
+        "title": "ਉਤਪਾਦ",
+        "links": {
+          "features": "ਸੁਵਿਧਾਵਾਂ",
+          "pricing": "ਕੀਮਤਾਂ",
+          "faq": "ਸਵਾਲ"
+        }
+      },
+      "company": {
+        "title": "ਕੰਪਨੀ",
+        "links": {
+          "about": "ਸਾਡੇ ਬਾਰੇ",
+          "contact": "ਸੰਪਰਕ ਕਰੋ"
+        }
+      },
+      "legal": {
+        "title": "ਕਾਨੂੰਨੀ ਜਾਣਕਾਰੀ",
+        "links": {
+          "terms": "ਵਰਤੋਂ ਦੀਆਂ ਸ਼ਰਤਾਂ",
+          "privacy": "ਗੋਪਨੀਯਤਾ ਨੀਤੀ"
+        }
+      }
     },
     "copyright": "© {{year}} DonatelloX. ਸਾਰੇ ਅਧਿਕਾਰ ਰਾਖਵੇਂ ਹਨ।",
     "paymentLine": "ਭੁਗਤਾਨ: Stripe · PayPal · ЮKassa · USDT"
@@ -164,6 +238,11 @@
     "privacy": {
       "title": "ਗੋਪਨੀਯਤਾ ਨੀਤੀ",
       "body": "DonatelloX ਲਾਗੂ ਡਾਟਾ ਸੁਰੱਖਿਆ ਕਾਨੂੰਨ ਅਨੁਸਾਰ ਨਿੱਜੀ ਡਾਟੇ ਦੀ ਪ੍ਰਕਿਰਿਆ ਕਰਦਾ ਹੈ। ਗੋਪਨੀਯਤਾ ਨੀਤੀ ਦਾ ਪੂਰਾ ਪਾਠ ਪਲੇਟਫਾਰਮ ਦੇ ਉਤਪਾਦਨ ਲਾਂਚ ਤੋਂ ਪਹਿਲਾਂ ਇੱਥੇ ਪ੍ਰਕਾਸ਼ਿਤ ਕੀਤਾ ਜਾਵੇਗਾ।"
+    },
+    "regionNotes": {
+      "ru": "ਰੂਸ ਦੇ ਉਪਭੋਗਤਾਵਾਂ ਲਈ, ਨਿੱਜੀ ਡਾਟਾ ਸੰਘੀ ਕਾਨੂੰਨ ਨੰ. 152-FZ \"ਨਿੱਜੀ ਡਾਟੇ ਬਾਰੇ\" ਅਨੁਸਾਰ ਪ੍ਰੋਸੈਸ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।",
+      "eu": "ਯੂਰਪੀਅਨ ਯੂਨੀਅਨ ਦੇ ਉਪਭੋਗਤਾਵਾਂ ਲਈ, ਨਿੱਜੀ ਡਾਟਾ ਜਨਰਲ ਡਾਟਾ ਪ੍ਰੋਟੈਕਸ਼ਨ ਰੈਗੂਲੇਸ਼ਨ (GDPR) ਅਨੁਸਾਰ ਪ੍ਰੋਸੈਸ ਕੀਤਾ ਜਾਂਦਾ ਹੈ।",
+      "us": "ਅਮਰੀਕਾ ਦੇ ਉਪਭੋਗਤਾਵਾਂ ਲਈ, ਸੰਬੰਧਿਤ ਰਾਜ ਦੇ ਖਪਤਕਾਰ ਗੋਪਨੀਯਤਾ ਕਾਨੂੰਨ ਲਾਗੂ ਹੁੰਦੇ ਹਨ।"
     }
   }
 }

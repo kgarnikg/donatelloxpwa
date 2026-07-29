@@ -78,6 +78,43 @@ export function useActiveSubscription() {
   });
 }
 
+interface WorkoutHistoryEntry {
+  id: string;
+  completedAt: string;
+  durationMinutes: number;
+  workoutTitle: string;
+}
+
+/** История завершённых тренировок с названием — для раздела «Прогресс». */
+export function useWorkoutHistory() {
+  const { authUser } = useAuth();
+  return useQuery({
+    queryKey: ["workout-history", authUser?.id],
+    enabled: !!authUser,
+    queryFn: async (): Promise<WorkoutHistoryEntry[]> => {
+      const { data, error } = await supabase
+        .from("workout_logs")
+        .select("id, completed_at, duration_minutes, workout:workouts(title)")
+        .eq("user_id", authUser!.id)
+        .order("completed_at", { ascending: false })
+        .limit(20);
+      if (error) throw error;
+
+      return ((data ?? []) as unknown as Array<{
+        id: string;
+        completed_at: string;
+        duration_minutes: number;
+        workout: { title: string } | null;
+      }>).map((row) => ({
+        id: row.id,
+        completedAt: row.completed_at,
+        durationMinutes: row.duration_minutes,
+        workoutTitle: row.workout?.title ?? "Тренировка",
+      }));
+    },
+  });
+}
+
 export function useProgressHistory() {
   const { authUser } = useAuth();
   return useQuery({

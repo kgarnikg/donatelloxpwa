@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, LogOut, CreditCard, Globe, Bell, Pencil, Check, X } from "lucide-react";
+import { ChevronRight, LogOut, CreditCard, Globe, Bell, Pencil, Check, X, Gift } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 
@@ -12,8 +13,32 @@ export default function ProfilePage() {
   const [nameDraft, setNameDraft] = useState(profile?.fullName ?? "");
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const { data: referralCount } = useQuery({
+    queryKey: ["referral-count", authUser?.id],
+    enabled: !!authUser,
+    queryFn: async (): Promise<number> => {
+      const { count, error } = await supabase
+        .from("referrals")
+        .select("id", { count: "exact", head: true })
+        .eq("referrer_id", authUser!.id);
+      if (error) throw error;
+      return count ?? 0;
+    },
+  });
 
   const displayName = profile?.fullName?.trim() || authUser?.email?.split("@")[0] || "Пользователь";
+  const referralLink = profile?.referralCode
+    ? `${window.location.origin}/register?ref=${profile.referralCode}`
+    : null;
+
+  async function copyReferralLink() {
+    if (!referralLink) return;
+    await navigator.clipboard.writeText(referralLink);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
 
   const menuItems = [
     { to: "/subscription", label: t("profile.subscription"), icon: CreditCard },
@@ -100,7 +125,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      <div className="card divide-y divide-ink-700 p-0">
+      <div className="card mb-6 divide-y divide-ink-700 p-0">
         {menuItems.map(({ to, label, icon: Icon }) => (
           <Link key={to} to={to} className="flex items-center gap-3 px-4 py-3.5 hover:bg-ink-800">
             <Icon size={18} className="text-neutral-400" />
@@ -108,6 +133,39 @@ export default function ProfilePage() {
             <ChevronRight size={18} className="text-neutral-500" />
           </Link>
         ))}
+      </div>
+
+      <div className="card mb-6">
+        <div className="flex items-center gap-2">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-volt-400/10 text-volt-400">
+            <Gift size={18} />
+          </div>
+          <div>
+            <p className="font-semibold">{t("referral.title")}</p>
+            <p className="text-xs text-neutral-400">{t("referral.subtitle")}</p>
+          </div>
+        </div>
+
+        {referralLink ? (
+          <>
+            <div className="mt-4 flex items-center gap-2 rounded-md border border-ink-700 bg-ink-800 px-3 py-2.5">
+              <p className="min-w-0 flex-1 truncate text-sm text-neutral-300">{referralLink}</p>
+              <button
+                onClick={copyReferralLink}
+                className="shrink-0 rounded-md bg-volt-400 px-3 py-1.5 text-xs font-semibold text-ink-950"
+              >
+                {copied ? t("referral.copied") : t("referral.copy")}
+              </button>
+            </div>
+            {referralCount != null && referralCount > 0 && (
+              <p className="mt-2 text-xs text-neutral-500">
+                {t("referral.invitedCount", { count: referralCount })}
+              </p>
+            )}
+          </>
+        ) : (
+          <p className="mt-3 text-sm text-neutral-500">{t("common.loading")}</p>
+        )}
       </div>
 
       <button

@@ -18,7 +18,7 @@
     "subtitle": "Strukturierte Trainings, Video-Anleitungen und ein Fortschrittstagebuch — alles in einer App. Trainiere zu Hause, im Fitnessstudio oder unterwegs.",
     "ctaPrimary": "Jetzt starten",
     "ctaSecondary": "Mehr erfahren",
-    "disclaimer": "Keine Kreditkarte zum Start nötig · Jederzeit kündbar"
+    "disclaimer": "Erste Woche und erstes Programm kostenlos · Keine Karte zum Start nötig"
   },
   "modules": {
     "eyebrow": "Funktionen",
@@ -60,13 +60,48 @@
     "cardioAbs": "Cardio + Bauch",
     "strength": "Kraft",
     "days": [
-      { "label": "Mo", "kind": "strength", "meta": "● 21 Sätze | 6 Üb.", "detail": "Brust, Trizeps" },
-      { "label": "Di", "kind": "cardio", "meta": "", "detail": "30 Min" },
-      { "label": "Mi", "kind": "strength", "meta": "● 25 Sätze | 7 Üb.", "detail": "Rücken, Bizeps, Griff" },
-      { "label": "Do", "kind": "cardio", "meta": "", "detail": "30 Min" },
-      { "label": "Fr", "kind": "strength", "meta": "● 14 Sätze | 4 Üb.", "detail": "Beine" },
-      { "label": "Sa", "kind": "cardio", "meta": "", "detail": "30 Min" },
-      { "label": "So", "kind": "strength", "meta": "● 17 Sätze | 5 Üb.", "detail": "Schultern" }
+      {
+        "label": "Mo",
+        "kind": "strength",
+        "meta": "● 21 Sätze | 6 Üb.",
+        "detail": "Brust, Trizeps"
+      },
+      {
+        "label": "Di",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 Min"
+      },
+      {
+        "label": "Mi",
+        "kind": "strength",
+        "meta": "● 25 Sätze | 7 Üb.",
+        "detail": "Rücken, Bizeps, Griff"
+      },
+      {
+        "label": "Do",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 Min"
+      },
+      {
+        "label": "Fr",
+        "kind": "strength",
+        "meta": "● 14 Sätze | 4 Üb.",
+        "detail": "Beine"
+      },
+      {
+        "label": "Sa",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 Min"
+      },
+      {
+        "label": "So",
+        "kind": "strength",
+        "meta": "● 17 Sätze | 5 Üb.",
+        "detail": "Schultern"
+      }
     ]
   },
   "pricing": {
@@ -77,7 +112,12 @@
     "bestValueBadge": "BESTES PREIS-LEISTUNGS-VERHÄLTNIS",
     "choosePlan": "Plan wählen",
     "paymentMethodsLabel": "Wir akzeptieren:",
-    "paymentMethods": ["Karte · Stripe", "PayPal", "ЮKassa (russische Karten)", "USDT"],
+    "paymentMethods": [
+      "Karte · Stripe",
+      "PayPal",
+      "ЮKassa (russische Karten)",
+      "USDT"
+    ],
     "baseFeatures": [
       "Alle Trainingsprogramme",
       "Video-Anleitungen zu jeder Übung",
@@ -90,10 +130,25 @@
       "maxSavings": "Maximale Ersparnis"
     },
     "plans": {
-      "monthly": { "label": "1 Monat", "perMonth": "pro Monat" },
-      "quarterly": { "label": "3 Monate", "perMonth": "15 $ / Monat", "originalTotal": "60 $ für 3 Monate" },
-      "semiannual": { "label": "6 Monate", "perMonth": "11,9 $ / Monat", "originalTotal": "119,9 $ für 6 Monate" },
-      "annual": { "label": "12 Monate", "perMonth": "8,08 $ / Monat", "originalTotal": "240 $ pro Jahr" }
+      "monthly": {
+        "label": "1 Monat",
+        "perMonth": "pro Monat"
+      },
+      "quarterly": {
+        "label": "3 Monate",
+        "perMonth": "{{amount}} / Monat",
+        "originalTotal": "{{amount}} für 3 Monate"
+      },
+      "semiannual": {
+        "label": "6 Monate",
+        "perMonth": "{{amount}} / Monat",
+        "originalTotal": "{{amount}} für 6 Monate"
+      },
+      "annual": {
+        "label": "12 Monate",
+        "perMonth": "{{amount}} / Monat",
+        "originalTotal": "{{amount}} pro Jahr"
+      }
     }
   },
   "steps": {
@@ -148,9 +203,28 @@
   "footer": {
     "description": "Persönliche Trainingsprogramme, Videos und ein Fortschrittstagebuch in einer App.",
     "groups": {
-      "product": { "title": "Produkt", "links": { "features": "Funktionen", "pricing": "Preise", "faq": "Fragen" } },
-      "company": { "title": "Unternehmen", "links": { "about": "Über uns", "contact": "Kontakt" } },
-      "legal": { "title": "Rechtliches", "links": { "terms": "Nutzungsbedingungen", "privacy": "Datenschutzrichtlinie" } }
+      "product": {
+        "title": "Produkt",
+        "links": {
+          "features": "Funktionen",
+          "pricing": "Preise",
+          "faq": "Fragen"
+        }
+      },
+      "company": {
+        "title": "Unternehmen",
+        "links": {
+          "about": "Über uns",
+          "contact": "Kontakt"
+        }
+      },
+      "legal": {
+        "title": "Rechtliches",
+        "links": {
+          "terms": "Nutzungsbedingungen",
+          "privacy": "Datenschutzrichtlinie"
+        }
+      }
     },
     "copyright": "© {{year}} DonatelloX. Alle Rechte vorbehalten.",
     "paymentLine": "Zahlungen: Stripe · PayPal · ЮKassa · USDT"
@@ -164,6 +238,11 @@
     "privacy": {
       "title": "Datenschutzrichtlinie",
       "body": "DonatelloX verarbeitet personenbezogene Daten gemäß geltendem Datenschutzrecht. Der vollständige Text der Datenschutzrichtlinie wird hier vor dem Produktivstart der Plattform veröffentlicht."
+    },
+    "regionNotes": {
+      "ru": "Für Nutzer in Russland werden personenbezogene Daten gemäß dem Bundesgesetz Nr. 152-FZ „Über personenbezogene Daten“ verarbeitet.",
+      "eu": "Für Nutzer in der Europäischen Union werden personenbezogene Daten gemäß der Datenschutz-Grundverordnung (DSGVO) verarbeitet.",
+      "us": "Für Nutzer in den USA gelten die entsprechenden bundesstaatlichen Verbraucherdatenschutzgesetze."
     }
   }
 }

@@ -51,7 +51,12 @@
     }
   },
   "onboarding": {
-    "steps": ["Objetivos", "Sobre ti", "Formato", "Listo"],
+    "steps": [
+      "Objetivos",
+      "Sobre ti",
+      "Formato",
+      "Listo"
+    ],
     "goalsTitle": "¿Cuál es tu objetivo?",
     "goalsSubtitle": "Puedes elegir más de uno",
     "goals": {
@@ -63,7 +68,11 @@
     },
     "aboutTitle": "Cuéntanos sobre ti",
     "gender": "Sexo",
-    "genderOptions": { "male": "Masculino", "female": "Femenino", "unspecified": "Prefiero no decirlo" },
+    "genderOptions": {
+      "male": "Masculino",
+      "female": "Femenino",
+      "unspecified": "Prefiero no decirlo"
+    },
     "birthDate": "Fecha de nacimiento",
     "height": "Altura, cm",
     "weight": "Peso, kg",
@@ -78,7 +87,10 @@
     "healthNotes": "Notas de salud (opcional)",
     "formatTitle": "¿Cómo prefieres entrenar?",
     "trainingFormat": "Formato de entrenamiento",
-    "formatOptions": { "gym": "En el gimnasio", "home": "En casa" },
+    "formatOptions": {
+      "gym": "En el gimnasio",
+      "home": "En casa"
+    },
     "daysPerWeek": "¿Cuántos días a la semana puedes entrenar?",
     "doneTitle": "¡Todo listo!",
     "doneSubtitle": "Te asignaremos un programa según tus objetivos y nivel.",
@@ -131,7 +143,18 @@
     "currentWeight": "Peso actual, kg",
     "change": "Cambio",
     "weightDynamics": "Evolución del peso",
-    "needMoreEntries": "Añade al menos 2 registros para ver el gráfico"
+    "needMoreEntries": "Añade al menos 2 registros para ver el gráfico",
+    "recentWorkouts": "Entrenamientos recientes",
+    "noWorkoutsYet": "Aún no hay entrenamientos completados",
+    "measurements": "Medidas corporales",
+    "addMeasurements": "Añadir medidas",
+    "chest": "Pecho",
+    "waist": "Cintura",
+    "hips": "Caderas",
+    "biceps": "Bíceps",
+    "thigh": "Muslo",
+    "cmUnit": "cm",
+    "noMeasurementsYet": "Aún no hay medidas"
   },
   "profile": {
     "title": "Perfil",
@@ -144,5 +167,13 @@
     "title": "Idioma de la app",
     "subtitle": "Elige el idioma de la aplicación",
     "auto": "Detectar automáticamente según el dispositivo"
+  },
+  "referral": {
+    "title": "Invita a un amigo",
+    "subtitle": "Tu amigo obtiene un 50% de descuento en su primer mes",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "invitedCount_one": "{{count}} amigo invitado",
+    "invitedCount_other": "{{count}} amigos invitados"
   }
 }

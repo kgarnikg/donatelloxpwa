@@ -51,7 +51,12 @@
     }
   },
   "onboarding": {
-    "steps": ["الأهداف", "عنك", "الصيغة", "تم"],
+    "steps": [
+      "الأهداف",
+      "عنك",
+      "الصيغة",
+      "تم"
+    ],
     "goalsTitle": "ما هو هدفك؟",
     "goalsSubtitle": "يمكنك اختيار أكثر من هدف",
     "goals": {
@@ -63,7 +68,11 @@
     },
     "aboutTitle": "أخبرنا عن نفسك",
     "gender": "الجنس",
-    "genderOptions": { "male": "ذكر", "female": "أنثى", "unspecified": "تفضيل عدم الذكر" },
+    "genderOptions": {
+      "male": "ذكر",
+      "female": "أنثى",
+      "unspecified": "تفضيل عدم الذكر"
+    },
     "birthDate": "تاريخ الميلاد",
     "height": "الطول، سم",
     "weight": "الوزن، كغ",
@@ -78,7 +87,10 @@
     "healthNotes": "ملاحظات صحية (اختياري)",
     "formatTitle": "كيف تفضل التمرين؟",
     "trainingFormat": "صيغة التمرين",
-    "formatOptions": { "gym": "في الصالة الرياضية", "home": "في المنزل" },
+    "formatOptions": {
+      "gym": "في الصالة الرياضية",
+      "home": "في المنزل"
+    },
     "daysPerWeek": "كم يومًا في الأسبوع يمكنك التمرين؟",
     "doneTitle": "كل شيء جاهز!",
     "doneSubtitle": "سنختار لك برنامج تمارين يناسب أهدافك ومستواك.",
@@ -131,7 +143,18 @@
     "currentWeight": "الوزن الحالي، كغ",
     "change": "التغيّر",
     "weightDynamics": "منحنى الوزن",
-    "needMoreEntries": "أضف قياسين على الأقل لعرض الرسم البياني"
+    "needMoreEntries": "أضف قياسين على الأقل لعرض الرسم البياني",
+    "recentWorkouts": "التمارين الأخيرة",
+    "noWorkoutsYet": "لا توجد تمارين مكتملة بعد",
+    "measurements": "قياسات الجسم",
+    "addMeasurements": "إضافة قياسات",
+    "chest": "الصدر",
+    "waist": "الخصر",
+    "hips": "الورك",
+    "biceps": "العضلة ذات الرأسين",
+    "thigh": "الفخذ",
+    "cmUnit": "سم",
+    "noMeasurementsYet": "لا توجد قياسات بعد"
   },
   "profile": {
     "title": "الملف الشخصي",
@@ -144,5 +167,12 @@
     "title": "لغة التطبيق",
     "subtitle": "اختر لغة التطبيق",
     "auto": "الكشف التلقائي حسب الجهاز"
+  },
+  "referral": {
+    "title": "ادعُ صديقًا",
+    "subtitle": "يحصل صديقك على خصم 50% على الشهر الأول من الاشتراك",
+    "copy": "نسخ",
+    "copied": "تم النسخ!",
+    "invitedCount_other": "تمت دعوة {{count}} صديق"
   }
 }

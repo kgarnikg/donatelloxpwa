@@ -51,7 +51,12 @@
     }
   },
   "onboarding": {
-    "steps": ["Goals", "About you", "Format", "Done"],
+    "steps": [
+      "Goals",
+      "About you",
+      "Format",
+      "Done"
+    ],
     "goalsTitle": "What's your goal?",
     "goalsSubtitle": "You can pick more than one",
     "goals": {
@@ -63,7 +68,11 @@
     },
     "aboutTitle": "Tell us about yourself",
     "gender": "Gender",
-    "genderOptions": { "male": "Male", "female": "Female", "unspecified": "Prefer not to say" },
+    "genderOptions": {
+      "male": "Male",
+      "female": "Female",
+      "unspecified": "Prefer not to say"
+    },
     "birthDate": "Date of birth",
     "height": "Height, cm",
     "weight": "Weight, kg",
@@ -78,7 +87,10 @@
     "healthNotes": "Health notes (optional)",
     "formatTitle": "How do you like to train?",
     "trainingFormat": "Training format",
-    "formatOptions": { "gym": "At the gym", "home": "At home" },
+    "formatOptions": {
+      "gym": "At the gym",
+      "home": "At home"
+    },
     "daysPerWeek": "How many days a week can you train?",
     "doneTitle": "All set!",
     "doneSubtitle": "We'll match a workout program to your goals and fitness level.",
@@ -131,7 +143,18 @@
     "currentWeight": "Current weight, kg",
     "change": "Change",
     "weightDynamics": "Weight trend",
-    "needMoreEntries": "Add at least 2 entries to see the chart"
+    "needMoreEntries": "Add at least 2 entries to see the chart",
+    "recentWorkouts": "Recent workouts",
+    "noWorkoutsYet": "No completed workouts yet",
+    "measurements": "Body measurements",
+    "addMeasurements": "Add measurements",
+    "chest": "Chest",
+    "waist": "Waist",
+    "hips": "Hips",
+    "biceps": "Biceps",
+    "thigh": "Thigh",
+    "cmUnit": "cm",
+    "noMeasurementsYet": "No measurements yet"
   },
   "profile": {
     "title": "Profile",
@@ -144,5 +167,13 @@
     "title": "App language",
     "subtitle": "Choose your app language",
     "auto": "Detect automatically from device"
+  },
+  "referral": {
+    "title": "Invite a friend",
+    "subtitle": "Your friend gets 50% off their first month",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "invitedCount_one": "{{count}} friend invited",
+    "invitedCount_other": "{{count}} friends invited"
   }
 }

@@ -62,6 +62,9 @@ export interface User {
   authProvider: AuthProvider;
   emailVerified: boolean;
   onboardingCompleted: boolean;
+  referralCode?: string;
+  pendingDiscountPercent?: number;
+  pendingDiscountReason?: string;
   createdAt: ISODateString;
   updatedAt: ISODateString;
   lastSeenAt?: ISODateString;

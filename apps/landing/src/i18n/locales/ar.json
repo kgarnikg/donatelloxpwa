@@ -18,7 +18,7 @@
     "subtitle": "تمارين منظمة، شروحات فيديو، ودفتر متابعة للتقدم — كل ذلك في تطبيق واحد. تمرّن في المنزل، في الصالة الرياضية، أو أثناء التنقل.",
     "ctaPrimary": "ابدأ الآن",
     "ctaSecondary": "اعرف المزيد",
-    "disclaimer": "بدون بطاقة بنكية للبدء · إلغاء الاشتراك في أي وقت"
+    "disclaimer": "الأسبوع الأول والبرنامج الأول مجانًا · بدون بطاقة للبدء"
   },
   "modules": {
     "eyebrow": "المزايا",
@@ -60,13 +60,48 @@
     "cardioAbs": "كارديو + بطن",
     "strength": "قوة",
     "days": [
-      { "label": "الإثنين", "kind": "strength", "meta": "● 21 مجموعة | 6 تمارين", "detail": "صدر، تراي سيبس" },
-      { "label": "الثلاثاء", "kind": "cardio", "meta": "", "detail": "30 دقيقة" },
-      { "label": "الأربعاء", "kind": "strength", "meta": "● 25 مجموعة | 7 تمارين", "detail": "ظهر، باي سيبس، قبضة" },
-      { "label": "الخميس", "kind": "cardio", "meta": "", "detail": "30 دقيقة" },
-      { "label": "الجمعة", "kind": "strength", "meta": "● 14 مجموعة | 4 تمارين", "detail": "أرجل" },
-      { "label": "السبت", "kind": "cardio", "meta": "", "detail": "30 دقيقة" },
-      { "label": "الأحد", "kind": "strength", "meta": "● 17 مجموعة | 5 تمارين", "detail": "أكتاف" }
+      {
+        "label": "الإثنين",
+        "kind": "strength",
+        "meta": "● 21 مجموعة | 6 تمارين",
+        "detail": "صدر، تراي سيبس"
+      },
+      {
+        "label": "الثلاثاء",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 دقيقة"
+      },
+      {
+        "label": "الأربعاء",
+        "kind": "strength",
+        "meta": "● 25 مجموعة | 7 تمارين",
+        "detail": "ظهر، باي سيبس، قبضة"
+      },
+      {
+        "label": "الخميس",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 دقيقة"
+      },
+      {
+        "label": "الجمعة",
+        "kind": "strength",
+        "meta": "● 14 مجموعة | 4 تمارين",
+        "detail": "أرجل"
+      },
+      {
+        "label": "السبت",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 دقيقة"
+      },
+      {
+        "label": "الأحد",
+        "kind": "strength",
+        "meta": "● 17 مجموعة | 5 تمارين",
+        "detail": "أكتاف"
+      }
     ]
   },
   "pricing": {
@@ -77,7 +112,12 @@
     "bestValueBadge": "أفضل قيمة",
     "choosePlan": "اختر الخطة",
     "paymentMethodsLabel": "نقبل الدفع عبر:",
-    "paymentMethods": ["بطاقة · Stripe", "PayPal", "ЮKassa (بطاقات روسية)", "USDT"],
+    "paymentMethods": [
+      "بطاقة · Stripe",
+      "PayPal",
+      "ЮKassa (بطاقات روسية)",
+      "USDT"
+    ],
     "baseFeatures": [
       "جميع برامج التمارين",
       "شروحات فيديو لكل تمرين",
@@ -90,10 +130,25 @@
       "maxSavings": "أقصى توفير"
     },
     "plans": {
-      "monthly": { "label": "شهر واحد", "perMonth": "شهريًا" },
-      "quarterly": { "label": "3 أشهر", "perMonth": "15 $ / شهريًا", "originalTotal": "60 $ لمدة 3 أشهر" },
-      "semiannual": { "label": "6 أشهر", "perMonth": "11.9 $ / شهريًا", "originalTotal": "119.9 $ لمدة 6 أشهر" },
-      "annual": { "label": "12 شهرًا", "perMonth": "8.08 $ / شهريًا", "originalTotal": "240 $ سنويًا" }
+      "monthly": {
+        "label": "شهر واحد",
+        "perMonth": "شهريًا"
+      },
+      "quarterly": {
+        "label": "3 أشهر",
+        "perMonth": "{{amount}} / شهريًا",
+        "originalTotal": "{{amount}} لمدة 3 أشهر"
+      },
+      "semiannual": {
+        "label": "6 أشهر",
+        "perMonth": "{{amount}} / شهريًا",
+        "originalTotal": "{{amount}} لمدة 6 أشهر"
+      },
+      "annual": {
+        "label": "12 شهرًا",
+        "perMonth": "{{amount}} / شهريًا",
+        "originalTotal": "{{amount}} سنويًا"
+      }
     }
   },
   "steps": {
@@ -148,9 +203,28 @@
   "footer": {
     "description": "برامج تمارين شخصية وفيديوهات ودفتر متابعة تقدم في تطبيق واحد.",
     "groups": {
-      "product": { "title": "المنتج", "links": { "features": "المزايا", "pricing": "الأسعار", "faq": "الأسئلة" } },
-      "company": { "title": "الشركة", "links": { "about": "من نحن", "contact": "تواصل معنا" } },
-      "legal": { "title": "معلومات قانونية", "links": { "terms": "شروط الاستخدام", "privacy": "سياسة الخصوصية" } }
+      "product": {
+        "title": "المنتج",
+        "links": {
+          "features": "المزايا",
+          "pricing": "الأسعار",
+          "faq": "الأسئلة"
+        }
+      },
+      "company": {
+        "title": "الشركة",
+        "links": {
+          "about": "من نحن",
+          "contact": "تواصل معنا"
+        }
+      },
+      "legal": {
+        "title": "معلومات قانونية",
+        "links": {
+          "terms": "شروط الاستخدام",
+          "privacy": "سياسة الخصوصية"
+        }
+      }
     },
     "copyright": "© {{year}} DonatelloX. جميع الحقوق محفوظة.",
     "paymentLine": "الدفع: Stripe · PayPal · ЮKassa · USDT"
@@ -164,6 +238,11 @@
     "privacy": {
       "title": "سياسة الخصوصية",
       "body": "تعالج DonatelloX البيانات الشخصية وفقًا لقوانين حماية البيانات المعمول بها. سيتم نشر النص الكامل لسياسة الخصوصية هنا قبل الإطلاق الفعلي للمنصة."
+    },
+    "regionNotes": {
+      "ru": "بالنسبة للمستخدمين في روسيا، تتم معالجة البيانات الشخصية وفقًا للقانون الاتحادي رقم 152-FZ «بشأن البيانات الشخصية».",
+      "eu": "بالنسبة للمستخدمين في الاتحاد الأوروبي، تتم معالجة البيانات الشخصية وفقًا للائحة العامة لحماية البيانات (GDPR).",
+      "us": "بالنسبة للمستخدمين في الولايات المتحدة، تُطبَّق قوانين خصوصية المستهلك الخاصة بالولاية المعنية."
     }
   }
 }

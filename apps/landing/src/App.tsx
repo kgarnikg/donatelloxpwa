@@ -4,6 +4,8 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { LegalPage } from "@/components/LegalPage";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { RegionSwitcher } from "@/components/RegionSwitcher";
+import { RegionProvider, useRegion } from "@/context/RegionContext";
 import { Hero } from "@/sections/Hero";
 import { Modules } from "@/sections/Modules";
 import { WeeklyPlan } from "@/sections/WeeklyPlan";
@@ -28,25 +30,29 @@ function HomePage() {
 
 function TermsPage() {
   const { t } = useTranslation();
+  const { region } = useRegion();
   return (
     <LegalPage title={t("legal.terms.title") as string}>
       <p>{t("legal.terms.body")}</p>
+      <p className="mt-4">{t(`legal.regionNotes.${region}`)}</p>
     </LegalPage>
   );
 }
 
 function PrivacyPage() {
   const { t } = useTranslation();
+  const { region } = useRegion();
   return (
     <LegalPage title={t("legal.privacy.title") as string}>
       <p>{t("legal.privacy.body")}</p>
+      <p className="mt-4">{t(`legal.regionNotes.${region}`)}</p>
     </LegalPage>
   );
 }
 
 export default function App() {
   return (
-    <>
+    <RegionProvider>
       <Routes>
         <Route
           path="/"
@@ -63,7 +69,8 @@ export default function App() {
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
       </Routes>
+      <RegionSwitcher />
       <LanguageSwitcher />
-    </>
+    </RegionProvider>
   );
 }

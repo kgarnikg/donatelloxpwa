@@ -2,6 +2,8 @@ import { Check, Flame } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import type { SubscriptionPlan } from "@donatellox/types";
+import { useRegion } from "@/context/RegionContext";
+import { getRegionAmounts, formatAmount, REGION_PAYMENT_METHODS } from "@/lib/regionPricing";
 
 const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
 
@@ -14,8 +16,10 @@ const PLAN_ORDER: { value: SubscriptionPlan; discountBadge?: string; highlight?:
 
 export function Pricing() {
   const { t } = useTranslation();
+  const { region } = useRegion();
+  const amounts = getRegionAmounts(region);
   const baseFeatures = t("pricing.baseFeatures", { returnObjects: true }) as string[];
-  const paymentMethods = t("pricing.paymentMethods", { returnObjects: true }) as string[];
+  const paymentMethods = REGION_PAYMENT_METHODS[region];
 
   return (
     <section id="pricing" className="py-20 sm:py-28">
@@ -28,11 +32,18 @@ export function Pricing() {
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {PLAN_ORDER.map((plan) => {
-            const planData = t(`pricing.plans.${plan.value}`, { returnObjects: true }) as {
-              label: string;
-              perMonth: string;
-              originalTotal?: string;
-            };
+            const label = t(`pricing.plans.${plan.value}.label`) as string;
+            const planAmounts = amounts[plan.value];
+            const mainPrice = formatAmount(region, planAmounts.main);
+            const perMonth = t(`pricing.plans.${plan.value}.perMonth`, {
+              amount: formatAmount(region, planAmounts.perMonthAmount),
+            }) as string;
+            const originalTotal = planAmounts.originalAmount
+              ? (t(`pricing.plans.${plan.value}.originalTotal`, {
+                  amount: formatAmount(region, planAmounts.originalAmount),
+                }) as string)
+              : undefined;
+
             const features =
               plan.highlight === "best-value"
                 ? [
@@ -73,17 +84,12 @@ export function Pricing() {
                   </span>
                 )}
 
-                <h3 className="font-semibold">{planData.label}</h3>
+                <h3 className="font-semibold">{label}</h3>
                 <p className="mt-2">
-                  <span className="font-display text-3xl font-bold">
-                    {plan.value === "monthly" ? "19,99 $" : planData.perMonth}
-                  </span>
+                  <span className="font-display text-3xl font-bold">{mainPrice}</span>
                 </p>
-                {plan.value !== "monthly" && <p className="text-sm text-neutral-400">{planData.perMonth}</p>}
-                {plan.value === "monthly" && <p className="text-sm text-neutral-400">{planData.perMonth}</p>}
-                {planData.originalTotal && (
-                  <p className="mt-1 text-xs text-neutral-600 line-through">{planData.originalTotal}</p>
-                )}
+                <p className="text-sm text-neutral-400">{perMonth}</p>
+                {originalTotal && <p className="mt-1 text-xs text-neutral-600 line-through">{originalTotal}</p>}
 
                 <ul className="mt-6 flex-1 space-y-3">
                   {features.map((f) => (

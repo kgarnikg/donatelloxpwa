@@ -37,6 +37,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.error("Не удалось убедиться в наличии профиля:", ensureError.message);
     }
 
+    // Если пользователь пришёл по реферальной ссылке (код сохранён в
+    // localStorage на странице регистрации), применяем его один раз.
+    const pendingReferralCode = localStorage.getItem("donatellox-referral-code");
+    if (pendingReferralCode) {
+      const { error: referralError } = await supabase.rpc("apply_referral", {
+        p_referral_code: pendingReferralCode,
+      });
+      if (referralError) {
+        console.error("Не удалось применить реферальный код:", referralError.message);
+      }
+      localStorage.removeItem("donatellox-referral-code");
+    }
+
     const { data, error } = await supabase
       .from("users")
       .select("*")

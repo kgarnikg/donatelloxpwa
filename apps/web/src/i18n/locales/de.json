@@ -51,7 +51,12 @@
     }
   },
   "onboarding": {
-    "steps": ["Ziele", "Über dich", "Format", "Fertig"],
+    "steps": [
+      "Ziele",
+      "Über dich",
+      "Format",
+      "Fertig"
+    ],
     "goalsTitle": "Was ist dein Ziel?",
     "goalsSubtitle": "Mehrfachauswahl möglich",
     "goals": {
@@ -63,7 +68,11 @@
     },
     "aboutTitle": "Erzähl uns von dir",
     "gender": "Geschlecht",
-    "genderOptions": { "male": "Männlich", "female": "Weiblich", "unspecified": "Keine Angabe" },
+    "genderOptions": {
+      "male": "Männlich",
+      "female": "Weiblich",
+      "unspecified": "Keine Angabe"
+    },
     "birthDate": "Geburtsdatum",
     "height": "Größe, cm",
     "weight": "Gewicht, kg",
@@ -78,7 +87,10 @@
     "healthNotes": "Gesundheitliche Hinweise (optional)",
     "formatTitle": "Wie trainierst du am liebsten?",
     "trainingFormat": "Trainingsformat",
-    "formatOptions": { "gym": "Im Fitnessstudio", "home": "Zuhause" },
+    "formatOptions": {
+      "gym": "Im Fitnessstudio",
+      "home": "Zuhause"
+    },
     "daysPerWeek": "Wie viele Tage pro Woche kannst du trainieren?",
     "doneTitle": "Alles bereit!",
     "doneSubtitle": "Wir stellen ein Trainingsprogramm passend zu deinen Zielen und deinem Niveau zusammen.",
@@ -131,7 +143,18 @@
     "currentWeight": "Aktuelles Gewicht, kg",
     "change": "Veränderung",
     "weightDynamics": "Gewichtsverlauf",
-    "needMoreEntries": "Füge mindestens 2 Einträge hinzu, um das Diagramm zu sehen"
+    "needMoreEntries": "Füge mindestens 2 Einträge hinzu, um das Diagramm zu sehen",
+    "recentWorkouts": "Letzte Trainings",
+    "noWorkoutsYet": "Noch keine abgeschlossenen Trainings",
+    "measurements": "Körpermaße",
+    "addMeasurements": "Maße hinzufügen",
+    "chest": "Brust",
+    "waist": "Taille",
+    "hips": "Hüfte",
+    "biceps": "Bizeps",
+    "thigh": "Oberschenkel",
+    "cmUnit": "cm",
+    "noMeasurementsYet": "Noch keine Maße"
   },
   "profile": {
     "title": "Profil",
@@ -144,5 +167,13 @@
     "title": "App-Sprache",
     "subtitle": "Wähle die Sprache der App",
     "auto": "Automatisch anhand des Geräts erkennen"
+  },
+  "referral": {
+    "title": "Freund einladen",
+    "subtitle": "Dein Freund erhält 50 % Rabatt auf den ersten Monat",
+    "copy": "Kopieren",
+    "copied": "Kopiert!",
+    "invitedCount_one": "{{count}} Freund eingeladen",
+    "invitedCount_other": "{{count}} Freunde eingeladen"
   }
 }

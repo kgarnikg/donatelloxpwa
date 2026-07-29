@@ -18,7 +18,7 @@
     "subtitle": "Entrenamientos estructurados, instrucciones en vídeo y un diario de progreso — todo en una sola app. Entrena en casa, en el gimnasio o de viaje.",
     "ctaPrimary": "Empezar ahora",
     "ctaSecondary": "Saber más",
-    "disclaimer": "Sin tarjeta para empezar · Cancela cuando quieras"
+    "disclaimer": "Primera semana y primer programa gratis · Sin tarjeta para empezar"
   },
   "modules": {
     "eyebrow": "Funciones",
@@ -60,13 +60,48 @@
     "cardioAbs": "Cardio + abdominales",
     "strength": "Fuerza",
     "days": [
-      { "label": "Lun", "kind": "strength", "meta": "● 21 series | 6 ejerc.", "detail": "Pecho, tríceps" },
-      { "label": "Mar", "kind": "cardio", "meta": "", "detail": "30 min" },
-      { "label": "Mié", "kind": "strength", "meta": "● 25 series | 7 ejerc.", "detail": "Espalda, bíceps, agarre" },
-      { "label": "Jue", "kind": "cardio", "meta": "", "detail": "30 min" },
-      { "label": "Vie", "kind": "strength", "meta": "● 14 series | 4 ejerc.", "detail": "Piernas" },
-      { "label": "Sáb", "kind": "cardio", "meta": "", "detail": "30 min" },
-      { "label": "Dom", "kind": "strength", "meta": "● 17 series | 5 ejerc.", "detail": "Hombros" }
+      {
+        "label": "Lun",
+        "kind": "strength",
+        "meta": "● 21 series | 6 ejerc.",
+        "detail": "Pecho, tríceps"
+      },
+      {
+        "label": "Mar",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 min"
+      },
+      {
+        "label": "Mié",
+        "kind": "strength",
+        "meta": "● 25 series | 7 ejerc.",
+        "detail": "Espalda, bíceps, agarre"
+      },
+      {
+        "label": "Jue",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 min"
+      },
+      {
+        "label": "Vie",
+        "kind": "strength",
+        "meta": "● 14 series | 4 ejerc.",
+        "detail": "Piernas"
+      },
+      {
+        "label": "Sáb",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 min"
+      },
+      {
+        "label": "Dom",
+        "kind": "strength",
+        "meta": "● 17 series | 5 ejerc.",
+        "detail": "Hombros"
+      }
     ]
   },
   "pricing": {
@@ -77,7 +112,12 @@
     "bestValueBadge": "MEJOR RELACIÓN CALIDAD-PRECIO",
     "choosePlan": "Elegir plan",
     "paymentMethodsLabel": "Aceptamos:",
-    "paymentMethods": ["Tarjeta · Stripe", "PayPal", "ЮKassa (tarjetas rusas)", "USDT"],
+    "paymentMethods": [
+      "Tarjeta · Stripe",
+      "PayPal",
+      "ЮKassa (tarjetas rusas)",
+      "USDT"
+    ],
     "baseFeatures": [
       "Todos los programas de entrenamiento",
       "Instrucciones en vídeo de cada ejercicio",
@@ -90,10 +130,25 @@
       "maxSavings": "Máximo ahorro"
     },
     "plans": {
-      "monthly": { "label": "1 mes", "perMonth": "al mes" },
-      "quarterly": { "label": "3 meses", "perMonth": "15 $ / mes", "originalTotal": "60 $ por 3 meses" },
-      "semiannual": { "label": "6 meses", "perMonth": "11,9 $ / mes", "originalTotal": "119,9 $ por 6 meses" },
-      "annual": { "label": "12 meses", "perMonth": "8,08 $ / mes", "originalTotal": "240 $ al año" }
+      "monthly": {
+        "label": "1 mes",
+        "perMonth": "al mes"
+      },
+      "quarterly": {
+        "label": "3 meses",
+        "perMonth": "{{amount}} / mes",
+        "originalTotal": "{{amount}} por 3 meses"
+      },
+      "semiannual": {
+        "label": "6 meses",
+        "perMonth": "{{amount}} / mes",
+        "originalTotal": "{{amount}} por 6 meses"
+      },
+      "annual": {
+        "label": "12 meses",
+        "perMonth": "{{amount}} / mes",
+        "originalTotal": "{{amount}} al año"
+      }
     }
   },
   "steps": {
@@ -148,9 +203,28 @@
   "footer": {
     "description": "Programas de entrenamiento personalizados, vídeos y un diario de progreso en una sola app.",
     "groups": {
-      "product": { "title": "Producto", "links": { "features": "Funciones", "pricing": "Precios", "faq": "Preguntas" } },
-      "company": { "title": "Empresa", "links": { "about": "Sobre nosotros", "contact": "Contacto" } },
-      "legal": { "title": "Legal", "links": { "terms": "Condiciones de uso", "privacy": "Política de privacidad" } }
+      "product": {
+        "title": "Producto",
+        "links": {
+          "features": "Funciones",
+          "pricing": "Precios",
+          "faq": "Preguntas"
+        }
+      },
+      "company": {
+        "title": "Empresa",
+        "links": {
+          "about": "Sobre nosotros",
+          "contact": "Contacto"
+        }
+      },
+      "legal": {
+        "title": "Legal",
+        "links": {
+          "terms": "Condiciones de uso",
+          "privacy": "Política de privacidad"
+        }
+      }
     },
     "copyright": "© {{year}} DonatelloX. Todos los derechos reservados.",
     "paymentLine": "Pagos: Stripe · PayPal · ЮKassa · USDT"
@@ -164,6 +238,11 @@
     "privacy": {
       "title": "Política de privacidad",
       "body": "DonatelloX trata los datos personales conforme a la legislación de protección de datos aplicable. El texto completo de la política de privacidad se publicará aquí antes del lanzamiento a producción de la plataforma."
+    },
+    "regionNotes": {
+      "ru": "Para los usuarios en Rusia, los datos personales se procesan conforme a la Ley Federal N.º 152-FZ «Sobre datos personales».",
+      "eu": "Para los usuarios de la Unión Europea, los datos personales se procesan conforme al Reglamento General de Protección de Datos (RGPD).",
+      "us": "Para los usuarios en Estados Unidos, se aplican las leyes estatales de privacidad del consumidor correspondientes."
     }
   }
 }

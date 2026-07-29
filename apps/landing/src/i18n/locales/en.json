@@ -18,7 +18,7 @@
     "subtitle": "Structured workouts, video instructions, and a progress journal — all in one app. Train at home, at the gym, or on the go.",
     "ctaPrimary": "Start now",
     "ctaSecondary": "Learn more",
-    "disclaimer": "No card required to start · Cancel anytime"
+    "disclaimer": "First week and first program free · No card required to start"
   },
   "modules": {
     "eyebrow": "Features",
@@ -60,13 +60,48 @@
     "cardioAbs": "Cardio + abs",
     "strength": "Strength",
     "days": [
-      { "label": "Mon", "kind": "strength", "meta": "● 21 sets | 6 ex.", "detail": "Chest, triceps" },
-      { "label": "Tue", "kind": "cardio", "meta": "", "detail": "30 min" },
-      { "label": "Wed", "kind": "strength", "meta": "● 25 sets | 7 ex.", "detail": "Back, biceps, grip" },
-      { "label": "Thu", "kind": "cardio", "meta": "", "detail": "30 min" },
-      { "label": "Fri", "kind": "strength", "meta": "● 14 sets | 4 ex.", "detail": "Legs" },
-      { "label": "Sat", "kind": "cardio", "meta": "", "detail": "30 min" },
-      { "label": "Sun", "kind": "strength", "meta": "● 17 sets | 5 ex.", "detail": "Shoulders" }
+      {
+        "label": "Mon",
+        "kind": "strength",
+        "meta": "● 21 sets | 6 ex.",
+        "detail": "Chest, triceps"
+      },
+      {
+        "label": "Tue",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 min"
+      },
+      {
+        "label": "Wed",
+        "kind": "strength",
+        "meta": "● 25 sets | 7 ex.",
+        "detail": "Back, biceps, grip"
+      },
+      {
+        "label": "Thu",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 min"
+      },
+      {
+        "label": "Fri",
+        "kind": "strength",
+        "meta": "● 14 sets | 4 ex.",
+        "detail": "Legs"
+      },
+      {
+        "label": "Sat",
+        "kind": "cardio",
+        "meta": "",
+        "detail": "30 min"
+      },
+      {
+        "label": "Sun",
+        "kind": "strength",
+        "meta": "● 17 sets | 5 ex.",
+        "detail": "Shoulders"
+      }
     ]
   },
   "pricing": {
@@ -77,7 +112,12 @@
     "bestValueBadge": "BEST VALUE",
     "choosePlan": "Choose plan",
     "paymentMethodsLabel": "We accept:",
-    "paymentMethods": ["Card · Stripe", "PayPal", "YuKassa (Russian cards)", "USDT"],
+    "paymentMethods": [
+      "Card · Stripe",
+      "PayPal",
+      "YuKassa (Russian cards)",
+      "USDT"
+    ],
     "baseFeatures": [
       "All workout programs",
       "Video instructions for every exercise",
@@ -90,10 +130,25 @@
       "maxSavings": "Maximum savings"
     },
     "plans": {
-      "monthly": { "label": "1 month", "perMonth": "per month" },
-      "quarterly": { "label": "3 months", "perMonth": "$15 / mo.", "originalTotal": "$60 for 3 mo." },
-      "semiannual": { "label": "6 months", "perMonth": "$11.9 / mo.", "originalTotal": "$119.9 for 6 mo." },
-      "annual": { "label": "12 months", "perMonth": "$8.08 / mo.", "originalTotal": "$240 per year" }
+      "monthly": {
+        "label": "1 month",
+        "perMonth": "per month"
+      },
+      "quarterly": {
+        "label": "3 months",
+        "perMonth": "{{amount}} / mo.",
+        "originalTotal": "{{amount}} for 3 mo."
+      },
+      "semiannual": {
+        "label": "6 months",
+        "perMonth": "{{amount}} / mo.",
+        "originalTotal": "{{amount}} for 6 mo."
+      },
+      "annual": {
+        "label": "12 months",
+        "perMonth": "{{amount}} / mo.",
+        "originalTotal": "{{amount}} per year"
+      }
     }
   },
   "steps": {
@@ -148,9 +203,28 @@
   "footer": {
     "description": "Personal workout programs, videos, and a progress journal in one app.",
     "groups": {
-      "product": { "title": "Product", "links": { "features": "Features", "pricing": "Pricing", "faq": "FAQ" } },
-      "company": { "title": "Company", "links": { "about": "About us", "contact": "Contact" } },
-      "legal": { "title": "Legal", "links": { "terms": "Terms of use", "privacy": "Privacy policy" } }
+      "product": {
+        "title": "Product",
+        "links": {
+          "features": "Features",
+          "pricing": "Pricing",
+          "faq": "FAQ"
+        }
+      },
+      "company": {
+        "title": "Company",
+        "links": {
+          "about": "About us",
+          "contact": "Contact"
+        }
+      },
+      "legal": {
+        "title": "Legal",
+        "links": {
+          "terms": "Terms of use",
+          "privacy": "Privacy policy"
+        }
+      }
     },
     "copyright": "© {{year}} DonatelloX. All rights reserved.",
     "paymentLine": "Payments: Stripe · PayPal · YuKassa · USDT"
@@ -164,6 +238,11 @@
     "privacy": {
       "title": "Privacy Policy",
       "body": "DonatelloX processes personal data in accordance with applicable data protection law. The full privacy policy will be published here before the platform's production launch."
+    },
+    "regionNotes": {
+      "ru": "For users in Russia, personal data is processed in accordance with Federal Law No. 152-FZ \"On Personal Data\".",
+      "eu": "For users in the European Union, personal data is processed in accordance with the General Data Protection Regulation (GDPR).",
+      "us": "For users in the United States, applicable state consumer privacy laws apply."
     }
   }
 }

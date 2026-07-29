@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
@@ -7,9 +7,12 @@ import { registerSchema, type RegisterInput } from "@donatellox/validation";
 import { supabase } from "@/lib/supabase";
 import { PasswordInput } from "@/components/PasswordInput";
 
+const REFERRAL_STORAGE_KEY = "donatellox-referral-code";
+
 export default function RegisterPage() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [serverError, setServerError] = useState<string | null>(null);
 
   const {
@@ -23,6 +26,15 @@ export default function RegisterPage() {
 
   async function onSubmit(values: RegisterInput) {
     setServerError(null);
+
+    // Реферальный код из ссылки (?ref=ABC123) сохраняем в localStorage —
+    // применится в AuthContext при первом входе (сразу или после
+    // подтверждения email, в зависимости от настроек проекта).
+    const referralCode = searchParams.get("ref");
+    if (referralCode) {
+      localStorage.setItem(REFERRAL_STORAGE_KEY, referralCode);
+    }
+
     const { data, error } = await supabase.auth.signUp({
       email: values.email,
       password: values.password,
