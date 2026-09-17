@@ -30,9 +30,7 @@
       "signUp": "Sign up",
       "or": "or",
       "continueWithGoogle": "Continue with Google",
-      "continueWithApple": "Continue with Apple",
-      "openingGoogle": "Opening Google…",
-      "openingApple": "Opening Apple…"
+      "openingGoogle": "Opening Google…"
     },
     "register": {
       "title": "Create account",

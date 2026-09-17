@@ -30,9 +30,7 @@
       "signUp": "Registrieren",
       "or": "oder",
       "continueWithGoogle": "Weiter mit Google",
-      "continueWithApple": "Weiter mit Apple",
-      "openingGoogle": "Google wird geöffnet…",
-      "openingApple": "Apple wird geöffnet…"
+      "openingGoogle": "Google wird geöffnet…"
     },
     "register": {
       "title": "Konto erstellen",

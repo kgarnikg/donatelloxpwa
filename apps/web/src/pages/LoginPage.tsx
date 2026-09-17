@@ -13,7 +13,7 @@ export default function LoginPage() {
   const location = useLocation();
   const from = (location.state as { from?: Location })?.from?.pathname ?? "/dashboard";
   const [serverError, setServerError] = useState<string | null>(null);
-  const [oauthLoading, setOauthLoading] = useState<"google" | "apple" | null>(null);
+  const [oauthLoading, setOauthLoading] = useState<"google" | null>(null);
 
   const {
     register,
@@ -35,7 +35,7 @@ export default function LoginPage() {
     navigate(from, { replace: true });
   }
 
-  async function signInWithOAuth(provider: "google" | "apple") {
+  async function signInWithOAuth(provider: "google") {
     setOauthLoading(provider);
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
@@ -109,13 +109,6 @@ export default function LoginPage() {
             className="btn-secondary w-full"
           >
             {oauthLoading === "google" ? t("auth.login.openingGoogle") : t("auth.login.continueWithGoogle")}
-          </button>
-          <button
-            onClick={() => signInWithOAuth("apple")}
-            disabled={oauthLoading !== null}
-            className="btn-secondary w-full"
-          >
-            {oauthLoading === "apple" ? t("auth.login.openingApple") : t("auth.login.continueWithApple")}
           </button>
         </div>
 

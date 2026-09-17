@@ -30,9 +30,7 @@
       "signUp": "Գրանցվել",
       "or": "կամ",
       "continueWithGoogle": "Շարունակել Google-ով",
-      "continueWithApple": "Շարունակել Apple-ով",
-      "openingGoogle": "Բացվում է Google…",
-      "openingApple": "Բացվում է Apple…"
+      "openingGoogle": "Բացվում է Google…"
     },
     "register": {
       "title": "Ստեղծել հաշիվ",

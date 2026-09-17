@@ -30,9 +30,7 @@
       "signUp": "Зареєструватися",
       "or": "або",
       "continueWithGoogle": "Продовжити з Google",
-      "continueWithApple": "Продовжити з Apple",
-      "openingGoogle": "Відкриваємо Google…",
-      "openingApple": "Відкриваємо Apple…"
+      "openingGoogle": "Відкриваємо Google…"
     },
     "register": {
       "title": "Створити акаунт",

@@ -30,9 +30,7 @@
       "signUp": "إنشاء حساب",
       "or": "أو",
       "continueWithGoogle": "المتابعة عبر Google",
-      "continueWithApple": "المتابعة عبر Apple",
-      "openingGoogle": "جارٍ فتح Google…",
-      "openingApple": "جارٍ فتح Apple…"
+      "openingGoogle": "جارٍ فتح Google…"
     },
     "register": {
       "title": "إنشاء حساب",
