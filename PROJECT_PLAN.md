@@ -144,6 +144,8 @@ Telegram-бот поддержки, ручная коррекция програ
 | `0009_fix_workout_logs_fkey.sql` | FK на workout_logs.user_id ссылался на несуществующую таблицу `profiles` (остаток старого черновика схемы) — исправлено на `public.users` |
 | `0010_fix_subscriptions_table.sql` | Таблица `subscriptions` оказалась тем же старым черновиком (неверный FK + другая структура) — пересоздана по актуальной схеме |
 | `0011_referral_program.sql` | Реферальные коды, таблица `referrals`, RPC `apply_referral` |
+| `0012_add_program_targeting.sql` | `workout_programs`: добавлены `gender` и `training_format` — подбор программы теперь может учитывать пол и формат тренировок, не только цель |
+| `0013_add_workout_week_grouping.sql` | `workouts`: добавлены `week_label` и `week_order` — тренировки группируются по 2-недельным блокам (LEVEL) вместо плоского списка. Патч `ProgramDetailPage.tsx` добавляет переключатель блока |
 
 ## 8. Важная находка: остатки старого черновика схемы в базе
 

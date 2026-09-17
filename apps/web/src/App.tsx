@@ -1,6 +1,8 @@
+import { useState, useMemo } from "react";
 import { Routes, Route, Navigate, Outlet, Link, useParams } from "react-router-dom";
 import { ChevronLeft, Play, Lock } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import clsx from "clsx";
 import { AppShell } from "@/components/AppShell";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useAuth } from "@/context/AuthContext";
@@ -58,12 +60,14 @@ function TabsLayout() {
 }
 
 /**
- * Детальная страница программы тренировок: список тренировок программы.
+ * Детальная страница программы тренировок: тренировки, сгруппированные по
+ * блокам недель (week_label/week_order), с переключателем блока.
  * Премиум-программы без активной подписки показывают пейволл вместо списка.
  */
 function ProgramDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const { hasFreeAccess } = useFreeProgramAccess();
+  const [activeWeekOrder, setActiveWeekOrder] = useState<number | null>(null);
 
   const { data: program, isLoading } = useQuery({
     queryKey: ["program", slug],
@@ -86,12 +90,30 @@ function ProgramDetailPage() {
         .from("workouts")
         .select("*, sets:workout_sets(*)")
         .eq("program_id", program!.id)
+        .order("week_order", { ascending: true })
         .order("order", { ascending: true });
       if (error) throw error;
       return toCamelCase<Workout[]>(data ?? []);
     },
     enabled: !!program?.id,
   });
+
+  // Уникальные блоки недель в порядке появления (week_order уже отсортирован запросом).
+  const weekBlocks = useMemo(() => {
+    if (!workouts) return [];
+    const seen = new Map<number, string>();
+    for (const w of workouts) {
+      if (!seen.has(w.weekOrder)) seen.set(w.weekOrder, w.weekLabel || `Блок ${w.weekOrder}`);
+    }
+    return Array.from(seen, ([order, label]) => ({ order, label }));
+  }, [workouts]);
+
+  const effectiveWeekOrder = activeWeekOrder ?? weekBlocks[0]?.order ?? 1;
+  const visibleWorkouts = useMemo(
+    () => (workouts ?? []).filter((w) => w.weekOrder === effectiveWeekOrder),
+    [workouts, effectiveWeekOrder],
+  );
+  const hasMultipleBlocks = weekBlocks.length > 1;
 
   if (isLoading) {
     return (
@@ -139,13 +161,32 @@ function ProgramDetailPage() {
         </div>
       )}
 
-      <div className="mt-6 space-y-3">
+      {hasMultipleBlocks && (
+        <div className="mt-6 -mx-5 flex gap-2 overflow-x-auto px-5 pb-1">
+          {weekBlocks.map((block) => (
+            <button
+              key={block.order}
+              onClick={() => setActiveWeekOrder(block.order)}
+              className={clsx(
+                "shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-xs font-semibold transition",
+                block.order === effectiveWeekOrder
+                  ? "border-volt-400 bg-volt-400 text-ink-950"
+                  : "border-ink-700 text-neutral-400 hover:border-ink-500",
+              )}
+            >
+              {block.label}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="mt-4 space-y-3">
         {workoutsLoading &&
           Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="card h-20 animate-pulse bg-ink-800" />
           ))}
 
-        {workouts?.map((workout, index) =>
+        {visibleWorkouts.map((workout, index) =>
           program.isPremium || !hasFreeAccess ? (
             <Link
               key={workout.id}
@@ -178,7 +219,7 @@ function ProgramDetailPage() {
           ),
         )}
 
-        {!workoutsLoading && workouts?.length === 0 && (
+        {!workoutsLoading && visibleWorkouts.length === 0 && (
           <p className="py-8 text-center text-neutral-500">
             Тренировки для этой программы скоро появятся.
           </p>
