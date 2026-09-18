@@ -1,10 +1,11 @@
+import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { Beef, Wheat, Droplet, Info, Lock } from "lucide-react";
+import { Beef, Wheat, Droplet, Info, Lock, Pencil, RotateCcw, Watch, Flame } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
-import { useActiveSubscription } from "@/lib/queries";
+import { useActiveSubscription, useDailyCalories, useSetCalorieOverride, useClearCalorieOverride } from "@/lib/queries";
 import type { FitnessGoal } from "@donatellox/types";
 
 interface NutritionGuidance {
@@ -113,6 +114,30 @@ export default function NutritionPage() {
   const primaryGoal: FitnessGoal = goals?.[0] ?? "general_fitness";
   const guidance = GUIDANCE_BY_GOAL[primaryGoal];
 
+  // ---- Автоматический расчёт калорий (0025) ------------------------------
+  const todayStr = useMemo(() => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  }, []);
+
+  const { data: daily, isLoading: dailyLoading } = useDailyCalories(todayStr);
+  const setOverride = useSetCalorieOverride();
+  const clearOverride = useClearCalorieOverride();
+
+  const [editingOverride, setEditingOverride] = useState(false);
+  const [overrideValue, setOverrideValue] = useState("");
+
+  function startEditingOverride() {
+    setOverrideValue(daily ? String(daily.total) : "");
+    setEditingOverride(true);
+  }
+
+  function saveOverride() {
+    const value = Math.round(Number(overrideValue));
+    if (!value || value <= 0) return;
+    setOverride.mutate({ loggedAt: todayStr, calories: value }, { onSuccess: () => setEditingOverride(false) });
+  }
+
   if (isLoading || subLoading) {
     return (
       <div className="px-5 pt-8">
@@ -149,6 +174,94 @@ export default function NutritionPage() {
       <div className="card mb-4 flex items-start gap-3 border-info/30 bg-info/5">
         <Info size={18} className="mt-0.5 shrink-0 text-info" />
         <p className="text-sm text-neutral-300">{t("nutrition.disclaimer")}</p>
+      </div>
+
+      {/* Автоматическая оценка расхода калорий за сегодня */}
+      <div className="card mb-4">
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="flex items-center gap-1.5 font-semibold">
+            <Flame size={16} className="text-ember-400" />
+            {t("nutrition.calorieBurn.title")}
+          </h2>
+          {!editingOverride && !dailyLoading && daily && (
+            <button
+              onClick={startEditingOverride}
+              className="flex items-center gap-1 rounded-full bg-ink-800 px-3 py-1.5 text-xs font-semibold text-neutral-300 transition hover:bg-ink-700"
+            >
+              <Pencil size={12} /> {t("nutrition.calorieBurn.edit")}
+            </button>
+          )}
+        </div>
+
+        {dailyLoading && <div className="h-16 animate-pulse rounded-md bg-ink-800" />}
+
+        {!dailyLoading && !daily && (
+          <div className="py-2 text-sm text-neutral-400">
+            {t("nutrition.calorieBurn.incompleteProfile")}{" "}
+            <Link to="/profile" className="font-medium text-volt-400">
+              {t("nutrition.calorieBurn.completeProfile")}
+            </Link>
+          </div>
+        )}
+
+        {!dailyLoading && daily && !editingOverride && (
+          <>
+            <p className="font-display text-3xl font-bold text-volt-400">
+              {daily.total} <span className="text-base font-normal text-neutral-500">{t("nutrition.log.kcal")}</span>
+            </p>
+
+            {daily.isManual ? (
+              <div className="mt-2 flex items-center gap-1.5 text-xs text-neutral-400">
+                <Watch size={12} />
+                {t("nutrition.calorieBurn.manualNote")}
+                <button
+                  onClick={() => clearOverride.mutate({ loggedAt: todayStr })}
+                  className="ml-1 flex items-center gap-1 font-medium text-volt-400"
+                >
+                  <RotateCcw size={11} /> {t("nutrition.calorieBurn.reset")}
+                </button>
+              </div>
+            ) : (
+              <p className="mt-1.5 text-xs text-neutral-500">
+                {t("nutrition.calorieBurn.breakdown", {
+                  bmr: daily.bmr,
+                  activity: daily.activityCalories,
+                  workout: daily.workoutCalories,
+                })}
+              </p>
+            )}
+          </>
+        )}
+
+        {editingOverride && (
+          <div className="mt-1 flex items-center gap-2">
+            <input
+              type="number"
+              inputMode="numeric"
+              min={0}
+              autoFocus
+              value={overrideValue}
+              onChange={(e) => setOverrideValue(e.target.value)}
+              className="input-field flex-1 py-2 text-sm"
+              placeholder="0"
+            />
+            <button
+              onClick={saveOverride}
+              disabled={!overrideValue || setOverride.isPending}
+              className="btn-primary px-4 py-2 text-sm"
+            >
+              {t("common.save")}
+            </button>
+            <button
+              onClick={() => setEditingOverride(false)}
+              className="px-3 py-2 text-sm text-neutral-400"
+            >
+              {t("common.cancel")}
+            </button>
+          </div>
+        )}
+
+        <p className="mt-3 text-xs text-neutral-500">{t("nutrition.calorieBurn.disclaimer")}</p>
       </div>
 
       <div className="card mb-4">

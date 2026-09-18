@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Check, ChevronLeft, PlayCircle, Video, TrendingUp } from "lucide-react";
+import { Check, ChevronLeft, PlayCircle, Video, TrendingUp, X, Timer } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
@@ -49,6 +49,49 @@ export default function WorkoutPlayerPage() {
   const [weights, setWeights] = useState<Record<string, string>>({});
   const [startedAt] = useState(() => Date.now());
   const [activeVideo, setActiveVideo] = useState<Exercise | null>(null);
+
+  // ---- Таймер отдыха между подходами ------------------------------------
+  // Запускается после отметки подхода выполненным, на set.restSeconds.
+  // Отдельный ref для setInterval — чтобы не плодить утечки/дублирующиеся
+  // таймеры при быстрых повторных нажатиях, и корректно чистить при
+  // размонтировании страницы.
+  const [restState, setRestState] = useState<{ total: number; remaining: number } | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  function clearRestInterval() {
+    if (intervalRef.current !== null) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }
+
+  function startRestTimer(seconds: number) {
+    clearRestInterval();
+    if (seconds <= 0) return;
+    setRestState({ total: seconds, remaining: seconds });
+    intervalRef.current = setInterval(() => {
+      setRestState((prev) => {
+        if (!prev) return prev;
+        if (prev.remaining <= 1) {
+          clearRestInterval();
+          if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+            navigator.vibrate?.(200);
+          }
+          return null;
+        }
+        return { ...prev, remaining: prev.remaining - 1 };
+      });
+    }, 1000);
+  }
+
+  function skipRestTimer() {
+    clearRestInterval();
+    setRestState(null);
+  }
+
+  // Чистим интервал при уходе со страницы — иначе он продолжит тикать
+  // в фоне и попытается обновлять состояние размонтированного компонента.
+  useEffect(() => clearRestInterval, []);
 
   const { data: workout, isLoading } = useQuery({
     queryKey: ["workout", workoutId],
@@ -102,6 +145,17 @@ export default function WorkoutPlayerPage() {
         weightKg: weights[g.exercise.id] ? Number(weights[g.exercise.id]) : undefined,
       }));
 
+      // Суммарный поднятый вес (вес × повторения по всем подходам) — для
+      // достижений и статистики "сколько поднято" (0026). Считаем только
+      // по упражнениям, где реально указан рабочий вес — иначе это не вес,
+      // который "подняли", а просто выполненные повторения.
+      const totalVolumeKg = groups.reduce((sum, g) => {
+        const weight = weights[g.exercise.id] ? Number(weights[g.exercise.id]) : 0;
+        if (!weight) return sum;
+        const totalReps = g.sets.reduce((s, set) => s + (set.reps ?? 0), 0);
+        return sum + weight * totalReps;
+      }, 0);
+
       const { data, error } = await supabase
         .from("workout_logs")
         .insert({
@@ -110,6 +164,7 @@ export default function WorkoutPlayerPage() {
           completed_at: new Date().toISOString(),
           duration_minutes: durationMinutes,
           completed_sets: completedSets,
+          total_volume_kg: totalVolumeKg,
         })
         .select()
         .single();
@@ -134,7 +189,7 @@ export default function WorkoutPlayerPage() {
   const allDone = completedIds.size === workout.sets.length;
 
   return (
-    <div className="min-h-dvh bg-ink-950 px-5 pb-32 pt-6">
+    <div className={clsx("min-h-dvh bg-ink-950 px-5 pt-6", restState ? "pb-48" : "pb-32")}>
       <button
         onClick={() => navigate(-1)}
         className="mb-4 flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-200"
@@ -183,7 +238,12 @@ export default function WorkoutPlayerPage() {
                       onClick={() =>
                         setCompletedIds((prev) => {
                           const next = new Set(prev);
-                          next.has(set.id) ? next.delete(set.id) : next.add(set.id);
+                          if (next.has(set.id)) {
+                            next.delete(set.id);
+                          } else {
+                            next.add(set.id);
+                            startRestTimer(set.restSeconds);
+                          }
                           return next;
                         })
                       }
@@ -260,25 +320,56 @@ export default function WorkoutPlayerPage() {
         </div>
       )}
 
-      <div className="fixed inset-x-0 bottom-0 border-t border-ink-700 bg-ink-950/95 p-5 backdrop-blur">
-        {finishMutation.isError && (
-          <div className="mx-auto mb-3 max-w-md rounded-md border border-danger/30 bg-danger/10 px-3.5 py-2.5 text-sm text-danger">
-            {finishMutation.error instanceof Error
-              ? finishMutation.error.message
-              : "Не удалось сохранить тренировку. Попробуйте ещё раз."}
+      <div className="fixed inset-x-0 bottom-0 z-40">
+        {restState && (
+          <div className="border-t border-ink-700 bg-ink-900/95 px-5 py-3 backdrop-blur animate-fade-in">
+            <div className="mx-auto flex max-w-md items-center gap-3">
+              <Timer size={18} className="shrink-0 text-volt-400" />
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="font-medium text-neutral-200">{t("workout.resting")}</span>
+                  <span className="font-display text-lg font-bold tabular-nums text-volt-400">
+                    {Math.floor(restState.remaining / 60)}:{String(restState.remaining % 60).padStart(2, "0")}
+                  </span>
+                </div>
+                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-ink-700">
+                  <div
+                    className="h-full rounded-full bg-volt-400 transition-all duration-1000 ease-linear"
+                    style={{ width: `${(restState.remaining / restState.total) * 100}%` }}
+                  />
+                </div>
+              </div>
+              <button
+                onClick={skipRestTimer}
+                className="shrink-0 rounded-full p-1.5 text-neutral-400 hover:bg-ink-800 hover:text-neutral-200"
+                aria-label={t("workout.skipRest")}
+              >
+                <X size={16} />
+              </button>
+            </div>
           </div>
         )}
-        <button
-          onClick={() => finishMutation.mutate()}
-          disabled={!allDone || finishMutation.isPending}
-          className="btn-primary mx-auto block w-full max-w-md"
-        >
-          {finishMutation.isPending
-            ? t("workout.saving")
-            : allDone
-              ? t("workout.finishWorkout")
-              : t("workout.remaining", { count: workout.sets.length - completedIds.size })}
-        </button>
+
+        <div className="border-t border-ink-700 bg-ink-950/95 p-5 backdrop-blur">
+          {finishMutation.isError && (
+            <div className="mx-auto mb-3 max-w-md rounded-md border border-danger/30 bg-danger/10 px-3.5 py-2.5 text-sm text-danger">
+              {finishMutation.error instanceof Error
+                ? finishMutation.error.message
+                : "Не удалось сохранить тренировку. Попробуйте ещё раз."}
+            </div>
+          )}
+          <button
+            onClick={() => finishMutation.mutate()}
+            disabled={!allDone || finishMutation.isPending}
+            className="btn-primary mx-auto block w-full max-w-md"
+          >
+            {finishMutation.isPending
+              ? t("workout.saving")
+              : allDone
+                ? t("workout.finishWorkout")
+                : t("workout.remaining", { count: workout.sets.length - completedIds.size })}
+          </button>
+        </div>
       </div>
     </div>
   );

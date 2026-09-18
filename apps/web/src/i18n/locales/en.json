@@ -105,7 +105,10 @@
     "recommendedForYou": "Recommended for you",
     "programsForYou": "Programs for you",
     "allPrograms": "All programs",
-    "noPrograms": "Programs are coming soon — check back later."
+    "noPrograms": "Programs are coming soon — check back later.",
+    "achievements": "Achievements",
+    "achievementsUnlocked": "Unlocked: {{n}}",
+    "achievementsEmpty": "Start training to unlock your first one"
   },
   "workout": {
     "back": "Back",
@@ -121,7 +124,9 @@
     "lastTime": "Last time: {{weight}} kg · try {{next}} kg",
     "remaining": "{{count}} left",
     "finishWorkout": "Finish workout",
-    "saving": "Saving…"
+    "saving": "Saving…",
+    "resting": "Resting",
+    "skipRest": "Skip rest"
   },
   "nutrition": {
     "title": "Nutrition",
@@ -133,7 +138,20 @@
     "tips": "Tips",
     "locked": "This section requires a subscription",
     "lockedDesc": "Subscribe to get personal nutrition guidance for your goal.",
-    "subscribe": "Subscribe"
+    "subscribe": "Subscribe",
+    "log": {
+      "kcal": "kcal"
+    },
+    "calorieBurn": {
+      "title": "Today's calorie burn",
+      "edit": "Edit",
+      "incompleteProfile": "Add your height, weight and birth date to get an automatic estimate.",
+      "completeProfile": "Complete profile",
+      "manualNote": "Entered manually",
+      "reset": "Reset to automatic",
+      "breakdown": "Base metabolism {{bmr}} · activity +{{activity}} · workout +{{workout}}",
+      "disclaimer": "Automatic estimate using the Mifflin-St Jeor formula — a guideline, not a precise medical calculation. If you have data from a smartwatch, enter it manually for more accuracy."
+    }
   },
   "progress": {
     "title": "Progress",
@@ -173,5 +191,24 @@
     "copied": "Copied!",
     "invitedCount_one": "{{count}} friend invited",
     "invitedCount_other": "{{count}} friends invited"
+  },
+  "achievements": {
+    "title": "Achievements",
+    "unlockedCount": "Unlocked {{n}} of {{total}}",
+    "categoryWorkouts": "Workouts",
+    "categoryStreak": "Day streaks",
+    "categorySpecial": "Special",
+    "personalRecords": "Personal records",
+    "noRecordsYet": "Your best working weights will show up here once you log one during a workout",
+    "categoryVolume": "Weight lifted",
+    "volumeStats": {
+      "title": "How much you lifted",
+      "workout": "Last workout",
+      "week": "This week",
+      "month": "This month",
+      "year": "This year",
+      "all": "All time",
+      "kg": "kg"
+    }
   }
 }

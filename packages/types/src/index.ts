@@ -225,6 +225,8 @@ export interface WorkoutLogEntry {
   durationMinutes: number;
   perceivedEffort?: 1 | 2 | 3 | 4 | 5;
   notes?: string;
+  /** Вес × повторения, просуммированные по всем подходам тренировки. Добавлено в 0026. */
+  totalVolumeKg: number;
   completedSets: Array<{
     exerciseId: UUID;
     reps?: number;
@@ -242,6 +244,63 @@ export interface ProgressEntry {
   bodyFatPercent?: number;
   measurements?: Record<string, number>;
   photoUrls?: string[];
+}
+
+// ---------------------------------------------------------------------------
+// Награды и достижения (0023). Разблокировка считается на сервере
+// триггером после каждой записи в workout_logs — см. миграцию. Личные
+// рекорды по весам отдельной таблицей не хранятся — выводятся на клиенте
+// из WorkoutLogEntry.completedSets (там уже есть exerciseId + weightKg).
+// ---------------------------------------------------------------------------
+
+export type AchievementCategory = "workouts" | "streak" | "special" | "volume";
+
+export interface Achievement {
+  id: UUID;
+  slug: string;
+  title: string;
+  description: string;
+  icon: string;
+  category: AchievementCategory;
+  threshold: number;
+  sortOrder: number;
+  createdAt: ISODateString;
+}
+
+export interface UserAchievement {
+  id: UUID;
+  userId: UUID;
+  achievementId: UUID;
+  unlockedAt: ISODateString;
+}
+
+/** Достижение из каталога, дополненное статусом разблокировки для текущего пользователя. */
+export interface AchievementWithStatus extends Achievement {
+  unlockedAt: ISODateString | null;
+}
+
+/** Личный рекорд по упражнению — вычисляется на клиенте, не хранится в БД. */
+export interface PersonalRecord {
+  exerciseId: UUID;
+  exerciseTitle: string;
+  bestWeightKg: number;
+  achievedAt: ISODateString;
+}
+
+// ---------------------------------------------------------------------------
+// Калории — автоматическая оценка расхода (0025). Основная формула — в
+// apps/web/src/lib/calories.ts, здесь только форма данных для ручного
+// переопределения (когда у пользователя есть более точные данные, например
+// с умных часов).
+// ---------------------------------------------------------------------------
+
+export interface CalorieOverride {
+  id: UUID;
+  userId: UUID;
+  loggedAt: string; // YYYY-MM-DD
+  calories: number;
+  createdAt: ISODateString;
+  updatedAt: ISODateString;
 }
 
 // ---------------------------------------------------------------------------
