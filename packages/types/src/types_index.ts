@@ -90,7 +90,7 @@ export interface UserProfile {
 // Подписки и платежи
 // ---------------------------------------------------------------------------
 
-export type SubscriptionPlan = "monthly" | "quarterly" | "semiannual" | "annual";
+export type SubscriptionPlan = "monthly" | "quarterly" | "semiannual" | "annual" | "lifetime";
 
 export type SubscriptionStatus =
   | "trialing"
@@ -114,7 +114,7 @@ export interface Subscription {
   updatedAt: ISODateString;
 }
 
-export type PaymentProvider = "stripe" | "paypal" | "yookassa" | "usdt";
+export type PaymentProvider = "stripe" | "paypal" | "yookassa" | "usdt" | "gift";
 
 export type PaymentStatus =
   | "pending"
