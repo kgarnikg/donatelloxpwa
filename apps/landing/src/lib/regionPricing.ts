@@ -1,5 +1,13 @@
 import type { SubscriptionPlan } from "@donatellox/types";
 
+/**
+ * "lifetime" — безлимитный доступ, который выдаётся только вручную в CMS
+ * (подарок близким / награда), никогда не продаётся и не показывается в
+ * ценах на сайте. Поэтому таблицы цен ниже исключают его из ключей —
+ * если появится ещё один непродаваемый план, тоже исключить здесь.
+ */
+export type PurchasablePlan = Exclude<SubscriptionPlan, "lifetime">;
+
 export type Region = "us" | "eu" | "ru";
 
 export const REGION_STORAGE_KEY = "donatellox-region";
@@ -22,14 +30,14 @@ interface PlanAmounts {
 // Цифры одинаковые во всех валютах (простая, предсказуемая локализация цены
 // по образцу многих SaaS) — для России взята отдельная, психологически
 // круглая рублёвая сетка вместо прямой конвертации по курсу.
-const US_EU_AMOUNTS: Record<SubscriptionPlan, PlanAmounts> = {
+const US_EU_AMOUNTS: Record<PurchasablePlan, PlanAmounts> = {
   monthly: { main: "19,99", perMonthAmount: "19,99" },
   quarterly: { main: "45", perMonthAmount: "15", originalAmount: "60" },
   semiannual: { main: "71,9", perMonthAmount: "11,9", originalAmount: "119,9" },
   annual: { main: "96,9", perMonthAmount: "8,08", originalAmount: "240" },
 };
 
-const RU_AMOUNTS: Record<SubscriptionPlan, PlanAmounts> = {
+const RU_AMOUNTS: Record<PurchasablePlan, PlanAmounts> = {
   monthly: { main: "1 990", perMonthAmount: "1 990" },
   quarterly: { main: "4 490", perMonthAmount: "1 497", originalAmount: "5 970" },
   semiannual: { main: "7 190", perMonthAmount: "1 198", originalAmount: "11 990" },
@@ -42,7 +50,7 @@ export function formatAmount(region: Region, value: string): string {
   return `${value} ${CURRENCY_SYMBOL[region]}`;
 }
 
-export function getRegionAmounts(region: Region): Record<SubscriptionPlan, PlanAmounts> {
+export function getRegionAmounts(region: Region): Record<PurchasablePlan, PlanAmounts> {
   return region === "ru" ? RU_AMOUNTS : US_EU_AMOUNTS;
 }
 

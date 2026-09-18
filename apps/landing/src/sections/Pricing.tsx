@@ -1,13 +1,12 @@
 import { Check, Flame } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
-import type { SubscriptionPlan } from "@donatellox/types";
 import { useRegion } from "@/context/RegionContext";
-import { getRegionAmounts, formatAmount, REGION_PAYMENT_METHODS } from "@/lib/regionPricing";
+import { getRegionAmounts, formatAmount, REGION_PAYMENT_METHODS, type PurchasablePlan } from "@/lib/regionPricing";
 
 const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
 
-const PLAN_ORDER: { value: SubscriptionPlan; discountBadge?: string; highlight?: "popular" | "best-value" }[] = [
+const PLAN_ORDER: { value: PurchasablePlan; discountBadge?: string; highlight?: "popular" | "best-value" }[] = [
   { value: "monthly" },
   { value: "quarterly", discountBadge: "-25%" },
   { value: "semiannual", discountBadge: "-40%", highlight: "popular" },

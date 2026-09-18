@@ -108,13 +108,15 @@ export interface Subscription {
   currentPeriodStart: ISODateString;
   currentPeriodEnd: ISODateString;
   cancelAtPeriodEnd: boolean;
-  provider: PaymentProvider;
+  provider: SubscriptionProvider;
   providerSubscriptionId?: string;
   createdAt: ISODateString;
   updatedAt: ISODateString;
 }
 
-export type PaymentProvider = "stripe" | "paypal" | "yookassa" | "usdt" | "gift";
+export type PaymentProvider = "stripe" | "paypal" | "yookassa" | "usdt";
+/** provider подписки — то же самое + 'gift' (безлимитный доступ, выдаётся вручную в CMS, никогда не создаёт запись в payments). */
+export type SubscriptionProvider = PaymentProvider | "gift";
 
 export type PaymentStatus =
   | "pending"
