@@ -19,12 +19,23 @@ interface WorkoutWithSets {
   title: string;
   estimatedDurationMinutes: number;
   sets: SetRow[];
+  /** Формат тренировок программы, к которой относится эта тренировка ("зал"/"дома") — см. комментарий у REST_BETWEEN_EXERCISES_SECONDS ниже. */
+  trainingFormat: "home" | "gym";
 }
 
 interface CompletedSetEntry {
   exerciseId: string;
   weightKg?: number;
 }
+
+/**
+ * Отдых между УПРАЖНЕНИЯМИ (не между подходами одного упражнения) — только
+ * для программ в зале, по просьбе: смена станции/тренажёра в зале требует
+ * больше времени, чем просто отдых между подходами. Для домашних программ
+ * между упражнениями по-прежнему действует обычный set.restSeconds —
+ * специально не трогаем, дома обычно нет очереди к оборудованию.
+ */
+const REST_BETWEEN_EXERCISES_SECONDS = 180;
 
 /** Группирует подходы по упражнению, сохраняя порядок первого появления. */
 function groupByExercise(sets: SetRow[]) {
@@ -55,7 +66,9 @@ export default function WorkoutPlayerPage() {
   // Отдельный ref для setInterval — чтобы не плодить утечки/дублирующиеся
   // таймеры при быстрых повторных нажатиях, и корректно чистить при
   // размонтировании страницы.
-  const [restState, setRestState] = useState<{ total: number; remaining: number } | null>(null);
+  const [restState, setRestState] = useState<{ total: number; remaining: number; kind: "set" | "exercise" } | null>(
+    null,
+  );
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   function clearRestInterval() {
@@ -65,10 +78,10 @@ export default function WorkoutPlayerPage() {
     }
   }
 
-  function startRestTimer(seconds: number) {
+  function startRestTimer(seconds: number, kind: "set" | "exercise") {
     clearRestInterval();
     if (seconds <= 0) return;
-    setRestState({ total: seconds, remaining: seconds });
+    setRestState({ total: seconds, remaining: seconds, kind });
     intervalRef.current = setInterval(() => {
       setRestState((prev) => {
         if (!prev) return prev;
@@ -98,12 +111,13 @@ export default function WorkoutPlayerPage() {
     queryFn: async (): Promise<WorkoutWithSets> => {
       const { data, error } = await supabase
         .from("workouts")
-        .select("*, sets:workout_sets(*, exercise:exercises(*))")
+        .select("*, sets:workout_sets(*, exercise:exercises(*)), program:workout_programs(training_format)")
         .eq("id", workoutId)
         .order("order", { referencedTable: "workout_sets", ascending: true })
         .single();
       if (error) throw error;
-      return toCamelCase<WorkoutWithSets>(data);
+      const camel = toCamelCase<WorkoutWithSets & { program?: { trainingFormat: "home" | "gym" } }>(data);
+      return { ...camel, trainingFormat: camel.program?.trainingFormat ?? "home" };
     },
     enabled: !!workoutId,
   });
@@ -201,7 +215,7 @@ export default function WorkoutPlayerPage() {
       <p className="mt-1 text-neutral-400">~{workout.estimatedDurationMinutes} {t("common.min")}</p>
 
       <div className="mt-6 space-y-4">
-        {groups.map((group) => {
+        {groups.map((group, groupIndex) => {
           const lastWeight = lastWeights?.[group.exercise.id];
           const isWeighted = !group.sets[0].durationSeconds;
           return (
@@ -232,9 +246,16 @@ export default function WorkoutPlayerPage() {
               <div className="mt-3 space-y-2">
                 {group.sets.map((set, i) => {
                   const done = completedIds.has(set.id);
+                  // Последний подход этого упражнения, и после него есть ещё
+                  // упражнения — значит, дальше не просто отдых между
+                  // подходами, а переход к следующему упражнению.
+                  const isLastSetOfGroup = i === group.sets.length - 1;
+                  const hasNextGroup = groupIndex < groups.length - 1;
+                  const locked = !!restState && !done;
                   return (
                     <button
                       key={set.id}
+                      disabled={locked}
                       onClick={() =>
                         setCompletedIds((prev) => {
                           const next = new Set(prev);
@@ -242,7 +263,11 @@ export default function WorkoutPlayerPage() {
                             next.delete(set.id);
                           } else {
                             next.add(set.id);
-                            startRestTimer(set.restSeconds);
+                            if (isLastSetOfGroup && hasNextGroup && workout.trainingFormat === "gym") {
+                              startRestTimer(REST_BETWEEN_EXERCISES_SECONDS, "exercise");
+                            } else {
+                              startRestTimer(set.restSeconds, "set");
+                            }
                           }
                           return next;
                         })
@@ -251,7 +276,9 @@ export default function WorkoutPlayerPage() {
                         "flex w-full items-center justify-between rounded-md border px-3.5 py-2.5 text-left transition",
                         done
                           ? "border-volt-400/40 bg-volt-400/5"
-                          : "border-ink-700 hover:border-ink-500",
+                          : locked
+                            ? "cursor-not-allowed border-ink-800 opacity-40"
+                            : "border-ink-700 hover:border-ink-500",
                       )}
                     >
                       <p className="text-sm">
@@ -327,7 +354,9 @@ export default function WorkoutPlayerPage() {
               <Timer size={18} className="shrink-0 text-volt-400" />
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="font-medium text-neutral-200">{t("workout.resting")}</span>
+                  <span className="font-medium text-neutral-200">
+                    {restState.kind === "exercise" ? t("workout.restingNextExercise") : t("workout.resting")}
+                  </span>
                   <span className="font-display text-lg font-bold tabular-nums text-volt-400">
                     {Math.floor(restState.remaining / 60)}:{String(restState.remaining % 60).padStart(2, "0")}
                   </span>

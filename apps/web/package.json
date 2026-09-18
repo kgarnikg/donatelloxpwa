@@ -29,7 +29,8 @@
     "lucide-react": "^0.462.0",
     "@donatellox/types": "workspace:*",
     "@donatellox/validation": "workspace:*",
-    "@donatellox/theme": "workspace:*"
+    "@donatellox/theme": "workspace:*",
+    "workbox-window": "^7.4.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.3",

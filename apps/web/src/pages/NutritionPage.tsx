@@ -209,6 +209,7 @@ export default function NutritionPage() {
             <p className="font-display text-3xl font-bold text-volt-400">
               {daily.total} <span className="text-base font-normal text-neutral-500">{t("nutrition.log.kcal")}</span>
             </p>
+            <p className="mt-2 text-sm text-neutral-300">{t("nutrition.calorieBurn.explainer")}</p>
 
             {daily.isManual ? (
               <div className="mt-2 flex items-center gap-1.5 text-xs text-neutral-400">

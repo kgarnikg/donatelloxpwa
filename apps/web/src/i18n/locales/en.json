@@ -126,7 +126,8 @@
     "finishWorkout": "Finish workout",
     "saving": "Saving…",
     "resting": "Resting",
-    "skipRest": "Skip rest"
+    "skipRest": "Skip rest",
+    "restingNextExercise": "Before next exercise"
   },
   "nutrition": {
     "title": "Nutrition",
@@ -144,12 +145,13 @@
     },
     "calorieBurn": {
       "title": "Today's calorie burn",
+      "explainer": "This estimates how many calories your body will burn over the whole day — resting metabolism plus everyday activity plus today's workout, if you complete one. The number updates automatically right after you finish a workout.",
       "edit": "Edit",
       "incompleteProfile": "Add your height, weight and birth date to get an automatic estimate.",
       "completeProfile": "Complete profile",
       "manualNote": "Entered manually",
       "reset": "Reset to automatic",
-      "breakdown": "Base metabolism {{bmr}} · activity +{{activity}} · workout +{{workout}}",
+      "breakdown": "At rest {{bmr}} · everyday activity +{{activity}} · today's workout +{{workout}}",
       "disclaimer": "Automatic estimate using the Mifflin-St Jeor formula — a guideline, not a precise medical calculation. If you have data from a smartwatch, enter it manually for more accuracy."
     }
   },
