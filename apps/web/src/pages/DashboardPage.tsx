@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
-import { Flame, Trophy, ChevronRight, Sparkles, Star } from "lucide-react";
+import { Flame, Trophy, ChevronRight, Sparkles, Star, Award } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "@/context/AuthContext";
-import { useActiveSubscription, usePrograms, useWorkoutStats, useRecommendedProgram } from "@/lib/queries";
+import {
+  useActiveSubscription,
+  usePrograms,
+  useWorkoutStats,
+  useRecommendedProgram,
+  useAchievements,
+} from "@/lib/queries";
 import { getDailyQuote } from "@/lib/quotes";
 
 export default function DashboardPage() {
@@ -12,6 +18,12 @@ export default function DashboardPage() {
   const { data: programs, isLoading } = usePrograms();
   const { data: stats } = useWorkoutStats();
   const { data: recommended } = useRecommendedProgram();
+  const { data: achievements } = useAchievements();
+
+  const unlockedAchievements = achievements?.filter((a) => a.unlockedAt !== null) ?? [];
+  const latestAchievement = [...unlockedAchievements].sort(
+    (a, b) => new Date(b.unlockedAt!).getTime() - new Date(a.unlockedAt!).getTime(),
+  )[0];
 
   const firstName =
     profile?.fullName?.trim().split(" ")[0] || authUser?.email?.split("@")[0] || "there";
@@ -62,6 +74,26 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+
+      <Link
+        to="/achievements"
+        className="card mb-6 flex items-center justify-between border-ink-700 hover:border-ink-500"
+      >
+        <div className="flex items-center gap-3">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-volt-400/10 text-lg">
+            {latestAchievement ? latestAchievement.icon : <Award size={20} className="text-volt-400" />}
+          </div>
+          <div>
+            <p className="font-semibold">{t("dashboard.achievements")}</p>
+            <p className="text-sm text-neutral-400">
+              {unlockedAchievements.length > 0
+                ? t("dashboard.achievementsUnlocked", { n: unlockedAchievements.length })
+                : t("dashboard.achievementsEmpty")}
+            </p>
+          </div>
+        </div>
+        <ChevronRight className="shrink-0 text-neutral-500" />
+      </Link>
 
       {recommended && (
         <div className="mb-6">

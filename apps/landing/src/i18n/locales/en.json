@@ -121,7 +121,7 @@
   "pricing": {
     "eyebrow": "Choose your plan",
     "title": "First results in just a few weeks",
-    "subtitle": "Cancel your subscription anytime, right in the app.",
+    "subtitle": "Pay once for the period you choose — no auto-renewal, no card on file.",
     "popularBadge": "MOST POPULAR",
     "bestValueBadge": "BEST VALUE",
     "choosePlan": "Choose plan",
@@ -166,20 +166,20 @@
     }
   },
   "steps": {
-    "eyebrow": "How to start",
+    "eyebrow": "How it works",
     "title": "Three simple steps",
     "items": [
       {
-        "title": "Define your starting point",
-        "description": "Tell us your level, goal, and available equipment — the program adapts to you from day one."
+        "title": "Sign up — free",
+        "description": "Email or Google. Under a minute, no card needed."
       },
       {
-        "title": "Get your personal plan",
-        "description": "A structured program built around your level and training schedule."
+        "title": "First week — free",
+        "description": "Full access to your program for a week, before you pay a cent."
       },
       {
-        "title": "Train and progress",
-        "description": "Follow daily workouts, log weights and reps — the program grows with you."
+        "title": "Train the plan",
+        "description": "Open the app and do what's written — no wondering what to train today."
       }
     ]
   },
@@ -189,30 +189,43 @@
     "items": [
       {
         "question": "Do I need special equipment?",
-        "answer": "No. Many programs are designed for bodyweight training. For programs with weights, we note what equipment you'll need before the workout starts."
+        "answer": "No. Many programs are built around bodyweight training. For programs that use weights, we tell you exactly what equipment you'll need before the workout starts."
       },
       {
-        "question": "Can I cancel my subscription?",
-        "answer": "Yes, anytime — right in the app's account settings, no need to contact support, no penalties."
+        "question": "I've never trained before — will this work for me?",
+        "answer": "Yes. You tell us your fitness level in the intake form, and the first weeks are a gradual ramp-up, not maximum load from day one."
       },
       {
-        "question": "What payment methods are supported?",
-        "answer": "Cards and local payment methods via Stripe and PayPal, YuKassa for Russian cards, and USDT via your own crypto wallet with automatic transaction verification."
+        "question": "I've tried working out before and quit — why would this be different?",
+        "answer": "People usually quit not from laziness, but from having to decide what to do every single time. DonatelloX removes that decision for you — the program is already mapped out for months ahead, all you do is open the app and follow it."
+      },
+      {
+        "question": "How long does a workout take?",
+        "answer": "40–90 minutes on average, depending on the program and the day — you see the full length before you start."
+      },
+      {
+        "question": "Will I be charged automatically when my period ends?",
+        "answer": "No. Payment is one-time, only for the period you choose. When it ends, access simply stops — no automatic charges. Want to continue? You pay for a new period yourself, whenever you like."
+      },
+      {
+        "question": "What payment methods do you support?",
+        "answer": "Cards and local payment methods via Stripe and PayPal, YooKassa for Russian cards and SBP, plus USDT payment through our own crypto wallet with automatic transaction verification."
       },
       {
         "question": "Does the app work offline?",
-        "answer": "DonatelloX is a PWA (Progressive Web App): the interface and previously viewed workouts are available offline, and progress syncs once you're back online."
+        "answer": "DonatelloX is a PWA (Progressive Web App): the interface and previously viewed workouts are available offline, and your progress syncs once you're back online."
       },
       {
-        "question": "Is the app available in my language?",
-        "answer": "Yes, the interface and content are available in several languages."
+        "question": "What languages does the app support?",
+        "answer": "The interface is fully available in 10 languages: Russian, English, Español, Deutsch, Italiano, Українська, العربية, हिन्दी, ਪੰਜਾਬੀ, Հայերեն — switch instantly in settings. The workout programs themselves are currently in Russian; the English version is already being translated."
       }
     ]
   },
   "cta": {
-    "title": "Ready to start training?",
-    "subtitle": "Fill out a short questionnaire, get your personal program, and take the first step today.",
-    "button": "Start for free"
+    "title": "Stop putting it off until Monday",
+    "subtitle": "Your first week is free. In a couple of minutes you'll have a plan for today — not another reason to wait.",
+    "button": "Start for free",
+    "noCard": "No payment now. Pay once for the period you choose — no subscription, no auto-renewal."
   },
   "footer": {
     "description": "Personal workout programs, videos, and a progress journal in one app.",

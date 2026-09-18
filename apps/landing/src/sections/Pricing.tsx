@@ -61,9 +61,13 @@ export function Pricing() {
               <div
                 key={plan.value}
                 className={clsx(
-                  "card relative flex flex-col",
-                  plan.highlight === "popular" && "border-volt-400/60 shadow-glow",
-                  plan.highlight === "best-value" && "border-ember-400/50",
+                  "card relative flex flex-col rounded-xl transition duration-200 hover:-translate-y-0.5",
+                  plan.highlight === "popular" &&
+                    "border-volt-400 shadow-[0_0_0_2px_rgba(168,224,0,0.35),0_0_44px_rgba(168,224,0,0.25)]",
+                  plan.highlight === "best-value" &&
+                    "border-ember-400 shadow-[0_0_0_2px_rgba(255,107,53,0.35),0_0_44px_rgba(255,107,53,0.25)]",
+                  !plan.highlight &&
+                    "hover:border-volt-400 hover:shadow-[0_0_0_2px_rgba(168,224,0,0.3),0_0_40px_rgba(168,224,0,0.2)]",
                 )}
               >
                 {plan.highlight === "popular" && (

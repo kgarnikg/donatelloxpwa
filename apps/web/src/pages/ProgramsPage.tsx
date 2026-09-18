@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { Lock, ChevronRight, Gift } from "lucide-react";
-import { usePrograms, useFreeProgramAccess } from "@/lib/queries";
+import { usePrograms, useFreeProgramAccess, useActiveSubscription } from "@/lib/queries";
 
 export default function ProgramsPage() {
   const { data: programs, isLoading } = usePrograms();
   const { hasFreeAccess } = useFreeProgramAccess();
+  const { data: activeSubscription } = useActiveSubscription();
 
   return (
     <div className="px-5 pt-8">
@@ -18,7 +19,10 @@ export default function ProgramsPage() {
           ))}
 
         {programs?.map((program) => {
-          const isLocked = program.isPremium || !hasFreeAccess;
+          // См. подробный комментарий в ProgramDetailPage (App.tsx) — тот же
+          // баг был и здесь: раньше премиум-программа была заблокирована
+          // независимо от наличия активной подписки.
+          const isLocked = program.isPremium && !hasFreeAccess && !activeSubscription;
           return (
             <Link
               key={program.id}

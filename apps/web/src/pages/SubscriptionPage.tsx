@@ -75,7 +75,7 @@ export default function SubscriptionPage() {
     return (
       <div className="px-5 pt-8">
         <div className="card border-success/30 bg-success/5 text-center">
-          <p className="font-semibold text-success">Подписка активна</p>
+          <p className="font-semibold text-success">Доступ активен</p>
           <p className="mt-1 text-sm text-neutral-400">
             {isEffectivelyLifetime ? "Бессрочный доступ" : `Действует до ${periodEnd.toLocaleDateString("ru-RU")}`}
           </p>
@@ -86,8 +86,10 @@ export default function SubscriptionPage() {
 
   return (
     <div className="px-5 pt-8">
-      <h1 className="font-display text-2xl font-bold">Подписка</h1>
-      <p className="mt-1 text-neutral-400">Полный доступ к программам и видео-контенту</p>
+      <h1 className="font-display text-2xl font-bold">Выбери период</h1>
+      <p className="mt-1 text-neutral-400">
+        Оплата разовая — доступ ко всем программам и видео ровно на выбранный срок, без автосписаний.
+      </p>
 
       <div className="mt-6 space-y-3">
         {PLANS.map((p) => (
@@ -146,8 +148,11 @@ export default function SubscriptionPage() {
         disabled={checkout.isPending}
         className="btn-primary mt-8 w-full"
       >
-        {checkout.isPending ? "Готовим оплату…" : "Оформить подписку"}
+        {checkout.isPending ? "Готовим оплату…" : "Оплатить и получить доступ"}
       </button>
+      <p className="mt-3 text-center text-xs text-neutral-500">
+        Без подписки и автосписаний — платишь один раз за выбранный период.
+      </p>
 
       <p className="mt-4 text-center text-xs text-neutral-500">
         Оплата обрабатывается партнёром безопасно. Отменить подписку можно в любой момент в личном

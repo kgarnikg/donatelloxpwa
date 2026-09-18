@@ -98,7 +98,7 @@
   "dashboard": {
     "greeting": "Hi, {{name}}",
     "readyQuestion": "Ready to train?",
-    "activateSubscription": "Activate subscription",
+    "activateSubscription": "Get access",
     "subscriptionDesc": "Access to all programs and videos",
     "streakDays": "day streak",
     "totalWorkouts": "workouts",
@@ -137,9 +137,9 @@
     "macros": "Macronutrient balance",
     "mealStructure": "Meal structure",
     "tips": "Tips",
-    "locked": "This section requires a subscription",
-    "lockedDesc": "Subscribe to get personal nutrition guidance for your goal.",
-    "subscribe": "Subscribe",
+    "locked": "Available after payment",
+    "lockedDesc": "Pay for access to get personalized nutrition guidance for your goal.",
+    "subscribe": "Get access",
     "log": {
       "kcal": "kcal"
     },
@@ -188,7 +188,7 @@
   },
   "referral": {
     "title": "Invite a friend",
-    "subtitle": "Your friend gets 50% off their first month",
+    "subtitle": "Your friend gets 50% off their first period",
     "copy": "Copy",
     "copied": "Copied!",
     "invitedCount_one": "{{count}} friend invited",

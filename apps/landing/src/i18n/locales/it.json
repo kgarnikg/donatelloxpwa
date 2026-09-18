@@ -107,7 +107,7 @@
   "pricing": {
     "eyebrow": "Scegli il tuo piano",
     "title": "Primi risultati in poche settimane",
-    "subtitle": "Annulla l'abbonamento quando vuoi, direttamente nell'app.",
+    "subtitle": "Paghi una sola volta per il periodo scelto — nessun rinnovo automatico, nessuna carta salvata.",
     "popularBadge": "IL PIÙ POPOLARE",
     "bestValueBadge": "MIGLIOR RAPPORTO QUALITÀ-PREZZO",
     "choosePlan": "Scegli piano",
@@ -156,16 +156,16 @@
     "title": "Tre semplici passi",
     "items": [
       {
-        "title": "Definisci il tuo punto di partenza",
-        "description": "Indica il tuo livello, obiettivo e attrezzatura disponibile — il programma si adatta a te dal primo giorno."
+        "title": "Registrati — gratis",
+        "description": "Email o Google. Meno di un minuto, nessuna carta."
       },
       {
-        "title": "Ricevi il tuo piano personale",
-        "description": "Un programma strutturato costruito sul tuo livello e sul tuo calendario di allenamento."
+        "title": "Prima settimana — gratis",
+        "description": "Accesso completo al tuo programma per una settimana, prima di pagare qualsiasi cosa."
       },
       {
-        "title": "Allenati e migliora",
-        "description": "Segui gli allenamenti quotidiani, registra pesi e ripetizioni — il programma cresce con te."
+        "title": "Allenati con il piano",
+        "description": "Apri l'app e fai quello che c'è scritto — senza pensare cosa allenare oggi."
       }
     ]
   },
@@ -174,31 +174,44 @@
     "title": "Domande frequenti",
     "items": [
       {
-        "question": "Serve un'attrezzatura speciale?",
-        "answer": "No. Molti programmi sono pensati per l'allenamento a corpo libero. Per i programmi con pesi, indichiamo l'attrezzatura necessaria prima dell'inizio dell'allenamento."
+        "question": "Serve attrezzatura speciale?",
+        "answer": "No. Molti programmi sono pensati per allenarsi a corpo libero. Per quelli con i pesi, indichiamo l'attrezzatura necessaria prima di iniziare."
       },
       {
-        "question": "Posso annullare l'abbonamento?",
-        "answer": "Sì, in qualsiasi momento — direttamente dall'area account dell'app, senza contattare l'assistenza e senza penali."
+        "question": "Non mi sono mai allenato — va bene per me?",
+        "answer": "Sì. Nel questionario indichi il tuo livello, e le prime settimane sono un adattamento graduale, non il carico massimo dal primo giorno."
       },
       {
-        "question": "Quali metodi di pagamento sono supportati?",
-        "answer": "Carte e metodi di pagamento locali tramite Stripe e PayPal, ЮKassa per le carte russe e USDT tramite il tuo portafoglio crypto con verifica automatica della transazione."
+        "question": "Ho già provato ad allenarmi e ho mollato — perché stavolta sarebbe diverso?",
+        "answer": "Di solito si molla non per pigrizia, ma perché ogni volta bisogna decidere cosa fare. DonatelloX ti toglie questa decisione — il programma è già pianificato per mesi, devi solo aprire l'app e seguirlo."
+      },
+      {
+        "question": "Quanto dura un allenamento?",
+        "answer": "In media 40–90 minuti a seconda del programma e del giorno — vedi la durata completa prima di iniziare."
+      },
+      {
+        "question": "Verrò addebitato automaticamente alla fine del periodo?",
+        "answer": "No. Il pagamento è unico, solo per il periodo scelto. Quando finisce, l'accesso si interrompe semplicemente, senza addebiti automatici. Vuoi continuare? Paghi tu stesso un nuovo periodo, quando vuoi."
+      },
+      {
+        "question": "Quali metodi di pagamento accettate?",
+        "answer": "Carte e metodi locali via Stripe e PayPal, YooKassa per carte russe e SBP, e pagamento in USDT tramite il nostro wallet crypto con verifica automatica."
       },
       {
         "question": "L'app funziona offline?",
-        "answer": "DonatelloX è una PWA (Progressive Web App): l'interfaccia e gli allenamenti visti in precedenza sono disponibili offline, e i progressi si sincronizzano appena torni online."
+        "answer": "DonatelloX è una PWA (Progressive Web App): interfaccia e allenamenti già visti sono disponibili offline, i progressi si sincronizzano appena torna la connessione."
       },
       {
-        "question": "È disponibile nella mia lingua?",
-        "answer": "Sì, l'interfaccia e i contenuti sono disponibili in diverse lingue."
+        "question": "In quali lingue funziona l'app?",
+        "answer": "L'interfaccia è disponibile completa in 10 lingue: Русский, English, Español, Deutsch, Italiano, Українська, العربية, हिन्दी, ਪੰਜਾਬੀ, Հայերեն — cambio istantaneo nelle impostazioni. I programmi di allenamento sono per ora in russo; la versione inglese è già in traduzione."
       }
     ]
   },
   "cta": {
-    "title": "Pronto a iniziare ad allenarti?",
-    "subtitle": "Compila un breve questionario, ricevi il tuo programma personale e fai il primo passo già oggi.",
-    "button": "Inizia gratis"
+    "title": "Basta rimandare a lunedì",
+    "subtitle": "La prima settimana è gratis. In un paio di minuti avrai un piano per oggi — non un'altra scusa per aspettare.",
+    "button": "Inizia gratis",
+    "noCard": "Nessun pagamento ora. Paghi una sola volta per il periodo scelto — nessun abbonamento, nessun rinnovo automatico."
   },
   "footer": {
     "description": "Programmi di allenamento personalizzati, video e un diario dei progressi in un'unica app.",
