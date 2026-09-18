@@ -22,40 +22,40 @@
   },
   "modules": {
     "eyebrow": "Features",
-    "title": "Everything you need for results",
-    "subtitle": "From the first questionnaire to your progress journal — DonatelloX is with you every step of the way.",
+    "title": "Everything you need to get results",
+    "subtitle": "From the intake form to a plan for months ahead — DonatelloX guides you every step of the way.",
     "items": [
       {
-        "title": "Questionnaire & program matching",
-        "description": "Tell us your goal, fitness level, and limitations — we'll match you with the right program."
+        "title": "Personal start",
+        "description": "2 minutes of questions — and your program is ready, matched to your goal, level and place to train."
       },
       {
-        "title": "Workout programs",
-        "description": "Structured programs weeks ahead: from weight loss to muscle gain and rehabilitation."
+        "title": "A clear plan for months",
+        "description": "Every day is planned ahead: exercises, sets, weight. No improvising at the gym."
       },
       {
-        "title": "Video instructions",
-        "description": "Every exercise comes with clear video and technique guidance — no guessing."
+        "title": "Video for every exercise",
+        "description": "Watch the technique right before your set — never guess if you're doing it right."
       },
       {
-        "title": "Journal & progress",
-        "description": "Track weight, measurements, and workout results — see your progress clearly."
+        "title": "Rest timer",
+        "description": "Counts down your rest between sets and exercises automatically — keeps your pace for you."
       },
       {
-        "title": "Personal account",
-        "description": "Subscription, language, and notification settings — all in one place."
+        "title": "Progress diary",
+        "description": "Weight, measurements, workout history — all your progress in one place."
       },
       {
-        "title": "Growing with you",
-        "description": "Nutrition, shop, courses, and an AI coach — in development, so the platform grows alongside you."
+        "title": "Grows with you",
+        "description": "Nutrition, store, courses, AI coach — the platform keeps evolving, not standing still."
       }
     ]
   },
   "weeklyPlan": {
     "eyebrow": "Your weekly plan",
     "title": "Know exactly what to do every day",
-    "subtitle": "The first program — \"Muscle Gain for Beginners\": 4 strength workouts and 3 days of light cardio with abs. Every exercise comes with sets, reps, and video technique.",
-    "footerNote": "Recovery and sleep are part of the program, not a pause from it.",
+    "subtitle": "Your program is mapped out week by week for months ahead: strength days, cardio, rest. Load builds up gradually, and the built-in timer counts your rest between sets and exercises.",
+    "footerNote": "Recovery and sleep are part of the program, not a pause in it.",
     "cardio": "Cardio",
     "cardioAbs": "Cardio + abs",
     "strength": "Strength",
@@ -101,6 +101,20 @@
         "kind": "strength",
         "meta": "● 17 sets | 5 ex.",
         "detail": "Shoulders"
+      }
+    ],
+    "benefits": [
+      {
+        "title": "Weekly progression",
+        "description": "Load increases gradually and deliberately — no random jumps, no plateaus."
+      },
+      {
+        "title": "Built-in rest timer",
+        "description": "Counts your rest between sets and exercises automatically — no need to watch the clock."
+      },
+      {
+        "title": "Zero improvisation",
+        "description": "You know in advance what exercise is next and how many sets — no thinking it through at the gym."
       }
     ]
   },

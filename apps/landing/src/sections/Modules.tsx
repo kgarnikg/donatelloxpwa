@@ -1,7 +1,7 @@
-import { Dumbbell, LineChart, Video, ClipboardList, UserCircle, Sparkles } from "lucide-react";
+import { Dumbbell, LineChart, Video, ClipboardList, Timer, Sparkles } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-const ICONS = [ClipboardList, Dumbbell, Video, LineChart, UserCircle, Sparkles];
+const ICONS = [ClipboardList, Dumbbell, Video, Timer, LineChart, Sparkles];
 
 interface ModuleItem {
   title: string;
@@ -25,7 +25,10 @@ export function Modules() {
           {items.map((item, i) => {
             const Icon = ICONS[i] ?? Sparkles;
             return (
-              <div key={item.title} className="card transition hover:border-volt-400/30 hover:shadow-glow">
+              <div
+                key={item.title}
+                className="card rounded-xl border-ink-700 transition duration-200 hover:-translate-y-0.5 hover:border-volt-400 hover:shadow-[0_0_0_2px_rgba(168,224,0,0.35),0_0_44px_rgba(168,224,0,0.25)]"
+              >
                 <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-volt-400/10 text-volt-400">
                   <Icon size={22} />
                 </div>

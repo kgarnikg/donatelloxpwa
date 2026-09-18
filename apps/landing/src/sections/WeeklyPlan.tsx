@@ -1,4 +1,4 @@
-import { Dumbbell, Flame, Moon } from "lucide-react";
+import { Dumbbell, Flame, Moon, TrendingUp, Timer, ListChecks } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 
@@ -8,6 +8,13 @@ interface PlanDay {
   meta: string;
   detail: string;
 }
+
+interface Benefit {
+  title: string;
+  description: string;
+}
+
+const BENEFIT_ICONS = [TrendingUp, Timer, ListChecks];
 
 function DayCard({ day, cardioLabel, strengthLabel }: { day: PlanDay; cardioLabel: string; strengthLabel: string }) {
   return (
@@ -39,6 +46,7 @@ function DayCard({ day, cardioLabel, strengthLabel }: { day: PlanDay; cardioLabe
 export function WeeklyPlan() {
   const { t } = useTranslation();
   const days = t("weeklyPlan.days", { returnObjects: true }) as PlanDay[];
+  const benefits = t("weeklyPlan.benefits", { returnObjects: true }) as Benefit[];
 
   return (
     <section id="plan" className="py-20 sm:py-28">
@@ -63,6 +71,24 @@ export function WeeklyPlan() {
         <div className="mt-6 flex items-center justify-center gap-2 text-sm text-neutral-500">
           <Moon size={16} />
           {t("weeklyPlan.footerNote")}
+        </div>
+
+        {/* Почему это лучше, чем тренироваться "по памяти" — коротко и по делу. */}
+        <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">
+          {benefits.map((benefit, i) => {
+            const Icon = BENEFIT_ICONS[i] ?? TrendingUp;
+            return (
+              <div key={benefit.title} className="flex items-start gap-3 rounded-lg border border-ink-700 bg-ink-900/60 p-4">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-volt-400/10 text-volt-400">
+                  <Icon size={18} />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">{benefit.title}</p>
+                  <p className="mt-0.5 text-xs text-neutral-400">{benefit.description}</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
