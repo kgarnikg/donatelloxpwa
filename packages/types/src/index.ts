@@ -90,7 +90,7 @@ export interface UserProfile {
 // Подписки и платежи
 // ---------------------------------------------------------------------------
 
-export type SubscriptionPlan = "monthly" | "quarterly" | "semiannual" | "annual";
+export type SubscriptionPlan = "monthly" | "quarterly" | "semiannual" | "annual" | "lifetime";
 
 export type SubscriptionStatus =
   | "trialing"
@@ -108,13 +108,15 @@ export interface Subscription {
   currentPeriodStart: ISODateString;
   currentPeriodEnd: ISODateString;
   cancelAtPeriodEnd: boolean;
-  provider: PaymentProvider;
+  provider: SubscriptionProvider;
   providerSubscriptionId?: string;
   createdAt: ISODateString;
   updatedAt: ISODateString;
 }
 
 export type PaymentProvider = "stripe" | "paypal" | "yookassa" | "usdt";
+/** provider подписки — то же самое + 'gift' (безлимитный доступ, выдаётся вручную в CMS, никогда не создаёт запись в payments). */
+export type SubscriptionProvider = PaymentProvider | "gift";
 
 export type PaymentStatus =
   | "pending"
@@ -187,6 +189,10 @@ export interface Workout {
   title: string;
   order: number;
   estimatedDurationMinutes: number;
+  /** Заголовок блока недель, напр. "Недели 1–2 · LEVEL 1A". Добавлено в 0013. */
+  weekLabel?: string;
+  /** Порядок блока недель в программе (1, 2, 3...), отдельно от `order` — дня внутри блока. Добавлено в 0013. */
+  weekOrder: number;
   sets: WorkoutSet[];
 }
 
@@ -197,6 +203,10 @@ export interface WorkoutProgram {
   description: string;
   coverUrl?: string;
   goal: FitnessGoal;
+  /** Целевой пол программы. `"unspecified"` — универсальная, подходит любому. Добавлено в 0012. */
+  gender: Gender;
+  /** Целевой формат тренировок. `"any"` — универсальная, подходит и залу, и дому. Добавлено в 0012. */
+  trainingFormat: TrainingFormat | "any";
   difficulty: ExerciseDifficulty;
   durationWeeks: number;
   workoutsPerWeek: number;
