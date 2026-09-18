@@ -64,12 +64,20 @@ export default function SubscriptionPage() {
   });
 
   if (activeSubscription) {
+    // Безлимитные (gift) подписки заведены с датой окончания далеко в
+    // будущем (+100 лет, см. 0022/0027) — для человека это "навсегда",
+    // показывать конкретную дату через 100 лет неинформативно и странно.
+    const periodEnd = new Date(activeSubscription.currentPeriodEnd);
+    const isEffectivelyLifetime =
+      activeSubscription.plan === "lifetime" ||
+      periodEnd.getFullYear() > new Date().getFullYear() + 50;
+
     return (
       <div className="px-5 pt-8">
         <div className="card border-success/30 bg-success/5 text-center">
           <p className="font-semibold text-success">Подписка активна</p>
           <p className="mt-1 text-sm text-neutral-400">
-            Действует до {new Date(activeSubscription.currentPeriodEnd).toLocaleDateString("ru-RU")}
+            {isEffectivelyLifetime ? "Бессрочный доступ" : `Действует до ${periodEnd.toLocaleDateString("ru-RU")}`}
           </p>
         </div>
       </div>
