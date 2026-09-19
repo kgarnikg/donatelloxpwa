@@ -39,7 +39,7 @@ begin
   where program_id = v_program_id and week_order = 1 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 1–2 — Фундамент'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 1–2 — Foundation'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '12'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -61,7 +61,7 @@ begin
   where program_id = v_program_id and week_order = 1 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 1–2 — Фундамент'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 1–2 — Foundation'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -81,7 +81,7 @@ begin
   where program_id = v_program_id and week_order = 1 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 1–2 — Фундамент'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 1–2 — Foundation'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Max.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -103,7 +103,7 @@ begin
   where program_id = v_program_id and week_order = 1 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders + Core/abs', week_label_en = 'Weeks 1–2 — Фундамент'
+    update public.workouts set title_en = 'Thursday · Shoulders + Core/abs', week_label_en = 'Weeks 1–2 — Foundation'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -121,7 +121,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 3–4 — Фундамент (new cable)'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 3–4 — Foundation (new cable)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -143,7 +143,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 3–4 — Фундамент (new cable)'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 3–4 — Foundation (new cable)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -163,7 +163,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 3–4 — Фундамент (new cable)'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 3–4 — Foundation (new cable)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -185,7 +185,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders + Core/abs', week_label_en = 'Weeks 3–4 — Фундамент (new cable)'
+    update public.workouts set title_en = 'Thursday · Shoulders + Core/abs', week_label_en = 'Weeks 3–4 — Foundation (new cable)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -203,7 +203,7 @@ begin
   where program_id = v_program_id and week_order = 3 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 5–6 — Наращивание mass'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 5–6 — Building mass'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -225,7 +225,7 @@ begin
   where program_id = v_program_id and week_order = 3 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 5–6 — Наращивание mass'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 5–6 — Building mass'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -245,7 +245,7 @@ begin
   where program_id = v_program_id and week_order = 3 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 5–6 — Наращивание mass'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 5–6 — Building mass'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -267,7 +267,7 @@ begin
   where program_id = v_program_id and week_order = 3 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders + Core/abs', week_label_en = 'Weeks 5–6 — Наращивание mass'
+    update public.workouts set title_en = 'Thursday · Shoulders + Core/abs', week_label_en = 'Weeks 5–6 — Building mass'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -287,7 +287,7 @@ begin
   where program_id = v_program_id and week_order = 4 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 7–8 — Калистеника and функционал'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 7–8 — Calisthenics and functional training'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8–10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -309,7 +309,7 @@ begin
   where program_id = v_program_id and week_order = 4 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 7–8 — Калистеника and функционал'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 7–8 — Calisthenics and functional training'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -329,7 +329,7 @@ begin
   where program_id = v_program_id and week_order = 4 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 7–8 — Калистеника and функционал'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 7–8 — Calisthenics and functional training'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -351,7 +351,7 @@ begin
   where program_id = v_program_id and week_order = 4 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders + Core/abs', week_label_en = 'Weeks 7–8 — Калистеника and функционал'
+    update public.workouts set title_en = 'Thursday · Shoulders + Core/abs', week_label_en = 'Weeks 7–8 — Calisthenics and functional training'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -371,7 +371,7 @@ begin
   where program_id = v_program_id and week_order = 5 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 9–10 — New stress: Strength + растяжение'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 9–10 — New stress: Strength + Stretching'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8–10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -393,7 +393,7 @@ begin
   where program_id = v_program_id and week_order = 5 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs + ФУНКЦИОНАЛ', week_label_en = 'Weeks 9–10 — New stress: Strength + растяжение'
+    update public.workouts set title_en = 'Tuesday · Legs + Functional training', week_label_en = 'Weeks 9–10 — New stress: Strength + Stretching'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -415,7 +415,7 @@ begin
   where program_id = v_program_id and week_order = 5 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 9–10 — New stress: Strength + растяжение'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 9–10 — New stress: Strength + Stretching'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Max.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -439,7 +439,7 @@ begin
   where program_id = v_program_id and week_order = 5 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 9–10 — New stress: Strength + растяжение'
+    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 9–10 — New stress: Strength + Stretching'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -635,7 +635,7 @@ begin
   where program_id = v_program_id and week_order = 8 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 15–16 — Strength + атлетизм'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 15–16 — Strength + Athleticism'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '6'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -657,7 +657,7 @@ begin
   where program_id = v_program_id and week_order = 8 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 15–16 — Strength + атлетизм'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 15–16 — Strength + Athleticism'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '6'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -679,7 +679,7 @@ begin
   where program_id = v_program_id and week_order = 8 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 15–16 — Strength + атлетизм'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 15–16 — Strength + Athleticism'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '6–8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -703,7 +703,7 @@ begin
   where program_id = v_program_id and week_order = 8 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 15–16 — Strength + атлетизм'
+    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 15–16 — Strength + Athleticism'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -805,7 +805,7 @@ begin
   where program_id = v_program_id and week_order = 10 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 19–20 — Мышечная endurance'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 19–20 — Muscle endurance'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Max.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -827,7 +827,7 @@ begin
   where program_id = v_program_id and week_order = 10 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 19–20 — Мышечная endurance'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 19–20 — Muscle endurance'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '6'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -847,7 +847,7 @@ begin
   where program_id = v_program_id and week_order = 10 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 19–20 — Мышечная endurance'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 19–20 — Muscle endurance'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Max.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -869,7 +869,7 @@ begin
   where program_id = v_program_id and week_order = 10 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 19–20 — Мышечная endurance'
+    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 19–20 — Muscle endurance'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '6'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -887,7 +887,7 @@ begin
   where program_id = v_program_id and week_order = 11 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 21–22 — Шоковая adaptation'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 21–22 — Shock adaptation'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -909,7 +909,7 @@ begin
   where program_id = v_program_id and week_order = 11 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs + ВЗРЫВНАЯ Work', week_label_en = 'Weeks 21–22 — Шоковая adaptation'
+    update public.workouts set title_en = 'Tuesday · Legs + ВЗРЫВНАЯ Work', week_label_en = 'Weeks 21–22 — Shock adaptation'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '6–8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -931,7 +931,7 @@ begin
   where program_id = v_program_id and week_order = 11 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 21–22 — Шоковая adaptation'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 21–22 — Shock adaptation'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Max.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -953,7 +953,7 @@ begin
   where program_id = v_program_id and week_order = 11 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 21–22 — Шоковая adaptation'
+    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 21–22 — Shock adaptation'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -973,7 +973,7 @@ begin
   where program_id = v_program_id and week_order = 12 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 23–24 — Атлетизм: Muscles как at спортсмена'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 23–24 — Athleticism: Muscles as/like at athlete'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -995,7 +995,7 @@ begin
   where program_id = v_program_id and week_order = 12 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 23–24 — Атлетизм: Muscles как at спортсмена'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 23–24 — Athleticism: Muscles as/like at athlete'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1015,7 +1015,7 @@ begin
   where program_id = v_program_id and week_order = 12 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 23–24 — Атлетизм: Muscles как at спортсмена'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 23–24 — Athleticism: Muscles as/like at athlete'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1037,7 +1037,7 @@ begin
   where program_id = v_program_id and week_order = 12 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 23–24 — Атлетизм: Muscles как at спортсмена'
+    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 23–24 — Athleticism: Muscles as/like at athlete'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '6'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1055,7 +1055,7 @@ begin
   where program_id = v_program_id and week_order = 13 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 25–26 — Peak hypertrophy: максимальный volume chest'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 25–26 — Peak hypertrophy: Maximum volume chest'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -1077,7 +1077,7 @@ begin
   where program_id = v_program_id and week_order = 13 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 25–26 — Peak hypertrophy: максимальный volume chest'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 25–26 — Peak hypertrophy: Maximum volume chest'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1099,7 +1099,7 @@ begin
   where program_id = v_program_id and week_order = 13 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 25–26 — Peak hypertrophy: максимальный volume chest'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 25–26 — Peak hypertrophy: Maximum volume chest'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Max.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1123,7 +1123,7 @@ begin
   where program_id = v_program_id and week_order = 13 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders + Core/abs', week_label_en = 'Weeks 25–26 — Peak hypertrophy: максимальный volume chest'
+    update public.workouts set title_en = 'Thursday · Shoulders + Core/abs', week_label_en = 'Weeks 25–26 — Peak hypertrophy: Maximum volume chest'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -1141,7 +1141,7 @@ begin
   where program_id = v_program_id and week_order = 14 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 27–28 — Бодибилдинг + атлетизм'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 27–28 — Bodybuilding + Athleticism'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -1163,7 +1163,7 @@ begin
   where program_id = v_program_id and week_order = 14 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 27–28 — Бодибилдинг + атлетизм'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 27–28 — Bodybuilding + Athleticism'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1183,7 +1183,7 @@ begin
   where program_id = v_program_id and week_order = 14 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 27–28 — Бодибилдинг + атлетизм'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 27–28 — Bodybuilding + Athleticism'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1205,7 +1205,7 @@ begin
   where program_id = v_program_id and week_order = 14 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 27–28 — Бодибилдинг + атлетизм'
+    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 27–28 — Bodybuilding + Athleticism'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1223,7 +1223,7 @@ begin
   where program_id = v_program_id and week_order = 15 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps + Core/abs', week_label_en = 'Weeks 29–30 — Специализация: Upper body chest + Volume'
+    update public.workouts set title_en = 'Monday · Chest + Triceps + Core/abs', week_label_en = 'Weeks 29–30 — Specialization: Upper body chest + Volume'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8–10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1245,7 +1245,7 @@ begin
   where program_id = v_program_id and week_order = 15 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs + ФУНКЦ. Strength', week_label_en = 'Weeks 29–30 — Специализация: Upper body chest + Volume'
+    update public.workouts set title_en = 'Tuesday · Legs + ФУНКЦ. Strength', week_label_en = 'Weeks 29–30 — Specialization: Upper body chest + Volume'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1267,7 +1267,7 @@ begin
   where program_id = v_program_id and week_order = 15 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 29–30 — Специализация: Upper body chest + Volume'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 29–30 — Specialization: Upper body chest + Volume'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Max.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1291,7 +1291,7 @@ begin
   where program_id = v_program_id and week_order = 15 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 29–30 — Специализация: Upper body chest + Volume'
+    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 29–30 — Specialization: Upper body chest + Volume'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1395,7 +1395,7 @@ begin
   where program_id = v_program_id and week_order = 17 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 33–34 — Strength пик: Heavy weight + Volume'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 33–34 — Strength peak: Heavy weight + Volume'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1419,7 +1419,7 @@ begin
   where program_id = v_program_id and week_order = 17 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 33–34 — Strength пик: Heavy weight + Volume'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 33–34 — Strength peak: Heavy weight + Volume'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1441,7 +1441,7 @@ begin
   where program_id = v_program_id and week_order = 17 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 33–34 — Strength пик: Heavy weight + Volume'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 33–34 — Strength peak: Heavy weight + Volume'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5–8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1465,7 +1465,7 @@ begin
   where program_id = v_program_id and week_order = 17 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 33–34 — Strength пик: Heavy weight + Volume'
+    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 33–34 — Strength peak: Heavy weight + Volume'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1485,7 +1485,7 @@ begin
   where program_id = v_program_id and week_order = 18 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 35–36 — Strength + тело атлета'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 35–36 — Strength + Body athlete'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '6'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1507,7 +1507,7 @@ begin
   where program_id = v_program_id and week_order = 18 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 35–36 — Strength + тело атлета'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 35–36 — Strength + Body athlete'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1527,7 +1527,7 @@ begin
   where program_id = v_program_id and week_order = 18 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 35–36 — Strength + тело атлета'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 35–36 — Strength + Body athlete'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Max.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1549,7 +1549,7 @@ begin
   where program_id = v_program_id and week_order = 18 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 35–36 — Strength + тело атлета'
+    update public.workouts set title_en = 'Thursday · Shoulders', week_label_en = 'Weeks 35–36 — Strength + Body athlete'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1653,7 +1653,7 @@ begin
   where program_id = v_program_id and week_order = 20 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 39–40 — Памп + Checkpoint body'
+    update public.workouts set title_en = 'Monday · Chest + Triceps', week_label_en = 'Weeks 39–40 — Pump + Checkpoint body'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -1675,7 +1675,7 @@ begin
   where program_id = v_program_id and week_order = 20 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 39–40 — Памп + Checkpoint body'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 39–40 — Pump + Checkpoint body'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1697,7 +1697,7 @@ begin
   where program_id = v_program_id and week_order = 20 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 39–40 — Памп + Checkpoint body'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 39–40 — Pump + Checkpoint body'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Max.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1719,7 +1719,7 @@ begin
   where program_id = v_program_id and week_order = 20 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders + Arms', week_label_en = 'Weeks 39–40 — Памп + Checkpoint body'
+    update public.workouts set title_en = 'Thursday · Shoulders + Arms', week_label_en = 'Weeks 39–40 — Pump + Checkpoint body'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '6'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1935,7 +1935,7 @@ begin
   where program_id = v_program_id and week_order = 23 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs + АТЛЕТИЗМ', week_label_en = 'Weeks 45–46 — 3D upper body body'
+    update public.workouts set title_en = 'Tuesday · Legs + Athleticism', week_label_en = 'Weeks 45–46 — 3D upper body body'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '6'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1999,7 +1999,7 @@ begin
   where program_id = v_program_id and week_order = 24 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Arms', week_label_en = 'Weeks 47–48 — FINAL BOSS: памп, рельеф, форма'
+    update public.workouts set title_en = 'Monday · Chest + Arms', week_label_en = 'Weeks 47–48 — FINAL BOSS: Pump, definition, shape'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '12'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -2019,7 +2019,7 @@ begin
   where program_id = v_program_id and week_order = 24 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 47–48 — FINAL BOSS: памп, рельеф, форма'
+    update public.workouts set title_en = 'Tuesday · Legs', week_label_en = 'Weeks 47–48 — FINAL BOSS: Pump, definition, shape'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -2039,7 +2039,7 @@ begin
   where program_id = v_program_id and week_order = 24 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 47–48 — FINAL BOSS: памп, рельеф, форма'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps', week_label_en = 'Weeks 47–48 — FINAL BOSS: Pump, definition, shape'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '100'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -2057,7 +2057,7 @@ begin
   where program_id = v_program_id and week_order = 24 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Shoulders + Final ПАМП', week_label_en = 'Weeks 47–48 — FINAL BOSS: памп, рельеф, форма'
+    update public.workouts set title_en = 'Thursday · Shoulders + Final Pump', week_label_en = 'Weeks 47–48 — FINAL BOSS: Pump, definition, shape'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '12'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;

@@ -39,7 +39,7 @@ begin
   where program_id = v_program_id and week_order = 1 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Chest + Triceps + Cardio', week_label_en = 'Month 1 — LEVEL 1: ЗАПУСК (weeks 1–2)'
+    update public.workouts set title_en = 'Monday · Chest + Triceps + Cardio', week_label_en = 'Month 1 — LEVEL 1: Kickoff (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '7 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -63,7 +63,7 @@ begin
   where program_id = v_program_id and week_order = 1 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · Back + Biceps + Cardio', week_label_en = 'Month 1 — LEVEL 1: ЗАПУСК (weeks 1–2)'
+    update public.workouts set title_en = 'Wednesday · Back + Biceps + Cardio', week_label_en = 'Month 1 — LEVEL 1: Kickoff (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '7 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -89,7 +89,7 @@ begin
   where program_id = v_program_id and week_order = 1 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Friday · Legs + Shoulders + Cardio', week_label_en = 'Month 1 — LEVEL 1: ЗАПУСК (weeks 1–2)'
+    update public.workouts set title_en = 'Friday · Legs + Shoulders + Cardio', week_label_en = 'Month 1 — LEVEL 1: Kickoff (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '7 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -247,7 +247,7 @@ begin
   where program_id = v_program_id and week_order = 4 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 2 — LEVEL 2: УСКОРЕНИЕ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 2 — LEVEL 2: Acceleration (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -273,7 +273,7 @@ begin
   where program_id = v_program_id and week_order = 4 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 2 — LEVEL 2: УСКОРЕНИЕ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 2 — LEVEL 2: Acceleration (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -299,7 +299,7 @@ begin
   where program_id = v_program_id and week_order = 4 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 2 — LEVEL 2: УСКОРЕНИЕ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 2 — LEVEL 2: Acceleration (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -327,7 +327,7 @@ begin
   where program_id = v_program_id and week_order = 4 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 6 · FULL BODY', week_label_en = 'Month 2 — LEVEL 2: УСКОРЕНИЕ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 6 · FULL BODY', week_label_en = 'Month 2 — LEVEL 2: Acceleration (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Round'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -499,7 +499,7 @@ begin
   where program_id = v_program_id and week_order = 7 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 3 — LEVEL 3: УСКОРЕНИЕ And Density (weeks 1–2)'
+    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 3 — LEVEL 3: Acceleration And Density (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -525,7 +525,7 @@ begin
   where program_id = v_program_id and week_order = 7 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 3 — LEVEL 3: УСКОРЕНИЕ And Density (weeks 1–2)'
+    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 3 — LEVEL 3: Acceleration And Density (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -551,7 +551,7 @@ begin
   where program_id = v_program_id and week_order = 7 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 3 — LEVEL 3: УСКОРЕНИЕ And Density (weeks 1–2)'
+    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 3 — LEVEL 3: Acceleration And Density (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -579,7 +579,7 @@ begin
   where program_id = v_program_id and week_order = 7 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 6 · FULL BODY', week_label_en = 'Month 3 — LEVEL 3: УСКОРЕНИЕ And Density (weeks 1–2)'
+    update public.workouts set title_en = 'Day 6 · FULL BODY', week_label_en = 'Month 3 — LEVEL 3: Acceleration And Density (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Round'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -753,7 +753,7 @@ begin
   where program_id = v_program_id and week_order = 10 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 4 — LEVEL 4: Strength + МЕТАБОЛИЧЕСКИЙ Stress (weeks 1–2)'
+    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 4 — LEVEL 4: Strength + Metabolic Stress (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -779,7 +779,7 @@ begin
   where program_id = v_program_id and week_order = 10 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 4 — LEVEL 4: Strength + МЕТАБОЛИЧЕСКИЙ Stress (weeks 1–2)'
+    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 4 — LEVEL 4: Strength + Metabolic Stress (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -805,7 +805,7 @@ begin
   where program_id = v_program_id and week_order = 10 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 4 — LEVEL 4: Strength + МЕТАБОЛИЧЕСКИЙ Stress (weeks 1–2)'
+    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 4 — LEVEL 4: Strength + Metabolic Stress (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -833,7 +833,7 @@ begin
   where program_id = v_program_id and week_order = 10 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 6 · FULL BODY', week_label_en = 'Month 4 — LEVEL 4: Strength + МЕТАБОЛИЧЕСКИЙ Stress (weeks 1–2)'
+    update public.workouts set title_en = 'Day 6 · FULL BODY', week_label_en = 'Month 4 — LEVEL 4: Strength + Metabolic Stress (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Round'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1241,7 +1241,7 @@ begin
   where program_id = v_program_id and week_order = 16 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 6 — LEVEL 6: Strength + МЕТАБОЛИЧЕСКИЙ Stress + New Movements (weeks 1–2)'
+    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 6 — LEVEL 6: Strength + Metabolic Stress + New Movements (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -1265,7 +1265,7 @@ begin
   where program_id = v_program_id and week_order = 16 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 6 — LEVEL 6: Strength + МЕТАБОЛИЧЕСКИЙ Stress + New Movements (weeks 1–2)'
+    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 6 — LEVEL 6: Strength + Metabolic Stress + New Movements (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -1289,7 +1289,7 @@ begin
   where program_id = v_program_id and week_order = 16 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 6 — LEVEL 6: Strength + МЕТАБОЛИЧЕСКИЙ Stress + New Movements (weeks 1–2)'
+    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 6 — LEVEL 6: Strength + Metabolic Stress + New Movements (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -1315,7 +1315,7 @@ begin
   where program_id = v_program_id and week_order = 16 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 6 · FULL BODY', week_label_en = 'Month 6 — LEVEL 6: Strength + МЕТАБОЛИЧЕСКИЙ Stress + New Movements (weeks 1–2)'
+    update public.workouts set title_en = 'Day 6 · FULL BODY', week_label_en = 'Month 6 — LEVEL 6: Strength + Metabolic Stress + New Movements (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Round'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1481,7 +1481,7 @@ begin
   where program_id = v_program_id and week_order = 19 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 1 · Chest + Shoulders + Triceps', week_label_en = 'Month 7 — LEVEL 7: Strength + Density + АТЛЕТИЧНОСТЬ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 1 · Chest + Shoulders + Triceps', week_label_en = 'Month 7 — LEVEL 7: Strength + Density + Athleticism (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -1505,7 +1505,7 @@ begin
   where program_id = v_program_id and week_order = 19 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 7 — LEVEL 7: Strength + Density + АТЛЕТИЧНОСТЬ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 7 — LEVEL 7: Strength + Density + Athleticism (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -1529,7 +1529,7 @@ begin
   where program_id = v_program_id and week_order = 19 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 4 · Legs + Glutes', week_label_en = 'Month 7 — LEVEL 7: Strength + Density + АТЛЕТИЧНОСТЬ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 4 · Legs + Glutes', week_label_en = 'Month 7 — LEVEL 7: Strength + Density + Athleticism (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -1555,7 +1555,7 @@ begin
   where program_id = v_program_id and week_order = 19 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 6 · ATHLETIC FULL BODY', week_label_en = 'Month 7 — LEVEL 7: Strength + Density + АТЛЕТИЧНОСТЬ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 6 · ATHLETIC FULL BODY', week_label_en = 'Month 7 — LEVEL 7: Strength + Density + Athleticism (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Round'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1723,7 +1723,7 @@ begin
   where program_id = v_program_id and week_order = 22 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 8 — LEVEL 8: Strength + Endurance + Density + АТЛЕТИЧНОСТЬ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 8 — LEVEL 8: Strength + Endurance + Density + Athleticism (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -1747,7 +1747,7 @@ begin
   where program_id = v_program_id and week_order = 22 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 8 — LEVEL 8: Strength + Endurance + Density + АТЛЕТИЧНОСТЬ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 8 — LEVEL 8: Strength + Endurance + Density + Athleticism (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -1771,7 +1771,7 @@ begin
   where program_id = v_program_id and week_order = 22 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 8 — LEVEL 8: Strength + Endurance + Density + АТЛЕТИЧНОСТЬ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 8 — LEVEL 8: Strength + Endurance + Density + Athleticism (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -1797,7 +1797,7 @@ begin
   where program_id = v_program_id and week_order = 22 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 6 · ATHLETIC FULL BODY', week_label_en = 'Month 8 — LEVEL 8: Strength + Endurance + Density + АТЛЕТИЧНОСТЬ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 6 · ATHLETIC FULL BODY', week_label_en = 'Month 8 — LEVEL 8: Strength + Endurance + Density + Athleticism (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Round'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -1963,7 +1963,7 @@ begin
   where program_id = v_program_id and week_order = 25 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 9 — LEVEL 9: Strength + ЖИРОСЖИГАНИЕ + АТЛЕТИЧНОСТЬ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 9 — LEVEL 9: Strength + Fat burn + Athleticism (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -1987,7 +1987,7 @@ begin
   where program_id = v_program_id and week_order = 25 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 9 — LEVEL 9: Strength + ЖИРОСЖИГАНИЕ + АТЛЕТИЧНОСТЬ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 9 — LEVEL 9: Strength + Fat burn + Athleticism (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -2011,7 +2011,7 @@ begin
   where program_id = v_program_id and week_order = 25 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 9 — LEVEL 9: Strength + ЖИРОСЖИГАНИЕ + АТЛЕТИЧНОСТЬ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 9 — LEVEL 9: Strength + Fat burn + Athleticism (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -2037,7 +2037,7 @@ begin
   where program_id = v_program_id and week_order = 25 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 6 · ATHLETIC FULL BODY', week_label_en = 'Month 9 — LEVEL 9: Strength + ЖИРОСЖИГАНИЕ + АТЛЕТИЧНОСТЬ (weeks 1–2)'
+    update public.workouts set title_en = 'Day 6 · ATHLETIC FULL BODY', week_label_en = 'Month 9 — LEVEL 9: Strength + Fat burn + Athleticism (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Round'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -2203,7 +2203,7 @@ begin
   where program_id = v_program_id and week_order = 28 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 10 — LEVEL 10: Strength + ЖИРОСЖИГАНИЕ + Speed (weeks 1–2)'
+    update public.workouts set title_en = 'Day 1 · Chest + Triceps', week_label_en = 'Month 10 — LEVEL 10: Strength + Fat burn + Speed (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -2227,7 +2227,7 @@ begin
   where program_id = v_program_id and week_order = 28 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 10 — LEVEL 10: Strength + ЖИРОСЖИГАНИЕ + Speed (weeks 1–2)'
+    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 10 — LEVEL 10: Strength + Fat burn + Speed (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -2251,7 +2251,7 @@ begin
   where program_id = v_program_id and week_order = 28 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 10 — LEVEL 10: Strength + ЖИРОСЖИГАНИЕ + Speed (weeks 1–2)'
+    update public.workouts set title_en = 'Day 4 · Legs + Shoulders', week_label_en = 'Month 10 — LEVEL 10: Strength + Fat burn + Speed (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -2277,7 +2277,7 @@ begin
   where program_id = v_program_id and week_order = 28 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 6 · ATHLETIC FULL BODY', week_label_en = 'Month 10 — LEVEL 10: Strength + ЖИРОСЖИГАНИЕ + Speed (weeks 1–2)'
+    update public.workouts set title_en = 'Day 6 · ATHLETIC FULL BODY', week_label_en = 'Month 10 — LEVEL 10: Strength + Fat burn + Speed (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Round'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -2443,7 +2443,7 @@ begin
   where program_id = v_program_id and week_order = 31 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 1 · Chest + Shoulders + Triceps', week_label_en = 'Month 11 — LEVEL 11: ATHLETIC CUT — Strength + РЕЛЬЕФ + Endurance (weeks 1–2)'
+    update public.workouts set title_en = 'Day 1 · Chest + Shoulders + Triceps', week_label_en = 'Month 11 — LEVEL 11: ATHLETIC CUT — Strength + Definition + Endurance (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -2467,7 +2467,7 @@ begin
   where program_id = v_program_id and week_order = 31 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 11 — LEVEL 11: ATHLETIC CUT — Strength + РЕЛЬЕФ + Endurance (weeks 1–2)'
+    update public.workouts set title_en = 'Day 2 · Back + Biceps', week_label_en = 'Month 11 — LEVEL 11: ATHLETIC CUT — Strength + Definition + Endurance (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -2491,7 +2491,7 @@ begin
   where program_id = v_program_id and week_order = 31 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 4 · Legs + Glutes', week_label_en = 'Month 11 — LEVEL 11: ATHLETIC CUT — Strength + РЕЛЬЕФ + Endurance (weeks 1–2)'
+    update public.workouts set title_en = 'Day 4 · Legs + Glutes', week_label_en = 'Month 11 — LEVEL 11: ATHLETIC CUT — Strength + Definition + Endurance (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8 min'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -2517,7 +2517,7 @@ begin
   where program_id = v_program_id and week_order = 31 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Day 6 · ATHLETIC FULL BODY', week_label_en = 'Month 11 — LEVEL 11: ATHLETIC CUT — Strength + РЕЛЬЕФ + Endurance (weeks 1–2)'
+    update public.workouts set title_en = 'Day 6 · ATHLETIC FULL BODY', week_label_en = 'Month 11 — LEVEL 11: ATHLETIC CUT — Strength + Definition + Endurance (weeks 1–2)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Round'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;

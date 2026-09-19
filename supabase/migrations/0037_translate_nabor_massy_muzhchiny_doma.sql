@@ -113,7 +113,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Week 3, Day 1 · Chest + Triceps', week_label_en = 'LEVEL UP — Week 3 (new механика) + LEVEL 1 BOSS — Week 4'
+    update public.workouts set title_en = 'Week 3, Day 1 · Chest + Triceps', week_label_en = 'LEVEL UP — Week 3 (new mechanics) + LEVEL 1 BOSS — Week 4'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10–15'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -135,7 +135,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Week 3, Day 2 · Back + Biceps', week_label_en = 'LEVEL UP — Week 3 (new механика) + LEVEL 1 BOSS — Week 4'
+    update public.workouts set title_en = 'Week 3, Day 2 · Back + Biceps', week_label_en = 'LEVEL UP — Week 3 (new mechanics) + LEVEL 1 BOSS — Week 4'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '6–10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -157,7 +157,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Week 3, Day 3 · Legs + Shoulders', week_label_en = 'LEVEL UP — Week 3 (new механика) + LEVEL 1 BOSS — Week 4'
+    update public.workouts set title_en = 'Week 3, Day 3 · Legs + Shoulders', week_label_en = 'LEVEL UP — Week 3 (new mechanics) + LEVEL 1 BOSS — Week 4'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10 per leg'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -181,7 +181,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Week 4, Day 1 — PUSH · PUSH (полная смена exercises)', week_label_en = 'LEVEL UP — Week 3 (new механика) + LEVEL 1 BOSS — Week 4'
+    update public.workouts set title_en = 'Week 4, Day 1 — PUSH · PUSH (полная смена exercises)', week_label_en = 'LEVEL UP — Week 3 (new mechanics) + LEVEL 1 BOSS — Week 4'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10–15'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -203,7 +203,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 5;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Week 4, Day 2 — PULL · PULL', week_label_en = 'LEVEL UP — Week 3 (new механика) + LEVEL 1 BOSS — Week 4'
+    update public.workouts set title_en = 'Week 4, Day 2 — PULL · PULL', week_label_en = 'LEVEL UP — Week 3 (new mechanics) + LEVEL 1 BOSS — Week 4'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Max.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -225,7 +225,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 6;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Week 4, Day 3 — Legs + ATHLETIC · Legs + ATHLETIC', week_label_en = 'LEVEL UP — Week 3 (new механика) + LEVEL 1 BOSS — Week 4'
+    update public.workouts set title_en = 'Week 4, Day 3 — Legs + ATHLETIC · Legs + ATHLETIC', week_label_en = 'LEVEL UP — Week 3 (new mechanics) + LEVEL 1 BOSS — Week 4'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '15'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -2369,7 +2369,7 @@ begin
   where program_id = v_program_id and week_order = 24 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · FINAL PUSH', week_label_en = 'FINAL BOSS, weeks 47–48 + Final Test ГОДА'
+    update public.workouts set title_en = 'Monday · FINAL PUSH', week_label_en = 'FINAL BOSS, weeks 47–48 + Final Test Year'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '6–10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -2393,7 +2393,7 @@ begin
   where program_id = v_program_id and week_order = 24 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · FINAL PULL', week_label_en = 'FINAL BOSS, weeks 47–48 + Final Test ГОДА'
+    update public.workouts set title_en = 'Tuesday · FINAL PULL', week_label_en = 'FINAL BOSS, weeks 47–48 + Final Test Year'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Max.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -2419,7 +2419,7 @@ begin
   where program_id = v_program_id and week_order = 24 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · FINAL LEGS', week_label_en = 'FINAL BOSS, weeks 47–48 + Final Test ГОДА'
+    update public.workouts set title_en = 'Thursday · FINAL LEGS', week_label_en = 'FINAL BOSS, weeks 47–48 + Final Test Year'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8–10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -2445,7 +2445,7 @@ begin
   where program_id = v_program_id and week_order = 24 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Saturday · 🏆 FINAL TEST', week_label_en = 'FINAL BOSS, weeks 47–48 + Final Test ГОДА'
+    update public.workouts set title_en = 'Saturday · 🏆 FINAL TEST', week_label_en = 'FINAL BOSS, weeks 47–48 + Final Test Year'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Max.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 3;

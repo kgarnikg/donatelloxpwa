@@ -5,15 +5,15 @@ import { usePrograms, useFreeProgramAccess, useActiveSubscription } from "@/lib/
 import { localizedField } from "@/lib/localizedField";
 
 export default function ProgramsPage() {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data: programs, isLoading } = usePrograms();
   const { hasFreeAccess } = useFreeProgramAccess();
   const { data: activeSubscription } = useActiveSubscription();
 
   return (
     <div className="px-5 pt-8">
-      <h1 className="font-display text-2xl font-bold">Программы тренировок</h1>
-      <p className="mt-1 text-neutral-400">Выберите программу под свою цель</p>
+      <h1 className="font-display text-2xl font-bold">{t("programs.pageTitle")}</h1>
+      <p className="mt-1 text-neutral-400">{t("programs.pageSubtitle")}</p>
 
       <div className="mt-6 space-y-3">
         {isLoading &&
@@ -47,7 +47,7 @@ export default function ProgramsPage() {
                   {localizedField(program.description, program.descriptionEn, i18n.language)}
                 </p>
                 <p className="mt-2 text-xs font-medium uppercase tracking-wide text-volt-400">
-                  {program.durationWeeks} нед · {program.workoutsPerWeek}×/нед · {program.difficulty}
+                  {t("programs.weeks", { count: program.durationWeeks })} · {t("programs.perWeek", { count: program.workoutsPerWeek })} · {program.difficulty}
                 </p>
               </div>
               <ChevronRight className="ml-3 shrink-0 text-neutral-500" />

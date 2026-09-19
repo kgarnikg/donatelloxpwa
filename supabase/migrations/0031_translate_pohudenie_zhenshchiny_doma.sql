@@ -1871,7 +1871,7 @@ begin
   where program_id = v_program_id and week_order = 24 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Week 4, Day 6 · 🔥 FINAL BOSS — Final ГОДА', week_label_en = '🔴 Month 12 — Week 3 (UP) + 🟠 Week 4 (New Level) + 🏆 FINAL BOSS'
+    update public.workouts set title_en = 'Week 4, Day 6 · 🔥 FINAL BOSS — Final Year', week_label_en = '🔴 Month 12 — Week 3 (UP) + 🟠 Week 4 (New Level) + 🏆 FINAL BOSS'
     where id = v_workout_id;
     update public.workout_sets set notes_en = 'Round'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;

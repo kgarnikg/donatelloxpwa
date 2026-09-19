@@ -113,7 +113,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · GLUTE POWER', week_label_en = 'Month 1 — LEVEL 1B — ПЕРВЫЙ СКАЧОК (Week 3)'
+    update public.workouts set title_en = 'Monday · GLUTE POWER', week_label_en = 'Month 1 — LEVEL 1B — First Jump (Week 3)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '12 (Weight: +5–10% относительно weeks 1–2, if form позволяет.)'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -137,7 +137,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Wednesday · GLUTE + HAMSTRING', week_label_en = 'Month 1 — LEVEL 1B — ПЕРВЫЙ СКАЧОК (Week 3)'
+    update public.workouts set title_en = 'Wednesday · GLUTE + HAMSTRING', week_label_en = 'Month 1 — LEVEL 1B — First Jump (Week 3)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '12'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -163,7 +163,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Friday · BACK + SHOULDERS + ARMS', week_label_en = 'Month 1 — LEVEL 1B — ПЕРВЫЙ СКАЧОК (Week 3)'
+    update public.workouts set title_en = 'Friday · BACK + SHOULDERS + ARMS', week_label_en = 'Month 1 — LEVEL 1B — First Jump (Week 3)'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '12'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -227,7 +227,7 @@ begin
     where workout_id = v_workout_id and "order" >= 40 and "order" < 41;
     update public.workout_sets set notes_en = 'Bicep curl with dumbbells 12 tricep extension with resistance band 15 3 rounds'
     where workout_id = v_workout_id and "order" >= 50 and "order" < 51;
-    update public.workout_sets set notes_en = '8–12 (Это первый элемент калистеники. If тяжело: делать with более high support.)'
+    update public.workout_sets set notes_en = '8–12 (Это first элемент калистеники. If тяжело: делать with более high support.)'
     where workout_id = v_workout_id and "order" >= 60 and "order" < 63;
     update public.workout_sets set notes_en = '4 exercise per 60 sec, rest 15 sec between exercises., 60 sec between rounds'
     where workout_id = v_workout_id and "order" >= 70 and "order" < 71;
@@ -297,7 +297,7 @@ begin
     where workout_id = v_workout_id and "order" >= 10 and "order" < 14;
     update public.workout_sets set notes_en = '10 per leg'
     where workout_id = v_workout_id and "order" >= 20 and "order" < 24;
-    update public.workout_sets set notes_en = '10 per side (New стимул for legs and ягодиц.)'
+    update public.workout_sets set notes_en = '10 per side (New stimulus for legs and ягодиц.)'
     where workout_id = v_workout_id and "order" >= 30 and "order" < 33;
     update public.workout_sets set notes_en = '20'
     where workout_id = v_workout_id and "order" >= 40 and "order" < 44;
@@ -383,7 +383,7 @@ begin
     where workout_id = v_workout_id and "order" >= 50 and "order" < 53;
     update public.workout_sets set notes_en = '45 sec'
     where workout_id = v_workout_id and "order" >= 60 and "order" < 64;
-    update public.workout_sets set notes_en = 'AMRAP — 8 min Сделать как you can more quality rounds: 8 squats 8 push-ups 10…'
+    update public.workout_sets set notes_en = 'AMRAP — 8 min Сделать as/like you can more quality rounds: 8 squats 8 push-ups 10…'
     where workout_id = v_workout_id and "order" >= 70 and "order" < 71;
     update public.workout_sets set notes_en = '4 rounds each exercise: 60 sec V-Ups Mountain Climbers Russian Twist Hollow Hold…'
     where workout_id = v_workout_id and "order" >= 80 and "order" < 81;

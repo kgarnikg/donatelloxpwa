@@ -214,5 +214,20 @@
       "all": "За всё время",
       "kg": "кг"
     }
+  },
+  "programs": {
+    "allPrograms": "Все программы",
+    "weeks_one": "{{count}} неделя",
+    "weeks_few": "{{count}} недели",
+    "weeks_many": "{{count}} недель",
+    "weeks_other": "{{count}} недель",
+    "perWeek": "{{count}}x в неделю",
+    "workoutLabel": "Тренировка {{number}}",
+    "exercises_one": "{{count}} упражнение",
+    "exercises_few": "{{count}} упражнения",
+    "exercises_many": "{{count}} упражнений",
+    "exercises_other": "{{count}} упражнений",
+    "pageTitle": "Программы тренировок",
+    "pageSubtitle": "Выберите программу под свою цель"
   }
 }

@@ -39,7 +39,7 @@ begin
   where program_id = v_program_id and week_order = 1 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Glutes + КВАДРИЦЕПС', week_label_en = 'Month 1 — ФУНДАМЕНТ — weeks 1–2'
+    update public.workouts set title_en = 'Monday · Glutes + КВАДРИЦЕПС', week_label_en = 'Month 1 — Foundation — weeks 1–2'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '12'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -61,7 +61,7 @@ begin
   where program_id = v_program_id and week_order = 1 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Back + Shoulders + Arms', week_label_en = 'Month 1 — ФУНДАМЕНТ — weeks 1–2'
+    update public.workouts set title_en = 'Tuesday · Back + Shoulders + Arms', week_label_en = 'Month 1 — Foundation — weeks 1–2'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '12'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -83,7 +83,7 @@ begin
   where program_id = v_program_id and week_order = 1 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Glutes + Rear Chain', week_label_en = 'Month 1 — ФУНДАМЕНТ — weeks 1–2'
+    update public.workouts set title_en = 'Thursday · Glutes + Rear Chain', week_label_en = 'Month 1 — Foundation — weeks 1–2'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -105,7 +105,7 @@ begin
   where program_id = v_program_id and week_order = 1 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Saturday · Upper body + Glutes + CORE', week_label_en = 'Month 1 — ФУНДАМЕНТ — weeks 1–2'
+    update public.workouts set title_en = 'Saturday · Upper body + Glutes + CORE', week_label_en = 'Month 1 — Foundation — weeks 1–2'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 3;
@@ -129,7 +129,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Workout 1', week_label_en = 'Month 1 — ФУНДАМЕНТ (New СТИМУЛ) — weeks 3–4'
+    update public.workouts set title_en = 'Monday · Workout 1', week_label_en = 'Month 1 — Foundation (New Stimulus) — weeks 3–4'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -151,7 +151,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Workout 2', week_label_en = 'Month 1 — ФУНДАМЕНТ (New СТИМУЛ) — weeks 3–4'
+    update public.workouts set title_en = 'Tuesday · Workout 2', week_label_en = 'Month 1 — Foundation (New Stimulus) — weeks 3–4'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -173,7 +173,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Workout 3', week_label_en = 'Month 1 — ФУНДАМЕНТ (New СТИМУЛ) — weeks 3–4'
+    update public.workouts set title_en = 'Thursday · Workout 3', week_label_en = 'Month 1 — Foundation (New Stimulus) — weeks 3–4'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -195,7 +195,7 @@ begin
   where program_id = v_program_id and week_order = 2 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 1 — ФУНДАМЕНТ (New СТИМУЛ) — weeks 3–4'
+    update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 1 — Foundation (New Stimulus) — weeks 3–4'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 3;
@@ -217,7 +217,7 @@ begin
   where program_id = v_program_id and week_order = 3 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Glutes + КВАДРИЦЕПС', week_label_en = 'Month 2 — НАРАЩИВАНИЕ МЫШЦ — weeks 5–6'
+    update public.workouts set title_en = 'Monday · Glutes + КВАДРИЦЕПС', week_label_en = 'Month 2 — Building Muscle — weeks 5–6'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8–10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -239,7 +239,7 @@ begin
   where program_id = v_program_id and week_order = 3 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Back + Shoulders', week_label_en = 'Month 2 — НАРАЩИВАНИЕ МЫШЦ — weeks 5–6'
+    update public.workouts set title_en = 'Tuesday · Back + Shoulders', week_label_en = 'Month 2 — Building Muscle — weeks 5–6'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -257,7 +257,7 @@ begin
   where program_id = v_program_id and week_order = 3 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Glutes + Biceps Thighs', week_label_en = 'Month 2 — НАРАЩИВАНИЕ МЫШЦ — weeks 5–6'
+    update public.workouts set title_en = 'Thursday · Glutes + Biceps Thighs', week_label_en = 'Month 2 — Building Muscle — weeks 5–6'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8–10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -277,7 +277,7 @@ begin
   where program_id = v_program_id and week_order = 3 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Saturday · Upper body + Glutes', week_label_en = 'Month 2 — НАРАЩИВАНИЕ МЫШЦ — weeks 5–6'
+    update public.workouts set title_en = 'Saturday · Upper body + Glutes', week_label_en = 'Month 2 — Building Muscle — weeks 5–6'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -297,7 +297,7 @@ begin
   where program_id = v_program_id and week_order = 4 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Workout 1', week_label_en = 'Month 2 — НАРАЩИВАНИЕ МЫШЦ (Hypertrophy + ФУНКЦИОНАЛ) — weeks 7–8'
+    update public.workouts set title_en = 'Monday · Workout 1', week_label_en = 'Month 2 — Building Muscle (Hypertrophy + Functional training) — weeks 7–8'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8–10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -313,7 +313,7 @@ begin
   where program_id = v_program_id and week_order = 4 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Workout 2', week_label_en = 'Month 2 — НАРАЩИВАНИЕ МЫШЦ (Hypertrophy + ФУНКЦИОНАЛ) — weeks 7–8'
+    update public.workouts set title_en = 'Tuesday · Workout 2', week_label_en = 'Month 2 — Building Muscle (Hypertrophy + Functional training) — weeks 7–8'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -333,7 +333,7 @@ begin
   where program_id = v_program_id and week_order = 4 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Workout 3', week_label_en = 'Month 2 — НАРАЩИВАНИЕ МЫШЦ (Hypertrophy + ФУНКЦИОНАЛ) — weeks 7–8'
+    update public.workouts set title_en = 'Thursday · Workout 3', week_label_en = 'Month 2 — Building Muscle (Hypertrophy + Functional training) — weeks 7–8'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -351,9 +351,9 @@ begin
   where program_id = v_program_id and week_order = 4 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 2 — НАРАЩИВАНИЕ МЫШЦ (Hypertrophy + ФУНКЦИОНАЛ) — weeks 7–8'
+    update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 2 — Building Muscle (Hypertrophy + Functional training) — weeks 7–8'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -523,7 +523,7 @@ begin
     v_updated_workouts := v_updated_workouts + 1;
     update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 4 — Strength + Mass — weeks 13–14'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -607,7 +607,7 @@ begin
     v_updated_workouts := v_updated_workouts + 1;
     update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 5 — Hypertrophy 2.0 — weeks 17–18'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -635,7 +635,7 @@ begin
   where program_id = v_program_id and week_order = 11 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'All week · New gain exercises (all тренировочные days this cable)', week_label_en = 'Month 6 — ШОКОВАЯ Adaptation — weeks 21–22'
+    update public.workouts set title_en = 'All week · New gain exercises (all тренировочные days this cable)', week_label_en = 'Month 6 — Shock Adaptation — weeks 21–22'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -655,7 +655,7 @@ begin
   where program_id = v_program_id and week_order = 12 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'All week · New gain exercises (all тренировочные days this cable)', week_label_en = 'Month 6 — ШОКОВАЯ Adaptation — weeks 23–24'
+    update public.workouts set title_en = 'All week · New gain exercises (all тренировочные days this cable)', week_label_en = 'Month 6 — Shock Adaptation — weeks 23–24'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -675,7 +675,7 @@ begin
   where program_id = v_program_id and week_order = 13 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Glutes + КВАДРИЦЕПС', week_label_en = 'Month 7 — Peak Hypertrophy + ФОРМА — weeks 25–26'
+    update public.workouts set title_en = 'Monday · Glutes + КВАДРИЦЕПС', week_label_en = 'Month 7 — Peak Hypertrophy + Shape — weeks 25–26'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -697,9 +697,9 @@ begin
   where program_id = v_program_id and week_order = 13 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Workout 2', week_label_en = 'Month 7 — Peak Hypertrophy + ФОРМА — weeks 25–26'
+    update public.workouts set title_en = 'Tuesday · Workout 2', week_label_en = 'Month 7 — Peak Hypertrophy + Shape — weeks 25–26'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -707,9 +707,9 @@ begin
   where program_id = v_program_id and week_order = 13 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Workout 3', week_label_en = 'Month 7 — Peak Hypertrophy + ФОРМА — weeks 25–26'
+    update public.workouts set title_en = 'Thursday · Workout 3', week_label_en = 'Month 7 — Peak Hypertrophy + Shape — weeks 25–26'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -717,9 +717,9 @@ begin
   where program_id = v_program_id and week_order = 13 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 7 — Peak Hypertrophy + ФОРМА — weeks 25–26'
+    update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 7 — Peak Hypertrophy + Shape — weeks 25–26'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -727,7 +727,7 @@ begin
   where program_id = v_program_id and week_order = 14 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'All week · Focus Cable', week_label_en = 'Month 7 — Peak Hypertrophy + ФОРМА — weeks 27–28'
+    update public.workouts set title_en = 'All week · Focus Cable', week_label_en = 'Month 7 — Peak Hypertrophy + Shape — weeks 27–28'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '—'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -737,7 +737,7 @@ begin
   where program_id = v_program_id and week_order = 15 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · GLUTE SPECIALIZATION', week_label_en = 'Month 8 — СПЕЦИАЛИЗАЦИЯ — weeks 29–30'
+    update public.workouts set title_en = 'Monday · GLUTE SPECIALIZATION', week_label_en = 'Month 8 — Specialization — weeks 29–30'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8–10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -757,9 +757,9 @@ begin
   where program_id = v_program_id and week_order = 15 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Workout 2', week_label_en = 'Month 8 — СПЕЦИАЛИЗАЦИЯ — weeks 29–30'
+    update public.workouts set title_en = 'Tuesday · Workout 2', week_label_en = 'Month 8 — Specialization — weeks 29–30'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -767,9 +767,9 @@ begin
   where program_id = v_program_id and week_order = 15 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Workout 3', week_label_en = 'Month 8 — СПЕЦИАЛИЗАЦИЯ — weeks 29–30'
+    update public.workouts set title_en = 'Thursday · Workout 3', week_label_en = 'Month 8 — Specialization — weeks 29–30'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -777,9 +777,9 @@ begin
   where program_id = v_program_id and week_order = 15 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 8 — СПЕЦИАЛИЗАЦИЯ — weeks 29–30'
+    update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 8 — Specialization — weeks 29–30'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -787,7 +787,7 @@ begin
   where program_id = v_program_id and week_order = 16 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'All week · New gain exercises (all тренировочные days this cable)', week_label_en = 'Month 8 — СПЕЦИАЛИЗАЦИЯ — weeks 31–32'
+    update public.workouts set title_en = 'All week · New gain exercises (all тренировочные days this cable)', week_label_en = 'Month 8 — Specialization — weeks 31–32'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '10 + 10-секундная изометрия последнего повтора.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 4;
@@ -797,7 +797,7 @@ begin
   where program_id = v_program_id and week_order = 17 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Monday · Workout 1', week_label_en = 'Month 9 — Strength ПИК — weeks 33–34'
+    update public.workouts set title_en = 'Monday · Workout 1', week_label_en = 'Month 9 — Strength Peak — weeks 33–34'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -817,7 +817,7 @@ begin
   where program_id = v_program_id and week_order = 17 and "order" = 2;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Tuesday · Workout 2', week_label_en = 'Month 9 — Strength ПИК — weeks 33–34'
+    update public.workouts set title_en = 'Tuesday · Workout 2', week_label_en = 'Month 9 — Strength Peak — weeks 33–34'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5–8'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -835,9 +835,9 @@ begin
   where program_id = v_program_id and week_order = 17 and "order" = 3;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Thursday · Workout 3', week_label_en = 'Month 9 — Strength ПИК — weeks 33–34'
+    update public.workouts set title_en = 'Thursday · Workout 3', week_label_en = 'Month 9 — Strength Peak — weeks 33–34'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -845,9 +845,9 @@ begin
   where program_id = v_program_id and week_order = 17 and "order" = 4;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 9 — Strength ПИК — weeks 33–34'
+    update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 9 — Strength Peak — weeks 33–34'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -855,7 +855,7 @@ begin
   where program_id = v_program_id and week_order = 18 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'All week · New gain exercises (all тренировочные days this cable)', week_label_en = 'Month 9 — Strength ПИК — weeks 35–36'
+    update public.workouts set title_en = 'All week · New gain exercises (all тренировочные days this cable)', week_label_en = 'Month 9 — Strength Peak — weeks 35–36'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '5'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -875,7 +875,7 @@ begin
   where program_id = v_program_id and week_order = 19 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'All week · New gain exercises (all тренировочные days this cable)', week_label_en = 'Month 10 — Maximum Hypertrophy + ФОРМА — weeks 37–38'
+    update public.workouts set title_en = 'All week · New gain exercises (all тренировочные days this cable)', week_label_en = 'Month 10 — Maximum Hypertrophy + Shape — weeks 37–38'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '8–10'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 5;
@@ -899,7 +899,7 @@ begin
   where program_id = v_program_id and week_order = 20 and "order" = 1;
   if v_workout_id is not null then
     v_updated_workouts := v_updated_workouts + 1;
-    update public.workouts set title_en = 'All week · New gain exercises (all тренировочные days this cable)', week_label_en = 'Month 10 — Maximum Hypertrophy + ФОРМА — weeks 39–40'
+    update public.workouts set title_en = 'All week · New gain exercises (all тренировочные days this cable)', week_label_en = 'Month 10 — Maximum Hypertrophy + Shape — weeks 39–40'
     where id = v_workout_id;
     update public.workout_sets set notes_en = '20.'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
@@ -967,7 +967,7 @@ begin
     v_updated_workouts := v_updated_workouts + 1;
     update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 11 — Final Gain Mass + Strength — weeks 41–42'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -1017,7 +1017,7 @@ begin
     v_updated_workouts := v_updated_workouts + 1;
     update public.workouts set title_en = 'Tuesday · UPPER 3D', week_label_en = 'Month 12 — FINAL TRANSFORMATION — weeks 45–46'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 
@@ -1047,7 +1047,7 @@ begin
     v_updated_workouts := v_updated_workouts + 1;
     update public.workouts set title_en = 'Saturday · Workout 4', week_label_en = 'Month 12 — FINAL TRANSFORMATION — weeks 45–46'
     where id = v_workout_id;
-    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы мышц'
+    update public.workout_sets set notes_en = 'Exercise not детализированы тренером — используйте movements from соответствующего day previous cable for этой группы muscle'
     where workout_id = v_workout_id and "order" >= 0 and "order" < 1;
   end if;
 

@@ -69,7 +69,7 @@ function TabsLayout() {
  */
 function ProgramDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { hasFreeAccess } = useFreeProgramAccess();
   const { data: activeSubscription } = useActiveSubscription();
   const [activeWeekOrder, setActiveWeekOrder] = useState<number | null>(null);
@@ -149,7 +149,7 @@ function ProgramDetailPage() {
   return (
     <div className="px-5 pt-8">
       <Link to="/programs" className="mb-4 inline-flex items-center gap-1 text-sm text-neutral-400">
-        <ChevronLeft size={16} /> Все программы
+        <ChevronLeft size={16} /> {t("programs.allPrograms")}
       </Link>
 
       <h1 className="font-display text-2xl font-bold">
@@ -160,10 +160,10 @@ function ProgramDetailPage() {
       </p>
       <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium uppercase tracking-wide text-volt-400">
         <span className="rounded-full border border-volt-400/30 px-2.5 py-1">
-          {program.durationWeeks} недель
+          {t("programs.weeks", { count: program.durationWeeks })}
         </span>
         <span className="rounded-full border border-volt-400/30 px-2.5 py-1">
-          {program.workoutsPerWeek}x в неделю
+          {t("programs.perWeek", { count: program.workoutsPerWeek })}
         </span>
         <span className="rounded-full border border-volt-400/30 px-2.5 py-1">
           {program.difficulty}
@@ -215,7 +215,7 @@ function ProgramDetailPage() {
               className="card flex items-center justify-between opacity-70 hover:opacity-100"
             >
               <div>
-                <p className="text-xs text-neutral-500">Тренировка {index + 1}</p>
+                <p className="text-xs text-neutral-500">{t("programs.workoutLabel", { number: index + 1 })}</p>
                 <p className="font-semibold">{localizedField(workout.title, workout.titleEn, i18n.language)}</p>
               </div>
               <Lock size={18} className="text-neutral-500" />
@@ -227,10 +227,10 @@ function ProgramDetailPage() {
               className="card flex items-center justify-between hover:border-ink-500"
             >
               <div>
-                <p className="text-xs text-neutral-500">Тренировка {index + 1}</p>
+                <p className="text-xs text-neutral-500">{t("programs.workoutLabel", { number: index + 1 })}</p>
                 <p className="font-semibold">{localizedField(workout.title, workout.titleEn, i18n.language)}</p>
                 <p className="mt-0.5 text-sm text-neutral-400">
-                  {workout.estimatedDurationMinutes} мин · {workout.sets.length} упражнений
+                  {workout.estimatedDurationMinutes} {t("common.min")} · {t("programs.exercises", { count: workout.sets.length })}
                 </p>
               </div>
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-volt-400 text-ink-950">

@@ -212,5 +212,16 @@
       "all": "All time",
       "kg": "kg"
     }
+  },
+  "programs": {
+    "allPrograms": "All programs",
+    "weeks_one": "{{count}} week",
+    "weeks_other": "{{count}} weeks",
+    "perWeek": "{{count}}x per week",
+    "workoutLabel": "Workout {{number}}",
+    "exercises_one": "{{count}} exercise",
+    "exercises_other": "{{count}} exercises",
+    "pageTitle": "Training programs",
+    "pageSubtitle": "Choose a program for your goal"
   }
 }
