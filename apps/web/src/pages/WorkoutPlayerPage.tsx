@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 import { localizedField } from "@/lib/localizedField";
+import { getYouTubeEmbedUrl } from "@/lib/video";
 import type { Exercise, WorkoutSet } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 
@@ -64,6 +65,41 @@ export default function WorkoutPlayerPage() {
   const [weights, setWeights] = useState<Record<string, string>>({});
   const [startedAt] = useState(() => Date.now());
   const [activeVideo, setActiveVideo] = useState<Exercise | null>(null);
+  const [videoClosing, setVideoClosing] = useState(false);
+
+  // Плавное закрытие: сначала проигрываем анимацию ухода, и только потом
+  // реально убираем модалку из DOM — иначе видео просто исчезает рывком,
+  // что не ощущается премиально.
+  function closeVideo() {
+    setVideoClosing(true);
+    setTimeout(() => {
+      setActiveVideo(null);
+      setVideoClosing(false);
+    }, 220);
+  }
+
+  function openVideo(exercise: Exercise) {
+    setVideoClosing(false);
+    setActiveVideo(exercise);
+  }
+
+  // Блокируем скролл фона, пока открыт просмотр видео, и даём закрыть по Esc
+  // (мелочь, но так плеер ощущается частью приложения, а не случайной вставкой).
+  useEffect(() => {
+    if (!activeVideo) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeVideo();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeVideo]);
+
 
   // ---- Таймер отдыха между подходами ------------------------------------
   // Запускается после отметки подхода выполненным, на set.restSeconds.
@@ -247,7 +283,7 @@ export default function WorkoutPlayerPage() {
 
                 {group.exercise.videoUrl ? (
                   <button
-                    onClick={() => setActiveVideo(group.exercise)}
+                    onClick={() => openVideo(group.exercise)}
                     className="flex shrink-0 items-center gap-1.5 rounded-full bg-volt-400/10 px-3 py-1.5 text-xs font-semibold text-volt-400 transition hover:bg-volt-400/20"
                   >
                     <PlayCircle size={14} /> {t("workout.video")}
@@ -346,22 +382,59 @@ export default function WorkoutPlayerPage() {
         })}
       </div>
 
-      {activeVideo && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
-          onClick={() => setActiveVideo(null)}
-        >
-          <div className="w-full max-w-md" onClick={(e) => e.stopPropagation()}>
-            <p className="mb-2 font-semibold text-neutral-100">{activeVideo.title}</p>
-            <video
-              src={activeVideo.videoUrl}
-              controls
-              autoPlay
-              className="w-full rounded-lg border border-ink-700"
-            />
-          </div>
-        </div>
-      )}
+      {activeVideo &&
+        (() => {
+          const youtubeEmbedUrl = getYouTubeEmbedUrl(activeVideo.videoUrl);
+          return (
+            <div
+              className={clsx(
+                "fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 transition-opacity duration-200",
+                videoClosing ? "opacity-0" : "animate-fade-in opacity-100",
+              )}
+              onClick={closeVideo}
+            >
+              <div
+                className={clsx(
+                  "w-full max-w-md transition-all duration-200 ease-out",
+                  videoClosing ? "translate-y-3 scale-[0.97] opacity-0" : "translate-y-0 scale-100 opacity-100",
+                )}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="mb-2 flex items-center justify-between gap-3">
+                  <p className="truncate font-semibold text-neutral-100">
+                    {localizedField(
+                      activeVideo.title,
+                      { en: activeVideo.titleEn, es: activeVideo.titleEs, hy: activeVideo.titleHy },
+                      i18n.language,
+                    )}
+                  </p>
+                  <button
+                    onClick={closeVideo}
+                    aria-label={t("common.close")}
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink-800 text-neutral-300 transition hover:bg-ink-700 hover:text-neutral-100 active:scale-90"
+                  >
+                    <X size={16} strokeWidth={2.5} />
+                  </button>
+                </div>
+
+                <div className="overflow-hidden rounded-lg border border-ink-700 bg-black shadow-2xl">
+                  {youtubeEmbedUrl ? (
+                    <div className="aspect-video w-full">
+                      <iframe
+                        src={youtubeEmbedUrl}
+                        className="h-full w-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    </div>
+                  ) : (
+                    <video src={activeVideo.videoUrl} controls autoPlay className="w-full" />
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })()}
 
       <div className="fixed inset-x-0 bottom-0 z-40">
         {restState && (
