@@ -11,6 +11,8 @@ import type {
 import { toCamelCase } from "@donatellox/types";
 import { useAuth } from "@/context/AuthContext";
 import { estimateDailyCalories, calculateAge, type CalorieEstimate } from "@/lib/calories";
+import { localizedField } from "@/lib/localizedField";
+import i18n from "@/i18n";
 
 const FREE_TRIAL_DAYS = 7;
 
@@ -309,12 +311,15 @@ export function usePersonalRecords() {
 
       const { data: exercisesData, error: exercisesError } = await supabase
         .from("exercises")
-        .select("id, title")
+        .select("id, title, title_en")
         .in("id", Array.from(best.keys()));
       if (exercisesError) throw exercisesError;
 
       const titleMap = new Map<string, string>(
-        (exercisesData ?? []).map((e) => [e.id as string, e.title as string]),
+        (exercisesData ?? []).map((e) => [
+          e.id as string,
+          localizedField(e.title as string, e.title_en as string | null, i18n.language),
+        ]),
       );
 
       return Array.from(best.entries())

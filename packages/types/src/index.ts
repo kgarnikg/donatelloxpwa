@@ -164,6 +164,8 @@ export interface Exercise {
   id: UUID;
   slug: string;
   title: string;
+  /** Английский перевод названия. Добавлено в 0029/0030 (Фаза 6 — локализация контента). */
+  titleEn?: string;
   description?: string;
   muscleGroups: MuscleGroup[];
   difficulty: ExerciseDifficulty;
@@ -181,16 +183,22 @@ export interface WorkoutSet {
   restSeconds: number;
   weightKg?: number;
   notes?: string;
+  /** Английский перевод notes. Добавлено в 0029 (Фаза 6). */
+  notesEn?: string;
 }
 
 export interface Workout {
   id: UUID;
   programId: UUID;
   title: string;
+  /** Английский перевод title. Добавлено в 0029 (Фаза 6). */
+  titleEn?: string;
   order: number;
   estimatedDurationMinutes: number;
   /** Заголовок блока недель, напр. "Недели 1–2 · LEVEL 1A". Добавлено в 0013. */
   weekLabel?: string;
+  /** Английский перевод weekLabel. Добавлено в 0029 (Фаза 6). */
+  weekLabelEn?: string;
   /** Порядок блока недель в программе (1, 2, 3...), отдельно от `order` — дня внутри блока. Добавлено в 0013. */
   weekOrder: number;
   sets: WorkoutSet[];
@@ -200,7 +208,11 @@ export interface WorkoutProgram {
   id: UUID;
   slug: string;
   title: string;
+  /** Английский перевод title. Добавлено в 0029 (Фаза 6). */
+  titleEn?: string;
   description: string;
+  /** Английский перевод description. Добавлено в 0029 (Фаза 6). */
+  descriptionEn?: string;
   coverUrl?: string;
   goal: FitnessGoal;
   /** Целевой пол программы. `"unspecified"` — универсальная, подходит любому. Добавлено в 0012. */

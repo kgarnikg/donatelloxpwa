@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { Lock, ChevronRight, Gift } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { usePrograms, useFreeProgramAccess, useActiveSubscription } from "@/lib/queries";
+import { localizedField } from "@/lib/localizedField";
 
 export default function ProgramsPage() {
+  const { i18n } = useTranslation();
   const { data: programs, isLoading } = usePrograms();
   const { hasFreeAccess } = useFreeProgramAccess();
   const { data: activeSubscription } = useActiveSubscription();
@@ -31,14 +34,18 @@ export default function ProgramsPage() {
             >
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <p className="truncate font-semibold">{program.title}</p>
+                  <p className="truncate font-semibold">
+                    {localizedField(program.title, program.titleEn, i18n.language)}
+                  </p>
                   {isLocked ? (
                     <Lock size={14} className="shrink-0 text-neutral-500" />
                   ) : (
                     !program.isPremium && <Gift size={14} className="shrink-0 text-volt-400" />
                   )}
                 </div>
-                <p className="mt-1 line-clamp-2 text-sm text-neutral-400">{program.description}</p>
+                <p className="mt-1 line-clamp-2 text-sm text-neutral-400">
+                  {localizedField(program.description, program.descriptionEn, i18n.language)}
+                </p>
                 <p className="mt-2 text-xs font-medium uppercase tracking-wide text-volt-400">
                   {program.durationWeeks} нед · {program.workoutsPerWeek}×/нед · {program.difficulty}
                 </p>

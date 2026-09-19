@@ -2,12 +2,14 @@ import { useState, useMemo } from "react";
 import { Routes, Route, Navigate, Outlet, Link, useParams } from "react-router-dom";
 import { ChevronLeft, Play, Lock } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { AppShell } from "@/components/AppShell";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { useFreeProgramAccess, useActiveSubscription } from "@/lib/queries";
+import { localizedField } from "@/lib/localizedField";
 import type { Workout, WorkoutProgram } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 
@@ -67,6 +69,7 @@ function TabsLayout() {
  */
 function ProgramDetailPage() {
   const { slug } = useParams<{ slug: string }>();
+  const { i18n } = useTranslation();
   const { hasFreeAccess } = useFreeProgramAccess();
   const { data: activeSubscription } = useActiveSubscription();
   const [activeWeekOrder, setActiveWeekOrder] = useState<number | null>(null);
@@ -105,10 +108,13 @@ function ProgramDetailPage() {
     if (!workouts) return [];
     const seen = new Map<number, string>();
     for (const w of workouts) {
-      if (!seen.has(w.weekOrder)) seen.set(w.weekOrder, w.weekLabel || `Блок ${w.weekOrder}`);
+      if (!seen.has(w.weekOrder)) {
+        const label = localizedField(w.weekLabel || `Блок ${w.weekOrder}`, w.weekLabelEn, i18n.language);
+        seen.set(w.weekOrder, label);
+      }
     }
     return Array.from(seen, ([order, label]) => ({ order, label }));
-  }, [workouts]);
+  }, [workouts, i18n.language]);
 
   const effectiveWeekOrder = activeWeekOrder ?? weekBlocks[0]?.order ?? 1;
   const visibleWorkouts = useMemo(
@@ -146,8 +152,12 @@ function ProgramDetailPage() {
         <ChevronLeft size={16} /> Все программы
       </Link>
 
-      <h1 className="font-display text-2xl font-bold">{program.title}</h1>
-      <p className="mt-1 text-neutral-400">{program.description}</p>
+      <h1 className="font-display text-2xl font-bold">
+        {localizedField(program.title, program.titleEn, i18n.language)}
+      </h1>
+      <p className="mt-1 text-neutral-400">
+        {localizedField(program.description, program.descriptionEn, i18n.language)}
+      </p>
       <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium uppercase tracking-wide text-volt-400">
         <span className="rounded-full border border-volt-400/30 px-2.5 py-1">
           {program.durationWeeks} недель
@@ -206,7 +216,7 @@ function ProgramDetailPage() {
             >
               <div>
                 <p className="text-xs text-neutral-500">Тренировка {index + 1}</p>
-                <p className="font-semibold">{workout.title}</p>
+                <p className="font-semibold">{localizedField(workout.title, workout.titleEn, i18n.language)}</p>
               </div>
               <Lock size={18} className="text-neutral-500" />
             </Link>
@@ -218,7 +228,7 @@ function ProgramDetailPage() {
             >
               <div>
                 <p className="text-xs text-neutral-500">Тренировка {index + 1}</p>
-                <p className="font-semibold">{workout.title}</p>
+                <p className="font-semibold">{localizedField(workout.title, workout.titleEn, i18n.language)}</p>
                 <p className="mt-0.5 text-sm text-neutral-400">
                   {workout.estimatedDurationMinutes} мин · {workout.sets.length} упражнений
                 </p>

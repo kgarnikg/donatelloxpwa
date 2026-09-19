@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Flame, Trophy, ChevronRight, Sparkles, Star, Award } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { localizedField } from "@/lib/localizedField";
 import { useAuth } from "@/context/AuthContext";
 import {
   useActiveSubscription,
@@ -12,7 +13,7 @@ import {
 import { getDailyQuote } from "@/lib/quotes";
 
 export default function DashboardPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { profile, authUser } = useAuth();
   const { data: subscription } = useActiveSubscription();
   const { data: programs, isLoading } = usePrograms();
@@ -106,7 +107,7 @@ export default function DashboardPage() {
             className="card flex items-center justify-between border-volt-400/40 hover:border-volt-400"
           >
             <div>
-              <p className="font-semibold">{recommended.title}</p>
+              <p className="font-semibold">{localizedField(recommended.title, recommended.titleEn, i18n.language)}</p>
               <p className="mt-1 text-sm text-neutral-400">
                 {recommended.durationWeeks} нед · {recommended.workoutsPerWeek}×/нед · {recommended.difficulty}
               </p>

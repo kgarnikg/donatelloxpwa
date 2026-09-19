@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
+import { localizedField } from "@/lib/localizedField";
 import type { Exercise, WorkoutSet } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 
@@ -17,6 +18,7 @@ interface SetRow extends WorkoutSet {
 interface WorkoutWithSets {
   id: string;
   title: string;
+  titleEn?: string;
   estimatedDurationMinutes: number;
   sets: SetRow[];
   /** Формат тренировок программы, к которой относится эта тренировка ("зал"/"дома") — см. комментарий у REST_BETWEEN_EXERCISES_SECONDS ниже. */
@@ -52,7 +54,7 @@ function groupByExercise(sets: SetRow[]) {
 }
 
 export default function WorkoutPlayerPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { workoutId } = useParams<{ workoutId: string }>();
   const navigate = useNavigate();
   const { authUser } = useAuth();
@@ -211,21 +213,29 @@ export default function WorkoutPlayerPage() {
         <ChevronLeft size={18} /> {t("workout.back")}
       </button>
 
-      <h1 className="font-display text-2xl font-bold">{workout.title}</h1>
+      <h1 className="font-display text-2xl font-bold">
+        {localizedField(workout.title, workout.titleEn, i18n.language)}
+      </h1>
       <p className="mt-1 text-neutral-400">~{workout.estimatedDurationMinutes} {t("common.min")}</p>
 
       <div className="mt-6 space-y-4">
         {groups.map((group, groupIndex) => {
           const lastWeight = lastWeights?.[group.exercise.id];
           const isWeighted = !group.sets[0].durationSeconds;
+          const exerciseTitle = localizedField(group.exercise.title, group.exercise.titleEn, i18n.language);
+          const firstSetNotes = localizedField(
+            group.sets[0].notes ?? "",
+            group.sets[0].notesEn,
+            i18n.language,
+          );
           return (
             <div key={group.exercise.id} className="card">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="font-semibold">{group.exercise.title}</p>
+                  <p className="font-semibold">{exerciseTitle}</p>
                   <p className="mt-0.5 text-xs text-neutral-500">
                     {t("workout.sets", { count: group.sets.length })}
-                    {group.sets[0].notes ? ` · ${group.sets[0].notes}` : ""}
+                    {firstSetNotes ? ` · ${firstSetNotes}` : ""}
                   </p>
                 </div>
 
