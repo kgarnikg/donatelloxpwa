@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Plus, X, Lock } from "lucide-react";
@@ -206,7 +207,7 @@ export default function ProgramsPage() {
           ))}
 
         {programs?.map((program) => (
-          <div key={program.id} className="card">
+          <Link key={program.id} to={`/programs/${program.id}`} className="card block transition hover:border-ink-500">
             <div className="flex items-start justify-between">
               <h3 className="font-semibold">{program.title}</h3>
               {program.isPremium && (
@@ -221,7 +222,7 @@ export default function ProgramsPage() {
               <span className={clsx("badge bg-ink-800")}>{program.difficulty}</span>
               <span className={clsx("badge bg-ink-800")}>{program.durationWeeks} нед.</span>
             </div>
-          </div>
+          </Link>
         ))}
 
         {!isLoading && programs?.length === 0 && (

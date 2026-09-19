@@ -5,6 +5,7 @@ import AdminLoginPage from "@/pages/AdminLoginPage";
 import OverviewPage from "@/pages/OverviewPage";
 import UsersPage from "@/pages/UsersPage";
 import ProgramsPage from "@/pages/ProgramsPage";
+import ProgramDetailPage from "@/pages/ProgramDetailPage";
 import VideosPage from "@/pages/VideosPage";
 import PaymentsPage from "@/pages/PaymentsPage";
 
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/" element={<OverviewPage />} />
         <Route path="/users" element={<UsersPage />} />
         <Route path="/programs" element={<ProgramsPage />} />
+        <Route path="/programs/:programId" element={<ProgramDetailPage />} />
         <Route path="/videos" element={<VideosPage />} />
         <Route path="/payments" element={<PaymentsPage />} />
       </Route>
