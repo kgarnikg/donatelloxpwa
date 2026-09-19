@@ -166,6 +166,8 @@ export interface Exercise {
   title: string;
   /** Английский перевод названия. Добавлено в 0029/0030 (Фаза 6 — локализация контента). */
   titleEn?: string;
+  /** Испанский перевод названия. Добавлено в 0039/0040 (Фаза 6). */
+  titleEs?: string;
   description?: string;
   muscleGroups: MuscleGroup[];
   difficulty: ExerciseDifficulty;
@@ -185,6 +187,8 @@ export interface WorkoutSet {
   notes?: string;
   /** Английский перевод notes. Добавлено в 0029 (Фаза 6). */
   notesEn?: string;
+  /** Испанский перевод notes. Добавлено в 0039 (Фаза 6). */
+  notesEs?: string;
 }
 
 export interface Workout {
@@ -193,12 +197,16 @@ export interface Workout {
   title: string;
   /** Английский перевод title. Добавлено в 0029 (Фаза 6). */
   titleEn?: string;
+  /** Испанский перевод title. Добавлено в 0039 (Фаза 6). */
+  titleEs?: string;
   order: number;
   estimatedDurationMinutes: number;
   /** Заголовок блока недель, напр. "Недели 1–2 · LEVEL 1A". Добавлено в 0013. */
   weekLabel?: string;
   /** Английский перевод weekLabel. Добавлено в 0029 (Фаза 6). */
   weekLabelEn?: string;
+  /** Испанский перевод weekLabel. Добавлено в 0039 (Фаза 6). */
+  weekLabelEs?: string;
   /** Порядок блока недель в программе (1, 2, 3...), отдельно от `order` — дня внутри блока. Добавлено в 0013. */
   weekOrder: number;
   sets: WorkoutSet[];
@@ -210,9 +218,13 @@ export interface WorkoutProgram {
   title: string;
   /** Английский перевод title. Добавлено в 0029 (Фаза 6). */
   titleEn?: string;
+  /** Испанский перевод title. Добавлено в 0039 (Фаза 6). */
+  titleEs?: string;
   description: string;
   /** Английский перевод description. Добавлено в 0029 (Фаза 6). */
   descriptionEn?: string;
+  /** Испанский перевод description. Добавлено в 0039 (Фаза 6). */
+  descriptionEs?: string;
   coverUrl?: string;
   goal: FitnessGoal;
   /** Целевой пол программы. `"unspecified"` — универсальная, подходит любому. Добавлено в 0012. */

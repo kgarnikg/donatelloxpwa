@@ -19,6 +19,7 @@ interface WorkoutWithSets {
   id: string;
   title: string;
   titleEn?: string;
+  titleEs?: string;
   estimatedDurationMinutes: number;
   sets: SetRow[];
   /** Формат тренировок программы, к которой относится эта тренировка ("зал"/"дома") — см. комментарий у REST_BETWEEN_EXERCISES_SECONDS ниже. */
@@ -214,7 +215,7 @@ export default function WorkoutPlayerPage() {
       </button>
 
       <h1 className="font-display text-2xl font-bold">
-        {localizedField(workout.title, workout.titleEn, i18n.language)}
+        {localizedField(workout.title, { en: workout.titleEn, es: workout.titleEs }, i18n.language)}
       </h1>
       <p className="mt-1 text-neutral-400">~{workout.estimatedDurationMinutes} {t("common.min")}</p>
 
@@ -222,10 +223,14 @@ export default function WorkoutPlayerPage() {
         {groups.map((group, groupIndex) => {
           const lastWeight = lastWeights?.[group.exercise.id];
           const isWeighted = !group.sets[0].durationSeconds;
-          const exerciseTitle = localizedField(group.exercise.title, group.exercise.titleEn, i18n.language);
+          const exerciseTitle = localizedField(
+            group.exercise.title,
+            { en: group.exercise.titleEn, es: group.exercise.titleEs },
+            i18n.language,
+          );
           const firstSetNotes = localizedField(
             group.sets[0].notes ?? "",
-            group.sets[0].notesEn,
+            { en: group.sets[0].notesEn, es: group.sets[0].notesEs },
             i18n.language,
           );
           return (

@@ -311,14 +311,18 @@ export function usePersonalRecords() {
 
       const { data: exercisesData, error: exercisesError } = await supabase
         .from("exercises")
-        .select("id, title, title_en")
+        .select("id, title, title_en, title_es")
         .in("id", Array.from(best.keys()));
       if (exercisesError) throw exercisesError;
 
       const titleMap = new Map<string, string>(
         (exercisesData ?? []).map((e) => [
           e.id as string,
-          localizedField(e.title as string, e.title_en as string | null, i18n.language),
+          localizedField(
+            e.title as string,
+            { en: e.title_en as string | null, es: e.title_es as string | null },
+            i18n.language,
+          ),
         ]),
       );
 

@@ -105,7 +105,10 @@
     "recommendedForYou": "Recomendado para ti",
     "programsForYou": "Programas para ti",
     "allPrograms": "Todos los programas",
-    "noPrograms": "Los programas llegarán pronto — vuelve más tarde."
+    "noPrograms": "Los programas llegarán pronto — vuelve más tarde.",
+    "achievements": "Logros",
+    "achievementsUnlocked": "Desbloqueados: {{n}}",
+    "achievementsEmpty": "Empieza a entrenar para desbloquear el primero"
   },
   "workout": {
     "back": "Atrás",
@@ -121,7 +124,10 @@
     "lastTime": "La última vez: {{weight}} kg · prueba {{next}} kg",
     "remaining": "Quedan {{count}}",
     "finishWorkout": "Terminar entrenamiento",
-    "saving": "Guardando…"
+    "saving": "Guardando…",
+    "resting": "Descanso",
+    "skipRest": "Saltar descanso",
+    "restingNextExercise": "Antes del siguiente ejercicio"
   },
   "nutrition": {
     "title": "Nutrición",
@@ -133,7 +139,21 @@
     "tips": "Consejos",
     "locked": "Esta sección requiere suscripción",
     "lockedDesc": "Suscríbete para recibir recomendaciones de nutrición personalizadas según tu objetivo.",
-    "subscribe": "Suscribirse"
+    "subscribe": "Suscribirse",
+    "log": {
+      "kcal": "kcal"
+    },
+    "calorieBurn": {
+      "title": "Gasto calórico de hoy",
+      "explainer": "Es una estimación de cuántas calorías gastará tu cuerpo en todo el día de hoy — en reposo, más la actividad habitual, más el entrenamiento, si lo haces hoy. La cifra aumentará automáticamente en cuanto termines un entrenamiento.",
+      "edit": "Editar",
+      "incompleteProfile": "Para calcularlo automáticamente hace falta tu altura, peso y fecha de nacimiento.",
+      "completeProfile": "Completar perfil",
+      "manualNote": "Introducido manualmente",
+      "reset": "Volver al cálculo automático",
+      "breakdown": "En reposo {{bmr}} · actividad habitual +{{activity}} · entrenamiento de hoy +{{workout}}",
+      "disclaimer": "Estimación automática con la fórmula de Mifflin-St Jeor — una guía, no un cálculo médico exacto. Si tienes datos de un reloj inteligente, introdúcelos manualmente para más precisión."
+    }
   },
   "progress": {
     "title": "Progreso",
@@ -171,7 +191,37 @@
     "subtitle": "Tu amigo obtiene un 50% de descuento en su primer mes",
     "copy": "Copiar",
     "copied": "¡Copiado!",
-    "invitedCount_one": "{{count}} amigo invitado",
-    "invitedCount_other": "{{count}} amigos invitados"
+    "invitedCount_one": "Has invitado a {{count}} amigo",
+    "invitedCount_other": "Has invitado a {{count}} amigos"
+  },
+  "achievements": {
+    "title": "Logros",
+    "unlockedCount": "Desbloqueados {{n}} de {{total}}",
+    "categoryWorkouts": "Entrenamientos",
+    "categoryStreak": "Rachas de días",
+    "categorySpecial": "Especiales",
+    "personalRecords": "Récords personales",
+    "noRecordsYet": "Aquí aparecerán tus mejores pesos de trabajo en cuanto registres uno en un entrenamiento",
+    "categoryVolume": "Peso levantado",
+    "volumeStats": {
+      "title": "Cuánto has levantado",
+      "workout": "Último entrenamiento",
+      "week": "Esta semana",
+      "month": "Este mes",
+      "year": "Este año",
+      "all": "Siempre",
+      "kg": "kg"
+    }
+  },
+  "programs": {
+    "allPrograms": "Todos los programas",
+    "weeks_one": "{{count}} semana",
+    "weeks_other": "{{count}} semanas",
+    "perWeek": "{{count}}x por semana",
+    "workoutLabel": "Entrenamiento {{number}}",
+    "exercises_one": "{{count}} ejercicio",
+    "exercises_other": "{{count}} ejercicios",
+    "pageTitle": "Programas de entrenamiento",
+    "pageSubtitle": "Elige un programa para tu objetivo"
   }
 }

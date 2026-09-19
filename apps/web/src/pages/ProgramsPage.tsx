@@ -35,7 +35,7 @@ export default function ProgramsPage() {
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
                   <p className="truncate font-semibold">
-                    {localizedField(program.title, program.titleEn, i18n.language)}
+                    {localizedField(program.title, { en: program.titleEn, es: program.titleEs }, i18n.language)}
                   </p>
                   {isLocked ? (
                     <Lock size={14} className="shrink-0 text-neutral-500" />
@@ -44,7 +44,7 @@ export default function ProgramsPage() {
                   )}
                 </div>
                 <p className="mt-1 line-clamp-2 text-sm text-neutral-400">
-                  {localizedField(program.description, program.descriptionEn, i18n.language)}
+                  {localizedField(program.description, { en: program.descriptionEn, es: program.descriptionEs }, i18n.language)}
                 </p>
                 <p className="mt-2 text-xs font-medium uppercase tracking-wide text-volt-400">
                   {t("programs.weeks", { count: program.durationWeeks })} · {t("programs.perWeek", { count: program.workoutsPerWeek })} · {program.difficulty}

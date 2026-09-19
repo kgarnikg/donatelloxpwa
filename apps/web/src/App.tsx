@@ -109,7 +109,11 @@ function ProgramDetailPage() {
     const seen = new Map<number, string>();
     for (const w of workouts) {
       if (!seen.has(w.weekOrder)) {
-        const label = localizedField(w.weekLabel || `Блок ${w.weekOrder}`, w.weekLabelEn, i18n.language);
+        const label = localizedField(
+          w.weekLabel || `Блок ${w.weekOrder}`,
+          { en: w.weekLabelEn, es: w.weekLabelEs },
+          i18n.language,
+        );
         seen.set(w.weekOrder, label);
       }
     }
@@ -153,10 +157,10 @@ function ProgramDetailPage() {
       </Link>
 
       <h1 className="font-display text-2xl font-bold">
-        {localizedField(program.title, program.titleEn, i18n.language)}
+        {localizedField(program.title, { en: program.titleEn, es: program.titleEs }, i18n.language)}
       </h1>
       <p className="mt-1 text-neutral-400">
-        {localizedField(program.description, program.descriptionEn, i18n.language)}
+        {localizedField(program.description, { en: program.descriptionEn, es: program.descriptionEs }, i18n.language)}
       </p>
       <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium uppercase tracking-wide text-volt-400">
         <span className="rounded-full border border-volt-400/30 px-2.5 py-1">
@@ -216,7 +220,7 @@ function ProgramDetailPage() {
             >
               <div>
                 <p className="text-xs text-neutral-500">{t("programs.workoutLabel", { number: index + 1 })}</p>
-                <p className="font-semibold">{localizedField(workout.title, workout.titleEn, i18n.language)}</p>
+                <p className="font-semibold">{localizedField(workout.title, { en: workout.titleEn, es: workout.titleEs }, i18n.language)}</p>
               </div>
               <Lock size={18} className="text-neutral-500" />
             </Link>
@@ -228,7 +232,7 @@ function ProgramDetailPage() {
             >
               <div>
                 <p className="text-xs text-neutral-500">{t("programs.workoutLabel", { number: index + 1 })}</p>
-                <p className="font-semibold">{localizedField(workout.title, workout.titleEn, i18n.language)}</p>
+                <p className="font-semibold">{localizedField(workout.title, { en: workout.titleEn, es: workout.titleEs }, i18n.language)}</p>
                 <p className="mt-0.5 text-sm text-neutral-400">
                   {workout.estimatedDurationMinutes} {t("common.min")} · {t("programs.exercises", { count: workout.sets.length })}
                 </p>

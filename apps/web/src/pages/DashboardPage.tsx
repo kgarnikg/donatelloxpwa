@@ -107,7 +107,7 @@ export default function DashboardPage() {
             className="card flex items-center justify-between border-volt-400/40 hover:border-volt-400"
           >
             <div>
-              <p className="font-semibold">{localizedField(recommended.title, recommended.titleEn, i18n.language)}</p>
+              <p className="font-semibold">{localizedField(recommended.title, { en: recommended.titleEn, es: recommended.titleEs }, i18n.language)}</p>
               <p className="mt-1 text-sm text-neutral-400">
                 {recommended.durationWeeks} нед · {recommended.workoutsPerWeek}×/нед · {recommended.difficulty}
               </p>
