@@ -18,7 +18,8 @@
     "subtitle": "Entrenamientos estructurados, instrucciones en vídeo y un diario de progreso — todo en una sola app. Entrena en casa, en el gimnasio o de viaje.",
     "ctaPrimary": "Empezar ahora",
     "ctaSecondary": "Saber más",
-    "disclaimer": "Primera semana y primer programa gratis · Sin tarjeta para empezar"
+    "disclaimer": "Primera semana y primer programa gratis · Sin tarjeta para empezar",
+    "scrollHint": "Desliza hacia abajo"
   },
   "modules": {
     "eyebrow": "Funciones",

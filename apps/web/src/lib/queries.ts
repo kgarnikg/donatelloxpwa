@@ -311,7 +311,7 @@ export function usePersonalRecords() {
 
       const { data: exercisesData, error: exercisesError } = await supabase
         .from("exercises")
-        .select("id, title, title_en, title_es")
+        .select("id, title, title_en, title_es, title_hy")
         .in("id", Array.from(best.keys()));
       if (exercisesError) throw exercisesError;
 
@@ -320,7 +320,11 @@ export function usePersonalRecords() {
           e.id as string,
           localizedField(
             e.title as string,
-            { en: e.title_en as string | null, es: e.title_es as string | null },
+            {
+              en: e.title_en as string | null,
+              es: e.title_es as string | null,
+              hy: e.title_hy as string | null,
+            },
             i18n.language,
           ),
         ]),

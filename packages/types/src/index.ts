@@ -168,6 +168,8 @@ export interface Exercise {
   titleEn?: string;
   /** Испанский перевод названия. Добавлено в 0039/0040 (Фаза 6). */
   titleEs?: string;
+  /** Армянский перевод названия. Добавлено в 0049/0050 (Фаза 6). */
+  titleHy?: string;
   description?: string;
   muscleGroups: MuscleGroup[];
   difficulty: ExerciseDifficulty;
@@ -189,6 +191,8 @@ export interface WorkoutSet {
   notesEn?: string;
   /** Испанский перевод notes. Добавлено в 0039 (Фаза 6). */
   notesEs?: string;
+  /** Армянский перевод notes. Добавлено в 0049 (Фаза 6). */
+  notesHy?: string;
 }
 
 export interface Workout {
@@ -199,6 +203,8 @@ export interface Workout {
   titleEn?: string;
   /** Испанский перевод title. Добавлено в 0039 (Фаза 6). */
   titleEs?: string;
+  /** Армянский перевод title. Добавлено в 0049 (Фаза 6). */
+  titleHy?: string;
   order: number;
   estimatedDurationMinutes: number;
   /** Заголовок блока недель, напр. "Недели 1–2 · LEVEL 1A". Добавлено в 0013. */
@@ -207,6 +213,8 @@ export interface Workout {
   weekLabelEn?: string;
   /** Испанский перевод weekLabel. Добавлено в 0039 (Фаза 6). */
   weekLabelEs?: string;
+  /** Армянский перевод weekLabel. Добавлено в 0049 (Фаза 6). */
+  weekLabelHy?: string;
   /** Порядок блока недель в программе (1, 2, 3...), отдельно от `order` — дня внутри блока. Добавлено в 0013. */
   weekOrder: number;
   sets: WorkoutSet[];
@@ -220,11 +228,15 @@ export interface WorkoutProgram {
   titleEn?: string;
   /** Испанский перевод title. Добавлено в 0039 (Фаза 6). */
   titleEs?: string;
+  /** Армянский перевод title. Добавлено в 0049 (Фаза 6). */
+  titleHy?: string;
   description: string;
   /** Английский перевод description. Добавлено в 0029 (Фаза 6). */
   descriptionEn?: string;
   /** Испанский перевод description. Добавлено в 0039 (Фаза 6). */
   descriptionEs?: string;
+  /** Армянский перевод description. Добавлено в 0049 (Фаза 6). */
+  descriptionHy?: string;
   coverUrl?: string;
   goal: FitnessGoal;
   /** Целевой пол программы. `"unspecified"` — универсальная, подходит любому. Добавлено в 0012. */

@@ -18,7 +18,8 @@
     "subtitle": "Structured workouts, video instructions, and a progress journal — all in one app. Train at home, at the gym, or on the go.",
     "ctaPrimary": "Start now",
     "ctaSecondary": "Learn more",
-    "disclaimer": "First week and first program free · No card required to start"
+    "disclaimer": "First week and first program free · No card required to start",
+    "scrollHint": "Scroll down"
   },
   "modules": {
     "eyebrow": "Features",

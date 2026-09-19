@@ -1,4 +1,4 @@
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowRight, PlayCircle, ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
@@ -41,6 +41,18 @@ export function Hero() {
 
         <p className="mt-6 text-sm text-neutral-400">{t("hero.disclaimer")}</p>
       </div>
+
+      {/* Подсказка "листай дальше" — многие не понимают, что страница длинная.
+          Кликабельна (скроллит к следующему блоку), анимация мягкая и медленная,
+          чтобы не раздражала, но была явно живой, а не статичной иконкой. */}
+      <a
+        href="#modules"
+        className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1.5 text-neutral-400 transition hover:text-volt-400 animate-[bounce_2.2s_ease-in-out_infinite]"
+        aria-label={t("hero.scrollHint")}
+      >
+        <span className="text-xs font-medium uppercase tracking-widest">{t("hero.scrollHint")}</span>
+        <ChevronDown size={22} />
+      </a>
     </section>
   );
 }
