@@ -13,13 +13,23 @@
   },
   "hero": {
     "eyebrow": "DonatelleX Fitness Training",
-    "titleLine1": "Todo para construir",
+    "titleLine1": "PROGRESS STARTS",
     "titleLine2": "el cuerpo de tus sueños",
-    "subtitle": "Entrenamientos estructurados, instrucciones en vídeo y un diario de progreso — todo en una sola app. Entrena en casa, en el gimnasio o de viaje.",
-    "ctaPrimary": "Empezar ahora",
+    "subtitle": "Un programa personal que se adapta a ti — desde el primer día hasta el resultado.",
+    "ctaPrimary": "Empezar gratis",
     "ctaSecondary": "Saber más",
     "disclaimer": "Primera semana y primer programa gratis · Sin tarjeta para empezar",
-    "scrollHint": "Desliza hacia abajo"
+    "scrollHint": "Desliza hacia abajo",
+    "titleLine2Pre": "WITH",
+    "titleLine2Highlight": "DONATELLEX POWER",
+    "titleLine3": "SYSTEM",
+    "socialProof": "+10.000 personas ya entrenando en la app",
+    "checklist": {
+      "personalized": "Personalizado según tu objetivo y nivel",
+      "results": "Primeros resultados en solo 4–8 semanas",
+      "price": "Desde {{price}}/mes — menos de {{perDay}}/día",
+      "flexible": "En casa o en el gimnasio — formatos flexibles"
+    }
   },
   "modules": {
     "eyebrow": "Funciones",
@@ -268,5 +278,30 @@
   },
   "common": {
     "close": "Cerrar"
+  },
+  "forWomenMen": {
+    "women": {
+      "badge": "Para mujeres",
+      "title": "Forma tu cuerpo, no solo lo entrenes",
+      "description": "Creado para mujeres — con enfoque en tren inferior, core y recuperación sin agotamiento. Un programa que te ayuda a verte y sentirte mejor.",
+      "tags": {
+        "toneShape": "Tono y forma",
+        "lowerCore": "Tren inferior y core",
+        "fatBurn": "Quema de grasa",
+        "strengthNoBulk": "Fuerza sin volumen"
+      }
+    },
+    "men": {
+      "badge": "Para hombres",
+      "title": "Gana fuerza real, semana tras semana",
+      "description": "Más fuerte. Más definido. Sin entrenamientos al azar. Un sistema probado centrado en fuerza, crecimiento muscular y transformación corporal.",
+      "tags": {
+        "strengthProgression": "Progresión de fuerza",
+        "muscleGrowth": "Crecimiento muscular",
+        "homeOrGym": "Casa o gimnasio",
+        "shredded": "Definición"
+      }
+    },
+    "cta": "Empezar gratis"
   }
 }

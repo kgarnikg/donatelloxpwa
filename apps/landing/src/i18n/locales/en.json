@@ -13,13 +13,23 @@
   },
   "hero": {
     "eyebrow": "DonatelleX Fitness Training",
-    "titleLine1": "Everything to build",
+    "titleLine1": "PROGRESS STARTS",
     "titleLine2": "your dream body",
-    "subtitle": "Structured workouts, video instructions, and a progress journal — all in one app. Train at home, at the gym, or on the go.",
-    "ctaPrimary": "Start now",
+    "subtitle": "A personal program that adapts to you — from day one to the result.",
+    "ctaPrimary": "Start for free",
     "ctaSecondary": "Learn more",
     "disclaimer": "First week and first program free · No card required to start",
-    "scrollHint": "Scroll down"
+    "scrollHint": "Scroll down",
+    "titleLine2Pre": "WITH",
+    "titleLine2Highlight": "DONATELLEX POWER",
+    "titleLine3": "SYSTEM",
+    "socialProof": "10,000+ people already training in the app",
+    "checklist": {
+      "personalized": "Personalized to your goal and level",
+      "results": "First results in just 4–8 weeks",
+      "price": "From {{price}}/mo — less than {{perDay}}/day",
+      "flexible": "Home or gym — flexible formats"
+    }
   },
   "modules": {
     "eyebrow": "Features",
@@ -282,5 +292,30 @@
   },
   "common": {
     "close": "Close"
+  },
+  "forWomenMen": {
+    "women": {
+      "badge": "For women",
+      "title": "Shape your body — not just train it",
+      "description": "Built for women — with a focus on the lower body, core strength, and recovery without burnout. A program that helps you look and feel your best.",
+      "tags": {
+        "toneShape": "Tone & shape",
+        "lowerCore": "Lower body & core",
+        "fatBurn": "Fat burning",
+        "strengthNoBulk": "Strength, no bulk"
+      }
+    },
+    "men": {
+      "badge": "For men",
+      "title": "Build real strength, week by week",
+      "description": "Stronger. Leaner. No random workouts. A proven system focused on strength, muscle growth, and body transformation.",
+      "tags": {
+        "strengthProgression": "Strength progression",
+        "muscleGrowth": "Muscle growth",
+        "homeOrGym": "Home or gym",
+        "shredded": "Get shredded"
+      }
+    },
+    "cta": "Start for free"
   }
 }

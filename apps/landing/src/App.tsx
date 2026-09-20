@@ -7,6 +7,7 @@ import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { RegionSwitcher } from "@/components/RegionSwitcher";
 import { RegionProvider, useRegion } from "@/context/RegionContext";
 import { Hero } from "@/sections/Hero";
+import { ForWomenMen } from "@/sections/ForWomenMen";
 import { Modules } from "@/sections/Modules";
 import { WeeklyPlan } from "@/sections/WeeklyPlan";
 import { Pricing } from "@/sections/Pricing";
@@ -19,6 +20,7 @@ function HomePage() {
   return (
     <>
       <Hero />
+      <ForWomenMen />
       <Modules />
       <WeeklyPlan />
       <Pricing />

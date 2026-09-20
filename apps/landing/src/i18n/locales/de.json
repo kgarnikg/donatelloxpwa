@@ -13,13 +13,23 @@
   },
   "hero": {
     "eyebrow": "DonatelleX Fitness Training",
-    "titleLine1": "Alles für den Aufbau",
+    "titleLine1": "PROGRESS STARTS",
     "titleLine2": "deines Traumkörpers",
-    "subtitle": "Strukturierte Trainings, Video-Anleitungen und ein Fortschrittstagebuch — alles in einer App. Trainiere zu Hause, im Fitnessstudio oder unterwegs.",
-    "ctaPrimary": "Jetzt starten",
+    "subtitle": "Ein persönliches Programm, das sich dir anpasst — vom ersten Tag bis zum Ergebnis.",
+    "ctaPrimary": "Kostenlos starten",
     "ctaSecondary": "Mehr erfahren",
     "disclaimer": "Erste Woche und erstes Programm kostenlos · Keine Karte zum Start nötig",
-    "scrollHint": "Nach unten scrollen"
+    "scrollHint": "Nach unten scrollen",
+    "titleLine2Pre": "WITH",
+    "titleLine2Highlight": "DONATELLEX POWER",
+    "titleLine3": "SYSTEM",
+    "socialProof": "10.000+ Menschen trainieren bereits in der App",
+    "checklist": {
+      "personalized": "Persönlich auf dein Ziel und Level abgestimmt",
+      "results": "Erste Ergebnisse in nur 4–8 Wochen",
+      "price": "Ab {{price}}/Monat — weniger als {{perDay}}/Tag",
+      "flexible": "Zuhause oder im Gym — flexible Formate"
+    }
   },
   "modules": {
     "eyebrow": "Funktionen",
@@ -268,5 +278,30 @@
   },
   "common": {
     "close": "Schließen"
+  },
+  "forWomenMen": {
+    "women": {
+      "badge": "Für Frauen",
+      "title": "Forme deinen Körper — trainiere ihn nicht nur",
+      "description": "Entwickelt für Frauen — mit Fokus auf Unterkörper, Rumpfkraft und Erholung ohne Erschöpfung. Ein Programm, das dir hilft, besser auszusehen und dich besser zu fühlen.",
+      "tags": {
+        "toneShape": "Straffung & Form",
+        "lowerCore": "Unterkörper & Core",
+        "fatBurn": "Fettverbrennung",
+        "strengthNoBulk": "Kraft ohne Muskelmasse"
+      }
+    },
+    "men": {
+      "badge": "Für Männer",
+      "title": "Baue echte Kraft auf, Woche für Woche",
+      "description": "Stärker. Definierter. Keine zufälligen Workouts. Ein bewährtes System mit Fokus auf Kraft, Muskelaufbau und Körpertransformation.",
+      "tags": {
+        "strengthProgression": "Kraftprogression",
+        "muscleGrowth": "Muskelaufbau",
+        "homeOrGym": "Zuhause oder Gym",
+        "shredded": "Definition"
+      }
+    },
+    "cta": "Kostenlos starten"
   }
 }
