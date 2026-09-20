@@ -24,6 +24,7 @@
     "@donatellox/types": "workspace:*",
     "@donatellox/theme": "workspace:*",
     "@supabase/supabase-js": "^2.46.1",
+    "@vercel/analytics": "^1.4.1",
     "workbox-window": "^7.4.1"
   },
   "devDependencies": {
