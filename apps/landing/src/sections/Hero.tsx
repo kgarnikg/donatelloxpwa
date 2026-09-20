@@ -80,8 +80,10 @@ export function Hero() {
           "листай вниз" внизу — секция специально плотнее, чем стандартный
           отступ у остальных секций сайта (те листаются, эта — нет). Если на
           каком-то экране всё ещё не влезает — сначала уменьшать здесь, не
-          в остальных секциях. */}
-      <div className="section-container relative flex flex-col items-center py-8 text-center sm:py-12">
+          в остальных секциях.
+          На десктопе (lg+) блок сдвинут влево и сужен — чтобы видео на фоне
+          было лучше видно справа. На мобильном — по центру, как раньше. */}
+      <div className="section-container relative flex flex-col items-center py-8 text-center sm:py-12 lg:max-w-3xl lg:items-start lg:text-left">
         <span className="eyebrow mb-3 animate-fade-in">{t("hero.eyebrow")}</span>
 
         <h1 className="max-w-4xl animate-fade-in font-display text-3xl uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">

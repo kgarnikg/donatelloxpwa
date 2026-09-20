@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
+import { RegionSwitcher } from "@/components/RegionSwitcher";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
 
@@ -60,13 +62,17 @@ export function Header() {
           </a>
         </div>
 
-        <button
-          className="text-neutral-300 md:hidden"
-          onClick={() => setMenuOpen((v) => !v)}
-          aria-label={t("header.menuAriaLabel") ?? undefined}
-        >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <RegionSwitcher variant="inline" />
+          <LanguageSwitcher variant="inline" />
+          <button
+            className="text-neutral-300"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={t("header.menuAriaLabel") ?? undefined}
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {menuOpen && (

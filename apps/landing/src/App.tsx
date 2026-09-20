@@ -72,8 +72,13 @@ export default function App() {
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
       </Routes>
-      <RegionSwitcher />
-      <LanguageSwitcher />
+      {/* На мобильном эти же переключатели — в Header.tsx, рядом с кнопкой
+          меню (variant="inline"), а не здесь внизу справа, где раньше
+          перекрывали кнопки/соц.доказательство/стрелку в Hero. */}
+      <div className="hidden md:block">
+        <RegionSwitcher />
+        <LanguageSwitcher />
+      </div>
       <ExitIntentModal />
     </RegionProvider>
   );
