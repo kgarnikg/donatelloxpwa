@@ -103,12 +103,21 @@ export default function WorkoutPlayerPage() {
 
   // ---- Таймер отдыха между подходами ------------------------------------
   // Запускается после отметки подхода выполненным, на set.restSeconds.
-  // Отдельный ref для setInterval — чтобы не плодить утечки/дублирующиеся
-  // таймеры при быстрых повторных нажатиях, и корректно чистить при
-  // размонтировании страницы.
-  const [restState, setRestState] = useState<{ total: number; remaining: number; kind: "set" | "exercise" } | null>(
+  //
+  // ВАЖНО: считаем не тиками setInterval (remaining--), а от абсолютной
+  // метки времени окончания (endAt = Date.now() + секунды). Мобильные
+  // браузеры замедляют/полностью останавливают JS-таймеры, когда вкладка
+  // свёрнута (экономия батареи) — если бы отсчёт шёл декрементом на
+  // каждый тик, после возврата из фона (например, ответил в мессенджере,
+  // пока шёл отдых) таймер показывал бы неверное, "отставшее" время.
+  // Здесь же на каждый рендер remaining пересчитывается заново из разницы
+  // endAt - Date.now() — сколько бы тиков ни было пропущено, как только
+  // компонент перерендерится (в т.ч. принудительно при возврате видимости
+  // вкладки, см. ниже), значение будет верным.
+  const [restState, setRestState] = useState<{ total: number; endAt: number; kind: "set" | "exercise" } | null>(
     null,
   );
+  const [, forceTick] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   function clearRestInterval() {
@@ -121,26 +130,78 @@ export default function WorkoutPlayerPage() {
   function startRestTimer(seconds: number, kind: "set" | "exercise") {
     clearRestInterval();
     if (seconds <= 0) return;
-    setRestState({ total: seconds, remaining: seconds, kind });
-    intervalRef.current = setInterval(() => {
-      setRestState((prev) => {
-        if (!prev) return prev;
-        if (prev.remaining <= 1) {
-          clearRestInterval();
-          if (typeof navigator !== "undefined" && "vibrate" in navigator) {
-            navigator.vibrate?.(200);
-          }
-          return null;
-        }
-        return { ...prev, remaining: prev.remaining - 1 };
-      });
-    }, 1000);
+    setRestState({ total: seconds, endAt: Date.now() + seconds * 1000, kind });
+    intervalRef.current = setInterval(() => forceTick((t) => t + 1), 1000);
+
+    // Спрашиваем разрешение на уведомления один раз, лениво — именно в
+    // момент, когда это реально нужно (первый запуск отдыха), а не сразу
+    // при открытии страницы. Так контекст запроса понятен пользователю,
+    // и вероятность согласия выше, чем при "холодном" запросе на входе.
+    if (typeof Notification !== "undefined" && Notification.permission === "default") {
+      Notification.requestPermission().catch(() => {});
+    }
   }
 
   function skipRestTimer() {
     clearRestInterval();
     setRestState(null);
   }
+
+  const restRemaining = restState ? Math.max(0, Math.ceil((restState.endAt - Date.now()) / 1000)) : 0;
+
+  // Как только реальное время истекло — закрываем таймер (проверяется на
+  // каждом рендере, включая принудительный при возврате на вкладку, а не
+  // только по тику setInterval, который в фоне мог не сработать вовремя).
+  useEffect(() => {
+    if (restState && restRemaining <= 0) {
+      clearRestInterval();
+
+      if (document.visibilityState === "visible") {
+        // Страница на экране — обычная вибрация работает нормально.
+        if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+          navigator.vibrate?.(200);
+        }
+      } else if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+        // Страница свёрнута — прямой navigator.vibrate() браузер молча
+        // игнорирует (намеренное ограничение платформы, не обойти). Вместо
+        // этого показываем системное уведомление с СОБСТВЕННЫМ паттерном
+        // вибрации — это идёт через систему уведомлений ОС, а не через
+        // голый JS страницы, поэтому шанс реальной вибрации в фоне выше
+        // (не 100% гарантия на iOS, но лучшее, что доступно без сервера
+        // push-уведомлений — см. комментарий в PROJECT_PLAN.md).
+        const title =
+          restState.kind === "exercise" ? t("workout.restingNextExercise") : t("workout.resting");
+        navigator.serviceWorker?.ready
+          .then((reg) =>
+            reg.showNotification(title, {
+              body: t("workout.restDoneBody"),
+              icon: "/icons/icon-192.png",
+              badge: "/icons/icon-192.png",
+              // `vibrate` — часть спецификации Notification, но встроенные
+              // типы TypeScript (lib.dom.d.ts) пока его не знают — отсюда
+              // приведение типа, не ошибка в логике.
+              vibrate: [200, 100, 200],
+              tag: "donatellex-rest-timer",
+            } as NotificationOptions & { vibrate: number[] }),
+          )
+          .catch(() => {});
+      }
+
+      setRestState(null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [restState, restRemaining]);
+
+  // Принудительный пересчёт сразу при возврате на вкладку — не ждём
+  // следующего тика setInterval, который сразу после возврата из фона
+  // тоже может быть отложен на секунду-другую.
+  useEffect(() => {
+    function onVisibilityChange() {
+      if (document.visibilityState === "visible") forceTick((t) => t + 1);
+    }
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, []);
 
   // Чистим интервал при уходе со страницы — иначе он продолжит тикать
   // в фоне и попытается обновлять состояние размонтированного компонента.
@@ -447,13 +508,13 @@ export default function WorkoutPlayerPage() {
                     {restState.kind === "exercise" ? t("workout.restingNextExercise") : t("workout.resting")}
                   </span>
                   <span className="font-display text-lg font-bold tabular-nums text-volt-400">
-                    {Math.floor(restState.remaining / 60)}:{String(restState.remaining % 60).padStart(2, "0")}
+                    {Math.floor(restRemaining / 60)}:{String(restRemaining % 60).padStart(2, "0")}
                   </span>
                 </div>
                 <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-ink-700">
                   <div
                     className="h-full rounded-full bg-volt-400 transition-all duration-1000 ease-linear"
-                    style={{ width: `${(restState.remaining / restState.total) * 100}%` }}
+                    style={{ width: `${(restRemaining / restState.total) * 100}%` }}
                   />
                 </div>
               </div>

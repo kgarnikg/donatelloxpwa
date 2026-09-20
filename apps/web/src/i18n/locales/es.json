@@ -128,7 +128,8 @@
     "saving": "Guardando…",
     "resting": "Descanso",
     "skipRest": "Saltar descanso",
-    "restingNextExercise": "Antes del siguiente ejercicio"
+    "restingNextExercise": "Antes del siguiente ejercicio",
+    "restDoneBody": "Hora de continuar tu entrenamiento"
   },
   "nutrition": {
     "title": "Nutrición",

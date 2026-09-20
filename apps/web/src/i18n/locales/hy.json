@@ -128,7 +128,8 @@
     "saving": "Պահպանվում է…",
     "resting": "Հանգիստ",
     "skipRest": "Բաց թողնել հանգիստը",
-    "restingNextExercise": "Հաջորդ վարժությունից առաջ"
+    "restingNextExercise": "Հաջորդ վարժությունից առաջ",
+    "restDoneBody": "Ժամանակն է շարունակել մարզումը"
   },
   "nutrition": {
     "title": "Սնունդ",

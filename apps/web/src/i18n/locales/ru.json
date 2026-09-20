@@ -128,7 +128,8 @@
     "saving": "Сохраняем…",
     "resting": "Отдых",
     "skipRest": "Пропустить отдых",
-    "restingNextExercise": "Перед следующим упражнением"
+    "restingNextExercise": "Перед следующим упражнением",
+    "restDoneBody": "Пора продолжать тренировку"
   },
   "nutrition": {
     "title": "Питание",
