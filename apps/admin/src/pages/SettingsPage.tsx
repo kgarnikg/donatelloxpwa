@@ -17,6 +17,13 @@ import { supabase } from "@/lib/supabase";
  */
 const SETTINGS_FIELDS: { key: string; label: string; placeholder: string; help: string; group?: string }[] = [
   {
+    key: "hero_background_video_url",
+    label: "Фоновое видео на главном экране лендинга",
+    placeholder: "https:// … (прямая ссылка на mp4, желательно короткий зацикленный ролик без звука)",
+    help: "Играет автоматически, без звука, зациклено, во весь экран под текстом. YouTube сюда не подходит (там нет прямой ссылки на файл, только встраиваемый плеер) — нужна прямая ссылка на .mp4, например из Cloudflare R2/Bunny Storage. Пусто — используется файл по умолчанию из самого проекта.",
+    group: "Фон главного экрана",
+  },
+  {
     key: "hero_showreel_url_ru",
     label: "Русский (запасной вариант, если для языка посетителя видео нет)",
     placeholder: "https://… (YouTube или прямая ссылка на mp4)",

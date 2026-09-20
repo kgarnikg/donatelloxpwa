@@ -19,33 +19,43 @@ export function Hero() {
   // бы каждый раз делать через редеплой. Пока не загрузилась (или не
   // задана) — кнопка просто скроллит к следующему блоку, см. ниже.
   const [showreelUrl, setShowreelUrl] = useState<string | null>(null);
+  // Фоновое видео на весь экран — тоже настраивается из админки, тем же
+  // способом, что и ролик на кнопке (см. ниже). Пока не загрузилось (или
+  // не задано) — используется файл по умолчанию из самого проекта, не
+  // пустой экран.
+  const [backgroundVideoUrl, setBackgroundVideoUrl] = useState<string>("/video/hero-video.mp4");
 
   useEffect(() => {
-    async function loadShowreelUrl() {
+    async function loadHeroSettings() {
       try {
-        // Одним запросом тянем сразу все языковые варианты — дальше уже
-        // на клиенте выбираем нужный. Так же, как и с переводом контента
-        // программ (localizedField), запасной вариант — русский: если для
-        // языка посетителя своего ролика ещё не загрузили, показываем его,
-        // а не пустоту.
+        // Одним запросом тянем сразу все языковые варианты ролика на кнопке
+        // + фоновое видео — дальше уже на клиенте выбираем нужное. Так же,
+        // как и с переводом контента программ (localizedField), запасной
+        // вариант для ролика на кнопке — русский: если для языка
+        // посетителя своего ещё не загрузили, показываем его, а не пустоту.
         const { data } = await supabase
           .from("site_settings")
           .select("key, value")
-          .in("key", ["hero_showreel_url_ru", "hero_showreel_url_en", "hero_showreel_url_es", "hero_showreel_url_hy"]);
+          .in("key", [
+            "hero_showreel_url_ru",
+            "hero_showreel_url_en",
+            "hero_showreel_url_es",
+            "hero_showreel_url_hy",
+            "hero_background_video_url",
+          ]);
         if (!data) return;
 
-        const byLang = Object.fromEntries(
-          data.map((row) => [row.key.replace("hero_showreel_url_", ""), row.value]),
-        );
+        const byKey = Object.fromEntries(data.map((row) => [row.key, row.value]));
         const lang = i18n.language.split("-")[0]; // "en-US" -> "en"
-        setShowreelUrl(byLang[lang] || byLang.ru || null);
+        setShowreelUrl(byKey[`hero_showreel_url_${lang}`] || byKey.hero_showreel_url_ru || null);
+        if (byKey.hero_background_video_url) setBackgroundVideoUrl(byKey.hero_background_video_url);
       } catch {
-        // Настройка необязательна — если запрос не удался (например, сайт
-        // ещё не подключён к свежей базе), кнопка просто ведёт на блок
-        // ниже, ничего не ломается.
+        // Настройки необязательны — если запрос не удался (например, сайт
+        // ещё не подключён к свежей базе), кнопка ролика просто ведёт на
+        // блок ниже, а фон остаётся стандартным — ничего не ломается.
       }
     }
-    loadShowreelUrl();
+    loadHeroSettings();
   }, [i18n.language]);
 
   const cheapest = getRegionAmounts(region).annual;
@@ -65,7 +75,7 @@ export function Hero() {
     <section id="top" className="relative flex min-h-dvh items-center overflow-hidden pt-16">
       <video
         className="absolute inset-0 h-full w-full object-cover"
-        src="/video/hero-video.mp4"
+        src={backgroundVideoUrl}
         autoPlay
         muted
         loop
