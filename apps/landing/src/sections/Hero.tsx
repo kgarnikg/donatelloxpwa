@@ -27,7 +27,7 @@ export function Hero() {
   ];
 
   return (
-    <section id="top" className="relative flex min-h-dvh items-center overflow-hidden pt-20">
+    <section id="top" className="relative flex min-h-dvh items-center overflow-hidden pt-16">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src="/video/hero-video.mp4"
@@ -41,28 +41,33 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-ink-950/85 via-ink-950/75 to-ink-950" />
       <div className="absolute inset-0 bg-grid-fade opacity-40" />
 
-      <div className="section-container relative flex flex-col items-center py-20 text-center sm:py-28">
-        <span className="eyebrow mb-4 animate-fade-in">{t("hero.eyebrow")}</span>
+      {/* Весь блок должен целиком помещаться в один экран, вместе со стрелкой
+          "листай вниз" внизу — секция специально плотнее, чем стандартный
+          отступ у остальных секций сайта (те листаются, эта — нет). Если на
+          каком-то экране всё ещё не влезает — сначала уменьшать здесь, не
+          в остальных секциях. */}
+      <div className="section-container relative flex flex-col items-center py-8 text-center sm:py-12">
+        <span className="eyebrow mb-3 animate-fade-in">{t("hero.eyebrow")}</span>
 
-        <h1 className="max-w-4xl animate-fade-in font-display text-4xl uppercase leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+        <h1 className="max-w-4xl animate-fade-in font-display text-3xl uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
           {t("hero.titleBefore")} <span className="text-volt-400">{t("hero.titleHighlight")}</span>
         </h1>
 
-        <p className="mt-6 max-w-xl animate-fade-in text-lg text-neutral-300">{t("hero.subtitle")}</p>
-
-        {/* Чек-лист в духе референса — коротко, по делу, каждый пункт правда. */}
-        <ul className="mt-7 flex animate-fade-in flex-col gap-2.5 text-left sm:items-start">
+        {/* Чек-лист в духе референса — коротко, по делу, каждый пункт правда.
+            Шрифт крупнее и жирнее обычного текста — не мельчить рядом с
+            громким заголовком. */}
+        <ul className="mt-5 flex animate-fade-in flex-col gap-2 text-left sm:items-start">
           {checklist.map((item) => (
-            <li key={item} className="flex items-center gap-2.5 text-neutral-200">
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-volt-400/15 text-volt-400">
-                <Check size={13} strokeWidth={3} />
+            <li key={item} className="flex items-center gap-2.5 text-base font-medium text-neutral-100 sm:text-lg">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-volt-400 text-ink-950">
+                <Check size={13} strokeWidth={3.5} />
               </span>
               {item}
             </li>
           ))}
         </ul>
 
-        <div className="mt-8 flex animate-fade-in flex-col gap-3 sm:flex-row">
+        <div className="mt-6 flex animate-fade-in flex-col gap-3 sm:flex-row">
           <a
             href={`${APP_URL}/register`}
             className="btn-primary transition-transform duration-200 hover:scale-105 hover:shadow-[0_0_36px_rgba(168,224,0,0.45)]"
@@ -80,17 +85,17 @@ export function Hero() {
           )}
         </div>
 
-        <p className="mt-6 text-sm text-neutral-400">{t("hero.disclaimer")}</p>
+        <p className="mt-3 text-xs text-neutral-400 sm:text-sm">{t("hero.disclaimer")}</p>
 
         {/* Социальное доказательство — стилизованные аватары (не выдаём себя за
             реальные фото пользователей без их согласия), число — по решению
             владельца продукта, не выдумано автоматически. */}
-        <div className="mt-8 flex animate-fade-in items-center gap-3">
+        <div className="mt-4 flex animate-fade-in items-center gap-3">
           <div className="flex -space-x-2">
             {AVATAR_COLORS.map((color, i) => (
               <div
                 key={i}
-                className={`flex h-8 w-8 items-center justify-center rounded-full border-2 border-ink-950 text-xs font-bold text-ink-950 ${color}`}
+                className={`flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink-950 text-xs font-bold text-ink-950 ${color}`}
               >
                 {String.fromCharCode(65 + i)}
               </div>
@@ -120,11 +125,11 @@ export function Hero() {
 
       <a
         href="#modules"
-        className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1.5 text-neutral-400 transition hover:text-volt-400 animate-[bounce_2.2s_ease-in-out_infinite]"
+        className="absolute bottom-3 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-neutral-400 transition hover:text-volt-400 animate-[bounce_2.2s_ease-in-out_infinite] sm:bottom-5"
         aria-label={t("hero.scrollHint")}
       >
-        <span className="text-xs font-medium uppercase tracking-widest">{t("hero.scrollHint")}</span>
-        <ChevronDown size={22} />
+        <span className="text-[10px] font-medium uppercase tracking-widest sm:text-xs">{t("hero.scrollHint")}</span>
+        <ChevronDown size={18} />
       </a>
     </section>
   );
