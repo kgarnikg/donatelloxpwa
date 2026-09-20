@@ -13,23 +13,20 @@
   },
   "hero": {
     "eyebrow": "DonatelleX Fitness Training",
-    "titleLine1": "PROGRESS STARTS",
-    "titleLine2": "جسد أحلامك",
     "subtitle": "برنامج شخصي يتكيف معك — من اليوم الأول وحتى تحقيق النتيجة.",
     "ctaPrimary": "ابدأ مجانًا",
     "ctaSecondary": "اعرف المزيد",
     "disclaimer": "الأسبوع الأول والبرنامج الأول مجانًا · بدون بطاقة للبدء",
     "scrollHint": "مرر لأسفل",
-    "titleLine2Pre": "WITH",
-    "titleLine2Highlight": "DONATELLEX POWER",
-    "titleLine3": "SYSTEM",
     "socialProof": "+10,000 شخص يتدربون بالفعل في التطبيق",
     "checklist": {
       "personalized": "مخصص حسب هدفك ومستواك",
       "results": "أولى النتائج خلال 4–8 أسابيع فقط",
       "price": "ابتداءً من {{price}}/شهريًا — أقل من {{perDay}}/يوميًا",
       "flexible": "في المنزل أو الصالة الرياضية — صيغ مرنة"
-    }
+    },
+    "titleBefore": "التقدم يبدأ مع",
+    "titleHighlight": "DonatelleX Power System"
   },
   "modules": {
     "eyebrow": "المزايا",

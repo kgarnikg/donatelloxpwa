@@ -13,23 +13,20 @@
   },
   "hero": {
     "eyebrow": "DonatelleX Fitness Training",
-    "titleLine1": "PROGRESS STARTS",
-    "titleLine2": "your dream body",
     "subtitle": "A personal program that adapts to you — from day one to the result.",
     "ctaPrimary": "Start for free",
     "ctaSecondary": "Learn more",
     "disclaimer": "First week and first program free · No card required to start",
     "scrollHint": "Scroll down",
-    "titleLine2Pre": "WITH",
-    "titleLine2Highlight": "DONATELLEX POWER",
-    "titleLine3": "SYSTEM",
     "socialProof": "10,000+ people already training in the app",
     "checklist": {
       "personalized": "Personalized to your goal and level",
       "results": "First results in just 4–8 weeks",
       "price": "From {{price}}/mo — less than {{perDay}}/day",
       "flexible": "Home or gym — flexible formats"
-    }
+    },
+    "titleBefore": "Progress starts with",
+    "titleHighlight": "DonatelleX Power System"
   },
   "modules": {
     "eyebrow": "Features",

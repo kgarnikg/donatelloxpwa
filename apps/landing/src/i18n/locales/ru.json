@@ -13,23 +13,20 @@
   },
   "hero": {
     "eyebrow": "DonatelleX Fitness Training",
-    "titleLine1": "PROGRESS STARTS",
-    "titleLine2": "тела мечты",
     "subtitle": "Персональная программа, которая подстраивается под тебя — от первого дня и до результата.",
     "ctaPrimary": "Начать бесплатно",
     "ctaSecondary": "Узнать больше",
     "disclaimer": "Первая неделя и первая программа — бесплатно · Без карты для старта",
     "scrollHint": "Листай вниз",
-    "titleLine2Pre": "WITH",
-    "titleLine2Highlight": "DONATELLEX POWER",
-    "titleLine3": "SYSTEM",
     "socialProof": "10 000+ занимающихся уже в приложении",
     "checklist": {
       "personalized": "Персонально под твою цель и уровень",
       "results": "Первые результаты уже через 4–8 недель",
       "price": "От {{price}} в месяц — меньше {{perDay}} в день",
       "flexible": "Дома или в зале — гибкие форматы"
-    }
+    },
+    "titleBefore": "Прогресс начинается с",
+    "titleHighlight": "DonatelleX Power System"
   },
   "modules": {
     "eyebrow": "Возможности",

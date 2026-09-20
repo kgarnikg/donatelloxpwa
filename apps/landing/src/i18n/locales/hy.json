@@ -13,23 +13,20 @@
   },
   "hero": {
     "eyebrow": "DonatelleX Fitness Training",
-    "titleLine1": "PROGRESS STARTS",
-    "titleLine2": "մարմինը կառուցելու համար",
     "subtitle": "Անհատական ծրագիր, որը հարմարվում է քեզ՝ առաջին օրից մինչև արդյունք։",
     "ctaPrimary": "Սկսել անվճար",
     "ctaSecondary": "Իմանալ ավելին",
     "disclaimer": "Առաջին շաբաթը և առաջին ծրագիրը անվճար են · Քարտ պետք չէ մեկնարկելու համար",
     "scrollHint": "Ոլորիր ներքև",
-    "titleLine2Pre": "WITH",
-    "titleLine2Highlight": "DONATELLEX POWER",
-    "titleLine3": "SYSTEM",
     "socialProof": "10,000+ մարդ արդեն մարզվում է հավելվածում",
     "checklist": {
       "personalized": "Անհատականացված ըստ քո նպատակի և մակարդակի",
       "results": "Առաջին արդյունքները՝ ընդամենը 4–8 շաբաթում",
       "price": "{{price}}-ից/ամիս — օրական {{perDay}}-ից պակաս",
       "flexible": "Տանը կամ մարզասրահում — ճկուն ձևաչափեր"
-    }
+    },
+    "titleBefore": "Առաջընթացը սկսվում է",
+    "titleHighlight": "DonatelleX Power System"
   },
   "modules": {
     "eyebrow": "Հնարավորություններ",

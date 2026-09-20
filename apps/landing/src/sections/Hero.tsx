@@ -45,11 +45,7 @@ export function Hero() {
         <span className="eyebrow mb-4 animate-fade-in">{t("hero.eyebrow")}</span>
 
         <h1 className="max-w-4xl animate-fade-in font-display text-4xl uppercase leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-          {t("hero.titleLine1")}
-          <br />
-          {t("hero.titleLine2Pre")} <span className="text-volt-400">{t("hero.titleLine2Highlight")}</span>
-          <br />
-          {t("hero.titleLine3")}
+          {t("hero.titleBefore")} <span className="text-volt-400">{t("hero.titleHighlight")}</span>
         </h1>
 
         <p className="mt-6 max-w-xl animate-fade-in text-lg text-neutral-300">{t("hero.subtitle")}</p>
