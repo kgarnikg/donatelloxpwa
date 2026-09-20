@@ -1,11 +1,12 @@
 import { ArrowRight, PlayCircle, ChevronDown, Check, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRegion } from "@/context/RegionContext";
 import { getRegionAmounts, formatAmount } from "@/lib/regionPricing";
+import { supabase } from "@/lib/supabase";
+import { getYouTubeEmbedUrl } from "@/lib/video";
 
 const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
-const SHOWREEL_URL = import.meta.env.VITE_SHOWREEL_URL as string | undefined;
 
 const AVATAR_COLORS = ["bg-volt-400", "bg-ember-400", "bg-info", "bg-warning", "bg-success"];
 
@@ -13,6 +14,29 @@ export function Hero() {
   const { t } = useTranslation();
   const { region } = useRegion();
   const [showreelOpen, setShowreelOpen] = useState(false);
+  // Ссылка на ролик берётся из БД (настраивается в админке, "Настройки
+  // сайта"), а не из переменной окружения — иначе смену видео пришлось
+  // бы каждый раз делать через редеплой. Пока не загрузилась (или не
+  // задана) — кнопка просто скроллит к следующему блоку, см. ниже.
+  const [showreelUrl, setShowreelUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadShowreelUrl() {
+      try {
+        const { data } = await supabase
+          .from("site_settings")
+          .select("value")
+          .eq("key", "hero_showreel_url")
+          .maybeSingle();
+        if (data?.value) setShowreelUrl(data.value);
+      } catch {
+        // Настройка необязательна — если запрос не удался (например, сайт
+        // ещё не подключён к свежей базе), кнопка просто ведёт на блок
+        // ниже, ничего не ломается.
+      }
+    }
+    loadShowreelUrl();
+  }, []);
 
   const cheapest = getRegionAmounts(region).annual;
   // Целое число дней в месяце — достаточно точно для маркетингового "меньше X в день",
@@ -75,7 +99,7 @@ export function Hero() {
           >
             {t("hero.ctaPrimary")} <ArrowRight size={18} />
           </a>
-          {SHOWREEL_URL ? (
+          {showreelUrl ? (
             <button onClick={() => setShowreelOpen(true)} className="btn-secondary">
               <PlayCircle size={18} /> {t("hero.ctaSecondary")}
             </button>
@@ -104,7 +128,7 @@ export function Hero() {
         </div>
       </div>
 
-      {SHOWREEL_URL && showreelOpen && (
+      {showreelUrl && showreelOpen && (
         <div
           className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/85 p-4"
           onClick={() => setShowreelOpen(false)}
@@ -117,7 +141,18 @@ export function Hero() {
             >
               <X size={18} />
             </button>
-            <video src={SHOWREEL_URL} controls autoPlay className="w-full rounded-lg" />
+            {getYouTubeEmbedUrl(showreelUrl) ? (
+              <div className="aspect-video w-full overflow-hidden rounded-lg">
+                <iframe
+                  src={getYouTubeEmbedUrl(showreelUrl)!}
+                  className="h-full w-full"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <video src={showreelUrl} controls autoPlay className="w-full rounded-lg" />
+            )}
           </div>
         </div>
       )}

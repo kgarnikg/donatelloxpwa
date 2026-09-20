@@ -8,6 +8,7 @@ import ProgramsPage from "@/pages/ProgramsPage";
 import ProgramDetailPage from "@/pages/ProgramDetailPage";
 import VideosPage from "@/pages/VideosPage";
 import PaymentsPage from "@/pages/PaymentsPage";
+import SettingsPage from "@/pages/SettingsPage";
 
 function AuthorizedLayout() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/programs/:programId" element={<ProgramDetailPage />} />
         <Route path="/videos" element={<VideosPage />} />
         <Route path="/payments" element={<PaymentsPage />} />
+        <Route path="/settings" element={<SettingsPage />} />
       </Route>
 
       <Route
