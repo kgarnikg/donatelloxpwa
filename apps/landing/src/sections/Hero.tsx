@@ -82,18 +82,22 @@ export function Hero() {
           каком-то экране всё ещё не влезает — сначала уменьшать здесь, не
           в остальных секциях.
           На десктопе (lg+) блок сдвинут влево и сужен — чтобы видео на фоне
-          было лучше видно справа. На мобильном — по центру, как раньше. */}
-      <div className="section-container relative flex flex-col items-center py-8 text-center sm:py-12 lg:max-w-3xl lg:items-start lg:text-left">
-        <span className="eyebrow mb-3 animate-fade-in">{t("hero.eyebrow")}</span>
+          было лучше видно справа. Важно: mx-auto из .section-container
+          центрирует блок независимо от items-start внутри него — поэтому
+          на lg+ явно отменяем (lg:mx-0), иначе сужение само по себе почти
+          незаметно (блок просто сжимается к центру, а не уезжает влево).
+          На мобильном — по центру, как раньше. */}
+      <div className="section-container relative flex flex-col items-center py-5 text-center sm:py-12 lg:mx-0 lg:max-w-xl lg:items-start lg:pl-16 lg:text-left xl:max-w-2xl xl:pl-24">
+        <span className="eyebrow mb-2 animate-fade-in sm:mb-3">{t("hero.eyebrow")}</span>
 
-        <h1 className="max-w-4xl animate-fade-in font-display text-3xl uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+        <h1 className="max-w-4xl animate-fade-in font-display text-2xl uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
           {t("hero.titleBefore")} <span className="text-volt-400">{t("hero.titleHighlight")}</span>
         </h1>
 
         {/* Чек-лист в духе референса — коротко, по делу, каждый пункт правда.
             Шрифт крупнее и жирнее обычного текста — не мельчить рядом с
             громким заголовком. */}
-        <ul className="mt-5 flex animate-fade-in flex-col gap-2 text-left sm:items-start">
+        <ul className="mt-3 flex animate-fade-in flex-col gap-1.5 text-left sm:mt-5 sm:gap-2 sm:items-start">
           {checklist.map((item) => (
             <li key={item} className="flex items-center gap-2.5 text-base font-medium text-neutral-100 sm:text-lg">
               <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-volt-400 text-ink-950">
@@ -104,7 +108,7 @@ export function Hero() {
           ))}
         </ul>
 
-        <div className="mt-6 flex animate-fade-in flex-col gap-3 sm:flex-row">
+        <div className="mt-4 flex animate-fade-in flex-col gap-3 sm:mt-6 sm:flex-row">
           <a
             href={`${APP_URL}/register`}
             className="btn-primary transition-transform duration-200 hover:scale-105 hover:shadow-[0_0_36px_rgba(168,224,0,0.45)]"
@@ -125,7 +129,7 @@ export function Hero() {
         {/* Социальное доказательство — стилизованные аватары (не выдаём себя за
             реальные фото пользователей без их согласия), число — по решению
             владельца продукта, не выдумано автоматически. */}
-        <div className="mt-5 flex animate-fade-in items-center gap-3">
+        <div className="mt-3 flex animate-fade-in items-center gap-3 sm:mt-5">
           <div className="flex -space-x-2">
             {AVATAR_COLORS.map((color, i) => (
               <div
