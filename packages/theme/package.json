@@ -2,7 +2,7 @@
   "name": "@donatellox/theme",
   "version": "0.1.0",
   "private": true,
-  "description": "Общая конфигурация Tailwind CSS и дизайн-система DonatelloX",
+  "description": "Общая конфигурация Tailwind CSS и дизайн-система DonatelleX",
   "type": "module",
   "main": "./tailwind.config.js",
   "exports": {

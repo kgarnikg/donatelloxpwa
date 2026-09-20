@@ -35,7 +35,7 @@ export default function AdminLoginPage() {
           <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-volt-400 font-display text-xl font-bold text-ink-950">
             D
           </div>
-          <h1 className="font-display text-xl font-bold">DonatelloX CMS</h1>
+          <h1 className="font-display text-xl font-bold">DonatelleX CMS</h1>
           <p className="mt-1 text-sm text-neutral-400">Вход для администраторов</p>
         </div>
 

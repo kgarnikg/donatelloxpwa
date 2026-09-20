@@ -12,7 +12,7 @@
     "menuAriaLabel": "Menú"
   },
   "hero": {
-    "eyebrow": "DonatelloX Fitness Training",
+    "eyebrow": "DonatelleX Fitness Training",
     "titleLine1": "Todo para construir",
     "titleLine2": "el cuerpo de tus sueños",
     "subtitle": "Entrenamientos estructurados, instrucciones en vídeo y un diario de progreso — todo en una sola app. Entrena en casa, en el gimnasio o de viaje.",
@@ -24,7 +24,7 @@
   "modules": {
     "eyebrow": "Funciones",
     "title": "Todo lo que necesitas para lograr resultados",
-    "subtitle": "Desde el primer cuestionario hasta tu diario de progreso — DonatelloX te acompaña en cada paso.",
+    "subtitle": "Desde el primer cuestionario hasta tu diario de progreso — DonatelleX te acompaña en cada paso.",
     "items": [
       {
         "title": "Cuestionario y selección de programa",
@@ -184,7 +184,7 @@
       },
       {
         "question": "Ya probé entrenar antes y lo dejé — ¿por qué sería diferente ahora?",
-        "answer": "Normalmente se deja no por pereza, sino porque cada vez hay que decidir qué hacer. DonatelloX te quita esa decisión: el programa ya está planeado para meses, solo tienes que abrir la app y seguirlo."
+        "answer": "Normalmente se deja no por pereza, sino porque cada vez hay que decidir qué hacer. DonatelleX te quita esa decisión: el programa ya está planeado para meses, solo tienes que abrir la app y seguirlo."
       },
       {
         "question": "¿Cuánto dura un entrenamiento?",
@@ -200,7 +200,7 @@
       },
       {
         "question": "¿Funciona la app sin conexión?",
-        "answer": "DonatelloX es una PWA (Progressive Web App): la interfaz y los entrenamientos ya vistos están disponibles sin conexión, y el progreso se sincroniza al recuperar internet."
+        "answer": "DonatelleX es una PWA (Progressive Web App): la interfaz y los entrenamientos ya vistos están disponibles sin conexión, y el progreso se sincroniza al recuperar internet."
       },
       {
         "question": "¿En qué idiomas funciona la app?",
@@ -240,23 +240,33 @@
         }
       }
     },
-    "copyright": "© {{year}} DonatelloX. Todos los derechos reservados.",
+    "copyright": "© {{year}} DonatelleX. Todos los derechos reservados.",
     "paymentLine": "Pagos: Stripe · PayPal · ЮKassa · USDT"
   },
   "legal": {
     "back": "Volver al inicio",
     "terms": {
       "title": "Condiciones de uso",
-      "body": "Al usar la app y el sitio web de DonatelloX, aceptas estas condiciones. El texto completo de las condiciones de uso se publicará aquí antes del lanzamiento a producción de la plataforma."
+      "body": "Al usar la app y el sitio web de DonatelleX, aceptas estas condiciones. El texto completo de las condiciones de uso se publicará aquí antes del lanzamiento a producción de la plataforma."
     },
     "privacy": {
       "title": "Política de privacidad",
-      "body": "DonatelloX trata los datos personales conforme a la legislación de protección de datos aplicable. El texto completo de la política de privacidad se publicará aquí antes del lanzamiento a producción de la plataforma."
+      "body": "DonatelleX trata los datos personales conforme a la legislación de protección de datos aplicable. El texto completo de la política de privacidad se publicará aquí antes del lanzamiento a producción de la plataforma."
     },
     "regionNotes": {
       "ru": "Para los usuarios en Rusia, los datos personales se procesan conforme a la Ley Federal N.º 152-FZ «Sobre datos personales».",
       "eu": "Para los usuarios de la Unión Europea, los datos personales se procesan conforme al Reglamento General de Protección de Datos (RGPD).",
       "us": "Para los usuarios en Estados Unidos, se aplican las leyes estatales de privacidad del consumidor correspondientes."
     }
+  },
+  "exitIntent": {
+    "eyebrow": "Espera",
+    "title": "¿Te vas sin un plan para hoy?",
+    "subtitle": "Tu primera semana es totalmente gratis, sin pago. Solo falta empezar.",
+    "button": "Quiero mi semana gratis",
+    "noThanks": "Ahora no"
+  },
+  "common": {
+    "close": "Cerrar"
   }
 }

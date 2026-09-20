@@ -1,4 +1,4 @@
-# Локальная конфигурация Supabase для разработки DonatelloX.
+# Локальная конфигурация Supabase для разработки DonatelleX.
 # Полная документация: https://supabase.com/docs/guides/local-development/cli/config
 project_id = "donatellox"
 

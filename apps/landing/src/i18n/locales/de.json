@@ -12,7 +12,7 @@
     "menuAriaLabel": "Menü"
   },
   "hero": {
-    "eyebrow": "DonatelloX Fitness Training",
+    "eyebrow": "DonatelleX Fitness Training",
     "titleLine1": "Alles für den Aufbau",
     "titleLine2": "deines Traumkörpers",
     "subtitle": "Strukturierte Trainings, Video-Anleitungen und ein Fortschrittstagebuch — alles in einer App. Trainiere zu Hause, im Fitnessstudio oder unterwegs.",
@@ -24,7 +24,7 @@
   "modules": {
     "eyebrow": "Funktionen",
     "title": "Alles, was du für Ergebnisse brauchst",
-    "subtitle": "Vom ersten Fragebogen bis zum Fortschrittstagebuch — DonatelloX begleitet dich bei jedem Schritt.",
+    "subtitle": "Vom ersten Fragebogen bis zum Fortschrittstagebuch — DonatelleX begleitet dich bei jedem Schritt.",
     "items": [
       {
         "title": "Fragebogen & Programmauswahl",
@@ -184,7 +184,7 @@
       },
       {
         "question": "Ich habe es schon versucht und aufgehört — warum wäre es diesmal anders?",
-        "answer": "Meistens hört man nicht aus Faulheit auf, sondern weil man jedes Mal neu entscheiden muss, was zu tun ist. DonatelloX nimmt dir diese Entscheidung ab — der Plan steht schon für Monate fest, du musst nur die App öffnen und ihm folgen."
+        "answer": "Meistens hört man nicht aus Faulheit auf, sondern weil man jedes Mal neu entscheiden muss, was zu tun ist. DonatelleX nimmt dir diese Entscheidung ab — der Plan steht schon für Monate fest, du musst nur die App öffnen und ihm folgen."
       },
       {
         "question": "Wie lange dauert ein Training?",
@@ -200,7 +200,7 @@
       },
       {
         "question": "Funktioniert die App offline?",
-        "answer": "DonatelloX ist eine PWA (Progressive Web App): Oberfläche und bereits angesehene Trainings sind offline verfügbar, der Fortschritt synchronisiert sich, sobald wieder Internet da ist."
+        "answer": "DonatelleX ist eine PWA (Progressive Web App): Oberfläche und bereits angesehene Trainings sind offline verfügbar, der Fortschritt synchronisiert sich, sobald wieder Internet da ist."
       },
       {
         "question": "In welchen Sprachen funktioniert die App?",
@@ -240,23 +240,33 @@
         }
       }
     },
-    "copyright": "© {{year}} DonatelloX. Alle Rechte vorbehalten.",
+    "copyright": "© {{year}} DonatelleX. Alle Rechte vorbehalten.",
     "paymentLine": "Zahlungen: Stripe · PayPal · ЮKassa · USDT"
   },
   "legal": {
     "back": "Zur Startseite",
     "terms": {
       "title": "Nutzungsbedingungen",
-      "body": "Durch die Nutzung der DonatelloX-App und -Website stimmst du diesen Bedingungen zu. Der vollständige Text der Nutzungsbedingungen wird hier vor dem Produktivstart der Plattform veröffentlicht."
+      "body": "Durch die Nutzung der DonatelleX-App und -Website stimmst du diesen Bedingungen zu. Der vollständige Text der Nutzungsbedingungen wird hier vor dem Produktivstart der Plattform veröffentlicht."
     },
     "privacy": {
       "title": "Datenschutzrichtlinie",
-      "body": "DonatelloX verarbeitet personenbezogene Daten gemäß geltendem Datenschutzrecht. Der vollständige Text der Datenschutzrichtlinie wird hier vor dem Produktivstart der Plattform veröffentlicht."
+      "body": "DonatelleX verarbeitet personenbezogene Daten gemäß geltendem Datenschutzrecht. Der vollständige Text der Datenschutzrichtlinie wird hier vor dem Produktivstart der Plattform veröffentlicht."
     },
     "regionNotes": {
       "ru": "Für Nutzer in Russland werden personenbezogene Daten gemäß dem Bundesgesetz Nr. 152-FZ „Über personenbezogene Daten“ verarbeitet.",
       "eu": "Für Nutzer in der Europäischen Union werden personenbezogene Daten gemäß der Datenschutz-Grundverordnung (DSGVO) verarbeitet.",
       "us": "Für Nutzer in den USA gelten die entsprechenden bundesstaatlichen Verbraucherdatenschutzgesetze."
     }
+  },
+  "exitIntent": {
+    "eyebrow": "Warte",
+    "title": "Gehst du ohne Plan für heute?",
+    "subtitle": "Deine erste Woche ist völlig kostenlos, keine Zahlung nötig. Es fehlt nur der Start.",
+    "button": "Kostenlose Woche sichern",
+    "noThanks": "Jetzt nicht"
+  },
+  "common": {
+    "close": "Schließen"
   }
 }

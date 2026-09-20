@@ -81,7 +81,7 @@ export default function OverviewPage() {
   return (
     <div>
       <h1 className="font-display text-2xl font-bold">Обзор</h1>
-      <p className="mt-1 text-neutral-400">Ключевые показатели платформы DonatelloX</p>
+      <p className="mt-1 text-neutral-400">Ключевые показатели платформы DonatelleX</p>
 
       {error && (
         <div className="mt-6 rounded-md border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">

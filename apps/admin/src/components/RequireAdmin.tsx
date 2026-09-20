@@ -28,7 +28,7 @@ export function RequireAdmin({ children }: { children: ReactNode }) {
       <div className="flex min-h-dvh flex-col items-center justify-center gap-4 bg-ink-950 px-6 text-center">
         <h1 className="font-display text-xl font-bold">Доступ запрещён</h1>
         <p className="max-w-sm text-neutral-400">
-          У вашей учётной записи нет прав администратора DonatelloX CMS.
+          У вашей учётной записи нет прав администратора DonatelleX CMS.
         </p>
         <button onClick={() => signOut()} className="btn-secondary">
           Выйти и войти другим аккаунтом

@@ -19,7 +19,7 @@ export function Footer() {
               <div className="flex h-8 w-8 items-center justify-center rounded-md bg-volt-400 font-display font-bold text-ink-950">
                 D
               </div>
-              <span className="font-display text-lg font-bold">DonatelloX</span>
+              <span className="font-display text-lg font-bold">DonatelleX</span>
             </div>
             <p className="mt-3 max-w-xs text-sm text-neutral-500">{t("footer.description")}</p>
           </div>

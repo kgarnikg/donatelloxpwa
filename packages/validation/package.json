@@ -2,7 +2,7 @@
   "name": "@donatellox/validation",
   "version": "0.1.0",
   "private": true,
-  "description": "Схемы валидации на базе Zod для авторизации, анкет и форм DonatelloX",
+  "description": "Схемы валидации на базе Zod для авторизации, анкет и форм DonatelleX",
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",

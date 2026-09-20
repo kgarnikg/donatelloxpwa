@@ -12,7 +12,7 @@
     "menuAriaLabel": "Menu"
   },
   "hero": {
-    "eyebrow": "DonatelloX Fitness Training",
+    "eyebrow": "DonatelleX Fitness Training",
     "titleLine1": "Tutto per costruire",
     "titleLine2": "il corpo dei tuoi sogni",
     "subtitle": "Allenamenti strutturati, istruzioni video e un diario dei progressi — tutto in un'unica app. Allenati a casa, in palestra o in viaggio.",
@@ -24,7 +24,7 @@
   "modules": {
     "eyebrow": "Funzionalità",
     "title": "Tutto ciò che serve per ottenere risultati",
-    "subtitle": "Dal primo questionario al diario dei progressi — DonatelloX ti accompagna in ogni passo.",
+    "subtitle": "Dal primo questionario al diario dei progressi — DonatelleX ti accompagna in ogni passo.",
     "items": [
       {
         "title": "Questionario e selezione del programma",
@@ -184,7 +184,7 @@
       },
       {
         "question": "Ho già provato ad allenarmi e ho mollato — perché stavolta sarebbe diverso?",
-        "answer": "Di solito si molla non per pigrizia, ma perché ogni volta bisogna decidere cosa fare. DonatelloX ti toglie questa decisione — il programma è già pianificato per mesi, devi solo aprire l'app e seguirlo."
+        "answer": "Di solito si molla non per pigrizia, ma perché ogni volta bisogna decidere cosa fare. DonatelleX ti toglie questa decisione — il programma è già pianificato per mesi, devi solo aprire l'app e seguirlo."
       },
       {
         "question": "Quanto dura un allenamento?",
@@ -200,7 +200,7 @@
       },
       {
         "question": "L'app funziona offline?",
-        "answer": "DonatelloX è una PWA (Progressive Web App): interfaccia e allenamenti già visti sono disponibili offline, i progressi si sincronizzano appena torna la connessione."
+        "answer": "DonatelleX è una PWA (Progressive Web App): interfaccia e allenamenti già visti sono disponibili offline, i progressi si sincronizzano appena torna la connessione."
       },
       {
         "question": "In quali lingue funziona l'app?",
@@ -240,23 +240,33 @@
         }
       }
     },
-    "copyright": "© {{year}} DonatelloX. Tutti i diritti riservati.",
+    "copyright": "© {{year}} DonatelleX. Tutti i diritti riservati.",
     "paymentLine": "Pagamenti: Stripe · PayPal · ЮKassa · USDT"
   },
   "legal": {
     "back": "Torna alla home",
     "terms": {
       "title": "Termini di utilizzo",
-      "body": "Utilizzando l'app e il sito DonatelloX, accetti questi termini. Il testo completo dei termini di utilizzo sarà pubblicato qui prima del lancio in produzione della piattaforma."
+      "body": "Utilizzando l'app e il sito DonatelleX, accetti questi termini. Il testo completo dei termini di utilizzo sarà pubblicato qui prima del lancio in produzione della piattaforma."
     },
     "privacy": {
       "title": "Informativa sulla privacy",
-      "body": "DonatelloX tratta i dati personali in conformità con la normativa applicabile in materia di protezione dei dati. Il testo completo dell'informativa sulla privacy sarà pubblicato qui prima del lancio in produzione della piattaforma."
+      "body": "DonatelleX tratta i dati personali in conformità con la normativa applicabile in materia di protezione dei dati. Il testo completo dell'informativa sulla privacy sarà pubblicato qui prima del lancio in produzione della piattaforma."
     },
     "regionNotes": {
       "ru": "Per gli utenti in Russia, i dati personali sono trattati ai sensi della Legge Federale n. 152-FZ «Sui dati personali».",
       "eu": "Per gli utenti nell'Unione Europea, i dati personali sono trattati ai sensi del Regolamento Generale sulla Protezione dei Dati (GDPR).",
       "us": "Per gli utenti negli Stati Uniti, si applicano le leggi statali sulla privacy dei consumatori applicabili."
     }
+  },
+  "exitIntent": {
+    "eyebrow": "Aspetta",
+    "title": "Vai via senza un piano per oggi?",
+    "subtitle": "La tua prima settimana è completamente gratis, senza pagamento. Manca solo iniziare.",
+    "button": "Voglio la settimana gratis",
+    "noThanks": "Non ora"
+  },
+  "common": {
+    "close": "Chiudi"
   }
 }

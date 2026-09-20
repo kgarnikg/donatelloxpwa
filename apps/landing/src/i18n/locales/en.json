@@ -12,7 +12,7 @@
     "menuAriaLabel": "Menu"
   },
   "hero": {
-    "eyebrow": "DonatelloX Fitness Training",
+    "eyebrow": "DonatelleX Fitness Training",
     "titleLine1": "Everything to build",
     "titleLine2": "your dream body",
     "subtitle": "Structured workouts, video instructions, and a progress journal — all in one app. Train at home, at the gym, or on the go.",
@@ -24,7 +24,7 @@
   "modules": {
     "eyebrow": "Features",
     "title": "Everything you need to get results",
-    "subtitle": "From the intake form to a plan for months ahead — DonatelloX guides you every step of the way.",
+    "subtitle": "From the intake form to a plan for months ahead — DonatelleX guides you every step of the way.",
     "items": [
       {
         "title": "Personal start",
@@ -198,7 +198,7 @@
       },
       {
         "question": "I've tried working out before and quit — why would this be different?",
-        "answer": "People usually quit not from laziness, but from having to decide what to do every single time. DonatelloX removes that decision for you — the program is already mapped out for months ahead, all you do is open the app and follow it."
+        "answer": "People usually quit not from laziness, but from having to decide what to do every single time. DonatelleX removes that decision for you — the program is already mapped out for months ahead, all you do is open the app and follow it."
       },
       {
         "question": "How long does a workout take?",
@@ -214,7 +214,7 @@
       },
       {
         "question": "Does the app work offline?",
-        "answer": "DonatelloX is a PWA (Progressive Web App): the interface and previously viewed workouts are available offline, and your progress syncs once you're back online."
+        "answer": "DonatelleX is a PWA (Progressive Web App): the interface and previously viewed workouts are available offline, and your progress syncs once you're back online."
       },
       {
         "question": "What languages does the app support?",
@@ -254,23 +254,33 @@
         }
       }
     },
-    "copyright": "© {{year}} DonatelloX. All rights reserved.",
+    "copyright": "© {{year}} DonatelleX. All rights reserved.",
     "paymentLine": "Payments: Stripe · PayPal · YuKassa · USDT"
   },
   "legal": {
     "back": "Back to home",
     "terms": {
       "title": "Terms of Use",
-      "body": "By using the DonatelloX app and website, you agree to these terms. The full terms of use will be published here before the platform's production launch."
+      "body": "By using the DonatelleX app and website, you agree to these terms. The full terms of use will be published here before the platform's production launch."
     },
     "privacy": {
       "title": "Privacy Policy",
-      "body": "DonatelloX processes personal data in accordance with applicable data protection law. The full privacy policy will be published here before the platform's production launch."
+      "body": "DonatelleX processes personal data in accordance with applicable data protection law. The full privacy policy will be published here before the platform's production launch."
     },
     "regionNotes": {
       "ru": "For users in Russia, personal data is processed in accordance with Federal Law No. 152-FZ \"On Personal Data\".",
       "eu": "For users in the European Union, personal data is processed in accordance with the General Data Protection Regulation (GDPR).",
       "us": "For users in the United States, applicable state consumer privacy laws apply."
     }
+  },
+  "exitIntent": {
+    "eyebrow": "Wait",
+    "title": "Leaving without a plan for today?",
+    "subtitle": "Your first week is completely free, no payment needed. All that's left is to start.",
+    "button": "Claim my free week",
+    "noThanks": "Not now"
+  },
+  "common": {
+    "close": "Close"
   }
 }

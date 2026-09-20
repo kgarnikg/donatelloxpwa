@@ -2,7 +2,7 @@
   "name": "@donatellox/landing",
   "version": "0.1.0",
   "private": true,
-  "description": "DonatelloX \u2014 \u043c\u0430\u0440\u043a\u0435\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0439 \u043b\u0435\u043d\u0434\u0438\u043d\u0433",
+  "description": "DonatelleX \u2014 \u043c\u0430\u0440\u043a\u0435\u0442\u0438\u043d\u0433\u043e\u0432\u044b\u0439 \u043b\u0435\u043d\u0434\u0438\u043d\u0433",
   "type": "module",
   "scripts": {
     "dev": "vite --port 5175",

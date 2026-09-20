@@ -10,8 +10,8 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.svg", "apple-touch-icon.png", "robots.txt"],
       manifest: {
-        name: "DonatelloX — тренировки и прогресс",
-        short_name: "DonatelloX",
+        name: "DonatelleX — тренировки и прогресс",
+        short_name: "DonatelleX",
         description:
           "Персональные программы тренировок, дневник прогресса и подписка на видео-контент.",
         theme_color: "#0A0B0D",

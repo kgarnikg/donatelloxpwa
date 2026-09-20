@@ -32,7 +32,7 @@ begin
   end if;
 
   update public.workout_programs
-  set title_en = 'Weight loss for women (home) — DonatelloX, year-long program', description_en = 'Weight loss for women (home) — DonatelloX, year-long program. Equipment: Dumbbells, resistance band various resistance, mat, stable platform/step/step (per availability)'
+  set title_en = 'Weight loss for women (home) — DonatelleX, year-long program', description_en = 'Weight loss for women (home) — DonatelleX, year-long program. Equipment: Dumbbells, resistance band various resistance, mat, stable platform/step/step (per availability)'
   where id = v_program_id;
 
   select id into v_workout_id from public.workouts

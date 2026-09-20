@@ -1,6 +1,6 @@
 /**
  * @donatellox/types
- * Единый источник истины для доменных типов платформы DonatelloX.
+ * Единый источник истины для доменных типов платформы DonatelleX.
  * Используется во всех apps (web, admin, landing) и в Supabase Edge Functions.
  */
 

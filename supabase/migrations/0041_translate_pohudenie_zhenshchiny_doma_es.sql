@@ -20,7 +20,7 @@ begin
   end if;
 
   update public.workout_programs
-  set title_es = 'Pérdida de peso para mujeres (en casa) — DonatelloX, anual programa', description_es = 'Pérdida de peso para mujeres (en casa) — DonatelloX, anual programa. Equipo: Mancuernas, banda elástica variada resistencia, esterilla, estable plataforma/step/step (por disponibilidad)'
+  set title_es = 'Pérdida de peso para mujeres (en casa) — DonatelleX, anual programa', description_es = 'Pérdida de peso para mujeres (en casa) — DonatelleX, anual programa. Equipo: Mancuernas, banda elástica variada resistencia, esterilla, estable plataforma/step/step (por disponibilidad)'
   where id = v_program_id;
 
   select id into v_workout_id from public.workouts

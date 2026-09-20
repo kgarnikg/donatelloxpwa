@@ -29,7 +29,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-volt-400 font-display font-bold text-ink-950">
             D
           </div>
-          <span className="font-display text-lg font-bold">DonatelloX CMS</span>
+          <span className="font-display text-lg font-bold">DonatelleX CMS</span>
         </div>
 
         <nav className="flex-1 space-y-1 px-3 py-4">

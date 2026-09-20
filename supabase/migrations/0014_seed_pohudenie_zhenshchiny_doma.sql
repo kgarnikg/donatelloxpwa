@@ -516,7 +516,7 @@ insert into public.exercises (slug, title) values
   ('final-3-kruga-30-sek-kazhdoe-bystrye-step-up-jumping-jacks-squat-e0102f', '🔥 Финал ×3 круга (30 сек каждое): быстрые step-up, jumping jacks, squat pulses, отдых'),
   ('5-krugov-goblet-squat-15-tyaga-ganteley-v-naklone-15-vypady-nazad-10-1975d1', '5 кругов: Goblet Squat 15 + Тяга гантелей в наклоне 15 + Выпады назад 10+10 + Отжимания 10 + Румынская тяга 15 + Arnold Press 12 + Mountain Climbers 30 сек + Burpee (без прыжка или обычный) 30 сек. Отдых 60 сек после круга, 90 сек после 3-го круга, финиш после 5-го'),
   ('finalnyy-chellendzh-3-minuty-bez-ostanovki-30-sek-jumping-jacks-30-f5dcd7', '🏆 Финальный челлендж — 3 минуты без остановки: 30 сек jumping jacks, 30 сек приседания, 30 сек mountain climbers, 30 сек быстрые шаги, 30 сек jumping jacks, 30 сек планка'),
-  ('itogovyy-kontrol-goda-sravnit-ves-taliyu-bedra-foto-i-rezultat-amrap-39a783', '📊 ИТОГОВЫЙ КОНТРОЛЬ ГОДА: сравнить вес/талию/бёдра/фото и результат AMRAP с показателями месяца 1 — это финиш 12-месячного цикла DonatelloX')
+  ('itogovyy-kontrol-goda-sravnit-ves-taliyu-bedra-foto-i-rezultat-amrap-39a783', '📊 ИТОГОВЫЙ КОНТРОЛЬ ГОДА: сравнить вес/талию/бёдра/фото и результат AMRAP с показателями месяца 1 — это финиш 12-месячного цикла DonatelleX')
 on conflict (slug) do nothing;
 
 -- =====================================================================
@@ -530,7 +530,7 @@ begin
   insert into public.workout_programs
     (slug, title, description, goal, gender, training_format, difficulty, duration_weeks, workouts_per_week, is_premium, locale)
   values
-    ('pohudenie-zhenshchiny-doma', 'Похудение для женщин (дома) — DonatelloX, годовая программа', 'Похудение для женщин (дома) — DonatelloX, годовая программа. Оборудование: Гантели, резинки разной жёсткости, коврик, устойчивая платформа/ступень (по возможности)', 'lose_weight', 'female', 'home', 'intermediate', 48, 4, true, 'ru')
+    ('pohudenie-zhenshchiny-doma', 'Похудение для женщин (дома) — DonatelleX, годовая программа', 'Похудение для женщин (дома) — DonatelleX, годовая программа. Оборудование: Гантели, резинки разной жёсткости, коврик, устойчивая платформа/ступень (по возможности)', 'lose_weight', 'female', 'home', 'intermediate', 48, 4, true, 'ru')
   on conflict (slug) do update set
     title = excluded.title, description = excluded.description, goal = excluded.goal,
     gender = excluded.gender, training_format = excluded.training_format,

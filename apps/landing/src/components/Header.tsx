@@ -36,7 +36,7 @@ export function Header() {
           <div className="flex h-8 w-8 items-center justify-center rounded-md bg-volt-400 font-display font-bold text-ink-950">
             D
           </div>
-          <span className="font-display text-lg font-bold">DonatelloX</span>
+          <span className="font-display text-lg font-bold">DonatelleX</span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">

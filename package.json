@@ -2,7 +2,7 @@
   "name": "donatellox",
   "version": "0.1.0",
   "private": true,
-  "description": "DonatelloX — фитнес-платформа: PWA, админ-панель и лендинг на монорепозитории",
+  "description": "DonatelleX — фитнес-платформа: PWA, админ-панель и лендинг на монорепозитории",
   "engines": {
     "node": ">=20.0.0",
     "pnpm": ">=9.0.0"

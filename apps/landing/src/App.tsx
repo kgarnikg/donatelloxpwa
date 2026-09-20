@@ -13,6 +13,7 @@ import { Pricing } from "@/sections/Pricing";
 import { Steps } from "@/sections/Steps";
 import { Faq } from "@/sections/Faq";
 import { CallToAction } from "@/sections/CallToAction";
+import { ExitIntentModal } from "@/components/ExitIntentModal";
 
 function HomePage() {
   return (
@@ -71,6 +72,7 @@ export default function App() {
       </Routes>
       <RegionSwitcher />
       <LanguageSwitcher />
+      <ExitIntentModal />
     </RegionProvider>
   );
 }
