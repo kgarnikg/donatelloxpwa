@@ -23,7 +23,11 @@ export function Hero() {
   // способом, что и ролик на кнопке (см. ниже). Пока не загрузилось (или
   // не задано) — используется файл по умолчанию из самого проекта, не
   // пустой экран.
-  const [backgroundVideoUrl, setBackgroundVideoUrl] = useState<string>("/video/hero-video.mp4");
+  // ?v=2 — принудительно "новый" URL для браузера/CDN после замены файла
+  // с тем же именем (см. PROJECT_PLAN.md) — иначе старая кешированная
+  // копия могла бы показываться ещё долго, несмотря на новый деплой.
+  // При следующей замене видео под тем же именем — увеличить версию.
+  const [backgroundVideoUrl, setBackgroundVideoUrl] = useState<string>("/video/hero-video.mp4?v=2");
 
   useEffect(() => {
     async function loadHeroSettings() {
