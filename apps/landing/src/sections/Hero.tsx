@@ -24,6 +24,7 @@ export function Hero() {
     t("hero.checklist.results"),
     t("hero.checklist.price", { price: formatAmount(region, cheapest.perMonthAmount), perDay: formatAmount(region, perDay) }),
     t("hero.checklist.flexible"),
+    t("hero.checklist.freeWeek"),
   ];
 
   return (
@@ -85,12 +86,10 @@ export function Hero() {
           )}
         </div>
 
-        <p className="mt-3 text-xs text-neutral-400 sm:text-sm">{t("hero.disclaimer")}</p>
-
         {/* Социальное доказательство — стилизованные аватары (не выдаём себя за
             реальные фото пользователей без их согласия), число — по решению
             владельца продукта, не выдумано автоматически. */}
-        <div className="mt-4 flex animate-fade-in items-center gap-3">
+        <div className="mt-5 flex animate-fade-in items-center gap-3">
           <div className="flex -space-x-2">
             {AVATAR_COLORS.map((color, i) => (
               <div

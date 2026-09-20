@@ -15,14 +15,14 @@
     "eyebrow": "DonatelleX Fitness Training",
     "ctaPrimary": "Inizia gratis",
     "ctaSecondary": "Scopri di più",
-    "disclaimer": "Prima settimana e primo programma gratis · Nessuna carta richiesta per iniziare",
     "scrollHint": "Scorri in basso",
     "socialProof": "10.000+ persone si allenano già nell'app",
     "checklist": {
       "personalized": "Personalizzato in base al tuo obiettivo e livello",
       "results": "Primi risultati in sole 4–8 settimane",
       "price": "Da {{price}}/mese — meno di {{perDay}}/giorno",
-      "flexible": "A casa o in palestra — formati flessibili"
+      "flexible": "A casa o in palestra — formati flessibili",
+      "freeWeek": "Prima settimana gratis — senza carta"
     },
     "titleBefore": "Il progresso inizia con",
     "titleHighlight": "DonatelleX Power System"

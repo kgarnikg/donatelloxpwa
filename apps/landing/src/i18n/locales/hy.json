@@ -15,14 +15,14 @@
     "eyebrow": "DonatelleX Fitness Training",
     "ctaPrimary": "Սկսել անվճար",
     "ctaSecondary": "Իմանալ ավելին",
-    "disclaimer": "Առաջին շաբաթը և առաջին ծրագիրը անվճար են · Քարտ պետք չէ մեկնարկելու համար",
     "scrollHint": "Ոլորիր ներքև",
     "socialProof": "10,000+ մարդ արդեն մարզվում է հավելվածում",
     "checklist": {
       "personalized": "Անհատականացված ըստ քո նպատակի և մակարդակի",
       "results": "Առաջին արդյունքները՝ ընդամենը 4–8 շաբաթում",
       "price": "{{price}}-ից/ամիս — օրական {{perDay}}-ից պակաս",
-      "flexible": "Տանը կամ մարզասրահում — ճկուն ձևաչափեր"
+      "flexible": "Տանը կամ մարզասրահում — ճկուն ձևաչափեր",
+      "freeWeek": "Առաջին շաբաթը անվճար է՝ առանց քարտի"
     },
     "titleBefore": "Առաջընթացը սկսվում է",
     "titleHighlight": "DonatelleX Power System"

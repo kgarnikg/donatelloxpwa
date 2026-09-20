@@ -15,14 +15,14 @@
     "eyebrow": "DonatelleX Fitness Training",
     "ctaPrimary": "मुफ़्त में शुरू करें",
     "ctaSecondary": "और जानें",
-    "disclaimer": "पहला हफ्ता और पहला प्रोग्राम मुफ़्त · शुरू करने के लिए कार्ड ज़रूरी नहीं",
     "scrollHint": "नीचे स्क्रॉल करें",
     "socialProof": "10,000+ लोग पहले से ऐप में ट्रेनिंग कर रहे हैं",
     "checklist": {
       "personalized": "आपके लक्ष्य और लेवल के हिसाब से पर्सनलाइज़्ड",
       "results": "सिर्फ़ 4–8 हफ़्तों में पहले नतीजे",
       "price": "{{price}}/माह से शुरू — {{perDay}}/दिन से कम",
-      "flexible": "घर पर या जिम में — फ्लेक्सिबल फॉर्मेट"
+      "flexible": "घर पर या जिम में — फ्लेक्सिबल फॉर्मेट",
+      "freeWeek": "पहला हफ़्ता मुफ़्त — कार्ड की ज़रूरत नहीं"
     },
     "titleBefore": "प्रगति शुरू होती है",
     "titleHighlight": "DonatelleX Power System"

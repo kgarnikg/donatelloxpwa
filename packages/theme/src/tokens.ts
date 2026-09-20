@@ -52,16 +52,35 @@ export const colors = {
 } as const;
 
 export const fontFamily = {
-  // Заголовки — плотный жирный гротеск для энергичных заголовков.
-  // Было "Clash Display" — платный шрифт (не доступен бесплатно через
-  // Google Fonts) и физически никогда не подключался ни на одной
-  // странице (не было ни <link>, ни @font-face) — заголовки всё это
-  // время рендерились системным шрифтом браузера по умолчанию.
-  display: ["Archivo Black", "Manrope", "system-ui", "sans-serif"],
-  // Основной текст интерфейса — нейтральный, отлично читается в мелком
-  // размере. Сам шрифт бесплатный (это открытый Google Font), просто
-  // тоже никогда не подключался явно — тот же баг, что и с display.
-  body: ["Manrope", "system-ui", "-apple-system", "sans-serif"],
+  // Заголовки. Раньше здесь стоял отдельный, физически не загружавшийся
+  // шрифт (сначала "Clash Display" — платный, потом ошибочно заменённый
+  // на "Archivo Black" — грузится, но НЕ ЗНАЕТ кириллицу и большинство
+  // других письменностей сайта). Теперь — тот же Manrope, что и для
+  // основного текста (он уже гарантированно грузится через fonts.css и
+  // покрывает Latin+Cyrillic) — жирность на заголовках задаётся отдельно
+  // через .font-display в CSS (font-weight: 800), не через сам шрифт.
+  // Для писем не на Latin/Cyrillic (армянский/арабский/хинди/панджаби,
+  // которые Manrope не покрывает) — Noto Sans с нужным охватом, тоже
+  // грузится через fonts.css.
+  display: [
+    "Manrope",
+    "Noto Sans Arabic",
+    "Noto Sans Armenian",
+    "Noto Sans Devanagari",
+    "Noto Sans Gurmukhi",
+    "system-ui",
+    "sans-serif",
+  ],
+  body: [
+    "Manrope",
+    "Noto Sans Arabic",
+    "Noto Sans Armenian",
+    "Noto Sans Devanagari",
+    "Noto Sans Gurmukhi",
+    "system-ui",
+    "-apple-system",
+    "sans-serif",
+  ],
   mono: ["JetBrains Mono", "ui-monospace", "monospace"],
 } as const;
 

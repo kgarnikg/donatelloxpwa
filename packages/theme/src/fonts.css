@@ -1,13 +1,18 @@
 /**
  * @donatellox/theme/fonts.css
  * Подключить один раз в апп-энтри (main.tsx) каждого приложения.
- * Manrope — через Google Fonts CDN (Fontsource можно подключить позже для self-hosting).
+ * Manrope — через Google Fonts CDN, покрывает Latin+Cyrillic (не покрывает
+ * армянский/арабский/хинди/панджаби — для них отдельные Noto Sans-шрифты
+ * ниже, подключаются на всех трёх приложениях ради лендинга, где реально
+ * используются все 10 языков; для web/admin (ru+en) — просто не задействуются).
  */
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;700;900&family=Noto+Sans+Armenian:wght@400;700;900&family=Noto+Sans+Devanagari:wght@400;700;900&family=Noto+Sans+Gurmukhi:wght@400;700;900&display=swap");
 
 :root {
-  --font-body: "Manrope", system-ui, -apple-system, sans-serif;
-  --font-display: "Manrope", system-ui, sans-serif;
+  --font-body: "Manrope", "Noto Sans Arabic", "Noto Sans Armenian", "Noto Sans Devanagari",
+    "Noto Sans Gurmukhi", system-ui, -apple-system, sans-serif;
+  --font-display: "Manrope", "Noto Sans Arabic", "Noto Sans Armenian", "Noto Sans Devanagari",
+    "Noto Sans Gurmukhi", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
@@ -15,4 +20,12 @@ html {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* Manrope (и Noto Sans-семейства выше) сами по себе не выглядят "жирными
+   по умолчанию", в отличие от однонасыщенных display-шрифтов вроде Archivo
+   Black — поэтому жирность заголовков задаём явно здесь, один раз, а не
+   вручную на каждом .font-display в каждом компоненте (где легко забыть). */
+.font-display {
+  font-weight: 800;
 }
