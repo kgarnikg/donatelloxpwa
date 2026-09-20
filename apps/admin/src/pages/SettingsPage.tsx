@@ -8,13 +8,38 @@ import { supabase } from "@/lib/supabase";
  * рантайме без редеплоя. Список полей намеренно вынесен отдельно от formы
  * — добавление новой настройки в будущем = одна новая запись здесь, а не
  * переписывание страницы.
+ *
+ * Видео на кнопке "Узнать больше" — отдельная ссылка под каждый язык
+ * лендинга, у которого есть готовый ролик (пока 4: ru/en/es/hy — по числу
+ * языков, на которые переведён и контент программ, см. PROJECT_PLAN.md,
+ * Фаза 6). Сайт сам выбирает нужную по языку интерфейса посетителя, с
+ * запасным вариантом на русский, если для текущего языка видео ещё нет.
  */
-const SETTINGS_FIELDS: { key: string; label: string; placeholder: string; help: string }[] = [
+const SETTINGS_FIELDS: { key: string; label: string; placeholder: string; help: string; group?: string }[] = [
   {
-    key: "hero_showreel_url",
-    label: "Видео на кнопке «Узнать больше» (лендинг)",
+    key: "hero_showreel_url_ru",
+    label: "Русский (запасной вариант, если для языка посетителя видео нет)",
     placeholder: "https://… (YouTube или прямая ссылка на mp4)",
-    help: "Подходит и YouTube-ссылка, и прямая ссылка на файл (например, из Cloudflare R2/Bunny Storage) — сайт сам определит, что перед ним. Пусто — кнопка просто скроллит к следующему блоку лендинга.",
+    help: "",
+    group: "Видео на кнопке «Узнать больше» (лендинг) — по языкам",
+  },
+  {
+    key: "hero_showreel_url_en",
+    label: "English",
+    placeholder: "https://…",
+    help: "",
+  },
+  {
+    key: "hero_showreel_url_es",
+    label: "Español",
+    placeholder: "https://…",
+    help: "",
+  },
+  {
+    key: "hero_showreel_url_hy",
+    label: "Հայերեն (армянский)",
+    placeholder: "https://…",
+    help: "Подходит и YouTube-ссылка, и прямая ссылка на файл (например, из Cloudflare R2/Bunny Storage) — сайт сам определит, что перед ним. Пусто для конкретного языка — покажется русская версия; если и она пуста — кнопка просто скроллит к следующему блоку лендинга.",
   },
 ];
 
@@ -67,12 +92,18 @@ export default function SettingsPage() {
       {isLoading ? (
         <div className="card mt-6 h-40 animate-pulse bg-ink-800" />
       ) : (
-        <form onSubmit={handleSubmit((v) => saveSettings.mutate(v))} className="card mt-6 max-w-xl space-y-5">
-          {SETTINGS_FIELDS.map((field) => (
+        <form onSubmit={handleSubmit((v) => saveSettings.mutate(v))} className="card mt-6 max-w-xl space-y-4">
+          {SETTINGS_FIELDS.map((field, i) => (
             <div key={field.key}>
+              {field.group && (
+                <>
+                  {i > 0 && <div className="my-2 border-t border-ink-700" />}
+                  <p className="mb-3 text-sm font-semibold text-neutral-200">{field.group}</p>
+                </>
+              )}
               <label className="mb-1.5 block text-sm font-medium text-neutral-300">{field.label}</label>
               <input className="input-field" placeholder={field.placeholder} {...register(field.key)} />
-              <p className="mt-1 text-xs text-neutral-500">{field.help}</p>
+              {field.help && <p className="mt-1 text-xs text-neutral-500">{field.help}</p>}
             </div>
           ))}
 

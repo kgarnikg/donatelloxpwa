@@ -11,7 +11,7 @@ const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
 const AVATAR_COLORS = ["bg-volt-400", "bg-ember-400", "bg-info", "bg-warning", "bg-success"];
 
 export function Hero() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { region } = useRegion();
   const [showreelOpen, setShowreelOpen] = useState(false);
   // Ссылка на ролик берётся из БД (настраивается в админке, "Настройки
@@ -23,12 +23,22 @@ export function Hero() {
   useEffect(() => {
     async function loadShowreelUrl() {
       try {
+        // Одним запросом тянем сразу все языковые варианты — дальше уже
+        // на клиенте выбираем нужный. Так же, как и с переводом контента
+        // программ (localizedField), запасной вариант — русский: если для
+        // языка посетителя своего ролика ещё не загрузили, показываем его,
+        // а не пустоту.
         const { data } = await supabase
           .from("site_settings")
-          .select("value")
-          .eq("key", "hero_showreel_url")
-          .maybeSingle();
-        if (data?.value) setShowreelUrl(data.value);
+          .select("key, value")
+          .in("key", ["hero_showreel_url_ru", "hero_showreel_url_en", "hero_showreel_url_es", "hero_showreel_url_hy"]);
+        if (!data) return;
+
+        const byLang = Object.fromEntries(
+          data.map((row) => [row.key.replace("hero_showreel_url_", ""), row.value]),
+        );
+        const lang = i18n.language.split("-")[0]; // "en-US" -> "en"
+        setShowreelUrl(byLang[lang] || byLang.ru || null);
       } catch {
         // Настройка необязательна — если запрос не удался (например, сайт
         // ещё не подключён к свежей базе), кнопка просто ведёт на блок
@@ -36,7 +46,7 @@ export function Hero() {
       }
     }
     loadShowreelUrl();
-  }, []);
+  }, [i18n.language]);
 
   const cheapest = getRegionAmounts(region).annual;
   // Целое число дней в месяце — достаточно точно для маркетингового "меньше X в день",
