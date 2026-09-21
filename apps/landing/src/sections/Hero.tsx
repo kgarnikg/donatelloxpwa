@@ -27,7 +27,7 @@ export function Hero() {
   // с тем же именем (см. PROJECT_PLAN.md) — иначе старая кешированная
   // копия могла бы показываться ещё долго, несмотря на новый деплой.
   // При следующей замене видео под тем же именем — увеличить версию.
-  const [backgroundVideoUrl, setBackgroundVideoUrl] = useState<string>("/video/hero-video.mp4?v=2");
+  const [backgroundVideoUrl, setBackgroundVideoUrl] = useState<string>("/video/hero-video.mp4?v=3");
 
   useEffect(() => {
     async function loadHeroSettings() {
