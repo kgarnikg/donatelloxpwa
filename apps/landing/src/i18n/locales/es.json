@@ -138,25 +138,24 @@
     },
     "plans": {
       "monthly": {
-        "label": "1 mes",
-        "perMonth": "al mes"
+        "label": "1 mes"
       },
       "quarterly": {
         "label": "3 meses",
-        "perMonth": "{{amount}} / mes",
         "originalTotal": "{{amount}} por 3 meses"
       },
       "semiannual": {
         "label": "6 meses",
-        "perMonth": "{{amount}} / mes",
         "originalTotal": "{{amount}} por 6 meses"
       },
       "annual": {
         "label": "12 meses",
-        "perMonth": "{{amount}} / mes",
         "originalTotal": "{{amount}} al año"
       }
-    }
+    },
+    "perMonthSuffix": "/ mes",
+    "billedOnce": "Se cobra {{amount}} por {{label}}",
+    "startingFrom": "Desde {{amount}}/mes"
   },
   "steps": {
     "eyebrow": "Cómo empezar",

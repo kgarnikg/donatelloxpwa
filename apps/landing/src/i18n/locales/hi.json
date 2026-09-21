@@ -138,25 +138,24 @@
     },
     "plans": {
       "monthly": {
-        "label": "1 महीना",
-        "perMonth": "प्रति माह"
+        "label": "1 महीना"
       },
       "quarterly": {
         "label": "3 महीने",
-        "perMonth": "{{amount}} / माह",
         "originalTotal": "3 महीने के लिए {{amount}}"
       },
       "semiannual": {
         "label": "6 महीने",
-        "perMonth": "{{amount}} / माह",
         "originalTotal": "6 महीने के लिए {{amount}}"
       },
       "annual": {
         "label": "12 महीने",
-        "perMonth": "{{amount}} / माह",
         "originalTotal": "सालाना {{amount}}"
       }
-    }
+    },
+    "perMonthSuffix": "/ माह",
+    "billedOnce": "{{label}} के लिए {{amount}} चार्ज होगा",
+    "startingFrom": "{{amount}}/माह से शुरू"
   },
   "steps": {
     "eyebrow": "कैसे शुरू करें",

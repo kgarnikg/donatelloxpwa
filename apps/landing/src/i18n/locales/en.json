@@ -152,25 +152,24 @@
     },
     "plans": {
       "monthly": {
-        "label": "1 month",
-        "perMonth": "per month"
+        "label": "1 month"
       },
       "quarterly": {
         "label": "3 months",
-        "perMonth": "{{amount}} / mo.",
         "originalTotal": "{{amount}} for 3 mo."
       },
       "semiannual": {
         "label": "6 months",
-        "perMonth": "{{amount}} / mo.",
         "originalTotal": "{{amount}} for 6 mo."
       },
       "annual": {
         "label": "12 months",
-        "perMonth": "{{amount}} / mo.",
         "originalTotal": "{{amount}} per year"
       }
-    }
+    },
+    "perMonthSuffix": "/ mo.",
+    "billedOnce": "Billed {{amount}} for {{label}}",
+    "startingFrom": "From {{amount}}/month"
   },
   "steps": {
     "eyebrow": "How it works",

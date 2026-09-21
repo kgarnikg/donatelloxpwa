@@ -138,25 +138,24 @@
     },
     "plans": {
       "monthly": {
-        "label": "1 ਮਹੀਨਾ",
-        "perMonth": "ਪ੍ਰਤੀ ਮਹੀਨਾ"
+        "label": "1 ਮਹੀਨਾ"
       },
       "quarterly": {
         "label": "3 ਮਹੀਨੇ",
-        "perMonth": "{{amount}} / ਮਹੀਨਾ",
         "originalTotal": "3 ਮਹੀਨਿਆਂ ਲਈ {{amount}}"
       },
       "semiannual": {
         "label": "6 ਮਹੀਨੇ",
-        "perMonth": "{{amount}} / ਮਹੀਨਾ",
         "originalTotal": "6 ਮਹੀਨਿਆਂ ਲਈ {{amount}}"
       },
       "annual": {
         "label": "12 ਮਹੀਨੇ",
-        "perMonth": "{{amount}} / ਮਹੀਨਾ",
         "originalTotal": "ਸਾਲਾਨਾ {{amount}}"
       }
-    }
+    },
+    "perMonthSuffix": "/ ਮਹੀਨਾ",
+    "billedOnce": "{{label}} ਲਈ {{amount}} ਚਾਰਜ ਹੋਵੇਗਾ",
+    "startingFrom": "{{amount}}/ਮਹੀਨਾ ਤੋਂ ਸ਼ੁਰੂ"
   },
   "steps": {
     "eyebrow": "ਕਿਵੇਂ ਸ਼ੁਰੂ ਕਰੀਏ",

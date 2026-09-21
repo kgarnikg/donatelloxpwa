@@ -138,25 +138,24 @@
     },
     "plans": {
       "monthly": {
-        "label": "1 ամիս",
-        "perMonth": "ամսական"
+        "label": "1 ամիս"
       },
       "quarterly": {
         "label": "3 ամիս",
-        "perMonth": "{{amount}} / ամսական",
         "originalTotal": "{{amount}} 3 ամսվա համար"
       },
       "semiannual": {
         "label": "6 ամիս",
-        "perMonth": "{{amount}} / ամսական",
         "originalTotal": "{{amount}} 6 ամսվա համար"
       },
       "annual": {
         "label": "12 ամիս",
-        "perMonth": "{{amount}} / ամսական",
         "originalTotal": "{{amount}} տարեկան"
       }
-    }
+    },
+    "perMonthSuffix": "/ ամսական",
+    "billedOnce": "Կգանձվի {{amount}}՝ {{label}}-ի համար",
+    "startingFrom": "{{amount}}-ից ամսական"
   },
   "steps": {
     "eyebrow": "Ինչպես սկսել",

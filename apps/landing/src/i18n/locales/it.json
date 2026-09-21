@@ -138,25 +138,24 @@
     },
     "plans": {
       "monthly": {
-        "label": "1 mese",
-        "perMonth": "al mese"
+        "label": "1 mese"
       },
       "quarterly": {
         "label": "3 mesi",
-        "perMonth": "{{amount}} / mese",
         "originalTotal": "{{amount}} per 3 mesi"
       },
       "semiannual": {
         "label": "6 mesi",
-        "perMonth": "{{amount}} / mese",
         "originalTotal": "{{amount}} per 6 mesi"
       },
       "annual": {
         "label": "12 mesi",
-        "perMonth": "{{amount}} / mese",
         "originalTotal": "{{amount}} all'anno"
       }
-    }
+    },
+    "perMonthSuffix": "/ mese",
+    "billedOnce": "Addebito unico di {{amount}} per {{label}}",
+    "startingFrom": "Da {{amount}}/mese"
   },
   "steps": {
     "eyebrow": "Come iniziare",

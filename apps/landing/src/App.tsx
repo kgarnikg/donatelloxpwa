@@ -20,10 +20,10 @@ function HomePage() {
   return (
     <>
       <Hero />
+      <Pricing />
       <ForWomenMen />
       <Modules />
       <WeeklyPlan />
-      <Pricing />
       <Steps />
       <Faq />
       <CallToAction />

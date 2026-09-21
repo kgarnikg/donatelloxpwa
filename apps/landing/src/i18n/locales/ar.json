@@ -138,25 +138,24 @@
     },
     "plans": {
       "monthly": {
-        "label": "شهر واحد",
-        "perMonth": "شهريًا"
+        "label": "شهر واحد"
       },
       "quarterly": {
         "label": "3 أشهر",
-        "perMonth": "{{amount}} / شهريًا",
         "originalTotal": "{{amount}} لمدة 3 أشهر"
       },
       "semiannual": {
         "label": "6 أشهر",
-        "perMonth": "{{amount}} / شهريًا",
         "originalTotal": "{{amount}} لمدة 6 أشهر"
       },
       "annual": {
         "label": "12 شهرًا",
-        "perMonth": "{{amount}} / شهريًا",
         "originalTotal": "{{amount}} سنويًا"
       }
-    }
+    },
+    "perMonthSuffix": "/ شهريًا",
+    "billedOnce": "يُخصم {{amount}} مقابل {{label}}",
+    "startingFrom": "ابتداءً من {{amount}}/شهريًا"
   },
   "steps": {
     "eyebrow": "كيف تبدأ",

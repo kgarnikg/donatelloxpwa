@@ -152,25 +152,24 @@
     },
     "plans": {
       "monthly": {
-        "label": "1 месяц",
-        "perMonth": "в месяц"
+        "label": "1 месяц"
       },
       "quarterly": {
         "label": "3 месяца",
-        "perMonth": "{{amount}} / мес.",
         "originalTotal": "{{amount}} за 3 мес."
       },
       "semiannual": {
         "label": "6 месяцев",
-        "perMonth": "{{amount}} / мес.",
         "originalTotal": "{{amount}} за 6 мес."
       },
       "annual": {
         "label": "12 месяцев",
-        "perMonth": "{{amount}} / мес.",
         "originalTotal": "{{amount}} за год"
       }
-    }
+    },
+    "perMonthSuffix": "/ мес.",
+    "billedOnce": "Спишется {{amount}} за {{label}}",
+    "startingFrom": "От {{amount}} в месяц"
   },
   "steps": {
     "eyebrow": "Как начать",

@@ -138,25 +138,24 @@
     },
     "plans": {
       "monthly": {
-        "label": "1 місяць",
-        "perMonth": "на місяць"
+        "label": "1 місяць"
       },
       "quarterly": {
         "label": "3 місяці",
-        "perMonth": "{{amount}} / міс.",
         "originalTotal": "{{amount}} за 3 міс."
       },
       "semiannual": {
         "label": "6 місяців",
-        "perMonth": "{{amount}} / міс.",
         "originalTotal": "{{amount}} за 6 міс."
       },
       "annual": {
         "label": "12 місяців",
-        "perMonth": "{{amount}} / міс.",
         "originalTotal": "{{amount}} за рік"
       }
-    }
+    },
+    "perMonthSuffix": "/ міс.",
+    "billedOnce": "Спишеться {{amount}} за {{label}}",
+    "startingFrom": "Від {{amount}} на місяць"
   },
   "steps": {
     "eyebrow": "Як почати",

@@ -68,11 +68,14 @@ export function Hero() {
   const perDay = (Number(cheapest.perMonthAmount.replace(/\s/g, "").replace(",", ".")) / 30).toFixed(2);
 
   const checklist = [
-    t("hero.checklist.personalized"),
-    t("hero.checklist.results"),
-    t("hero.checklist.price", { price: formatAmount(region, cheapest.perMonthAmount), perDay: formatAmount(region, perDay) }),
-    t("hero.checklist.flexible"),
-    t("hero.checklist.freeWeek"),
+    { text: t("hero.checklist.personalized") },
+    { text: t("hero.checklist.results") },
+    {
+      text: t("hero.checklist.price", { price: formatAmount(region, cheapest.perMonthAmount), perDay: formatAmount(region, perDay) }),
+      href: "#pricing",
+    },
+    { text: t("hero.checklist.flexible") },
+    { text: t("hero.checklist.freeWeek") },
   ];
 
   return (
@@ -113,11 +116,22 @@ export function Hero() {
             громким заголовком. */}
         <ul className="mt-3 flex animate-fade-in flex-col gap-1.5 text-left sm:mt-5 sm:gap-2 sm:items-start">
           {checklist.map((item) => (
-            <li key={item} className="flex items-center gap-2.5 text-base font-medium text-neutral-100 sm:text-lg">
+            <li key={item.text} className="flex items-center gap-2.5 text-base font-medium text-neutral-100 sm:text-lg">
               <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-volt-400 text-ink-950">
                 <Check size={13} strokeWidth={3.5} />
               </span>
-              {item}
+              {item.href ? (
+                // Пункт про цену — кликабельный, ведёт прямо на блок с
+                // тарифами. Друзья пользователя, смотревшие с телефона,
+                // не сразу понимали, как до этого блока добраться (ссылка
+                // в шапке спрятана за гамбургер-меню) — так можно попасть
+                // туда одним тапом прямо с первого экрана.
+                <a href={item.href} className="underline decoration-volt-400/50 decoration-2 underline-offset-4 transition hover:text-volt-400">
+                  {item.text}
+                </a>
+              ) : (
+                item.text
+              )}
             </li>
           ))}
         </ul>
