@@ -8,6 +8,7 @@ import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 import { localizedField } from "@/lib/localizedField";
 import { getYouTubeEmbedUrl } from "@/lib/video";
+import { triggerHapticPulse } from "@/lib/haptics";
 import type { Exercise, WorkoutSet } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 
@@ -157,10 +158,10 @@ export default function WorkoutPlayerPage() {
       clearRestInterval();
 
       if (document.visibilityState === "visible") {
-        // Страница на экране — обычная вибрация работает нормально.
-        if (typeof navigator !== "undefined" && "vibrate" in navigator) {
-          navigator.vibrate?.(200);
-        }
+        // Страница на экране — пробуем оба известных способа разом (обычный
+        // navigator.vibrate для Android/Chrome + резервный трюк под iOS
+        // Safari, где Vibration API в принципе не реализован — см. lib/haptics.ts).
+        triggerHapticPulse();
       } else if (typeof Notification !== "undefined" && Notification.permission === "granted") {
         // Страница свёрнута — прямой navigator.vibrate() браузер молча
         // игнорирует (намеренное ограничение платформы, не обойти). Вместо
@@ -168,7 +169,10 @@ export default function WorkoutPlayerPage() {
         // вибрации — это идёт через систему уведомлений ОС, а не через
         // голый JS страницы, поэтому шанс реальной вибрации в фоне выше
         // (не 100% гарантия на iOS, но лучшее, что доступно без сервера
-        // push-уведомлений — см. комментарий в PROJECT_PLAN.md).
+        // push-уведомлений — см. комментарий в PROJECT_PLAN.md). Плюс тот
+        // же best-effort iOS-трюк — на случай, если колбэк таймера всё же
+        // выполняется в фоне у части браузеров.
+        triggerHapticPulse();
         const title =
           restState.kind === "exercise" ? t("workout.restingNextExercise") : t("workout.resting");
         navigator.serviceWorker?.ready
