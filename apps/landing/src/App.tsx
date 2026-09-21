@@ -6,7 +6,7 @@ import { LegalPage } from "@/components/LegalPage";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { RegionSwitcher } from "@/components/RegionSwitcher";
 import { RegionProvider, useRegion } from "@/context/RegionContext";
-import { Hero } from "@/sections/Hero";
+import { Hero, HeroMobileDetails } from "@/sections/Hero";
 import { ForWomenMen } from "@/sections/ForWomenMen";
 import { Modules } from "@/sections/Modules";
 import { WeeklyPlan } from "@/sections/WeeklyPlan";
@@ -20,6 +20,7 @@ function HomePage() {
   return (
     <>
       <Hero />
+      <HeroMobileDetails />
       <Pricing />
       <ForWomenMen />
       <Modules />

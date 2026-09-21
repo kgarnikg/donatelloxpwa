@@ -129,7 +129,15 @@
     "resting": "Հանգիստ",
     "skipRest": "Բաց թողնել հանգիստը",
     "restingNextExercise": "Հաջորդ վարժությունից առաջ",
-    "restDoneBody": "Ժամանակն է շարունակել մարզումը"
+    "restDoneBody": "Ժամանակն է շարունակել մարզումը",
+    "setLabel": "հրահանգի համաձայն",
+    "confirmExitTitle": "Դուրս գա՞լ մարզումից",
+    "confirmExitBody": "Նշված մոտեցումները չեն պահպանվի, եթե չսեղմես «Ավարտել մարզումը»։",
+    "confirmExitStay": "Մնալ",
+    "confirmExitLeave": "Դուրս գալ",
+    "moveLater": "Տեղափոխել ավելի ուշ",
+    "replace": "Փոխարինել",
+    "replaced": "Փոխարինված է ✓"
   },
   "nutrition": {
     "title": "Սնունդ",

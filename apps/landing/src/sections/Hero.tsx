@@ -113,8 +113,14 @@ export function Hero() {
 
         {/* Чек-лист в духе референса — коротко, по делу, каждый пункт правда.
             Шрифт крупнее и жирнее обычного текста — не мельчить рядом с
-            громким заголовком. */}
-        <ul className="mt-3 flex animate-fade-in flex-col gap-1.5 text-left sm:mt-5 sm:gap-2 sm:items-start">
+            громким заголовком.
+            На мобильном скрыт здесь — первый экран нарочно оставлен только
+            под яркий фон + заголовок, без мелких подробностей (запрос
+            пользователя: "перегружено"). Те же пункты показываются чуть
+            ниже, вне зоны min-h-dvh — см. HeroMobileDetails внизу файла,
+            подключается в App.tsx сразу после <Hero />. Десктоп — как был,
+            без изменений. */}
+        <ul className="mt-3 hidden animate-fade-in flex-col gap-1.5 text-left sm:mt-5 sm:gap-2 lg:flex lg:items-start">
           {checklist.map((item) => (
             <li key={item.text} className="flex items-center gap-2.5 text-base font-medium text-neutral-100 sm:text-lg">
               <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-volt-400 text-ink-950">
@@ -143,21 +149,24 @@ export function Hero() {
           >
             {t("hero.ctaPrimary")} <ArrowRight size={18} />
           </a>
-          {showreelUrl ? (
-            <button onClick={() => setShowreelOpen(true)} className="btn-secondary">
-              <PlayCircle size={18} /> {t("hero.ctaSecondary")}
-            </button>
-          ) : (
-            <a href="#modules" className="btn-secondary">
-              <PlayCircle size={18} /> {t("hero.ctaSecondary")}
-            </a>
-          )}
+          {/* Вторая кнопка (видео) — тоже только на десктопе, та же логика
+              упрощения первого экрана на мобильном. */}
+          <div className="hidden lg:block">
+            {showreelUrl ? (
+              <button onClick={() => setShowreelOpen(true)} className="btn-secondary">
+                <PlayCircle size={18} /> {t("hero.ctaSecondary")}
+              </button>
+            ) : (
+              <a href="#modules" className="btn-secondary">
+                <PlayCircle size={18} /> {t("hero.ctaSecondary")}
+              </a>
+            )}
+          </div>
         </div>
 
-        {/* Социальное доказательство — стилизованные аватары (не выдаём себя за
-            реальные фото пользователей без их согласия), число — по решению
-            владельца продукта, не выдумано автоматически. */}
-        <div className="mt-3 flex animate-fade-in items-center gap-3 sm:mt-5">
+        {/* Социальное доказательство — только на десктопе здесь, на мобильном
+            переехало в HeroMobileDetails (см. комментарий у чек-листа выше). */}
+        <div className="mt-5 hidden animate-fade-in items-center gap-3 lg:flex">
           <div className="flex -space-x-2">
             {AVATAR_COLORS.map((color, i) => (
               <div
@@ -210,5 +219,67 @@ export function Hero() {
         <ChevronDown size={18} />
       </a>
     </section>
+  );
+}
+
+/**
+ * Те же подробности (чек-лист/вторая кнопка/соц.доказательство), что на
+ * десктопе живут прямо внутри Hero — на мобильном подключается отдельным
+ * блоком сразу после <Hero /> в App.tsx. Не видео-фон, обычный тёмный фон,
+ * как у остальных секций сайта — первый экран уже полностью "потратил"
+ * яркий эффект инфлюенсера, здесь просто продолжение по смыслу.
+ * На lg+ (десктоп) не рендерится вообще — там всё уже внутри Hero.
+ */
+export function HeroMobileDetails() {
+  const { t } = useTranslation();
+  const { region } = useRegion();
+
+  const cheapest = getRegionAmounts(region).annual;
+  const perDay = (Number(cheapest.perMonthAmount.replace(/\s/g, "").replace(",", ".")) / 30).toFixed(2);
+
+  const checklist = [
+    { text: t("hero.checklist.personalized") },
+    { text: t("hero.checklist.results") },
+    {
+      text: t("hero.checklist.price", { price: formatAmount(region, cheapest.perMonthAmount), perDay: formatAmount(region, perDay) }),
+      href: "#pricing",
+    },
+    { text: t("hero.checklist.flexible") },
+    { text: t("hero.checklist.freeWeek") },
+  ];
+
+  return (
+    <div className="section-container py-8 lg:hidden">
+      <ul className="flex flex-col gap-2 text-left">
+        {checklist.map((item) => (
+          <li key={item.text} className="flex items-center gap-2.5 text-base font-medium text-neutral-100">
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-volt-400 text-ink-950">
+              <Check size={13} strokeWidth={3.5} />
+            </span>
+            {item.href ? (
+              <a href={item.href} className="underline decoration-volt-400/50 decoration-2 underline-offset-4 transition hover:text-volt-400">
+                {item.text}
+              </a>
+            ) : (
+              item.text
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-5 flex items-center gap-3">
+        <div className="flex -space-x-2">
+          {AVATAR_COLORS.map((color, i) => (
+            <div
+              key={i}
+              className={`flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink-950 text-xs font-bold text-ink-950 ${color}`}
+            >
+              {String.fromCharCode(65 + i)}
+            </div>
+          ))}
+        </div>
+        <span className="text-sm text-neutral-400">{t("hero.socialProof")}</span>
+      </div>
+    </div>
   );
 }

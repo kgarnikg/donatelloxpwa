@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Check, ChevronLeft, PlayCircle, Video, TrendingUp, X, Timer } from "lucide-react";
+import { Check, ChevronLeft, PlayCircle, Video, TrendingUp, X, Timer, ArrowDown, Shuffle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
@@ -63,6 +63,7 @@ export default function WorkoutPlayerPage() {
   const navigate = useNavigate();
   const { authUser } = useAuth();
   const [completedIds, setCompletedIds] = useState<Set<string>>(new Set());
+  const [confirmExit, setConfirmExit] = useState(false);
   const [weights, setWeights] = useState<Record<string, string>>({});
   const [startedAt] = useState(() => Date.now());
   const [activeVideo, setActiveVideo] = useState<Exercise | null>(null);
@@ -229,6 +230,55 @@ export default function WorkoutPlayerPage() {
 
   const groups = useMemo(() => (workout ? groupByExercise(workout.sets) : []), [workout]);
 
+  // ---- Переставить/заменить упражнение — только на текущий сеанс -------
+  // Ни то, ни другое не пишет в саму программу (workout_sets в базе) —
+  // иначе поменялось бы для всех, кто проходит эту же тренировку. Заказ
+  // пользователя: "занят тренажёр — подвинуть дальше" и "заменить на
+  // похожее, если это конкретное выполнить нельзя". При сохранении
+  // тренировки (finishMutation ниже) в историю пишется РЕАЛЬНО
+  // выполненное упражнение (после замены, если она была) — иначе личные
+  // рекорды и объём по упражнениям задваивались бы неправильному движению.
+  const [orderOverride, setOrderOverride] = useState<string[] | null>(null);
+  const [substitutions, setSubstitutions] = useState<Record<string, Exercise>>({});
+  const [replacingId, setReplacingId] = useState<string | null>(null);
+
+  const orderedGroups = useMemo(() => {
+    if (!orderOverride) return groups;
+    const byId = new Map(groups.map((g) => [g.exercise.id, g]));
+    const ordered = orderOverride.map((id) => byId.get(id)).filter((g): g is (typeof groups)[number] => !!g);
+    // На случай рассинхронизации (состав groups поменялся под ногами) —
+    // не теряем упражнения, которых нет в сохранённом порядке.
+    const missing = groups.filter((g) => !orderOverride.includes(g.exercise.id));
+    return [...ordered, ...missing];
+  }, [groups, orderOverride]);
+
+  function moveGroupLater(exerciseId: string) {
+    const currentOrder = (orderOverride ?? groups.map((g) => g.exercise.id)).slice();
+    const idx = currentOrder.indexOf(exerciseId);
+    if (idx === -1 || idx === currentOrder.length - 1) return;
+    [currentOrder[idx], currentOrder[idx + 1]] = [currentOrder[idx + 1], currentOrder[idx]];
+    setOrderOverride(currentOrder);
+  }
+
+  async function replaceExercise(original: Exercise) {
+    setReplacingId(original.id);
+    try {
+      const { data } = await supabase
+        .from("exercises")
+        .select("*")
+        .neq("id", original.id)
+        .overlaps("muscle_groups", original.muscleGroups)
+        .limit(25);
+      const candidates = toCamelCase<Exercise[]>(data ?? []);
+      if (candidates.length === 0) return;
+      const pick = candidates[Math.floor(Math.random() * candidates.length)];
+      setSubstitutions((prev) => ({ ...prev, [original.id]: pick }));
+    } finally {
+      setReplacingId(null);
+    }
+  }
+
+
   /** Последние зафиксированные рабочие веса по этой тренировке — для подсказки "в прошлый раз". */
   const { data: lastWeights } = useQuery({
     queryKey: ["last-weights", workoutId, authUser?.id],
@@ -259,10 +309,13 @@ export default function WorkoutPlayerPage() {
       if (!workout) throw new Error("Не удалось определить тренировку.");
 
       const durationMinutes = Math.max(1, Math.round((Date.now() - startedAt) / 60_000));
-      const completedSets: CompletedSetEntry[] = groups.map((g) => ({
-        exerciseId: g.exercise.id,
-        weightKg: weights[g.exercise.id] ? Number(weights[g.exercise.id]) : undefined,
-      }));
+      const completedSets: CompletedSetEntry[] = groups.map((g) => {
+        const actual = substitutions[g.exercise.id] ?? g.exercise;
+        return {
+          exerciseId: actual.id,
+          weightKg: weights[g.exercise.id] ? Number(weights[g.exercise.id]) : undefined,
+        };
+      });
 
       // Суммарный поднятый вес (вес × повторения по всем подходам) — для
       // достижений и статистики "сколько поднято" (0026). Считаем только
@@ -310,7 +363,13 @@ export default function WorkoutPlayerPage() {
   return (
     <div className={clsx("min-h-dvh bg-ink-950 px-5 pt-6", restState ? "pb-48" : "pb-32")}>
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => {
+          if (completedIds.size > 0) {
+            setConfirmExit(true);
+          } else {
+            navigate(-1);
+          }
+        }}
         className="mb-4 flex items-center gap-1 text-sm text-neutral-400 hover:text-neutral-200"
       >
         <ChevronLeft size={18} /> {t("workout.back")}
@@ -322,12 +381,17 @@ export default function WorkoutPlayerPage() {
       <p className="mt-1 text-neutral-400">~{workout.estimatedDurationMinutes} {t("common.min")}</p>
 
       <div className="mt-6 space-y-4">
-        {groups.map((group, groupIndex) => {
+        {orderedGroups.map((group, groupIndex) => {
           const lastWeight = lastWeights?.[group.exercise.id];
           const isWeighted = !group.sets[0].durationSeconds;
+          // group.exercise — то, что ПРЕДПИСАНО программой; displayExercise —
+          // то, что реально показываем/играем (может быть заменено пользователем
+          // на этот сеанс). Подходы/повторения/отдых (group.sets) остаются от
+          // исходного предписания — меняется только сама движение.
+          const displayExercise = substitutions[group.exercise.id] ?? group.exercise;
           const exerciseTitle = localizedField(
-            group.exercise.title,
-            { en: group.exercise.titleEn, es: group.exercise.titleEs, hy: group.exercise.titleHy },
+            displayExercise.title,
+            { en: displayExercise.titleEn, es: displayExercise.titleEs, hy: displayExercise.titleHy },
             i18n.language,
           );
           const firstSetNotes = localizedField(
@@ -346,9 +410,9 @@ export default function WorkoutPlayerPage() {
                   </p>
                 </div>
 
-                {group.exercise.videoUrl ? (
+                {displayExercise.videoUrl ? (
                   <button
-                    onClick={() => openVideo(group.exercise)}
+                    onClick={() => openVideo(displayExercise)}
                     className="flex shrink-0 items-center gap-1.5 rounded-full bg-volt-400/10 px-3 py-1.5 text-xs font-semibold text-volt-400 transition hover:bg-volt-400/20"
                   >
                     <PlayCircle size={14} /> {t("workout.video")}
@@ -358,6 +422,27 @@ export default function WorkoutPlayerPage() {
                     <Video size={14} /> {t("workout.videoSoon")}
                   </span>
                 )}
+              </div>
+
+              {/* "Занят тренажёр — подвинуть дальше" и "заменить на похожее" —
+                  оба только на этот сеанс, см. комментарий у состояния выше. */}
+              <div className="mt-2 flex flex-wrap gap-2">
+                {groupIndex < orderedGroups.length - 1 && (
+                  <button
+                    onClick={() => moveGroupLater(group.exercise.id)}
+                    className="flex items-center gap-1 rounded-full border border-ink-700 px-2.5 py-1 text-xs text-neutral-400 transition hover:border-ink-500 hover:text-neutral-200"
+                  >
+                    <ArrowDown size={12} /> {t("workout.moveLater")}
+                  </button>
+                )}
+                <button
+                  onClick={() => replaceExercise(group.exercise)}
+                  disabled={replacingId === group.exercise.id}
+                  className="flex items-center gap-1 rounded-full border border-ink-700 px-2.5 py-1 text-xs text-neutral-400 transition hover:border-ink-500 hover:text-neutral-200 disabled:opacity-50"
+                >
+                  <Shuffle size={12} className={replacingId === group.exercise.id ? "animate-spin" : ""} />
+                  {substitutions[group.exercise.id] ? t("workout.replaced") : t("workout.replace")}
+                </button>
               </div>
 
               <div className="mt-3 space-y-2">
@@ -400,7 +485,14 @@ export default function WorkoutPlayerPage() {
                     >
                       <p className="text-sm">
                         <span className="text-neutral-500">{t("workout.set", { number: i + 1 })}:</span>{" "}
-                        {set.reps ? t("workout.reps", { count: set.reps }) : `${set.durationSeconds}s`}
+                        {set.reps
+                          ? t("workout.reps", { count: set.reps })
+                          : set.durationSeconds
+                            ? `${set.durationSeconds}s`
+                            : // Составные "финишеры"/круги без числовых reps/duration —
+                              // вся инструкция только в notes (напр. "30 сек высокий темп /
+                              // 60 сек спокойно ×7"). Раньше здесь падало в `${null}s` = "nulls".
+                              set.notes || t("workout.setLabel")}
                         <span className="text-neutral-500"> · {t("workout.rest", { count: set.restSeconds })}</span>
                       </p>
                       <div
@@ -554,6 +646,29 @@ export default function WorkoutPlayerPage() {
           </button>
         </div>
       </div>
+
+      {confirmExit && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
+          onClick={() => setConfirmExit(false)}
+        >
+          <div className="w-full max-w-sm rounded-lg border border-ink-700 bg-ink-900 p-6 text-center" onClick={(e) => e.stopPropagation()}>
+            <p className="font-semibold">{t("workout.confirmExitTitle")}</p>
+            <p className="mt-1.5 text-sm text-neutral-400">{t("workout.confirmExitBody")}</p>
+            <div className="mt-5 flex gap-3">
+              <button onClick={() => setConfirmExit(false)} className="btn-secondary flex-1">
+                {t("workout.confirmExitStay")}
+              </button>
+              <button
+                onClick={() => navigate(-1)}
+                className="flex-1 rounded-md bg-danger px-5 py-3 font-medium text-neutral-0 transition hover:bg-danger/90"
+              >
+                {t("workout.confirmExitLeave")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

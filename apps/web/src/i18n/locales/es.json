@@ -129,7 +129,15 @@
     "resting": "Descanso",
     "skipRest": "Saltar descanso",
     "restingNextExercise": "Antes del siguiente ejercicio",
-    "restDoneBody": "Hora de continuar tu entrenamiento"
+    "restDoneBody": "Hora de continuar tu entrenamiento",
+    "setLabel": "según instrucciones",
+    "confirmExitTitle": "¿Salir del entrenamiento?",
+    "confirmExitBody": "Las series marcadas no se guardarán si no pulsas \"Finalizar entrenamiento\".",
+    "confirmExitStay": "Quedarme",
+    "confirmExitLeave": "Salir",
+    "moveLater": "Mover más tarde",
+    "replace": "Sustituir",
+    "replaced": "Sustituido ✓"
   },
   "nutrition": {
     "title": "Nutrición",

@@ -129,7 +129,15 @@
     "resting": "Resting",
     "skipRest": "Skip rest",
     "restingNextExercise": "Before next exercise",
-    "restDoneBody": "Time to get back to your workout"
+    "restDoneBody": "Time to get back to your workout",
+    "setLabel": "per instructions",
+    "confirmExitTitle": "Leave this workout?",
+    "confirmExitBody": "Checked sets won't be saved unless you tap \"Finish workout\".",
+    "confirmExitStay": "Stay",
+    "confirmExitLeave": "Leave",
+    "moveLater": "Move later",
+    "replace": "Replace",
+    "replaced": "Replaced ✓"
   },
   "nutrition": {
     "title": "Nutrition",

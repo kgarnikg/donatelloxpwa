@@ -129,7 +129,15 @@
     "resting": "Отдых",
     "skipRest": "Пропустить отдых",
     "restingNextExercise": "Перед следующим упражнением",
-    "restDoneBody": "Пора продолжать тренировку"
+    "restDoneBody": "Пора продолжать тренировку",
+    "setLabel": "по инструкции",
+    "confirmExitTitle": "Выйти из тренировки?",
+    "confirmExitBody": "Отмеченные подходы не сохранятся, если не нажать «Завершить тренировку».",
+    "confirmExitStay": "Остаться",
+    "confirmExitLeave": "Выйти",
+    "moveLater": "Подвинуть дальше",
+    "replace": "Заменить",
+    "replaced": "Заменено ✓"
   },
   "nutrition": {
     "title": "Питание",
