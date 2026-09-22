@@ -22,7 +22,17 @@ export default function SupportPage() {
 
   function openEmail() {
     const subject = t("support.emailSubject", { name: profile?.fullName ?? "" });
-    const body = message.trim();
+    // Через mailto: реально откроется ТА почта, что настроена по
+    // умолчанию на телефоне/компьютере — она может отличаться от почты
+    // регистрации в приложении. Добавляем данные клиента прямо в текст
+    // письма, чтобы тренер точно понимал, кто написал, даже если "от
+    // кого" в самом письме будет другой адрес.
+    const clientInfoLines = [
+      profile?.fullName && t("support.clientInfoName", { name: profile.fullName }),
+      profile?.email && t("support.clientInfoEmail", { email: profile.email }),
+      profile?.phone && t("support.clientInfoPhone", { phone: profile.phone }),
+    ].filter(Boolean);
+    const body = [...clientInfoLines, "", message.trim()].join("\n");
     window.location.href = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 

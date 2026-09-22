@@ -338,6 +338,9 @@
     "placeholder": "¿Qué ha pasado?",
     "send": "Enviar",
     "emailSubject": "Solicitud de soporte — {{name}}",
-    "screenshotHint": "¿Necesitas mostrar una captura de pantalla? Adjúntala a mano una vez que se abra el correo."
+    "screenshotHint": "¿Necesitas mostrar una captura de pantalla? Adjúntala a mano una vez que se abra el correo.",
+    "clientInfoName": "Nombre: {{name}}",
+    "clientInfoEmail": "Correo de registro: {{email}}",
+    "clientInfoPhone": "Teléfono: {{phone}}"
   }
 }

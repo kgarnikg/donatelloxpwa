@@ -338,6 +338,9 @@
     "placeholder": "What happened?",
     "send": "Send",
     "emailSubject": "Support request — {{name}}",
-    "screenshotHint": "Need to show a screenshot? Attach it by hand once the email opens."
+    "screenshotHint": "Need to show a screenshot? Attach it by hand once the email opens.",
+    "clientInfoName": "Name: {{name}}",
+    "clientInfoEmail": "Registered email: {{email}}",
+    "clientInfoPhone": "Phone: {{phone}}"
   }
 }

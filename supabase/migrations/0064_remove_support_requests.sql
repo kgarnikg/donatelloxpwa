@@ -6,9 +6,14 @@
 -- бэкенд (Vercel-функция, таблица, приватное хранилище). Раз это не
 -- нужно — убираем лишнее, а не оставляем неиспользуемым мёртвым весом.
 --
+-- ВАЖНО: сам бакет "support-attachments" эта миграция НЕ удаляет —
+-- Supabase намеренно блокирует прямой DELETE по таблицам storage через
+-- SQL (защита от "осиротевших" файлов в реальном хранилище, не только
+-- в базе). Бакет нужно удалить вручную через Dashboard → Storage — см.
+-- инструкцию в PROJECT_PLAN.md рядом с этой миграцией.
+--
 -- Безопасно выполнять повторно (DROP ... IF EXISTS).
 
 drop policy if exists "support_attachments_own_upload" on storage.objects;
-delete from storage.buckets where id = 'support-attachments';
 
 drop table if exists public.support_requests;
