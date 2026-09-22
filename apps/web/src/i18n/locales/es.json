@@ -334,14 +334,10 @@
   },
   "support": {
     "title": "Ayuda",
-    "subtitle": "Describe el problema — responderemos al correo de tu cuenta.",
+    "subtitle": "Describe el problema — se abrirá un correo en tu app de correo habitual, solo envíalo.",
     "placeholder": "¿Qué ha pasado?",
-    "attachScreenshot": "Adjuntar captura de pantalla",
-    "fileTooLarge": "El archivo es demasiado grande (máx. 5 MB)",
     "send": "Enviar",
-    "sending": "Enviando…",
-    "sendError": "No se pudo enviar. Inténtalo de nuevo en un momento.",
-    "sentTitle": "Enviado",
-    "sentBody": "Hemos recibido tu mensaje y responderemos a tu correo pronto."
+    "emailSubject": "Solicitud de soporte — {{name}}",
+    "screenshotHint": "¿Necesitas mostrar una captura de pantalla? Adjúntala a mano una vez que se abra el correo."
   }
 }

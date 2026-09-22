@@ -334,14 +334,10 @@
   },
   "support": {
     "title": "Help",
-    "subtitle": "Describe the issue — we'll reply to the email linked to your account.",
+    "subtitle": "Describe the issue — this opens an email in your regular mail app, just send it.",
     "placeholder": "What happened?",
-    "attachScreenshot": "Attach a screenshot",
-    "fileTooLarge": "File is too large (max 5 MB)",
     "send": "Send",
-    "sending": "Sending…",
-    "sendError": "Couldn't send it. Please try again in a bit.",
-    "sentTitle": "Sent",
-    "sentBody": "We've got your message and will reply to your email soon."
+    "emailSubject": "Support request — {{name}}",
+    "screenshotHint": "Need to show a screenshot? Attach it by hand once the email opens."
   }
 }
