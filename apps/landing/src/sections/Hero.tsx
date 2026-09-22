@@ -139,7 +139,7 @@ export function Hero() {
 
         {/* Нижний блок: кнопки + соц.доказательство (десктоп) — на мобильном
             прижат к низу секции, прямо над стрелкой. */}
-        <div className="section-container relative mb-16 flex flex-col items-center text-center sm:mb-20 lg:mx-0 lg:mb-0 lg:mt-6 lg:max-w-xl lg:items-start lg:pl-16 lg:text-left xl:max-w-2xl xl:pl-24">
+        <div className="section-container relative mb-24 flex flex-col items-center text-center sm:mb-28 lg:mx-0 lg:mb-0 lg:mt-6 lg:max-w-xl lg:items-start lg:pl-16 lg:text-left xl:max-w-2xl xl:pl-24">
           <div className="flex animate-fade-in flex-col gap-3 sm:flex-row">
             <a
               href={`${APP_URL}/register`}
