@@ -298,5 +298,14 @@
       }
     },
     "cta": "ابدأ مجانًا"
+  },
+  "regionSwitcher": {
+    "russia": "روسيا",
+    "europe": "أوروبا",
+    "usa": "الولايات المتحدة",
+    "ariaLabel": "اختر المنطقة"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "اختر اللغة"
   }
 }

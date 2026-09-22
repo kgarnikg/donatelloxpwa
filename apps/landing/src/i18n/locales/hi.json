@@ -298,5 +298,14 @@
       }
     },
     "cta": "मुफ़्त में शुरू करें"
+  },
+  "regionSwitcher": {
+    "russia": "रूस",
+    "europe": "यूरोप",
+    "usa": "अमेरिका",
+    "ariaLabel": "क्षेत्र चुनें"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "भाषा चुनें"
   }
 }

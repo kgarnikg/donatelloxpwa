@@ -93,7 +93,8 @@
     "doneTitle": "Tutto pronto!",
     "doneSubtitle": "Ti proporremo un programma in base ai tuoi obiettivi e al tuo livello.",
     "startButton": "Inizia ad allenarti",
-    "savingButton": "Salvataggio…"
+    "savingButton": "Salvataggio…",
+    "activityLevelHint": "La tua attività quotidiana abituale — senza contare gli allenamenti nell'app: quelli li calcoliamo separatamente e con precisione, in base a ciò che completi davvero."
   },
   "dashboard": {
     "greeting": "Ciao, {{name}}",
@@ -133,7 +134,102 @@
     "tips": "Consigli",
     "locked": "Questa sezione richiede un abbonamento",
     "lockedDesc": "Abbonati per ricevere indicazioni nutrizionali personalizzate in base al tuo obiettivo.",
-    "subscribe": "Abbonati"
+    "subscribe": "Abbonati",
+    "guidance": {
+      "build_muscle": {
+        "title": "Aumento della massa muscolare",
+        "calorieNote": "Un piccolo surplus calorico — circa +10–15% rispetto al mantenimento.",
+        "macros": {
+          "protein": "1,6–2,2 g di proteine per kg di peso",
+          "carbs": "3–5 g di carboidrati per kg di peso",
+          "fat": "0,8–1 g di grassi per kg di peso"
+        },
+        "mealStructure": [
+          "3–5 pasti al giorno",
+          "Proteine a ogni pasto (carne, pesce, uova, ricotta, legumi)",
+          "Carboidrati intorno all'allenamento — prima e dopo",
+          "Non dimenticare l'acqua: almeno 30 ml per kg di peso al giorno"
+        ],
+        "tips": [
+          "Il surplus deve essere moderato — un eccesso di calorie troppo grande diventa grasso, non muscolo.",
+          "Vale la pena contare con precisione le proteine; carboidrati e grassi si possono stimare a occhio.",
+          "Dormire 7–9 ore è importante per la crescita muscolare quanto l'alimentazione."
+        ]
+      },
+      "lose_weight": {
+        "title": "Perdita di peso",
+        "calorieNote": "Un deficit calorico moderato — circa -15–20% rispetto al mantenimento.",
+        "macros": {
+          "protein": "1,8–2,4 g di proteine per kg di peso",
+          "carbs": "2–3 g di carboidrati per kg di peso",
+          "fat": "0,6–0,8 g di grassi per kg di peso"
+        },
+        "mealStructure": [
+          "3–4 pasti per non sentire troppa fame",
+          "Gli alimenti ricchi di proteine riducono il senso di fame",
+          "Più verdure e fibre — per la sazietà con meno calorie",
+          "Limita le calorie liquide (bevande zuccherate, succhi)"
+        ],
+        "tips": [
+          "Un deficit troppo grande rallenta il metabolismo e fa perdere muscolo — mantieni un ritmo moderato.",
+          "Pesati al massimo una volta a settimana, alla stessa ora del giorno.",
+          "L'allenamento di forza in deficit aiuta a mantenere il muscolo, non solo a perdere grasso."
+        ]
+      },
+      "improve_endurance": {
+        "title": "Resistenza",
+        "calorieNote": "Calorie a livello di mantenimento, con enfasi sui carboidrati per l'energia.",
+        "macros": {
+          "protein": "1,4–1,8 g di proteine per kg di peso",
+          "carbs": "5–7 g di carboidrati per kg di peso",
+          "fat": "0,8–1 g di grassi per kg di peso"
+        },
+        "mealStructure": [
+          "Carboidrati 2–3 ore prima di una sessione cardio lunga",
+          "Un pasto di recupero con proteine e carboidrati entro un'ora dall'allenamento",
+          "Idratazione costante durante il giorno, non solo durante l'allenamento"
+        ],
+        "tips": [
+          "Per sessioni lunghe (oltre un'ora) potresti aver bisogno di energia durante l'allenamento stesso.",
+          "Gli elettroliti (sodio, potassio) sono importanti con una forte sudorazione."
+        ]
+      },
+      "general_fitness": {
+        "title": "Forma fisica generale",
+        "calorieNote": "Calorie a livello di mantenimento del peso.",
+        "macros": {
+          "protein": "1,4–1,8 g di proteine per kg di peso",
+          "carbs": "3–4 g di carboidrati per kg di peso",
+          "fat": "0,8–1 g di grassi per kg di peso"
+        },
+        "mealStructure": [
+          "Pasti equilibrati con proteine, carboidrati e verdure",
+          "Minimo di alimenti processati",
+          "Orario dei pasti regolare, senza saltarli"
+        ],
+        "tips": [
+          "Per mantenere la forma, la costanza a lungo termine conta più del conteggio perfetto delle calorie.",
+          "La varietà alimentare aiuta a coprire il fabbisogno di micronutrienti."
+        ]
+      },
+      "rehabilitation": {
+        "title": "Riabilitazione",
+        "calorieNote": "Calorie a livello di mantenimento — non consigliamo un deficit durante il recupero.",
+        "macros": {
+          "protein": "1,6–2 g di proteine per kg di peso (per la riparazione dei tessuti)",
+          "carbs": "3–4 g di carboidrati per kg di peso",
+          "fat": "0,8–1 g di grassi per kg di peso"
+        },
+        "mealStructure": [
+          "Alimenti con omega-3 (pesce grasso, olio di lino) — supportano il recupero",
+          "Proteine sufficienti per la rigenerazione dei tessuti",
+          "Evita restrizioni brusche durante il recupero"
+        ],
+        "tips": [
+          "Queste sono indicazioni generali, non indicazioni mediche — in caso di infortuni o condizioni particolari, consulta un medico o un nutrizionista."
+        ]
+      }
+    }
   },
   "progress": {
     "title": "Progressi",

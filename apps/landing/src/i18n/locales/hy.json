@@ -298,5 +298,14 @@
       }
     },
     "cta": "Սկսել անվճար"
+  },
+  "regionSwitcher": {
+    "russia": "Ռուսաստան",
+    "europe": "Եվրոպա",
+    "usa": "ԱՄՆ",
+    "ariaLabel": "Ընտրել տարածաշրջանը"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "Ընտրել լեզուն"
   }
 }

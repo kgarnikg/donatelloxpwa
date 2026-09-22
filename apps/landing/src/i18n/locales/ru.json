@@ -312,5 +312,14 @@
       }
     },
     "cta": "Начать бесплатно"
+  },
+  "regionSwitcher": {
+    "russia": "Россия",
+    "europe": "Европа",
+    "usa": "США",
+    "ariaLabel": "Выбрать регион"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "Выбрать язык"
   }
 }

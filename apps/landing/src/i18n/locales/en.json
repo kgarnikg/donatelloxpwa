@@ -312,5 +312,14 @@
       }
     },
     "cta": "Start for free"
+  },
+  "regionSwitcher": {
+    "russia": "Russia",
+    "europe": "Europe",
+    "usa": "USA",
+    "ariaLabel": "Select region"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "Select language"
   }
 }

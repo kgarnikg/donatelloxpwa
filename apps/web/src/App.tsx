@@ -24,6 +24,7 @@ import ProgramsPage from "@/pages/ProgramsPage";
 import NutritionPage from "@/pages/NutritionPage";
 import ProgressPage from "@/pages/ProgressPage";
 import ProfilePage from "@/pages/ProfilePage";
+import SupportPage from "@/pages/SupportPage";
 import LanguageSettingsPage from "@/pages/LanguageSettingsPage";
 import NotificationsSettingsPage from "@/pages/NotificationsSettingsPage";
 import SubscriptionPage from "@/pages/SubscriptionPage";
@@ -418,6 +419,7 @@ export default function App() {
         <Route path="/nutrition" element={<NutritionPage />} />
         <Route path="/progress" element={<ProgressPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/support" element={<SupportPage />} />
       </Route>
 
       <Route

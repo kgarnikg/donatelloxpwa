@@ -195,6 +195,7 @@ export default function OnboardingPage() {
                 <label className="mb-1.5 block text-sm font-medium text-neutral-300">
                   {t("onboarding.activityLevel")}
                 </label>
+                <p className="mb-1.5 text-xs text-neutral-500">{t("onboarding.activityLevelHint")}</p>
                 <select className="input-field" {...register("activityLevel")}>
                   {ACTIVITY_LEVELS.map((l) => (
                     <option key={l} value={l}>

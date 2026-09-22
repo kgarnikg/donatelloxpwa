@@ -94,7 +94,8 @@
     "doneTitle": "¡Todo listo!",
     "doneSubtitle": "Te asignaremos un programa según tus objetivos y nivel.",
     "startButton": "Empezar a entrenar",
-    "savingButton": "Guardando…"
+    "savingButton": "Guardando…",
+    "activityLevelHint": "Tu actividad diaria habitual — sin contar los entrenamientos de la app: esos los calculamos aparte y con precisión, según lo que realmente completes."
   },
   "dashboard": {
     "greeting": "Hola, {{name}}",
@@ -163,6 +164,101 @@
       "reset": "Volver al cálculo automático",
       "breakdown": "En reposo {{bmr}} · actividad habitual +{{activity}} · entrenamiento de hoy +{{workout}}",
       "disclaimer": "Estimación automática con la fórmula de Mifflin-St Jeor — una guía, no un cálculo médico exacto. Si tienes datos de un reloj inteligente, introdúcelos manualmente para más precisión."
+    },
+    "guidance": {
+      "build_muscle": {
+        "title": "Ganancia muscular",
+        "calorieNote": "Un pequeño superávit calórico — entre +10–15% sobre el mantenimiento.",
+        "macros": {
+          "protein": "1,6–2,2 g de proteína por kg de peso",
+          "carbs": "3–5 g de carbohidratos por kg de peso",
+          "fat": "0,8–1 g de grasa por kg de peso"
+        },
+        "mealStructure": [
+          "3–5 comidas al día",
+          "Proteína en cada comida (carne, pescado, huevos, requesón, legumbres)",
+          "Carbohidratos alrededor del entrenamiento — antes y después",
+          "No olvides el agua: al menos 30 ml por kg de peso al día"
+        ],
+        "tips": [
+          "El superávit debe ser moderado — un exceso grande de calorías se convierte en grasa, no en músculo.",
+          "Vale la pena contar la proteína con precisión; los carbohidratos y grasas se pueden calcular a ojo.",
+          "Dormir 7–9 horas es tan importante para el crecimiento muscular como la alimentación."
+        ]
+      },
+      "lose_weight": {
+        "title": "Pérdida de peso",
+        "calorieNote": "Un déficit calórico moderado — entre -15–20% bajo el mantenimiento.",
+        "macros": {
+          "protein": "1,8–2,4 g de proteína por kg de peso",
+          "carbs": "2–3 g de carbohidratos por kg de peso",
+          "fat": "0,6–0,8 g de grasa por kg de peso"
+        },
+        "mealStructure": [
+          "3–4 comidas para no pasar demasiada hambre",
+          "Los alimentos altos en proteína reducen el hambre",
+          "Más verduras y fibra — para saciarte con menos calorías",
+          "Limita las calorías líquidas (bebidas azucaradas, zumos)"
+        ],
+        "tips": [
+          "Un déficit demasiado grande ralentiza el metabolismo y hace perder músculo — mantén un ritmo moderado.",
+          "Pésate como máximo una vez por semana, a la misma hora del día.",
+          "El entrenamiento de fuerza en déficit ayuda a conservar músculo, no solo a perder grasa."
+        ]
+      },
+      "improve_endurance": {
+        "title": "Resistencia",
+        "calorieNote": "Calorías a nivel de mantenimiento, con énfasis en carbohidratos para energía.",
+        "macros": {
+          "protein": "1,4–1,8 g de proteína por kg de peso",
+          "carbs": "5–7 g de carbohidratos por kg de peso",
+          "fat": "0,8–1 g de grasa por kg de peso"
+        },
+        "mealStructure": [
+          "Carbohidratos 2–3 horas antes de una sesión larga de cardio",
+          "Una comida de recuperación con proteína y carbohidratos dentro de la hora posterior al entrenamiento",
+          "Hidratación constante durante el día, no solo durante el entrenamiento"
+        ],
+        "tips": [
+          "Para sesiones largas (más de una hora) puede que necesites comer durante el propio entrenamiento.",
+          "Los electrolitos (sodio, potasio) importan con sudoración intensa."
+        ]
+      },
+      "general_fitness": {
+        "title": "Forma física general",
+        "calorieNote": "Calorías a nivel de mantenimiento de peso.",
+        "macros": {
+          "protein": "1,4–1,8 g de proteína por kg de peso",
+          "carbs": "3–4 g de carbohidratos por kg de peso",
+          "fat": "0,8–1 g de grasa por kg de peso"
+        },
+        "mealStructure": [
+          "Comidas equilibradas con proteína, carbohidratos y verduras",
+          "Mínimo de alimentos procesados",
+          "Horario de comidas regular, sin saltarte comidas"
+        ],
+        "tips": [
+          "Para mantenerte en forma, la constancia a largo plazo importa más que contar calorías a la perfección.",
+          "La variedad de alimentos ayuda a cubrir tus necesidades de micronutrientes."
+        ]
+      },
+      "rehabilitation": {
+        "title": "Rehabilitación",
+        "calorieNote": "Calorías a nivel de mantenimiento — no recomendamos déficit durante la recuperación.",
+        "macros": {
+          "protein": "1,6–2 g de proteína por kg de peso (para reparación de tejidos)",
+          "carbs": "3–4 g de carbohidratos por kg de peso",
+          "fat": "0,8–1 g de grasa por kg de peso"
+        },
+        "mealStructure": [
+          "Alimentos con omega-3 (pescado graso, aceite de lino) — apoyan la recuperación",
+          "Suficiente proteína para la regeneración de tejidos",
+          "Evita restricciones bruscas durante la recuperación"
+        ],
+        "tips": [
+          "Estas son pautas generales, no indicaciones médicas — ante lesiones o condiciones especiales, consulta con un médico o nutricionista."
+        ]
+      }
     }
   },
   "progress": {
@@ -189,7 +285,8 @@
     "subscription": "Suscripción y pago",
     "language": "Idioma de la app",
     "notifications": "Notificaciones",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "support": "Ayuda"
   },
   "language": {
     "title": "Idioma de la app",
@@ -234,5 +331,17 @@
     "pageTitle": "Programas de entrenamiento",
     "pageSubtitle": "Elige un programa para tu objetivo",
     "sequenceLockedHint": "Se desbloquea al completar el entrenamiento anterior"
+  },
+  "support": {
+    "title": "Ayuda",
+    "subtitle": "Describe el problema — responderemos al correo de tu cuenta.",
+    "placeholder": "¿Qué ha pasado?",
+    "attachScreenshot": "Adjuntar captura de pantalla",
+    "fileTooLarge": "El archivo es demasiado grande (máx. 5 MB)",
+    "send": "Enviar",
+    "sending": "Enviando…",
+    "sendError": "No se pudo enviar. Inténtalo de nuevo en un momento.",
+    "sentTitle": "Enviado",
+    "sentBody": "Hemos recibido tu mensaje y responderemos a tu correo pronto."
   }
 }

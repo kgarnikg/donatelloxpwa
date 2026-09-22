@@ -93,7 +93,8 @@
     "doneTitle": "Alles bereit!",
     "doneSubtitle": "Wir stellen ein Trainingsprogramm passend zu deinen Zielen und deinem Niveau zusammen.",
     "startButton": "Training starten",
-    "savingButton": "Wird gespeichert…"
+    "savingButton": "Wird gespeichert…",
+    "activityLevelHint": "Deine normale Alltagsaktivität — ohne die Workouts in der App: die werden separat und präzise erfasst, basierend auf dem, was du tatsächlich abschließt."
   },
   "dashboard": {
     "greeting": "Hallo, {{name}}",
@@ -133,7 +134,102 @@
     "tips": "Tipps",
     "locked": "Dieser Bereich erfordert ein Abo",
     "lockedDesc": "Schließe ein Abo ab, um persönliche Ernährungsempfehlungen für dein Ziel zu erhalten.",
-    "subscribe": "Abo abschließen"
+    "subscribe": "Abo abschließen",
+    "guidance": {
+      "build_muscle": {
+        "title": "Muskelaufbau",
+        "calorieNote": "Ein kleiner Kalorienüberschuss — etwa +10–15 % über dem Erhaltungsbedarf.",
+        "macros": {
+          "protein": "1,6–2,2 g Eiweiß pro kg Körpergewicht",
+          "carbs": "3–5 g Kohlenhydrate pro kg Körpergewicht",
+          "fat": "0,8–1 g Fett pro kg Körpergewicht"
+        },
+        "mealStructure": [
+          "3–5 Mahlzeiten am Tag",
+          "Eiweiß bei jeder Mahlzeit (Fleisch, Fisch, Eier, Quark, Hülsenfrüchte)",
+          "Kohlenhydrate rund um das Training — davor und danach",
+          "Wasser nicht vergessen: mindestens 30 ml pro kg Körpergewicht am Tag"
+        ],
+        "tips": [
+          "Der Überschuss sollte moderat sein — ein großer Kalorienüberschuss wird zu Fett, nicht zu Muskeln.",
+          "Eiweiß lohnt sich genau zu tracken, Kohlenhydrate und Fett kann man grob schätzen.",
+          "7–9 Stunden Schlaf sind für Muskelwachstum genauso wichtig wie die Ernährung."
+        ]
+      },
+      "lose_weight": {
+        "title": "Gewichtsabnahme",
+        "calorieNote": "Ein moderates Kaloriendefizit — etwa -15–20 % unter dem Erhaltungsbedarf.",
+        "macros": {
+          "protein": "1,8–2,4 g Eiweiß pro kg Körpergewicht",
+          "carbs": "2–3 g Kohlenhydrate pro kg Körpergewicht",
+          "fat": "0,6–0,8 g Fett pro kg Körpergewicht"
+        },
+        "mealStructure": [
+          "3–4 Mahlzeiten, damit kein starker Hunger entsteht",
+          "Eiweißreiche Lebensmittel reduzieren das Hungergefühl",
+          "Mehr Gemüse und Ballaststoffe — für Sättigung bei weniger Kalorien",
+          "Flüssige Kalorien begrenzen (süße Getränke, Säfte)"
+        ],
+        "tips": [
+          "Ein zu großes Defizit verlangsamt den Stoffwechsel und kostet Muskelmasse — bleib bei einem moderaten Tempo.",
+          "Wiege dich höchstens einmal pro Woche, zur gleichen Tageszeit.",
+          "Krafttraining im Defizit hilft, Muskeln zu erhalten, nicht nur Fett zu verlieren."
+        ]
+      },
+      "improve_endurance": {
+        "title": "Ausdauer",
+        "calorieNote": "Kalorien auf Erhaltungsniveau, mit Fokus auf Kohlenhydrate für Energie.",
+        "macros": {
+          "protein": "1,4–1,8 g Eiweiß pro kg Körpergewicht",
+          "carbs": "5–7 g Kohlenhydrate pro kg Körpergewicht",
+          "fat": "0,8–1 g Fett pro kg Körpergewicht"
+        },
+        "mealStructure": [
+          "Kohlenhydrate 2–3 Stunden vor einer langen Cardio-Einheit",
+          "Eine Erholungsmahlzeit mit Eiweiß und Kohlenhydraten innerhalb einer Stunde nach dem Training",
+          "Gleichmäßige Flüssigkeitszufuhr über den Tag, nicht nur beim Training"
+        ],
+        "tips": [
+          "Bei langen Einheiten (über eine Stunde) brauchst du eventuell Energie schon während des Trainings.",
+          "Elektrolyte (Natrium, Kalium) sind bei starkem Schwitzen wichtig."
+        ]
+      },
+      "general_fitness": {
+        "title": "Allgemeine Fitness",
+        "calorieNote": "Kalorien auf Gewichtserhaltungsniveau.",
+        "macros": {
+          "protein": "1,4–1,8 g Eiweiß pro kg Körpergewicht",
+          "carbs": "3–4 g Kohlenhydrate pro kg Körpergewicht",
+          "fat": "0,8–1 g Fett pro kg Körpergewicht"
+        },
+        "mealStructure": [
+          "Ausgewogene Mahlzeiten mit Eiweiß, Kohlenhydraten und Gemüse",
+          "Möglichst wenig verarbeitete Lebensmittel",
+          "Regelmäßiger Essrhythmus, keine ausgelassenen Mahlzeiten"
+        ],
+        "tips": [
+          "Für die Formerhaltung zählt langfristige Konsequenz mehr als perfektes Kalorienzählen.",
+          "Vielfalt bei Lebensmitteln hilft, den Mikronährstoffbedarf zu decken."
+        ]
+      },
+      "rehabilitation": {
+        "title": "Rehabilitation",
+        "calorieNote": "Kalorien auf Erhaltungsniveau — ein Defizit während der Genesung wird nicht empfohlen.",
+        "macros": {
+          "protein": "1,6–2 g Eiweiß pro kg Körpergewicht (für die Geweberegeneration)",
+          "carbs": "3–4 g Kohlenhydrate pro kg Körpergewicht",
+          "fat": "0,8–1 g Fett pro kg Körpergewicht"
+        },
+        "mealStructure": [
+          "Omega-3-reiche Lebensmittel (fetter Fisch, Leinöl) — unterstützen die Genesung",
+          "Genügend Eiweiß für die Geweberegeneration",
+          "Starke Einschränkungen während der Genesung vermeiden"
+        ],
+        "tips": [
+          "Dies sind allgemeine Hinweise, keine medizinischen Empfehlungen — bei Verletzungen oder besonderen Umständen einen Arzt oder Ernährungsberater konsultieren."
+        ]
+      }
+    }
   },
   "progress": {
     "title": "Fortschritt",

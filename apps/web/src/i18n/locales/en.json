@@ -94,7 +94,8 @@
     "doneTitle": "All set!",
     "doneSubtitle": "We'll match a workout program to your goals and fitness level.",
     "startButton": "Start training",
-    "savingButton": "Saving…"
+    "savingButton": "Saving…",
+    "activityLevelHint": "Your everyday activity — not counting workouts in the app: those are tracked separately and precisely, based on what you actually complete."
   },
   "dashboard": {
     "greeting": "Hi, {{name}}",
@@ -163,6 +164,101 @@
       "reset": "Reset to automatic",
       "breakdown": "At rest {{bmr}} · everyday activity +{{activity}} · today's workout +{{workout}}",
       "disclaimer": "Automatic estimate using the Mifflin-St Jeor formula — a guideline, not a precise medical calculation. If you have data from a smartwatch, enter it manually for more accuracy."
+    },
+    "guidance": {
+      "build_muscle": {
+        "title": "Muscle gain",
+        "calorieNote": "A small calorie surplus — roughly +10–15% above maintenance.",
+        "macros": {
+          "protein": "1.6–2.2 g protein per kg body weight",
+          "carbs": "3–5 g carbs per kg body weight",
+          "fat": "0.8–1 g fat per kg body weight"
+        },
+        "mealStructure": [
+          "3–5 meals a day",
+          "Protein at every meal (meat, fish, eggs, cottage cheese, legumes)",
+          "Carbs around your workout — before and after",
+          "Don't forget water: at least 30 ml per kg of body weight a day"
+        ],
+        "tips": [
+          "Keep the surplus moderate — a big excess of calories goes to fat, not muscle.",
+          "Protein is worth tracking precisely; carbs and fat can be eyeballed.",
+          "7–9 hours of sleep matters for muscle growth just as much as food does."
+        ]
+      },
+      "lose_weight": {
+        "title": "Weight loss",
+        "calorieNote": "A moderate calorie deficit — roughly -15–20% below maintenance.",
+        "macros": {
+          "protein": "1.8–2.4 g protein per kg body weight",
+          "carbs": "2–3 g carbs per kg body weight",
+          "fat": "0.6–0.8 g fat per kg body weight"
+        },
+        "mealStructure": [
+          "3–4 meals so you don't feel overly hungry",
+          "High-protein foods help curb hunger",
+          "More vegetables and fibre — for fullness at a lower calorie count",
+          "Limit liquid calories (sugary drinks, juices)"
+        ],
+        "tips": [
+          "Too large a deficit slows your metabolism and costs you muscle — stick to a moderate pace.",
+          "Weigh yourself no more than once a week, at the same time of day.",
+          "Strength training on a deficit helps you keep muscle, not just lose fat."
+        ]
+      },
+      "improve_endurance": {
+        "title": "Endurance",
+        "calorieNote": "Calories at maintenance, with an emphasis on carbs for energy.",
+        "macros": {
+          "protein": "1.4–1.8 g protein per kg body weight",
+          "carbs": "5–7 g carbs per kg body weight",
+          "fat": "0.8–1 g fat per kg body weight"
+        },
+        "mealStructure": [
+          "Carbs 2–3 hours before a long cardio session",
+          "A recovery meal with protein and carbs within an hour after training",
+          "Steady hydration throughout the day, not just during the workout"
+        ],
+        "tips": [
+          "For long sessions (over an hour) you may need to fuel during the workout itself.",
+          "Electrolytes (sodium, potassium) matter with heavy sweating."
+        ]
+      },
+      "general_fitness": {
+        "title": "General fitness",
+        "calorieNote": "Calories at maintenance level.",
+        "macros": {
+          "protein": "1.4–1.8 g protein per kg body weight",
+          "carbs": "3–4 g carbs per kg body weight",
+          "fat": "0.8–1 g fat per kg body weight"
+        },
+        "mealStructure": [
+          "Balanced meals with protein, carbs, and vegetables",
+          "Minimal processed food",
+          "A regular eating schedule, without skipping meals"
+        ],
+        "tips": [
+          "For staying in shape, long-term consistency matters more than perfect calorie counting.",
+          "Food variety helps cover your micronutrient needs."
+        ]
+      },
+      "rehabilitation": {
+        "title": "Rehabilitation",
+        "calorieNote": "Calories at maintenance — we don't recommend a deficit while recovering.",
+        "macros": {
+          "protein": "1.6–2 g protein per kg body weight (for tissue repair)",
+          "carbs": "3–4 g carbs per kg body weight",
+          "fat": "0.8–1 g fat per kg body weight"
+        },
+        "mealStructure": [
+          "Omega-3 foods (fatty fish, flaxseed oil) — support recovery",
+          "Enough protein for tissue regeneration",
+          "Avoid sharp restrictions while recovering"
+        ],
+        "tips": [
+          "These are general guidelines, not medical advice — for injuries or specific conditions, consult a doctor or dietitian."
+        ]
+      }
     }
   },
   "progress": {
@@ -189,7 +285,8 @@
     "subscription": "Subscription & billing",
     "language": "App language",
     "notifications": "Notifications",
-    "logout": "Log out"
+    "logout": "Log out",
+    "support": "Help"
   },
   "language": {
     "title": "App language",
@@ -234,5 +331,17 @@
     "pageTitle": "Training programs",
     "pageSubtitle": "Choose a program for your goal",
     "sequenceLockedHint": "Unlocks after you finish the previous workout"
+  },
+  "support": {
+    "title": "Help",
+    "subtitle": "Describe the issue — we'll reply to the email linked to your account.",
+    "placeholder": "What happened?",
+    "attachScreenshot": "Attach a screenshot",
+    "fileTooLarge": "File is too large (max 5 MB)",
+    "send": "Send",
+    "sending": "Sending…",
+    "sendError": "Couldn't send it. Please try again in a bit.",
+    "sentTitle": "Sent",
+    "sentBody": "We've got your message and will reply to your email soon."
   }
 }

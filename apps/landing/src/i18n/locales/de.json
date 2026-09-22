@@ -298,5 +298,14 @@
       }
     },
     "cta": "Kostenlos starten"
+  },
+  "regionSwitcher": {
+    "russia": "Russland",
+    "europe": "Europa",
+    "usa": "USA",
+    "ariaLabel": "Region wählen"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "Sprache wählen"
   }
 }

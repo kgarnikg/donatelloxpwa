@@ -298,5 +298,14 @@
       }
     },
     "cta": "ਮੁਫ਼ਤ ਸ਼ੁਰੂ ਕਰੋ"
+  },
+  "regionSwitcher": {
+    "russia": "ਰੂਸ",
+    "europe": "ਯੂਰਪ",
+    "usa": "ਅਮਰੀਕਾ",
+    "ariaLabel": "ਖੇਤਰ ਚੁਣੋ"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "ਭਾਸ਼ਾ ਚੁਣੋ"
   }
 }

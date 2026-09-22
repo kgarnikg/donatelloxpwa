@@ -11,6 +11,7 @@ import {
   ChevronUp,
   ChevronDown,
   PlayCircle,
+  Video,
   Search,
   AlertTriangle,
 } from "lucide-react";
@@ -1288,9 +1289,17 @@ export default function ProgramDetailPage() {
                       <p className="text-xs text-neutral-500">
                         {group.sets.length} подхода
                         {group.sets[0]?.notes ? ` · ${group.sets[0].notes}` : ""}
-                        {group.exercise.videoUrl && (
+                        {group.exercise.videoUrl ? (
                           <span className="ml-1.5 inline-flex items-center gap-0.5 text-volt-400">
                             <PlayCircle size={11} /> видео
+                          </span>
+                        ) : (
+                          // Раньше при отсутствии видео здесь просто ничего не
+                          // показывалось — сканируя список тренировки, было не
+                          // видно, где ещё не хватает видео, а где уже всё
+                          // прикреплено. Явный индикатор решает именно это.
+                          <span className="ml-1.5 inline-flex items-center gap-0.5 text-neutral-600">
+                            <Video size={11} /> нет видео
                           </span>
                         )}
                       </p>

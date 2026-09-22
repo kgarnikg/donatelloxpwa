@@ -1,14 +1,15 @@
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MapPin, Check } from "lucide-react";
 import clsx from "clsx";
 import { useOnClickOutside } from "@/lib/useOnClickOutside";
 import { useRegion } from "@/context/RegionContext";
 import type { Region } from "@/lib/regionPricing";
 
-const OPTIONS: { value: Region; label: string; flag: string }[] = [
-  { value: "ru", label: "Россия", flag: "🇷🇺" },
-  { value: "eu", label: "Европа", flag: "🇪🇺" },
-  { value: "us", label: "США", flag: "🇺🇸" },
+const REGION_KEYS: { value: Region; labelKey: string; flag: string }[] = [
+  { value: "ru", labelKey: "regionSwitcher.russia", flag: "🇷🇺" },
+  { value: "eu", labelKey: "regionSwitcher.europe", flag: "🇪🇺" },
+  { value: "us", labelKey: "regionSwitcher.usa", flag: "🇺🇸" },
 ];
 
 /**
@@ -19,14 +20,22 @@ const OPTIONS: { value: Region; label: string; flag: string }[] = [
  * пределы экрана сверху). См. Header.tsx — там же лежит и LanguageSwitcher
  * с тем же паттерном, оба нужны были на мобильном раньше внизу справа, где
  * перекрывали контент Hero (кнопки/соц.доказательство/стрелку).
+ *
+ * Названия регионов — через t(), не зашиты на русском: раньше "Россия"/
+ * "Европа"/"США" были литеральными русскими строками, посетитель из
+ * испаноязычной страны видел баннер выбора региона по-русски, даже если
+ * весь остальной сайт уже был на испанском (язык устройства). Баг найден
+ * пользователем на реальном трафике.
  */
 export function RegionSwitcher({ variant = "fixed" }: { variant?: "fixed" | "inline" }) {
+  const { t } = useTranslation();
   const { region, setRegion } = useRegion();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => setOpen(false));
 
-  const current = OPTIONS.find((o) => o.value === region) ?? OPTIONS[2];
+  const options = REGION_KEYS.map((o) => ({ ...o, label: t(o.labelKey) }));
+  const current = options.find((o) => o.value === region) ?? options[2];
   const isInline = variant === "inline";
 
   const menu = open && (
@@ -36,7 +45,7 @@ export function RegionSwitcher({ variant = "fixed" }: { variant?: "fixed" | "inl
         isInline ? "absolute right-0 top-full mt-2" : "mb-2",
       )}
     >
-      {OPTIONS.map((opt) => (
+      {options.map((opt) => (
         <button
           key={opt.value}
           onClick={() => {
@@ -62,7 +71,7 @@ export function RegionSwitcher({ variant = "fixed" }: { variant?: "fixed" | "inl
     <button
       onClick={() => setOpen((v) => !v)}
       className="flex items-center gap-1.5 rounded-full border border-ink-700 bg-ink-900/90 px-3.5 py-2.5 text-xs font-semibold text-neutral-200 shadow-lg backdrop-blur transition hover:border-volt-400/50"
-      aria-label="Выбрать регион"
+      aria-label={t("regionSwitcher.ariaLabel")}
     >
       <MapPin size={14} className="text-volt-400" />
       {current.flag}

@@ -7,7 +7,7 @@ import { SUPPORTED_LANGUAGES, LANGUAGE_LABELS, type SupportedLanguage } from "@/
 
 /** См. комментарий в RegionSwitcher.tsx — тот же паттерн fixed/inline. */
 export function LanguageSwitcher({ variant = "fixed" }: { variant?: "fixed" | "inline" }) {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => setOpen(false));
@@ -47,7 +47,7 @@ export function LanguageSwitcher({ variant = "fixed" }: { variant?: "fixed" | "i
     <button
       onClick={() => setOpen((v) => !v)}
       className="flex items-center gap-1.5 rounded-full border border-ink-700 bg-ink-900/90 px-3.5 py-2.5 text-xs font-semibold text-neutral-200 shadow-lg backdrop-blur transition hover:border-volt-400/50"
-      aria-label="Выбрать язык"
+      aria-label={t("languageSwitcher.ariaLabel")}
     >
       <Globe size={14} className="text-volt-400" />
       {current.toUpperCase()}
