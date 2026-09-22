@@ -134,10 +134,9 @@
     "choosePlan": "Choose plan",
     "paymentMethodsLabel": "We accept:",
     "paymentMethods": [
-      "Card · Stripe",
-      "PayPal",
-      "YuKassa (Russian cards)",
-      "USDT"
+      "Visa",
+      "Mastercard",
+      "ArCa"
     ],
     "baseFeatures": [
       "All workout programs",
@@ -215,7 +214,7 @@
       },
       {
         "question": "What payment methods do you support?",
-        "answer": "Cards and local payment methods via Stripe and PayPal, YooKassa for Russian cards and SBP, plus USDT payment through our own crypto wallet with automatic transaction verification."
+        "answer": "Visa, Mastercard and ArCa bank cards. Payment is processed on the bank's secure page — we never see or store your card details. It's a one-time payment with no automatic renewals."
       },
       {
         "question": "Does the app work offline?",
@@ -260,7 +259,7 @@
       }
     },
     "copyright": "© {{year}} DonatelleX. All rights reserved.",
-    "paymentLine": "Payments: Stripe · PayPal · YuKassa · USDT"
+    "paymentLine": "Payments: Visa · Mastercard · ArCa"
   },
   "legal": {
     "back": "Back to home",

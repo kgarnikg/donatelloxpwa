@@ -1,58 +1,95 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { Check } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { ArrowLeft, Check, CreditCard, Lock } from "lucide-react";
 import clsx from "clsx";
-import type { SubscriptionPlan, PaymentProvider } from "@donatellox/types";
+import {
+  PURCHASABLE_PLANS,
+  REGIONS,
+  formatRegionPrice,
+  getPayableAmount,
+  getRegionPrices,
+  guessRegionFromLanguage,
+  isDiscountApplicable,
+  type PurchasablePlan,
+  type Region,
+} from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 import { useActiveSubscription } from "@/lib/queries";
+import { useAuth } from "@/context/AuthContext";
 
-const PLANS: { value: SubscriptionPlan; label: string; price: string; note?: string }[] = [
-  { value: "monthly", label: "1 месяц", price: "19,99 $" },
-  { value: "quarterly", label: "3 месяца", price: "45 $", note: "15 $/мес · экономия 25%" },
-  { value: "semiannual", label: "6 месяцев", price: "71,9 $", note: "11,9 $/мес · экономия 40%" },
-  { value: "annual", label: "12 месяцев", price: "96,9 $", note: "8,08 $/мес · экономия 60%" },
-];
+/**
+ * Выбор периода и оплата (Фаза 3).
+ *
+ * - Цены — из общего `@donatellox/types` (pricing.ts), тот же источник,
+ *   что у лендинга и у серверной функции. Сумма здесь — только для показа:
+ *   сервер пересчитывает её сам по плану/региону/скидке из БД.
+ * - Оплата разовая за период, без автосписаний (см. ARCHITECTURE.md, 4.3).
+ * - Провайдер — vPOS Араратбанка. Пока серверная функция не подключена
+ *   (ждём документацию и тестовый доступ от банка), кнопка оплаты
+ *   выключена флагом VITE_PAYMENTS_ENABLED — честное "скоро", а не ошибка.
+ */
 
-const PROVIDERS: { value: PaymentProvider; label: string; hint: string }[] = [
-  { value: "stripe", label: "Банковская карта", hint: "Stripe · Европа/мир" },
-  { value: "paypal", label: "PayPal", hint: "Быстрая оплата без карты" },
-  { value: "yookassa", label: "ЮKassa", hint: "Карты РФ, СБП" },
-  { value: "usdt", label: "USDT", hint: "TRC20 / ERC20 / BEP20" },
-];
+const REGION_STORAGE_KEY = "donatellox-region";
+const PAYMENTS_ENABLED = import.meta.env.VITE_PAYMENTS_ENABLED === "true";
+
+function readStoredRegion(fallbackLanguage: string): Region {
+  try {
+    const stored = localStorage.getItem(REGION_STORAGE_KEY);
+    if (stored === "eu" || stored === "us" || stored === "ru") return stored;
+  } catch {
+    // localStorage недоступен (приватный режим и т.п.) — просто угадываем
+  }
+  return guessRegionFromLanguage(fallbackLanguage || navigator.language);
+}
 
 export default function SubscriptionPage() {
+  const { t, i18n } = useTranslation();
+  const { profile } = useAuth();
   const { data: activeSubscription } = useActiveSubscription();
-  const [plan, setPlan] = useState<SubscriptionPlan>("quarterly");
-  const [provider, setProvider] = useState<PaymentProvider>("stripe");
+  const [plan, setPlan] = useState<PurchasablePlan>("quarterly");
+  const [region, setRegionState] = useState<Region>(() =>
+    readStoredRegion(i18n.language),
+  );
   const [error, setError] = useState<string | null>(null);
+
+  const discountPercent = profile?.pendingDiscountPercent ?? 0;
+  const prices = getRegionPrices(region);
+
+  function setRegion(next: Region) {
+    setRegionState(next);
+    try {
+      localStorage.setItem(REGION_STORAGE_KEY, next);
+    } catch {
+      // не критично — регион просто не запомнится
+    }
+  }
 
   const checkout = useMutation({
     mutationFn: async () => {
       setError(null);
       const { data: sessionData } = await supabase.auth.getSession();
       const accessToken = sessionData.session?.access_token;
-      if (!accessToken) throw new Error("Не удалось получить сессию. Войдите заново.");
+      if (!accessToken) throw new Error(t("payment.errors.noSession"));
 
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-checkout`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            plan,
-            provider,
-            successUrl: `${window.location.origin}/dashboard?checkout=success`,
-            cancelUrl: `${window.location.origin}/subscription?checkout=cancelled`,
-          }),
+      // Vercel Serverless Function (apps/web/api/create-checkout.ts) —
+      // появится вместе с интеграцией банка. Передаём только ВЫБОР
+      // пользователя (план + регион), сумму считает сервер.
+      const response = await fetch("/api/create-checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
-      );
+        body: JSON.stringify({ plan, region, language: i18n.language }),
+      });
 
       if (!response.ok) {
-        const body = await response.json().catch(() => ({}));
-        throw new Error(body.message ?? "Не удалось создать платёж");
+        const body = (await response.json().catch(() => ({}))) as {
+          message?: string;
+        };
+        throw new Error(body.message ?? t("payment.errors.createFailed"));
       }
 
       return response.json() as Promise<{ redirectUrl: string }>;
@@ -65,76 +102,163 @@ export default function SubscriptionPage() {
 
   if (activeSubscription) {
     // Безлимитные (gift) подписки заведены с датой окончания далеко в
-    // будущем (+100 лет, см. 0022/0027) — для человека это "навсегда",
-    // показывать конкретную дату через 100 лет неинформативно и странно.
+    // будущем (+100 лет, см. 0022/0027) — для человека это "навсегда".
     const periodEnd = new Date(activeSubscription.currentPeriodEnd);
     const isEffectivelyLifetime =
       activeSubscription.plan === "lifetime" ||
       periodEnd.getFullYear() > new Date().getFullYear() + 50;
 
     return (
-      <div className="px-5 pt-8">
-        <div className="card border-success/30 bg-success/5 text-center">
-          <p className="font-semibold text-success">Доступ активен</p>
+      <div className="min-h-dvh bg-ink-950 px-5 pt-8 pb-8">
+        <BackLink />
+        <div className="card mt-6 border-success/30 bg-success/5 text-center">
+          <p className="font-semibold text-success">
+            {t("payment.active.title")}
+          </p>
           <p className="mt-1 text-sm text-neutral-400">
-            {isEffectivelyLifetime ? "Бессрочный доступ" : `Действует до ${periodEnd.toLocaleDateString("ru-RU")}`}
+            {isEffectivelyLifetime
+              ? t("payment.active.lifetime")
+              : t("payment.active.until", {
+                  date: periodEnd.toLocaleDateString(i18n.language),
+                })}
           </p>
         </div>
       </div>
     );
   }
 
-  return (
-    <div className="px-5 pt-8">
-      <h1 className="font-display text-2xl font-bold">Выбери период</h1>
-      <p className="mt-1 text-neutral-400">
-        Оплата разовая — доступ ко всем программам и видео ровно на выбранный срок, без автосписаний.
-      </p>
+  const payable = getPayableAmount(region, plan, discountPercent);
 
-      <div className="mt-6 space-y-3">
-        {PLANS.map((p) => (
-          <button
-            key={p.value}
-            onClick={() => setPlan(p.value)}
-            className={clsx(
-              "card flex w-full items-center justify-between text-left transition",
-              plan === p.value ? "border-volt-400 bg-volt-400/5" : "hover:border-ink-500",
-            )}
-          >
-            <div className="flex items-center gap-3">
-              <div
-                className={clsx(
-                  "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
-                  plan === p.value ? "border-volt-400 bg-volt-400" : "border-ink-600",
-                )}
-              >
-                {plan === p.value && <Check size={12} strokeWidth={4} className="text-ink-950" />}
-              </div>
-              <div>
-                <p className="font-semibold">{p.label}</p>
-                {p.note && <p className="text-xs text-volt-400">{p.note}</p>}
-              </div>
-            </div>
-            <p className="font-display text-lg font-bold">{p.price}</p>
-          </button>
-        ))}
+  return (
+    <div className="min-h-dvh bg-ink-950 px-5 pt-8 pb-10">
+      <BackLink />
+
+      <h1 className="mt-6 font-display text-2xl font-bold">
+        {t("payment.title")}
+      </h1>
+      <p className="mt-1 text-neutral-400">{t("payment.subtitle")}</p>
+
+      {/* Регион — определяет валюту показа цены */}
+      <div className="mt-6">
+        <p className="mb-2 text-xs uppercase tracking-wide text-neutral-500">
+          {t("payment.regionLabel")}
+        </p>
+        <div className="flex gap-2">
+          {REGIONS.map((r) => (
+            <button
+              key={r}
+              onClick={() => setRegion(r)}
+              className={clsx(
+                "rounded-full border px-4 py-1.5 text-sm transition",
+                region === r
+                  ? "border-volt-400 bg-volt-400/10 text-volt-400"
+                  : "border-ink-600 text-neutral-300 hover:border-ink-500",
+              )}
+            >
+              {t(`payment.regions.${r}`)}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <h2 className="mb-3 mt-8 font-display text-lg font-semibold">Способ оплаты</h2>
-      <div className="grid grid-cols-2 gap-3">
-        {PROVIDERS.map((p) => (
-          <button
-            key={p.value}
-            onClick={() => setProvider(p.value)}
-            className={clsx(
-              "card text-left transition",
-              provider === p.value ? "border-volt-400 bg-volt-400/5" : "hover:border-ink-500",
-            )}
-          >
-            <p className="font-medium">{p.label}</p>
-            <p className="mt-0.5 text-xs text-neutral-400">{p.hint}</p>
-          </button>
-        ))}
+      {discountPercent > 0 && (
+        <div className="mt-5 rounded-md border border-volt-400/30 bg-volt-400/10 px-4 py-3 text-sm text-volt-400">
+          {t("payment.referralBanner", { percent: discountPercent })}
+        </div>
+      )}
+
+      <div className="mt-5 space-y-3">
+        {PURCHASABLE_PLANS.map((p) => {
+          const price = prices[p];
+          const discounted = discountPercent > 0 && isDiscountApplicable(p);
+          const finalAmount = getPayableAmount(region, p, discountPercent);
+          const strikeAmount = discounted ? price.total : price.original;
+          const savingsPercent = price.original
+            ? Math.round((1 - price.total / price.original) * 100)
+            : 0;
+
+          return (
+            <button
+              key={p}
+              onClick={() => setPlan(p)}
+              className={clsx(
+                "card flex w-full items-center justify-between text-left transition",
+                plan === p
+                  ? "border-volt-400 bg-volt-400/5"
+                  : "hover:border-ink-500",
+              )}
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className={clsx(
+                    "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
+                    plan === p
+                      ? "border-volt-400 bg-volt-400"
+                      : "border-ink-600",
+                  )}
+                >
+                  {plan === p && (
+                    <Check size={12} strokeWidth={4} className="text-ink-950" />
+                  )}
+                </div>
+                <div>
+                  <p className="font-semibold">{t(`payment.plans.${p}`)}</p>
+                  {p !== "monthly" && (
+                    <p className="text-xs text-volt-400">
+                      {t("payment.perMonth", {
+                        amount: formatRegionPrice(region, price.perMonth),
+                      })}
+                      {savingsPercent > 0 &&
+                        ` · ${t("payment.savings", { percent: savingsPercent })}`}
+                    </p>
+                  )}
+                  {discounted && (
+                    <p className="text-xs text-volt-400">
+                      {t("payment.referralApplied", {
+                        percent: discountPercent,
+                      })}
+                    </p>
+                  )}
+                </div>
+              </div>
+              <div className="text-right">
+                {strikeAmount !== undefined && (
+                  <p className="text-xs text-neutral-500 line-through">
+                    {formatRegionPrice(region, strikeAmount)}
+                  </p>
+                )}
+                <p className="font-display text-lg font-bold">
+                  {formatRegionPrice(region, finalAmount)}
+                </p>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      <h2 className="mb-3 mt-8 font-display text-lg font-semibold">
+        {t("payment.methodTitle")}
+      </h2>
+      <div className="card flex items-center justify-between border-volt-400/40">
+        <div className="flex items-center gap-3">
+          <CreditCard size={20} className="text-volt-400" />
+          <div>
+            <p className="font-medium">{t("payment.methodCard")}</p>
+            <p className="mt-0.5 text-xs text-neutral-400">
+              {t("payment.methodCardHint")}
+            </p>
+          </div>
+        </div>
+        <div className="flex gap-1.5">
+          {["Visa", "Mastercard", "ArCa"].map((brand) => (
+            <span
+              key={brand}
+              className="rounded border border-ink-600 px-1.5 py-0.5 text-[10px] font-semibold text-neutral-300"
+            >
+              {brand}
+            </span>
+          ))}
+        </div>
       </div>
 
       {error && (
@@ -143,21 +267,58 @@ export default function SubscriptionPage() {
         </div>
       )}
 
-      <button
-        onClick={() => checkout.mutate()}
-        disabled={checkout.isPending}
-        className="btn-primary mt-8 w-full"
-      >
-        {checkout.isPending ? "Готовим оплату…" : "Оплатить и получить доступ"}
-      </button>
-      <p className="mt-3 text-center text-xs text-neutral-500">
-        Без подписки и автосписаний — платишь один раз за выбранный период.
-      </p>
+      {PAYMENTS_ENABLED ? (
+        <button
+          onClick={() => checkout.mutate()}
+          disabled={checkout.isPending}
+          className="btn-primary mt-8 w-full"
+        >
+          {checkout.isPending
+            ? t("payment.preparing")
+            : t("payment.payButton", {
+                amount: formatRegionPrice(region, payable),
+              })}
+        </button>
+      ) : (
+        <>
+          <button
+            disabled
+            className="btn-primary mt-8 w-full cursor-not-allowed opacity-60"
+          >
+            {t("payment.comingSoon")}
+          </button>
+          <p className="mt-3 text-center text-xs text-neutral-400">
+            {t("payment.comingSoonHint")}{" "}
+            <Link to="/support" className="text-volt-400 underline">
+              {t("payment.contactSupport")}
+            </Link>
+          </p>
+        </>
+      )}
 
-      <p className="mt-4 text-center text-xs text-neutral-500">
-        Оплата обрабатывается партнёром безопасно. Отменить подписку можно в любой момент в личном
-        кабинете.
+      <p className="mt-4 flex items-center justify-center gap-1.5 text-center text-xs text-neutral-500">
+        <Lock size={12} />
+        {t("payment.secureNote")}
+      </p>
+      <p className="mt-2 text-center text-xs text-neutral-500">
+        {t("payment.oneTimeNote")}
       </p>
     </div>
+  );
+}
+
+function BackLink() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  return (
+    <button
+      onClick={() =>
+        window.history.length > 1 ? navigate(-1) : navigate("/dashboard")
+      }
+      className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-white"
+    >
+      <ArrowLeft size={16} />
+      {t("common.back")}
+    </button>
   );
 }

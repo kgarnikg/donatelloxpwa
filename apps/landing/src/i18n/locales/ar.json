@@ -120,10 +120,9 @@
     "choosePlan": "اختر الخطة",
     "paymentMethodsLabel": "نقبل الدفع عبر:",
     "paymentMethods": [
-      "بطاقة · Stripe",
-      "PayPal",
-      "ЮKassa (بطاقات روسية)",
-      "USDT"
+      "Visa",
+      "Mastercard",
+      "ArCa"
     ],
     "baseFeatures": [
       "جميع برامج التمارين",
@@ -201,7 +200,7 @@
       },
       {
         "question": "ما طرق الدفع المدعومة؟",
-        "answer": "البطاقات وطرق الدفع المحلية عبر Stripe وPayPal، وYooKassa لبطاقات روسيا وSBP، بالإضافة إلى الدفع بعملة USDT عبر محفظتنا الرقمية الخاصة مع تحقق تلقائي من المعاملة."
+        "answer": "بطاقات Visa وMastercard وArCa المصرفية. تتم عملية الدفع على صفحة البنك الآمنة — لا نرى بيانات بطاقتك ولا نخزنها. الدفع لمرة واحدة، دون تجديد تلقائي."
       },
       {
         "question": "هل يعمل التطبيق دون اتصال بالإنترنت؟",
@@ -246,7 +245,7 @@
       }
     },
     "copyright": "© {{year}} DonatelleX. جميع الحقوق محفوظة.",
-    "paymentLine": "الدفع: Stripe · PayPal · ЮKassa · USDT"
+    "paymentLine": "الدفع: Visa · Mastercard · ArCa"
   },
   "legal": {
     "back": "العودة للرئيسية",

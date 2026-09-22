@@ -269,5 +269,57 @@
     "copied": "Kopiert!",
     "invitedCount_one": "{{count}} Freund eingeladen",
     "invitedCount_other": "{{count}} Freunde eingeladen"
+  },
+  "payment": {
+    "title": "Wähle deinen Zeitraum",
+    "subtitle": "Einmalzahlung – Zugang zu allen Programmen und Videos genau für den gewählten Zeitraum, ohne automatische Verlängerung.",
+    "regionLabel": "Region",
+    "regions": {
+      "eu": "Europa",
+      "us": "USA",
+      "ru": "Russland"
+    },
+    "plans": {
+      "monthly": "1 Monat",
+      "quarterly": "3 Monate",
+      "semiannual": "6 Monate",
+      "annual": "12 Monate"
+    },
+    "perMonth": "{{amount}} / Monat",
+    "savings": "{{percent}}% sparen",
+    "referralBanner": "Ein Freund hat dich eingeladen – {{percent}}% Rabatt auf deinen ersten Monat.",
+    "referralApplied": "{{percent}}% Einladungsrabatt",
+    "methodTitle": "Zahlungsmethode",
+    "methodCard": "Bankkarte",
+    "methodCardHint": "Sichere Zahlungsseite der Bank",
+    "payButton": "{{amount}} bezahlen",
+    "preparing": "Zahlung wird vorbereitet…",
+    "comingSoon": "Zahlung bald verfügbar",
+    "comingSoonHint": "Wir richten gerade die Kartenzahlung ein. Brauchst du sofort Zugang?",
+    "contactSupport": "Support kontaktieren",
+    "secureNote": "Kartendaten werden auf der Seite der Bank eingegeben – wir sehen und speichern sie nicht",
+    "oneTimeNote": "Kein Abo, keine automatischen Abbuchungen – du zahlst einmal für den gewählten Zeitraum.",
+    "active": {
+      "title": "Zugang aktiv",
+      "lifetime": "Unbegrenzter Zugang",
+      "until": "Gültig bis {{date}}"
+    },
+    "errors": {
+      "noSession": "Sitzung konnte nicht abgerufen werden. Bitte melde dich erneut an.",
+      "createFailed": "Zahlung konnte nicht erstellt werden. Bitte versuche es erneut."
+    },
+    "result": {
+      "checkingTitle": "Zahlung wird geprüft…",
+      "checkingText": "Das dauert meist nur ein paar Sekunden. Bitte schließe die Seite nicht.",
+      "successTitle": "Zahlung erfolgreich!",
+      "successText": "Zugang freigeschaltet bis {{date}}. Viel Erfolg beim Training!",
+      "toDashboard": "Zu den Workouts",
+      "pendingTitle": "Zahlung wird noch verarbeitet",
+      "pendingText": "Die Bank hat die Zahlung noch nicht bestätigt. Wenn Geld abgebucht wurde und der Zugang nicht innerhalb weniger Minuten erscheint, schreib dem Support – wir klären das.",
+      "checkAgain": "Erneut prüfen",
+      "failedTitle": "Zahlung fehlgeschlagen",
+      "failedText": "Es wurde nichts abgebucht. Prüfe Kartendaten und Guthaben oder versuche es mit einer anderen Karte.",
+      "tryAgain": "Erneut versuchen"
+    }
   }
 }

@@ -120,10 +120,9 @@
     "choosePlan": "Plan wählen",
     "paymentMethodsLabel": "Wir akzeptieren:",
     "paymentMethods": [
-      "Karte · Stripe",
-      "PayPal",
-      "ЮKassa (russische Karten)",
-      "USDT"
+      "Visa",
+      "Mastercard",
+      "ArCa"
     ],
     "baseFeatures": [
       "Alle Trainingsprogramme",
@@ -201,7 +200,7 @@
       },
       {
         "question": "Welche Zahlungsmethoden werden unterstützt?",
-        "answer": "Karten und lokale Methoden über Stripe und PayPal, YooKassa für russische Karten und SBP, sowie USDT über unsere eigene Krypto-Wallet mit automatischer Prüfung."
+        "answer": "Bankkarten von Visa, Mastercard und ArCa. Die Zahlung erfolgt auf der sicheren Seite der Bank – wir sehen und speichern deine Kartendaten nicht. Einmalzahlung, ohne automatische Verlängerung."
       },
       {
         "question": "Funktioniert die App offline?",
@@ -246,7 +245,7 @@
       }
     },
     "copyright": "© {{year}} DonatelleX. Alle Rechte vorbehalten.",
-    "paymentLine": "Zahlungen: Stripe · PayPal · ЮKassa · USDT"
+    "paymentLine": "Zahlungen: Visa · Mastercard · ArCa"
   },
   "legal": {
     "back": "Zur Startseite",

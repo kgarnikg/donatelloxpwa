@@ -114,7 +114,11 @@ export interface Subscription {
   updatedAt: ISODateString;
 }
 
-export type PaymentProvider = "stripe" | "paypal" | "yookassa" | "usdt";
+/**
+ * "ararat" — vPOS Араратбанка (Ереван), основной провайдер с Фазы 3.
+ * Остальные оставлены ради совместимости с уже существующими строками в БД.
+ */
+export type PaymentProvider = "stripe" | "paypal" | "yookassa" | "usdt" | "ararat";
 /** provider подписки — то же самое + 'gift' (безлимитный доступ, выдаётся вручную в CMS, никогда не создаёт запись в payments). */
 export type SubscriptionProvider = PaymentProvider | "gift";
 
@@ -125,7 +129,7 @@ export type PaymentStatus =
   | "refunded"
   | "expired";
 
-export type Currency = "EUR" | "USD" | "RUB" | "USDT";
+export type Currency = "EUR" | "USD" | "RUB" | "USDT" | "AMD";
 
 export interface Payment {
   id: UUID;
@@ -133,6 +137,12 @@ export interface Payment {
   subscriptionId?: UUID;
   provider: PaymentProvider;
   providerPaymentId: string;
+  /** Наш номер заказа (уходит в банк как orderNumber), см. миграцию 0065. */
+  orderNumber?: string;
+  /** Какой период оплачен — сервер выдаёт доступ по этому полю, не по данным из браузера. */
+  plan?: Exclude<SubscriptionPlan, "lifetime">;
+  /** Применённая скидка в процентах (реферальная), 0 — без скидки. */
+  discountPercent?: number;
   amount: number;
   currency: Currency;
   status: PaymentStatus;
@@ -359,6 +369,8 @@ export interface Notification {
   read: boolean;
   createdAt: ISODateString;
 }
+
+export * from "./pricing";
 
 // ---------------------------------------------------------------------------
 // Утилита: конвертация snake_case → camelCase

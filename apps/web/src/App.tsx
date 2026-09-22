@@ -28,6 +28,7 @@ import SupportPage from "@/pages/SupportPage";
 import LanguageSettingsPage from "@/pages/LanguageSettingsPage";
 import NotificationsSettingsPage from "@/pages/NotificationsSettingsPage";
 import SubscriptionPage from "@/pages/SubscriptionPage";
+import { PaymentSuccessPage, PaymentFailedPage } from "@/pages/PaymentResultPage";
 import WorkoutPlayerPage from "@/pages/WorkoutPlayerPage";
 import AchievementsPage from "@/pages/AchievementsPage";
 import NotFoundPage from "@/pages/NotFoundPage";
@@ -401,6 +402,22 @@ export default function App() {
         element={
           <ProtectedRoute>
             <SubscriptionPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/payment/success"
+        element={
+          <ProtectedRoute>
+            <PaymentSuccessPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/payment/failed"
+        element={
+          <ProtectedRoute>
+            <PaymentFailedPage />
           </ProtectedRoute>
         }
       />

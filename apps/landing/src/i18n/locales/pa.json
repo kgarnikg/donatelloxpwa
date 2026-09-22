@@ -120,10 +120,9 @@
     "choosePlan": "ਯੋਜਨਾ ਚੁਣੋ",
     "paymentMethodsLabel": "ਅਸੀਂ ਸਵੀਕਾਰ ਕਰਦੇ ਹਾਂ:",
     "paymentMethods": [
-      "ਕਾਰਡ · Stripe",
-      "PayPal",
-      "ЮKassa (ਰੂਸੀ ਕਾਰਡ)",
-      "USDT"
+      "Visa",
+      "Mastercard",
+      "ArCa"
     ],
     "baseFeatures": [
       "ਸਾਰੇ ਵਰਕਆਊਟ ਪ੍ਰੋਗਰਾਮ",
@@ -201,7 +200,7 @@
       },
       {
         "question": "ਕਿਹੜੇ ਭੁਗਤਾਨ ਤਰੀਕੇ ਸਮਰਥਿਤ ਹਨ?",
-        "answer": "Stripe ਅਤੇ PayPal ਰਾਹੀਂ ਕਾਰਡ ਅਤੇ ਲੋਕਲ ਤਰੀਕੇ, ਰੂਸੀ ਕਾਰਡਾਂ ਅਤੇ SBP ਲਈ YooKassa, ਅਤੇ ਆਟੋਮੈਟਿਕ ਵੈਰੀਫਿਕੇਸ਼ਨ ਨਾਲ ਆਪਣੇ ਖੁਦ ਦੇ ਕ੍ਰਿਪਟੋ ਵਾਲਿਟ ਰਾਹੀਂ USDT ਭੁਗਤਾਨ।"
+        "answer": "Visa, Mastercard ਅਤੇ ArCa ਬੈਂਕ ਕਾਰਡ। ਭੁਗਤਾਨ ਬੈਂਕ ਦੇ ਸੁਰੱਖਿਅਤ ਪੰਨੇ 'ਤੇ ਹੁੰਦਾ ਹੈ — ਅਸੀਂ ਤੁਹਾਡੇ ਕਾਰਡ ਦੇ ਵੇਰਵੇ ਨਾ ਵੇਖਦੇ ਹਾਂ, ਨਾ ਸੰਭਾਲਦੇ ਹਾਂ। ਇਹ ਇੱਕ ਵਾਰ ਦਾ ਭੁਗਤਾਨ ਹੈ, ਕੋਈ ਆਟੋਮੈਟਿਕ ਨਵੀਨੀਕਰਨ ਨਹੀਂ।"
       },
       {
         "question": "ਕੀ ਐਪ ਆਫਲਾਈਨ ਕੰਮ ਕਰਦੀ ਹੈ?",
@@ -246,7 +245,7 @@
       }
     },
     "copyright": "© {{year}} DonatelleX. ਸਾਰੇ ਅਧਿਕਾਰ ਰਾਖਵੇਂ ਹਨ।",
-    "paymentLine": "ਭੁਗਤਾਨ: Stripe · PayPal · ЮKassa · USDT"
+    "paymentLine": "ਭੁਗਤਾਨ: Visa · Mastercard · ArCa"
   },
   "legal": {
     "back": "ਹੋਮ 'ਤੇ ਜਾਓ",

@@ -26,9 +26,10 @@ const PROVIDER_LABEL: Record<PaymentProvider, string> = {
   paypal: "PayPal",
   yookassa: "ЮKassa",
   usdt: "USDT",
+  ararat: "Араратбанк",
 };
 
-const PROVIDER_FILTERS: Array<PaymentProvider | "all"> = ["all", "stripe", "paypal", "yookassa", "usdt"];
+const PROVIDER_FILTERS: Array<PaymentProvider | "all"> = ["all", "ararat", "stripe", "paypal", "yookassa", "usdt"];
 
 export default function PaymentsPage() {
   const [providerFilter, setProviderFilter] = useState<PaymentProvider | "all">("all");

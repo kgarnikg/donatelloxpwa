@@ -120,10 +120,9 @@
     "choosePlan": "योजना चुनें",
     "paymentMethodsLabel": "भुगतान स्वीकार करते हैं:",
     "paymentMethods": [
-      "कार्ड · Stripe",
-      "PayPal",
-      "ЮKassa (रूसी कार्ड)",
-      "USDT"
+      "Visa",
+      "Mastercard",
+      "ArCa"
     ],
     "baseFeatures": [
       "सभी वर्कआउट प्रोग्राम",
@@ -201,7 +200,7 @@
       },
       {
         "question": "कौन से भुगतान तरीके समर्थित हैं?",
-        "answer": "Stripe और PayPal के ज़रिए कार्ड और लोकल तरीके, रूसी कार्ड और SBP के लिए YooKassa, और ऑटोमैटिक वेरिफिकेशन के साथ अपने खुद के क्रिप्टो वॉलेट के ज़रिए USDT भुगतान।"
+        "answer": "Visa, Mastercard और ArCa बैंक कार्ड। भुगतान बैंक के सुरक्षित पेज पर होता है — हम आपके कार्ड का विवरण न देखते हैं, न सहेजते हैं। यह एक बार का भुगतान है, कोई स्वचालित नवीनीकरण नहीं।"
       },
       {
         "question": "क्या ऐप ऑफ़लाइन काम करता है?",
@@ -246,7 +245,7 @@
       }
     },
     "copyright": "© {{year}} DonatelleX. सर्वाधिकार सुरक्षित।",
-    "paymentLine": "भुगतान: Stripe · PayPal · ЮKassa · USDT"
+    "paymentLine": "भुगतान: Visa · Mastercard · ArCa"
   },
   "legal": {
     "back": "होम पर जाएं",

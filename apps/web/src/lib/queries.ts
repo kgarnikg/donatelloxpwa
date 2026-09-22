@@ -79,7 +79,11 @@ export function useActiveSubscription() {
         .select("*")
         .eq("user_id", authUser!.id)
         .in("status", ["active", "trialing", "past_due"])
-        .order("created_at", { ascending: false })
+        // Оплата разовая за период (без автопродления): по истечении
+        // current_period_end доступ должен закрываться сам, даже если
+        // статус в строке ещё не переведён в 'expired'.
+        .gt("current_period_end", new Date().toISOString())
+        .order("current_period_end", { ascending: false })
         .limit(1)
         .maybeSingle();
       if (error) throw error;

@@ -269,5 +269,57 @@
     "copied": "Copiato!",
     "invitedCount_one": "{{count}} amico invitato",
     "invitedCount_other": "{{count}} amici invitati"
+  },
+  "payment": {
+    "title": "Scegli il periodo",
+    "subtitle": "Pagamento unico: accesso a tutti i programmi e i video esattamente per il periodo scelto, senza rinnovi automatici.",
+    "regionLabel": "Regione",
+    "regions": {
+      "eu": "Europa",
+      "us": "USA",
+      "ru": "Russia"
+    },
+    "plans": {
+      "monthly": "1 mese",
+      "quarterly": "3 mesi",
+      "semiannual": "6 mesi",
+      "annual": "12 mesi"
+    },
+    "perMonth": "{{amount}} / mese",
+    "savings": "risparmi il {{percent}}%",
+    "referralBanner": "Ti ha invitato un amico: {{percent}}% di sconto sul primo mese.",
+    "referralApplied": "Sconto invito {{percent}}%",
+    "methodTitle": "Metodo di pagamento",
+    "methodCard": "Carta bancaria",
+    "methodCardHint": "Pagina di pagamento sicura della banca",
+    "payButton": "Paga {{amount}}",
+    "preparing": "Preparazione del pagamento…",
+    "comingSoon": "Pagamento presto disponibile",
+    "comingSoonHint": "Stiamo attivando il pagamento con carta. Ti serve l'accesso subito?",
+    "contactSupport": "Scrivi al supporto",
+    "secureNote": "I dati della carta si inseriscono sulla pagina della banca: non li vediamo né li conserviamo",
+    "oneTimeNote": "Nessun abbonamento né addebito automatico: paghi una volta per il periodo scelto.",
+    "active": {
+      "title": "Accesso attivo",
+      "lifetime": "Accesso illimitato",
+      "until": "Valido fino al {{date}}"
+    },
+    "errors": {
+      "noSession": "Impossibile ottenere la sessione. Accedi di nuovo.",
+      "createFailed": "Impossibile creare il pagamento. Riprova."
+    },
+    "result": {
+      "checkingTitle": "Verifica del pagamento…",
+      "checkingText": "Di solito bastano pochi secondi. Non chiudere la pagina.",
+      "successTitle": "Pagamento riuscito!",
+      "successText": "Accesso attivo fino al {{date}}. Buon allenamento!",
+      "toDashboard": "Vai agli allenamenti",
+      "pendingTitle": "Pagamento ancora in elaborazione",
+      "pendingText": "La banca non ha ancora confermato il pagamento. Se l'importo è stato addebitato e l'accesso non compare entro pochi minuti, scrivi al supporto e risolveremo.",
+      "checkAgain": "Verifica di nuovo",
+      "failedTitle": "Pagamento non riuscito",
+      "failedText": "Non è stato addebitato nulla. Controlla i dati e il saldo della carta o prova con un'altra.",
+      "tryAgain": "Riprova"
+    }
   }
 }

@@ -342,5 +342,57 @@
     "clientInfoName": "Name: {{name}}",
     "clientInfoEmail": "Registered email: {{email}}",
     "clientInfoPhone": "Phone: {{phone}}"
+  },
+  "payment": {
+    "title": "Choose your period",
+    "subtitle": "One-time payment — access to all programs and videos for exactly the period you choose, no automatic renewals.",
+    "regionLabel": "Region",
+    "regions": {
+      "eu": "Europe",
+      "us": "USA",
+      "ru": "Russia"
+    },
+    "plans": {
+      "monthly": "1 month",
+      "quarterly": "3 months",
+      "semiannual": "6 months",
+      "annual": "12 months"
+    },
+    "perMonth": "{{amount}} / mo",
+    "savings": "save {{percent}}%",
+    "referralBanner": "A friend invited you — {{percent}}% off your first month.",
+    "referralApplied": "{{percent}}% invite discount",
+    "methodTitle": "Payment method",
+    "methodCard": "Bank card",
+    "methodCardHint": "Secure bank payment page",
+    "payButton": "Pay {{amount}}",
+    "preparing": "Preparing payment…",
+    "comingSoon": "Payment coming soon",
+    "comingSoonHint": "We're setting up card payments. Need access right now?",
+    "contactSupport": "Contact support",
+    "secureNote": "Card details are entered on the bank's page — we never see or store them",
+    "oneTimeNote": "No subscription, no automatic charges — you pay once for the chosen period.",
+    "active": {
+      "title": "Access active",
+      "lifetime": "Lifetime access",
+      "until": "Valid until {{date}}"
+    },
+    "errors": {
+      "noSession": "Couldn't get your session. Please sign in again.",
+      "createFailed": "Couldn't create the payment. Please try again."
+    },
+    "result": {
+      "checkingTitle": "Checking your payment…",
+      "checkingText": "This usually takes a few seconds. Please don't close this page.",
+      "successTitle": "Payment successful!",
+      "successText": "Access is open until {{date}}. Enjoy your workouts!",
+      "toDashboard": "Go to workouts",
+      "pendingTitle": "Payment is still processing",
+      "pendingText": "The bank hasn't confirmed the payment yet. If you were charged and access doesn't appear within a few minutes, contact support and we'll sort it out.",
+      "checkAgain": "Check again",
+      "failedTitle": "Payment failed",
+      "failedText": "You haven't been charged. Check your card details and balance, or try another card.",
+      "tryAgain": "Try again"
+    }
   }
 }

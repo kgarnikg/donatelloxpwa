@@ -342,5 +342,57 @@
     "clientInfoName": "Nombre: {{name}}",
     "clientInfoEmail": "Correo de registro: {{email}}",
     "clientInfoPhone": "Teléfono: {{phone}}"
+  },
+  "payment": {
+    "title": "Elige tu periodo",
+    "subtitle": "Pago único: acceso a todos los programas y vídeos durante exactamente el periodo elegido, sin renovaciones automáticas.",
+    "regionLabel": "Región",
+    "regions": {
+      "eu": "Europa",
+      "us": "EE. UU.",
+      "ru": "Rusia"
+    },
+    "plans": {
+      "monthly": "1 mes",
+      "quarterly": "3 meses",
+      "semiannual": "6 meses",
+      "annual": "12 meses"
+    },
+    "perMonth": "{{amount}} / mes",
+    "savings": "ahorra un {{percent}}%",
+    "referralBanner": "Te ha invitado un amigo: {{percent}}% de descuento en tu primer mes.",
+    "referralApplied": "{{percent}}% de descuento por invitación",
+    "methodTitle": "Método de pago",
+    "methodCard": "Tarjeta bancaria",
+    "methodCardHint": "Página de pago segura del banco",
+    "payButton": "Pagar {{amount}}",
+    "preparing": "Preparando el pago…",
+    "comingSoon": "El pago estará disponible pronto",
+    "comingSoonHint": "Estamos activando el pago con tarjeta. ¿Necesitas acceso ya?",
+    "contactSupport": "Escribir a soporte",
+    "secureNote": "Los datos de la tarjeta se introducen en la página del banco: no los vemos ni los guardamos",
+    "oneTimeNote": "Sin suscripción ni cargos automáticos: pagas una vez por el periodo elegido.",
+    "active": {
+      "title": "Acceso activo",
+      "lifetime": "Acceso ilimitado",
+      "until": "Válido hasta el {{date}}"
+    },
+    "errors": {
+      "noSession": "No se pudo obtener la sesión. Vuelve a iniciar sesión.",
+      "createFailed": "No se pudo crear el pago. Inténtalo de nuevo."
+    },
+    "result": {
+      "checkingTitle": "Comprobando el pago…",
+      "checkingText": "Suele tardar unos segundos. No cierres esta página.",
+      "successTitle": "¡Pago realizado!",
+      "successText": "Acceso activo hasta el {{date}}. ¡Buenos entrenamientos!",
+      "toDashboard": "Ir a los entrenamientos",
+      "pendingTitle": "El pago aún se está procesando",
+      "pendingText": "El banco todavía no ha confirmado el pago. Si se te ha cobrado y el acceso no aparece en unos minutos, escribe a soporte y lo resolvemos.",
+      "checkAgain": "Comprobar de nuevo",
+      "failedTitle": "El pago no se ha completado",
+      "failedText": "No se ha realizado ningún cargo. Revisa los datos y el saldo de la tarjeta o prueba con otra.",
+      "tryAgain": "Intentar de nuevo"
+    }
   }
 }

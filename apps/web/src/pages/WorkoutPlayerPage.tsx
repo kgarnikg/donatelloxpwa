@@ -100,7 +100,6 @@ export default function WorkoutPlayerPage() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeVideo]);
 
 
