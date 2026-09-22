@@ -79,7 +79,7 @@ export function Hero() {
   ];
 
   return (
-    <section id="top" className="relative flex min-h-dvh flex-col justify-between overflow-hidden pt-16 lg:items-center lg:justify-center">
+    <section id="top" className="relative flex min-h-dvh flex-col justify-between overflow-hidden pt-16 lg:justify-center">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src={backgroundVideoUrl}
@@ -213,7 +213,7 @@ export function Hero() {
           чем left-1/2 + translate: не зависит от точной ширины элемента). */}
       <a
         href="#hero-details"
-        className="absolute bottom-5 inset-x-0 flex flex-col items-center gap-2 text-neutral-300 transition hover:text-volt-400 animate-[bounce_2.2s_ease-in-out_infinite] sm:bottom-6"
+        className="absolute bottom-5 inset-x-0 flex flex-col items-center gap-2 text-neutral-300 transition hover:text-volt-400 animate-[bounce_2.2s_ease-in-out_infinite] sm:bottom-6 lg:hidden"
         aria-label={t("hero.scrollHint")}
       >
         <span className="text-xs font-semibold uppercase tracking-widest sm:text-sm">{t("hero.scrollHint")}</span>
