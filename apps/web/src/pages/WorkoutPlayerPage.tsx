@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Check, ChevronLeft, PlayCircle, Video, TrendingUp, X, Timer, ArrowDown, Shuffle } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
@@ -61,6 +61,7 @@ export default function WorkoutPlayerPage() {
   const { t, i18n } = useTranslation();
   const { workoutId } = useParams<{ workoutId: string }>();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { authUser } = useAuth();
   const [completedIds, setCompletedIds] = useState<Set<string>>(new Set());
   const [confirmExit, setConfirmExit] = useState(false);
@@ -263,13 +264,33 @@ export default function WorkoutPlayerPage() {
   async function replaceExercise(original: Exercise) {
     setReplacingId(original.id);
     try {
-      const { data } = await supabase
-        .from("exercises")
-        .select("*")
-        .neq("id", original.id)
-        .overlaps("muscle_groups", original.muscleGroups)
-        .limit(25);
-      const candidates = toCamelCase<Exercise[]>(data ?? []);
+      // muscle_groups пустое почти у всех 2040 упражнений — в исходном
+      // сидировании (gen_sql_split.py) заполнялись только slug/title,
+      // ничего больше. Поиск по .overlaps() на пустом массиве находил
+      // 0 кандидатов и молча ничего не делал — кнопка "работала", просто
+      // без видимого эффекта. Вместо группы мышц ищем по первому слову
+      // названия — в русской номенклатуре упражнений это почти всегда
+      // тип движения ("Жим", "Тяга", "Приседание", "Сгибание" и т.п.),
+      // так похожие по паттерну упражнения находятся уже сейчас, без
+      // необходимости сначала размечать весь каталог по группам мышц.
+      const firstWord = original.title.trim().split(/\s+/)[0];
+      let candidates: Exercise[] = [];
+      if (firstWord && firstWord.length >= 3) {
+        const { data } = await supabase
+          .from("exercises")
+          .select("*")
+          .neq("id", original.id)
+          .ilike("title", `%${firstWord}%`)
+          .limit(25);
+        candidates = toCamelCase<Exercise[]>(data ?? []);
+      }
+      // Гарантированный запасной вариант — если по ключевому слову ничего
+      // не нашлось (редкое/уникальное название), берём случайное из ВСЕГО
+      // каталога. Кнопка должна что-то делать всегда, а не молчать.
+      if (candidates.length === 0) {
+        const { data } = await supabase.from("exercises").select("*").neq("id", original.id).limit(50);
+        candidates = toCamelCase<Exercise[]>(data ?? []);
+      }
       if (candidates.length === 0) return;
       const pick = candidates[Math.floor(Math.random() * candidates.length)];
       setSubstitutions((prev) => ({ ...prev, [original.id]: pick }));
@@ -277,7 +298,6 @@ export default function WorkoutPlayerPage() {
       setReplacingId(null);
     }
   }
-
 
   /** Последние зафиксированные рабочие веса по этой тренировке — для подсказки "в прошлый раз". */
   const { data: lastWeights } = useQuery({
@@ -347,7 +367,15 @@ export default function WorkoutPlayerPage() {
       }
       return data;
     },
-    onSuccess: () => navigate("/dashboard", { replace: true }),
+    onSuccess: () => {
+      // Без этого страница "Прогресс" могла показывать старый (пустой)
+      // снимок истории тренировок ещё до минуты (staleTime=60с в
+      // main.tsx) после реального сохранения — данные в базе были, но
+      // react-query не знал, что их нужно перезапросить.
+      queryClient.invalidateQueries({ queryKey: ["workout-history"] });
+      queryClient.invalidateQueries({ queryKey: ["progress"] });
+      navigate("/dashboard", { replace: true });
+    },
   });
 
   if (isLoading || !workout) {

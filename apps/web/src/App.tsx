@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Routes, Route, Navigate, Outlet, Link, useParams } from "react-router-dom";
-import { ChevronLeft, Play, Lock } from "lucide-react";
+import { ChevronLeft, Play, Lock, Check } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
@@ -70,6 +70,7 @@ function TabsLayout() {
 function ProgramDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const { t, i18n } = useTranslation();
+  const { session } = useAuth();
   const { hasFreeAccess } = useFreeProgramAccess();
   const { data: activeSubscription } = useActiveSubscription();
   const [activeWeekOrder, setActiveWeekOrder] = useState<number | null>(null);
@@ -102,6 +103,46 @@ function ProgramDetailPage() {
     },
     enabled: !!program?.id,
   });
+
+  // Последовательное открытие тренировок: у каждой программы свой
+  // прогресс (запрос отдельно на program.id), никакого отдельного
+  // "указателя" в базе не заводили — вычисляем на лету из того, какие
+  // workout_id уже есть в workout_logs этого пользователя. Тренировка N
+  // открыта для прохождения, только если все тренировки ДО неё (в
+  // каноническом порядке — том же week_order → order, каким их и
+  // запрашиваем выше) уже отмечены выполненными. Порядок ГЛОБАЛЬНЫЙ по
+  // всей программе, не сбрасывается по неделям — если человек месяц не
+  // ходил в зал, следующая тренировка не "откроется по календарю" сама,
+  // только по факту выполнения предыдущей.
+  const { data: completedWorkoutIds } = useQuery({
+    queryKey: ["completed-workout-ids", program?.id, session?.user?.id, workouts?.length],
+    queryFn: async (): Promise<Set<string>> => {
+      const workoutIds = (workouts ?? []).map((w) => w.id);
+      if (workoutIds.length === 0) return new Set();
+      const { data, error } = await supabase
+        .from("workout_logs")
+        .select("workout_id")
+        .eq("user_id", session!.user.id)
+        .in("workout_id", workoutIds);
+      if (error) throw error;
+      return new Set((data ?? []).map((row) => row.workout_id as string));
+    },
+    // Ждём workouts, чтобы точно знать, по каким ID фильтровать — иначе
+    // пришлось бы полагаться на менее очевидный синтаксис фильтра через
+    // связанную таблицу (workouts!inner(program_id)).
+    enabled: !!program?.id && !!session?.user && !!workouts,
+  });
+
+  // Первая в каноническом порядке тренировка, которой ещё нет в
+  // completedWorkoutIds — это она открыта для прохождения сейчас. Всё до
+  // неё — уже пройдено, всё после — заблокировано. Ничего не считали, пока
+  // completedWorkoutIds ещё не загрузился (undefined) — тогда просто не
+  // определяем состояние вообще, чтобы не мигнуть "всё заблокировано" на
+  // долю секунды до прихода реальных данных.
+  const nextUnlockedWorkoutId = useMemo(() => {
+    if (!workouts || !completedWorkoutIds) return undefined;
+    return workouts.find((w) => !completedWorkoutIds.has(w.id))?.id ?? null;
+  }, [workouts, completedWorkoutIds]);
 
   // Уникальные блоки недель в порядке появления (week_order уже отсортирован запросом).
   const weekBlocks = useMemo(() => {
@@ -211,38 +252,80 @@ function ProgramDetailPage() {
             <div key={i} className="card h-20 animate-pulse bg-ink-800" />
           ))}
 
-        {visibleWorkouts.map((workout, index) =>
-          isLocked ? (
-            <Link
-              key={workout.id}
-              to="/subscription"
-              className="card flex items-center justify-between opacity-70 hover:opacity-100"
-            >
-              <div>
-                <p className="text-xs text-neutral-500">{t("programs.workoutLabel", { number: index + 1 })}</p>
-                <p className="font-semibold">{localizedField(workout.title, { en: workout.titleEn, es: workout.titleEs, hy: workout.titleHy }, i18n.language)}</p>
+        {visibleWorkouts.map((workout, index) => {
+          const workoutTitle = localizedField(
+            workout.title,
+            { en: workout.titleEn, es: workout.titleEs, hy: workout.titleHy },
+            i18n.language,
+          );
+
+          if (isLocked) {
+            return (
+              <Link
+                key={workout.id}
+                to="/subscription"
+                className="card flex items-center justify-between opacity-70 hover:opacity-100"
+              >
+                <div>
+                  <p className="text-xs text-neutral-500">{t("programs.workoutLabel", { number: index + 1 })}</p>
+                  <p className="font-semibold">{workoutTitle}</p>
+                </div>
+                <Lock size={18} className="text-neutral-500" />
+              </Link>
+            );
+          }
+
+          const isDone = completedWorkoutIds?.has(workout.id) ?? false;
+          // Пока nextUnlockedWorkoutId ещё не вычислен (undefined) — не
+          // блокируем на всякий случай, считаем доступной (безопаснее
+          // показать лишний Play на долю секунды, чем ложно показать замок
+          // на тренировке, которую на самом деле можно проходить).
+          const isNext = nextUnlockedWorkoutId === undefined || workout.id === nextUnlockedWorkoutId;
+          const isSequenceLocked = !isDone && !isNext;
+
+          if (isSequenceLocked) {
+            return (
+              <div
+                key={workout.id}
+                className="card flex items-center justify-between opacity-50"
+                title={t("programs.sequenceLockedHint")}
+              >
+                <div>
+                  <p className="text-xs text-neutral-500">{t("programs.workoutLabel", { number: index + 1 })}</p>
+                  <p className="font-semibold">{workoutTitle}</p>
+                </div>
+                <Lock size={18} className="text-neutral-500" />
               </div>
-              <Lock size={18} className="text-neutral-500" />
-            </Link>
-          ) : (
+            );
+          }
+
+          return (
             <Link
               key={workout.id}
               to={`/workout/${workout.id}`}
-              className="card flex items-center justify-between hover:border-ink-500"
+              className={clsx(
+                "card flex items-center justify-between hover:border-ink-500",
+                isDone && "border-volt-400/30 bg-volt-400/5",
+              )}
             >
               <div>
                 <p className="text-xs text-neutral-500">{t("programs.workoutLabel", { number: index + 1 })}</p>
-                <p className="font-semibold">{localizedField(workout.title, { en: workout.titleEn, es: workout.titleEs, hy: workout.titleHy }, i18n.language)}</p>
+                <p className="font-semibold">{workoutTitle}</p>
                 <p className="mt-0.5 text-sm text-neutral-400">
                   {workout.estimatedDurationMinutes} {t("common.min")} · {t("programs.exercises", { count: workout.sets.length })}
                 </p>
               </div>
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-volt-400 text-ink-950">
-                <Play size={16} fill="currentColor" />
+              <span
+                className={clsx(
+                  "flex h-9 w-9 shrink-0 items-center justify-center rounded-full",
+                  isDone ? "bg-volt-400/15 text-volt-400" : "bg-volt-400 text-ink-950",
+                )}
+              >
+                {isDone ? <Check size={18} /> : <Play size={16} fill="currentColor" />}
               </span>
             </Link>
-          ),
-        )}
+          );
+        })}
 
         {!workoutsLoading && visibleWorkouts.length === 0 && (
           <p className="py-8 text-center text-neutral-500">

@@ -232,6 +232,7 @@
     "exercises_one": "{{count}} ejercicio",
     "exercises_other": "{{count}} ejercicios",
     "pageTitle": "Programas de entrenamiento",
-    "pageSubtitle": "Elige un programa para tu objetivo"
+    "pageSubtitle": "Elige un programa para tu objetivo",
+    "sequenceLockedHint": "Se desbloquea al completar el entrenamiento anterior"
   }
 }

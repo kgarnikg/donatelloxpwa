@@ -27,7 +27,7 @@ export function Hero() {
   // с тем же именем (см. PROJECT_PLAN.md) — иначе старая кешированная
   // копия могла бы показываться ещё долго, несмотря на новый деплой.
   // При следующей замене видео под тем же именем — увеличить версию.
-  const [backgroundVideoUrl, setBackgroundVideoUrl] = useState<string>("/video/hero-video.mp4?v=3");
+  const [backgroundVideoUrl, setBackgroundVideoUrl] = useState<string>("/video/hero-video.mp4?v=5");
 
   useEffect(() => {
     async function loadHeroSettings() {
@@ -79,7 +79,7 @@ export function Hero() {
   ];
 
   return (
-    <section id="top" className="relative flex min-h-dvh items-center overflow-hidden pt-16">
+    <section id="top" className="relative flex min-h-dvh flex-col overflow-hidden pt-16 lg:items-center lg:justify-center">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src={backgroundVideoUrl}
@@ -93,91 +93,90 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-ink-950/85 via-ink-950/75 to-ink-950" />
       <div className="absolute inset-0 bg-grid-fade opacity-40" />
 
-      {/* Весь блок должен целиком помещаться в один экран, вместе со стрелкой
-          "листай вниз" внизу — секция специально плотнее, чем стандартный
-          отступ у остальных секций сайта (те листаются, эта — нет). Если на
-          каком-то экране всё ещё не влезает — сначала уменьшать здесь, не
-          в остальных секциях.
-          На десктопе (lg+) блок сдвинут влево и сужен — чтобы видео на фоне
-          было лучше видно справа. Важно: mx-auto из .section-container
-          центрирует блок независимо от items-start внутри него — поэтому
-          на lg+ явно отменяем (lg:mx-0), иначе сужение само по себе почти
-          незаметно (блок просто сжимается к центру, а не уезжает влево).
-          На мобильном — по центру, как раньше. */}
-      <div className="section-container relative flex flex-col items-center py-5 text-center sm:py-12 lg:mx-0 lg:max-w-xl lg:items-start lg:pl-16 lg:text-left xl:max-w-2xl xl:pl-24">
-        <span className="eyebrow mb-2 animate-fade-in sm:mb-3">{t("hero.eyebrow")}</span>
+      {/* На мобильном — заголовок прижат к верху, кнопка к низу (justify-between
+          на самой секции), чтобы между ними было видно фон-видео, а не сплошной
+          текстовый блок посередине (отклик пользователя на предыдущую версию).
+          "contents" — оба блока (header/actions) становятся прямыми flex-детьми
+          <section>, это и даёт им разъехаться к разным краям без лишнего DOM.
+          На десктопе (lg+) "contents" снимается (lg:flex lg:flex-col) — тогда
+          это снова один общий центрированный блок, как было изначально; секция
+          на lg получает justify-center вместо between. */}
+      <div className="contents lg:flex lg:flex-col lg:items-start">
+        {/* Верхний блок: эйброу + заголовок */}
+        <div className="section-container relative mt-10 flex flex-col items-center text-center sm:mt-14 lg:mx-0 lg:mt-0 lg:max-w-xl lg:items-start lg:pl-16 lg:text-left xl:max-w-2xl xl:pl-24">
+          <span className="eyebrow mb-2 animate-fade-in sm:mb-3">{t("hero.eyebrow")}</span>
 
-        <h1 className="max-w-4xl animate-fade-in font-display text-2xl uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-          {t("hero.titleBefore")} <span className="text-volt-400">{t("hero.titleHighlight")}</span>
-        </h1>
+          <h1 className="max-w-4xl animate-fade-in font-display text-2xl uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+            {t("hero.titleBefore")} <span className="text-volt-400">{t("hero.titleHighlight")}</span>
+          </h1>
 
-        {/* Чек-лист в духе референса — коротко, по делу, каждый пункт правда.
-            Шрифт крупнее и жирнее обычного текста — не мельчить рядом с
-            громким заголовком.
-            На мобильном скрыт здесь — первый экран нарочно оставлен только
-            под яркий фон + заголовок, без мелких подробностей (запрос
-            пользователя: "перегружено"). Те же пункты показываются чуть
-            ниже, вне зоны min-h-dvh — см. HeroMobileDetails внизу файла,
-            подключается в App.tsx сразу после <Hero />. Десктоп — как был,
-            без изменений. */}
-        <ul className="mt-3 hidden animate-fade-in flex-col gap-1.5 text-left sm:mt-5 sm:gap-2 lg:flex lg:items-start">
-          {checklist.map((item) => (
-            <li key={item.text} className="flex items-center gap-2.5 text-base font-medium text-neutral-100 sm:text-lg">
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-volt-400 text-ink-950">
-                <Check size={13} strokeWidth={3.5} />
-              </span>
-              {item.href ? (
-                // Пункт про цену — кликабельный, ведёт прямо на блок с
-                // тарифами. Друзья пользователя, смотревшие с телефона,
-                // не сразу понимали, как до этого блока добраться (ссылка
-                // в шапке спрятана за гамбургер-меню) — так можно попасть
-                // туда одним тапом прямо с первого экрана.
-                <a href={item.href} className="underline decoration-volt-400/50 decoration-2 underline-offset-4 transition hover:text-volt-400">
-                  {item.text}
-                </a>
-              ) : (
-                item.text
-              )}
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-4 flex animate-fade-in flex-col gap-3 sm:mt-6 sm:flex-row">
-          <a
-            href={`${APP_URL}/register`}
-            className="btn-primary transition-transform duration-200 hover:scale-105 hover:shadow-[0_0_36px_rgba(168,224,0,0.45)]"
-          >
-            {t("hero.ctaPrimary")} <ArrowRight size={18} />
-          </a>
-          {/* Вторая кнопка (видео) — тоже только на десктопе, та же логика
-              упрощения первого экрана на мобильном. */}
-          <div className="hidden lg:block">
-            {showreelUrl ? (
-              <button onClick={() => setShowreelOpen(true)} className="btn-secondary">
-                <PlayCircle size={18} /> {t("hero.ctaSecondary")}
-              </button>
-            ) : (
-              <a href="#modules" className="btn-secondary">
-                <PlayCircle size={18} /> {t("hero.ctaSecondary")}
-              </a>
-            )}
-          </div>
+          {/* Чек-лист в духе референса — коротко, по делу, каждый пункт правда.
+              Шрифт крупнее и жирнее обычного текста — не мельчить рядом с
+              громким заголовком.
+              На мобильном скрыт здесь — первый экран нарочно оставлен только
+              под яркий фон + заголовок, без мелких подробностей (запрос
+              пользователя: "перегружено"). Те же пункты показываются чуть
+              ниже, вне зоны min-h-dvh — см. HeroMobileDetails внизу файла,
+              подключается в App.tsx сразу после <Hero />. Десктоп — как был,
+              без изменений. */}
+          <ul className="mt-3 hidden animate-fade-in flex-col gap-1.5 text-left sm:mt-5 sm:gap-2 lg:flex lg:items-start">
+            {checklist.map((item) => (
+              <li key={item.text} className="flex items-center gap-2.5 text-base font-medium text-neutral-100 sm:text-lg">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-volt-400 text-ink-950">
+                  <Check size={13} strokeWidth={3.5} />
+                </span>
+                {item.href ? (
+                  <a href={item.href} className="underline decoration-volt-400/50 decoration-2 underline-offset-4 transition hover:text-volt-400">
+                    {item.text}
+                  </a>
+                ) : (
+                  item.text
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Социальное доказательство — только на десктопе здесь, на мобильном
-            переехало в HeroMobileDetails (см. комментарий у чек-листа выше). */}
-        <div className="mt-5 hidden animate-fade-in items-center gap-3 lg:flex">
-          <div className="flex -space-x-2">
-            {AVATAR_COLORS.map((color, i) => (
-              <div
-                key={i}
-                className={`flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink-950 text-xs font-bold text-ink-950 ${color}`}
-              >
-                {String.fromCharCode(65 + i)}
-              </div>
-            ))}
+        {/* Нижний блок: кнопки + соц.доказательство (десктоп) — на мобильном
+            прижат к низу секции, прямо над стрелкой. */}
+        <div className="section-container relative mb-16 flex flex-col items-center text-center sm:mb-20 lg:mx-0 lg:mb-0 lg:mt-6 lg:max-w-xl lg:items-start lg:pl-16 lg:text-left xl:max-w-2xl xl:pl-24">
+          <div className="flex animate-fade-in flex-col gap-3 sm:flex-row">
+            <a
+              href={`${APP_URL}/register`}
+              className="btn-primary transition-transform duration-200 hover:scale-105 hover:shadow-[0_0_36px_rgba(168,224,0,0.45)]"
+            >
+              {t("hero.ctaPrimary")} <ArrowRight size={18} />
+            </a>
+            {/* Вторая кнопка (видео) — тоже только на десктопе, та же логика
+                упрощения первого экрана на мобильном. */}
+            <div className="hidden lg:block">
+              {showreelUrl ? (
+                <button onClick={() => setShowreelOpen(true)} className="btn-secondary">
+                  <PlayCircle size={18} /> {t("hero.ctaSecondary")}
+                </button>
+              ) : (
+                <a href="#modules" className="btn-secondary">
+                  <PlayCircle size={18} /> {t("hero.ctaSecondary")}
+                </a>
+              )}
+            </div>
           </div>
-          <span className="text-sm text-neutral-400">{t("hero.socialProof")}</span>
+
+          {/* Социальное доказательство — только на десктопе здесь, на мобильном
+              переехало в HeroMobileDetails (см. комментарий у чек-листа выше). */}
+          <div className="mt-5 hidden animate-fade-in items-center gap-3 lg:flex">
+            <div className="flex -space-x-2">
+              {AVATAR_COLORS.map((color, i) => (
+                <div
+                  key={i}
+                  className={`flex h-7 w-7 items-center justify-center rounded-full border-2 border-ink-950 text-xs font-bold text-ink-950 ${color}`}
+                >
+                  {String.fromCharCode(65 + i)}
+                </div>
+              ))}
+            </div>
+            <span className="text-sm text-neutral-400">{t("hero.socialProof")}</span>
+          </div>
         </div>
       </div>
 
@@ -210,13 +209,15 @@ export function Hero() {
         </div>
       )}
 
+      {/* Стрелка — крупнее и центрирована через inset-x-0 + flex (надёжнее,
+          чем left-1/2 + translate: не зависит от точной ширины элемента). */}
       <a
         href="#modules"
-        className="absolute bottom-3 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1 text-neutral-400 transition hover:text-volt-400 animate-[bounce_2.2s_ease-in-out_infinite] sm:bottom-5"
+        className="absolute bottom-5 inset-x-0 flex flex-col items-center gap-2 text-neutral-300 transition hover:text-volt-400 animate-[bounce_2.2s_ease-in-out_infinite] sm:bottom-6"
         aria-label={t("hero.scrollHint")}
       >
-        <span className="text-[10px] font-medium uppercase tracking-widest sm:text-xs">{t("hero.scrollHint")}</span>
-        <ChevronDown size={18} />
+        <span className="text-xs font-semibold uppercase tracking-widest sm:text-sm">{t("hero.scrollHint")}</span>
+        <ChevronDown size={30} strokeWidth={2.5} />
       </a>
     </section>
   );

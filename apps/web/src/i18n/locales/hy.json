@@ -232,6 +232,7 @@
     "exercises_one": "{{count}} վարժություն",
     "exercises_other": "{{count}} վարժություն",
     "pageTitle": "Մարզումների ծրագրեր",
-    "pageSubtitle": "Ընտրեք ծրագիր ձեր նպատակի համար"
+    "pageSubtitle": "Ընտրեք ծրագիր ձեր նպատակի համար",
+    "sequenceLockedHint": "Կբացվի նախորդ մարզումն ավարտելուց հետո"
   }
 }

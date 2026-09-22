@@ -238,6 +238,7 @@
     "exercises_many": "{{count}} упражнений",
     "exercises_other": "{{count}} упражнений",
     "pageTitle": "Программы тренировок",
-    "pageSubtitle": "Выберите программу под свою цель"
+    "pageSubtitle": "Выберите программу под свою цель",
+    "sequenceLockedHint": "Откроется после выполнения предыдущей тренировки"
   }
 }
