@@ -233,8 +233,6 @@
     "exercises_other": "{{count}} exercises",
     "pageTitle": "Training programs",
     "pageSubtitle": "Choose a program for your goal",
-    "sequenceLockedHint": "Unlocks after you finish the previous workout",
-    "catchUpLink": "Already did this program before?",
-    "catchUpConfirm": "Mark \"{{title}}\" and every workout before it as done? This will unlock the next one."
+    "sequenceLockedHint": "Unlocks after you finish the previous workout"
   }
 }

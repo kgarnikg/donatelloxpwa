@@ -8,6 +8,7 @@ import {
   CreditCard,
   Video,
   Settings,
+  RotateCcw,
   LogOut,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
@@ -18,6 +19,7 @@ const NAV_ITEMS = [
   { to: "/programs", label: "Программы", icon: Dumbbell },
   { to: "/videos", label: "Видео", icon: Video },
   { to: "/payments", label: "Платежи", icon: CreditCard },
+  { to: "/catch-up", label: "Догнать прогресс", icon: RotateCcw },
   { to: "/settings", label: "Настройки сайта", icon: Settings },
 ];
 

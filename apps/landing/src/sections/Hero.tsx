@@ -106,7 +106,7 @@ export function Hero() {
         <div className="section-container relative mt-10 flex flex-col items-center text-center sm:mt-14 lg:mx-0 lg:mt-0 lg:max-w-xl lg:items-start lg:pl-16 lg:text-left xl:max-w-2xl xl:pl-24">
           <span className="eyebrow mb-2 animate-fade-in sm:mb-3">{t("hero.eyebrow")}</span>
 
-          <h1 className="max-w-4xl animate-fade-in font-display text-2xl uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="max-w-4xl animate-fade-in font-display text-3xl uppercase leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
             {t("hero.titleBefore")} <span className="text-volt-400">{t("hero.titleHighlight")}</span>
           </h1>
 

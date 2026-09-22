@@ -233,8 +233,6 @@
     "exercises_other": "{{count}} ejercicios",
     "pageTitle": "Programas de entrenamiento",
     "pageSubtitle": "Elige un programa para tu objetivo",
-    "sequenceLockedHint": "Se desbloquea al completar el entrenamiento anterior",
-    "catchUpLink": "¿Ya hiciste este programa antes?",
-    "catchUpConfirm": "¿Marcar \"{{title}}\" y todos los entrenamientos anteriores como completados? Esto desbloqueará el siguiente."
+    "sequenceLockedHint": "Se desbloquea al completar el entrenamiento anterior"
   }
 }

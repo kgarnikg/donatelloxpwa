@@ -9,6 +9,7 @@ import ProgramDetailPage from "@/pages/ProgramDetailPage";
 import VideosPage from "@/pages/VideosPage";
 import PaymentsPage from "@/pages/PaymentsPage";
 import SettingsPage from "@/pages/SettingsPage";
+import CatchUpProgressPage from "@/pages/CatchUpProgressPage";
 
 function AuthorizedLayout() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/videos" element={<VideosPage />} />
         <Route path="/payments" element={<PaymentsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/catch-up" element={<CatchUpProgressPage />} />
       </Route>
 
       <Route
