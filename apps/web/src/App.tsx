@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Routes, Route, Navigate, Outlet, Link, useParams } from "react-router-dom";
 import { ChevronLeft, Play, Lock, Check } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { AppShell } from "@/components/AppShell";
@@ -71,6 +71,7 @@ function ProgramDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const { t, i18n } = useTranslation();
   const { session } = useAuth();
+  const queryClient = useQueryClient();
   const { hasFreeAccess } = useFreeProgramAccess();
   const { data: activeSubscription } = useActiveSubscription();
   const [activeWeekOrder, setActiveWeekOrder] = useState<number | null>(null);
@@ -143,6 +144,39 @@ function ProgramDetailPage() {
     if (!workouts || !completedWorkoutIds) return undefined;
     return workouts.find((w) => !completedWorkoutIds.has(w.id))?.id ?? null;
   }, [workouts, completedWorkoutIds]);
+
+  // "Я уже дошёл(-шла) досюда" — для людей с реальным прогрессом, не
+  // отражённым в workout_logs (занимались по этой же программе на
+  // бумаге/вручную до появления приложения или до появления самой
+  // функции последовательного открытия — ровно такой случай). Отмечает
+  // ЭТУ тренировку и все, что канонически идут ДО неё, выполненными
+  // одним действием — не нужно проходить их по одной через полный плеер.
+  // Не пишет total_volume_kg/completed_sets с реальными деталями (их и
+  // не было) — только сам факт "пройдено", этого достаточно для логики
+  // разблокировки следующей тренировки.
+  const catchUpMutation = useMutation({
+    mutationFn: async (upToWorkout: Workout) => {
+      if (!workouts || !session?.user || !completedWorkoutIds) return;
+      const idx = workouts.findIndex((w) => w.id === upToWorkout.id);
+      if (idx === -1) return;
+      const toMark = workouts.slice(0, idx + 1).filter((w) => !completedWorkoutIds.has(w.id));
+      if (toMark.length === 0) return;
+      const { error } = await supabase.from("workout_logs").insert(
+        toMark.map((w) => ({
+          user_id: session.user.id,
+          workout_id: w.id,
+          completed_at: new Date().toISOString(),
+          duration_minutes: w.estimatedDurationMinutes ?? 0,
+          completed_sets: [],
+        })),
+      );
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["completed-workout-ids"] });
+      queryClient.invalidateQueries({ queryKey: ["workout-history"] });
+    },
+  });
 
   // Уникальные блоки недель в порядке появления (week_order уже отсортирован запросом).
   const weekBlocks = useMemo(() => {
@@ -285,16 +319,30 @@ function ProgramDetailPage() {
 
           if (isSequenceLocked) {
             return (
-              <div
-                key={workout.id}
-                className="card flex items-center justify-between opacity-50"
-                title={t("programs.sequenceLockedHint")}
-              >
-                <div>
-                  <p className="text-xs text-neutral-500">{t("programs.workoutLabel", { number: index + 1 })}</p>
-                  <p className="font-semibold">{workoutTitle}</p>
+              <div key={workout.id} className="card">
+                <div className="flex items-center justify-between opacity-50" title={t("programs.sequenceLockedHint")}>
+                  <div>
+                    <p className="text-xs text-neutral-500">{t("programs.workoutLabel", { number: index + 1 })}</p>
+                    <p className="font-semibold">{workoutTitle}</p>
+                  </div>
+                  <Lock size={18} className="text-neutral-500" />
                 </div>
-                <Lock size={18} className="text-neutral-500" />
+                {/* "Уже дошёл(-шла) досюда" — для реального прогресса, не
+                    отражённого в workout_logs (занимались по программе до
+                    появления приложения/этой функции). Не затемнена вместе
+                    с остальной карточкой — должна оставаться заметной и
+                    читаемой, не выглядеть как часть заблокированного. */}
+                <button
+                  onClick={() => {
+                    if (window.confirm(t("programs.catchUpConfirm", { title: workoutTitle }) as string)) {
+                      catchUpMutation.mutate(workout);
+                    }
+                  }}
+                  disabled={catchUpMutation.isPending}
+                  className="mt-2 text-xs text-neutral-500 underline decoration-dotted underline-offset-2 transition hover:text-neutral-300 disabled:opacity-50"
+                >
+                  {t("programs.catchUpLink")}
+                </button>
               </div>
             );
           }

@@ -79,7 +79,7 @@ export function Hero() {
   ];
 
   return (
-    <section id="top" className="relative flex min-h-dvh flex-col overflow-hidden pt-16 lg:items-center lg:justify-center">
+    <section id="top" className="relative flex min-h-dvh flex-col justify-between overflow-hidden pt-16 lg:items-center lg:justify-center">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src={backgroundVideoUrl}
@@ -155,7 +155,7 @@ export function Hero() {
                   <PlayCircle size={18} /> {t("hero.ctaSecondary")}
                 </button>
               ) : (
-                <a href="#modules" className="btn-secondary">
+                <a href="#pricing" className="btn-secondary">
                   <PlayCircle size={18} /> {t("hero.ctaSecondary")}
                 </a>
               )}
@@ -212,7 +212,7 @@ export function Hero() {
       {/* Стрелка — крупнее и центрирована через inset-x-0 + flex (надёжнее,
           чем left-1/2 + translate: не зависит от точной ширины элемента). */}
       <a
-        href="#modules"
+        href="#hero-details"
         className="absolute bottom-5 inset-x-0 flex flex-col items-center gap-2 text-neutral-300 transition hover:text-volt-400 animate-[bounce_2.2s_ease-in-out_infinite] sm:bottom-6"
         aria-label={t("hero.scrollHint")}
       >
@@ -250,7 +250,7 @@ export function HeroMobileDetails() {
   ];
 
   return (
-    <div className="section-container py-8 lg:hidden">
+    <div id="hero-details" className="section-container py-8 lg:hidden">
       <ul className="flex flex-col gap-2 text-left">
         {checklist.map((item) => (
           <li key={item.text} className="flex items-center gap-2.5 text-base font-medium text-neutral-100">
