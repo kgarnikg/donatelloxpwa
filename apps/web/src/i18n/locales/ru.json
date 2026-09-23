@@ -296,7 +296,9 @@
     "biceps": "Бицепс",
     "thigh": "Бедро",
     "cmUnit": "см",
-    "noMeasurementsYet": "Пока нет замеров"
+    "noMeasurementsYet": "Пока нет замеров",
+    "workoutFallback": "Тренировка",
+    "catchUpNote": "Отмечено тренером как пройденные: {{count}}"
   },
   "profile": {
     "title": "Профиль",

@@ -269,7 +269,9 @@
     "biceps": "Bizeps",
     "thigh": "Oberschenkel",
     "cmUnit": "cm",
-    "noMeasurementsYet": "Noch keine Maße"
+    "noMeasurementsYet": "Noch keine Maße",
+    "workoutFallback": "Workout",
+    "catchUpNote": "Vom Trainer als erledigt markiert: {{count}}"
   },
   "profile": {
     "title": "Profil",

@@ -269,7 +269,9 @@
     "biceps": "Біцепс",
     "thigh": "Стегно",
     "cmUnit": "см",
-    "noMeasurementsYet": "Ще немає замірів"
+    "noMeasurementsYet": "Ще немає замірів",
+    "workoutFallback": "Тренування",
+    "catchUpNote": "Позначено тренером як пройдені: {{count}}"
   },
   "profile": {
     "title": "Профіль",

@@ -92,53 +92,99 @@ export function useActiveSubscription() {
   });
 }
 
-interface WorkoutHistoryEntry {
+export interface WorkoutHistoryEntry {
   id: string;
   completedAt: string;
   durationMinutes: number;
   workoutTitle: string;
+  /** Блок недель, напр. "Недели 13–14" — различает одинаковые "Вторник · НОГИ" из разных недель. */
+  weekLabel: string | null;
+  /** Сожжённые калории (0066), null — не посчитаны (не было веса в профиле). */
+  caloriesBurned: number | null;
 }
 
-/** История завершённых тренировок с названием — для раздела «Прогресс». */
+export interface WorkoutHistory {
+  entries: WorkoutHistoryEntry[];
+  /** Сколько тренировок отмечено тренером через "Догнать прогресс" (в список не входят). */
+  catchUpCount: number;
+}
+
+/**
+ * История тренировок для раздела «Прогресс» — только реально пройденные
+ * в приложении. Отметки "Догнать прогресс" из админки (is_catch_up, 0066)
+ * в список не входят: это десятки записей с одной датой и расчётной, а не
+ * реальной длительностью — выглядело как бессмысленный список. Вместо них
+ * — одна строка-итог (catchUpCount).
+ */
 export function useWorkoutHistory() {
   const { authUser } = useAuth();
   return useQuery({
-    queryKey: ["workout-history", authUser?.id],
+    queryKey: ["workout-history", authUser?.id, i18n.language],
     enabled: !!authUser,
-    queryFn: async (): Promise<WorkoutHistoryEntry[]> => {
+    queryFn: async (): Promise<WorkoutHistory> => {
       // Два запроса вместо вложенной выборки workout_logs → workouts —
       // см. комментарий у attachWorkoutInfo (отсутствовавший FK, 0067).
-      const { data, error } = await supabase
-        .from("workout_logs")
-        .select("id, completed_at, duration_minutes, workout_id")
-        .eq("user_id", authUser!.id)
-        .order("completed_at", { ascending: false })
-        .limit(20);
+      const [{ data, error }, { count: catchUpCount, error: countError }] = await Promise.all([
+        supabase
+          .from("workout_logs")
+          .select("id, completed_at, duration_minutes, workout_id, calories_burned")
+          .eq("user_id", authUser!.id)
+          .eq("is_catch_up", false)
+          .order("completed_at", { ascending: false })
+          .limit(20),
+        supabase
+          .from("workout_logs")
+          .select("id", { count: "exact", head: true })
+          .eq("user_id", authUser!.id)
+          .eq("is_catch_up", true),
+      ]);
       if (error) throw error;
+      if (countError) throw countError;
 
       const rows = (data ?? []) as unknown as Array<{
         id: string;
         completed_at: string;
         duration_minutes: number;
         workout_id: string;
+        calories_burned: number | null;
       }>;
       const ids = [...new Set(rows.map((r) => r.workout_id))];
-      const titles = new Map<string, string>();
+      const info = new Map<string, { title: string; weekLabel: string | null }>();
       if (ids.length > 0) {
         const { data: workouts, error: workoutsError } = await supabase
           .from("workouts")
-          .select("id, title")
+          .select("id, title, title_en, title_es, title_hy, week_label, week_label_en, week_label_es, week_label_hy")
           .in("id", ids);
         if (workoutsError) throw workoutsError;
-        for (const w of (workouts ?? []) as { id: string; title: string }[]) titles.set(w.id, w.title);
+        for (const w of (workouts ?? []) as Array<Record<string, string | null>>) {
+          info.set(w.id as string, {
+            title: localizedField(
+              w.title ?? "",
+              { en: w.title_en, es: w.title_es, hy: w.title_hy },
+              i18n.language,
+            ),
+            weekLabel: w.week_label
+              ? localizedField(
+                  w.week_label,
+                  { en: w.week_label_en, es: w.week_label_es, hy: w.week_label_hy },
+                  i18n.language,
+                )
+              : null,
+          });
+        }
       }
 
-      return rows.map((row) => ({
-        id: row.id,
-        completedAt: row.completed_at,
-        durationMinutes: row.duration_minutes,
-        workoutTitle: titles.get(row.workout_id) ?? "Тренировка",
-      }));
+      return {
+        catchUpCount: catchUpCount ?? 0,
+        entries: rows.map((row) => ({
+          id: row.id,
+          completedAt: row.completed_at,
+          durationMinutes: row.duration_minutes,
+          workoutTitle: info.get(row.workout_id)?.title || i18n.t("progress.workoutFallback"),
+          weekLabel: info.get(row.workout_id)?.weekLabel ?? null,
+          caloriesBurned: row.calories_burned,
+        })),
+      };
     },
   });
 }

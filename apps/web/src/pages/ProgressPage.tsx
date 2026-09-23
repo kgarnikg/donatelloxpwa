@@ -15,7 +15,7 @@ const MEASUREMENT_FIELDS = [
 ] as const;
 
 export default function ProgressPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { authUser } = useAuth();
   const queryClient = useQueryClient();
   const { data: entries, isLoading } = useProgressHistory();
@@ -225,31 +225,49 @@ export default function ProgressPage() {
               <div key={i} className="h-14 animate-pulse rounded-md bg-ink-800" />
             ))}
           </div>
-        ) : !workoutHistory?.length ? (
+        ) : !workoutHistory?.entries.length && !workoutHistory?.catchUpCount ? (
           <p className="py-6 text-center text-sm text-neutral-500">{t("progress.noWorkoutsYet")}</p>
         ) : (
           <ul className="space-y-2">
-            {workoutHistory.map((entry) => (
-              <li
-                key={entry.id}
-                className="flex items-center justify-between rounded-md border border-ink-700 px-3.5 py-2.5"
-              >
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-medium">{entry.workoutTitle}</p>
-                  <p className="text-xs text-neutral-500">
-                    {new Date(entry.completedAt).toLocaleDateString("ru-RU", {
-                      day: "numeric",
-                      month: "short",
-                    })}
-                  </p>
-                </div>
-                <span className="shrink-0 rounded-full bg-volt-400/10 px-2.5 py-1 text-xs font-medium text-volt-400">
-                  {entry.durationMinutes} {t("common.min")}
-                </span>
+            {workoutHistory.entries.map((entry) => {
+              // Неделя берём только номер ("Недели 13–14"), без длинного
+              // описания блока после тире — иначе строка не помещается
+              const week = entry.weekLabel?.split(/\s[—–-]\s|·/)[0]?.trim();
+              return (
+                <li
+                  key={entry.id}
+                  className="flex items-center justify-between gap-3 rounded-md border border-ink-700 px-3.5 py-2.5"
+                >
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-medium">{entry.workoutTitle}</p>
+                    <p className="truncate text-xs text-neutral-500">
+                      {new Date(entry.completedAt).toLocaleDateString(i18n.language, {
+                        day: "numeric",
+                        month: "short",
+                      })}
+                      {week ? ` · ${week}` : ""}
+                    </p>
+                  </div>
+                  <div className="shrink-0 text-right">
+                    <span className="rounded-full bg-volt-400/10 px-2.5 py-1 text-xs font-medium text-volt-400">
+                      {entry.durationMinutes} {t("common.min")}
+                    </span>
+                    {entry.caloriesBurned != null && entry.caloriesBurned > 0 && (
+                      <p className="mt-1 text-[11px] text-neutral-500">
+                        {entry.caloriesBurned} {t("nutrition.log.kcal")}
+                      </p>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+            {workoutHistory.catchUpCount > 0 && (
+              <li className="rounded-md border border-dashed border-ink-700 px-3.5 py-2.5 text-xs text-neutral-500">
+                {t("progress.catchUpNote", { count: workoutHistory.catchUpCount })}
               </li>
-            ))}
+            )}
           </ul>
-        )}
+                )}
       </div>
     </div>
   );

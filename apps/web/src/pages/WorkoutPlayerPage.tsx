@@ -512,17 +512,27 @@ export default function WorkoutPlayerPage() {
                   // подходами, а переход к следующему упражнению.
                   const isLastSetOfGroup = i === group.sets.length - 1;
                   const hasNextGroup = groupIndex < groups.length - 1;
-                  const locked = !!restState && !done;
+                  // Подходы — строго по порядку: третий нельзя отметить,
+                  // пока не отмечены первый и второй (иначе объём, калории
+                  // и прогресс считаются по подходам, которых не было).
+                  const previousDone = group.sets.slice(0, i).every((s) => completedIds.has(s.id));
+                  const outOfOrder = !done && !previousDone;
+                  const locked = (!!restState && !done) || outOfOrder;
                   return (
                     <button
                       key={set.id}
                       disabled={locked}
+                      aria-disabled={locked}
                       onClick={() =>
                         setCompletedIds((prev) => {
                           const next = new Set(prev);
                           if (next.has(set.id)) {
-                            next.delete(set.id);
+                            // Снимаем отметку — вместе со всеми следующими
+                            // подходами этого упражнения, чтобы порядок не
+                            // нарушился "задним числом".
+                            for (const later of group.sets.slice(i)) next.delete(later.id);
                           } else {
+                            if (!group.sets.slice(0, i).every((s) => next.has(s.id))) return prev;
                             next.add(set.id);
                             if (isLastSetOfGroup && hasNextGroup && workout.trainingFormat === "gym") {
                               startRestTimer(REST_BETWEEN_EXERCISES_SECONDS, "exercise");
@@ -580,7 +590,7 @@ export default function WorkoutPlayerPage() {
                     onChange={(e) =>
                       setWeights((prev) => ({ ...prev, [group.exercise.id]: e.target.value }))
                     }
-                    className="input-field w-28 py-1.5 text-sm"
+                    className="input-field w-40 py-1.5 text-sm"
                   />
                   {lastWeight != null && (
                     <p className="mt-1.5 flex items-center gap-1 text-xs text-volt-400">

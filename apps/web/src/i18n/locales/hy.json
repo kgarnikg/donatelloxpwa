@@ -296,7 +296,9 @@
     "biceps": "Բիցեպս",
     "thigh": "Ազդր",
     "cmUnit": "սմ",
-    "noMeasurementsYet": "Դեռ չափումներ չկան"
+    "noMeasurementsYet": "Դեռ չափումներ չկան",
+    "workoutFallback": "Մարզում",
+    "catchUpNote": "Մարզչի կողմից նշված որպես կատարված՝ {{count}}"
   },
   "profile": {
     "title": "Պրոֆիլ",

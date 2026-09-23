@@ -269,7 +269,9 @@
     "biceps": "العضلة ذات الرأسين",
     "thigh": "الفخذ",
     "cmUnit": "سم",
-    "noMeasurementsYet": "لا توجد قياسات بعد"
+    "noMeasurementsYet": "لا توجد قياسات بعد",
+    "workoutFallback": "تمرين",
+    "catchUpNote": "حدّدها المدرب كمكتملة: {{count}}"
   },
   "profile": {
     "title": "الملف الشخصي",

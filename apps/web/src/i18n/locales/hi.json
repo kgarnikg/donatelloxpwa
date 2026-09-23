@@ -269,7 +269,9 @@
     "biceps": "बाइसेप्स",
     "thigh": "जांघ",
     "cmUnit": "सेमी",
-    "noMeasurementsYet": "अभी तक कोई माप नहीं"
+    "noMeasurementsYet": "अभी तक कोई माप नहीं",
+    "workoutFallback": "वर्कआउट",
+    "catchUpNote": "कोच द्वारा पूरा चिह्नित: {{count}}"
   },
   "profile": {
     "title": "प्रोफ़ाइल",

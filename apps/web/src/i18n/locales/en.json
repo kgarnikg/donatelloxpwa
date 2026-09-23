@@ -296,7 +296,9 @@
     "biceps": "Biceps",
     "thigh": "Thigh",
     "cmUnit": "cm",
-    "noMeasurementsYet": "No measurements yet"
+    "noMeasurementsYet": "No measurements yet",
+    "workoutFallback": "Workout",
+    "catchUpNote": "Marked as completed by your coach: {{count}}"
   },
   "profile": {
     "title": "Profile",
