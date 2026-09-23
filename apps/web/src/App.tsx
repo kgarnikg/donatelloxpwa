@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import { Routes, Route, Navigate, Outlet, Link, useParams } from "react-router-dom";
-import { ChevronLeft, Play, Lock, Check } from "lucide-react";
+import { ChevronLeft, Play, Lock, Check, Dumbbell, Info } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
@@ -10,6 +10,8 @@ import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { useFreeProgramAccess, useActiveSubscription } from "@/lib/queries";
 import { localizedField } from "@/lib/localizedField";
+import { splitDescription } from "@/lib/programMeta";
+import { useDashboard } from "@/lib/dashboard";
 import type { Workout, WorkoutProgram } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 
@@ -77,6 +79,7 @@ function ProgramDetailPage() {
   const { hasFreeAccess } = useFreeProgramAccess();
   const { data: activeSubscription } = useActiveSubscription();
   const [activeWeekOrder, setActiveWeekOrder] = useState<number | null>(null);
+  const { data: dashboard } = useDashboard();
 
   const { data: program, isLoading } = useQuery({
     queryKey: ["program", slug],
@@ -233,18 +236,41 @@ function ProgramDetailPage() {
   // ни оплатой, ни через безлимит из CMS.
   const isLocked = program.isPremium && !hasFreeAccess && !activeSubscription;
 
+  // Превью программы (Фаза 26): описание без хвоста "Оборудование: …",
+  // оборудование — отдельными метками, число тренировок, большая кнопка.
+  const { summary, equipment } = splitDescription(
+    localizedField(program.description, { en: program.descriptionEn, es: program.descriptionEs, hy: program.descriptionHy }, i18n.language),
+  );
+  const doneCount = completedWorkoutIds?.size ?? 0;
+  const totalCount = workouts?.length ?? 0;
+  // Другая программа уже активна (по ней была последняя тренировка) —
+  // предупреждаем, что прогресс там сохранится.
+  const otherActiveProgram =
+    dashboard?.isActiveProgram && dashboard.program && dashboard.program.id !== program.id
+      ? dashboard.program
+      : null;
+
   return (
     <div className="px-5 pt-8">
       <Link to="/programs" className="mb-4 inline-flex items-center gap-1 text-sm text-neutral-400">
         <ChevronLeft size={16} /> {t("programs.allPrograms")}
       </Link>
 
-      <h1 className="font-display text-2xl font-bold">
-        {localizedField(program.title, { en: program.titleEn, es: program.titleEs, hy: program.titleHy }, i18n.language)}
+      {/* Заголовок как в каталоге: крупно цель, мельче — для кого и где */}
+      <h1 className="font-display text-3xl font-bold">
+        {t(`programs.goalShort.${program.goal}`, {
+          defaultValue: localizedField(program.title, { en: program.titleEn, es: program.titleEs, hy: program.titleHy }, i18n.language),
+        })}
       </h1>
-      <p className="mt-1 text-neutral-400">
-        {localizedField(program.description, { en: program.descriptionEn, es: program.descriptionEs, hy: program.descriptionHy }, i18n.language)}
+      <p className="text-neutral-400">
+        {[
+          program.gender !== "unspecified" ? t(`programs.genderShort.${program.gender}`) : null,
+          program.trainingFormat !== "any" ? t(`programs.placeShort.${program.trainingFormat}`) : null,
+        ]
+          .filter(Boolean)
+          .join(" · ")}
       </p>
+      <p className="mt-3 text-sm text-neutral-400">{summary}</p>
       <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium uppercase tracking-wide text-volt-400">
         <span className="rounded-full border border-volt-400/30 px-2.5 py-1">
           {t("programs.weeks", { count: program.durationWeeks })}
@@ -257,14 +283,61 @@ function ProgramDetailPage() {
         </span>
       </div>
 
+      {equipment.length > 0 && (
+        <div className="mt-4">
+          <p className="mb-1.5 flex items-center gap-1.5 text-xs uppercase tracking-wide text-neutral-500">
+            <Dumbbell size={13} /> {t("programs.equipment")}
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {equipment.map((item) => (
+              <span key={item} className="rounded-full bg-ink-800 px-2.5 py-1 text-xs text-neutral-300">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {!isLocked && totalCount > 0 && (
+        <div className="card mt-5">
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-neutral-400">{t("dashboard.programProgress", { done: doneCount, total: totalCount })}</span>
+            <span className="font-semibold text-volt-400">{Math.round((doneCount / totalCount) * 100)}%</span>
+          </div>
+          <div className="mt-2 h-2 overflow-hidden rounded-full bg-ink-700">
+            <div
+              className="h-full rounded-full bg-volt-400"
+              style={{ width: `${Math.max(2, (doneCount / totalCount) * 100)}%` }}
+            />
+          </div>
+          {otherActiveProgram && (
+            <p className="mt-3 flex items-start gap-1.5 text-xs text-neutral-400">
+              <Info size={13} className="mt-0.5 shrink-0" />
+              {t("programs.switchNote", {
+                program: localizedField(
+                  otherActiveProgram.title,
+                  { en: otherActiveProgram.titleEn, es: otherActiveProgram.titleEs, hy: otherActiveProgram.titleHy },
+                  i18n.language,
+                ),
+              })}
+            </p>
+          )}
+          {nextUnlockedWorkoutId && (
+            <Link to={`/workout/${nextUnlockedWorkoutId}`} className="btn-primary mt-4 w-full py-3.5">
+              <Play size={16} fill="currentColor" />
+              {doneCount > 0 ? t("programs.continue") : t("programs.startProgram")}
+            </Link>
+          )}
+        </div>
+      )}
+
       {isLocked && (
         <div className="card mt-4 border-volt-400/30 bg-volt-400/5">
           <p className="text-sm text-neutral-300">
-            Бесплатный доступ к этой программе был доступен в первую неделю после регистрации.
-            Оформите подписку, чтобы продолжить тренировки по ней.
+            {t("programs.lockedText")}
           </p>
           <Link to="/subscription" className="btn-primary mt-3 w-full">
-            Оформить подписку
+            {t("dashboard.activateSubscription")}
           </Link>
         </div>
       )}

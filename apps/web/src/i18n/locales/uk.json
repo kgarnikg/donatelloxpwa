@@ -413,6 +413,43 @@
     "weeks_few": "{{count}} тижні",
     "weeks_many": "{{count}} тижнів",
     "weeks_other": "{{count}} тижня",
-    "perWeek": "{{count}}× на тиждень"
+    "perWeek": "{{count}}× на тиждень",
+    "goalShort": {
+      "build_muscle": "Набір маси",
+      "lose_weight": "Схуднення"
+    },
+    "genderShort": {
+      "male": "Чоловіки",
+      "female": "Жінки"
+    },
+    "placeShort": {
+      "gym": "Зал",
+      "home": "Вдома"
+    },
+    "filters": {
+      "all": "Усі цілі",
+      "anywhere": "Будь-де",
+      "everyone": "Усі"
+    },
+    "myProgram": "Моя програма",
+    "otherPrograms": "Інші програми",
+    "accessNote": "Доступ відкриває всі програми — можна перемикатися, прогрес зберігається.",
+    "noMatch": "Немає програм за такими фільтрами",
+    "fitsYou": "Підходить тобі",
+    "needsAccess": "Потрібен доступ",
+    "continue": "Продовжити",
+    "startProgram": "Почати програму",
+    "equipment": "Обладнання",
+    "switchNote": "Зараз твоя активна програма — «{{program}}». Прогрес за нею збережеться, до неї можна повернутися будь-коли.",
+    "lockedText": "Безкоштовний тиждень закінчився. Відкрий доступ, щоб продовжити — він діє одразу на всі програми.",
+    "pageTitle": "Програми тренувань",
+    "pageSubtitle": "Обери програму під свою ціль",
+    "workoutLabel": "Тренування {{number}}",
+    "sequenceLockedHint": "Відкриється після попереднього тренування",
+    "allPrograms": "Усі програми",
+    "exercises_one": "{{count}} вправа",
+    "exercises_few": "{{count}} вправи",
+    "exercises_many": "{{count}} вправ",
+    "exercises_other": "{{count}} вправи"
   }
 }

@@ -398,7 +398,35 @@
       "beginner": "Beginner",
       "intermediate": "Intermediate",
       "advanced": "Advanced"
-    }
+    },
+    "goalShort": {
+      "build_muscle": "Muscle gain",
+      "lose_weight": "Weight loss"
+    },
+    "genderShort": {
+      "male": "Men",
+      "female": "Women"
+    },
+    "placeShort": {
+      "gym": "Gym",
+      "home": "Home"
+    },
+    "filters": {
+      "all": "All goals",
+      "anywhere": "Anywhere",
+      "everyone": "Everyone"
+    },
+    "myProgram": "My program",
+    "otherPrograms": "Other programs",
+    "accessNote": "Access unlocks every program — switch any time, your progress is saved.",
+    "noMatch": "No programs match these filters",
+    "fitsYou": "Right for you",
+    "needsAccess": "Access needed",
+    "continue": "Continue",
+    "startProgram": "Start program",
+    "equipment": "Equipment",
+    "switchNote": "Your active program is “{{program}}”. Your progress there is saved and you can go back any time.",
+    "lockedText": "Your free week is over. Get access to continue — it unlocks all programs at once."
   },
   "support": {
     "title": "Help",

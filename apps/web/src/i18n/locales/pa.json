@@ -408,6 +408,41 @@
     },
     "weeks_one": "{{count}} ਹਫ਼ਤਾ",
     "weeks_other": "{{count}} ਹਫ਼ਤੇ",
-    "perWeek": "ਹਫ਼ਤੇ ਵਿੱਚ {{count}}×"
+    "perWeek": "ਹਫ਼ਤੇ ਵਿੱਚ {{count}}×",
+    "goalShort": {
+      "build_muscle": "ਮਸਲ ਗੇਨ",
+      "lose_weight": "ਭਾਰ ਘਟਾਉਣਾ"
+    },
+    "genderShort": {
+      "male": "ਮਰਦ",
+      "female": "ਔਰਤਾਂ"
+    },
+    "placeShort": {
+      "gym": "ਜਿਮ",
+      "home": "ਘਰ"
+    },
+    "filters": {
+      "all": "ਸਾਰੇ ਟੀਚੇ",
+      "anywhere": "ਕਿਤੇ ਵੀ",
+      "everyone": "ਸਾਰੇ"
+    },
+    "myProgram": "ਮੇਰਾ ਪ੍ਰੋਗਰਾਮ",
+    "otherPrograms": "ਹੋਰ ਪ੍ਰੋਗਰਾਮ",
+    "accessNote": "ਐਕਸੈਸ ਨਾਲ ਸਾਰੇ ਪ੍ਰੋਗਰਾਮ ਖੁੱਲ੍ਹ ਜਾਂਦੇ ਹਨ — ਕਦੇ ਵੀ ਬਦਲੋ, ਤਰੱਕੀ ਸੰਭਾਲੀ ਰਹਿੰਦੀ ਹੈ।",
+    "noMatch": "ਇਹਨਾਂ ਫਿਲਟਰਾਂ ਲਈ ਕੋਈ ਪ੍ਰੋਗਰਾਮ ਨਹੀਂ",
+    "fitsYou": "ਤੁਹਾਡੇ ਲਈ ਸਹੀ",
+    "needsAccess": "ਐਕਸੈਸ ਲੋੜੀਂਦਾ",
+    "continue": "ਜਾਰੀ ਰੱਖੋ",
+    "startProgram": "ਪ੍ਰੋਗਰਾਮ ਸ਼ੁਰੂ ਕਰੋ",
+    "equipment": "ਸਾਮਾਨ",
+    "switchNote": "ਤੁਹਾਡਾ ਸਰਗਰਮ ਪ੍ਰੋਗਰਾਮ «{{program}}» ਹੈ। ਉਸਦੀ ਤਰੱਕੀ ਸੰਭਾਲੀ ਰਹੇਗੀ, ਤੁਸੀਂ ਕਦੇ ਵੀ ਵਾਪਸ ਜਾ ਸਕਦੇ ਹੋ।",
+    "lockedText": "ਤੁਹਾਡਾ ਮੁਫ਼ਤ ਹਫ਼ਤਾ ਖਤਮ ਹੋ ਗਿਆ। ਜਾਰੀ ਰੱਖਣ ਲਈ ਐਕਸੈਸ ਲਓ — ਇਹ ਸਾਰੇ ਪ੍ਰੋਗਰਾਮ ਖੋਲ੍ਹ ਦਿੰਦਾ ਹੈ।",
+    "pageTitle": "ਟ੍ਰੇਨਿੰਗ ਪ੍ਰੋਗਰਾਮ",
+    "pageSubtitle": "ਆਪਣੇ ਟੀਚੇ ਲਈ ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
+    "workoutLabel": "ਵਰਕਆਉਟ {{number}}",
+    "sequenceLockedHint": "ਪਿਛਲਾ ਵਰਕਆਉਟ ਪੂਰਾ ਕਰਨ ਤੋਂ ਬਾਅਦ ਖੁੱਲ੍ਹੇਗਾ",
+    "allPrograms": "ਸਾਰੇ ਪ੍ਰੋਗਰਾਮ",
+    "exercises_one": "{{count}} ਕਸਰਤ",
+    "exercises_other": "{{count}} ਕਸਰਤਾਂ"
   }
 }

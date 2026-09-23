@@ -412,6 +412,45 @@
     "weeks_few": "{{count}} أسابيع",
     "weeks_many": "{{count}} أسبوعًا",
     "weeks_other": "{{count}} أسبوع",
-    "perWeek": "{{count}}× أسبوعيًا"
+    "perWeek": "{{count}}× أسبوعيًا",
+    "goalShort": {
+      "build_muscle": "بناء العضلات",
+      "lose_weight": "خسارة الوزن"
+    },
+    "genderShort": {
+      "male": "رجال",
+      "female": "نساء"
+    },
+    "placeShort": {
+      "gym": "النادي",
+      "home": "المنزل"
+    },
+    "filters": {
+      "all": "كل الأهداف",
+      "anywhere": "أي مكان",
+      "everyone": "الجميع"
+    },
+    "myProgram": "برنامجي",
+    "otherPrograms": "برامج أخرى",
+    "accessNote": "الوصول يفتح كل البرامج — يمكنك التبديل في أي وقت ويُحفظ تقدمك.",
+    "noMatch": "لا توجد برامج بهذه المرشحات",
+    "fitsYou": "مناسب لك",
+    "needsAccess": "يتطلب الوصول",
+    "continue": "متابعة",
+    "startProgram": "ابدأ البرنامج",
+    "equipment": "المعدات",
+    "switchNote": "برنامجك النشط هو «{{program}}». يُحفظ تقدمك فيه ويمكنك العودة إليه في أي وقت.",
+    "lockedText": "انتهى أسبوعك المجاني. فعّل الوصول للمتابعة — فهو يفتح كل البرامج دفعة واحدة.",
+    "pageTitle": "برامج التدريب",
+    "pageSubtitle": "اختر برنامجًا يناسب هدفك",
+    "workoutLabel": "التمرين {{number}}",
+    "sequenceLockedHint": "يُفتح بعد إكمال التمرين السابق",
+    "allPrograms": "كل البرامج",
+    "exercises_zero": "{{count}} تمرين",
+    "exercises_one": "تمرين واحد",
+    "exercises_two": "تمرينان",
+    "exercises_few": "{{count}} تمارين",
+    "exercises_many": "{{count}} تمرينًا",
+    "exercises_other": "{{count}} تمرين"
   }
 }

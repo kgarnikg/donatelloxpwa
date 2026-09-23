@@ -398,7 +398,35 @@
       "beginner": "Principiante",
       "intermediate": "Intermedio",
       "advanced": "Avanzado"
-    }
+    },
+    "goalShort": {
+      "build_muscle": "Ganar masa",
+      "lose_weight": "Perder peso"
+    },
+    "genderShort": {
+      "male": "Hombres",
+      "female": "Mujeres"
+    },
+    "placeShort": {
+      "gym": "Gimnasio",
+      "home": "Casa"
+    },
+    "filters": {
+      "all": "Todos",
+      "anywhere": "Cualquier sitio",
+      "everyone": "Todos"
+    },
+    "myProgram": "Mi programa",
+    "otherPrograms": "Otros programas",
+    "accessNote": "El acceso desbloquea todos los programas: puedes cambiar cuando quieras y tu progreso se guarda.",
+    "noMatch": "No hay programas con estos filtros",
+    "fitsYou": "Ideal para ti",
+    "needsAccess": "Requiere acceso",
+    "continue": "Continuar",
+    "startProgram": "Empezar programa",
+    "equipment": "Equipamiento",
+    "switchNote": "Tu programa activo es «{{program}}». Tu progreso en él se guarda y puedes volver cuando quieras.",
+    "lockedText": "Tu semana gratis ha terminado. Activa el acceso para continuar: desbloquea todos los programas a la vez."
   },
   "support": {
     "title": "Ayuda",

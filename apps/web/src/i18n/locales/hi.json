@@ -408,6 +408,41 @@
     },
     "weeks_one": "{{count}} सप्ताह",
     "weeks_other": "{{count}} सप्ताह",
-    "perWeek": "सप्ताह में {{count}}×"
+    "perWeek": "सप्ताह में {{count}}×",
+    "goalShort": {
+      "build_muscle": "मसल गेन",
+      "lose_weight": "वज़न घटाना"
+    },
+    "genderShort": {
+      "male": "पुरुष",
+      "female": "महिलाएँ"
+    },
+    "placeShort": {
+      "gym": "जिम",
+      "home": "घर"
+    },
+    "filters": {
+      "all": "सभी लक्ष्य",
+      "anywhere": "कहीं भी",
+      "everyone": "सभी"
+    },
+    "myProgram": "मेरा प्रोग्राम",
+    "otherPrograms": "अन्य प्रोग्राम",
+    "accessNote": "एक्सेस से सभी प्रोग्राम खुल जाते हैं — कभी भी बदलें, प्रगति सहेजी रहती है।",
+    "noMatch": "इन फ़िल्टरों के लिए कोई प्रोग्राम नहीं",
+    "fitsYou": "आपके लिए सही",
+    "needsAccess": "एक्सेस ज़रूरी",
+    "continue": "जारी रखें",
+    "startProgram": "प्रोग्राम शुरू करें",
+    "equipment": "उपकरण",
+    "switchNote": "आपका सक्रिय प्रोग्राम «{{program}}» है। उसकी प्रगति सहेजी रहेगी, आप कभी भी लौट सकते हैं।",
+    "lockedText": "आपका मुफ़्त सप्ताह खत्म हो गया। जारी रखने के लिए एक्सेस लें — यह सभी प्रोग्राम खोल देता है।",
+    "pageTitle": "ट्रेनिंग प्रोग्राम",
+    "pageSubtitle": "अपने लक्ष्य के लिए प्रोग्राम चुनें",
+    "workoutLabel": "वर्कआउट {{number}}",
+    "sequenceLockedHint": "पिछला वर्कआउट पूरा करने के बाद खुलेगा",
+    "allPrograms": "सभी प्रोग्राम",
+    "exercises_one": "{{count}} एक्सरसाइज़",
+    "exercises_other": "{{count}} एक्सरसाइज़"
   }
 }

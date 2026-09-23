@@ -409,6 +409,41 @@
     },
     "weeks_one": "{{count}} Woche",
     "weeks_other": "{{count}} Wochen",
-    "perWeek": "{{count}}× pro Woche"
+    "perWeek": "{{count}}× pro Woche",
+    "goalShort": {
+      "build_muscle": "Muskelaufbau",
+      "lose_weight": "Abnehmen"
+    },
+    "genderShort": {
+      "male": "Männer",
+      "female": "Frauen"
+    },
+    "placeShort": {
+      "gym": "Studio",
+      "home": "Zuhause"
+    },
+    "filters": {
+      "all": "Alle Ziele",
+      "anywhere": "Überall",
+      "everyone": "Alle"
+    },
+    "myProgram": "Mein Programm",
+    "otherPrograms": "Weitere Programme",
+    "accessNote": "Der Zugang schaltet alle Programme frei – jederzeit wechseln, der Fortschritt bleibt erhalten.",
+    "noMatch": "Keine Programme für diese Filter",
+    "fitsYou": "Passt zu dir",
+    "needsAccess": "Zugang nötig",
+    "continue": "Weiter",
+    "startProgram": "Programm starten",
+    "equipment": "Ausrüstung",
+    "switchNote": "Dein aktives Programm ist „{{program}}“. Dein Fortschritt dort bleibt gespeichert, du kannst jederzeit zurück.",
+    "lockedText": "Deine Gratiswoche ist vorbei. Schalte den Zugang frei, um weiterzumachen – er gilt für alle Programme.",
+    "pageTitle": "Trainingsprogramme",
+    "pageSubtitle": "Wähle ein Programm für dein Ziel",
+    "workoutLabel": "Workout {{number}}",
+    "sequenceLockedHint": "Wird nach dem vorherigen Workout freigeschaltet",
+    "allPrograms": "Alle Programme",
+    "exercises_one": "{{count}} Übung",
+    "exercises_other": "{{count}} Übungen"
   }
 }

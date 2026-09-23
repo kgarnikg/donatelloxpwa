@@ -409,6 +409,41 @@
     },
     "weeks_one": "{{count}} settimana",
     "weeks_other": "{{count}} settimane",
-    "perWeek": "{{count}}× a settimana"
+    "perWeek": "{{count}}× a settimana",
+    "goalShort": {
+      "build_muscle": "Massa muscolare",
+      "lose_weight": "Dimagrimento"
+    },
+    "genderShort": {
+      "male": "Uomini",
+      "female": "Donne"
+    },
+    "placeShort": {
+      "gym": "Palestra",
+      "home": "Casa"
+    },
+    "filters": {
+      "all": "Tutti gli obiettivi",
+      "anywhere": "Ovunque",
+      "everyone": "Tutti"
+    },
+    "myProgram": "Il mio programma",
+    "otherPrograms": "Altri programmi",
+    "accessNote": "L'accesso sblocca tutti i programmi: puoi cambiare quando vuoi, i progressi restano salvati.",
+    "noMatch": "Nessun programma con questi filtri",
+    "fitsYou": "Adatto a te",
+    "needsAccess": "Serve l'accesso",
+    "continue": "Continua",
+    "startProgram": "Inizia il programma",
+    "equipment": "Attrezzatura",
+    "switchNote": "Il tuo programma attivo è «{{program}}». I progressi restano salvati e puoi tornarci quando vuoi.",
+    "lockedText": "La settimana gratuita è finita. Attiva l'accesso per continuare: sblocca tutti i programmi.",
+    "pageTitle": "Programmi di allenamento",
+    "pageSubtitle": "Scegli un programma per il tuo obiettivo",
+    "workoutLabel": "Allenamento {{number}}",
+    "sequenceLockedHint": "Si sblocca dopo l'allenamento precedente",
+    "allPrograms": "Tutti i programmi",
+    "exercises_one": "{{count}} esercizio",
+    "exercises_other": "{{count}} esercizi"
   }
 }
