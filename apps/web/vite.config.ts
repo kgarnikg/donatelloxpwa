@@ -7,7 +7,10 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "autoUpdate",
+      // "prompt": новая версия НЕ применяется молча в любой момент — решает
+      // lib/pwaUpdate.ts (сразу, но не посреди тренировки, чтобы не
+      // потерять отмеченные подходы).
+      registerType: "prompt",
       includeAssets: ["favicon.svg", "apple-touch-icon.png", "robots.txt"],
       manifest: {
         name: "DonatelleX — тренировки и прогресс",
@@ -35,7 +38,7 @@ export default defineConfig({
         // Без этого браузер мог продолжать работать со старой закэшированной
         // версией приложения даже после деплоя новой — из-за чего
         // исправленные баги "возвращались" у пользователей со старой вкладкой.
-        skipWaiting: true,
+        // skipWaiting вызывается вручную из lib/pwaUpdate.ts (updateSW(true))
         clientsClaim: true,
         cleanupOutdatedCaches: true,
         globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],

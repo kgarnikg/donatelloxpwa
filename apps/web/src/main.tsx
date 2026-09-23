@@ -2,20 +2,16 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { registerSW } from "virtual:pwa-register";
+import { setupPwaAutoUpdate } from "@/lib/pwaUpdate";
 import { AuthProvider } from "@/context/AuthContext";
 import App from "./App";
 import "./index.css";
 import "./i18n";
 
-// Без этого вызова конфигурация skipWaiting/clientsClaim в vite.config.ts
-// (workbox) обновляет service worker "в фоне", но уже открытая вкладка не
-// узнаёт об этом сама и продолжает работать со старым кэшем, пока
-// пользователь не закроет и не откроет приложение заново вручную —
-// именно так и проявлялось "ничего не поменялось после деплоя".
-// registerSW с registerType: "autoUpdate" сам следит за новой версией и
-// перезагружает страницу, как только она готова — без участия пользователя.
-registerSW({ immediate: true });
+// Автообновление после деплоя: проверка при каждом возврате в приложение
+// и раз в 5 минут, применение — сразу, но не посреди тренировки.
+// Подробности — в lib/pwaUpdate.ts.
+setupPwaAutoUpdate();
 
 const queryClient = new QueryClient({
   defaultOptions: {
