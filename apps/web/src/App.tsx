@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { Routes, Route, Navigate, Outlet, Link, useParams } from "react-router-dom";
 import { ChevronLeft, Play, Lock, Check } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -189,6 +189,26 @@ function ProgramDetailPage() {
   );
   const hasMultipleBlocks = weekBlocks.length > 1;
 
+  // Лента недель прокручивается горизонтально: при открытии программы
+  // (например, на 13-й неделе) активная неделя оказывалась далеко за
+  // правым краем экрана — её приходилось искать, пролистывая ленту.
+  // Прокручиваем саму ленту (не страницу — scrollIntoView дёрнул бы и
+  // вертикальный скролл), чтобы активная неделя стояла по центру.
+  const weekStripRef = useRef<HTMLDivElement>(null);
+  const weekStripScrolledOnce = useRef(false);
+  useEffect(() => {
+    const strip = weekStripRef.current;
+    if (!strip) return;
+    const active = strip.querySelector<HTMLElement>('[data-active="true"]');
+    if (!active) return;
+    const left = active.offsetLeft - (strip.clientWidth - active.offsetWidth) / 2;
+    strip.scrollTo({
+      left: Math.max(0, left),
+      behavior: weekStripScrolledOnce.current ? "smooth" : "auto",
+    });
+    weekStripScrolledOnce.current = true;
+  }, [effectiveWeekOrder, weekBlocks.length]);
+
   if (isLoading) {
     return (
       <div className="px-5 pt-8">
@@ -249,10 +269,11 @@ function ProgramDetailPage() {
       )}
 
       {hasMultipleBlocks && (
-        <div className="mt-6 -mx-5 flex gap-2 overflow-x-auto px-5 pb-1">
+        <div ref={weekStripRef} className="relative mt-6 -mx-5 flex gap-2 overflow-x-auto px-5 pb-1">
           {weekBlocks.map((block) => (
             <button
               key={block.order}
+              data-active={block.order === effectiveWeekOrder}
               onClick={() => setActiveWeekOrder(block.order)}
               className={clsx(
                 "shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-xs font-semibold transition",

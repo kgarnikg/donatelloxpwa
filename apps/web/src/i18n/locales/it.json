@@ -229,6 +229,18 @@
           "Queste sono indicazioni generali, non indicazioni mediche — in caso di infortuni o condizioni particolari, consulta un medico o un nutrizionista."
         ]
       }
+    },
+    "log": {
+      "kcal": "kcal"
+    },
+    "workoutBurn": {
+      "title": "Bruciate negli allenamenti",
+      "subtitle": "Allenamenti nell'app: {{count}}",
+      "last": "ultimo allenamento",
+      "week": "ultimi 7 giorni",
+      "month": "questo mese",
+      "empty": "Qui vedrai quante calorie hai bruciato allenandoti. Il numero crescerà a ogni allenamento completato.",
+      "how": "Calcolate per ogni allenamento in base a peso, altezza, età e sesso, tipo di programma, durata reale e serie completate."
     }
   },
   "progress": {

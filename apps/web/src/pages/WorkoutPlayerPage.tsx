@@ -9,6 +9,8 @@ import { useAuth } from "@/context/AuthContext";
 import { localizedField } from "@/lib/localizedField";
 import { getYouTubeEmbedUrl } from "@/lib/video";
 import { triggerHapticPulse } from "@/lib/haptics";
+import { estimateWorkoutCalories, calculateAge } from "@/lib/calories";
+import { useUserProfile } from "@/lib/queries";
 import type { Exercise, WorkoutSet } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 
@@ -27,6 +29,8 @@ interface WorkoutWithSets {
   sets: SetRow[];
   /** Формат тренировок программы, к которой относится эта тренировка ("зал"/"дома") — см. комментарий у REST_BETWEEN_EXERCISES_SECONDS ниже. */
   trainingFormat: "home" | "gym";
+  /** Цель программы (workout_programs.goal) — задаёт интенсивность для расчёта калорий. */
+  programGoal: string | null;
 }
 
 interface CompletedSetEntry {
@@ -63,6 +67,7 @@ export default function WorkoutPlayerPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { authUser } = useAuth();
+  const { data: userProfile } = useUserProfile();
   const [completedIds, setCompletedIds] = useState<Set<string>>(new Set());
   const [confirmExit, setConfirmExit] = useState(false);
   const [weights, setWeights] = useState<Record<string, string>>({});
@@ -217,13 +222,19 @@ export default function WorkoutPlayerPage() {
     queryFn: async (): Promise<WorkoutWithSets> => {
       const { data, error } = await supabase
         .from("workouts")
-        .select("*, sets:workout_sets(*, exercise:exercises(*)), program:workout_programs(training_format)")
+        .select("*, sets:workout_sets(*, exercise:exercises(*)), program:workout_programs(training_format, goal)")
         .eq("id", workoutId)
         .order("order", { referencedTable: "workout_sets", ascending: true })
         .single();
       if (error) throw error;
-      const camel = toCamelCase<WorkoutWithSets & { program?: { trainingFormat: "home" | "gym" } }>(data);
-      return { ...camel, trainingFormat: camel.program?.trainingFormat ?? "home" };
+      const camel = toCamelCase<
+        WorkoutWithSets & { program?: { trainingFormat: "home" | "gym"; goal?: string | null } }
+      >(data);
+      return {
+        ...camel,
+        trainingFormat: camel.program?.trainingFormat ?? "home",
+        programGoal: camel.program?.goal ?? null,
+      };
     },
     enabled: !!workoutId,
   });
@@ -347,6 +358,24 @@ export default function WorkoutPlayerPage() {
         return sum + weight * totalReps;
       }, 0);
 
+      // Калории за ЭТУ тренировку (lib/calories.ts, estimateWorkoutCalories):
+      // вес/рост/возраст/пол из профиля + интенсивность программы +
+      // фактическая длительность (с потолком) + доля выполненных подходов.
+      // Сохраняем в саму запись — общий счётчик на странице "Питание"
+      // складывает эти числа и не "плывёт", если потом поменяется вес.
+      const caloriesBurned = userProfile?.weightKg
+        ? estimateWorkoutCalories({
+            weightKg: userProfile.weightKg,
+            heightCm: userProfile.heightCm,
+            age: userProfile.birthDate ? calculateAge(userProfile.birthDate) : null,
+            gender: userProfile.gender,
+            actualMinutes: (Date.now() - startedAt) / 60_000,
+            estimatedMinutes: workout.estimatedDurationMinutes,
+            programGoal: workout.programGoal,
+            completionRatio: workout.sets.length ? completedIds.size / workout.sets.length : 1,
+          })
+        : null;
+
       const { data, error } = await supabase
         .from("workout_logs")
         .insert({
@@ -356,6 +385,7 @@ export default function WorkoutPlayerPage() {
           duration_minutes: durationMinutes,
           completed_sets: completedSets,
           total_volume_kg: totalVolumeKg,
+          calories_burned: caloriesBurned,
         })
         .select()
         .single();
@@ -373,6 +403,8 @@ export default function WorkoutPlayerPage() {
       // react-query не знал, что их нужно перезапросить.
       queryClient.invalidateQueries({ queryKey: ["workout-history"] });
       queryClient.invalidateQueries({ queryKey: ["progress"] });
+      queryClient.invalidateQueries({ queryKey: ["daily-calories"] });
+      queryClient.invalidateQueries({ queryKey: ["workout-calorie-stats"] });
       navigate("/dashboard", { replace: true });
     },
   });

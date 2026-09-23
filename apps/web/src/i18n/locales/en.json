@@ -259,6 +259,15 @@
           "These are general guidelines, not medical advice — for injuries or specific conditions, consult a doctor or dietitian."
         ]
       }
+    },
+    "workoutBurn": {
+      "title": "Burned in workouts",
+      "subtitle": "Workouts in the app: {{count}}",
+      "last": "last workout",
+      "week": "last 7 days",
+      "month": "this month",
+      "empty": "This is where you'll see how many calories you've burned in workouts. The number grows with every workout you finish.",
+      "how": "Calculated for each workout from your weight, height, age and sex, the program type, how long the workout actually took and how many sets you completed."
     }
   },
   "progress": {

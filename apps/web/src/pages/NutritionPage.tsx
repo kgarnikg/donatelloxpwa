@@ -1,11 +1,17 @@
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { Beef, Wheat, Droplet, Info, Lock, Pencil, RotateCcw, Watch, Flame } from "lucide-react";
+import { Beef, Wheat, Droplet, Info, Lock, Pencil, RotateCcw, Watch, Flame, Dumbbell } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
-import { useActiveSubscription, useDailyCalories, useSetCalorieOverride, useClearCalorieOverride } from "@/lib/queries";
+import {
+  useActiveSubscription,
+  useDailyCalories,
+  useSetCalorieOverride,
+  useClearCalorieOverride,
+  useWorkoutCalorieStats,
+} from "@/lib/queries";
 import type { FitnessGoal } from "@donatellox/types";
 
 interface NutritionGuidance {
@@ -38,7 +44,7 @@ function useNutritionGuidance(goal: FitnessGoal): NutritionGuidance {
 }
 
 export default function NutritionPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { authUser } = useAuth();
   const { data: subscription, isLoading: subLoading } = useActiveSubscription();
 
@@ -66,6 +72,7 @@ export default function NutritionPage() {
   }, []);
 
   const { data: daily, isLoading: dailyLoading } = useDailyCalories(todayStr);
+  const { data: burnStats, isLoading: burnStatsLoading } = useWorkoutCalorieStats();
   const setOverride = useSetCalorieOverride();
   const clearOverride = useClearCalorieOverride();
 
@@ -208,6 +215,50 @@ export default function NutritionPage() {
         )}
 
         <p className="mt-3 text-xs text-neutral-500">{t("nutrition.calorieBurn.disclaimer")}</p>
+      </div>
+
+      {/* Счётчик: сколько всего сожжено на тренировках — растёт с каждой тренировкой */}
+      <div className="card mb-4">
+        <h2 className="mb-3 flex items-center gap-1.5 font-semibold">
+          <Dumbbell size={16} className="text-volt-400" />
+          {t("nutrition.workoutBurn.title")}
+        </h2>
+
+        {burnStatsLoading && <div className="h-16 animate-pulse rounded-md bg-ink-800" />}
+
+        {!burnStatsLoading && burnStats && burnStats.workouts === 0 && (
+          <p className="text-sm text-neutral-400">{t("nutrition.workoutBurn.empty")}</p>
+        )}
+
+        {!burnStatsLoading && burnStats && burnStats.workouts > 0 && (
+          <>
+            <p className="font-display text-3xl font-bold text-volt-400">
+              {burnStats.total.toLocaleString(i18n.language)}{" "}
+              <span className="text-base font-normal text-neutral-500">{t("nutrition.log.kcal")}</span>
+            </p>
+            <p className="mt-1 text-sm text-neutral-400">
+              {t("nutrition.workoutBurn.subtitle", { count: burnStats.workouts })}
+            </p>
+
+            <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+              {[
+                { label: t("nutrition.workoutBurn.last"), value: burnStats.last ?? 0, plus: true },
+                { label: t("nutrition.workoutBurn.week"), value: burnStats.week },
+                { label: t("nutrition.workoutBurn.month"), value: burnStats.month },
+              ].map((item) => (
+                <div key={item.label} className="rounded-md bg-ink-800 px-2 py-2.5">
+                  <p className="font-display text-lg font-bold">
+                    {item.plus ? "+" : ""}
+                    {item.value.toLocaleString(i18n.language)}
+                  </p>
+                  <p className="mt-0.5 text-[11px] leading-tight text-neutral-500">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        <p className="mt-3 text-xs text-neutral-500">{t("nutrition.workoutBurn.how")}</p>
       </div>
 
       <div className="card mb-4">

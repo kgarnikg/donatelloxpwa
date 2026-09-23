@@ -94,6 +94,11 @@ export default function CatchUpProgressPage() {
           completed_at: new Date().toISOString(),
           duration_minutes: w.estimatedDurationMinutes ?? 0,
           completed_sets: [],
+          // Отметка "проставлено тренером" — открывает следующие
+          // тренировки, но не считается тренировкой сегодня в калориях
+          // клиента (иначе 20 тренировок разом = +11 000 ккал, см. 0066).
+          is_catch_up: true,
+          calories_burned: 0,
         })),
       );
       if (error) throw error;

@@ -10,7 +10,7 @@ import type {
 } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 import { useAuth } from "@/context/AuthContext";
-import { estimateDailyCalories, calculateAge, type CalorieEstimate } from "@/lib/calories";
+import { estimateDailyCalories, estimateWorkoutCalories, calculateAge, type CalorieEstimate } from "@/lib/calories";
 import { localizedField } from "@/lib/localizedField";
 import i18n from "@/i18n";
 
@@ -356,6 +356,46 @@ export interface DailyCalories extends CalorieEstimate {
   isManual: boolean;
 }
 
+/**
+ * Строка workout_logs для подсчёта калорий + данные тренировки/программы,
+ * нужные для запасного расчёта (если calories_burned ещё не заполнен —
+ * например, миграция 0066 не применена или в профиле не было веса).
+ */
+interface CalorieLogRow {
+  completed_at: string;
+  duration_minutes: number | null;
+  calories_burned: number | null;
+  workout: {
+    estimated_duration_minutes: number | null;
+    program: { goal: string | null } | null;
+  } | null;
+}
+
+const CALORIE_LOG_SELECT =
+  "completed_at, duration_minutes, calories_burned, workout:workouts(estimated_duration_minutes, program:workout_programs(goal))";
+
+function caloriesOfLog(row: CalorieLogRow, profile: UserProfile | null | undefined): number {
+  if (row.calories_burned != null) return row.calories_burned;
+  if (!profile?.weightKg) return 0;
+  return estimateWorkoutCalories({
+    weightKg: profile.weightKg,
+    heightCm: profile.heightCm,
+    age: profile.birthDate ? calculateAge(profile.birthDate, new Date(row.completed_at)) : null,
+    gender: profile.gender,
+    actualMinutes: row.duration_minutes ?? 0,
+    estimatedMinutes: row.workout?.estimated_duration_minutes,
+    programGoal: row.workout?.program?.goal,
+  });
+}
+
+/** Границы локального дня (YYYY-MM-DD) в ISO/UTC — чтобы тренировка в 00:30 по Мадриду не уехала во "вчера". */
+function localDayRange(date: string): { from: string; to: string } {
+  const [y, m, d] = date.split("-").map(Number);
+  const start = new Date(y, m - 1, d);
+  const end = new Date(y, m - 1, d + 1);
+  return { from: start.toISOString(), to: end.toISOString() };
+}
+
 /** Автоматическая оценка расхода калорий за день + переопределение, если оно есть. */
 export function useDailyCalories(date: string) {
   const { authUser } = useAuth();
@@ -367,6 +407,7 @@ export function useDailyCalories(date: string) {
     queryFn: async (): Promise<DailyCalories | null> => {
       if (!profile?.weightKg || !profile?.heightCm || !profile?.birthDate) return null;
 
+      const { from, to } = localDayRange(date);
       const [{ data: override }, { data: dayWorkouts, error: workoutsError }] = await Promise.all([
         supabase
           .from("calorie_overrides")
@@ -376,15 +417,17 @@ export function useDailyCalories(date: string) {
           .maybeSingle(),
         supabase
           .from("workout_logs")
-          .select("duration_minutes")
+          .select(CALORIE_LOG_SELECT)
           .eq("user_id", authUser!.id)
-          .gte("completed_at", `${date}T00:00:00`)
-          .lt("completed_at", `${date}T23:59:59.999`),
+          // Записи "догнать прогресс" из админки — не тренировки сегодня (0066)
+          .eq("is_catch_up", false)
+          .gte("completed_at", from)
+          .lt("completed_at", to),
       ]);
       if (workoutsError) throw workoutsError;
 
-      const workoutMinutes = (dayWorkouts ?? []).reduce(
-        (sum, w) => sum + ((w as { duration_minutes: number }).duration_minutes ?? 0),
+      const workoutCalories = ((dayWorkouts ?? []) as unknown as CalorieLogRow[]).reduce(
+        (sum, row) => sum + caloriesOfLog(row, profile),
         0,
       );
 
@@ -394,13 +437,67 @@ export function useDailyCalories(date: string) {
         age: calculateAge(profile.birthDate),
         gender: profile.gender,
         activityLevel: profile.activityLevel,
-        workoutMinutes,
+        workoutCalories,
       });
 
       if (override?.calories != null) {
         return { ...estimate, total: override.calories, isManual: true };
       }
       return { ...estimate, isManual: false };
+    },
+  });
+}
+
+export interface WorkoutCalorieStats {
+  /** Всего сожжено на тренировках в приложении, ккал. */
+  total: number;
+  /** За последние 7 дней. */
+  week: number;
+  /** С начала текущего месяца. */
+  month: number;
+  /** Сколько тренировок учтено. */
+  workouts: number;
+  /** Калории последней тренировки (null — тренировок ещё не было). */
+  last: number | null;
+}
+
+/**
+ * Счётчик калорий, сожжённых на тренировках — растёт с каждой завершённой
+ * тренировкой. Учитываются только тренировки, пройденные в приложении
+ * (записи "догнать прогресс" — нет: их реальная длительность/интенсивность
+ * неизвестна).
+ */
+export function useWorkoutCalorieStats() {
+  const { authUser } = useAuth();
+  const { data: profile } = useUserProfile();
+
+  return useQuery({
+    queryKey: ["workout-calorie-stats", authUser?.id, profile?.updatedAt],
+    enabled: !!authUser && profile !== undefined,
+    queryFn: async (): Promise<WorkoutCalorieStats> => {
+      const { data, error } = await supabase
+        .from("workout_logs")
+        .select(CALORIE_LOG_SELECT)
+        .eq("user_id", authUser!.id)
+        .eq("is_catch_up", false)
+        .order("completed_at", { ascending: false });
+      if (error) throw error;
+
+      const rows = (data ?? []) as unknown as CalorieLogRow[];
+      const now = new Date();
+      const weekAgo = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6).getTime();
+      const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).getTime();
+
+      const stats: WorkoutCalorieStats = { total: 0, week: 0, month: 0, workouts: rows.length, last: null };
+      rows.forEach((row, i) => {
+        const kcal = caloriesOfLog(row, profile);
+        const at = new Date(row.completed_at).getTime();
+        stats.total += kcal;
+        if (at >= weekAgo) stats.week += kcal;
+        if (at >= monthStart) stats.month += kcal;
+        if (i === 0) stats.last = kcal;
+      });
+      return stats;
     },
   });
 }

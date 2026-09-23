@@ -229,6 +229,18 @@
           "Dies sind allgemeine Hinweise, keine medizinischen Empfehlungen — bei Verletzungen oder besonderen Umständen einen Arzt oder Ernährungsberater konsultieren."
         ]
       }
+    },
+    "log": {
+      "kcal": "kcal"
+    },
+    "workoutBurn": {
+      "title": "Im Training verbrannt",
+      "subtitle": "Workouts in der App: {{count}}",
+      "last": "letztes Workout",
+      "week": "letzte 7 Tage",
+      "month": "diesen Monat",
+      "empty": "Hier siehst du, wie viele Kalorien du im Training verbrannt hast. Die Zahl wächst mit jedem abgeschlossenen Workout.",
+      "how": "Für jedes Workout berechnet aus Gewicht, Größe, Alter und Geschlecht, dem Programmtyp, der tatsächlichen Dauer und den erledigten Sätzen."
     }
   },
   "progress": {

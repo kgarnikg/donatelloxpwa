@@ -259,6 +259,15 @@
           "Estas son pautas generales, no indicaciones médicas — ante lesiones o condiciones especiales, consulta con un médico o nutricionista."
         ]
       }
+    },
+    "workoutBurn": {
+      "title": "Quemado en entrenamientos",
+      "subtitle": "Entrenamientos en la app: {{count}}",
+      "last": "último entreno",
+      "week": "últimos 7 días",
+      "month": "este mes",
+      "empty": "Aquí verás cuántas calorías has quemado entrenando. La cifra crecerá con cada entrenamiento que completes.",
+      "how": "Se calcula para cada entrenamiento con tu peso, altura, edad y sexo, el tipo de programa, lo que duró realmente y cuántas series completaste."
     }
   },
   "progress": {
