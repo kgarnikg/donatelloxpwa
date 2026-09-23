@@ -26,6 +26,7 @@ import ProgressPage from "@/pages/ProgressPage";
 import ProfilePage from "@/pages/ProfilePage";
 import SupportPage from "@/pages/SupportPage";
 import LanguageSettingsPage from "@/pages/LanguageSettingsPage";
+import BodyParamsPage from "@/pages/BodyParamsPage";
 import NotificationsSettingsPage from "@/pages/NotificationsSettingsPage";
 import SubscriptionPage from "@/pages/SubscriptionPage";
 import { PaymentSuccessPage, PaymentFailedPage } from "@/pages/PaymentResultPage";
@@ -460,6 +461,14 @@ export default function App() {
         <Route path="/support" element={<SupportPage />} />
       </Route>
 
+      <Route
+        path="/profile/body"
+        element={
+          <ProtectedRoute>
+            <BodyParamsPage />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/profile/language"
         element={

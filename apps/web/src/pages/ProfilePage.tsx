@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, LogOut, CreditCard, Globe, Bell, Pencil, Check, X, Gift, LifeBuoy } from "lucide-react";
+import { ChevronRight, LogOut, CreditCard, Globe, Bell, Pencil, Check, X, Gift, LifeBuoy, Ruler } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
@@ -41,6 +41,7 @@ export default function ProfilePage() {
   }
 
   const menuItems = [
+    { to: "/profile/body", label: t("profile.body"), icon: Ruler },
     { to: "/subscription", label: t("profile.subscription"), icon: CreditCard },
     { to: "/profile/language", label: t("profile.language"), icon: Globe },
     { to: "/profile/notifications", label: t("profile.notifications"), icon: Bell },

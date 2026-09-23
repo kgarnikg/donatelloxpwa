@@ -71,8 +71,8 @@ export default function NutritionPage() {
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   }, []);
 
-  const { data: daily, isLoading: dailyLoading } = useDailyCalories(todayStr);
-  const { data: burnStats, isLoading: burnStatsLoading } = useWorkoutCalorieStats();
+  const { data: daily, isLoading: dailyLoading, error: dailyError } = useDailyCalories(todayStr);
+  const { data: burnStats, isLoading: burnStatsLoading, error: burnStatsError } = useWorkoutCalorieStats();
   const setOverride = useSetCalorieOverride();
   const clearOverride = useClearCalorieOverride();
 
@@ -147,10 +147,17 @@ export default function NutritionPage() {
 
         {dailyLoading && <div className="h-16 animate-pulse rounded-md bg-ink-800" />}
 
-        {!dailyLoading && !daily && (
+        {/* Ошибка загрузки — показываем честно, а не "заполните профиль" */}
+        {!dailyLoading && dailyError && (
+          <div className="rounded-md border border-danger/30 bg-danger/10 px-3 py-2 text-sm text-danger">
+            {t("nutrition.loadError")} ({(dailyError as Error).message})
+          </div>
+        )}
+
+        {!dailyLoading && !dailyError && !daily && (
           <div className="py-2 text-sm text-neutral-400">
             {t("nutrition.calorieBurn.incompleteProfile")}{" "}
-            <Link to="/profile" className="font-medium text-volt-400">
+            <Link to="/profile/body" className="font-medium text-volt-400">
               {t("nutrition.calorieBurn.completeProfile")}
             </Link>
           </div>
@@ -225,6 +232,12 @@ export default function NutritionPage() {
         </h2>
 
         {burnStatsLoading && <div className="h-16 animate-pulse rounded-md bg-ink-800" />}
+
+        {!burnStatsLoading && burnStatsError && (
+          <div className="rounded-md border border-danger/30 bg-danger/10 px-3 py-2 text-sm text-danger">
+            {t("nutrition.loadError")} ({(burnStatsError as Error).message})
+          </div>
+        )}
 
         {!burnStatsLoading && burnStats && burnStats.workouts === 0 && (
           <p className="text-sm text-neutral-400">{t("nutrition.workoutBurn.empty")}</p>

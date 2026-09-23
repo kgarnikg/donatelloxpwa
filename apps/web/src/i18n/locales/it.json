@@ -241,7 +241,8 @@
       "month": "questo mese",
       "empty": "Qui vedrai quante calorie hai bruciato allenandoti. Il numero crescerà a ogni allenamento completato.",
       "how": "Calcolate per ogni allenamento in base a peso, altezza, età e sesso, tipo di programma, durata reale e serie completate."
-    }
+    },
+    "loadError": "Impossibile caricare i dati"
   },
   "progress": {
     "title": "Progressi",
@@ -267,7 +268,8 @@
     "subscription": "Abbonamento e pagamento",
     "language": "Lingua dell'app",
     "notifications": "Notifiche",
-    "logout": "Esci"
+    "logout": "Esci",
+    "body": "Parametri corporei"
   },
   "language": {
     "title": "Lingua dell'app",
@@ -332,6 +334,17 @@
       "failedTitle": "Pagamento non riuscito",
       "failedText": "Non è stato addebitato nulla. Controlla i dati e il saldo della carta o prova con un'altra.",
       "tryAgain": "Riprova"
+    }
+  },
+  "bodyParams": {
+    "title": "Parametri corporei",
+    "subtitle": "Servono per calcolare calorie e carico di allenamento. Aggiorna il peso man mano che progredisci e il calcolo si adeguerà.",
+    "saved": "Salvato",
+    "toNutrition": "Vai alla nutrizione",
+    "errors": {
+      "height": "L'altezza deve essere tra 100 e 250 cm",
+      "weight": "Il peso deve essere tra 30 e 300 kg",
+      "birthDate": "Controlla la data di nascita"
     }
   }
 }

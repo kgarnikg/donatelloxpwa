@@ -268,7 +268,8 @@
       "month": "this month",
       "empty": "This is where you'll see how many calories you've burned in workouts. The number grows with every workout you finish.",
       "how": "Calculated for each workout from your weight, height, age and sex, the program type, how long the workout actually took and how many sets you completed."
-    }
+    },
+    "loadError": "Couldn't load data"
   },
   "progress": {
     "title": "Progress",
@@ -295,7 +296,8 @@
     "language": "App language",
     "notifications": "Notifications",
     "logout": "Log out",
-    "support": "Help"
+    "support": "Help",
+    "body": "Body parameters"
   },
   "language": {
     "title": "App language",
@@ -402,6 +404,17 @@
       "failedTitle": "Payment failed",
       "failedText": "You haven't been charged. Check your card details and balance, or try another card.",
       "tryAgain": "Try again"
+    }
+  },
+  "bodyParams": {
+    "title": "Body parameters",
+    "subtitle": "Used to calculate calories and training load. Update your weight as you progress and the numbers will follow.",
+    "saved": "Saved",
+    "toNutrition": "Go to nutrition",
+    "errors": {
+      "height": "Height must be 100–250 cm",
+      "weight": "Weight must be 30–300 kg",
+      "birthDate": "Check your date of birth"
     }
   }
 }

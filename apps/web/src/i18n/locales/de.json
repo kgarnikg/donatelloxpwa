@@ -241,7 +241,8 @@
       "month": "diesen Monat",
       "empty": "Hier siehst du, wie viele Kalorien du im Training verbrannt hast. Die Zahl wächst mit jedem abgeschlossenen Workout.",
       "how": "Für jedes Workout berechnet aus Gewicht, Größe, Alter und Geschlecht, dem Programmtyp, der tatsächlichen Dauer und den erledigten Sätzen."
-    }
+    },
+    "loadError": "Daten konnten nicht geladen werden"
   },
   "progress": {
     "title": "Fortschritt",
@@ -267,7 +268,8 @@
     "subscription": "Abo & Zahlung",
     "language": "App-Sprache",
     "notifications": "Benachrichtigungen",
-    "logout": "Abmelden"
+    "logout": "Abmelden",
+    "body": "Körperdaten"
   },
   "language": {
     "title": "App-Sprache",
@@ -332,6 +334,17 @@
       "failedTitle": "Zahlung fehlgeschlagen",
       "failedText": "Es wurde nichts abgebucht. Prüfe Kartendaten und Guthaben oder versuche es mit einer anderen Karte.",
       "tryAgain": "Erneut versuchen"
+    }
+  },
+  "bodyParams": {
+    "title": "Körperdaten",
+    "subtitle": "Werden für Kalorien und Trainingsbelastung genutzt. Aktualisiere dein Gewicht, wenn du Fortschritte machst – die Berechnung passt sich an.",
+    "saved": "Gespeichert",
+    "toNutrition": "Zur Ernährung",
+    "errors": {
+      "height": "Größe: 100–250 cm",
+      "weight": "Gewicht: 30–300 kg",
+      "birthDate": "Prüfe dein Geburtsdatum"
     }
   }
 }

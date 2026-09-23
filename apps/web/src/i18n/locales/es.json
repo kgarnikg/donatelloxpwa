@@ -268,7 +268,8 @@
       "month": "este mes",
       "empty": "Aquí verás cuántas calorías has quemado entrenando. La cifra crecerá con cada entrenamiento que completes.",
       "how": "Se calcula para cada entrenamiento con tu peso, altura, edad y sexo, el tipo de programa, lo que duró realmente y cuántas series completaste."
-    }
+    },
+    "loadError": "No se pudieron cargar los datos"
   },
   "progress": {
     "title": "Progreso",
@@ -295,7 +296,8 @@
     "language": "Idioma de la app",
     "notifications": "Notificaciones",
     "logout": "Cerrar sesión",
-    "support": "Ayuda"
+    "support": "Ayuda",
+    "body": "Parámetros corporales"
   },
   "language": {
     "title": "Idioma de la app",
@@ -402,6 +404,17 @@
       "failedTitle": "El pago no se ha completado",
       "failedText": "No se ha realizado ningún cargo. Revisa los datos y el saldo de la tarjeta o prueba con otra.",
       "tryAgain": "Intentar de nuevo"
+    }
+  },
+  "bodyParams": {
+    "title": "Parámetros corporales",
+    "subtitle": "Se usan para calcular calorías y la carga de entrenamiento. Actualiza tu peso según avances y el cálculo se ajustará.",
+    "saved": "Guardado",
+    "toNutrition": "Ir a nutrición",
+    "errors": {
+      "height": "La altura debe estar entre 100 y 250 cm",
+      "weight": "El peso debe estar entre 30 y 300 kg",
+      "birthDate": "Revisa tu fecha de nacimiento"
     }
   }
 }
