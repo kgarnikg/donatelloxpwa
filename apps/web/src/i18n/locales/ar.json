@@ -130,7 +130,9 @@
     "lastTime": "المرة الماضية: {{weight}} كغ · جرّب {{next}} كغ",
     "remaining": "متبقٍّ {{count}}",
     "finishWorkout": "إنهاء التمرين",
-    "saving": "جارٍ الحفظ…"
+    "saving": "جارٍ الحفظ…",
+    "setMarked": "تم تسجيل المجموعة",
+    "undo": "تراجع"
   },
   "nutrition": {
     "title": "التغذية",

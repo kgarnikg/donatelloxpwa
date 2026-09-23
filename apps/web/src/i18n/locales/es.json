@@ -146,7 +146,9 @@
     "confirmExitLeave": "Salir",
     "moveLater": "Mover más tarde",
     "replace": "Sustituir",
-    "replaced": "Sustituido ✓"
+    "replaced": "Sustituido ✓",
+    "setMarked": "Serie completada",
+    "undo": "Deshacer"
   },
   "nutrition": {
     "title": "Nutrición",

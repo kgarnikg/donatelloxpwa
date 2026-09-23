@@ -130,7 +130,9 @@
     "lastTime": "ਪਿਛਲੀ ਵਾਰ: {{weight}} ਕਿਲੋ · {{next}} ਕਿਲੋ ਅਜ਼ਮਾਓ",
     "remaining": "{{count}} ਬਾਕੀ",
     "finishWorkout": "ਵਰਕਆਊਟ ਖਤਮ ਕਰੋ",
-    "saving": "ਸੰਭਾਲਿਆ ਜਾ ਰਿਹਾ ਹੈ…"
+    "saving": "ਸੰਭਾਲਿਆ ਜਾ ਰਿਹਾ ਹੈ…",
+    "setMarked": "ਸੈੱਟ ਪੂਰਾ ਹੋਇਆ",
+    "undo": "ਵਾਪਸ ਲਓ"
   },
   "nutrition": {
     "title": "ਖੁਰਾਕ",

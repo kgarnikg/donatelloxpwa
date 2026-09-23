@@ -146,7 +146,9 @@
     "confirmExitLeave": "Выйти",
     "moveLater": "Подвинуть дальше",
     "replace": "Заменить",
-    "replaced": "Заменено ✓"
+    "replaced": "Заменено ✓",
+    "setMarked": "Подход отмечен",
+    "undo": "Отменить"
   },
   "nutrition": {
     "title": "Питание",

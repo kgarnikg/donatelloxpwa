@@ -154,6 +154,51 @@ export default function WorkoutPlayerPage() {
     setRestState(null);
   }
 
+  // ---- Отметка подхода: один раз, без снятия --------------------------
+  // Галочку нельзя снять повторным нажатием (иначе её можно "щёлкать"
+  // сколько угодно, а таймер отдыха продолжал бы идти). Для случайного
+  // нажатия — короткое окно "Отменить" (как при удалении письма в почте):
+  // снимает ИМЕННО последнюю отметку и останавливает запущенный ею отдых.
+  const UNDO_WINDOW_MS = 5000;
+  const [undoSetId, setUndoSetId] = useState<string | null>(null);
+  const undoTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function clearUndo() {
+    if (undoTimeoutRef.current !== null) {
+      clearTimeout(undoTimeoutRef.current);
+      undoTimeoutRef.current = null;
+    }
+    setUndoSetId(null);
+  }
+
+  function offerUndo(setId: string) {
+    if (undoTimeoutRef.current !== null) clearTimeout(undoTimeoutRef.current);
+    setUndoSetId(setId);
+    undoTimeoutRef.current = setTimeout(() => {
+      undoTimeoutRef.current = null;
+      setUndoSetId(null);
+    }, UNDO_WINDOW_MS);
+  }
+
+  function undoLastSet() {
+    if (!undoSetId) return;
+    const id = undoSetId;
+    setCompletedIds((prev) => {
+      const next = new Set(prev);
+      next.delete(id);
+      return next;
+    });
+    skipRestTimer();
+    clearUndo();
+  }
+
+  useEffect(
+    () => () => {
+      if (undoTimeoutRef.current !== null) clearTimeout(undoTimeoutRef.current);
+    },
+    [],
+  );
+
   const restRemaining = restState ? Math.max(0, Math.ceil((restState.endAt - Date.now()) / 1000)) : 0;
 
   // Как только реальное время истекло — закрываем таймер (проверяется на
@@ -420,7 +465,10 @@ export default function WorkoutPlayerPage() {
   const allDone = completedIds.size === workout.sets.length;
 
   return (
-    <div className={clsx("min-h-dvh bg-ink-950 px-5 pt-6", restState ? "pb-48" : "pb-32")}>
+    <div className={clsx(
+        "min-h-dvh bg-ink-950 px-5 pt-6",
+        restState && undoSetId ? "pb-60" : restState || undoSetId ? "pb-48" : "pb-32",
+      )}>
       <button
         onClick={() => {
           if (completedIds.size > 0) {
@@ -517,32 +565,25 @@ export default function WorkoutPlayerPage() {
                   // и прогресс считаются по подходам, которых не было).
                   const previousDone = group.sets.slice(0, i).every((s) => completedIds.has(s.id));
                   const outOfOrder = !done && !previousDone;
-                  const locked = (!!restState && !done) || outOfOrder;
+                  const locked = done || (!!restState && !done) || outOfOrder;
                   return (
                     <button
                       key={set.id}
                       disabled={locked}
                       aria-disabled={locked}
-                      onClick={() =>
-                        setCompletedIds((prev) => {
-                          const next = new Set(prev);
-                          if (next.has(set.id)) {
-                            // Снимаем отметку — вместе со всеми следующими
-                            // подходами этого упражнения, чтобы порядок не
-                            // нарушился "задним числом".
-                            for (const later of group.sets.slice(i)) next.delete(later.id);
-                          } else {
-                            if (!group.sets.slice(0, i).every((s) => next.has(s.id))) return prev;
-                            next.add(set.id);
-                            if (isLastSetOfGroup && hasNextGroup && workout.trainingFormat === "gym") {
-                              startRestTimer(REST_BETWEEN_EXERCISES_SECONDS, "exercise");
-                            } else {
-                              startRestTimer(set.restSeconds, "set");
-                            }
-                          }
-                          return next;
-                        })
-                      }
+                      aria-pressed={done}
+                      onClick={() => {
+                        // Уже отмеченный подход — не снимается (только через "Отменить")
+                        if (completedIds.has(set.id)) return;
+                        if (!group.sets.slice(0, i).every((s) => completedIds.has(s.id))) return;
+                        setCompletedIds((prev) => new Set(prev).add(set.id));
+                        if (isLastSetOfGroup && hasNextGroup && workout.trainingFormat === "gym") {
+                          startRestTimer(REST_BETWEEN_EXERCISES_SECONDS, "exercise");
+                        } else {
+                          startRestTimer(set.restSeconds, "set");
+                        }
+                        offerUndo(set.id);
+                      }}
                       className={clsx(
                         "flex w-full items-center justify-between rounded-md border px-3.5 py-2.5 text-left transition",
                         done
@@ -663,6 +704,21 @@ export default function WorkoutPlayerPage() {
         })()}
 
       <div className="fixed inset-x-0 bottom-0 z-40">
+        {undoSetId && (
+          <div className="border-t border-ink-700 bg-ink-800/95 px-5 py-2.5 backdrop-blur animate-fade-in">
+            <div className="mx-auto flex max-w-md items-center justify-between gap-3 text-sm">
+              <span className="flex items-center gap-2 text-neutral-300">
+                <Check size={16} className="text-volt-400" /> {t("workout.setMarked")}
+              </span>
+              <button
+                onClick={undoLastSet}
+                className="shrink-0 rounded-full px-3 py-1 font-semibold text-volt-400 hover:bg-ink-700"
+              >
+                {t("workout.undo")}
+              </button>
+            </div>
+          </div>
+        )}
         {restState && (
           <div className="border-t border-ink-700 bg-ink-900/95 px-5 py-3 backdrop-blur animate-fade-in">
             <div className="mx-auto flex max-w-md items-center gap-3">

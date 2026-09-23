@@ -130,7 +130,9 @@
     "lastTime": "Letztes Mal: {{weight}} kg · versuch {{next}} kg",
     "remaining": "Noch {{count}}",
     "finishWorkout": "Training beenden",
-    "saving": "Wird gespeichert…"
+    "saving": "Wird gespeichert…",
+    "setMarked": "Satz erledigt",
+    "undo": "Rückgängig"
   },
   "nutrition": {
     "title": "Ernährung",

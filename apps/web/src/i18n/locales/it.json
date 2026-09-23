@@ -130,7 +130,9 @@
     "lastTime": "L'ultima volta: {{weight}} kg · prova {{next}} kg",
     "remaining": "Rimangono {{count}}",
     "finishWorkout": "Termina allenamento",
-    "saving": "Salvataggio…"
+    "saving": "Salvataggio…",
+    "setMarked": "Serie completata",
+    "undo": "Annulla"
   },
   "nutrition": {
     "title": "Alimentazione",

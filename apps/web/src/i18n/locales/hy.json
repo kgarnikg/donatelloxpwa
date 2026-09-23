@@ -146,7 +146,9 @@
     "confirmExitLeave": "Դուրս գալ",
     "moveLater": "Տեղափոխել ավելի ուշ",
     "replace": "Փոխարինել",
-    "replaced": "Փոխարինված է ✓"
+    "replaced": "Փոխարինված է ✓",
+    "setMarked": "Սեթը նշված է",
+    "undo": "Չեղարկել"
   },
   "nutrition": {
     "title": "Սնունդ",

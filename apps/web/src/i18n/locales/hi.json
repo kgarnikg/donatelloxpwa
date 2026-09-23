@@ -130,7 +130,9 @@
     "lastTime": "पिछली बार: {{weight}} किग्रा · {{next}} किग्रा आज़माएं",
     "remaining": "{{count}} बाकी",
     "finishWorkout": "वर्कआउट समाप्त करें",
-    "saving": "सहेजा जा रहा है…"
+    "saving": "सहेजा जा रहा है…",
+    "setMarked": "सेट पूरा हुआ",
+    "undo": "पूर्ववत करें"
   },
   "nutrition": {
     "title": "पोषण",
