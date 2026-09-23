@@ -253,7 +253,7 @@ function ProgramDetailPage() {
           {t("programs.perWeek", { count: program.workoutsPerWeek })}
         </span>
         <span className="rounded-full border border-volt-400/30 px-2.5 py-1">
-          {program.difficulty}
+          {t(`programs.difficulty.${program.difficulty}`)}
         </span>
       </div>
 

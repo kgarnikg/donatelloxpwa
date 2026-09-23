@@ -8,7 +8,8 @@
     "comingSoon": "قريبًا",
     "min": "دقيقة",
     "kg": "كغ",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "close": "إغلاق"
   },
   "nav": {
     "home": "الرئيسية",
@@ -114,7 +115,48 @@
     "recommendedForYou": "موصى به لك",
     "programsForYou": "برامج لك",
     "allPrograms": "جميع البرامج",
-    "noPrograms": "البرامج قادمة قريبًا — تحقق لاحقًا."
+    "noPrograms": "البرامج قادمة قريبًا — تحقق لاحقًا.",
+    "level": "المستوى {{level}}",
+    "xpToNext": "{{xp}} XP حتى المستوى {{next}}",
+    "ranks": {
+      "novice": "مبتدئ",
+      "fighter": "مقاتل",
+      "athlete": "رياضي",
+      "champion": "بطل",
+      "master": "محترف",
+      "legend": "أسطورة"
+    },
+    "xpRules": {
+      "workout": "تمرين في التطبيق",
+      "week": "أسبوع حسب الخطة",
+      "record": "رقم قياسي شخصي في الوزن",
+      "catchUp": "تمرين حدّده المدرب"
+    },
+    "today": "اليوم",
+    "todayDone": "تم تمرين اليوم ✓",
+    "todayDoneHint": "عمل رائع! استرح وتعافَ. التمرين التالي:",
+    "workoutOf": "التمرين {{n}} من {{total}}",
+    "start": "ابدأ التمرين",
+    "programDone": "أكملت البرنامج!",
+    "programDoneHint": "عمل مذهل. اختر برنامجك التالي واستمر في التقدم.",
+    "thisWeek": "هذا الأسبوع",
+    "weekProgress": "{{done}} من {{target}}",
+    "weekStreak": "أسابيع متتالية حسب الخطة",
+    "weekStreakStart": "أكمل خطة الأسبوع لتبدأ سلسلة",
+    "programPath": "مسارك في البرنامج",
+    "programProgress": "أُنجز {{done}} من {{total}}",
+    "nextAchievement": "الإنجاز التالي",
+    "achievementLeft": "المتبقي: {{left}}",
+    "allAchievementsDone": "حصلت على كل الإنجازات — أنت أسطورة!",
+    "kg": "كغ",
+    "statTons": "طن مرفوع",
+    "statKcal": "سعرة محروقة",
+    "statWorkouts": "تمارين",
+    "quoteOfDay": "فكرة اليوم",
+    "chooseProgram": "اختر برنامجًا للبدء",
+    "levelUpTitle": "مستوى جديد!",
+    "levelUpButton": "هيا!",
+    "achievementsUnlocked": "المفتوحة: {{n}}"
   },
   "workout": {
     "back": "رجوع",
@@ -357,5 +399,19 @@
       "weight": "يجب أن يكون الوزن بين 30 و300 كغ",
       "birthDate": "تحقق من تاريخ الميلاد"
     }
+  },
+  "programs": {
+    "difficulty": {
+      "beginner": "مبتدئ",
+      "intermediate": "متوسط",
+      "advanced": "متقدم"
+    },
+    "weeks_zero": "{{count}} أسبوع",
+    "weeks_one": "أسبوع واحد",
+    "weeks_two": "أسبوعان",
+    "weeks_few": "{{count}} أسابيع",
+    "weeks_many": "{{count}} أسبوعًا",
+    "weeks_other": "{{count}} أسبوع",
+    "perWeek": "{{count}}× أسبوعيًا"
   }
 }

@@ -8,7 +8,8 @@
     "comingSoon": "Скоро",
     "min": "хв",
     "kg": "кг",
-    "logout": "Вийти"
+    "logout": "Вийти",
+    "close": "Закрити"
   },
   "nav": {
     "home": "Головна",
@@ -114,7 +115,48 @@
     "recommendedForYou": "Рекомендовано для вас",
     "programsForYou": "Програми для вас",
     "allPrograms": "Усі програми",
-    "noPrograms": "Програми скоро з'являться — зазирніть пізніше."
+    "noPrograms": "Програми скоро з'являться — зазирніть пізніше.",
+    "level": "Рівень {{level}}",
+    "xpToNext": "{{xp}} XP до рівня {{next}}",
+    "ranks": {
+      "novice": "Новачок",
+      "fighter": "Боєць",
+      "athlete": "Атлет",
+      "champion": "Чемпіон",
+      "master": "Майстер",
+      "legend": "Легенда"
+    },
+    "xpRules": {
+      "workout": "Тренування в застосунку",
+      "week": "Тиждень за планом",
+      "record": "Особистий рекорд ваги",
+      "catchUp": "Тренування, позначене тренером"
+    },
+    "today": "Сьогодні",
+    "todayDone": "Сьогодні виконано ✓",
+    "todayDoneHint": "Чудова робота! Відпочивай і відновлюйся. Наступне тренування:",
+    "workoutOf": "тренування {{n}} з {{total}}",
+    "start": "Почати тренування",
+    "programDone": "Програму пройдено!",
+    "programDoneHint": "Неймовірна робота. Обери наступну програму й рости далі.",
+    "thisWeek": "Цей тиждень",
+    "weekProgress": "{{done}} з {{target}}",
+    "weekStreak": "Тижнів поспіль за планом",
+    "weekStreakStart": "Виконай план тижня — почнеться серія",
+    "programPath": "Шлях програмою",
+    "programProgress": "Пройдено {{done}} з {{total}}",
+    "nextAchievement": "Найближча нагорода",
+    "achievementLeft": "Залишилось: {{left}}",
+    "allAchievementsDone": "Усі нагороди отримано — ти легенда!",
+    "kg": "кг",
+    "statTons": "т піднято",
+    "statKcal": "ккал спалено",
+    "statWorkouts": "тренувань",
+    "quoteOfDay": "Думка дня",
+    "chooseProgram": "Обери програму, щоб почати",
+    "levelUpTitle": "Новий рівень!",
+    "levelUpButton": "Уперед!",
+    "achievementsUnlocked": "Відкрито: {{n}}"
   },
   "workout": {
     "back": "Назад",
@@ -360,5 +402,17 @@
       "weight": "Вага — від 30 до 300 кг",
       "birthDate": "Перевір дату народження"
     }
+  },
+  "programs": {
+    "difficulty": {
+      "beginner": "Початковий",
+      "intermediate": "Середній",
+      "advanced": "Просунутий"
+    },
+    "weeks_one": "{{count}} тиждень",
+    "weeks_few": "{{count}} тижні",
+    "weeks_many": "{{count}} тижнів",
+    "weeks_other": "{{count}} тижня",
+    "perWeek": "{{count}}× на тиждень"
   }
 }

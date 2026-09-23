@@ -47,7 +47,7 @@ export default function ProgramsPage() {
                   {localizedField(program.description, { en: program.descriptionEn, es: program.descriptionEs, hy: program.descriptionHy }, i18n.language)}
                 </p>
                 <p className="mt-2 text-xs font-medium uppercase tracking-wide text-volt-400">
-                  {t("programs.weeks", { count: program.durationWeeks })} · {t("programs.perWeek", { count: program.workoutsPerWeek })} · {program.difficulty}
+                  {t("programs.weeks", { count: program.durationWeeks })} · {t("programs.perWeek", { count: program.workoutsPerWeek })} · {t(`programs.difficulty.${program.difficulty}`)}
                 </p>
               </div>
               <ChevronRight className="ml-3 shrink-0 text-neutral-500" />

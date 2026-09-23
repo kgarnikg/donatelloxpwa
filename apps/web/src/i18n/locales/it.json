@@ -8,7 +8,8 @@
     "comingSoon": "Presto disponibile",
     "min": "min",
     "kg": "kg",
-    "logout": "Esci"
+    "logout": "Esci",
+    "close": "Chiudi"
   },
   "nav": {
     "home": "Home",
@@ -114,7 +115,48 @@
     "recommendedForYou": "Consigliato per te",
     "programsForYou": "Programmi per te",
     "allPrograms": "Tutti i programmi",
-    "noPrograms": "I programmi arriveranno presto — torna più tardi."
+    "noPrograms": "I programmi arriveranno presto — torna più tardi.",
+    "level": "Livello {{level}}",
+    "xpToNext": "{{xp}} XP al livello {{next}}",
+    "ranks": {
+      "novice": "Principiante",
+      "fighter": "Lottatore",
+      "athlete": "Atleta",
+      "champion": "Campione",
+      "master": "Maestro",
+      "legend": "Leggenda"
+    },
+    "xpRules": {
+      "workout": "Allenamento nell'app",
+      "week": "Settimana completata",
+      "record": "Record personale di peso",
+      "catchUp": "Allenamento segnato dal coach"
+    },
+    "today": "Oggi",
+    "todayDone": "Fatto per oggi ✓",
+    "todayDoneHint": "Ottimo lavoro! Riposa e recupera. Prossimo allenamento:",
+    "workoutOf": "allenamento {{n}} di {{total}}",
+    "start": "Inizia allenamento",
+    "programDone": "Programma completato!",
+    "programDoneHint": "Lavoro incredibile. Scegli il prossimo programma e continua a crescere.",
+    "thisWeek": "Questa settimana",
+    "weekProgress": "{{done}} di {{target}}",
+    "weekStreak": "Settimane di fila secondo il piano",
+    "weekStreakStart": "Completa il piano della settimana per iniziare una serie",
+    "programPath": "Il tuo percorso",
+    "programProgress": "{{done}} di {{total}} completati",
+    "nextAchievement": "Prossimo traguardo",
+    "achievementLeft": "Mancano: {{left}}",
+    "allAchievementsDone": "Tutti i traguardi sbloccati: sei una leggenda!",
+    "kg": "kg",
+    "statTons": "t sollevate",
+    "statKcal": "kcal bruciate",
+    "statWorkouts": "allenamenti",
+    "quoteOfDay": "Pensiero del giorno",
+    "chooseProgram": "Scegli un programma per iniziare",
+    "levelUpTitle": "Livello superiore!",
+    "levelUpButton": "Andiamo!",
+    "achievementsUnlocked": "Sbloccati: {{n}}"
   },
   "workout": {
     "back": "Indietro",
@@ -358,5 +400,15 @@
       "weight": "Il peso deve essere tra 30 e 300 kg",
       "birthDate": "Controlla la data di nascita"
     }
+  },
+  "programs": {
+    "difficulty": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzato"
+    },
+    "weeks_one": "{{count}} settimana",
+    "weeks_other": "{{count}} settimane",
+    "perWeek": "{{count}}× a settimana"
   }
 }

@@ -8,7 +8,8 @@
     "comingSoon": "Bald verfügbar",
     "min": "Min",
     "kg": "kg",
-    "logout": "Abmelden"
+    "logout": "Abmelden",
+    "close": "Schließen"
   },
   "nav": {
     "home": "Start",
@@ -114,7 +115,48 @@
     "recommendedForYou": "Für dich empfohlen",
     "programsForYou": "Programme für dich",
     "allPrograms": "Alle Programme",
-    "noPrograms": "Programme folgen bald — schau später wieder vorbei."
+    "noPrograms": "Programme folgen bald — schau später wieder vorbei.",
+    "level": "Level {{level}}",
+    "xpToNext": "{{xp}} XP bis Level {{next}}",
+    "ranks": {
+      "novice": "Neuling",
+      "fighter": "Kämpfer",
+      "athlete": "Athlet",
+      "champion": "Champion",
+      "master": "Meister",
+      "legend": "Legende"
+    },
+    "xpRules": {
+      "workout": "Workout in der App",
+      "week": "Wochenplan erfüllt",
+      "record": "Persönlicher Gewichtsrekord",
+      "catchUp": "Vom Trainer markiertes Workout"
+    },
+    "today": "Heute",
+    "todayDone": "Heute erledigt ✓",
+    "todayDoneHint": "Starke Leistung! Erhol dich gut. Nächstes Workout:",
+    "workoutOf": "Workout {{n}} von {{total}}",
+    "start": "Workout starten",
+    "programDone": "Programm abgeschlossen!",
+    "programDoneHint": "Unglaubliche Arbeit. Wähle dein nächstes Programm und wachse weiter.",
+    "thisWeek": "Diese Woche",
+    "weekProgress": "{{done}} von {{target}}",
+    "weekStreak": "Wochen in Folge nach Plan",
+    "weekStreakStart": "Erfülle den Wochenplan, um eine Serie zu starten",
+    "programPath": "Dein Weg im Programm",
+    "programProgress": "{{done}} von {{total}} geschafft",
+    "nextAchievement": "Nächste Auszeichnung",
+    "achievementLeft": "Noch: {{left}}",
+    "allAchievementsDone": "Alle Auszeichnungen freigeschaltet – du bist eine Legende!",
+    "kg": "kg",
+    "statTons": "t gehoben",
+    "statKcal": "kcal verbrannt",
+    "statWorkouts": "Workouts",
+    "quoteOfDay": "Gedanke des Tages",
+    "chooseProgram": "Wähle ein Programm, um zu starten",
+    "levelUpTitle": "Level aufgestiegen!",
+    "levelUpButton": "Los geht's!",
+    "achievementsUnlocked": "Freigeschaltet: {{n}}"
   },
   "workout": {
     "back": "Zurück",
@@ -358,5 +400,15 @@
       "weight": "Gewicht: 30–300 kg",
       "birthDate": "Prüfe dein Geburtsdatum"
     }
+  },
+  "programs": {
+    "difficulty": {
+      "beginner": "Anfänger",
+      "intermediate": "Fortgeschritten",
+      "advanced": "Profi"
+    },
+    "weeks_one": "{{count}} Woche",
+    "weeks_other": "{{count}} Wochen",
+    "perWeek": "{{count}}× pro Woche"
   }
 }

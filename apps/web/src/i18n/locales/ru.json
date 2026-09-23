@@ -118,7 +118,47 @@
     "noPrograms": "Программы скоро появятся — загляните позже.",
     "achievements": "Награды",
     "achievementsUnlocked": "Разблокировано: {{n}}",
-    "achievementsEmpty": "Начните тренироваться, чтобы открыть первую"
+    "achievementsEmpty": "Начните тренироваться, чтобы открыть первую",
+    "level": "Уровень {{level}}",
+    "xpToNext": "{{xp}} XP до уровня {{next}}",
+    "ranks": {
+      "novice": "Новичок",
+      "fighter": "Боец",
+      "athlete": "Атлет",
+      "champion": "Чемпион",
+      "master": "Мастер",
+      "legend": "Легенда"
+    },
+    "xpRules": {
+      "workout": "Тренировка в приложении",
+      "week": "Неделя по плану",
+      "record": "Личный рекорд веса",
+      "catchUp": "Тренировка, отмеченная тренером"
+    },
+    "today": "Сегодня",
+    "todayDone": "Сегодня выполнено ✓",
+    "todayDoneHint": "Отличная работа! Отдыхай и восстанавливайся. Следующая тренировка:",
+    "workoutOf": "тренировка {{n}} из {{total}}",
+    "start": "Начать тренировку",
+    "programDone": "Программа пройдена!",
+    "programDoneHint": "Невероятная работа. Выбери следующую программу и продолжай расти.",
+    "thisWeek": "Эта неделя",
+    "weekProgress": "{{done}} из {{target}}",
+    "weekStreak": "Недель подряд по плану",
+    "weekStreakStart": "Выполни план недели — начнётся серия",
+    "programPath": "Путь по программе",
+    "programProgress": "Пройдено {{done}} из {{total}}",
+    "nextAchievement": "Ближайшая награда",
+    "achievementLeft": "Осталось: {{left}}",
+    "allAchievementsDone": "Все награды получены — ты легенда!",
+    "kg": "кг",
+    "statTons": "т поднято",
+    "statKcal": "ккал сожжено",
+    "statWorkouts": "тренировок",
+    "quoteOfDay": "Мысль дня",
+    "chooseProgram": "Выбери программу, чтобы начать",
+    "levelUpTitle": "Новый уровень!",
+    "levelUpButton": "Вперёд!"
   },
   "workout": {
     "back": "Назад",
@@ -359,7 +399,12 @@
     "exercises_other": "{{count}} упражнений",
     "pageTitle": "Программы тренировок",
     "pageSubtitle": "Выберите программу под свою цель",
-    "sequenceLockedHint": "Откроется после выполнения предыдущей тренировки"
+    "sequenceLockedHint": "Откроется после выполнения предыдущей тренировки",
+    "difficulty": {
+      "beginner": "Начальный",
+      "intermediate": "Средний",
+      "advanced": "Продвинутый"
+    }
   },
   "support": {
     "title": "Помощь",

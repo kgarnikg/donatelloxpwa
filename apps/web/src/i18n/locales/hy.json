@@ -118,7 +118,47 @@
     "noPrograms": "Ծրագրերը շուտով կհայտնվեն — ստուգեք ավելի ուշ։",
     "achievements": "Մրցանակներ",
     "achievementsUnlocked": "Բացված է՝ {{n}}",
-    "achievementsEmpty": "Սկսիր մարզվել՝ առաջինը բացելու համար"
+    "achievementsEmpty": "Սկսիր մարզվել՝ առաջինը բացելու համար",
+    "level": "Մակարդակ {{level}}",
+    "xpToNext": "{{xp}} XP մինչև {{next}}-րդ մակարդակ",
+    "ranks": {
+      "novice": "Սկսնակ",
+      "fighter": "Մարտիկ",
+      "athlete": "Աթլետ",
+      "champion": "Չեմպիոն",
+      "master": "Վարպետ",
+      "legend": "Լեգենդ"
+    },
+    "xpRules": {
+      "workout": "Մարզում հավելվածում",
+      "week": "Շաբաթը ըստ պլանի",
+      "record": "Քաշի անձնական ռեկորդ",
+      "catchUp": "Մարզչի նշած մարզում"
+    },
+    "today": "Այսօր",
+    "todayDone": "Այսօր կատարված է ✓",
+    "todayDoneHint": "Հիանալի աշխատանք։ Հանգստացիր և վերականգնվիր։ Հաջորդ մարզումը՝",
+    "workoutOf": "մարզում {{n}}՝ {{total}}-ից",
+    "start": "Սկսել մարզումը",
+    "programDone": "Ծրագիրն ավարտված է։",
+    "programDoneHint": "Անհավանական աշխատանք։ Ընտրիր հաջորդ ծրագիրը և շարունակիր աճել։",
+    "thisWeek": "Այս շաբաթ",
+    "weekProgress": "{{done}}՝ {{target}}-ից",
+    "weekStreak": "Անընդմեջ շաբաթներ ըստ պլանի",
+    "weekStreakStart": "Կատարիր շաբաթվա պլանը՝ շարքը կսկսվի",
+    "programPath": "Ծրագրի ճանապարհը",
+    "programProgress": "Անցված է {{done}}՝ {{total}}-ից",
+    "nextAchievement": "Մոտակա պարգևը",
+    "achievementLeft": "Մնաց՝ {{left}}",
+    "allAchievementsDone": "Բոլոր պարգևները ստացված են՝ դու լեգենդ ես։",
+    "kg": "կգ",
+    "statTons": "տ բարձրացված",
+    "statKcal": "կկալ այրված",
+    "statWorkouts": "մարզում",
+    "quoteOfDay": "Օրվա միտքը",
+    "chooseProgram": "Ընտրիր ծրագիր՝ սկսելու համար",
+    "levelUpTitle": "Նոր մակարդակ։",
+    "levelUpButton": "Առա՛ջ"
   },
   "workout": {
     "back": "Հետ",
@@ -353,7 +393,12 @@
     "exercises_other": "{{count}} վարժություն",
     "pageTitle": "Մարզումների ծրագրեր",
     "pageSubtitle": "Ընտրեք ծրագիր ձեր նպատակի համար",
-    "sequenceLockedHint": "Կբացվի նախորդ մարզումն ավարտելուց հետո"
+    "sequenceLockedHint": "Կբացվի նախորդ մարզումն ավարտելուց հետո",
+    "difficulty": {
+      "beginner": "Սկսնակ",
+      "intermediate": "Միջին",
+      "advanced": "Առաջադեմ"
+    }
   },
   "support": {
     "title": "Օգնություն",

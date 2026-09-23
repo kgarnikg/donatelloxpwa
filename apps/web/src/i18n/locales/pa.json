@@ -8,7 +8,8 @@
     "comingSoon": "ਜਲਦੀ ਆ ਰਿਹਾ ਹੈ",
     "min": "ਮਿੰਟ",
     "kg": "ਕਿਲੋ",
-    "logout": "ਲੌਗ ਆਊਟ"
+    "logout": "ਲੌਗ ਆਊਟ",
+    "close": "ਬੰਦ ਕਰੋ"
   },
   "nav": {
     "home": "ਹੋਮ",
@@ -114,7 +115,48 @@
     "recommendedForYou": "ਤੁਹਾਡੇ ਲਈ ਸਿਫ਼ਾਰਸ਼ੀ",
     "programsForYou": "ਤੁਹਾਡੇ ਲਈ ਪ੍ਰੋਗਰਾਮ",
     "allPrograms": "ਸਾਰੇ ਪ੍ਰੋਗਰਾਮ",
-    "noPrograms": "ਪ੍ਰੋਗਰਾਮ ਜਲਦੀ ਆ ਰਹੇ ਹਨ — ਬਾਅਦ ਵਿੱਚ ਦੇਖੋ।"
+    "noPrograms": "ਪ੍ਰੋਗਰਾਮ ਜਲਦੀ ਆ ਰਹੇ ਹਨ — ਬਾਅਦ ਵਿੱਚ ਦੇਖੋ।",
+    "level": "ਲੈਵਲ {{level}}",
+    "xpToNext": "ਲੈਵਲ {{next}} ਤੱਕ {{xp}} XP",
+    "ranks": {
+      "novice": "ਨਵਾਂ",
+      "fighter": "ਯੋਧਾ",
+      "athlete": "ਐਥਲੀਟ",
+      "champion": "ਚੈਂਪੀਅਨ",
+      "master": "ਮਾਸਟਰ",
+      "legend": "ਲੀਜੈਂਡ"
+    },
+    "xpRules": {
+      "workout": "ਐਪ ਵਿੱਚ ਵਰਕਆਉਟ",
+      "week": "ਯੋਜਨਾ ਅਨੁਸਾਰ ਹਫ਼ਤਾ",
+      "record": "ਭਾਰ ਦਾ ਨਿੱਜੀ ਰਿਕਾਰਡ",
+      "catchUp": "ਕੋਚ ਵੱਲੋਂ ਚਿੰਨ੍ਹਿਤ ਵਰਕਆਉਟ"
+    },
+    "today": "ਅੱਜ",
+    "todayDone": "ਅੱਜ ਦਾ ਪੂਰਾ ✓",
+    "todayDoneHint": "ਸ਼ਾਨਦਾਰ! ਆਰਾਮ ਕਰੋ ਅਤੇ ਰਿਕਵਰ ਕਰੋ। ਅਗਲਾ ਵਰਕਆਉਟ:",
+    "workoutOf": "ਵਰਕਆਉਟ {{n}} / {{total}}",
+    "start": "ਵਰਕਆਉਟ ਸ਼ੁਰੂ ਕਰੋ",
+    "programDone": "ਪ੍ਰੋਗਰਾਮ ਪੂਰਾ!",
+    "programDoneHint": "ਕਮਾਲ ਦਾ ਕੰਮ। ਅਗਲਾ ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ ਅਤੇ ਅੱਗੇ ਵਧਦੇ ਰਹੋ।",
+    "thisWeek": "ਇਹ ਹਫ਼ਤਾ",
+    "weekProgress": "{{done}} / {{target}}",
+    "weekStreak": "ਲਗਾਤਾਰ ਹਫ਼ਤੇ ਯੋਜਨਾ ਅਨੁਸਾਰ",
+    "weekStreakStart": "ਹਫ਼ਤੇ ਦੀ ਯੋਜਨਾ ਪੂਰੀ ਕਰੋ — ਸਟ੍ਰੀਕ ਸ਼ੁਰੂ ਹੋਵੇਗੀ",
+    "programPath": "ਪ੍ਰੋਗਰਾਮ ਵਿੱਚ ਤੁਹਾਡਾ ਸਫ਼ਰ",
+    "programProgress": "{{total}} ਵਿੱਚੋਂ {{done}} ਪੂਰੇ",
+    "nextAchievement": "ਅਗਲੀ ਪ੍ਰਾਪਤੀ",
+    "achievementLeft": "ਬਾਕੀ: {{left}}",
+    "allAchievementsDone": "ਸਾਰੀਆਂ ਪ੍ਰਾਪਤੀਆਂ ਮਿਲ ਗਈਆਂ — ਤੁਸੀਂ ਲੀਜੈਂਡ ਹੋ!",
+    "kg": "ਕਿਲੋ",
+    "statTons": "ਟਨ ਚੁੱਕਿਆ",
+    "statKcal": "ਕੈਲੋਰੀ ਬਰਨ",
+    "statWorkouts": "ਵਰਕਆਉਟ",
+    "quoteOfDay": "ਅੱਜ ਦਾ ਵਿਚਾਰ",
+    "chooseProgram": "ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਪ੍ਰੋਗਰਾਮ ਚੁਣੋ",
+    "levelUpTitle": "ਨਵਾਂ ਲੈਵਲ!",
+    "levelUpButton": "ਚੱਲੋ!",
+    "achievementsUnlocked": "ਅਨਲੌਕ: {{n}}"
   },
   "workout": {
     "back": "ਪਿੱਛੇ",
@@ -357,5 +399,15 @@
       "weight": "ਭਾਰ 30–300 ਕਿਲੋ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ",
       "birthDate": "ਜਨਮ ਮਿਤੀ ਜਾਂਚੋ"
     }
+  },
+  "programs": {
+    "difficulty": {
+      "beginner": "ਸ਼ੁਰੂਆਤੀ",
+      "intermediate": "ਦਰਮਿਆਨਾ",
+      "advanced": "ਉੱਨਤ"
+    },
+    "weeks_one": "{{count}} ਹਫ਼ਤਾ",
+    "weeks_other": "{{count}} ਹਫ਼ਤੇ",
+    "perWeek": "ਹਫ਼ਤੇ ਵਿੱਚ {{count}}×"
   }
 }

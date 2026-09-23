@@ -118,7 +118,47 @@
     "noPrograms": "Programs are coming soon — check back later.",
     "achievements": "Achievements",
     "achievementsUnlocked": "Unlocked: {{n}}",
-    "achievementsEmpty": "Start training to unlock your first one"
+    "achievementsEmpty": "Start training to unlock your first one",
+    "level": "Level {{level}}",
+    "xpToNext": "{{xp}} XP to level {{next}}",
+    "ranks": {
+      "novice": "Rookie",
+      "fighter": "Fighter",
+      "athlete": "Athlete",
+      "champion": "Champion",
+      "master": "Master",
+      "legend": "Legend"
+    },
+    "xpRules": {
+      "workout": "Workout in the app",
+      "week": "Weekly plan completed",
+      "record": "Personal weight record",
+      "catchUp": "Workout marked by coach"
+    },
+    "today": "Today",
+    "todayDone": "Done for today ✓",
+    "todayDoneHint": "Great work! Rest and recover. Next workout:",
+    "workoutOf": "workout {{n}} of {{total}}",
+    "start": "Start workout",
+    "programDone": "Program completed!",
+    "programDoneHint": "Incredible work. Pick your next program and keep growing.",
+    "thisWeek": "This week",
+    "weekProgress": "{{done}} of {{target}}",
+    "weekStreak": "Weeks in a row on plan",
+    "weekStreakStart": "Complete this week's plan to start a streak",
+    "programPath": "Program journey",
+    "programProgress": "{{done}} of {{total}} completed",
+    "nextAchievement": "Next achievement",
+    "achievementLeft": "To go: {{left}}",
+    "allAchievementsDone": "All achievements unlocked — you're a legend!",
+    "kg": "kg",
+    "statTons": "t lifted",
+    "statKcal": "kcal burned",
+    "statWorkouts": "workouts",
+    "quoteOfDay": "Thought of the day",
+    "chooseProgram": "Choose a program to get started",
+    "levelUpTitle": "Level up!",
+    "levelUpButton": "Let's go!"
   },
   "workout": {
     "back": "Back",
@@ -353,7 +393,12 @@
     "exercises_other": "{{count}} exercises",
     "pageTitle": "Training programs",
     "pageSubtitle": "Choose a program for your goal",
-    "sequenceLockedHint": "Unlocks after you finish the previous workout"
+    "sequenceLockedHint": "Unlocks after you finish the previous workout",
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    }
   },
   "support": {
     "title": "Help",

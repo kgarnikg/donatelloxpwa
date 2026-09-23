@@ -118,7 +118,47 @@
     "noPrograms": "Los programas llegarán pronto — vuelve más tarde.",
     "achievements": "Logros",
     "achievementsUnlocked": "Desbloqueados: {{n}}",
-    "achievementsEmpty": "Empieza a entrenar para desbloquear el primero"
+    "achievementsEmpty": "Empieza a entrenar para desbloquear el primero",
+    "level": "Nivel {{level}}",
+    "xpToNext": "{{xp}} XP para el nivel {{next}}",
+    "ranks": {
+      "novice": "Novato",
+      "fighter": "Luchador",
+      "athlete": "Atleta",
+      "champion": "Campeón",
+      "master": "Maestro",
+      "legend": "Leyenda"
+    },
+    "xpRules": {
+      "workout": "Entreno en la app",
+      "week": "Semana cumplida",
+      "record": "Récord personal de peso",
+      "catchUp": "Entreno marcado por el entrenador"
+    },
+    "today": "Hoy",
+    "todayDone": "Hoy completado ✓",
+    "todayDoneHint": "¡Buen trabajo! Descansa y recupérate. Siguiente entreno:",
+    "workoutOf": "entreno {{n}} de {{total}}",
+    "start": "Empezar entreno",
+    "programDone": "¡Programa completado!",
+    "programDoneHint": "Un trabajo increíble. Elige tu siguiente programa y sigue creciendo.",
+    "thisWeek": "Esta semana",
+    "weekProgress": "{{done}} de {{target}}",
+    "weekStreak": "Semanas seguidas cumpliendo el plan",
+    "weekStreakStart": "Cumple el plan de la semana para empezar una racha",
+    "programPath": "Tu camino en el programa",
+    "programProgress": "{{done}} de {{total}} completados",
+    "nextAchievement": "Próximo logro",
+    "achievementLeft": "Faltan: {{left}}",
+    "allAchievementsDone": "Todos los logros desbloqueados: ¡eres una leyenda!",
+    "kg": "kg",
+    "statTons": "t levantadas",
+    "statKcal": "kcal quemadas",
+    "statWorkouts": "entrenos",
+    "quoteOfDay": "Frase del día",
+    "chooseProgram": "Elige un programa para empezar",
+    "levelUpTitle": "¡Subes de nivel!",
+    "levelUpButton": "¡Vamos!"
   },
   "workout": {
     "back": "Atrás",
@@ -353,7 +393,12 @@
     "exercises_other": "{{count}} ejercicios",
     "pageTitle": "Programas de entrenamiento",
     "pageSubtitle": "Elige un programa para tu objetivo",
-    "sequenceLockedHint": "Se desbloquea al completar el entrenamiento anterior"
+    "sequenceLockedHint": "Se desbloquea al completar el entrenamiento anterior",
+    "difficulty": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    }
   },
   "support": {
     "title": "Ayuda",
