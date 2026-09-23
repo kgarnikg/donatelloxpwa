@@ -33,6 +33,7 @@ export default function OnboardingPage() {
     handleSubmit,
     watch,
     setValue,
+    trigger,
     formState: { errors, isSubmitting },
   } = useForm<OnboardingInput>({
     resolver: zodResolver(onboardingSchema),
@@ -168,26 +169,26 @@ export default function OnboardingPage() {
 
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-neutral-300">
-                  {t("onboarding.birthDate")}
+                  {t("onboarding.birthDate")} <span className="text-danger">*</span>
                 </label>
                 <input type="date" className="input-field" {...register("birthDate")} />
-                {errors.birthDate && <p className="field-error">{errors.birthDate.message}</p>}
+                {errors.birthDate && <p className="field-error">{t(errors.birthDate.message ?? "", { defaultValue: errors.birthDate.message })}</p>}
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-neutral-300">
-                    {t("onboarding.height")}
+                    {t("onboarding.height")} <span className="text-danger">*</span>
                   </label>
-                  <input type="number" className="input-field" {...register("heightCm")} />
-                  {errors.heightCm && <p className="field-error">{errors.heightCm.message}</p>}
+                  <input type="number" inputMode="decimal" className="input-field" {...register("heightCm")} />
+                  {errors.heightCm && <p className="field-error">{t(errors.heightCm.message ?? "", { defaultValue: errors.heightCm.message })}</p>}
                 </div>
                 <div>
                   <label className="mb-1.5 block text-sm font-medium text-neutral-300">
-                    {t("onboarding.weight")}
+                    {t("onboarding.weight")} <span className="text-danger">*</span>
                   </label>
-                  <input type="number" className="input-field" {...register("weightKg")} />
-                  {errors.weightKg && <p className="field-error">{errors.weightKg.message}</p>}
+                  <input type="number" inputMode="decimal" step="0.1" className="input-field" {...register("weightKg")} />
+                  {errors.weightKg && <p className="field-error">{t(errors.weightKg.message ?? "", { defaultValue: errors.weightKg.message })}</p>}
                 </div>
               </div>
 
@@ -216,7 +217,17 @@ export default function OnboardingPage() {
                 <button type="button" onClick={() => setStep(0)} className="btn-secondary flex-1">
                   {t("common.back")}
                 </button>
-                <button type="button" onClick={() => setStep(2)} className="btn-primary flex-1">
+                <button
+                  type="button"
+                  onClick={async () => {
+                    // Не пускаем дальше без роста/веса/даты рождения —
+                    // иначе ошибки всплыли бы только на последнем шаге,
+                    // где этих полей уже не видно.
+                    const ok = await trigger(["birthDate", "heightCm", "weightKg"]);
+                    if (ok) setStep(2);
+                  }}
+                  className="btn-primary flex-1"
+                >
                   {t("common.next")}
                 </button>
               </div>

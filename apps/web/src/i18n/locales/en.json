@@ -95,7 +95,15 @@
     "doneSubtitle": "We'll match a workout program to your goals and fitness level.",
     "startButton": "Start training",
     "savingButton": "Saving…",
-    "activityLevelHint": "Your everyday activity — not counting workouts in the app: those are tracked separately and precisely, based on what you actually complete."
+    "activityLevelHint": "Your everyday activity — not counting workouts in the app: those are tracked separately and precisely, based on what you actually complete.",
+    "errors": {
+      "birthDateRequired": "Enter your date of birth",
+      "birthDateInvalid": "Check your date of birth",
+      "heightRequired": "Enter your height",
+      "heightRange": "Height must be 100–250 cm",
+      "weightRequired": "Enter your weight",
+      "weightRange": "Weight must be 30–300 kg"
+    }
   },
   "dashboard": {
     "greeting": "Hi, {{name}}",

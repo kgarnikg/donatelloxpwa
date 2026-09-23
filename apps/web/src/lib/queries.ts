@@ -106,24 +106,38 @@ export function useWorkoutHistory() {
     queryKey: ["workout-history", authUser?.id],
     enabled: !!authUser,
     queryFn: async (): Promise<WorkoutHistoryEntry[]> => {
+      // Два запроса вместо вложенной выборки workout_logs → workouts —
+      // см. комментарий у attachWorkoutInfo (отсутствовавший FK, 0067).
       const { data, error } = await supabase
         .from("workout_logs")
-        .select("id, completed_at, duration_minutes, workout:workouts(title)")
+        .select("id, completed_at, duration_minutes, workout_id")
         .eq("user_id", authUser!.id)
         .order("completed_at", { ascending: false })
         .limit(20);
       if (error) throw error;
 
-      return ((data ?? []) as unknown as Array<{
+      const rows = (data ?? []) as unknown as Array<{
         id: string;
         completed_at: string;
         duration_minutes: number;
-        workout: { title: string } | null;
-      }>).map((row) => ({
+        workout_id: string;
+      }>;
+      const ids = [...new Set(rows.map((r) => r.workout_id))];
+      const titles = new Map<string, string>();
+      if (ids.length > 0) {
+        const { data: workouts, error: workoutsError } = await supabase
+          .from("workouts")
+          .select("id, title")
+          .in("id", ids);
+        if (workoutsError) throw workoutsError;
+        for (const w of (workouts ?? []) as { id: string; title: string }[]) titles.set(w.id, w.title);
+      }
+
+      return rows.map((row) => ({
         id: row.id,
         completedAt: row.completed_at,
         durationMinutes: row.duration_minutes,
-        workoutTitle: row.workout?.title ?? "Тренировка",
+        workoutTitle: titles.get(row.workout_id) ?? "Тренировка",
       }));
     },
   });
@@ -359,9 +373,10 @@ export interface DailyCalories extends CalorieEstimate {
 /**
  * Строка workout_logs для подсчёта калорий + данные тренировки/программы,
  * нужные для запасного расчёта (если calories_burned ещё не заполнен —
- * например, миграция 0066 не применена или в профиле не было веса).
+ * например, в профиле не было веса на момент тренировки).
  */
 interface CalorieLogRow {
+  workout_id: string;
   completed_at: string;
   duration_minutes: number | null;
   calories_burned: number | null;
@@ -371,8 +386,37 @@ interface CalorieLogRow {
   } | null;
 }
 
-const CALORIE_LOG_SELECT =
-  "completed_at, duration_minutes, calories_burned, workout:workouts(estimated_duration_minutes, program:workout_programs(goal))";
+const CALORIE_LOG_COLUMNS = "workout_id, completed_at, duration_minutes, calories_burned";
+
+/**
+ * Намеренно ДВА запроса, а не вложенная выборка workout_logs → workouts:
+ * в реальной базе у workout_logs долго не было внешнего ключа на
+ * workouts (остаток старого черновика, чинит 0067), и вложенная выборка
+ * падала с "Could not find a relationship". Так калории работают
+ * независимо от того, применена ли 0067.
+ */
+async function attachWorkoutInfo(
+  logs: Omit<CalorieLogRow, "workout">[],
+): Promise<CalorieLogRow[]> {
+  // Нужны только для записей без сохранённых калорий
+  const ids = [...new Set(logs.filter((l) => l.calories_burned == null).map((l) => l.workout_id))];
+  const info = new Map<string, CalorieLogRow["workout"]>();
+  if (ids.length > 0) {
+    const { data, error } = await supabase
+      .from("workouts")
+      .select("id, estimated_duration_minutes, program:workout_programs(goal)")
+      .in("id", ids);
+    if (error) throw error;
+    for (const w of (data ?? []) as unknown as {
+      id: string;
+      estimated_duration_minutes: number | null;
+      program: { goal: string | null } | null;
+    }[]) {
+      info.set(w.id, { estimated_duration_minutes: w.estimated_duration_minutes, program: w.program });
+    }
+  }
+  return logs.map((l) => ({ ...l, workout: info.get(l.workout_id) ?? null }));
+}
 
 function caloriesOfLog(row: CalorieLogRow, profile: UserProfile | null | undefined): number {
   if (row.calories_burned != null) return row.calories_burned;
@@ -417,7 +461,7 @@ export function useDailyCalories(date: string) {
           .maybeSingle(),
         supabase
           .from("workout_logs")
-          .select(CALORIE_LOG_SELECT)
+          .select(CALORIE_LOG_COLUMNS)
           .eq("user_id", authUser!.id)
           // Записи "догнать прогресс" из админки — не тренировки сегодня (0066)
           .eq("is_catch_up", false)
@@ -426,7 +470,10 @@ export function useDailyCalories(date: string) {
       ]);
       if (workoutsError) throw workoutsError;
 
-      const workoutCalories = ((dayWorkouts ?? []) as unknown as CalorieLogRow[]).reduce(
+      const dayRows = await attachWorkoutInfo(
+        (dayWorkouts ?? []) as unknown as Omit<CalorieLogRow, "workout">[],
+      );
+      const workoutCalories = dayRows.reduce(
         (sum, row) => sum + caloriesOfLog(row, profile),
         0,
       );
@@ -477,13 +524,13 @@ export function useWorkoutCalorieStats() {
     queryFn: async (): Promise<WorkoutCalorieStats> => {
       const { data, error } = await supabase
         .from("workout_logs")
-        .select(CALORIE_LOG_SELECT)
+        .select(CALORIE_LOG_COLUMNS)
         .eq("user_id", authUser!.id)
         .eq("is_catch_up", false)
         .order("completed_at", { ascending: false });
       if (error) throw error;
 
-      const rows = (data ?? []) as unknown as CalorieLogRow[];
+      const rows = await attachWorkoutInfo((data ?? []) as unknown as Omit<CalorieLogRow, "workout">[]);
       const now = new Date();
       const weekAgo = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6).getTime();
       const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).getTime();

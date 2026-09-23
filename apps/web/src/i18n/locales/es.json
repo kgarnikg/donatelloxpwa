@@ -95,7 +95,15 @@
     "doneSubtitle": "Te asignaremos un programa según tus objetivos y nivel.",
     "startButton": "Empezar a entrenar",
     "savingButton": "Guardando…",
-    "activityLevelHint": "Tu actividad diaria habitual — sin contar los entrenamientos de la app: esos los calculamos aparte y con precisión, según lo que realmente completes."
+    "activityLevelHint": "Tu actividad diaria habitual — sin contar los entrenamientos de la app: esos los calculamos aparte y con precisión, según lo que realmente completes.",
+    "errors": {
+      "birthDateRequired": "Indica tu fecha de nacimiento",
+      "birthDateInvalid": "Revisa tu fecha de nacimiento",
+      "heightRequired": "Indica tu altura",
+      "heightRange": "La altura debe estar entre 100 y 250 cm",
+      "weightRequired": "Indica tu peso",
+      "weightRange": "El peso debe estar entre 30 y 300 kg"
+    }
   },
   "dashboard": {
     "greeting": "Hola, {{name}}",

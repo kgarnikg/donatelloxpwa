@@ -94,7 +94,15 @@
     "doneSubtitle": "Ti proporremo un programma in base ai tuoi obiettivi e al tuo livello.",
     "startButton": "Inizia ad allenarti",
     "savingButton": "Salvataggio…",
-    "activityLevelHint": "La tua attività quotidiana abituale — senza contare gli allenamenti nell'app: quelli li calcoliamo separatamente e con precisione, in base a ciò che completi davvero."
+    "activityLevelHint": "La tua attività quotidiana abituale — senza contare gli allenamenti nell'app: quelli li calcoliamo separatamente e con precisione, in base a ciò che completi davvero.",
+    "errors": {
+      "birthDateRequired": "Inserisci la data di nascita",
+      "birthDateInvalid": "Controlla la data di nascita",
+      "heightRequired": "Inserisci l'altezza",
+      "heightRange": "L'altezza deve essere tra 100 e 250 cm",
+      "weightRequired": "Inserisci il peso",
+      "weightRange": "Il peso deve essere tra 30 e 300 kg"
+    }
   },
   "dashboard": {
     "greeting": "Ciao, {{name}}",

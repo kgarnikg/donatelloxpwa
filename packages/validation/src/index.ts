@@ -109,14 +109,53 @@ export const activityLevelSchema = z.enum([
   "very_active",
 ]);
 
+/**
+ * Поле формы → число. Пустое ("" / null / NaN) → undefined, чтобы
+ * сработало "обязательно", а не "минимум 100". Запятая как десятичный
+ * разделитель тоже принимается ("85,5").
+ */
+function emptyToUndefined(v: unknown): unknown {
+  if (v === "" || v === null || v === undefined) return undefined;
+  const n = typeof v === "string" ? Number(v.replace(",", ".")) : Number(v);
+  return Number.isNaN(n) ? undefined : n;
+}
+
 export const onboardingSchema = z.object({
   gender: genderSchema,
+  // Рост, вес и дата рождения — обязательны: без них не считаются
+  // калории и не подбирается нагрузка. Сообщения — ключи i18n
+  // (onboarding.errors.*), переводятся на странице анкеты.
   birthDate: z
-    .string()
-    .refine((v) => !Number.isNaN(Date.parse(v)), "Введите корректную дату")
-    .optional(),
-  heightCm: z.coerce.number().min(100, "Минимум 100 см").max(250, "Максимум 250 см").optional(),
-  weightKg: z.coerce.number().min(30, "Минимум 30 кг").max(300, "Максимум 300 кг").optional(),
+    .string({ required_error: "onboarding.errors.birthDateRequired" })
+    .min(1, "onboarding.errors.birthDateRequired")
+    .refine((v) => {
+      if (!v) return true; // пустое — уже сообщили "обязательно"
+      const time = Date.parse(v);
+      if (Number.isNaN(time)) return false;
+      const year = new Date(time).getFullYear();
+      const now = new Date().getFullYear();
+      return year >= now - 100 && year <= now - 10;
+    }, "onboarding.errors.birthDateInvalid"),
+  heightCm: z.preprocess(
+    emptyToUndefined,
+    z
+      .number({
+        required_error: "onboarding.errors.heightRequired",
+        invalid_type_error: "onboarding.errors.heightRequired",
+      })
+      .min(100, "onboarding.errors.heightRange")
+      .max(250, "onboarding.errors.heightRange"),
+  ),
+  weightKg: z.preprocess(
+    emptyToUndefined,
+    z
+      .number({
+        required_error: "onboarding.errors.weightRequired",
+        invalid_type_error: "onboarding.errors.weightRequired",
+      })
+      .min(30, "onboarding.errors.weightRange")
+      .max(300, "onboarding.errors.weightRange"),
+  ),
   activityLevel: activityLevelSchema,
   goals: z.array(fitnessGoalSchema).min(1, "Выберите хотя бы одну цель"),
   trainingFormat: z.enum(["gym", "home"]),

@@ -94,7 +94,15 @@
     "doneSubtitle": "Wir stellen ein Trainingsprogramm passend zu deinen Zielen und deinem Niveau zusammen.",
     "startButton": "Training starten",
     "savingButton": "Wird gespeichert…",
-    "activityLevelHint": "Deine normale Alltagsaktivität — ohne die Workouts in der App: die werden separat und präzise erfasst, basierend auf dem, was du tatsächlich abschließt."
+    "activityLevelHint": "Deine normale Alltagsaktivität — ohne die Workouts in der App: die werden separat und präzise erfasst, basierend auf dem, was du tatsächlich abschließt.",
+    "errors": {
+      "birthDateRequired": "Gib dein Geburtsdatum an",
+      "birthDateInvalid": "Prüfe dein Geburtsdatum",
+      "heightRequired": "Gib deine Größe an",
+      "heightRange": "Größe: 100–250 cm",
+      "weightRequired": "Gib dein Gewicht an",
+      "weightRange": "Gewicht: 30–300 kg"
+    }
   },
   "dashboard": {
     "greeting": "Hallo, {{name}}",
