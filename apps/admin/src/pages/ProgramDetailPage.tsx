@@ -34,7 +34,6 @@ const GOALS: FitnessGoal[] = [
   "rehabilitation",
 ];
 const DIFFICULTIES: ExerciseDifficulty[] = ["beginner", "intermediate", "advanced"];
-const WEEKDAYS = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"];
 
 // ---------------------------------------------------------------------------
 // Типы данных этой страницы
@@ -485,20 +484,20 @@ function WorkoutModal({
   const isEditing = !!workout;
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      dayName: workout ? workout.title.split(" · ")[0] : WEEKDAYS[0],
-      dayTitle: workout ? workout.title.split(" · ").slice(1).join(" · ") : "",
+      // Дни недели в названиях убраны (миграция 0068) — клиент сам решает,
+      // когда тренироваться. Название = только то, что тренируем.
+      dayTitle: workout?.title ?? "",
       weekLabel: workout?.weekLabel ?? weekLabel,
       estimatedDurationMinutes: workout?.estimatedDurationMinutes ?? 45,
     },
   });
 
   function onSubmit(values: {
-    dayName: string;
     dayTitle: string;
     weekLabel: string;
     estimatedDurationMinutes: number;
   }) {
-    const title = values.dayTitle ? `${values.dayName} · ${values.dayTitle}` : values.dayName;
+    const title = values.dayTitle.trim() || "Тренировка";
     saveWorkout.mutate(
       {
         id: workout?.id,
@@ -540,17 +539,7 @@ function WorkoutModal({
               </p>
             )}
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="mb-1.5 block text-sm font-medium text-neutral-300">День недели</label>
-              <select className="input-field" {...register("dayName")}>
-                {WEEKDAYS.map((d) => (
-                  <option key={d} value={d}>
-                    {d}
-                  </option>
-                ))}
-              </select>
-            </div>
+          <div>
             <div>
               <label className="mb-1.5 block text-sm font-medium text-neutral-300">Длительность, мин.</label>
               <input
@@ -563,7 +552,7 @@ function WorkoutModal({
           </div>
           <div>
             <label className="mb-1.5 block text-sm font-medium text-neutral-300">
-              Группа мышц / название дня
+              Название (что тренируем)
             </label>
             <input className="input-field" placeholder="ГРУДЬ + ТРИЦЕПС" {...register("dayTitle")} />
           </div>
