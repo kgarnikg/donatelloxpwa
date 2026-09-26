@@ -332,6 +332,20 @@ export default function UsersPage() {
                   <td className="table-td font-medium">
                     <div className="flex items-center gap-2">
                       {u.fullName || "—"}
+                      {!!u.sessionKicks && (
+                        <span
+                          className={clsx(
+                            "badge",
+                            u.sessionKicks >= 5 ? "bg-warning/10 text-warning" : "bg-ink-700 text-neutral-400",
+                          )}
+                          title={
+                            "Сколько раз аккаунт выкидывало входом на другом устройстве" +
+                            (u.sessionKicks >= 5 ? " — возможно, подпиской делятся" : "")
+                          }
+                        >
+                          Вылетов: {u.sessionKicks}
+                        </span>
+                      )}
                       {u.isBlocked && (
                         <span className="badge bg-danger/10 text-danger" title={u.blockedReason ?? undefined}>
                           Заблокирован

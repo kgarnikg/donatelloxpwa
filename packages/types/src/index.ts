@@ -55,6 +55,9 @@ export interface User {
   id: UUID;
   email: string;
   phone?: string;
+  /** Сколько раз аккаунт выкидывало входом на другом устройстве (0088). */
+  sessionKicks?: number;
+  lastSessionKickAt?: ISODateString | null;
   fullName: string;
   /** Имя / фамилия / страна (ISO-код) — с регистрации, 0081. */
   firstName?: string | null;

@@ -23,6 +23,9 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
+/** Флаг "вас выкинуло: вход на другом устройстве" — читает экран входа. */
+export const KICKED_KEY = "donatellex-session-kicked";
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<User | null>(null);
@@ -92,6 +95,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       subscription.subscription.unsubscribe();
     };
   }, []);
+
+  // Один аккаунт — одно устройство (0088). Действует только самый новый
+  // вход: проверяем при запуске, при возврате на экран и раз в минуту.
+  // Вошли на другом устройстве — выходим отсюда и на экране входа
+  // объясняем почему (KICKED_KEY). Ошибка сети/сервера — не выкидываем.
+  const sessionUserId = session?.user?.id;
+  useEffect(() => {
+    if (!sessionUserId) return;
+    let stopped = false;
+    async function check() {
+      if (stopped || document.visibilityState !== "visible") return;
+      const { data, error } = await supabase.rpc("touch_session");
+      if (stopped || error || data !== false) return;
+      stopped = true;
+      try {
+        localStorage.setItem(KICKED_KEY, "1");
+      } catch {
+        // не критично
+      }
+      await supabase.auth.signOut({ scope: "local" });
+    }
+    check();
+    const timer = setInterval(check, 60_000);
+    const onVisible = () => document.visibilityState === "visible" && check();
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      stopped = true;
+      clearInterval(timer);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, [sessionUserId]);
 
   // Язык интерфейса → в данные пользователя: по нему Supabase выбирает язык
   // писем (подтверждение, сброс пароля — supabase/email-templates), а

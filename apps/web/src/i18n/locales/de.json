@@ -97,6 +97,10 @@
       "title": "Zugang gesperrt",
       "text": "Dein Konto wurde gesperrt. Wenn das ein Fehler ist, schreib uns.",
       "signOut": "Abmelden"
+    },
+    "kicked": {
+      "title": "Du hast dich auf einem anderen Gerät angemeldet",
+      "text": "Das Konto kann jeweils nur auf einem Gerät genutzt werden. Melde dich erneut an, um hier weiterzumachen — die Sitzung auf dem anderen Gerät endet dann."
     }
   },
   "onboarding": {

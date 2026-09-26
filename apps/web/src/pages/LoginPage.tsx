@@ -7,6 +7,7 @@ import { loginSchema, type LoginInput } from "@donatellox/validation";
 import { supabase } from "@/lib/supabase";
 import { useValidationMessage } from "@/lib/validationMessage";
 import { PasswordInput } from "@/components/PasswordInput";
+import { KICKED_KEY } from "@/context/AuthContext";
 
 export default function LoginPage() {
   const { t } = useTranslation();
@@ -16,6 +17,21 @@ export default function LoginPage() {
   const from = (location.state as { from?: Location })?.from?.pathname ?? "/dashboard";
   const [serverError, setServerError] = useState<string | null>(null);
   const [oauthLoading, setOauthLoading] = useState<"google" | null>(null);
+  // Выкинуло: этот аккаунт открыли на другом устройстве (0088)
+  const [kicked] = useState(() => {
+    try {
+      return localStorage.getItem(KICKED_KEY) === "1";
+    } catch {
+      return false;
+    }
+  });
+  const clearKicked = () => {
+    try {
+      localStorage.removeItem(KICKED_KEY);
+    } catch {
+      // не критично
+    }
+  };
 
   const {
     register,
@@ -36,11 +52,13 @@ export default function LoginPage() {
       );
       return;
     }
+    clearKicked();
     navigate(from, { replace: true });
   }
 
   async function signInWithOAuth(provider: "google") {
     setOauthLoading(provider);
+    clearKicked();
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: { redirectTo: `${window.location.origin}/dashboard` },
@@ -56,6 +74,13 @@ export default function LoginPage() {
       <div className="mx-auto w-full max-w-sm animate-fade-in">
         <h1 className="font-display text-3xl font-bold text-neutral-0">{t("auth.login.title")}</h1>
         <p className="mt-2 text-neutral-400">{t("auth.login.subtitle")}</p>
+
+        {kicked && (
+          <div className="mt-6 rounded-md border border-ember-400/30 bg-ember-400/10 px-4 py-3 text-sm text-ember-300">
+            <p className="font-semibold">{t("auth.kicked.title")}</p>
+            <p className="mt-1 text-neutral-300">{t("auth.kicked.text")}</p>
+          </div>
+        )}
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-4" noValidate>
           <div>

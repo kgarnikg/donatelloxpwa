@@ -97,6 +97,10 @@
       "title": "Access blocked",
       "text": "Your account has been blocked. If you think this is a mistake, contact us.",
       "signOut": "Sign out"
+    },
+    "kicked": {
+      "title": "You signed in on another device",
+      "text": "Your account can be used on only one device at a time. Sign in again to continue here — the session on the other device will end."
     }
   },
   "onboarding": {

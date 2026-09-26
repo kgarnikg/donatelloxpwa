@@ -97,6 +97,10 @@
       "title": "Accesso bloccato",
       "text": "Il tuo account è stato bloccato. Se pensi sia un errore, scrivici.",
       "signOut": "Esci"
+    },
+    "kicked": {
+      "title": "Hai effettuato l'accesso su un altro dispositivo",
+      "text": "L'account può essere usato su un solo dispositivo alla volta. Accedi di nuovo per continuare qui: la sessione sull'altro dispositivo verrà chiusa."
     }
   },
   "onboarding": {
