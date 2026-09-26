@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, LogOut, CreditCard, Globe, Bell, Pencil, Check, X, Gift, LifeBuoy, Ruler, Smartphone } from "lucide-react";
+import { ChevronRight, LogOut, CreditCard, Globe, Bell, Pencil, Check, X, Gift, LifeBuoy, Ruler, Smartphone, Undo2 } from "lucide-react";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { isStandalone } from "@/lib/install";
+import { useWithdrawalInfo } from "@/lib/withdrawal";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
@@ -10,6 +11,7 @@ import { supabase } from "@/lib/supabase";
 
 export default function ProfilePage() {
   const [showInstall, setShowInstall] = useState(false);
+  const { data: withdrawal } = useWithdrawalInfo();
   const { t } = useTranslation();
   const { profile, authUser, signOut, refreshProfile } = useAuth();
   const [editing, setEditing] = useState(false);
@@ -151,6 +153,17 @@ export default function ProfilePage() {
             </span>
             <ChevronRight size={18} className="text-neutral-500" />
           </button>
+        )}
+        {/* "Кнопка отказа" (0086) — только если есть оплата */}
+        {withdrawal?.payment_id && (
+          <Link to="/subscription/withdraw" className="flex items-center gap-3 px-4 py-3.5 hover:bg-ink-800">
+            <Undo2 size={18} className="text-neutral-400" />
+            <span className="flex-1">
+              <span className="block font-medium">{t("withdrawal.profileItem")}</span>
+              <span className="block text-xs text-neutral-500">{t("withdrawal.profileItemHint")}</span>
+            </span>
+            <ChevronRight size={18} className="text-neutral-500" />
+          </Link>
         )}
       </div>
       {showInstall && <InstallPrompt onClose={() => setShowInstall(false)} />}

@@ -4,6 +4,9 @@
 //    продлевает/выдаёт месяц доступа и возвращает, кому написать.
 // 2) Напоминания "доступ заканчивается через 3 дня": due_subscription_reminders()
 //    → письмо → mark_subscription_reminded().
+// 3) Заявки на возврат (0086), которые ждут действий, — сводка админу на
+//    ADMIN_NOTIFY_EMAIL (если переменная задана): по закону деньги нужно
+//    вернуть не позже 14 дней с заявки.
 //
 // Переменные окружения проекта donatelloxpwa-web на Vercel:
 //   SUPABASE_URL (или VITE_SUPABASE_URL), SUPABASE_SERVICE_ROLE_KEY,
@@ -69,6 +72,25 @@ async function sendEmail(to: string, subject: string, html: string): Promise<voi
   if (!res.ok) throw new Error(`resend: ${res.status} ${await res.text()}`);
 }
 
+interface OpenRefundRow {
+  requested_at: string;
+  status: string;
+  refund_amount: number | null;
+  currency: string | null;
+}
+
+async function openRefunds(): Promise<OpenRefundRow[]> {
+  const url = (env("SUPABASE_URL") || env("VITE_SUPABASE_URL")).replace(/\/$/, "");
+  const key = env("SUPABASE_SERVICE_ROLE_KEY");
+  const res = await fetch(
+    `${url}/rest/v1/refund_requests?select=requested_at,status,refund_amount,currency&status=in.(pending,approved)&order=requested_at.asc`,
+    { headers: { apikey: key, ...(key.startsWith("eyJ") ? { Authorization: `Bearer ${key}` } : {}) } },
+  );
+  const text = await res.text();
+  if (!res.ok) throw new Error(`refund_requests: ${res.status} ${text}`);
+  return (text ? JSON.parse(text) : []) as OpenRefundRow[];
+}
+
 const pause = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 function firstNameOf(row: { first_name: string | null; full_name: string | null }): string {
@@ -95,7 +117,7 @@ export default async function handler(request: Request): Promise<Response> {
     return Response.json({ error: `missing env: ${missing.join(", ") || "SUPABASE_URL"}` }, { status: 500 });
   }
 
-  const report = { rewards: 0, rewardEmails: 0, reminders: 0, errors: [] as string[] };
+  const report = { rewards: 0, rewardEmails: 0, reminders: 0, openRefunds: 0, errors: [] as string[] };
 
   // 1. Награды за друзей (месяц уже начислен в базе — письмо лишь сообщает)
   try {
@@ -143,6 +165,31 @@ export default async function handler(request: Request): Promise<Response> {
     }
     if (sent.length) await rpc("mark_subscription_reminded", { p_ids: sent });
     report.reminders = sent.length;
+  } catch (e) {
+    report.errors.push(String(e));
+  }
+
+  // 3. Возвраты, ждущие действий — сводка админу
+  try {
+    const refunds = await openRefunds();
+    report.openRefunds = refunds.length;
+    const adminEmail = env("ADMIN_NOTIFY_EMAIL");
+    if (refunds.length && adminEmail) {
+      const day = 24 * 60 * 60 * 1000;
+      const items = refunds
+        .map((r) => {
+          const payBy = new Date(new Date(r.requested_at).getTime() + 14 * day);
+          const left = Math.ceil((payBy.getTime() - Date.now()) / day);
+          const state = r.status === "pending" ? "новая" : "одобрена, вернуть деньги";
+          return `<li>${state} — вернуть до <b>${payBy.toLocaleDateString("ru-RU")}</b> (${left > 0 ? `осталось ${left} дн.` : "срок истёк!"})</li>`;
+        })
+        .join("");
+      await sendEmail(
+        adminEmail,
+        `DonatelleX: заявки на возврат — ${refunds.length}`,
+        `<p>Заявки на возврат, которые ждут действий:</p><ul>${items}</ul><p><a href="https://admin.donatellex.com/refunds">Открыть в админке</a></p>`,
+      );
+    }
   } catch (e) {
     report.errors.push(String(e));
   }

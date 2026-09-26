@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { ArrowLeft, Check, CreditCard, Lock } from "lucide-react";
 import clsx from "clsx";
 import {
@@ -20,6 +20,7 @@ import { supabase } from "@/lib/supabase";
 import { useActiveSubscription } from "@/lib/queries";
 import { useAuth } from "@/context/AuthContext";
 import { detectRegionByCountry } from "@/lib/detectRegion";
+import { REFUND_POLICY_URL, TERMS_URL, useWithdrawalInfo } from "@/lib/withdrawal";
 
 /**
  * Выбор периода и оплата (Фаза 3).
@@ -70,6 +71,13 @@ export default function SubscriptionPage() {
     };
   }, []);
   const [error, setError] = useState<string | null>(null);
+  // Согласия перед оплатой (0086): оферта + политика возврата и просьба
+  // открыть доступ сразу (тогда при отказе в 14 дней удерживаются
+  // использованные дни). Без обеих галочек оплатить нельзя.
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [immediateStart, setImmediateStart] = useState(false);
+  const consentsGiven = acceptTerms && immediateStart;
+  const { data: withdrawal } = useWithdrawalInfo();
 
   const discountPercent = profile?.pendingDiscountPercent ?? 0;
   const prices = getRegionPrices(region);
@@ -99,7 +107,14 @@ export default function SubscriptionPage() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify({ plan, region, language: i18n.language }),
+        // Согласия сервер сохраняет в платёж (payments.withdrawal_consent_at)
+        body: JSON.stringify({
+          plan,
+          region,
+          language: i18n.language,
+          acceptTerms,
+          immediateStartConsent: immediateStart,
+        }),
       });
 
       if (!response.ok) {
@@ -140,6 +155,14 @@ export default function SubscriptionPage() {
                 })}
           </p>
         </div>
+        {withdrawal?.payment_id && (
+          <Link
+            to="/subscription/withdraw"
+            className="mt-4 block text-center text-sm text-neutral-400 underline hover:text-neutral-200"
+          >
+            {t("withdrawal.profileItem")}
+          </Link>
+        )}
       </div>
     );
   }
@@ -284,10 +307,25 @@ export default function SubscriptionPage() {
         </div>
       )}
 
+      <div className="mt-6 space-y-3">
+        <ConsentCheckbox checked={acceptTerms} onChange={setAcceptTerms}>
+          <Trans
+            i18nKey="payment.consentTerms"
+            components={{
+              terms: <a href={TERMS_URL} target="_blank" rel="noreferrer" className="text-volt-400 underline" />,
+              refund: <a href={REFUND_POLICY_URL} target="_blank" rel="noreferrer" className="text-volt-400 underline" />,
+            }}
+          />
+        </ConsentCheckbox>
+        <ConsentCheckbox checked={immediateStart} onChange={setImmediateStart}>
+          {t("payment.consentImmediate")}
+        </ConsentCheckbox>
+      </div>
+
       {PAYMENTS_ENABLED ? (
         <button
           onClick={() => checkout.mutate()}
-          disabled={checkout.isPending}
+          disabled={checkout.isPending || !consentsGiven}
           className="btn-primary mt-8 w-full"
         >
           {checkout.isPending
@@ -321,6 +359,32 @@ export default function SubscriptionPage() {
         {t("payment.oneTimeNote")}
       </p>
     </div>
+  );
+}
+
+function ConsentCheckbox({
+  checked,
+  onChange,
+  children,
+}: {
+  checked: boolean;
+  onChange: (v: boolean) => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <label className="flex cursor-pointer items-start gap-3 text-sm leading-snug text-neutral-300">
+      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="peer sr-only" />
+      <span
+        aria-hidden
+        className={clsx(
+          "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition peer-focus-visible:ring-2 peer-focus-visible:ring-volt-400/50",
+          checked ? "border-volt-400 bg-volt-400 text-ink-950" : "border-ink-500",
+        )}
+      >
+        {checked && <Check size={12} strokeWidth={4} />}
+      </span>
+      <span>{children}</span>
+    </label>
   );
 }
 

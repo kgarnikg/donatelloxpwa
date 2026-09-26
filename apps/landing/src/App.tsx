@@ -54,6 +54,24 @@ function PrivacyPage() {
   );
 }
 
+/** Политика возврата (0086): 14 дней на отказ, пропорциональный возврат. */
+function RefundPage() {
+  const { t } = useTranslation();
+  const sections = t("legal.refund.sections", { returnObjects: true }) as { h: string; p: string }[];
+  return (
+    <LegalPage title={t("legal.refund.title") as string}>
+      <p>{t("legal.refund.intro")}</p>
+      {Array.isArray(sections) &&
+        sections.map((s) => (
+          <section key={s.h} className="mt-6">
+            <h2 className="font-display text-lg font-semibold text-neutral-100">{s.h}</h2>
+            <p className="mt-2">{s.p}</p>
+          </section>
+        ))}
+    </LegalPage>
+  );
+}
+
 export default function App() {
   return (
     <RegionProvider>
@@ -72,6 +90,7 @@ export default function App() {
         />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/refund" element={<RefundPage />} />
       </Routes>
       {/* На мобильном эти же переключатели — в Header.tsx, рядом с кнопкой
           меню (variant="inline"), а не здесь внизу справа, где раньше

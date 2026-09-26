@@ -517,7 +517,9 @@
       "failedTitle": "Pagamento non riuscito",
       "failedText": "Non è stato addebitato nulla. Controlla i dati e il saldo della carta o prova con un'altra.",
       "tryAgain": "Riprova"
-    }
+    },
+    "consentTerms": "Accetto le <terms>condizioni dell'offerta</terms> e la <refund>politica di rimborso</refund>",
+    "consentImmediate": "Chiedo di attivare l'accesso subito dopo il pagamento. Capisco che, se recedo entro 14 giorni, viene trattenuto il costo dei giorni usati."
   },
   "bodyParams": {
     "title": "Parametri corporei",
@@ -839,5 +841,41 @@
     "done": "Ho capito",
     "profileItem": "Installa l'app",
     "profileItemHint": "Icona di DonatelleX nella schermata Home"
+  },
+  "withdrawal": {
+    "title": "Recesso e rimborso",
+    "eligibleText": "Puoi recedere dall'abbonamento senza motivazione fino al {{date}} incluso: sono 14 giorni dal pagamento.",
+    "paid": "Pagato",
+    "used": "Giorni usati",
+    "usedValue": "{{used}} di {{period}}",
+    "retained": "Trattenuto per quei giorni",
+    "refund": "Rimborsiamo",
+    "proportionalNote": "Al pagamento hai chiesto di iniziare subito, quindi viene trattenuto solo il costo dei giorni usati.",
+    "fullRefundNote": "Rimborsiamo l'intero importo pagato.",
+    "reasonLabel": "Motivo (facoltativo)",
+    "reasonPlaceholder": "Cosa non ti ha convinto? Ci aiuta a migliorare",
+    "submit": "Recedi e ottieni il rimborso",
+    "confirmTitle": "Recedere dall'abbonamento?",
+    "confirmBody": "Dopo l'approvazione l'accesso ai programmi a pagamento verrà chiuso. Ti rimborseremo entro 14 giorni con lo stesso metodo di pagamento.",
+    "confirmYes": "Sì, recedi",
+    "confirmNo": "No, resto",
+    "statusTitle": {
+      "pending": "Richiesta di rimborso ricevuta",
+      "approved": "Rimborso approvato",
+      "refunded": "Rimborso effettuato",
+      "rejected": "Richiesta respinta"
+    },
+    "statusPending": "Richiesta del {{date}}. Rimborseremo {{amount}} entro il {{payBy}} con lo stesso metodo usato per pagare.",
+    "statusApproved": "Rimborsiamo {{amount}} entro il {{payBy}}. Quando appare sulla carta dipende dalla banca (di solito 3–10 giorni lavorativi).",
+    "statusRefunded": "Il {{date}} abbiamo rimborsato {{amount}}. Se non lo vedi ancora, la banca può impiegare fino a 10 giorni lavorativi.",
+    "statusRejected": "Se non sei d'accordo con la decisione, scrivi al supporto.",
+    "windowPassed": "Sono passati i 14 giorni dal pagamento ({{date}}), quindi il periodo restante non è rimborsabile. L'accesso resta fino al {{until}}; nessun addebito automatico: l'abbonamento semplicemente termina.",
+    "problemHint": "Se il servizio non funziona come promesso, scrivici: risolviamo e rimborsiamo il periodo non fornito.",
+    "support": "Scrivi al supporto",
+    "noPaid": "Non hai un abbonamento a pagamento. La settimana gratuita e l'accesso bonus sono gratis: non c'è nulla da rimborsare.",
+    "policyLink": "Politica di rimborso",
+    "error": "Impossibile inviare la richiesta. Riprova o scrivi al supporto.",
+    "profileItem": "Recesso e rimborso",
+    "profileItemHint": "14 giorni dal pagamento, senza motivazione"
   }
 }

@@ -10,7 +10,10 @@ import {
   Settings,
   RotateCcw,
   LogOut,
+  Undo2,
 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 
 const NAV_ITEMS = [
@@ -19,12 +22,26 @@ const NAV_ITEMS = [
   { to: "/programs", label: "Программы", icon: Dumbbell },
   { to: "/videos", label: "Видео", icon: Video },
   { to: "/payments", label: "Платежи", icon: CreditCard },
+  { to: "/refunds", label: "Возвраты", icon: Undo2 },
   { to: "/catch-up", label: "Догнать прогресс", icon: RotateCcw },
   { to: "/settings", label: "Настройки сайта", icon: Settings },
 ];
 
 export function AdminShell({ children }: { children: ReactNode }) {
   const { profile, authUser, signOut } = useAuth();
+  // Сколько заявок на возврат ждут действий — срок по закону 14 дней (0086)
+  const { data: openRefunds } = useQuery({
+    queryKey: ["admin-refunds-open"],
+    refetchInterval: 5 * 60 * 1000,
+    queryFn: async () => {
+      const { count, error } = await supabase
+        .from("refund_requests")
+        .select("id", { count: "exact", head: true })
+        .in("status", ["pending", "approved"]);
+      if (error) return 0;
+      return count ?? 0;
+    },
+  });
 
   return (
     <div className="flex min-h-dvh bg-ink-950">
@@ -52,7 +69,10 @@ export function AdminShell({ children }: { children: ReactNode }) {
               }
             >
               <Icon size={18} />
-              {label}
+              <span className="flex-1">{label}</span>
+              {to === "/refunds" && !!openRefunds && (
+                <span className="rounded-full bg-danger px-2 py-0.5 text-xs font-bold text-neutral-0">{openRefunds}</span>
+              )}
             </NavLink>
           ))}
         </nav>

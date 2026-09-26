@@ -258,7 +258,8 @@
         "title": "Legal",
         "links": {
           "terms": "Terms of use",
-          "privacy": "Privacy policy"
+          "privacy": "Privacy policy",
+          "refund": "Refund policy"
         }
       }
     },
@@ -280,6 +281,44 @@
       "ru": "For users in Russia, personal data is processed in accordance with Federal Law No. 152-FZ \"On Personal Data\".",
       "eu": "For users in the European Union, personal data is processed in accordance with the General Data Protection Regulation (GDPR).",
       "us": "For users in the United States, applicable state consumer privacy laws apply."
+    },
+    "refund": {
+      "title": "Refund policy",
+      "intro": "A short, honest guide to cancelling your DonatelleX subscription and getting your money back.",
+      "sections": [
+        {
+          "h": "14 days to withdraw",
+          "p": "You can withdraw from a paid subscription within 14 calendar days of payment — no reason needed."
+        },
+        {
+          "h": "How to withdraw",
+          "p": "In the app: Profile → “Cancel subscription & refund” → “Withdraw and get a refund”. Or email hello@donatellex.com with your account email and payment date."
+        },
+        {
+          "h": "How much we refund",
+          "p": "If at checkout you asked for access to start immediately (the tick box on the payment screen), we keep the cost of the days you have already used, in proportion to the subscription length, and refund the rest. Example: a 3-month subscription (91 days) cancelled on day 10 — we refund 81/91 of the amount. If you didn't make that request, we refund the full amount."
+        },
+        {
+          "h": "Timing and method",
+          "p": "Refunds are made no later than 14 days after we receive your request, using the same payment method. When it reaches your card depends on your bank — usually 3–10 business days. Access to paid programs ends once the refund is approved."
+        },
+        {
+          "h": "After 14 days",
+          "p": "After 14 days the remaining period is not refunded, and you keep access until the end of the paid period. There are no automatic renewals or charges. If the service was not provided or did not work as described through our fault, email hello@donatellex.com and we'll refund the period not provided."
+        },
+        {
+          "h": "Free and bonus access",
+          "p": "The free week, the month for inviting a friend and gifted access are not paid for and are not refundable."
+        },
+        {
+          "h": "Your rights",
+          "p": "This policy does not limit the rights you have under the consumer protection laws of your country."
+        },
+        {
+          "h": "Contact",
+          "p": "Refund questions: hello@donatellex.com. The seller's details are listed in the terms of use."
+        }
+      ]
     }
   },
   "exitIntent": {

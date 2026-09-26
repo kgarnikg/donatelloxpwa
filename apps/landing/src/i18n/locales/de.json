@@ -244,7 +244,8 @@
         "title": "Rechtliches",
         "links": {
           "terms": "Nutzungsbedingungen",
-          "privacy": "Datenschutzrichtlinie"
+          "privacy": "Datenschutzrichtlinie",
+          "refund": "Erstattungsrichtlinie"
         }
       }
     },
@@ -266,6 +267,44 @@
       "ru": "Für Nutzer in Russland werden personenbezogene Daten gemäß dem Bundesgesetz Nr. 152-FZ „Über personenbezogene Daten“ verarbeitet.",
       "eu": "Für Nutzer in der Europäischen Union werden personenbezogene Daten gemäß der Datenschutz-Grundverordnung (DSGVO) verarbeitet.",
       "us": "Für Nutzer in den USA gelten die entsprechenden bundesstaatlichen Verbraucherdatenschutzgesetze."
+    },
+    "refund": {
+      "title": "Erstattungsrichtlinie",
+      "intro": "Kurz und ehrlich: So widerrufst du dein DonatelleX-Abo und bekommst dein Geld zurück.",
+      "sections": [
+        {
+          "h": "14 Tage Widerrufsrecht",
+          "p": "Du kannst ein bezahltes Abo innerhalb von 14 Kalendertagen ab Zahlung ohne Angabe von Gründen widerrufen."
+        },
+        {
+          "h": "So widerrufst du",
+          "p": "In der App: Profil → „Widerruf & Erstattung“ → „Widerrufen und Geld zurück“. Oder schreib an hello@donatellex.com mit deiner Konto-E-Mail und dem Zahlungsdatum."
+        },
+        {
+          "h": "Wie viel wir erstatten",
+          "p": "Wenn du beim Bezahlen den sofortigen Beginn verlangt hast (Häkchen auf der Zahlungsseite), behalten wir den Wert der bereits genutzten Tage anteilig zur Abolaufzeit ein und erstatten den Rest. Beispiel: 3-Monats-Abo (91 Tage), Widerruf am 10. Tag — wir erstatten 81/91 des Betrags. Ohne diesen Wunsch erstatten wir den vollen Betrag."
+        },
+        {
+          "h": "Frist und Zahlungsweg",
+          "p": "Die Erstattung erfolgt spätestens 14 Tage nach Eingang deines Widerrufs über dieselbe Zahlungsart. Wann das Geld auf der Karte ist, hängt von deiner Bank ab — meist 3–10 Werktage. Der Zugang zu den Bezahlprogrammen endet mit der Genehmigung der Erstattung."
+        },
+        {
+          "h": "Nach 14 Tagen",
+          "p": "Nach 14 Tagen wird der Restzeitraum nicht erstattet; der Zugang bleibt bis zum Ende des bezahlten Zeitraums. Es gibt keine automatischen Verlängerungen oder Abbuchungen. Wurde der Dienst durch unser Verschulden nicht oder nicht wie beschrieben erbracht, schreib an hello@donatellex.com — wir erstatten den nicht erbrachten Zeitraum."
+        },
+        {
+          "h": "Gratis- und Bonuszugang",
+          "p": "Die Gratiswoche, der Monat für eine Freundeseinladung und geschenkte Zugänge sind unbezahlt und nicht erstattungsfähig."
+        },
+        {
+          "h": "Deine Rechte",
+          "p": "Diese Richtlinie schränkt deine Rechte nach dem Verbraucherschutzrecht deines Landes nicht ein."
+        },
+        {
+          "h": "Kontakt",
+          "p": "Fragen zur Erstattung: hello@donatellex.com. Die Angaben zum Verkäufer findest du in den Nutzungsbedingungen."
+        }
+      ]
     }
   },
   "exitIntent": {

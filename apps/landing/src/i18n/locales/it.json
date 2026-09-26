@@ -244,7 +244,8 @@
         "title": "Legale",
         "links": {
           "terms": "Termini di utilizzo",
-          "privacy": "Informativa sulla privacy"
+          "privacy": "Informativa sulla privacy",
+          "refund": "Politica di rimborso"
         }
       }
     },
@@ -266,6 +267,44 @@
       "ru": "Per gli utenti in Russia, i dati personali sono trattati ai sensi della Legge Federale n. 152-FZ «Sui dati personali».",
       "eu": "Per gli utenti nell'Unione Europea, i dati personali sono trattati ai sensi del Regolamento Generale sulla Protezione dei Dati (GDPR).",
       "us": "Per gli utenti negli Stati Uniti, si applicano le leggi statali sulla privacy dei consumatori applicabili."
+    },
+    "refund": {
+      "title": "Politica di rimborso",
+      "intro": "Una guida breve e chiara per recedere dall'abbonamento DonatelleX e ottenere il rimborso.",
+      "sections": [
+        {
+          "h": "14 giorni per recedere",
+          "p": "Puoi recedere da un abbonamento a pagamento entro 14 giorni di calendario dal pagamento, senza motivazione."
+        },
+        {
+          "h": "Come recedere",
+          "p": "Nell'app: Profilo → «Recesso e rimborso» → «Recedi e ottieni il rimborso». Oppure scrivi a hello@donatellex.com indicando l'email dell'account e la data del pagamento."
+        },
+        {
+          "h": "Quanto rimborsiamo",
+          "p": "Se al pagamento hai chiesto di iniziare subito (la casella nella schermata di pagamento), tratteniamo il costo dei giorni già usati in proporzione alla durata dell'abbonamento e rimborsiamo il resto. Esempio: abbonamento di 3 mesi (91 giorni), recesso il 10° giorno — rimborsiamo 81/91 dell'importo. Senza questa richiesta rimborsiamo l'intero importo."
+        },
+        {
+          "h": "Tempi e modalità",
+          "p": "Il rimborso avviene entro 14 giorni dalla ricezione della richiesta, con lo stesso metodo di pagamento. L'accredito sulla carta dipende dalla banca, di solito 3–10 giorni lavorativi. L'accesso ai programmi a pagamento termina con l'approvazione del rimborso."
+        },
+        {
+          "h": "Dopo 14 giorni",
+          "p": "Dopo 14 giorni il periodo restante non è rimborsabile e l'accesso resta fino alla fine del periodo pagato. Non ci sono rinnovi né addebiti automatici. Se il servizio non è stato fornito o non ha funzionato come descritto per nostra responsabilità, scrivi a hello@donatellex.com: rimborseremo il periodo non fornito."
+        },
+        {
+          "h": "Accesso gratuito e bonus",
+          "p": "La settimana gratuita, il mese per l'invito di un amico e gli accessi regalo non sono a pagamento e non sono rimborsabili."
+        },
+        {
+          "h": "I tuoi diritti",
+          "p": "Questa politica non limita i diritti che ti riconosce la normativa a tutela dei consumatori del tuo paese."
+        },
+        {
+          "h": "Contatti",
+          "p": "Domande sui rimborsi: hello@donatellex.com. I dati del venditore sono indicati nelle condizioni d'uso."
+        }
+      ]
     }
   },
   "exitIntent": {

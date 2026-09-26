@@ -4,7 +4,7 @@ const GROUP_KEYS = ["product", "company", "legal"] as const;
 const GROUP_LINK_HREFS: Record<(typeof GROUP_KEYS)[number], Record<string, string>> = {
   product: { features: "#modules", pricing: "#pricing", faq: "#faq" },
   company: { about: "#top", contact: "mailto:hello@donatellex.com" },
-  legal: { terms: "/terms", privacy: "/privacy" },
+  legal: { terms: "/terms", privacy: "/privacy", refund: "/refund" },
 };
 
 export function Footer() {

@@ -675,7 +675,9 @@
       "failedTitle": "El pago no se ha completado",
       "failedText": "No se ha realizado ningún cargo. Revisa los datos y el saldo de la tarjeta o prueba con otra.",
       "tryAgain": "Intentar de nuevo"
-    }
+    },
+    "consentTerms": "Acepto las <terms>condiciones de la oferta</terms> y la <refund>política de reembolso</refund>",
+    "consentImmediate": "Solicito empezar el acceso justo después del pago. Entiendo que, si desisto en 14 días, se descuenta el coste de los días usados."
   },
   "bodyParams": {
     "title": "Parámetros corporales",
@@ -839,5 +841,41 @@
     "done": "Entendido",
     "profileItem": "Instalar la app",
     "profileItemHint": "Icono de DonatelleX en tu pantalla de inicio"
+  },
+  "withdrawal": {
+    "title": "Desistimiento y reembolso",
+    "eligibleText": "Puedes desistir de la suscripción sin dar explicaciones hasta el {{date}} inclusive: son 14 días desde el pago.",
+    "paid": "Pagado",
+    "used": "Días usados",
+    "usedValue": "{{used}} de {{period}}",
+    "retained": "Se descuenta por esos días",
+    "refund": "Te devolvemos",
+    "proportionalNote": "Al pagar pediste empezar el acceso de inmediato, así que solo se descuenta el coste de los días usados.",
+    "fullRefundNote": "Te devolvemos todo el importe pagado.",
+    "reasonLabel": "Motivo (opcional)",
+    "reasonPlaceholder": "¿Qué no te convenció? Nos ayuda a mejorar",
+    "submit": "Desistir y recuperar el dinero",
+    "confirmTitle": "¿Desistir de la suscripción?",
+    "confirmBody": "Al aprobar la solicitud se cerrará el acceso a los programas de pago. Te devolveremos el dinero en un máximo de 14 días por el mismo medio de pago.",
+    "confirmYes": "Sí, desistir",
+    "confirmNo": "No, quedarme",
+    "statusTitle": {
+      "pending": "Solicitud de reembolso recibida",
+      "approved": "Reembolso aprobado",
+      "refunded": "Dinero devuelto",
+      "rejected": "Solicitud rechazada"
+    },
+    "statusPending": "Solicitud del {{date}}. Te devolveremos {{amount}} antes del {{payBy}} por el mismo medio con el que pagaste.",
+    "statusApproved": "Te devolvemos {{amount}} antes del {{payBy}}. Cuándo aparece en la tarjeta depende de tu banco (normalmente 3–10 días hábiles).",
+    "statusRefunded": "El {{date}} te devolvimos {{amount}}. Si aún no lo ves, tu banco puede tardar hasta 10 días hábiles.",
+    "statusRejected": "Si no estás de acuerdo con la decisión, escribe a soporte.",
+    "windowPassed": "Ya pasaron los 14 días desde el pago ({{date}}), así que el periodo restante no se reembolsa. Mantienes el acceso hasta el {{until}}; no hay cobros automáticos: la suscripción simplemente termina.",
+    "problemHint": "Si el servicio no funciona como se prometió, escríbenos: lo resolvemos y te devolvemos el periodo no prestado.",
+    "support": "Escribir a soporte",
+    "noPaid": "No tienes una suscripción de pago. La semana gratis y el acceso de regalo son gratuitos: no hay nada que devolver.",
+    "policyLink": "Política de reembolso",
+    "error": "No se pudo enviar la solicitud. Inténtalo de nuevo o escribe a soporte.",
+    "profileItem": "Desistimiento y reembolso",
+    "profileItemHint": "14 días desde el pago, sin dar explicaciones"
   }
 }

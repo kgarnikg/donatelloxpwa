@@ -675,7 +675,9 @@
       "failedTitle": "Payment failed",
       "failedText": "You haven't been charged. Check your card details and balance, or try another card.",
       "tryAgain": "Try again"
-    }
+    },
+    "consentTerms": "I accept the <terms>terms of the offer</terms> and the <refund>refund policy</refund>",
+    "consentImmediate": "Please start my access right after payment. I understand that if I withdraw within 14 days, the cost of the days used is kept."
   },
   "bodyParams": {
     "title": "Body parameters",
@@ -839,5 +841,41 @@
     "done": "Got it",
     "profileItem": "Install the app",
     "profileItemHint": "DonatelleX icon on your Home Screen"
+  },
+  "withdrawal": {
+    "title": "Cancel subscription & refund",
+    "eligibleText": "You can withdraw from your subscription without giving a reason until {{date}} inclusive — that's 14 days from payment.",
+    "paid": "Paid",
+    "used": "Days used",
+    "usedValue": "{{used}} of {{period}}",
+    "retained": "Kept for those days",
+    "refund": "We'll refund",
+    "proportionalNote": "At checkout you asked for access to start immediately, so only the cost of the days used is kept.",
+    "fullRefundNote": "We'll refund the full amount paid.",
+    "reasonLabel": "Reason (optional)",
+    "reasonPlaceholder": "What didn't work for you? It helps us improve",
+    "submit": "Withdraw and get a refund",
+    "confirmTitle": "Cancel your subscription?",
+    "confirmBody": "Once the request is approved, access to paid programs ends. We'll refund you within 14 days using the same payment method.",
+    "confirmYes": "Yes, cancel",
+    "confirmNo": "No, stay",
+    "statusTitle": {
+      "pending": "Refund request received",
+      "approved": "Refund approved",
+      "refunded": "Money refunded",
+      "rejected": "Request declined"
+    },
+    "statusPending": "Request from {{date}}. We'll refund {{amount}} by {{payBy}} using the same method you paid with.",
+    "statusApproved": "Refunding {{amount}} — by {{payBy}}. When it shows up on your card depends on your bank (usually 3–10 business days).",
+    "statusRefunded": "Refunded {{amount}} on {{date}}. If you don't see it yet, your bank may need up to 10 business days.",
+    "statusRejected": "If you disagree with the decision, please contact support.",
+    "windowPassed": "The 14 days after payment have passed ({{date}}), so the remaining period isn't refundable. You keep access until {{until}}; there are no automatic charges — the subscription simply ends.",
+    "problemHint": "If the service doesn't work as promised, write to us — we'll sort it out and refund the period not provided.",
+    "support": "Contact support",
+    "noPaid": "You don't have a paid subscription. The free week and bonus access are free — there's nothing to refund.",
+    "policyLink": "Refund policy",
+    "error": "Couldn't send the request. Try again or contact support.",
+    "profileItem": "Cancel subscription & refund",
+    "profileItemHint": "14 days from payment — no reason needed"
   }
 }

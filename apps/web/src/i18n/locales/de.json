@@ -517,7 +517,9 @@
       "failedTitle": "Zahlung fehlgeschlagen",
       "failedText": "Es wurde nichts abgebucht. Prüfe Kartendaten und Guthaben oder versuche es mit einer anderen Karte.",
       "tryAgain": "Erneut versuchen"
-    }
+    },
+    "consentTerms": "Ich akzeptiere die <terms>Angebotsbedingungen</terms> und die <refund>Erstattungsrichtlinie</refund>",
+    "consentImmediate": "Ich verlange den Zugang sofort nach der Zahlung. Mir ist bekannt, dass bei Widerruf innerhalb von 14 Tagen der Wert der genutzten Tage einbehalten wird."
   },
   "bodyParams": {
     "title": "Körperdaten",
@@ -839,5 +841,41 @@
     "done": "Verstanden",
     "profileItem": "App installieren",
     "profileItemHint": "DonatelleX-Symbol auf dem Home-Bildschirm"
+  },
+  "withdrawal": {
+    "title": "Widerruf & Erstattung",
+    "eligibleText": "Du kannst dein Abo bis einschließlich {{date}} ohne Angabe von Gründen widerrufen — das sind 14 Tage ab Zahlung.",
+    "paid": "Bezahlt",
+    "used": "Genutzte Tage",
+    "usedValue": "{{used}} von {{period}}",
+    "retained": "Einbehalten für diese Tage",
+    "refund": "Wir erstatten",
+    "proportionalNote": "Beim Bezahlen hast du den sofortigen Beginn verlangt, daher wird nur der Wert der genutzten Tage einbehalten.",
+    "fullRefundNote": "Wir erstatten den vollen Betrag.",
+    "reasonLabel": "Grund (optional)",
+    "reasonPlaceholder": "Was hat nicht gepasst? Das hilft uns, besser zu werden",
+    "submit": "Widerrufen und Geld zurück",
+    "confirmTitle": "Abo widerrufen?",
+    "confirmBody": "Nach Genehmigung endet der Zugang zu den Bezahlprogrammen. Wir erstatten das Geld innerhalb von 14 Tagen über dieselbe Zahlungsart.",
+    "confirmYes": "Ja, widerrufen",
+    "confirmNo": "Nein, bleiben",
+    "statusTitle": {
+      "pending": "Erstattungsantrag eingegangen",
+      "approved": "Erstattung genehmigt",
+      "refunded": "Geld erstattet",
+      "rejected": "Antrag abgelehnt"
+    },
+    "statusPending": "Antrag vom {{date}}. Wir erstatten {{amount}} spätestens bis {{payBy}} über die Zahlungsart, mit der du bezahlt hast.",
+    "statusApproved": "Wir erstatten {{amount}} — spätestens bis {{payBy}}. Wann das Geld auf der Karte erscheint, hängt von deiner Bank ab (meist 3–10 Werktage).",
+    "statusRefunded": "Am {{date}} erstattet: {{amount}}. Falls noch nicht sichtbar, kann die Bank bis zu 10 Werktage brauchen.",
+    "statusRejected": "Wenn du nicht einverstanden bist, schreib dem Support.",
+    "windowPassed": "Die 14 Tage nach der Zahlung sind vorbei ({{date}}), daher wird der Restzeitraum nicht erstattet. Dein Zugang bleibt bis {{until}}; es gibt keine automatischen Abbuchungen — das Abo endet einfach.",
+    "problemHint": "Wenn der Dienst nicht wie versprochen funktioniert, schreib uns — wir klären das und erstatten den nicht erbrachten Zeitraum.",
+    "support": "Support kontaktieren",
+    "noPaid": "Du hast kein bezahltes Abo. Die Gratiswoche und Bonuszugänge sind kostenlos — es gibt nichts zu erstatten.",
+    "policyLink": "Erstattungsrichtlinie",
+    "error": "Antrag konnte nicht gesendet werden. Versuch es erneut oder schreib dem Support.",
+    "profileItem": "Widerruf & Erstattung",
+    "profileItemHint": "14 Tage ab Zahlung — ohne Begründung"
   }
 }

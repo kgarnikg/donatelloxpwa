@@ -8,6 +8,7 @@ import ProgramsPage from "@/pages/ProgramsPage";
 import ProgramDetailPage from "@/pages/ProgramDetailPage";
 import VideosPage from "@/pages/VideosPage";
 import PaymentsPage from "@/pages/PaymentsPage";
+import RefundsPage from "@/pages/RefundsPage";
 import SettingsPage from "@/pages/SettingsPage";
 import CatchUpProgressPage from "@/pages/CatchUpProgressPage";
 
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/programs/:programId" element={<ProgramDetailPage />} />
         <Route path="/videos" element={<VideosPage />} />
         <Route path="/payments" element={<PaymentsPage />} />
+        <Route path="/refunds" element={<RefundsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/catch-up" element={<CatchUpProgressPage />} />
       </Route>

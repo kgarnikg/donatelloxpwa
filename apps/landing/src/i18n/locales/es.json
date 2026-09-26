@@ -244,7 +244,8 @@
         "title": "Legal",
         "links": {
           "terms": "Condiciones de uso",
-          "privacy": "Política de privacidad"
+          "privacy": "Política de privacidad",
+          "refund": "Política de reembolso"
         }
       }
     },
@@ -266,6 +267,44 @@
       "ru": "Para los usuarios en Rusia, los datos personales se procesan conforme a la Ley Federal N.º 152-FZ «Sobre datos personales».",
       "eu": "Para los usuarios de la Unión Europea, los datos personales se procesan conforme al Reglamento General de Protección de Datos (RGPD).",
       "us": "Para los usuarios en Estados Unidos, se aplican las leyes estatales de privacidad del consumidor correspondientes."
+    },
+    "refund": {
+      "title": "Política de reembolso",
+      "intro": "Una guía breve y honesta para desistir de la suscripción a DonatelleX y recuperar tu dinero.",
+      "sections": [
+        {
+          "h": "14 días para desistir",
+          "p": "Puedes desistir de una suscripción de pago en los 14 días naturales siguientes al pago, sin dar explicaciones."
+        },
+        {
+          "h": "Cómo desistir",
+          "p": "En la app: Perfil → «Desistimiento y reembolso» → «Desistir y recuperar el dinero». O escribe a hello@donatellex.com indicando el email de tu cuenta y la fecha del pago."
+        },
+        {
+          "h": "Cuánto devolvemos",
+          "p": "Si al pagar solicitaste empezar el acceso de inmediato (la casilla de la pantalla de pago), descontamos el coste de los días ya usados, en proporción a la duración de la suscripción, y devolvemos el resto. Ejemplo: suscripción de 3 meses (91 días), desistimiento el día 10 — devolvemos 81/91 del importe. Si no hiciste esa solicitud, devolvemos el importe íntegro."
+        },
+        {
+          "h": "Plazo y forma de devolución",
+          "p": "Devolvemos el dinero en un máximo de 14 días desde que recibimos tu solicitud, por el mismo medio de pago. Cuándo llega a tu tarjeta depende de tu banco: normalmente 3–10 días hábiles. El acceso a los programas de pago se cierra al aprobar el reembolso."
+        },
+        {
+          "h": "Pasados 14 días",
+          "p": "Pasados 14 días no se reembolsa el periodo restante y mantienes el acceso hasta el final del periodo pagado. No hay renovaciones ni cobros automáticos. Si el servicio no se prestó o no funcionó como se describe por causa nuestra, escribe a hello@donatellex.com y te devolveremos el periodo no prestado."
+        },
+        {
+          "h": "Acceso gratuito y de regalo",
+          "p": "La semana gratis, el mes por invitar a un amigo y el acceso de regalo no se pagan y no son reembolsables."
+        },
+        {
+          "h": "Tus derechos",
+          "p": "Esta política no limita los derechos que te reconoce la normativa de protección de consumidores de tu país."
+        },
+        {
+          "h": "Contacto",
+          "p": "Dudas sobre reembolsos: hello@donatellex.com. Los datos del vendedor figuran en las condiciones de uso."
+        }
+      ]
     }
   },
   "exitIntent": {

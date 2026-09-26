@@ -31,6 +31,7 @@ import LanguageSettingsPage from "@/pages/LanguageSettingsPage";
 import BodyParamsPage from "@/pages/BodyParamsPage";
 import NotificationsSettingsPage from "@/pages/NotificationsSettingsPage";
 import SubscriptionPage from "@/pages/SubscriptionPage";
+import WithdrawalPage from "@/pages/WithdrawalPage";
 import { PaymentSuccessPage, PaymentFailedPage } from "@/pages/PaymentResultPage";
 import WorkoutPlayerPage from "@/pages/WorkoutPlayerPage";
 import AchievementsPage from "@/pages/AchievementsPage";
@@ -493,6 +494,14 @@ export default function App() {
         element={
           <ProtectedRoute>
             <SubscriptionPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/subscription/withdraw"
+        element={
+          <ProtectedRoute>
+            <WithdrawalPage />
           </ProtectedRoute>
         }
       />
