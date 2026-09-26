@@ -51,7 +51,13 @@
       "submit": "Sign up",
       "submitting": "Creating account…",
       "haveAccount": "Already have an account?",
-      "signIn": "Sign in"
+      "signIn": "Sign in",
+      "firstName": "First name",
+      "firstNamePlaceholder": "John",
+      "lastName": "Last name",
+      "lastNamePlaceholder": "Smith",
+      "country": "Country",
+      "countryPlaceholder": "Select your country"
     },
     "showPassword": "Show password",
     "hidePassword": "Hide password",
@@ -655,7 +661,9 @@
     "acceptTerms": "You need to accept the terms of use",
     "passwordsMismatch": "Passwords don't match",
     "passwordRequired": "Enter your password",
-    "goalsRequired": "Choose at least one goal"
+    "goalsRequired": "Choose at least one goal",
+    "lastNameRequired": "Enter your last name",
+    "countryRequired": "Select your country"
   },
   "quotes": [
     "Discipline wins when motivation runs out.",

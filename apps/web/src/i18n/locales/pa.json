@@ -51,7 +51,13 @@
       "submit": "ਸਾਈਨ ਅੱਪ ਕਰੋ",
       "submitting": "ਖਾਤਾ ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ…",
       "haveAccount": "ਪਹਿਲਾਂ ਹੀ ਖਾਤਾ ਹੈ?",
-      "signIn": "ਸਾਈਨ ਇਨ ਕਰੋ"
+      "signIn": "ਸਾਈਨ ਇਨ ਕਰੋ",
+      "firstName": "ਪਹਿਲਾ ਨਾਮ",
+      "firstNamePlaceholder": "ਹਰਪ੍ਰੀਤ",
+      "lastName": "ਉਪਨਾਮ",
+      "lastNamePlaceholder": "ਸਿੰਘ",
+      "country": "ਦੇਸ਼",
+      "countryPlaceholder": "ਆਪਣਾ ਦੇਸ਼ ਚੁਣੋ"
     },
     "showPassword": "ਪਾਸਵਰਡ ਦਿਖਾਓ",
     "hidePassword": "ਪਾਸਵਰਡ ਲੁਕਾਓ",
@@ -655,7 +661,9 @@
     "acceptTerms": "ਤੁਹਾਨੂੰ ਵਰਤੋਂ ਦੀਆਂ ਸ਼ਰਤਾਂ ਸਵੀਕਾਰ ਕਰਨੀਆਂ ਪੈਣਗੀਆਂ",
     "passwordsMismatch": "ਪਾਸਵਰਡ ਮੇਲ ਨਹੀਂ ਖਾਂਦੇ",
     "passwordRequired": "ਆਪਣਾ ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ",
-    "goalsRequired": "ਘੱਟੋ-ਘੱਟ ਇੱਕ ਟੀਚਾ ਚੁਣੋ"
+    "goalsRequired": "ਘੱਟੋ-ਘੱਟ ਇੱਕ ਟੀਚਾ ਚੁਣੋ",
+    "lastNameRequired": "ਆਪਣਾ ਉਪਨਾਮ ਦਰਜ ਕਰੋ",
+    "countryRequired": "ਆਪਣਾ ਦੇਸ਼ ਚੁਣੋ"
   },
   "quotes": [
     "ਜਦੋਂ ਜੋਸ਼ ਮੁੱਕ ਜਾਂਦਾ ਹੈ, ਅਨੁਸ਼ਾਸਨ ਜਿੱਤਦਾ ਹੈ।",

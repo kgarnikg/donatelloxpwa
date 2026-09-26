@@ -51,7 +51,13 @@
       "submit": "Գրանցվել",
       "submitting": "Հաշիվը ստեղծվում է…",
       "haveAccount": "Արդեն ունե՞ք հաշիվ",
-      "signIn": "Մուտք"
+      "signIn": "Մուտք",
+      "firstName": "Անուն",
+      "firstNamePlaceholder": "Արամ",
+      "lastName": "Ազգանուն",
+      "lastNamePlaceholder": "Պետրոսյան",
+      "country": "Երկիր",
+      "countryPlaceholder": "Ընտրեք երկիրը"
     },
     "showPassword": "Ցույց տալ գաղտնաբառը",
     "hidePassword": "Թաքցնել գաղտնաբառը",
@@ -655,7 +661,9 @@
     "acceptTerms": "Անհրաժեշտ է ընդունել օգտագործման պայմանները",
     "passwordsMismatch": "Գաղտնաբառերը չեն համընկնում",
     "passwordRequired": "Մուտքագրեք գաղտնաբառը",
-    "goalsRequired": "Ընտրեք առնվազն մեկ նպատակ"
+    "goalsRequired": "Ընտրեք առնվազն մեկ նպատակ",
+    "lastNameRequired": "Մուտքագրեք ազգանունը",
+    "countryRequired": "Ընտրեք երկիրը"
   },
   "quotes": [
     "Կարգապահությունը հաղթում է, երբ մոտիվացիան ավարտվում է։",

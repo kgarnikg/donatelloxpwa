@@ -51,7 +51,13 @@
       "submit": "إنشاء حساب",
       "submitting": "جارٍ إنشاء الحساب…",
       "haveAccount": "لديك حساب بالفعل؟",
-      "signIn": "تسجيل الدخول"
+      "signIn": "تسجيل الدخول",
+      "firstName": "الاسم",
+      "firstNamePlaceholder": "أحمد",
+      "lastName": "اسم العائلة",
+      "lastNamePlaceholder": "العلي",
+      "country": "الدولة",
+      "countryPlaceholder": "اختر دولتك"
     },
     "showPassword": "إظهار كلمة المرور",
     "hidePassword": "إخفاء كلمة المرور",
@@ -671,7 +677,9 @@
     "acceptTerms": "يجب الموافقة على شروط الاستخدام",
     "passwordsMismatch": "كلمتا المرور غير متطابقتين",
     "passwordRequired": "أدخل كلمة المرور",
-    "goalsRequired": "اختر هدفًا واحدًا على الأقل"
+    "goalsRequired": "اختر هدفًا واحدًا على الأقل",
+    "lastNameRequired": "أدخل اسم العائلة",
+    "countryRequired": "اختر دولتك"
   },
   "quotes": [
     "الانضباط ينتصر حين تنفد الحماسة.",

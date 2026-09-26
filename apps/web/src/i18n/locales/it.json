@@ -51,7 +51,13 @@
       "submit": "Registrati",
       "submitting": "Creazione account…",
       "haveAccount": "Hai già un account?",
-      "signIn": "Accedi"
+      "signIn": "Accedi",
+      "firstName": "Nome",
+      "firstNamePlaceholder": "Marco",
+      "lastName": "Cognome",
+      "lastNamePlaceholder": "Rossi",
+      "country": "Paese",
+      "countryPlaceholder": "Seleziona il tuo paese"
     },
     "showPassword": "Mostra password",
     "hidePassword": "Nascondi password",
@@ -655,7 +661,9 @@
     "acceptTerms": "Devi accettare i termini di utilizzo",
     "passwordsMismatch": "Le password non coincidono",
     "passwordRequired": "Inserisci la password",
-    "goalsRequired": "Scegli almeno un obiettivo"
+    "goalsRequired": "Scegli almeno un obiettivo",
+    "lastNameRequired": "Inserisci il cognome",
+    "countryRequired": "Seleziona il tuo paese"
   },
   "quotes": [
     "La disciplina vince quando la motivazione finisce.",

@@ -39,9 +39,16 @@ export const phoneSchema = z
 // Авторизация
 // ---------------------------------------------------------------------------
 
+export const countrySchema = z
+  .string({ required_error: "Выберите страну" })
+  .regex(/^[A-Z]{2}$/, "Выберите страну");
+
 export const registerSchema = z
   .object({
-    fullName: z.string().trim().min(2, "Введите имя").max(120),
+    firstName: z.string().trim().min(1, "Введите имя").max(60),
+    lastName: z.string().trim().min(1, "Введите фамилию").max(60),
+    /** Страна — ISO 3166-1 alpha-2 ("ES", "AM"), 0081. */
+    country: countrySchema,
     email: emailSchema,
     password: passwordSchema,
     passwordConfirm: z.string(),

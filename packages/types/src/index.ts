@@ -56,6 +56,10 @@ export interface User {
   email: string;
   phone?: string;
   fullName: string;
+  /** Имя / фамилия / страна (ISO-код) — с регистрации, 0081. */
+  firstName?: string | null;
+  lastName?: string | null;
+  country?: string | null;
   avatarUrl?: string;
   locale: LocaleCode;
   role: UserRole;

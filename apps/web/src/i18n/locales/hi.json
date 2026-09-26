@@ -51,7 +51,13 @@
       "submit": "साइन अप करें",
       "submitting": "खाता बनाया जा रहा है…",
       "haveAccount": "पहले से खाता है?",
-      "signIn": "साइन इन करें"
+      "signIn": "साइन इन करें",
+      "firstName": "पहला नाम",
+      "firstNamePlaceholder": "राहुल",
+      "lastName": "उपनाम",
+      "lastNamePlaceholder": "शर्मा",
+      "country": "देश",
+      "countryPlaceholder": "अपना देश चुनें"
     },
     "showPassword": "पासवर्ड दिखाएं",
     "hidePassword": "पासवर्ड छिपाएं",
@@ -655,7 +661,9 @@
     "acceptTerms": "आपको उपयोग की शर्तें स्वीकार करनी होंगी",
     "passwordsMismatch": "पासवर्ड मेल नहीं खाते",
     "passwordRequired": "अपना पासवर्ड दर्ज करें",
-    "goalsRequired": "कम से कम एक लक्ष्य चुनें"
+    "goalsRequired": "कम से कम एक लक्ष्य चुनें",
+    "lastNameRequired": "अपना उपनाम दर्ज करें",
+    "countryRequired": "अपना देश चुनें"
   },
   "quotes": [
     "जब मोटिवेशन खत्म हो जाए, तब अनुशासन जीतता है।",

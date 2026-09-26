@@ -51,3 +51,6 @@ apps/web/dev-dist/
 # Misc
 *.local
 .vercel/
+
+# Файлы, которые Claude присылает в чат (архивы, скриншоты) — не часть кода
+Claude outputs/

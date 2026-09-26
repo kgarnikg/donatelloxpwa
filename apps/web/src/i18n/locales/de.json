@@ -51,7 +51,13 @@
       "submit": "Registrieren",
       "submitting": "Konto wird erstellt…",
       "haveAccount": "Bereits ein Konto?",
-      "signIn": "Anmelden"
+      "signIn": "Anmelden",
+      "firstName": "Vorname",
+      "firstNamePlaceholder": "Max",
+      "lastName": "Nachname",
+      "lastNamePlaceholder": "Müller",
+      "country": "Land",
+      "countryPlaceholder": "Land auswählen"
     },
     "showPassword": "Passwort anzeigen",
     "hidePassword": "Passwort verbergen",
@@ -655,7 +661,9 @@
     "acceptTerms": "Du musst die Nutzungsbedingungen akzeptieren",
     "passwordsMismatch": "Die Passwörter stimmen nicht überein",
     "passwordRequired": "Gib dein Passwort ein",
-    "goalsRequired": "Wähle mindestens ein Ziel"
+    "goalsRequired": "Wähle mindestens ein Ziel",
+    "lastNameRequired": "Gib deinen Nachnamen ein",
+    "countryRequired": "Wähle dein Land"
   },
   "quotes": [
     "Disziplin gewinnt, wenn die Motivation längst weg ist.",

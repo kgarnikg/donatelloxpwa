@@ -7,6 +7,7 @@ import { onboardingSchema, type OnboardingInput } from "@donatellox/validation";
 import type { FitnessGoal } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
+import { CountrySelect } from "@/components/CountrySelect";
 import clsx from "clsx";
 
 const GOALS: FitnessGoal[] = [
@@ -24,8 +25,12 @@ const DAYS_OPTIONS = [2, 3, 4, 5, 6] as const;
 export default function OnboardingPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { authUser, refreshProfile } = useAuth();
+  const { authUser, profile, refreshProfile } = useAuth();
   const [step, setStep] = useState(0);
+  // Страна обязательна (0081). При регистрации по email её уже выбрали;
+  // при входе через Google её нет — спрашиваем здесь, на первом шаге.
+  const needsCountry = !!profile && !profile.country;
+  const [country, setCountry] = useState<string | undefined>(undefined);
   const [serverError, setServerError] = useState<string | null>(null);
 
   const {
@@ -83,7 +88,10 @@ export default function OnboardingPage() {
       return;
     }
 
-    await supabase.from("users").update({ onboarding_completed: true }).eq("id", authUser.id);
+    await supabase
+      .from("users")
+      .update({ onboarding_completed: true, ...(needsCountry && country ? { country } : {}) })
+      .eq("id", authUser.id);
     await refreshProfile();
     navigate("/dashboard", { replace: true });
   }
@@ -109,6 +117,14 @@ export default function OnboardingPage() {
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           {step === 0 && (
             <fieldset>
+              {needsCountry && (
+                <div className="mb-8">
+                  <label htmlFor="onboarding-country" className="mb-1.5 block text-sm font-medium text-neutral-300">
+                    {t("auth.register.country")}
+                  </label>
+                  <CountrySelect id="onboarding-country" value={country} onChange={setCountry} />
+                </div>
+              )}
               <h1 className="font-display text-2xl font-bold">{t("onboarding.goalsTitle")}</h1>
               <p className="mt-1 text-neutral-400">{t("onboarding.goalsSubtitle")}</p>
               <div className="mt-6 grid grid-cols-1 gap-3">
@@ -132,7 +148,7 @@ export default function OnboardingPage() {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                disabled={!selectedGoals?.length}
+                disabled={!selectedGoals?.length || (needsCountry && !country)}
                 className="btn-primary mt-8 w-full"
               >
                 {t("common.next")}

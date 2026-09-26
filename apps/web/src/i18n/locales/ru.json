@@ -51,7 +51,13 @@
       "submit": "Зарегистрироваться",
       "submitting": "Создаём аккаунт…",
       "haveAccount": "Уже есть аккаунт?",
-      "signIn": "Войти"
+      "signIn": "Войти",
+      "firstName": "Имя",
+      "firstNamePlaceholder": "Иван",
+      "lastName": "Фамилия",
+      "lastNamePlaceholder": "Иванов",
+      "country": "Страна",
+      "countryPlaceholder": "Выберите страну"
     },
     "showPassword": "Показать пароль",
     "hidePassword": "Скрыть пароль",
@@ -663,7 +669,9 @@
     "acceptTerms": "Необходимо принять условия использования",
     "passwordsMismatch": "Пароли не совпадают",
     "passwordRequired": "Введите пароль",
-    "goalsRequired": "Выберите хотя бы одну цель"
+    "goalsRequired": "Выберите хотя бы одну цель",
+    "lastNameRequired": "Введите фамилию",
+    "countryRequired": "Выберите страну"
   },
   "quotes": [
     "Дисциплина побеждает мотивацию, когда мотивация заканчивается.",

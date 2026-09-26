@@ -51,7 +51,13 @@
       "submit": "Зареєструватися",
       "submitting": "Створюємо акаунт…",
       "haveAccount": "Вже є акаунт?",
-      "signIn": "Увійти"
+      "signIn": "Увійти",
+      "firstName": "Ім'я",
+      "firstNamePlaceholder": "Іван",
+      "lastName": "Прізвище",
+      "lastNamePlaceholder": "Петренко",
+      "country": "Країна",
+      "countryPlaceholder": "Оберіть країну"
     },
     "showPassword": "Показати пароль",
     "hidePassword": "Приховати пароль",
@@ -663,7 +669,9 @@
     "acceptTerms": "Необхідно прийняти умови використання",
     "passwordsMismatch": "Паролі не збігаються",
     "passwordRequired": "Введіть пароль",
-    "goalsRequired": "Оберіть хоча б одну мету"
+    "goalsRequired": "Оберіть хоча б одну мету",
+    "lastNameRequired": "Введіть прізвище",
+    "countryRequired": "Оберіть країну"
   },
   "quotes": [
     "Дисципліна перемагає мотивацію, коли мотивація закінчується.",

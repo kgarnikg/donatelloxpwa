@@ -7,6 +7,7 @@ import { registerSchema, type RegisterInput } from "@donatellox/validation";
 import { supabase } from "@/lib/supabase";
 import { useValidationMessage } from "@/lib/validationMessage";
 import { PasswordInput } from "@/components/PasswordInput";
+import { CountrySelect } from "@/components/CountrySelect";
 
 const REFERRAL_STORAGE_KEY = "donatellox-referral-code";
 
@@ -20,6 +21,8 @@ export default function RegisterPage() {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
@@ -41,7 +44,14 @@ export default function RegisterPage() {
       email: values.email,
       password: values.password,
       options: {
-        data: { full_name: values.fullName, locale: i18n.language },
+        data: {
+          // full_name остаётся "Имя Фамилия" — его читают главная, админка, письма
+          full_name: `${values.firstName} ${values.lastName}`,
+          first_name: values.firstName,
+          last_name: values.lastName,
+          country: values.country,
+          locale: i18n.language,
+        },
         emailRedirectTo: `${window.location.origin}/onboarding`,
       },
     });
@@ -65,16 +75,44 @@ export default function RegisterPage() {
         <p className="mt-2 text-neutral-400">{t("auth.register.subtitle")}</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-4" noValidate>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="mb-1.5 block text-sm font-medium text-neutral-300">
+                {t("auth.register.firstName")}
+              </label>
+              <input
+                className="input-field"
+                autoComplete="given-name"
+                placeholder={t("auth.register.firstNamePlaceholder") ?? ""}
+                {...register("firstName")}
+              />
+              {errors.firstName && <p className="field-error">{vm(errors.firstName.message)}</p>}
+            </div>
+            <div>
+              <label className="mb-1.5 block text-sm font-medium text-neutral-300">
+                {t("auth.register.lastName")}
+              </label>
+              <input
+                className="input-field"
+                autoComplete="family-name"
+                placeholder={t("auth.register.lastNamePlaceholder") ?? ""}
+                {...register("lastName")}
+              />
+              {errors.lastName && <p className="field-error">{vm(errors.lastName.message)}</p>}
+            </div>
+          </div>
+
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-neutral-300">
-              {t("auth.register.fullName")}
+            <label htmlFor="register-country" className="mb-1.5 block text-sm font-medium text-neutral-300">
+              {t("auth.register.country")}
             </label>
-            <input
-              className="input-field"
-              placeholder={t("auth.register.fullNamePlaceholder") ?? ""}
-              {...register("fullName")}
+            <CountrySelect
+              id="register-country"
+              value={watch("country")}
+              onChange={(code) => setValue("country", code, { shouldValidate: !!errors.country })}
+              invalid={!!errors.country}
             />
-            {errors.fullName && <p className="field-error">{vm(errors.fullName.message)}</p>}
+            {errors.country && <p className="field-error">{vm(errors.country.message)}</p>}
           </div>
 
           <div>
