@@ -1,8 +1,7 @@
 import { X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useExitIntent } from "@/hooks/useExitIntent";
-
-const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
+import { APP_URL } from "@/lib/appUrl";
 
 export function ExitIntentModal() {
   const { t } = useTranslation();

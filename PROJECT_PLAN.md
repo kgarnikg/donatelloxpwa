@@ -583,6 +583,18 @@ width/height) не учла флаг поворота (-90°) в метадан�
 замене файла с тем же именем нужно вручную увеличивать версию, иначе
 кеш у части посетителей не обновится сразу.
 
+**Фаза 28.1 — Свой домен** ✅ (26.09)
+Домены на Vercel: лендинг — www.donatellex.com (donatellex.com → 308 на
+www), приложение — app.donatellex.com, админка — admin.donatellex.com.
+- [x] Кнопки лендинга ведут на `APP_URL` из `apps/landing/src/lib/appUrl.ts`:
+  по умолчанию https://app.donatellex.com, `VITE_WEB_APP_URL` — только
+  для локальной разработки; старые *.vercel.app игнорируются
+- [x] Почта в футере лендинга — hello@donatellex.com (ящик нужно завести)
+- ⚠️ Supabase → Authentication → URL Configuration: Site URL =
+  https://app.donatellex.com, в Redirect URLs добавить
+  https://app.donatellex.com/** — иначе письма (подтверждение, сброс
+  пароля) и вход через Google ведут на старый адрес
+
 **Фаза 28 — Приложение целиком на всех 10 языках** ✅ завершена (26.09)
 Цель: при смене языка всё приложение — и интерфейс, и программы — на
 выбранном языке, без русских "дыр".

@@ -45,7 +45,7 @@ export default function AdminLoginPage() {
             <input
               type="email"
               className="input-field"
-              placeholder="admin@donatellox.com"
+              placeholder="admin@donatellex.com"
               {...register("email")}
             />
             {errors.email && <p className="field-error">{errors.email.message}</p>}

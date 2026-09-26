@@ -3,8 +3,7 @@ import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { useRegion } from "@/context/RegionContext";
 import { getRegionAmounts, formatAmount, REGION_PAYMENT_METHODS, type PurchasablePlan } from "@/lib/regionPricing";
-
-const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
+import { APP_URL } from "@/lib/appUrl";
 
 const PLAN_ORDER: { value: PurchasablePlan; discountBadge?: string; highlight?: "popular" | "best-value" }[] = [
   { value: "monthly" },

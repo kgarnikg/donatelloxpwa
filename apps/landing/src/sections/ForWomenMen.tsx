@@ -1,7 +1,6 @@
 import { ArrowRight, Flame, Dumbbell, Home, Sparkles, TrendingUp, Zap, Target } from "lucide-react";
 import { useTranslation } from "react-i18next";
-
-const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
+import { APP_URL } from "@/lib/appUrl";
 
 const WOMEN_TAGS = [
   { icon: Sparkles, key: "toneShape" },

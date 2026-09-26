@@ -5,8 +5,7 @@ import { useRegion } from "@/context/RegionContext";
 import { getRegionAmounts, formatAmount } from "@/lib/regionPricing";
 import { supabase } from "@/lib/supabase";
 import { getYouTubeEmbedUrl } from "@/lib/video";
-
-const APP_URL = (import.meta.env.VITE_WEB_APP_URL || "/").replace(/\/$/, "");
+import { APP_URL } from "@/lib/appUrl";
 
 const AVATAR_COLORS = ["bg-volt-400", "bg-ember-400", "bg-info", "bg-warning", "bg-success"];
 
