@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, LogOut, CreditCard, Globe, Bell, Pencil, Check, X, Gift, LifeBuoy, Ruler } from "lucide-react";
+import { ChevronRight, LogOut, CreditCard, Globe, Bell, Pencil, Check, X, Gift, LifeBuoy, Ruler, Smartphone } from "lucide-react";
+import { InstallPrompt } from "@/components/InstallPrompt";
+import { isStandalone } from "@/lib/install";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 
 export default function ProfilePage() {
+  const [showInstall, setShowInstall] = useState(false);
   const { t } = useTranslation();
   const { profile, authUser, signOut, refreshProfile } = useAuth();
   const [editing, setEditing] = useState(false);
@@ -135,7 +138,22 @@ export default function ProfilePage() {
             <ChevronRight size={18} className="text-neutral-500" />
           </Link>
         ))}
+        {/* Уже открыто с главного экрана — пункт не нужен */}
+        {!isStandalone() && (
+          <button
+            onClick={() => setShowInstall(true)}
+            className="flex w-full items-center gap-3 px-4 py-3.5 text-left hover:bg-ink-800"
+          >
+            <Smartphone size={18} className="text-volt-400" />
+            <span className="flex-1">
+              <span className="block font-medium">{t("install.profileItem")}</span>
+              <span className="block text-xs text-neutral-500">{t("install.profileItemHint")}</span>
+            </span>
+            <ChevronRight size={18} className="text-neutral-500" />
+          </button>
+        )}
       </div>
+      {showInstall && <InstallPrompt onClose={() => setShowInstall(false)} />}
 
       <div className="card mb-6">
         <div className="flex items-center gap-2">

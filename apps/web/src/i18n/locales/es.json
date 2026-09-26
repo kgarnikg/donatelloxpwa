@@ -780,5 +780,26 @@
     "Disciplina hoy, libertad mañana.",
     "No busques el camino fácil. Busca el correcto.",
     "Cada vez que cuesta, te vuelves un poco más fuerte."
-  ]
+  ],
+  "install": {
+    "title": "Añade DonatelleX a tu pantalla de inicio",
+    "subtitle": "Se abre con un toque y a pantalla completa, como una app normal. Sin App Store.",
+    "iosStep1": "Toca «Compartir»",
+    "iosStep1Hint": "Abajo en Safari (en iOS reciente, dentro del menú «⋯»)",
+    "iosOtherStep1": "Toca «Compartir» en la barra de direcciones",
+    "iosStep2": "Desliza hacia abajo y elige",
+    "iosAddLabel": "Añadir a pantalla de inicio",
+    "iosStep2Hint": "¿No aparece? Toca «Editar acciones» al final de la lista",
+    "iosStep3": "Toca",
+    "iosAdd": "Añadir",
+    "inappText": "Este navegador integrado no puede añadir apps a la pantalla de inicio. Abre el enlace en Safari: toca ⋯ o ↗ y elige «Abrir en Safari», o copia el enlace y pégalo en Safari.",
+    "copyLink": "Copiar enlace",
+    "copied": "Enlace copiado",
+    "androidInstall": "Instalar app",
+    "androidManual": "Abre el menú ⋮ del navegador y elige «Instalar aplicación» o «Añadir a pantalla de inicio».",
+    "later": "Más tarde",
+    "done": "Entendido",
+    "profileItem": "Instalar la app",
+    "profileItemHint": "Icono de DonatelleX en tu pantalla de inicio"
+  }
 }

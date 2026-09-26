@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { setupPwaAutoUpdate } from "@/lib/pwaUpdate";
+import { initInstallCapture } from "@/lib/install";
 import { AuthProvider } from "@/context/AuthContext";
 import App from "./App";
 import "./index.css";
@@ -12,6 +13,8 @@ import "./i18n";
 // и раз в 5 минут, применение — сразу, но не посреди тренировки.
 // Подробности — в lib/pwaUpdate.ts.
 setupPwaAutoUpdate();
+// "Установить на главный экран": событие Android/Chrome приходит рано
+initInstallCapture();
 
 const queryClient = new QueryClient({
   defaultOptions: {

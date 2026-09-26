@@ -15,6 +15,8 @@ import {
 import { useDashboard } from "@/lib/dashboard";
 import { XP_RULES, startOfWeek, rankForLevel, type LevelInfo } from "@/lib/gamification";
 import { getDailyQuote } from "@/lib/quotes";
+import { InstallPrompt } from "@/components/InstallPrompt";
+import { markInstallPromptShown, shouldAutoShowInstall } from "@/lib/install";
 
 /**
  * Главная — геймифицированная (Фаза 23). Сверху вниз:
@@ -36,6 +38,20 @@ export default function DashboardPage() {
     profile?.fullName?.trim().split(" ")[0] || authUser?.email?.split("@")[0] || "";
 
   const levelUp = useLevelUpCelebration(authUser?.id, dash?.game.level.level);
+
+  // Подсказка "установи на главный экран": первый заход на главную после
+  // анкеты и сразу после первой тренировки (правила — lib/install.ts).
+  // Небольшая пауза — сначала человек видит свою главную.
+  const [showInstall, setShowInstall] = useState(false);
+  const dashReady = !!dash;
+  useEffect(() => {
+    if (!dashReady || !shouldAutoShowInstall()) return;
+    const timer = setTimeout(() => {
+      markInstallPromptShown();
+      setShowInstall(true);
+    }, 1800);
+    return () => clearTimeout(timer);
+  }, [dashReady]);
 
   if (isLoading || !dash) {
     return (
@@ -145,6 +161,7 @@ export default function DashboardPage() {
       </div>
 
       {levelUp && <LevelUpOverlay level={levelUp.level} onClose={levelUp.dismiss} />}
+      {showInstall && !levelUp && <InstallPrompt onClose={() => setShowInstall(false)} />}
     </div>
   );
 }

@@ -780,5 +780,26 @@
     "Discipline today, freedom tomorrow.",
     "Don't look for the easy way. Look for the right one.",
     "Every time it gets hard, you get a little stronger."
-  ]
+  ],
+  "install": {
+    "title": "Add DonatelleX to your Home Screen",
+    "subtitle": "Opens in one tap, full screen — just like a regular app. No App Store needed.",
+    "iosStep1": "Tap Share",
+    "iosStep1Hint": "At the bottom of Safari (on newer iOS — in the «⋯» menu)",
+    "iosOtherStep1": "Tap Share in the address bar",
+    "iosStep2": "Scroll down and choose",
+    "iosAddLabel": "Add to Home Screen",
+    "iosStep2Hint": "Don't see it? Tap «Edit Actions» at the bottom of the list",
+    "iosStep3": "Tap",
+    "iosAdd": "Add",
+    "inappText": "This in-app browser can't add apps to your Home Screen. Open the link in Safari: tap ⋯ or ↗ and choose «Open in Safari» — or copy the link and paste it into Safari.",
+    "copyLink": "Copy link",
+    "copied": "Link copied",
+    "androidInstall": "Install app",
+    "androidManual": "Open the browser menu ⋮ and choose «Install app» or «Add to Home screen».",
+    "later": "Later",
+    "done": "Got it",
+    "profileItem": "Install the app",
+    "profileItemHint": "DonatelleX icon on your Home Screen"
+  }
 }

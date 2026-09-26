@@ -780,5 +780,26 @@
     "Disciplina oggi, libertà domani.",
     "Non cercare la strada facile. Cerca quella giusta.",
     "Ogni volta che è dura, diventi un po' più forte."
-  ]
+  ],
+  "install": {
+    "title": "Aggiungi DonatelleX alla schermata Home",
+    "subtitle": "Si apre con un tocco, a schermo intero, come una normale app. Senza App Store.",
+    "iosStep1": "Tocca «Condividi»",
+    "iosStep1Hint": "In basso in Safari (su iOS recenti, nel menu «⋯»)",
+    "iosOtherStep1": "Tocca «Condividi» nella barra degli indirizzi",
+    "iosStep2": "Scorri in basso e scegli",
+    "iosAddLabel": "Aggiungi alla schermata Home",
+    "iosStep2Hint": "Non lo vedi? Tocca «Modifica azioni» in fondo alla lista",
+    "iosStep3": "Tocca",
+    "iosAdd": "Aggiungi",
+    "inappText": "Questo browser integrato non può aggiungere app alla schermata Home. Apri il link in Safari: tocca ⋯ o ↗ e scegli «Apri in Safari», oppure copia il link e incollalo in Safari.",
+    "copyLink": "Copia link",
+    "copied": "Link copiato",
+    "androidInstall": "Installa app",
+    "androidManual": "Apri il menu ⋮ del browser e scegli «Installa app» o «Aggiungi a schermata Home».",
+    "later": "Più tardi",
+    "done": "Ho capito",
+    "profileItem": "Installa l'app",
+    "profileItemHint": "Icona di DonatelleX nella schermata Home"
+  }
 }

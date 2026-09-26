@@ -12,6 +12,7 @@ import { triggerHapticPulse } from "@/lib/haptics";
 import { estimateWorkoutCalories, calculateAge } from "@/lib/calories";
 import { useUserProfile, useProgramAccess } from "@/lib/queries";
 import { RestTimerOverlay } from "@/components/RestTimerOverlay";
+import { markWorkoutJustFinished } from "@/lib/install";
 import type { Exercise, WorkoutSet } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 
@@ -454,6 +455,7 @@ export default function WorkoutPlayerPage() {
       return data;
     },
     onSuccess: () => {
+      markWorkoutJustFinished();
       // Без этого страница "Прогресс" могла показывать старый (пустой)
       // снимок истории тренировок ещё до минуты (staleTime=60с в
       // main.tsx) после реального сохранения — данные в базе были, но

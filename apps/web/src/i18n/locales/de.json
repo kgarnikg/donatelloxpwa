@@ -780,5 +780,26 @@
     "Disziplin heute – Freiheit morgen.",
     "Such nicht den leichten Weg. Such den richtigen.",
     "Jedes Mal, wenn es schwer wird, wirst du ein Stück stärker."
-  ]
+  ],
+  "install": {
+    "title": "DonatelleX zum Home-Bildschirm hinzufügen",
+    "subtitle": "Öffnet sich mit einem Tipp im Vollbild – wie eine normale App. Ohne App Store.",
+    "iosStep1": "Tippe auf «Teilen»",
+    "iosStep1Hint": "Unten in Safari (bei neuerem iOS im Menü «⋯»)",
+    "iosOtherStep1": "Tippe auf «Teilen» in der Adressleiste",
+    "iosStep2": "Scrolle nach unten und wähle",
+    "iosAddLabel": "Zum Home-Bildschirm",
+    "iosStep2Hint": "Nicht zu sehen? Tippe unten in der Liste auf «Aktionen bearbeiten»",
+    "iosStep3": "Tippe auf",
+    "iosAdd": "Hinzufügen",
+    "inappText": "Dieser integrierte Browser kann keine Apps zum Home-Bildschirm hinzufügen. Öffne den Link in Safari: Tippe auf ⋯ oder ↗ und wähle «In Safari öffnen» – oder kopiere den Link und füge ihn in Safari ein.",
+    "copyLink": "Link kopieren",
+    "copied": "Link kopiert",
+    "androidInstall": "App installieren",
+    "androidManual": "Öffne das Browsermenü ⋮ und wähle «App installieren» oder «Zum Startbildschirm hinzufügen».",
+    "later": "Später",
+    "done": "Verstanden",
+    "profileItem": "App installieren",
+    "profileItemHint": "DonatelleX-Symbol auf dem Home-Bildschirm"
+  }
 }
