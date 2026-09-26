@@ -168,7 +168,11 @@
     },
     "perMonthSuffix": "/ mo.",
     "billedOnce": "Billed {{amount}} for {{label}}",
-    "startingFrom": "From {{amount}}/month"
+    "startingFrom": "From {{amount}}/month",
+    "totalFor": "{{amount}} for {{label}}",
+    "save": "You save {{amount}}",
+    "getStarted": "Get started",
+    "oneTime": "One-time payment, no auto-renewal"
   },
   "steps": {
     "eyebrow": "How it works",
@@ -272,6 +276,7 @@
       "body": "DonatelleX processes personal data in accordance with applicable data protection law. The full privacy policy will be published here before the platform's production launch."
     },
     "regionNotes": {
+      "am": "For users in Armenia, personal data is processed in accordance with the Law of the Republic of Armenia “On Protection of Personal Data”.",
       "ru": "For users in Russia, personal data is processed in accordance with Federal Law No. 152-FZ \"On Personal Data\".",
       "eu": "For users in the European Union, personal data is processed in accordance with the General Data Protection Regulation (GDPR).",
       "us": "For users in the United States, applicable state consumer privacy laws apply."
@@ -316,7 +321,10 @@
     "russia": "Russia",
     "europe": "Europe",
     "usa": "USA",
-    "ariaLabel": "Select region"
+    "ariaLabel": "Select region",
+    "armenia": "Armenia",
+    "pickerTitle": "Choose your region",
+    "pickerSubtitle": "So we can show prices and payment methods in the right currency"
   },
   "languageSwitcher": {
     "ariaLabel": "Select language"

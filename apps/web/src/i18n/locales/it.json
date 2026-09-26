@@ -225,7 +225,13 @@
     "confirmExitLeave": "Esci",
     "moveLater": "Sposta dopo",
     "replace": "Sostituisci",
-    "replaced": "Sostituito ✓"
+    "replaced": "Sostituito ✓",
+    "restMinimize": "Riduci",
+    "restExpand": "Espandi timer",
+    "nextUp": "Prossimo",
+    "restAdd": "{{count}} sec",
+    "restSkipShort": "Salta",
+    "noReplacement": "Non c'è ancora un'alternativa adatta per questo esercizio"
   },
   "nutrition": {
     "title": "Alimentazione",
@@ -408,6 +414,7 @@
     "subtitle": "Pagamento unico: accesso a tutti i programmi e i video esattamente per il periodo scelto, senza rinnovi automatici.",
     "regionLabel": "Regione",
     "regions": {
+      "am": "Armenia",
       "eu": "Europa",
       "us": "USA",
       "ru": "Russia"

@@ -1,5 +1,8 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
+import { isRegion } from "@donatellox/types";
 import { type Region, REGION_STORAGE_KEY, guessRegionFromLocale } from "@/lib/regionPricing";
+import { detectRegionByCountry } from "@/lib/detectRegion";
 
 interface RegionContextValue {
   region: Region;
@@ -11,27 +14,56 @@ interface RegionContextValue {
 const RegionContext = createContext<RegionContextValue | undefined>(undefined);
 
 export function RegionProvider({ children }: { children: ReactNode }) {
-  const [region, setRegionState] = useState<Region>("us");
+  // Стартовая догадка без сети (часовой пояс Asia/Yerevan → Армения, иначе
+  // язык браузера), чтобы цены сразу были в правильной валюте.
+  const [region, setRegionState] = useState<Region>(() => guessRegionFromLocale());
   const [isReady, setIsReady] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(REGION_STORAGE_KEY) as Region | null;
-    if (stored === "us" || stored === "eu" || stored === "ru") {
+    let stored: string | null = null;
+    try {
+      stored = localStorage.getItem(REGION_STORAGE_KEY);
+    } catch {
+      // приватный режим и т.п. — определяем заново
+    }
+    if (isRegion(stored)) {
       setRegionState(stored);
       setIsReady(true);
-    } else {
-      // Ещё не выбирали — подставляем эвристику по языку браузера как
-      // предзаполненный вариант в модалке, но просим подтвердить явно.
-      setRegionState(guessRegionFromLocale());
-      setShowPicker(true);
-      setIsReady(true);
+      return;
     }
+
+    // Первый визит: страна по IP (Vercel). Если определилась — ставим
+    // регион сам, без модалки (сменить можно в переключателе региона).
+    // Так гость из Армении сразу видит цены в драмах. Если страну узнать
+    // не удалось — как раньше: модалка с предвыбранной догадкой.
+    let cancelled = false;
+    detectRegionByCountry().then((byCountry) => {
+      if (cancelled) return;
+      if (byCountry) {
+        setRegionState(byCountry);
+        try {
+          localStorage.setItem(REGION_STORAGE_KEY, byCountry);
+        } catch {
+          // не критично
+        }
+      } else {
+        setShowPicker(true);
+      }
+      setIsReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   function setRegion(next: Region) {
     setRegionState(next);
-    localStorage.setItem(REGION_STORAGE_KEY, next);
+    try {
+      localStorage.setItem(REGION_STORAGE_KEY, next);
+    } catch {
+      // не критично — регион просто не запомнится
+    }
     setShowPicker(false);
   }
 
@@ -50,10 +82,12 @@ export function useRegion(): RegionContextValue {
   return ctx;
 }
 
-const REGION_OPTIONS: { value: Region; label: string; flag: string }[] = [
-  { value: "ru", label: "Россия", flag: "🇷🇺" },
-  { value: "eu", label: "Европа", flag: "🇪🇺" },
-  { value: "us", label: "США", flag: "🇺🇸" },
+// Порядок и названия — общие с переключателем региона (RegionSwitcher).
+const REGION_OPTIONS: { value: Region; labelKey: string; flag: string }[] = [
+  { value: "am", labelKey: "regionSwitcher.armenia", flag: "🇦🇲" },
+  { value: "eu", labelKey: "regionSwitcher.europe", flag: "🇪🇺" },
+  { value: "us", labelKey: "regionSwitcher.usa", flag: "🇺🇸" },
+  { value: "ru", labelKey: "regionSwitcher.russia", flag: "🇷🇺" },
 ];
 
 function RegionPickerModal({
@@ -63,12 +97,13 @@ function RegionPickerModal({
   current: Region;
   onSelect: (region: Region) => void;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/70 p-4 sm:items-center">
       <div className="w-full max-w-sm rounded-2xl border border-ink-700 bg-ink-900 p-6 text-center animate-fade-in">
-        <h2 className="font-display text-lg font-bold">Выберите ваш регион</h2>
+        <h2 className="font-display text-lg font-bold">{t("regionSwitcher.pickerTitle")}</h2>
         <p className="mt-1.5 text-sm text-neutral-400">
-          Чтобы показать цены и способы оплаты в правильной валюте
+          {t("regionSwitcher.pickerSubtitle")}
         </p>
 
         <div className="mt-5 space-y-2">
@@ -77,14 +112,14 @@ function RegionPickerModal({
               key={opt.value}
               onClick={() => onSelect(opt.value)}
               className={
-                "flex w-full items-center gap-3 rounded-md border px-4 py-3 text-left font-medium transition " +
+                "flex w-full items-center gap-3 rounded-md border px-4 py-3 text-start font-medium transition " +
                 (current === opt.value
                   ? "border-volt-400 bg-volt-400/10 text-volt-300"
                   : "border-ink-600 bg-ink-800 text-neutral-200 hover:border-ink-500")
               }
             >
               <span className="text-xl">{opt.flag}</span>
-              {opt.label}
+              {t(opt.labelKey)}
             </button>
           ))}
         </div>

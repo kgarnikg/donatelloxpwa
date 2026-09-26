@@ -225,7 +225,13 @@
     "confirmExitLeave": "Verlassen",
     "moveLater": "Nach hinten schieben",
     "replace": "Ersetzen",
-    "replaced": "Ersetzt ✓"
+    "replaced": "Ersetzt ✓",
+    "restMinimize": "Minimieren",
+    "restExpand": "Timer vergrößern",
+    "nextUp": "Als Nächstes",
+    "restAdd": "{{count}} Sek.",
+    "restSkipShort": "Weiter",
+    "noReplacement": "Für diese Übung gibt es noch keinen passenden Ersatz"
   },
   "nutrition": {
     "title": "Ernährung",
@@ -408,6 +414,7 @@
     "subtitle": "Einmalzahlung – Zugang zu allen Programmen und Videos genau für den gewählten Zeitraum, ohne automatische Verlängerung.",
     "regionLabel": "Region",
     "regions": {
+      "am": "Armenien",
       "eu": "Europa",
       "us": "USA",
       "ru": "Russland"

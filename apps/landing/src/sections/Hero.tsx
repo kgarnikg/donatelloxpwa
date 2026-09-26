@@ -64,7 +64,9 @@ export function Hero() {
   const cheapest = getRegionAmounts(region).annual;
   // Целое число дней в месяце — достаточно точно для маркетингового "меньше X в день",
   // не претендует на бухгалтерскую точность.
-  const perDay = (Number(cheapest.perMonthAmount.replace(/\s/g, "").replace(",", ".")) / 30).toFixed(2);
+  const perDayRaw = Number(cheapest.perMonthAmount.replace(/\s/g, "").replace(",", ".")) / 30;
+  // Драмы/рубли за день — целым числом ("105 ֏"), $/€ — с центами ("0,27 €").
+  const perDay = perDayRaw >= 10 ? String(Math.round(perDayRaw)) : perDayRaw.toFixed(2).replace(".", ",");
 
   const checklist = [
     { text: t("hero.checklist.personalized") },
@@ -235,7 +237,9 @@ export function HeroMobileDetails() {
   const { region } = useRegion();
 
   const cheapest = getRegionAmounts(region).annual;
-  const perDay = (Number(cheapest.perMonthAmount.replace(/\s/g, "").replace(",", ".")) / 30).toFixed(2);
+  const perDayRaw = Number(cheapest.perMonthAmount.replace(/\s/g, "").replace(",", ".")) / 30;
+  // Драмы/рубли за день — целым числом ("105 ֏"), $/€ — с центами ("0,27 €").
+  const perDay = perDayRaw >= 10 ? String(Math.round(perDayRaw)) : perDayRaw.toFixed(2).replace(".", ",");
 
   const checklist = [
     { text: t("hero.checklist.personalized") },

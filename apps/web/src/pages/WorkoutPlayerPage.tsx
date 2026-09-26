@@ -11,6 +11,7 @@ import { getYouTubeEmbedUrl } from "@/lib/video";
 import { triggerHapticPulse } from "@/lib/haptics";
 import { estimateWorkoutCalories, calculateAge } from "@/lib/calories";
 import { useUserProfile } from "@/lib/queries";
+import { RestTimerOverlay } from "@/components/RestTimerOverlay";
 import type { Exercise, WorkoutSet } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 
@@ -124,6 +125,9 @@ export default function WorkoutPlayerPage() {
   const [restState, setRestState] = useState<{ total: number; endAt: number; kind: "set" | "exercise" } | null>(
     null,
   );
+  // Полноэкранный режим таймера: открывается сам при каждом старте отдыха,
+  // "Свернуть" — компактная полоска внизу (тап по ней разворачивает обратно).
+  const [restExpanded, setRestExpanded] = useState(true);
   const [, forceTick] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -138,6 +142,7 @@ export default function WorkoutPlayerPage() {
     clearRestInterval();
     if (seconds <= 0) return;
     setRestState({ total: seconds, endAt: Date.now() + seconds * 1000, kind });
+    setRestExpanded(true);
     intervalRef.current = setInterval(() => forceTick((t) => t + 1), 1000);
 
     // Спрашиваем разрешение на уведомления один раз, лениво — именно в
@@ -152,6 +157,12 @@ export default function WorkoutPlayerPage() {
   function skipRestTimer() {
     clearRestInterval();
     setRestState(null);
+  }
+
+  function addRestTime(seconds: number) {
+    setRestState((prev) =>
+      prev ? { ...prev, total: prev.total + seconds, endAt: prev.endAt + seconds * 1000 } : prev,
+    );
   }
 
   // ---- Отметка подхода: один раз, без снятия --------------------------
@@ -316,39 +327,34 @@ export default function WorkoutPlayerPage() {
     setOrderOverride(currentOrder);
   }
 
+  // Замена упражнения — только на упражнение той же группы замены
+  // (exercises.swap_group, миграция 0079): грудь → грудь, трицепс →
+  // трицепс, круг на пресс → круг на пресс. Кандидатов подбирает сервер
+  // (suggest_exercise_swaps): тот же формат программы (зал/дом), без
+  // упражнений, которые уже есть в этой тренировке. Раньше искали по
+  // первому слову названия — "Жим гантелей" находил "Жим ногами".
+  const [swapError, setSwapError] = useState<string | null>(null);
+
   async function replaceExercise(original: Exercise) {
+    if (!workoutId) return;
     setReplacingId(original.id);
+    setSwapError(null);
     try {
-      // muscle_groups пустое почти у всех 2040 упражнений — в исходном
-      // сидировании (gen_sql_split.py) заполнялись только slug/title,
-      // ничего больше. Поиск по .overlaps() на пустом массиве находил
-      // 0 кандидатов и молча ничего не делал — кнопка "работала", просто
-      // без видимого эффекта. Вместо группы мышц ищем по первому слову
-      // названия — в русской номенклатуре упражнений это почти всегда
-      // тип движения ("Жим", "Тяга", "Приседание", "Сгибание" и т.п.),
-      // так похожие по паттерну упражнения находятся уже сейчас, без
-      // необходимости сначала размечать весь каталог по группам мышц.
-      const firstWord = original.title.trim().split(/\s+/)[0];
-      let candidates: Exercise[] = [];
-      if (firstWord && firstWord.length >= 3) {
-        const { data } = await supabase
-          .from("exercises")
-          .select("*")
-          .neq("id", original.id)
-          .ilike("title", `%${firstWord}%`)
-          .limit(25);
-        candidates = toCamelCase<Exercise[]>(data ?? []);
-      }
-      // Гарантированный запасной вариант — если по ключевому слову ничего
-      // не нашлось (редкое/уникальное название), берём случайное из ВСЕГО
-      // каталога. Кнопка должна что-то делать всегда, а не молчать.
+      const { data, error } = await supabase.rpc("suggest_exercise_swaps", {
+        p_exercise_id: original.id,
+        p_workout_id: workoutId,
+      });
+      if (error) throw error;
+      const current = substitutions[original.id];
+      const candidates = toCamelCase<Exercise[]>(data ?? []).filter((c) => c.id !== current?.id);
       if (candidates.length === 0) {
-        const { data } = await supabase.from("exercises").select("*").neq("id", original.id).limit(50);
-        candidates = toCamelCase<Exercise[]>(data ?? []);
+        setSwapError(original.id);
+        return;
       }
-      if (candidates.length === 0) return;
       const pick = candidates[Math.floor(Math.random() * candidates.length)];
       setSubstitutions((prev) => ({ ...prev, [original.id]: pick }));
+    } catch {
+      setSwapError(original.id);
     } finally {
       setReplacingId(null);
     }
@@ -464,6 +470,18 @@ export default function WorkoutPlayerPage() {
 
   const allDone = completedIds.size === workout.sets.length;
 
+  // Следующий неотмеченный подход — показываем на таймере отдыха ("Далее"),
+  // чтобы издалека было видно, к какому упражнению возвращаться.
+  let nextLabel: string | undefined;
+  for (const group of orderedGroups) {
+    const index = group.sets.findIndex((s) => !completedIds.has(s.id));
+    if (index === -1) continue;
+    const shown = substitutions[group.exercise.id] ?? group.exercise;
+    nextLabel = `${t("workout.set", { number: index + 1 })} · ${localizedOf(shown, "title", i18n.language)}`;
+    break;
+  }
+  const restOverlayOpen = !!restState && restExpanded;
+
   return (
     <div className={clsx(
         "min-h-dvh bg-ink-950 px-5 pt-6",
@@ -534,6 +552,7 @@ export default function WorkoutPlayerPage() {
                     <ArrowDown size={12} /> {t("workout.moveLater")}
                   </button>
                 )}
+                {group.exercise.swapGroup !== "other" && (
                 <button
                   onClick={() => replaceExercise(group.exercise)}
                   disabled={replacingId === group.exercise.id}
@@ -542,7 +561,11 @@ export default function WorkoutPlayerPage() {
                   <Shuffle size={12} className={replacingId === group.exercise.id ? "animate-spin" : ""} />
                   {substitutions[group.exercise.id] ? t("workout.replaced") : t("workout.replace")}
                 </button>
+                )}
               </div>
+              {swapError === group.exercise.id && (
+                <p className="mt-2 text-xs text-neutral-500">{t("workout.noReplacement")}</p>
+              )}
 
               <div className="mt-3 space-y-2">
                 {group.sets.map((set, i) => {
@@ -692,7 +715,7 @@ export default function WorkoutPlayerPage() {
         })()}
 
       <div className="fixed inset-x-0 bottom-0 z-40">
-        {undoSetId && (
+        {undoSetId && !restOverlayOpen && (
           <div className="border-t border-ink-700 bg-ink-800/95 px-5 py-2.5 backdrop-blur animate-fade-in">
             <div className="mx-auto flex max-w-md items-center justify-between gap-3 text-sm">
               <span className="flex items-center gap-2 text-neutral-300">
@@ -707,9 +730,18 @@ export default function WorkoutPlayerPage() {
             </div>
           </div>
         )}
-        {restState && (
+        {restState && !restExpanded && (
           <div className="border-t border-ink-700 bg-ink-900/95 px-5 py-3 backdrop-blur animate-fade-in">
-            <div className="mx-auto flex max-w-md items-center gap-3">
+            <div
+              className="mx-auto flex max-w-md cursor-pointer items-center gap-3"
+              role="button"
+              tabIndex={0}
+              aria-label={t("workout.restExpand")}
+              onClick={() => setRestExpanded(true)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") setRestExpanded(true);
+              }}
+            >
               <Timer size={18} className="shrink-0 text-volt-400" />
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between text-sm">
@@ -728,7 +760,10 @@ export default function WorkoutPlayerPage() {
                 </div>
               </div>
               <button
-                onClick={skipRestTimer}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  skipRestTimer();
+                }}
                 className="shrink-0 rounded-full p-1.5 text-neutral-400 hover:bg-ink-800 hover:text-neutral-200"
                 aria-label={t("workout.skipRest")}
               >
@@ -759,6 +794,19 @@ export default function WorkoutPlayerPage() {
           </button>
         </div>
       </div>
+
+      {restState && restExpanded && (
+        <RestTimerOverlay
+          kind={restState.kind}
+          remaining={restRemaining}
+          total={restState.total}
+          nextLabel={nextLabel}
+          onSkip={skipRestTimer}
+          onAddTime={addRestTime}
+          onMinimize={() => setRestExpanded(false)}
+          onUndo={undoSetId ? undoLastSet : undefined}
+        />
+      )}
 
       {confirmExit && (
         <div

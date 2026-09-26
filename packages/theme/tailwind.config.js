@@ -54,10 +54,16 @@ const config = {
           "0%, 100%": { boxShadow: "0 0 0 0 rgba(168,224,0,0.35)" },
           "50%": { boxShadow: "0 0 0 8px rgba(168,224,0,0)" },
         },
+        // Последние секунды таймера отдыха: каждая цифра "толкается" заново
+        "rest-tick": {
+          "0%": { transform: "scale(1.12)", opacity: "0.6" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
       },
       animation: {
         "fade-in": "fade-in 0.4s ease-out both",
         "pulse-glow": "pulse-glow 2.4s ease-in-out infinite",
+        "rest-tick": "rest-tick 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both",
       },
     },
   },

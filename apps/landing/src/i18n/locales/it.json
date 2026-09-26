@@ -154,7 +154,11 @@
     },
     "perMonthSuffix": "/ mese",
     "billedOnce": "Addebito unico di {{amount}} per {{label}}",
-    "startingFrom": "Da {{amount}}/mese"
+    "startingFrom": "Da {{amount}}/mese",
+    "totalFor": "{{amount}} per {{label}}",
+    "save": "Risparmi {{amount}}",
+    "getStarted": "Inizia ora",
+    "oneTime": "Pagamento unico, senza rinnovo automatico"
   },
   "steps": {
     "eyebrow": "Come iniziare",
@@ -258,6 +262,7 @@
       "body": "DonatelleX tratta i dati personali in conformità con la normativa applicabile in materia di protezione dei dati. Il testo completo dell'informativa sulla privacy sarà pubblicato qui prima del lancio in produzione della piattaforma."
     },
     "regionNotes": {
+      "am": "Per gli utenti in Armenia, i dati personali sono trattati ai sensi della Legge della Repubblica di Armenia «Sulla protezione dei dati personali».",
       "ru": "Per gli utenti in Russia, i dati personali sono trattati ai sensi della Legge Federale n. 152-FZ «Sui dati personali».",
       "eu": "Per gli utenti nell'Unione Europea, i dati personali sono trattati ai sensi del Regolamento Generale sulla Protezione dei Dati (GDPR).",
       "us": "Per gli utenti negli Stati Uniti, si applicano le leggi statali sulla privacy dei consumatori applicabili."
@@ -302,7 +307,10 @@
     "russia": "Russia",
     "europe": "Europa",
     "usa": "USA",
-    "ariaLabel": "Seleziona regione"
+    "ariaLabel": "Seleziona regione",
+    "armenia": "Armenia",
+    "pickerTitle": "Scegli la tua regione",
+    "pickerSubtitle": "Per mostrarti prezzi e metodi di pagamento nella valuta giusta"
   },
   "languageSwitcher": {
     "ariaLabel": "Seleziona lingua"

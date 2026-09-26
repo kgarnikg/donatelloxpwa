@@ -7,9 +7,10 @@ import { useRegion } from "@/context/RegionContext";
 import type { Region } from "@/lib/regionPricing";
 
 const REGION_KEYS: { value: Region; labelKey: string; flag: string }[] = [
-  { value: "ru", labelKey: "regionSwitcher.russia", flag: "🇷🇺" },
+  { value: "am", labelKey: "regionSwitcher.armenia", flag: "🇦🇲" },
   { value: "eu", labelKey: "regionSwitcher.europe", flag: "🇪🇺" },
   { value: "us", labelKey: "regionSwitcher.usa", flag: "🇺🇸" },
+  { value: "ru", labelKey: "regionSwitcher.russia", flag: "🇷🇺" },
 ];
 
 /**
@@ -35,7 +36,7 @@ export function RegionSwitcher({ variant = "fixed" }: { variant?: "fixed" | "inl
   useOnClickOutside(ref, () => setOpen(false));
 
   const options = REGION_KEYS.map((o) => ({ ...o, label: t(o.labelKey) }));
-  const current = options.find((o) => o.value === region) ?? options[2];
+  const current = options.find((o) => o.value === region) ?? options[0];
   const isInline = variant === "inline";
 
   const menu = open && (

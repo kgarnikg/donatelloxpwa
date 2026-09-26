@@ -225,7 +225,13 @@
     "replace": "Sustituir",
     "replaced": "Sustituido ✓",
     "setMarked": "Serie completada",
-    "undo": "Deshacer"
+    "undo": "Deshacer",
+    "restMinimize": "Minimizar",
+    "restExpand": "Ampliar temporizador",
+    "nextUp": "A continuación",
+    "restAdd": "{{count}} s",
+    "restSkipShort": "Saltar",
+    "noReplacement": "Todavía no hay un reemplazo adecuado para este ejercicio"
   },
   "nutrition": {
     "title": "Nutrición",
@@ -563,6 +569,7 @@
     "subtitle": "Pago único: acceso a todos los programas y vídeos durante exactamente el periodo elegido, sin renovaciones automáticas.",
     "regionLabel": "Región",
     "regions": {
+      "am": "Armenia",
       "eu": "Europa",
       "us": "EE. UU.",
       "ru": "Rusia"

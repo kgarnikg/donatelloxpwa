@@ -174,7 +174,7 @@ export const subscriptionPlanSchema = z.enum(["monthly", "quarterly", "semiannua
 
 export const paymentProviderSchema = z.enum(["stripe", "paypal", "yookassa", "usdt"]);
 
-export const currencySchema = z.enum(["EUR", "USD", "RUB", "USDT"]);
+export const currencySchema = z.enum(["EUR", "USD", "RUB", "USDT", "AMD"]);
 
 export const createCheckoutSchema = z.object({
   plan: subscriptionPlanSchema,

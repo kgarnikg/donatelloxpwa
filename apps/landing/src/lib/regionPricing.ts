@@ -4,7 +4,7 @@ import {
   REGION_CURRENCY,
   formatMinorAmount,
   getRegionPrices,
-  guessRegionFromLanguage,
+  guessRegionFromDevice,
   type PurchasablePlan,
   type Region,
 } from "@donatellox/types";
@@ -14,6 +14,7 @@ export type { PurchasablePlan, Region };
 export const REGION_STORAGE_KEY = "donatellox-region";
 
 export const REGION_LABELS: Record<Region, string> = {
+  am: "Армения",
   us: "США",
   eu: "Европа",
   ru: "Россия",
@@ -57,12 +58,13 @@ export function getRegionAmounts(region: Region): Record<PurchasablePlan, PlanAm
 // Принимаются ли российские карты — открытый вопрос к банку, поэтому для
 // региона "ru" пока показываем то же самое, без обещаний про СБП/ЮKassa.
 export const REGION_PAYMENT_METHODS: Record<Region, string[]> = {
+  am: ["Visa", "Mastercard", "ArCa"],
   us: ["Visa", "Mastercard", "ArCa"],
   eu: ["Visa", "Mastercard", "ArCa"],
   ru: ["Visa", "Mastercard", "ArCa"],
 };
 
-/** Определяет регион по языку браузера при самом первом визите (эвристика, не точная геолокация). */
+/** Быстрая догадка без сети при первом визите: часовой пояс (Asia/Yerevan → Армения), иначе язык браузера. */
 export function guessRegionFromLocale(): Region {
-  return guessRegionFromLanguage(navigator.language);
+  return guessRegionFromDevice(navigator.language);
 }

@@ -187,6 +187,11 @@ export interface Exercise {
   thumbnailUrl?: string;
   durationSeconds?: number;
   equipment?: string[];
+  /**
+   * На что можно заменить кнопкой "Заменить" (0079): chest, back, triceps,
+   * quads, block_core... "other" — заменять нечего (заголовок-плейсхолдер).
+   */
+  swapGroup?: string | null;
 }
 
 export interface WorkoutSet {

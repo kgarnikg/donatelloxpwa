@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -10,14 +10,16 @@ import {
   formatRegionPrice,
   getPayableAmount,
   getRegionPrices,
-  guessRegionFromLanguage,
+  guessRegionFromDevice,
   isDiscountApplicable,
+  isRegion,
   type PurchasablePlan,
   type Region,
 } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 import { useActiveSubscription } from "@/lib/queries";
 import { useAuth } from "@/context/AuthContext";
+import { detectRegionByCountry } from "@/lib/detectRegion";
 
 /**
  * Выбор периода и оплата (Фаза 3).
@@ -34,14 +36,14 @@ import { useAuth } from "@/context/AuthContext";
 const REGION_STORAGE_KEY = "donatellox-region";
 const PAYMENTS_ENABLED = import.meta.env.VITE_PAYMENTS_ENABLED === "true";
 
-function readStoredRegion(fallbackLanguage: string): Region {
+function readStoredRegion(): Region | null {
   try {
     const stored = localStorage.getItem(REGION_STORAGE_KEY);
-    if (stored === "eu" || stored === "us" || stored === "ru") return stored;
+    if (isRegion(stored)) return stored;
   } catch {
     // localStorage недоступен (приватный режим и т.п.) — просто угадываем
   }
-  return guessRegionFromLanguage(fallbackLanguage || navigator.language);
+  return null;
 }
 
 export default function SubscriptionPage() {
@@ -49,9 +51,24 @@ export default function SubscriptionPage() {
   const { profile } = useAuth();
   const { data: activeSubscription } = useActiveSubscription();
   const [plan, setPlan] = useState<PurchasablePlan>("quarterly");
-  const [region, setRegionState] = useState<Region>(() =>
-    readStoredRegion(i18n.language),
+  const [region, setRegionState] = useState<Region>(
+    () =>
+      readStoredRegion() ??
+      guessRegionFromDevice(i18n.language || navigator.language),
   );
+
+  // Регион ещё не выбирали — уточняем по стране (IP, api/geo.ts): гость из
+  // Армении сразу видит цены в драмах. Выбор человека не перетираем.
+  useEffect(() => {
+    if (readStoredRegion()) return;
+    let cancelled = false;
+    detectRegionByCountry().then((byCountry) => {
+      if (!cancelled && byCountry && !readStoredRegion()) setRegionState(byCountry);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
   const [error, setError] = useState<string | null>(null);
 
   const discountPercent = profile?.pendingDiscountPercent ?? 0;
@@ -143,7 +160,7 @@ export default function SubscriptionPage() {
         <p className="mb-2 text-xs uppercase tracking-wide text-neutral-500">
           {t("payment.regionLabel")}
         </p>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {REGIONS.map((r) => (
             <button
               key={r}

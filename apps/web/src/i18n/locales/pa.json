@@ -225,7 +225,13 @@
     "confirmExitLeave": "ਛੱਡੋ",
     "moveLater": "ਬਾਅਦ ਵਿੱਚ ਕਰੋ",
     "replace": "ਬਦਲੋ",
-    "replaced": "ਬਦਲ ਦਿੱਤੀ ✓"
+    "replaced": "ਬਦਲ ਦਿੱਤੀ ✓",
+    "restMinimize": "ਛੋਟਾ ਕਰੋ",
+    "restExpand": "ਟਾਈਮਰ ਵੱਡਾ ਕਰੋ",
+    "nextUp": "ਅੱਗੇ",
+    "restAdd": "{{count}} ਸਕਿੰਟ",
+    "restSkipShort": "ਅੱਗੇ ਵਧੋ",
+    "noReplacement": "ਇਸ ਕਸਰਤ ਲਈ ਅਜੇ ਕੋਈ ਢੁਕਵਾਂ ਬਦਲ ਨਹੀਂ ਹੈ"
   },
   "nutrition": {
     "title": "ਖੁਰਾਕ",
@@ -408,6 +414,7 @@
     "subtitle": "ਇੱਕ ਵਾਰ ਦਾ ਭੁਗਤਾਨ — ਚੁਣੀ ਗਈ ਮਿਆਦ ਲਈ ਸਾਰੇ ਪ੍ਰੋਗਰਾਮਾਂ ਅਤੇ ਵੀਡੀਓ ਤੱਕ ਪਹੁੰਚ, ਕੋਈ ਆਟੋਮੈਟਿਕ ਨਵੀਨੀਕਰਨ ਨਹੀਂ।",
     "regionLabel": "ਖੇਤਰ",
     "regions": {
+      "am": "ਅਰਮੀਨੀਆ",
       "eu": "ਯੂਰਪ",
       "us": "ਅਮਰੀਕਾ",
       "ru": "ਰੂਸ"

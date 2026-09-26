@@ -225,7 +225,13 @@
     "replace": "Replace",
     "replaced": "Replaced ✓",
     "setMarked": "Set completed",
-    "undo": "Undo"
+    "undo": "Undo",
+    "restMinimize": "Minimize",
+    "restExpand": "Expand timer",
+    "nextUp": "Up next",
+    "restAdd": "{{count}} sec",
+    "restSkipShort": "Skip",
+    "noReplacement": "No suitable replacement for this exercise yet"
   },
   "nutrition": {
     "title": "Nutrition",
@@ -563,6 +569,7 @@
     "subtitle": "One-time payment — access to all programs and videos for exactly the period you choose, no automatic renewals.",
     "regionLabel": "Region",
     "regions": {
+      "am": "Armenia",
       "eu": "Europe",
       "us": "USA",
       "ru": "Russia"

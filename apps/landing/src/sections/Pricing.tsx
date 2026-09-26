@@ -1,23 +1,34 @@
-import { Check, Flame } from "lucide-react";
+import { Check, Flame, Trophy } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
+import { formatRegionPrice, getRegionPrices } from "@donatellox/types";
 import { useRegion } from "@/context/RegionContext";
-import { getRegionAmounts, formatAmount, REGION_PAYMENT_METHODS, type PurchasablePlan } from "@/lib/regionPricing";
+import { REGION_PAYMENT_METHODS, type PurchasablePlan } from "@/lib/regionPricing";
 import { APP_URL } from "@/lib/appUrl";
 
-const PLAN_ORDER: { value: PurchasablePlan; discountBadge?: string; highlight?: "popular" | "best-value" }[] = [
+type Highlight = "popular" | "best-value";
+
+const PLAN_ORDER: { value: PurchasablePlan; highlight?: Highlight }[] = [
   { value: "monthly" },
-  { value: "quarterly", discountBadge: "-25%" },
-  { value: "semiannual", discountBadge: "-40%", highlight: "popular" },
-  { value: "annual", discountBadge: "-60%", highlight: "best-value" },
+  { value: "quarterly" },
+  { value: "semiannual", highlight: "popular" },
+  { value: "annual", highlight: "best-value" },
 ];
 
+/**
+ * Карточки цен по образцу "сильных" прайсингов фитнес-приложений:
+ * крупная цена за месяц, крупно зачёркнутая старая цена рядом с итоговой,
+ * диагональная лента со скидкой в углу и одна яркая кнопка на всю ширину.
+ * Процент скидки и экономия считаются из тех же цифр, что и чекаут
+ * (`@donatellox/types`, pricing.ts), — вручную их нигде не прописываем.
+ */
 export function Pricing() {
   const { t } = useTranslation();
   const { region } = useRegion();
-  const amounts = getRegionAmounts(region);
+  const prices = getRegionPrices(region);
   const baseFeatures = t("pricing.baseFeatures", { returnObjects: true }) as string[];
   const paymentMethods = REGION_PAYMENT_METHODS[region];
+  const price = (minor: number) => formatRegionPrice(region, minor);
 
   return (
     <section id="pricing" className="py-20 sm:py-28">
@@ -28,86 +39,119 @@ export function Pricing() {
           <p className="mt-4 text-neutral-400">{t("pricing.subtitle")}</p>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
           {PLAN_ORDER.map((plan) => {
+            const p = prices[plan.value];
             const label = t(`pricing.plans.${plan.value}.label`) as string;
-            const planAmounts = amounts[plan.value];
-            const mainPrice = formatAmount(region, planAmounts.main);
-            const perMonth = t(`pricing.plans.${plan.value}.perMonth`, {
-              amount: formatAmount(region, planAmounts.perMonthAmount),
-            }) as string;
-            const originalTotal = planAmounts.originalAmount
-              ? (t(`pricing.plans.${plan.value}.originalTotal`, {
-                  amount: formatAmount(region, planAmounts.originalAmount),
-                }) as string)
-              : undefined;
+            const discount = p.original ? Math.round((1 - p.total / p.original) * 100) : 0;
+            const isPopular = plan.highlight === "popular";
+            const isBest = plan.highlight === "best-value";
 
-            const features =
-              plan.highlight === "best-value"
-                ? [
-                    ...baseFeatures,
-                    t("pricing.extraFeatures.prioritySupport"),
-                    t("pricing.extraFeatures.earlyAccess"),
-                    t("pricing.extraFeatures.maxSavings"),
-                  ]
-                : plan.highlight === "popular"
-                  ? [...baseFeatures, t("pricing.extraFeatures.prioritySupport"), t("pricing.extraFeatures.earlyAccess")]
-                  : plan.value === "quarterly"
-                    ? [...baseFeatures, t("pricing.extraFeatures.prioritySupport")]
-                    : baseFeatures;
+            const features = isBest
+              ? [
+                  ...baseFeatures,
+                  t("pricing.extraFeatures.prioritySupport"),
+                  t("pricing.extraFeatures.earlyAccess"),
+                  t("pricing.extraFeatures.maxSavings"),
+                ]
+              : isPopular
+                ? [...baseFeatures, t("pricing.extraFeatures.prioritySupport"), t("pricing.extraFeatures.earlyAccess")]
+                : plan.value === "quarterly"
+                  ? [...baseFeatures, t("pricing.extraFeatures.prioritySupport")]
+                  : baseFeatures;
 
             return (
               <div
                 key={plan.value}
                 className={clsx(
-                  "card relative flex flex-col rounded-xl transition duration-200 hover:-translate-y-0.5",
-                  plan.highlight === "popular" &&
-                    "border-volt-400 shadow-[0_0_0_2px_rgba(168,224,0,0.35),0_0_44px_rgba(168,224,0,0.25)]",
-                  plan.highlight === "best-value" &&
-                    "border-ember-400 shadow-[0_0_0_2px_rgba(255,107,53,0.35),0_0_44px_rgba(255,107,53,0.25)]",
-                  !plan.highlight &&
-                    "hover:border-volt-400 hover:shadow-[0_0_0_2px_rgba(168,224,0,0.3),0_0_40px_rgba(168,224,0,0.2)]",
+                  "relative flex flex-col rounded-2xl border bg-ink-900 transition duration-200 hover:-translate-y-1",
+                  isPopular &&
+                    "border-volt-400 bg-gradient-to-b from-volt-400/[0.10] to-ink-900 shadow-[0_0_0_1px_rgba(168,224,0,0.5),0_0_48px_rgba(168,224,0,0.22)] lg:-my-2",
+                  isBest && "border-ember-400/80 shadow-[0_0_0_1px_rgba(255,107,53,0.4),0_0_40px_rgba(255,107,53,0.16)]",
+                  !plan.highlight && "border-ink-700 hover:border-ink-600",
                 )}
               >
-                {plan.highlight === "popular" && (
-                  <span className="absolute -top-3 left-1/2 flex -translate-x-1/2 items-center gap-1 whitespace-nowrap rounded-full bg-volt-400 px-3 py-1 text-xs font-bold text-ink-950">
-                    <Flame size={12} /> {t("pricing.popularBadge")}
-                  </span>
-                )}
-                {plan.highlight === "best-value" && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-ember-400 px-3 py-1 text-xs font-bold text-ink-950">
-                    {t("pricing.bestValueBadge")}
-                  </span>
-                )}
-
-                {plan.discountBadge && (
-                  <span className="mb-3 inline-block w-fit rounded-full bg-volt-400/10 px-2.5 py-1 text-xs font-semibold text-volt-400">
-                    {plan.discountBadge}
+                {plan.highlight && (
+                  <span
+                    className={clsx(
+                      "absolute -top-3.5 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.1em] text-ink-950 shadow-lg",
+                      isPopular ? "bg-volt-400" : "bg-ember-400",
+                    )}
+                  >
+                    {isPopular ? <Flame size={14} /> : <Trophy size={14} />}
+                    {isPopular ? t("pricing.popularBadge") : t("pricing.bestValueBadge")}
                   </span>
                 )}
 
-                <h3 className="font-semibold">{label}</h3>
-                <p className="mt-2">
-                  <span className="font-display text-3xl font-bold">{mainPrice}</span>
-                </p>
-                <p className="text-sm text-neutral-400">{perMonth}</p>
-                {originalTotal && <p className="mt-1 text-xs text-neutral-600 line-through">{originalTotal}</p>}
+                {discount > 0 && (
+                  <div className="pointer-events-none absolute end-0 top-0 h-28 w-28 overflow-hidden rounded-se-2xl" aria-hidden>
+                    <div
+                      className={clsx(
+                        "absolute -end-9 top-[22px] w-40 rotate-45 py-1.5 text-center font-display text-lg font-extrabold shadow-lg rtl:-rotate-45",
+                        isPopular ? "bg-ink-950 text-volt-400" : "bg-volt-400 text-ink-950",
+                      )}
+                    >
+                      <span dir="ltr">−{discount}%</span>
+                    </div>
+                  </div>
+                )}
 
-                <ul className="mt-6 flex-1 space-y-3">
-                  {features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm text-neutral-300">
-                      <Check size={16} className="mt-0.5 shrink-0 text-volt-400" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+                <div className="flex flex-1 flex-col p-6 pt-8">
+                  <h3 className="pe-14 text-sm font-bold uppercase tracking-[0.14em] text-neutral-300">{label}</h3>
 
-                <a
-                  href={`${APP_URL}/register`}
-                  className={clsx("mt-8 w-full", plan.highlight ? "btn-primary" : "btn-secondary")}
-                >
-                  {t("pricing.choosePlan")}
-                </a>
+                  <div className="mt-4 flex flex-wrap items-end gap-x-1.5">
+                    <span className="whitespace-nowrap font-display text-5xl font-extrabold leading-none tracking-tight lg:text-4xl">
+                      {price(p.perMonth)}
+                    </span>
+                    <span className="whitespace-nowrap pb-0.5 text-base text-neutral-400">{t("pricing.perMonthSuffix")}</span>
+                  </div>
+
+                  <div className="mt-4 min-h-[64px]">
+                    {p.original ? (
+                      <>
+                        <p className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                          <span className="text-xl font-semibold text-neutral-500 line-through decoration-ember-400 decoration-2">
+                            {price(p.original)}
+                          </span>
+                          <span className="text-lg font-bold text-neutral-0">
+                            {t("pricing.totalFor", { amount: price(p.total), label })}
+                          </span>
+                        </p>
+                        <span className="mt-2 inline-block rounded-md bg-volt-400/15 px-2 py-0.5 text-sm font-bold text-volt-400">
+                          {t("pricing.save", { amount: price(p.original - p.total) })}
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-lg font-bold text-neutral-0">
+                          {t("pricing.totalFor", { amount: price(p.total), label })}
+                        </p>
+                        <p className="mt-1 text-sm text-neutral-500">{t("pricing.oneTime")}</p>
+                      </>
+                    )}
+                  </div>
+
+                  <a
+                    href={`${APP_URL}/register`}
+                    className={clsx(
+                      "mt-6 inline-flex w-full items-center justify-center rounded-lg px-6 py-4 text-base font-extrabold uppercase tracking-wide transition active:scale-[0.98]",
+                      isPopular && "bg-volt-400 text-ink-950 hover:bg-volt-300",
+                      isBest && "bg-ember-400 text-ink-950 hover:brightness-110",
+                      !plan.highlight && "bg-neutral-0 text-ink-950 hover:bg-neutral-200",
+                    )}
+                  >
+                    {t("pricing.getStarted")}
+                  </a>
+
+                  <ul className="mt-6 flex-1 space-y-2.5 border-t border-ink-700 pt-5">
+                    {features.map((f) => (
+                      <li key={f} className="flex items-start gap-2 text-sm text-neutral-300">
+                        <Check size={16} className="mt-0.5 shrink-0 text-volt-400" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             );
           })}
