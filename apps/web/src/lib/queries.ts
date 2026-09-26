@@ -11,7 +11,7 @@ import type {
 import { toCamelCase } from "@donatellox/types";
 import { useAuth } from "@/context/AuthContext";
 import { estimateDailyCalories, estimateWorkoutCalories, calculateAge, type CalorieEstimate } from "@/lib/calories";
-import { localizedField } from "@/lib/localizedField";
+import { localizedOf, withTranslations } from "@/lib/localizedField";
 import i18n from "@/i18n";
 
 const FREE_TRIAL_DAYS = 7;
@@ -153,22 +153,14 @@ export function useWorkoutHistory() {
       if (ids.length > 0) {
         const { data: workouts, error: workoutsError } = await supabase
           .from("workouts")
-          .select("id, title, title_en, title_es, title_hy, week_label, week_label_en, week_label_es, week_label_hy")
+          .select("id, " + withTranslations("title", "week_label"))
           .in("id", ids);
         if (workoutsError) throw workoutsError;
-        for (const w of (workouts ?? []) as Array<Record<string, string | null>>) {
+        for (const w of (workouts ?? []) as unknown as Array<Record<string, string | null>>) {
           info.set(w.id as string, {
-            title: localizedField(
-              w.title ?? "",
-              { en: w.title_en, es: w.title_es, hy: w.title_hy },
-              i18n.language,
-            ),
+            title: localizedOf(w, "title", i18n.language),
             weekLabel: w.week_label
-              ? localizedField(
-                  w.week_label,
-                  { en: w.week_label_en, es: w.week_label_es, hy: w.week_label_hy },
-                  i18n.language,
-                )
+              ? localizedOf(w, "week_label", i18n.language)
               : null,
           });
         }
@@ -375,29 +367,21 @@ export function usePersonalRecords() {
 
       const { data: exercisesData, error: exercisesError } = await supabase
         .from("exercises")
-        .select("id, title, title_en, title_es, title_hy")
+        .select("id, " + withTranslations("title"))
         .in("id", Array.from(best.keys()));
       if (exercisesError) throw exercisesError;
 
       const titleMap = new Map<string, string>(
-        (exercisesData ?? []).map((e) => [
+        ((exercisesData ?? []) as unknown as Array<Record<string, string>>).map((e) => [
           e.id as string,
-          localizedField(
-            e.title as string,
-            {
-              en: e.title_en as string | null,
-              es: e.title_es as string | null,
-              hy: e.title_hy as string | null,
-            },
-            i18n.language,
-          ),
+          localizedOf(e, "title", i18n.language),
         ]),
       );
 
       return Array.from(best.entries())
         .map(([exerciseId, v]) => ({
           exerciseId,
-          exerciseTitle: titleMap.get(exerciseId) ?? "Упражнение",
+          exerciseTitle: titleMap.get(exerciseId) ?? i18n.t("common.exercise"),
           bestWeightKg: v.weightKg,
           achievedAt: v.achievedAt,
         }))
@@ -600,7 +584,7 @@ export function useSetCalorieOverride() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ loggedAt, calories }: { loggedAt: string; calories: number }) => {
-      if (!authUser) throw new Error("Сессия истекла — войдите заново.");
+      if (!authUser) throw new Error(i18n.t("errors.sessionExpired"));
       const { error } = await supabase
         .from("calorie_overrides")
         .upsert(

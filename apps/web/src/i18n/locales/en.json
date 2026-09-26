@@ -9,7 +9,11 @@
     "min": "min",
     "kg": "kg",
     "logout": "Log out",
-    "close": "Close"
+    "close": "Close",
+    "block": "Block {{n}}",
+    "user": "User",
+    "exercise": "Exercise",
+    "ton": "t"
   },
   "nav": {
     "home": "Home",
@@ -31,7 +35,8 @@
       "signUp": "Sign up",
       "or": "or",
       "continueWithGoogle": "Continue with Google",
-      "openingGoogle": "Opening Google…"
+      "openingGoogle": "Opening Google…",
+      "invalidCredentials": "Incorrect email or password"
     },
     "register": {
       "title": "Create account",
@@ -47,6 +52,38 @@
       "submitting": "Creating account…",
       "haveAccount": "Already have an account?",
       "signIn": "Sign in"
+    },
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "backToLogin": "Back to sign in",
+    "forgot": {
+      "title": "Reset password",
+      "sent": "We've emailed you a link to reset your password.",
+      "sending": "Sending…",
+      "submit": "Send link"
+    },
+    "reset": {
+      "invalidTitle": "Link is invalid",
+      "invalidText": "This password reset link has expired or has already been used. Please request a new one.",
+      "requestNew": "Request a new link",
+      "doneTitle": "Password updated",
+      "redirecting": "Taking you to the app…",
+      "title": "New password",
+      "subtitle": "Choose a new password to sign in.",
+      "newPassword": "New password",
+      "repeatPassword": "Repeat password",
+      "saving": "Saving…",
+      "save": "Save password"
+    },
+    "verify": {
+      "title": "Confirm your email",
+      "text": "We've sent you an email with a confirmation link. Open it to continue.",
+      "emailPlaceholder": "your email",
+      "resendIn": "Resend in {{time}}",
+      "sending": "Sending…",
+      "resend": "Resend email",
+      "resent": "Email sent again.",
+      "failed": "Couldn't send it. Please try again later."
     }
   },
   "onboarding": {
@@ -349,7 +386,9 @@
     "notifications": "Notifications",
     "logout": "Log out",
     "support": "Help",
-    "body": "Body parameters"
+    "body": "Body parameters",
+    "namePlaceholder": "Your name",
+    "notificationsSoon": "Push notifications about workouts and your subscription are coming here soon."
   },
   "language": {
     "title": "App language",
@@ -381,6 +420,84 @@
       "year": "This year",
       "all": "All time",
       "kg": "kg"
+    },
+    "badges": {
+      "first_workout": {
+        "title": "First Step",
+        "description": "Complete your first workout"
+      },
+      "workouts_10": {
+        "title": "Gaining Speed",
+        "description": "Complete 10 workouts"
+      },
+      "workouts_25": {
+        "title": "In the Groove",
+        "description": "Complete 25 workouts"
+      },
+      "workouts_50": {
+        "title": "Half-Century",
+        "description": "Complete 50 workouts"
+      },
+      "workouts_100": {
+        "title": "Century",
+        "description": "Complete 100 workouts"
+      },
+      "workouts_200": {
+        "title": "Iron Will",
+        "description": "Complete 200 workouts"
+      },
+      "streak_3": {
+        "title": "Warming Up",
+        "description": "Train 3 days in a row"
+      },
+      "streak_7": {
+        "title": "Power Week",
+        "description": "Train 7 days in a row"
+      },
+      "streak_14": {
+        "title": "Two Weeks Strong",
+        "description": "Train 14 days in a row"
+      },
+      "streak_30": {
+        "title": "No Days Off",
+        "description": "Train 30 days in a row"
+      },
+      "streak_60": {
+        "title": "Unbreakable",
+        "description": "Train 60 days in a row"
+      },
+      "volume_1000": {
+        "title": "First Ton",
+        "description": "1,000 kg lifted in total"
+      },
+      "volume_5000": {
+        "title": "Five Tons",
+        "description": "5,000 kg lifted in total"
+      },
+      "volume_10000": {
+        "title": "Ten Tons",
+        "description": "10,000 kg lifted in total"
+      },
+      "volume_25000": {
+        "title": "A Quarter of a Bus",
+        "description": "25,000 kg lifted in total"
+      },
+      "volume_50000": {
+        "title": "Fifty Tons",
+        "description": "50,000 kg lifted in total"
+      },
+      "volume_100000": {
+        "title": "Hundred Tons",
+        "description": "100,000 kg lifted in total"
+      },
+      "volume_250000": {
+        "title": "Quarter Million",
+        "description": "250,000 kg lifted in total"
+      },
+      "volume_500000": {
+        "title": "Half a Million",
+        "description": "500,000 kg lifted in total"
+      }
     }
   },
   "programs": {
@@ -426,7 +543,9 @@
     "startProgram": "Start program",
     "equipment": "Equipment",
     "switchNote": "Your active program is “{{program}}”. Your progress there is saved and you can go back any time.",
-    "lockedText": "Your free week is over. Get access to continue — it unlocks all programs at once."
+    "lockedText": "Your free week is over. Get access to continue — it unlocks all programs at once.",
+    "notFound": "Program not found.",
+    "noWorkoutsYet": "Workouts for this program are coming soon."
   },
   "support": {
     "title": "Help",
@@ -501,5 +620,134 @@
       "weight": "Weight must be 30–300 kg",
       "birthDate": "Check your date of birth"
     }
-  }
+  },
+  "notFound": {
+    "title": "Page not found",
+    "home": "Go home"
+  },
+  "errors": {
+    "sessionExpired": "Your session has expired — please sign in again.",
+    "sessionExpiredSave": "Your session has expired — sign in again to save your workout.",
+    "workoutUnknown": "Couldn't identify the workout.",
+    "workoutSaveFailed": "Couldn't save your workout. Please try again."
+  },
+  "validation": {
+    "emailRequired": "Enter your email",
+    "emailInvalid": "Enter a valid email",
+    "passwordMin": "At least 8 characters",
+    "passwordMax": "Password is too long",
+    "passwordLetter": "Password must contain at least one letter",
+    "passwordDigit": "Password must contain at least one digit",
+    "phoneInvalid": "Enter a valid phone number in international format",
+    "nameRequired": "Enter your name",
+    "acceptTerms": "You need to accept the terms of use",
+    "passwordsMismatch": "Passwords don't match",
+    "passwordRequired": "Enter your password",
+    "goalsRequired": "Choose at least one goal"
+  },
+  "quotes": [
+    "Discipline wins when motivation runs out.",
+    "The body achieves what the mind believes.",
+    "The only bad workout is the one that didn't happen.",
+    "Progress, not perfection.",
+    "Today's discomfort is tomorrow's strength.",
+    "Don't wait for motivation. Start — it'll catch up.",
+    "Small steps every day add up to big results.",
+    "Your only competition is who you were yesterday.",
+    "Strength doesn't come from what comes easy.",
+    "Hard doesn't mean impossible.",
+    "Every rep is an investment in a better you.",
+    "Results don't care if you felt lazy.",
+    "Start where you are, with what you've got.",
+    "The last rep is the one that counts.",
+    "Comfort and growth never live together.",
+    "You don't have to be fast. You have to be consistent.",
+    "Training is talking to yourself in the language of action.",
+    "Change your habits and your body follows.",
+    "Hard days build strong people.",
+    "Train to respect your body, not to punish it.",
+    "You can't lose if you never quit.",
+    "The only workout you'll regret is the one you skipped.",
+    "Discipline first. Results follow.",
+    "Hard today, easy tomorrow.",
+    "Your progress doesn't have to be fast — just real.",
+    "Every day is a chance to beat yesterday.",
+    "Strength is built one rep at a time.",
+    "Don't compare your step one to someone else's step one hundred.",
+    "Sweat today, confidence tomorrow.",
+    "Training doesn't pay off tomorrow — it pays off after months of discipline.",
+    "You're stronger than you think and weaker than you want to be. Work the gap.",
+    "Small progress is still progress.",
+    "The body listens to what the mind says.",
+    "Don't look for excuses — look for a way.",
+    "Patience and hard work beat talent without discipline.",
+    "Winning starts with deciding not to quit.",
+    "Every workout is a brick in the foundation of your goal.",
+    "Discipline is choosing between what you want now and what you want most.",
+    "Train when you don't feel like it — that's when character is forged.",
+    "The results will come. The only question is when you start.",
+    "Don't wait for the perfect day to train. It won't come — make it.",
+    "Willpower, like muscle, grows under load.",
+    "You haven't lost until you stop.",
+    "Training is an investment that always pays off.",
+    "Future you will thank you for today's effort.",
+    "All it takes is one more set.",
+    "Don't fear going slow — fear standing still.",
+    "The struggle makes the finish line sweeter.",
+    "Work in silence. Let your results do the talking.",
+    "Train for your health — the results will follow.",
+    "Every day you skip is a day you chose yesterday's version of you.",
+    "You eat an elephant one bite at a time. Same goes for your goals.",
+    "You don't have to be great to start. You have to start to be great.",
+    "Training is time you give yourself, not time you take from your day.",
+    "Character shows when you want to quit.",
+    "Over the long haul, consistency beats intensity.",
+    "Your body is the only place you'll live your whole life. Take care of it.",
+    "Train like someone's quitting right now — and pass them.",
+    "The secret to progress: start again after every break.",
+    "Your goal won't disappear if you rest — but it won't get closer if you stop.",
+    "Every drop of sweat is a step closer to your goal.",
+    "Don't count the days — make the days count.",
+    "Strength is keeping going when you think you've got nothing left.",
+    "Want what you've never had? Do what you've never done.",
+    "Today's workout is a letter to your future self.",
+    "Don't fear starting over — fear never starting.",
+    "The biggest enemy of progress is comparing your path to someone else's.",
+    "Hard road, easy life. Easy road, hard life.",
+    "You're laying the foundation now, even if you can't see the building yet.",
+    "Discipline is the bridge between goals and results.",
+    "Work on yourself for you, not for anyone's approval.",
+    "Today's set is tomorrow's strength.",
+    "Progress loves the patient.",
+    "You are the one who can do this.",
+    "One workout won't change you. But it's one of the thousand that will.",
+    "Start with what you can. Do what you must. It gets easier from there.",
+    "Don't let one missed day turn into a missed month.",
+    "Strength isn't never getting tired — it's pushing on anyway.",
+    "Every workout is proof you keep your word to yourself.",
+    "The body changes shape when the mind changes its discipline.",
+    "Trust the process — the results will follow.",
+    "Don't quit over a moment that won't matter a year from now.",
+    "You don't train for other people's eyes — you train for the freedom to move.",
+    "Hard workouts make for easy wins.",
+    "Consistency is what separates dreamers from achievers.",
+    "Every step toward the bar is a step away from the old you.",
+    "You're not tired — you're just not used to the new level yet.",
+    "Training isn't punishment — it's a gift to yourself.",
+    "The secret is simple: just don't stop.",
+    "What feels impossible today will be your warm-up next month.",
+    "You're stronger than your excuses.",
+    "Action creates motivation — not the other way around.",
+    "Train while others sleep. Rest while others doubt.",
+    "Your determination today shapes your body tomorrow.",
+    "Go where it's hard — that's where growth lives.",
+    "Your body obeys habits, not wishes.",
+    "Every workout brings you closer to a version of yourself you're proud of.",
+    "The only comparison that matters is you vs. yesterday's you.",
+    "Start slow, but start today.",
+    "Your progress is invisible to others — until it's obvious to everyone.",
+    "Discipline today, freedom tomorrow.",
+    "Don't look for the easy way. Look for the right one.",
+    "Every time it gets hard, you get a little stronger."
+  ]
 }

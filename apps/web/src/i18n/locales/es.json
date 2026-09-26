@@ -9,7 +9,11 @@
     "min": "min",
     "kg": "kg",
     "logout": "Cerrar sesión",
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "block": "Bloque {{n}}",
+    "user": "Usuario",
+    "exercise": "Ejercicio",
+    "ton": "t"
   },
   "nav": {
     "home": "Inicio",
@@ -31,7 +35,8 @@
       "signUp": "Regístrate",
       "or": "o",
       "continueWithGoogle": "Continuar con Google",
-      "openingGoogle": "Abriendo Google…"
+      "openingGoogle": "Abriendo Google…",
+      "invalidCredentials": "Correo o contraseña incorrectos"
     },
     "register": {
       "title": "Crear cuenta",
@@ -47,6 +52,38 @@
       "submitting": "Creando cuenta…",
       "haveAccount": "¿Ya tienes cuenta?",
       "signIn": "Iniciar sesión"
+    },
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "backToLogin": "Volver a iniciar sesión",
+    "forgot": {
+      "title": "Restablecer contraseña",
+      "sent": "Te hemos enviado un enlace para restablecer tu contraseña.",
+      "sending": "Enviando…",
+      "submit": "Enviar enlace"
+    },
+    "reset": {
+      "invalidTitle": "Enlace no válido",
+      "invalidText": "Este enlace para restablecer la contraseña ha caducado o ya se ha usado. Solicita uno nuevo.",
+      "requestNew": "Solicitar un nuevo enlace",
+      "doneTitle": "Contraseña actualizada",
+      "redirecting": "Te llevamos a la app…",
+      "title": "Nueva contraseña",
+      "subtitle": "Elige una nueva contraseña para iniciar sesión.",
+      "newPassword": "Nueva contraseña",
+      "repeatPassword": "Repite la contraseña",
+      "saving": "Guardando…",
+      "save": "Guardar contraseña"
+    },
+    "verify": {
+      "title": "Confirma tu correo",
+      "text": "Te hemos enviado un correo con un enlace de confirmación. Ábrelo para continuar.",
+      "emailPlaceholder": "tu correo",
+      "resendIn": "Reenviar en {{time}}",
+      "sending": "Enviando…",
+      "resend": "Reenviar correo",
+      "resent": "Correo reenviado.",
+      "failed": "No se pudo enviar. Inténtalo de nuevo más tarde."
     }
   },
   "onboarding": {
@@ -349,7 +386,9 @@
     "notifications": "Notificaciones",
     "logout": "Cerrar sesión",
     "support": "Ayuda",
-    "body": "Parámetros corporales"
+    "body": "Parámetros corporales",
+    "namePlaceholder": "Tu nombre",
+    "notificationsSoon": "Pronto recibirás aquí notificaciones push sobre tus entrenamientos y tu suscripción."
   },
   "language": {
     "title": "Idioma de la app",
@@ -381,6 +420,84 @@
       "year": "Este año",
       "all": "Siempre",
       "kg": "kg"
+    },
+    "badges": {
+      "first_workout": {
+        "title": "Primer paso",
+        "description": "Completa tu primer entrenamiento"
+      },
+      "workouts_10": {
+        "title": "Tomando impulso",
+        "description": "Completa 10 entrenamientos"
+      },
+      "workouts_25": {
+        "title": "Con ritmo",
+        "description": "Completa 25 entrenamientos"
+      },
+      "workouts_50": {
+        "title": "Medio centenar",
+        "description": "Completa 50 entrenamientos"
+      },
+      "workouts_100": {
+        "title": "Centenar",
+        "description": "Completa 100 entrenamientos"
+      },
+      "workouts_200": {
+        "title": "Voluntad de hierro",
+        "description": "Completa 200 entrenamientos"
+      },
+      "streak_3": {
+        "title": "Calentando",
+        "description": "Entrena 3 días seguidos"
+      },
+      "streak_7": {
+        "title": "Semana de fuerza",
+        "description": "Entrena 7 días seguidos"
+      },
+      "streak_14": {
+        "title": "Dos semanas",
+        "description": "Entrena 14 días seguidos"
+      },
+      "streak_30": {
+        "title": "Un mes sin fallar",
+        "description": "Entrena 30 días seguidos"
+      },
+      "streak_60": {
+        "title": "Imparable",
+        "description": "Entrena 60 días seguidos"
+      },
+      "volume_1000": {
+        "title": "Primera tonelada",
+        "description": "1000 kg levantados en total"
+      },
+      "volume_5000": {
+        "title": "Cinco toneladas",
+        "description": "5000 kg levantados en total"
+      },
+      "volume_10000": {
+        "title": "Diez toneladas",
+        "description": "10 000 kg levantados en total"
+      },
+      "volume_25000": {
+        "title": "Un cuarto de autobús",
+        "description": "25 000 kg levantados en total"
+      },
+      "volume_50000": {
+        "title": "Cincuenta toneladas",
+        "description": "50 000 kg levantados en total"
+      },
+      "volume_100000": {
+        "title": "Cien toneladas",
+        "description": "100 000 kg levantados en total"
+      },
+      "volume_250000": {
+        "title": "Un cuarto de millón",
+        "description": "250 000 kg levantados en total"
+      },
+      "volume_500000": {
+        "title": "Medio millón",
+        "description": "500 000 kg levantados en total"
+      }
     }
   },
   "programs": {
@@ -426,7 +543,9 @@
     "startProgram": "Empezar programa",
     "equipment": "Equipamiento",
     "switchNote": "Tu programa activo es «{{program}}». Tu progreso en él se guarda y puedes volver cuando quieras.",
-    "lockedText": "Tu semana gratis ha terminado. Activa el acceso para continuar: desbloquea todos los programas a la vez."
+    "lockedText": "Tu semana gratis ha terminado. Activa el acceso para continuar: desbloquea todos los programas a la vez.",
+    "notFound": "Programa no encontrado.",
+    "noWorkoutsYet": "Los entrenamientos de este programa llegarán pronto."
   },
   "support": {
     "title": "Ayuda",
@@ -501,5 +620,134 @@
       "weight": "El peso debe estar entre 30 y 300 kg",
       "birthDate": "Revisa tu fecha de nacimiento"
     }
-  }
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "home": "Ir al inicio"
+  },
+  "errors": {
+    "sessionExpired": "Tu sesión ha caducado. Vuelve a iniciar sesión.",
+    "sessionExpiredSave": "Tu sesión ha caducado. Inicia sesión de nuevo para guardar tu entrenamiento.",
+    "workoutUnknown": "No se pudo identificar el entrenamiento.",
+    "workoutSaveFailed": "No se pudo guardar el entrenamiento. Inténtalo de nuevo."
+  },
+  "validation": {
+    "emailRequired": "Introduce tu correo",
+    "emailInvalid": "Introduce un correo válido",
+    "passwordMin": "Mínimo 8 caracteres",
+    "passwordMax": "La contraseña es demasiado larga",
+    "passwordLetter": "La contraseña debe tener al menos una letra",
+    "passwordDigit": "La contraseña debe tener al menos un número",
+    "phoneInvalid": "Introduce un teléfono válido en formato internacional",
+    "nameRequired": "Introduce tu nombre",
+    "acceptTerms": "Debes aceptar los términos de uso",
+    "passwordsMismatch": "Las contraseñas no coinciden",
+    "passwordRequired": "Introduce tu contraseña",
+    "goalsRequired": "Elige al menos un objetivo"
+  },
+  "quotes": [
+    "La disciplina gana cuando la motivación se acaba.",
+    "El cuerpo logra lo que la mente cree.",
+    "El único mal entrenamiento es el que no hiciste.",
+    "Progreso, no perfección.",
+    "La incomodidad de hoy es la fuerza de mañana.",
+    "No esperes a la motivación. Empieza: llegará por el camino.",
+    "Pequeños pasos cada día suman grandes resultados.",
+    "Tu único rival es quien fuiste ayer.",
+    "La fuerza no nace de lo que resulta fácil.",
+    "Difícil no significa imposible.",
+    "Cada repetición es una inversión en tu mejor versión.",
+    "Al resultado no le importa si tenías pereza.",
+    "Empieza donde estás, con lo que tienes.",
+    "La última repetición es la que más cuenta.",
+    "La comodidad y el crecimiento no van de la mano.",
+    "No tienes que ser rápido. Tienes que ser constante.",
+    "Entrenar es hablar contigo mismo con hechos.",
+    "El cuerpo cambia cuando cambian los hábitos.",
+    "Los días duros forjan a la gente fuerte.",
+    "No entrenes para castigar tu cuerpo, sino para respetarlo.",
+    "Quien no se rinde, no pierde.",
+    "El único entrenamiento del que te arrepentirás es el que te saltes.",
+    "Primero la disciplina, después los resultados.",
+    "Duro hoy, fácil mañana.",
+    "Tu progreso no tiene que ser rápido, solo real.",
+    "Cada día es una oportunidad de ser un poco mejor que ayer.",
+    "La fuerza nace de la repetición.",
+    "No compares tu primer paso con el paso cien de otro.",
+    "El sudor de hoy es la confianza de mañana.",
+    "El entrenamiento no rinde mañana, sino tras meses de disciplina.",
+    "Eres más fuerte de lo que crees y menos de lo que quieres: trabaja esa diferencia.",
+    "Un pequeño progreso sigue siendo progreso.",
+    "El cuerpo escucha lo que dice la mente.",
+    "No busques excusas, busca la manera.",
+    "La constancia y el esfuerzo superan al talento sin disciplina.",
+    "La victoria empieza con la decisión de no rendirse.",
+    "Cada entrenamiento es un ladrillo en los cimientos de tu meta.",
+    "Disciplina es elegir entre lo que quieres ahora y lo que más quieres.",
+    "Entrena cuando no te apetezca: ahí se forja el carácter.",
+    "El resultado llegará. La única pregunta es cuándo empiezas.",
+    "No esperes el día perfecto para entrenar. No llegará: créalo tú.",
+    "La fuerza de voluntad, como los músculos, crece con la carga.",
+    "No pierdes mientras no te detengas.",
+    "Entrenar es una inversión que siempre sale rentable.",
+    "Tu yo del futuro te agradecerá el esfuerzo de hoy.",
+    "Todo lo que hace falta es una serie más.",
+    "No temas ir despacio; teme quedarte quieto.",
+    "Las dificultades hacen la meta más dulce.",
+    "Trabaja en silencio y deja que los resultados hablen por ti.",
+    "Entrena por tu salud; los resultados vendrán solos.",
+    "Cada día sin entrenar es un día en que elegiste a tu versión de ayer.",
+    "Un elefante se come a bocados. Con tu meta pasa lo mismo.",
+    "No tienes que ser grande para empezar. Tienes que empezar para ser grande.",
+    "Entrenar es tiempo que te regalas, no tiempo que le quitas al día.",
+    "El carácter se ve cuando dan ganas de tirarlo todo.",
+    "A largo plazo, la constancia vence a la intensidad.",
+    "Tu cuerpo es el único lugar donde vivirás toda la vida. Cuídalo.",
+    "Entrena como si alguien se estuviera rindiendo ahora mismo, y adelántalo.",
+    "El secreto del progreso es volver a empezar después de cada pausa.",
+    "Tu meta no desaparece si descansas, pero tampoco se acerca si te detienes del todo.",
+    "Cada gota de sudor te acerca a tu meta.",
+    "No cuentes los días: haz que los días cuenten.",
+    "La fuerza es seguir cuando parece que ya no te quedan fuerzas.",
+    "Si quieres lo que nunca tuviste, haz lo que nunca hiciste.",
+    "El entrenamiento de hoy es una carta a tu yo del futuro.",
+    "No temas empezar de nuevo; teme no empezar nunca.",
+    "El mayor enemigo del progreso es compararte con el camino de otros.",
+    "El camino difícil lleva a una vida fácil; el fácil, a una vida difícil.",
+    "Estás poniendo los cimientos, aunque aún no veas el edificio.",
+    "La disciplina es el puente entre tus metas y tus resultados.",
+    "Trabaja en ti por ti, no por la aprobación de otros.",
+    "La serie de hoy es la fuerza de mañana.",
+    "El progreso premia a los pacientes.",
+    "Tú eres la persona que puede lograrlo.",
+    "Un entrenamiento no te cambiará. Pero es uno de los mil que sí lo harán.",
+    "Empieza por lo que puedes. Haz lo que debes. Luego será más fácil.",
+    "No dejes que un día perdido se convierta en un mes perdido.",
+    "La fuerza no es no cansarse, sino seguir a pesar del cansancio.",
+    "Cada entrenamiento demuestra que cumples la palabra que te diste.",
+    "El cuerpo cambia de forma cuando cambia la disciplina de la mente.",
+    "Confía en el proceso: el resultado llegará.",
+    "No te rindas por algo que dentro de un año parecerá una tontería.",
+    "No entrenas para los demás, sino por tu libertad de moverte.",
+    "Los entrenamientos duros crean victorias fáciles.",
+    "La constancia separa a los que sueñan de los que lo logran.",
+    "Cada paso hacia la barra es un paso lejos de tu antigua versión.",
+    "No estás cansado: aún no te has acostumbrado a tu nuevo nivel.",
+    "Entrenar no es un castigo, es un regalo para ti.",
+    "El secreto es simplemente no parar.",
+    "Lo que hoy parece imposible, en un mes será tu calentamiento.",
+    "Eres más fuerte que tus excusas.",
+    "La acción genera motivación, no al revés.",
+    "Entrena mientras otros duermen, descansa mientras otros dudan.",
+    "Tu determinación de hoy define tu forma de mañana.",
+    "Ve a donde cuesta: ahí es donde se crece.",
+    "El cuerpo obedece a los hábitos, no a los deseos.",
+    "Cada entrenamiento te acerca a la versión de ti de la que te sentirás orgulloso.",
+    "Que tu única comparación sea contigo mismo de ayer.",
+    "Empieza despacio, pero empieza hoy.",
+    "Tu progreso es invisible para los demás hasta que se vuelve evidente para todos.",
+    "Disciplina hoy, libertad mañana.",
+    "No busques el camino fácil. Busca el correcto.",
+    "Cada vez que cuesta, te vuelves un poco más fuerte."
+  ]
 }

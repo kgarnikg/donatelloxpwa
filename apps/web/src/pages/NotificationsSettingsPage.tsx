@@ -19,7 +19,7 @@ export default function NotificationsSettingsPage() {
         </div>
         <p className="font-semibold">{t("common.comingSoon")}</p>
         <p className="mt-1.5 max-w-xs text-sm text-neutral-400">
-          Push-уведомления о тренировках и подписке скоро появятся здесь.
+          {t("profile.notificationsSoon")}
         </p>
       </div>
     </div>

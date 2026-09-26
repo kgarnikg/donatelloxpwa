@@ -140,7 +140,7 @@ export default function ProgressPage() {
         <div className="mb-6 grid grid-cols-2 gap-3">
           <div className="card">
             <p className="text-xs text-neutral-400">{t("progress.currentWeight")}</p>
-            <p className="mt-1 text-2xl font-bold">{latest} кг</p>
+            <p className="mt-1 text-2xl font-bold">{latest} {t("common.kg")}</p>
           </div>
           <div className="card">
             <p className="text-xs text-neutral-400">{t("progress.change")}</p>
@@ -149,7 +149,7 @@ export default function ProgressPage() {
                 delta && delta < 0 ? "text-success" : delta && delta > 0 ? "text-ember-400" : ""
               }`}
             >
-              {delta === null ? "—" : `${delta > 0 ? "+" : ""}${delta.toFixed(1)} кг`}
+              {delta === null ? "—" : `${delta > 0 ? "+" : ""}${delta.toFixed(1)} ${t("common.kg")}`}
             </p>
           </div>
         </div>

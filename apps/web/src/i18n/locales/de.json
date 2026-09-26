@@ -9,7 +9,11 @@
     "min": "Min",
     "kg": "kg",
     "logout": "Abmelden",
-    "close": "Schließen"
+    "close": "Schließen",
+    "block": "Block {{n}}",
+    "user": "Nutzer",
+    "exercise": "Übung",
+    "ton": "t"
   },
   "nav": {
     "home": "Start",
@@ -31,7 +35,8 @@
       "signUp": "Registrieren",
       "or": "oder",
       "continueWithGoogle": "Weiter mit Google",
-      "openingGoogle": "Google wird geöffnet…"
+      "openingGoogle": "Google wird geöffnet…",
+      "invalidCredentials": "E-Mail oder Passwort ist falsch"
     },
     "register": {
       "title": "Konto erstellen",
@@ -47,6 +52,38 @@
       "submitting": "Konto wird erstellt…",
       "haveAccount": "Bereits ein Konto?",
       "signIn": "Anmelden"
+    },
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort verbergen",
+    "backToLogin": "Zurück zur Anmeldung",
+    "forgot": {
+      "title": "Passwort zurücksetzen",
+      "sent": "Wir haben dir einen Link zum Zurücksetzen deines Passworts geschickt.",
+      "sending": "Wird gesendet…",
+      "submit": "Link senden"
+    },
+    "reset": {
+      "invalidTitle": "Link ungültig",
+      "invalidText": "Dieser Link zum Zurücksetzen ist abgelaufen oder wurde bereits verwendet. Fordere bitte einen neuen an.",
+      "requestNew": "Neuen Link anfordern",
+      "doneTitle": "Passwort aktualisiert",
+      "redirecting": "Du wirst zur App weitergeleitet…",
+      "title": "Neues Passwort",
+      "subtitle": "Wähle ein neues Passwort für deine Anmeldung.",
+      "newPassword": "Neues Passwort",
+      "repeatPassword": "Passwort wiederholen",
+      "saving": "Wird gespeichert…",
+      "save": "Passwort speichern"
+    },
+    "verify": {
+      "title": "Bestätige deine E-Mail",
+      "text": "Wir haben dir eine E-Mail mit einem Bestätigungslink geschickt. Öffne ihn, um fortzufahren.",
+      "emailPlaceholder": "deine E-Mail",
+      "resendIn": "Erneut senden in {{time}}",
+      "sending": "Wird gesendet…",
+      "resend": "E-Mail erneut senden",
+      "resent": "E-Mail wurde erneut gesendet.",
+      "failed": "Senden fehlgeschlagen. Versuch es später noch einmal."
     }
   },
   "onboarding": {
@@ -156,7 +193,9 @@
     "chooseProgram": "Wähle ein Programm, um zu starten",
     "levelUpTitle": "Level aufgestiegen!",
     "levelUpButton": "Los geht's!",
-    "achievementsUnlocked": "Freigeschaltet: {{n}}"
+    "achievementsUnlocked": "Freigeschaltet: {{n}}",
+    "achievements": "Erfolge",
+    "achievementsEmpty": "Starte dein Training, um den ersten freizuschalten"
   },
   "workout": {
     "back": "Zurück",
@@ -174,7 +213,19 @@
     "finishWorkout": "Training beenden",
     "saving": "Wird gespeichert…",
     "setMarked": "Satz erledigt",
-    "undo": "Rückgängig"
+    "undo": "Rückgängig",
+    "resting": "Pause",
+    "skipRest": "Pause überspringen",
+    "restingNextExercise": "Vor der nächsten Übung",
+    "restDoneBody": "Zeit, weiterzutrainieren",
+    "setLabel": "laut Anleitung",
+    "confirmExitTitle": "Training verlassen?",
+    "confirmExitBody": "Abgehakte Sätze werden nicht gespeichert, wenn du nicht auf „Training beenden“ tippst.",
+    "confirmExitStay": "Bleiben",
+    "confirmExitLeave": "Verlassen",
+    "moveLater": "Nach hinten schieben",
+    "replace": "Ersetzen",
+    "replaced": "Ersetzt ✓"
   },
   "nutrition": {
     "title": "Ernährung",
@@ -294,7 +345,18 @@
       "empty": "Hier siehst du, wie viele Kalorien du im Training verbrannt hast. Die Zahl wächst mit jedem abgeschlossenen Workout.",
       "how": "Für jedes Workout berechnet aus Gewicht, Größe, Alter und Geschlecht, dem Programmtyp, der tatsächlichen Dauer und den erledigten Sätzen."
     },
-    "loadError": "Daten konnten nicht geladen werden"
+    "loadError": "Daten konnten nicht geladen werden",
+    "calorieBurn": {
+      "title": "Kalorienverbrauch heute",
+      "explainer": "Das ist eine Schätzung, wie viele Kalorien dein Körper heute insgesamt verbraucht – Grundumsatz plus Alltagsaktivität plus Training, falls du heute eins machst. Der Wert aktualisiert sich automatisch, sobald du ein Training abschließt.",
+      "edit": "Bearbeiten",
+      "incompleteProfile": "Für eine automatische Berechnung brauchen wir Größe, Gewicht und Geburtsdatum.",
+      "completeProfile": "Profil vervollständigen",
+      "manualNote": "Manuell eingegeben",
+      "reset": "Zur automatischen Berechnung",
+      "breakdown": "In Ruhe {{bmr}} · Alltagsaktivität +{{activity}} · heutiges Training +{{workout}}",
+      "disclaimer": "Automatische Schätzung nach der Mifflin-St-Jeor-Formel – ein Richtwert, keine exakte medizinische Berechnung. Wenn du Daten von einer Smartwatch hast, gib sie manuell ein – das ist genauer."
+    }
   },
   "progress": {
     "title": "Fortschritt",
@@ -323,7 +385,10 @@
     "language": "App-Sprache",
     "notifications": "Benachrichtigungen",
     "logout": "Abmelden",
-    "body": "Körperdaten"
+    "body": "Körperdaten",
+    "support": "Hilfe",
+    "namePlaceholder": "Dein Name",
+    "notificationsSoon": "Push-Benachrichtigungen zu Trainings und deinem Abo gibt es hier bald."
   },
   "language": {
     "title": "App-Sprache",
@@ -444,6 +509,245 @@
     "sequenceLockedHint": "Wird nach dem vorherigen Workout freigeschaltet",
     "allPrograms": "Alle Programme",
     "exercises_one": "{{count}} Übung",
-    "exercises_other": "{{count}} Übungen"
-  }
+    "exercises_other": "{{count}} Übungen",
+    "notFound": "Programm nicht gefunden.",
+    "noWorkoutsYet": "Trainings für dieses Programm folgen in Kürze."
+  },
+  "achievements": {
+    "title": "Erfolge",
+    "unlockedCount": "{{n}} von {{total}} freigeschaltet",
+    "categoryWorkouts": "Trainings",
+    "categoryStreak": "Tagesserien",
+    "categorySpecial": "Besondere",
+    "personalRecords": "Persönliche Rekorde",
+    "noRecordsYet": "Hier erscheinen deine besten Arbeitsgewichte, sobald du im Training ein Gewicht einträgst",
+    "categoryVolume": "Bewegtes Gewicht",
+    "volumeStats": {
+      "title": "So viel hast du bewegt",
+      "workout": "Letztes Training",
+      "week": "Diese Woche",
+      "month": "Diesen Monat",
+      "year": "Dieses Jahr",
+      "all": "Gesamt",
+      "kg": "kg"
+    },
+    "badges": {
+      "first_workout": {
+        "title": "Erster Schritt",
+        "description": "Schließ dein erstes Training ab"
+      },
+      "workouts_10": {
+        "title": "In Fahrt",
+        "description": "Schließ 10 Trainings ab"
+      },
+      "workouts_25": {
+        "title": "Im Rhythmus",
+        "description": "Schließ 25 Trainings ab"
+      },
+      "workouts_50": {
+        "title": "Halbes Hundert",
+        "description": "Schließ 50 Trainings ab"
+      },
+      "workouts_100": {
+        "title": "Hunderter",
+        "description": "Schließ 100 Trainings ab"
+      },
+      "workouts_200": {
+        "title": "Eiserner Wille",
+        "description": "Schließ 200 Trainings ab"
+      },
+      "streak_3": {
+        "title": "Aufgewärmt",
+        "description": "Trainiere 3 Tage am Stück"
+      },
+      "streak_7": {
+        "title": "Power-Woche",
+        "description": "Trainiere 7 Tage am Stück"
+      },
+      "streak_14": {
+        "title": "Zwei Wochen",
+        "description": "Trainiere 14 Tage am Stück"
+      },
+      "streak_30": {
+        "title": "Ein Monat ohne Pause",
+        "description": "Trainiere 30 Tage am Stück"
+      },
+      "streak_60": {
+        "title": "Unzerstörbar",
+        "description": "Trainiere 60 Tage am Stück"
+      },
+      "volume_1000": {
+        "title": "Erste Tonne",
+        "description": "Insgesamt 1.000 kg gestemmt"
+      },
+      "volume_5000": {
+        "title": "Fünf Tonnen",
+        "description": "Insgesamt 5.000 kg gestemmt"
+      },
+      "volume_10000": {
+        "title": "Zehn Tonnen",
+        "description": "Insgesamt 10.000 kg gestemmt"
+      },
+      "volume_25000": {
+        "title": "Ein Viertel Bus",
+        "description": "Insgesamt 25.000 kg gestemmt"
+      },
+      "volume_50000": {
+        "title": "Fünfzig Tonnen",
+        "description": "Insgesamt 50.000 kg gestemmt"
+      },
+      "volume_100000": {
+        "title": "Hundert Tonnen",
+        "description": "Insgesamt 100.000 kg gestemmt"
+      },
+      "volume_250000": {
+        "title": "Eine Viertelmillion",
+        "description": "Insgesamt 250.000 kg gestemmt"
+      },
+      "volume_500000": {
+        "title": "Eine halbe Million",
+        "description": "Insgesamt 500.000 kg gestemmt"
+      }
+    }
+  },
+  "support": {
+    "title": "Hilfe",
+    "subtitle": "Beschreib das Problem – es öffnet sich eine E-Mail in deiner Mail-App, du musst sie nur noch senden.",
+    "placeholder": "Was ist passiert?",
+    "send": "Senden",
+    "emailSubject": "Support-Anfrage – {{name}}",
+    "screenshotHint": "Du willst einen Screenshot mitschicken? Häng ihn einfach an die geöffnete E-Mail an.",
+    "clientInfoName": "Name: {{name}}",
+    "clientInfoEmail": "Registrierte E-Mail: {{email}}",
+    "clientInfoPhone": "Telefon: {{phone}}"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "home": "Zur Startseite"
+  },
+  "errors": {
+    "sessionExpired": "Deine Sitzung ist abgelaufen – bitte melde dich erneut an.",
+    "sessionExpiredSave": "Deine Sitzung ist abgelaufen – melde dich erneut an, um dein Training zu speichern.",
+    "workoutUnknown": "Training konnte nicht erkannt werden.",
+    "workoutSaveFailed": "Training konnte nicht gespeichert werden. Versuch es noch einmal."
+  },
+  "validation": {
+    "emailRequired": "Gib deine E-Mail ein",
+    "emailInvalid": "Gib eine gültige E-Mail ein",
+    "passwordMin": "Mindestens 8 Zeichen",
+    "passwordMax": "Passwort ist zu lang",
+    "passwordLetter": "Das Passwort muss mindestens einen Buchstaben enthalten",
+    "passwordDigit": "Das Passwort muss mindestens eine Ziffer enthalten",
+    "phoneInvalid": "Gib eine gültige Telefonnummer im internationalen Format ein",
+    "nameRequired": "Gib deinen Namen ein",
+    "acceptTerms": "Du musst die Nutzungsbedingungen akzeptieren",
+    "passwordsMismatch": "Die Passwörter stimmen nicht überein",
+    "passwordRequired": "Gib dein Passwort ein",
+    "goalsRequired": "Wähle mindestens ein Ziel"
+  },
+  "quotes": [
+    "Disziplin gewinnt, wenn die Motivation längst weg ist.",
+    "Der Körper erreicht, woran der Kopf glaubt.",
+    "Das einzige schlechte Training ist das, das nicht stattgefunden hat.",
+    "Fortschritt, nicht Perfektion.",
+    "Das Unbehagen von heute ist die Stärke von morgen.",
+    "Warte nicht auf Motivation. Fang an – sie kommt unterwegs.",
+    "Kleine Schritte jeden Tag ergeben ein großes Ergebnis.",
+    "Dein einziger Gegner bist du von gestern.",
+    "Stärke kommt nicht von dem, was leichtfällt.",
+    "Schwer heißt nicht unmöglich.",
+    "Jede Wiederholung ist eine Investition in deine beste Version.",
+    "Dem Ergebnis ist egal, ob du keine Lust hattest.",
+    "Fang da an, wo du stehst, mit dem, was du hast.",
+    "Die letzte Wiederholung ist die wichtigste.",
+    "Komfort und Wachstum passen nicht zusammen.",
+    "Du musst nicht schnell sein. Nur beständig.",
+    "Training ist ein Gespräch mit dir selbst – in der Sprache der Taten.",
+    "Der Körper verändert sich, wenn sich deine Gewohnheiten ändern.",
+    "Harte Tage machen starke Menschen.",
+    "Trainiere nicht, um deinen Körper zu bestrafen, sondern um ihn zu respektieren.",
+    "Wer nicht aufgibt, verliert nicht.",
+    "Das einzige Training, das du bereust, ist das ausgelassene.",
+    "Erst die Disziplin, dann das Ergebnis.",
+    "Heute schwer – morgen leicht.",
+    "Dein Fortschritt muss nicht schnell sein, nur echt.",
+    "Jeder Tag ist eine Chance, ein bisschen besser zu sein als gestern.",
+    "Stärke entsteht durch Wiederholung.",
+    "Vergleich deinen ersten Schritt nicht mit dem hundertsten eines anderen.",
+    "Schweiß heute – Selbstvertrauen morgen.",
+    "Training zahlt sich nicht morgen aus, sondern nach Monaten voller Disziplin.",
+    "Du bist stärker, als du denkst, und schwächer, als du sein willst – arbeite an der Differenz.",
+    "Kleiner Fortschritt ist immer noch Fortschritt.",
+    "Der Körper hört auf das, was der Kopf sagt.",
+    "Such keine Ausreden – such einen Weg.",
+    "Geduld und harte Arbeit schlagen Talent ohne Disziplin.",
+    "Der Sieg beginnt mit der Entscheidung, nicht aufzugeben.",
+    "Jedes Training ist ein Baustein im Fundament deines Ziels.",
+    "Disziplin heißt, zu wählen zwischen dem, was du jetzt willst, und dem, was du am meisten willst.",
+    "Trainiere, wenn du keine Lust hast – genau dann wird Charakter geschmiedet.",
+    "Das Ergebnis kommt. Die Frage ist nur, wann du anfängst.",
+    "Warte nicht auf den perfekten Trainingstag. Den gibt es nicht – mach ihn selbst.",
+    "Willenskraft wächst wie Muskeln: unter Belastung.",
+    "Du verlierst erst, wenn du stehen bleibst.",
+    "Training ist eine Investition, die sich immer auszahlt.",
+    "Dein zukünftiges Ich wird dir für die Mühe von heute danken.",
+    "Alles, was es braucht, ist noch ein Satz.",
+    "Hab keine Angst, langsam zu sein – hab Angst, stillzustehen.",
+    "Hindernisse machen das Ziel umso süßer.",
+    "Arbeite im Stillen und lass deine Ergebnisse sprechen.",
+    "Trainiere für deine Gesundheit – die Ergebnisse kommen von selbst.",
+    "Jeder Tag ohne Training ist ein Tag, an dem du dein Ich von gestern gewählt hast.",
+    "Einen Elefanten isst man Stück für Stück. Genauso erreichst du dein Ziel.",
+    "Du musst nicht großartig sein, um anzufangen. Aber du musst anfangen, um großartig zu werden.",
+    "Training ist Zeit, die du dir schenkst – nicht Zeit, die du dem Tag stiehlst.",
+    "Charakterstärke zeigt sich, wenn du am liebsten alles hinschmeißen würdest.",
+    "Auf lange Sicht schlägt Beständigkeit Intensität.",
+    "Dein Körper ist der einzige Ort, an dem du dein ganzes Leben wohnst. Pass auf ihn auf.",
+    "Trainiere, als würde gerade jemand aufgeben – und zieh an ihm vorbei.",
+    "Das Geheimnis des Fortschritts: nach jeder Pause wieder anfangen.",
+    "Dein Ziel verschwindet nicht, wenn du dir Ruhe gönnst – aber es kommt auch nicht näher, wenn du ganz aufhörst.",
+    "Jeder Tropfen Schweiß bringt dich deinem Ziel näher.",
+    "Zähl nicht die Tage – lass die Tage zählen.",
+    "Stärke heißt weiterzumachen, wenn scheinbar keine Kraft mehr da ist.",
+    "Willst du, was du nie hattest, tu, was du nie getan hast.",
+    "Das Training von heute ist ein Brief an dein zukünftiges Ich.",
+    "Hab keine Angst, neu anzufangen – hab Angst, gar nicht anzufangen.",
+    "Der größte Feind des Fortschritts ist der Vergleich mit dem Weg anderer.",
+    "Der harte Weg führt zu einem leichten Leben, der leichte Weg zu einem harten.",
+    "Du legst jetzt das Fundament, auch wenn du das Haus noch nicht siehst.",
+    "Disziplin ist die Brücke zwischen Zielen und Ergebnissen.",
+    "Arbeite an dir für dich – nicht für den Applaus anderer.",
+    "Der Satz von heute ist die Stärke von morgen.",
+    "Fortschritt liebt die Geduldigen.",
+    "Du bist genau der Mensch, der das schaffen kann.",
+    "Ein Training verändert dich nicht. Aber es ist eins von tausend, die es tun.",
+    "Fang mit dem an, was du kannst. Tu, was du musst. Danach wird es leichter.",
+    "Lass aus einem verpassten Tag keinen verpassten Monat werden.",
+    "Stärke heißt nicht, nie müde zu sein, sondern trotzdem weiterzumachen.",
+    "Jedes Training beweist, dass du dein Wort dir selbst gegenüber hältst.",
+    "Der Körper verändert seine Form, wenn der Kopf seine Disziplin ändert.",
+    "Vertrau dem Prozess – das Ergebnis folgt.",
+    "Gib nicht auf wegen eines Moments, der in einem Jahr eine Kleinigkeit sein wird.",
+    "Du trainierst nicht für die Blicke anderer, sondern für deine Freiheit, dich zu bewegen.",
+    "Harte Trainings bringen leichte Siege.",
+    "Beständigkeit trennt die Träumer von den Machern.",
+    "Jeder Schritt zur Hantelstange ist ein Schritt weg von deinem alten Ich.",
+    "Du bist nicht müde – du bist nur das neue Level noch nicht gewohnt.",
+    "Training ist keine Strafe – es ist ein Geschenk an dich selbst.",
+    "Das Geheimnis: einfach nicht aufhören.",
+    "Was heute unmöglich scheint, ist in einem Monat dein Aufwärmen.",
+    "Du bist stärker als deine Ausreden.",
+    "Handeln erzeugt Motivation – nicht umgekehrt.",
+    "Trainiere, während andere schlafen. Ruh dich aus, während andere zweifeln.",
+    "Deine Entschlossenheit heute bestimmt deine Form morgen.",
+    "Geh dahin, wo es schwer ist – dort wächst du.",
+    "Der Körper folgt Gewohnheiten, nicht Wünschen.",
+    "Jedes Training bringt dich näher an die Version von dir, auf die du stolz bist.",
+    "Der einzige Vergleich, der zählt: du von gestern.",
+    "Fang langsam an, aber fang heute an.",
+    "Dein Fortschritt ist für andere unsichtbar – bis er für alle offensichtlich ist.",
+    "Disziplin heute – Freiheit morgen.",
+    "Such nicht den leichten Weg. Such den richtigen.",
+    "Jedes Mal, wenn es schwer wird, wirst du ein Stück stärker."
+  ]
 }

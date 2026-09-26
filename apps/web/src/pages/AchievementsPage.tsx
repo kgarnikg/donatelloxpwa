@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ChevronLeft, Dumbbell, Flame, Sparkles, TrendingUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 import clsx from "clsx";
 import { useAchievements, usePersonalRecords, useVolumeStats, type VolumePeriod } from "@/lib/queries";
 import type { AchievementCategory, AchievementWithStatus } from "@donatellox/types";
@@ -9,14 +10,17 @@ const CATEGORY_ORDER: AchievementCategory[] = ["workouts", "streak", "volume", "
 const VOLUME_PERIODS: VolumePeriod[] = ["workout", "week", "month", "year", "all"];
 
 function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", month: "short", year: "numeric" });
+  return new Date(iso).toLocaleDateString(i18n.language, { day: "numeric", month: "short", year: "numeric" });
 }
 
 function formatKg(kg: number) {
-  return kg >= 1000 ? `${(kg / 1000).toLocaleString("ru-RU", { maximumFractionDigits: 1 })} т` : `${Math.round(kg)} кг`;
+  return kg >= 1000
+    ? `${(kg / 1000).toLocaleString(i18n.language, { maximumFractionDigits: 1 })} ${i18n.t("common.ton")}`
+    : `${Math.round(kg)} ${i18n.t("common.kg")}`;
 }
 
 function BadgeCard({ achievement }: { achievement: AchievementWithStatus }) {
+  const { t } = useTranslation();
   const unlocked = achievement.unlockedAt !== null;
   return (
     <div
@@ -26,8 +30,8 @@ function BadgeCard({ achievement }: { achievement: AchievementWithStatus }) {
       )}
     >
       <span className={clsx("text-3xl", !unlocked && "grayscale")}>{achievement.icon}</span>
-      <p className="text-sm font-semibold leading-tight">{achievement.title}</p>
-      <p className="text-xs leading-tight text-neutral-500">{achievement.description}</p>
+      <p className="text-sm font-semibold leading-tight">{t(`achievements.badges.${achievement.slug}.title`, { defaultValue: achievement.title })}</p>
+      <p className="text-xs leading-tight text-neutral-500">{t(`achievements.badges.${achievement.slug}.description`, { defaultValue: achievement.description })}</p>
       {unlocked && (
         <p className="mt-1 text-[11px] font-medium text-volt-400">{formatDate(achievement.unlockedAt!)}</p>
       )}
@@ -152,7 +156,7 @@ export default function AchievementsPage() {
                   <p className="text-xs text-neutral-500">{formatDate(pr.achievedAt)}</p>
                 </div>
                 <span className="shrink-0 rounded-full bg-volt-400/10 px-2.5 py-1 text-sm font-bold text-volt-400">
-                  {pr.bestWeightKg} кг
+                  {pr.bestWeightKg} {t("common.kg")}
                 </span>
               </li>
             ))}

@@ -128,7 +128,7 @@ export default function OnboardingPage() {
                   </button>
                 ))}
               </div>
-              {errors.goals && <p className="field-error">{errors.goals.message}</p>}
+              {errors.goals && <p className="field-error">{t(errors.goals.message === "Выберите хотя бы одну цель" ? "validation.goalsRequired" : (errors.goals.message ?? ""), { defaultValue: errors.goals.message })}</p>}
               <button
                 type="button"
                 onClick={() => setStep(1)}

@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
-import { localizedField } from "@/lib/localizedField";
+import { localizedOf } from "@/lib/localizedField";
 import { getYouTubeEmbedUrl } from "@/lib/video";
 import { triggerHapticPulse } from "@/lib/haptics";
 import { estimateWorkoutCalories, calculateAge } from "@/lib/calories";
@@ -380,8 +380,8 @@ export default function WorkoutPlayerPage() {
 
   const finishMutation = useMutation({
     mutationFn: async () => {
-      if (!authUser) throw new Error("Сессия истекла — войдите заново, чтобы сохранить тренировку.");
-      if (!workout) throw new Error("Не удалось определить тренировку.");
+      if (!authUser) throw new Error(t("errors.sessionExpiredSave"));
+      if (!workout) throw new Error(t("errors.workoutUnknown"));
 
       const durationMinutes = Math.max(1, Math.round((Date.now() - startedAt) / 60_000));
       const completedSets: CompletedSetEntry[] = groups.map((g) => {
@@ -437,7 +437,7 @@ export default function WorkoutPlayerPage() {
 
       if (error) {
         console.error("Не удалось сохранить тренировку:", error);
-        throw new Error(error.message || "Не удалось сохранить тренировку. Попробуйте ещё раз.");
+        throw new Error(error.message || t("errors.workoutSaveFailed"));
       }
       return data;
     },
@@ -483,7 +483,7 @@ export default function WorkoutPlayerPage() {
       </button>
 
       <h1 className="font-display text-2xl font-bold">
-        {localizedField(workout.title, { en: workout.titleEn, es: workout.titleEs, hy: workout.titleHy }, i18n.language)}
+        {localizedOf(workout, "title", i18n.language)}
       </h1>
       <p className="mt-1 text-neutral-400">~{workout.estimatedDurationMinutes} {t("common.min")}</p>
 
@@ -496,16 +496,8 @@ export default function WorkoutPlayerPage() {
           // на этот сеанс). Подходы/повторения/отдых (group.sets) остаются от
           // исходного предписания — меняется только сама движение.
           const displayExercise = substitutions[group.exercise.id] ?? group.exercise;
-          const exerciseTitle = localizedField(
-            displayExercise.title,
-            { en: displayExercise.titleEn, es: displayExercise.titleEs, hy: displayExercise.titleHy },
-            i18n.language,
-          );
-          const firstSetNotes = localizedField(
-            group.sets[0].notes ?? "",
-            { en: group.sets[0].notesEn, es: group.sets[0].notesEs, hy: group.sets[0].notesHy },
-            i18n.language,
-          );
+          const exerciseTitle = localizedOf(displayExercise, "title", i18n.language);
+          const firstSetNotes = localizedOf(group.sets[0], "notes", i18n.language);
           return (
             <div key={group.exercise.id} className="card">
               <div className="flex items-start justify-between gap-3">
@@ -669,11 +661,7 @@ export default function WorkoutPlayerPage() {
               >
                 <div className="mb-2 flex items-center justify-between gap-3">
                   <p className="truncate font-semibold text-neutral-100">
-                    {localizedField(
-                      activeVideo.title,
-                      { en: activeVideo.titleEn, es: activeVideo.titleEs, hy: activeVideo.titleHy },
-                      i18n.language,
-                    )}
+                    {localizedOf(activeVideo, "title", i18n.language)}
                   </p>
                   <button
                     onClick={closeVideo}
@@ -755,7 +743,7 @@ export default function WorkoutPlayerPage() {
             <div className="mx-auto mb-3 max-w-md rounded-md border border-danger/30 bg-danger/10 px-3.5 py-2.5 text-sm text-danger">
               {finishMutation.error instanceof Error
                 ? finishMutation.error.message
-                : "Не удалось сохранить тренировку. Попробуйте ещё раз."}
+                : t("errors.workoutSaveFailed")}
             </div>
           )}
           <button

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronRight, Play, Check, Flame, Sparkles, Info, X, Trophy, Lock } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
-import { localizedField } from "@/lib/localizedField";
+import { localizedOf } from "@/lib/localizedField";
 import { useAuth } from "@/context/AuthContext";
 import {
   useActiveSubscription,
@@ -205,9 +205,9 @@ function TodayCard({ dash, canTrain }: { dash: NonNullable<ReturnType<typeof use
     );
   }
 
-  const title = localizedField(w.title, { en: w.titleEn, es: w.titleEs, hy: w.titleHy }, lang);
+  const title = localizedOf(w, "title", lang);
   const week = w.weekLabel
-    ? localizedField(w.weekLabel, { en: w.weekLabelEn, es: w.weekLabelEs, hy: w.weekLabelHy }, lang).split(/\s[—–-]\s|·/)[0].trim()
+    ? localizedOf(w, "weekLabel", lang).split(/\s[—–-]\s|·/)[0].trim()
     : null;
   const done = dash.game.trainedToday;
 
@@ -321,7 +321,7 @@ function ProgramPathCard({ dash }: { dash: NonNullable<ReturnType<typeof useDash
   const { t, i18n } = useTranslation();
   const p = dash.program!;
   const pct = dash.programTotal ? Math.round((dash.programDone / dash.programTotal) * 100) : 0;
-  const title = localizedField(p.title, { en: p.titleEn, es: p.titleEs, hy: p.titleHy }, i18n.language);
+  const title = localizedOf(p, "title", i18n.language);
   // Отметки на полосе — границы месяцев (каждые ~4 недели)
   const months = Math.max(1, Math.round(p.durationWeeks / 4));
 
@@ -406,7 +406,7 @@ function NextAchievementCard({
             {next.a.icon}
           </div>
           <div className="min-w-0 flex-1">
-            <p className="truncate font-semibold">{next.a.title}</p>
+            <p className="truncate font-semibold">{t(`achievements.badges.${next.a.slug}.title`, { defaultValue: next.a.title })}</p>
             <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-ink-700">
               <div className="h-full rounded-full bg-ember-400" style={{ width: `${Math.max(3, next.ratio * 100)}%` }} />
             </div>
@@ -458,7 +458,7 @@ function ChooseProgram({ recommendedId }: { recommendedId?: string }) {
                 </p>
               )}
               <p className="font-semibold">
-                {localizedField(program.title, { en: program.titleEn, es: program.titleEs, hy: program.titleHy }, i18n.language)}
+                {localizedOf(program, "title", i18n.language)}
               </p>
               <p className="mt-1 text-sm text-neutral-400">
                 {t("programs.weeks", { count: program.durationWeeks })} ·{" "}

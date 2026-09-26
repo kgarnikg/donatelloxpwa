@@ -13,9 +13,10 @@ export function goalTone(goal: WorkoutProgram["goal"]): "ember" | "volt" {
   return goal === "lose_weight" ? "ember" : "volt";
 }
 
-// "Оборудование:" / "Equipment:" / "Equipo:" / "Սարքավորում…:" — в описаниях
-// всех 8 программ оборудование идёт последним предложением.
-const EQUIPMENT_RE = /(?:Оборудование|Equipment|Equipo|Սարքավորում\S*)\s*:\s*(.+)$/i;
+// "Оборудование:" / "Equipment:" / "Equipo:" / … — в описаниях всех
+// программ на всех языках контента оборудование идёт последним предложением.
+const EQUIPMENT_RE =
+  /(?:Оборудование|Обладнання|Equipment|Equipo|Ausrüstung|Attrezzatura|Սարքավորում\S*|المعدات|उपकरण|ਸਾਮਾਨ)\s*:\s*(.+)$/i;
 
 /** Делит описание на основную часть и список оборудования. */
 export function splitDescription(description: string | null | undefined): {
@@ -25,7 +26,7 @@ export function splitDescription(description: string | null | undefined): {
   const text = (description ?? "").trim();
   const m = text.match(EQUIPMENT_RE);
   if (!m || m.index === undefined) return { summary: text, equipment: [] };
-  const summary = text.slice(0, m.index).trim().replace(/[.\s]+$/, "");
+  const summary = text.slice(0, m.index).trim().replace(/[.।\s]+$/, "");
   // Запятые внутри скобок ("тренажёры (Hip Thrust, Hack Squat)") не делим
   const equipment: string[] = [];
   let depth = 0;
@@ -33,7 +34,7 @@ export function splitDescription(description: string | null | undefined): {
   for (const ch of m[1]) {
     if (ch === "(") depth += 1;
     if (ch === ")") depth = Math.max(0, depth - 1);
-    if (ch === "," && depth === 0) {
+    if ((ch === "," || ch === "،") && depth === 0) {
       equipment.push(current);
       current = "";
     } else current += ch;

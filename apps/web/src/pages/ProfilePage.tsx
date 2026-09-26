@@ -28,7 +28,7 @@ export default function ProfilePage() {
     },
   });
 
-  const displayName = profile?.fullName?.trim() || authUser?.email?.split("@")[0] || "Пользователь";
+  const displayName = profile?.fullName?.trim() || authUser?.email?.split("@")[0] || t("common.user");
   const referralLink = profile?.referralCode
     ? `${window.location.origin}/register?ref=${profile.referralCode}`
     : null;
@@ -92,7 +92,7 @@ export default function ProfilePage() {
                   value={nameDraft}
                   onChange={(e) => setNameDraft(e.target.value)}
                   className="input-field py-1.5 text-sm"
-                  placeholder="Ваше имя"
+                  placeholder={t("profile.namePlaceholder")}
                 />
                 <button
                   onClick={saveName}

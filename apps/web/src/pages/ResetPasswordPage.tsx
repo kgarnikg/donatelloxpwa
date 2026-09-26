@@ -1,25 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { KeyRound } from "lucide-react";
 import { supabase } from "@/lib/supabase";
+import { useValidationMessage } from "@/lib/validationMessage";
 import { PasswordInput } from "@/components/PasswordInput";
 
 const resetPasswordFormSchema = z
   .object({
-    password: z.string().min(8, "Минимум 8 символов"),
+    password: z.string().min(8, "validation.passwordMin"),
     passwordConfirm: z.string(),
   })
   .refine((data) => data.password === data.passwordConfirm, {
-    message: "Пароли не совпадают",
+    message: "validation.passwordsMismatch",
     path: ["passwordConfirm"],
   });
 
 type FormValues = z.infer<typeof resetPasswordFormSchema>;
 
 export default function ResetPasswordPage() {
+  const { t } = useTranslation();
+  const vm = useValidationMessage();
   const navigate = useNavigate();
   const [ready, setReady] = useState(false);
   const [invalidLink, setInvalidLink] = useState(false);
@@ -72,12 +76,12 @@ export default function ResetPasswordPage() {
   if (invalidLink) {
     return (
       <div className="flex min-h-dvh flex-col items-center justify-center bg-ink-950 px-6 text-center">
-        <h1 className="font-display text-2xl font-bold">Ссылка недействительна</h1>
+        <h1 className="font-display text-2xl font-bold">{t("auth.reset.invalidTitle")}</h1>
         <p className="mt-2 max-w-xs text-neutral-400">
-          Ссылка для сброса пароля устарела или уже была использована. Запросите новую.
+          {t("auth.reset.invalidText")}
         </p>
         <button onClick={() => navigate("/forgot-password")} className="btn-primary mt-6">
-          Запросить новую ссылку
+          {t("auth.reset.requestNew")}
         </button>
       </div>
     );
@@ -94,8 +98,8 @@ export default function ResetPasswordPage() {
   if (done) {
     return (
       <div className="flex min-h-dvh flex-col items-center justify-center bg-ink-950 px-6 text-center">
-        <h1 className="font-display text-2xl font-bold">Пароль обновлён</h1>
-        <p className="mt-2 text-neutral-400">Переходим в приложение…</p>
+        <h1 className="font-display text-2xl font-bold">{t("auth.reset.doneTitle")}</h1>
+        <p className="mt-2 text-neutral-400">{t("auth.reset.redirecting")}</p>
       </div>
     );
   }
@@ -106,20 +110,20 @@ export default function ResetPasswordPage() {
         <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-volt-400/15 text-volt-400">
           <KeyRound size={26} />
         </div>
-        <h1 className="font-display text-2xl font-bold">Новый пароль</h1>
-        <p className="mt-2 text-neutral-400">Придумайте новый пароль для входа.</p>
+        <h1 className="font-display text-2xl font-bold">{t("auth.reset.title")}</h1>
+        <p className="mt-2 text-neutral-400">{t("auth.reset.subtitle")}</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4" noValidate>
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-neutral-300">Новый пароль</label>
-            <PasswordInput placeholder="Минимум 8 символов" {...register("password")} />
-            {errors.password && <p className="field-error">{errors.password.message}</p>}
+            <label className="mb-1.5 block text-sm font-medium text-neutral-300">{t("auth.reset.newPassword")}</label>
+            <PasswordInput placeholder={t("auth.register.passwordPlaceholder")} {...register("password")} />
+            {errors.password && <p className="field-error">{vm(errors.password.message)}</p>}
           </div>
 
           <div>
-            <label className="mb-1.5 block text-sm font-medium text-neutral-300">Повторите пароль</label>
+            <label className="mb-1.5 block text-sm font-medium text-neutral-300">{t("auth.reset.repeatPassword")}</label>
             <PasswordInput {...register("passwordConfirm")} />
-            {errors.passwordConfirm && <p className="field-error">{errors.passwordConfirm.message}</p>}
+            {errors.passwordConfirm && <p className="field-error">{vm(errors.passwordConfirm.message)}</p>}
           </div>
 
           {serverError && (
@@ -129,7 +133,7 @@ export default function ResetPasswordPage() {
           )}
 
           <button type="submit" disabled={isSubmitting} className="btn-primary w-full">
-            {isSubmitting ? "Сохраняем…" : "Сохранить пароль"}
+            {isSubmitting ? t("auth.reset.saving") : t("auth.reset.save")}
           </button>
         </form>
       </div>

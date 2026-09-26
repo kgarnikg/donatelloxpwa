@@ -9,7 +9,11 @@
     "min": "min",
     "kg": "kg",
     "logout": "Esci",
-    "close": "Chiudi"
+    "close": "Chiudi",
+    "block": "Blocco {{n}}",
+    "user": "Utente",
+    "exercise": "Esercizio",
+    "ton": "t"
   },
   "nav": {
     "home": "Home",
@@ -31,7 +35,8 @@
       "signUp": "Registrati",
       "or": "oppure",
       "continueWithGoogle": "Continua con Google",
-      "openingGoogle": "Apertura di Google…"
+      "openingGoogle": "Apertura di Google…",
+      "invalidCredentials": "Email o password errate"
     },
     "register": {
       "title": "Crea account",
@@ -47,6 +52,38 @@
       "submitting": "Creazione account…",
       "haveAccount": "Hai già un account?",
       "signIn": "Accedi"
+    },
+    "showPassword": "Mostra password",
+    "hidePassword": "Nascondi password",
+    "backToLogin": "Torna all'accesso",
+    "forgot": {
+      "title": "Reimposta password",
+      "sent": "Ti abbiamo inviato via email un link per reimpostare la password.",
+      "sending": "Invio in corso…",
+      "submit": "Invia link"
+    },
+    "reset": {
+      "invalidTitle": "Link non valido",
+      "invalidText": "Questo link per reimpostare la password è scaduto o è già stato usato. Richiedine uno nuovo.",
+      "requestNew": "Richiedi un nuovo link",
+      "doneTitle": "Password aggiornata",
+      "redirecting": "Ti stiamo portando all'app…",
+      "title": "Nuova password",
+      "subtitle": "Scegli una nuova password per accedere.",
+      "newPassword": "Nuova password",
+      "repeatPassword": "Ripeti password",
+      "saving": "Salvataggio…",
+      "save": "Salva password"
+    },
+    "verify": {
+      "title": "Conferma la tua email",
+      "text": "Ti abbiamo inviato un'email con un link di conferma. Aprila per continuare.",
+      "emailPlaceholder": "la tua email",
+      "resendIn": "Reinvia tra {{time}}",
+      "sending": "Invio in corso…",
+      "resend": "Reinvia email",
+      "resent": "Email inviata di nuovo.",
+      "failed": "Invio non riuscito. Riprova più tardi."
     }
   },
   "onboarding": {
@@ -156,7 +193,9 @@
     "chooseProgram": "Scegli un programma per iniziare",
     "levelUpTitle": "Livello superiore!",
     "levelUpButton": "Andiamo!",
-    "achievementsUnlocked": "Sbloccati: {{n}}"
+    "achievementsUnlocked": "Sbloccati: {{n}}",
+    "achievements": "Traguardi",
+    "achievementsEmpty": "Inizia ad allenarti per sbloccare il primo"
   },
   "workout": {
     "back": "Indietro",
@@ -174,7 +213,19 @@
     "finishWorkout": "Termina allenamento",
     "saving": "Salvataggio…",
     "setMarked": "Serie completata",
-    "undo": "Annulla"
+    "undo": "Annulla",
+    "resting": "Recupero",
+    "skipRest": "Salta recupero",
+    "restingNextExercise": "Prima del prossimo esercizio",
+    "restDoneBody": "È ora di tornare all'allenamento",
+    "setLabel": "come da scheda",
+    "confirmExitTitle": "Uscire dall'allenamento?",
+    "confirmExitBody": "Le serie spuntate non verranno salvate se non tocchi «Termina allenamento».",
+    "confirmExitStay": "Resta",
+    "confirmExitLeave": "Esci",
+    "moveLater": "Sposta dopo",
+    "replace": "Sostituisci",
+    "replaced": "Sostituito ✓"
   },
   "nutrition": {
     "title": "Alimentazione",
@@ -294,7 +345,18 @@
       "empty": "Qui vedrai quante calorie hai bruciato allenandoti. Il numero crescerà a ogni allenamento completato.",
       "how": "Calcolate per ogni allenamento in base a peso, altezza, età e sesso, tipo di programma, durata reale e serie completate."
     },
-    "loadError": "Impossibile caricare i dati"
+    "loadError": "Impossibile caricare i dati",
+    "calorieBurn": {
+      "title": "Calorie bruciate oggi",
+      "explainer": "È una stima di quante calorie brucerà il tuo corpo nell'arco della giornata: metabolismo basale più attività quotidiana più l'allenamento di oggi, se lo completi. Il valore si aggiorna automaticamente appena finisci un allenamento.",
+      "edit": "Modifica",
+      "incompleteProfile": "Aggiungi altezza, peso e data di nascita per ottenere una stima automatica.",
+      "completeProfile": "Completa il profilo",
+      "manualNote": "Inserito manualmente",
+      "reset": "Torna al calcolo automatico",
+      "breakdown": "A riposo {{bmr}} · attività quotidiana +{{activity}} · allenamento di oggi +{{workout}}",
+      "disclaimer": "Stima automatica con la formula di Mifflin-St Jeor: un riferimento indicativo, non un calcolo medico preciso. Se hai i dati di uno smartwatch, inseriscili manualmente per una maggiore precisione."
+    }
   },
   "progress": {
     "title": "Progressi",
@@ -323,7 +385,10 @@
     "language": "Lingua dell'app",
     "notifications": "Notifiche",
     "logout": "Esci",
-    "body": "Parametri corporei"
+    "body": "Parametri corporei",
+    "support": "Assistenza",
+    "namePlaceholder": "Il tuo nome",
+    "notificationsSoon": "Presto qui arriveranno le notifiche push su allenamenti e abbonamento."
   },
   "language": {
     "title": "Lingua dell'app",
@@ -444,6 +509,245 @@
     "sequenceLockedHint": "Si sblocca dopo l'allenamento precedente",
     "allPrograms": "Tutti i programmi",
     "exercises_one": "{{count}} esercizio",
-    "exercises_other": "{{count}} esercizi"
-  }
+    "exercises_other": "{{count}} esercizi",
+    "notFound": "Programma non trovato.",
+    "noWorkoutsYet": "Gli allenamenti di questo programma arriveranno presto."
+  },
+  "achievements": {
+    "title": "Traguardi",
+    "unlockedCount": "Sbloccati {{n}} su {{total}}",
+    "categoryWorkouts": "Allenamenti",
+    "categoryStreak": "Giorni di fila",
+    "categorySpecial": "Speciali",
+    "personalRecords": "Record personali",
+    "noRecordsYet": "I tuoi migliori carichi di lavoro compariranno qui appena ne registri uno durante l'allenamento",
+    "categoryVolume": "Peso sollevato",
+    "volumeStats": {
+      "title": "Quanto hai sollevato",
+      "workout": "Ultimo allenamento",
+      "week": "Questa settimana",
+      "month": "Questo mese",
+      "year": "Quest'anno",
+      "all": "Da sempre",
+      "kg": "kg"
+    },
+    "badges": {
+      "first_workout": {
+        "title": "Primo passo",
+        "description": "Completa il tuo primo allenamento"
+      },
+      "workouts_10": {
+        "title": "Si parte",
+        "description": "Completa 10 allenamenti"
+      },
+      "workouts_25": {
+        "title": "A ritmo",
+        "description": "Completa 25 allenamenti"
+      },
+      "workouts_50": {
+        "title": "Mezzo centinaio",
+        "description": "Completa 50 allenamenti"
+      },
+      "workouts_100": {
+        "title": "Centinaio",
+        "description": "Completa 100 allenamenti"
+      },
+      "workouts_200": {
+        "title": "Volontà di ferro",
+        "description": "Completa 200 allenamenti"
+      },
+      "streak_3": {
+        "title": "Riscaldamento",
+        "description": "Allenati 3 giorni di fila"
+      },
+      "streak_7": {
+        "title": "Settimana di forza",
+        "description": "Allenati 7 giorni di fila"
+      },
+      "streak_14": {
+        "title": "Due settimane",
+        "description": "Allenati 14 giorni di fila"
+      },
+      "streak_30": {
+        "title": "Un mese senza saltare",
+        "description": "Allenati 30 giorni di fila"
+      },
+      "streak_60": {
+        "title": "Indistruttibile",
+        "description": "Allenati 60 giorni di fila"
+      },
+      "volume_1000": {
+        "title": "Prima tonnellata",
+        "description": "1.000 kg sollevati in totale"
+      },
+      "volume_5000": {
+        "title": "Cinque tonnellate",
+        "description": "5.000 kg sollevati in totale"
+      },
+      "volume_10000": {
+        "title": "Dieci tonnellate",
+        "description": "10.000 kg sollevati in totale"
+      },
+      "volume_25000": {
+        "title": "Un quarto di autobus",
+        "description": "25.000 kg sollevati in totale"
+      },
+      "volume_50000": {
+        "title": "Cinquanta tonnellate",
+        "description": "50.000 kg sollevati in totale"
+      },
+      "volume_100000": {
+        "title": "Cento tonnellate",
+        "description": "100.000 kg sollevati in totale"
+      },
+      "volume_250000": {
+        "title": "Un quarto di milione",
+        "description": "250.000 kg sollevati in totale"
+      },
+      "volume_500000": {
+        "title": "Mezzo milione",
+        "description": "500.000 kg sollevati in totale"
+      }
+    }
+  },
+  "support": {
+    "title": "Assistenza",
+    "subtitle": "Descrivi il problema: si aprirà un'email nella tua app di posta, dovrai solo inviarla.",
+    "placeholder": "Cos'è successo?",
+    "send": "Invia",
+    "emailSubject": "Richiesta di assistenza — {{name}}",
+    "screenshotHint": "Vuoi mostrare uno screenshot? Allegalo a mano quando si apre l'email.",
+    "clientInfoName": "Nome: {{name}}",
+    "clientInfoEmail": "Email di registrazione: {{email}}",
+    "clientInfoPhone": "Telefono: {{phone}}"
+  },
+  "notFound": {
+    "title": "Pagina non trovata",
+    "home": "Torna alla home"
+  },
+  "errors": {
+    "sessionExpired": "La sessione è scaduta: accedi di nuovo.",
+    "sessionExpiredSave": "La sessione è scaduta: accedi di nuovo per salvare l'allenamento.",
+    "workoutUnknown": "Impossibile identificare l'allenamento.",
+    "workoutSaveFailed": "Impossibile salvare l'allenamento. Riprova."
+  },
+  "validation": {
+    "emailRequired": "Inserisci la tua email",
+    "emailInvalid": "Inserisci un'email valida",
+    "passwordMin": "Almeno 8 caratteri",
+    "passwordMax": "La password è troppo lunga",
+    "passwordLetter": "La password deve contenere almeno una lettera",
+    "passwordDigit": "La password deve contenere almeno una cifra",
+    "phoneInvalid": "Inserisci un numero di telefono valido in formato internazionale",
+    "nameRequired": "Inserisci il tuo nome",
+    "acceptTerms": "Devi accettare i termini di utilizzo",
+    "passwordsMismatch": "Le password non coincidono",
+    "passwordRequired": "Inserisci la password",
+    "goalsRequired": "Scegli almeno un obiettivo"
+  },
+  "quotes": [
+    "La disciplina vince quando la motivazione finisce.",
+    "Il corpo raggiunge ciò in cui la mente crede.",
+    "L'unico allenamento sbagliato è quello che non hai fatto.",
+    "Progresso, non perfezione.",
+    "Il disagio di oggi è la forza di domani.",
+    "Non aspettare la motivazione. Inizia: arriverà strada facendo.",
+    "Piccoli passi ogni giorno fanno un grande risultato.",
+    "Il tuo unico rivale sei tu di ieri.",
+    "La forza non nasce da ciò che è facile.",
+    "Difficile non vuol dire impossibile.",
+    "Ogni ripetizione è un investimento nella tua versione migliore.",
+    "Al risultato non importa se avevi voglia.",
+    "Parti da dove sei, con quello che hai.",
+    "L'ultima ripetizione è quella che conta di più.",
+    "Comodità e crescita non vanno d'accordo.",
+    "Non devi essere veloce. Devi essere costante.",
+    "L'allenamento è un dialogo con te stesso fatto di azioni.",
+    "Il corpo cambia quando cambiano le abitudini.",
+    "I giorni duri forgiano persone forti.",
+    "Allenati non per punire il corpo, ma per rispettarlo.",
+    "Chi non si arrende non perde.",
+    "L'unico allenamento di cui ti pentirai è quello saltato.",
+    "Prima la disciplina, poi il risultato.",
+    "Duro oggi, facile domani.",
+    "Il tuo progresso non deve essere veloce, solo vero.",
+    "Ogni giorno è l'occasione per essere un po' meglio di ieri.",
+    "La forza nasce dalla ripetizione.",
+    "Non confrontare il tuo primo passo con il centesimo di un altro.",
+    "Il sudore di oggi è la sicurezza di domani.",
+    "L'allenamento non ripaga domani, ma dopo mesi di disciplina.",
+    "Sei più forte di quanto pensi e meno di quanto vorresti: lavora su quella differenza.",
+    "Un piccolo progresso è sempre progresso.",
+    "Il corpo ascolta ciò che dice la mente.",
+    "Non cercare scuse, cerca soluzioni.",
+    "Pazienza e fatica battono il talento senza disciplina.",
+    "La vittoria inizia con la decisione di non mollare.",
+    "Ogni allenamento è un mattone nelle fondamenta del tuo obiettivo.",
+    "Disciplina è scegliere tra ciò che vuoi ora e ciò che vuoi di più.",
+    "Allenati quando non ne hai voglia: è lì che si forgia il carattere.",
+    "Il risultato arriverà. La domanda è solo quando inizierai.",
+    "Non aspettare il giorno perfetto per allenarti. Non arriverà: crealo tu.",
+    "La forza di volontà, come i muscoli, cresce sotto carico.",
+    "Non stai perdendo finché non ti fermi.",
+    "L'allenamento è un investimento che ripaga sempre.",
+    "Il te del futuro ti ringrazierà per lo sforzo di oggi.",
+    "Serve solo un'altra serie.",
+    "Non temere di andare piano, temi di restare fermo.",
+    "Le difficoltà rendono il traguardo più dolce.",
+    "Lavora in silenzio e lascia parlare i risultati.",
+    "Allenati per la salute: i risultati verranno di conseguenza.",
+    "Ogni giorno senza allenamento è un giorno in cui scegli il te di ieri.",
+    "Un elefante si mangia un boccone alla volta. Lo stesso vale per i tuoi obiettivi.",
+    "Non devi essere grande per iniziare. Devi iniziare per diventare grande.",
+    "L'allenamento è tempo che regali a te stesso, non che togli alla giornata.",
+    "La forza di carattere si vede quando vorresti mollare tutto.",
+    "Sulla lunga distanza la costanza batte l'intensità.",
+    "Il corpo è l'unico posto in cui vivrai per tutta la vita. Prenditene cura.",
+    "Allenati come se qualcuno stesse mollando proprio ora, e superalo.",
+    "Il segreto del progresso è ripartire dopo ogni pausa.",
+    "Il tuo obiettivo non sparisce se ti concedi un riposo, ma non si avvicina se ti fermi del tutto.",
+    "Ogni goccia di sudore è un passo verso l'obiettivo.",
+    "Non contare i giorni: fai in modo che i giorni contino.",
+    "La forza è andare avanti quando sembra di non averne più.",
+    "Se vuoi ciò che non hai mai avuto, fai ciò che non hai mai fatto.",
+    "L'allenamento di oggi è una lettera al te del futuro.",
+    "Non temere di ricominciare, temi di non iniziare mai.",
+    "Il peggior nemico del progresso è confrontarsi con il percorso degli altri.",
+    "La strada dura porta a una vita facile, quella facile a una vita dura.",
+    "Stai gettando le fondamenta adesso, anche se l'edificio non si vede ancora.",
+    "La disciplina è il ponte tra obiettivi e risultati.",
+    "Lavora su te stesso per te, non per l'approvazione degli altri.",
+    "La serie di oggi è la forza di domani.",
+    "Il progresso premia chi ha pazienza.",
+    "Sei proprio tu la persona che può farcela.",
+    "Un allenamento non ti cambierà. Ma fa parte dei mille che lo faranno.",
+    "Inizia da ciò che puoi. Fai ciò che devi. Poi sarà più facile.",
+    "Non lasciare che un giorno saltato diventi un mese saltato.",
+    "La forza non è non sentire la fatica, ma continuare nonostante lei.",
+    "Ogni allenamento è la prova che mantieni la parola data a te stesso.",
+    "Il corpo cambia forma quando cambia la disciplina della mente.",
+    "Fidati del processo: il risultato arriverà.",
+    "Non mollare per un momento che tra un anno ti sembrerà niente.",
+    "Non ti alleni per gli occhi degli altri, ma per la libertà di muoverti.",
+    "Allenamenti duri, vittorie facili.",
+    "La costanza è ciò che separa chi sogna da chi realizza.",
+    "Ogni passo verso il bilanciere è un passo lontano dal vecchio te.",
+    "Non sei stanco: semplicemente non sei ancora abituato al nuovo livello.",
+    "Allenarsi non è una punizione, è un regalo a te stesso.",
+    "Il segreto è semplicemente non fermarsi.",
+    "Ciò che oggi sembra impossibile tra un mese sarà il tuo riscaldamento.",
+    "Sei più forte delle tue scuse.",
+    "È l'azione a creare la motivazione, non il contrario.",
+    "Allenati mentre gli altri dormono, riposa mentre gli altri dubitano.",
+    "La tua determinazione di oggi decide la tua forma di domani.",
+    "Vai dove è difficile: è lì che vive la crescita.",
+    "Il corpo obbedisce alle abitudini, non ai desideri.",
+    "Ogni allenamento ti avvicina alla versione di te di cui andrai fiero.",
+    "L'unico confronto sia con il te di ieri.",
+    "Inizia piano, ma inizia oggi.",
+    "Il tuo progresso è invisibile agli altri finché non diventa evidente a tutti.",
+    "Disciplina oggi, libertà domani.",
+    "Non cercare la strada facile. Cerca quella giusta.",
+    "Ogni volta che è dura, diventi un po' più forte."
+  ]
 }

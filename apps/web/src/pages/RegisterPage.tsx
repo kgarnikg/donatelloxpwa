@@ -5,12 +5,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { registerSchema, type RegisterInput } from "@donatellox/validation";
 import { supabase } from "@/lib/supabase";
+import { useValidationMessage } from "@/lib/validationMessage";
 import { PasswordInput } from "@/components/PasswordInput";
 
 const REFERRAL_STORAGE_KEY = "donatellox-referral-code";
 
 export default function RegisterPage() {
   const { t, i18n } = useTranslation();
+  const vm = useValidationMessage();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [serverError, setServerError] = useState<string | null>(null);
@@ -72,7 +74,7 @@ export default function RegisterPage() {
               placeholder={t("auth.register.fullNamePlaceholder") ?? ""}
               {...register("fullName")}
             />
-            {errors.fullName && <p className="field-error">{errors.fullName.message}</p>}
+            {errors.fullName && <p className="field-error">{vm(errors.fullName.message)}</p>}
           </div>
 
           <div>
@@ -80,7 +82,7 @@ export default function RegisterPage() {
               {t("auth.register.email")}
             </label>
             <input type="email" className="input-field" placeholder="you@example.com" {...register("email")} />
-            {errors.email && <p className="field-error">{errors.email.message}</p>}
+            {errors.email && <p className="field-error">{vm(errors.email.message)}</p>}
           </div>
 
           <div>
@@ -91,7 +93,7 @@ export default function RegisterPage() {
               placeholder={t("auth.register.passwordPlaceholder") ?? ""}
               {...register("password")}
             />
-            {errors.password && <p className="field-error">{errors.password.message}</p>}
+            {errors.password && <p className="field-error">{vm(errors.password.message)}</p>}
           </div>
 
           <div>
@@ -99,7 +101,7 @@ export default function RegisterPage() {
               {t("auth.register.passwordConfirm")}
             </label>
             <PasswordInput {...register("passwordConfirm")} />
-            {errors.passwordConfirm && <p className="field-error">{errors.passwordConfirm.message}</p>}
+            {errors.passwordConfirm && <p className="field-error">{vm(errors.passwordConfirm.message)}</p>}
           </div>
 
           <label className="flex items-start gap-2.5 text-sm text-neutral-400">
@@ -110,7 +112,7 @@ export default function RegisterPage() {
             />
             {t("auth.register.acceptTerms")}
           </label>
-          {errors.acceptedTerms && <p className="field-error">{errors.acceptedTerms.message}</p>}
+          {errors.acceptedTerms && <p className="field-error">{vm(errors.acceptedTerms.message)}</p>}
 
           {serverError && (
             <div className="rounded-md border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">

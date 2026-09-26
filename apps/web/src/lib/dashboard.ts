@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { WorkoutProgram } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
+import { withTranslations } from "@/lib/localizedField";
 import { useAuth } from "@/context/AuthContext";
 import { usePrograms, useRecommendedProgram } from "@/lib/queries";
 import { summarize, type GameLog, type GameSummary } from "@/lib/gamification";
@@ -88,9 +89,7 @@ export function useDashboard() {
       if (program) {
         const { data, error } = await supabase
           .from("workouts")
-          .select(
-            "id, title, title_en, title_es, title_hy, week_label, week_label_en, week_label_es, week_label_hy, week_order, order, estimated_duration_minutes",
-          )
+          .select(`id, ${withTranslations("title", "week_label")}, week_order, order, estimated_duration_minutes`)
           .eq("program_id", program.id)
           .order("week_order", { ascending: true })
           .order("order", { ascending: true });

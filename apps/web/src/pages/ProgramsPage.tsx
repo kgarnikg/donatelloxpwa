@@ -13,7 +13,7 @@ import {
 } from "@/lib/queries";
 import { useDashboard } from "@/lib/dashboard";
 import { goalTone, splitDescription, useProgramsProgress, type ProgramProgress } from "@/lib/programMeta";
-import { localizedField } from "@/lib/localizedField";
+import { localizedOf } from "@/lib/localizedField";
 
 /**
  * Каталог программ (Фаза 26).
@@ -168,7 +168,7 @@ function useTitleParts() {
   const { t, i18n } = useTranslation();
   return (p: WorkoutProgram) => ({
     main: t(`programs.goalShort.${p.goal}`, {
-      defaultValue: localizedField(p.title, { en: p.titleEn, es: p.titleEs, hy: p.titleHy }, i18n.language),
+      defaultValue: localizedOf(p, "title", i18n.language),
     }),
     sub: [
       p.gender !== "unspecified" ? t(`programs.genderShort.${p.gender}`) : null,
@@ -253,7 +253,7 @@ function ProgramCard({
   const tone = goalTone(program.goal);
   const { main, sub } = titleParts(program);
   const { equipment } = splitDescription(
-    localizedField(program.description, { en: program.descriptionEn, es: program.descriptionEs, hy: program.descriptionHy }, i18n.language),
+    localizedOf(program, "description", i18n.language),
   );
   const started = !!progress && progress.done > 0;
   const pct = progress?.total ? Math.round((progress.done / progress.total) * 100) : 0;

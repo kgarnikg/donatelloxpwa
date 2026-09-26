@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { MailCheck } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/lib/supabase";
 
 const RESEND_COOLDOWN_SECONDS = 120;
 
 export default function VerifyEmailPage() {
+  const { t } = useTranslation();
   const location = useLocation();
   const email = (location.state as { email?: string } | null)?.email ?? "";
 
@@ -54,9 +56,9 @@ export default function VerifyEmailPage() {
       <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-volt-400/15 text-volt-400">
         <MailCheck size={30} />
       </div>
-      <h1 className="font-display text-2xl font-bold">Подтвердите email</h1>
+      <h1 className="font-display text-2xl font-bold">{t("auth.verify.title")}</h1>
       <p className="mt-2 max-w-xs text-neutral-400">
-        Мы отправили письмо со ссылкой для подтверждения. Перейдите по ней, чтобы продолжить.
+        {t("auth.verify.text")}
       </p>
 
       {!email && (
@@ -64,7 +66,7 @@ export default function VerifyEmailPage() {
           type="email"
           value={manualEmail}
           onChange={(e) => setManualEmail(e.target.value)}
-          placeholder="ваш email"
+          placeholder={t("auth.verify.emailPlaceholder")}
           className="input-field mt-6 max-w-xs"
         />
       )}
@@ -75,21 +77,21 @@ export default function VerifyEmailPage() {
         className="btn-secondary mt-4 w-full max-w-xs"
       >
         {cooldown > 0
-          ? `Повторить через ${Math.floor(cooldown / 60)}:${String(cooldown % 60).padStart(2, "0")}`
+          ? t("auth.verify.resendIn", { time: `${Math.floor(cooldown / 60)}:${String(cooldown % 60).padStart(2, "0")}` })
           : status === "sending"
-            ? "Отправляем…"
-            : "Отправить письмо ещё раз"}
+            ? t("auth.verify.sending")
+            : t("auth.verify.resend")}
       </button>
 
       {status === "sent" && (
-        <p className="mt-2 text-sm text-success">Письмо отправлено повторно.</p>
+        <p className="mt-2 text-sm text-success">{t("auth.verify.resent")}</p>
       )}
       {status === "error" && (
-        <p className="mt-2 text-sm text-danger">Не удалось отправить. Попробуйте позже.</p>
+        <p className="mt-2 text-sm text-danger">{t("auth.verify.failed")}</p>
       )}
 
       <Link to="/login" className="btn-secondary mt-6 w-full max-w-xs">
-        Вернуться ко входу
+        {t("auth.backToLogin")}
       </Link>
     </div>
   );

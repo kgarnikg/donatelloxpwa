@@ -9,7 +9,7 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { useFreeProgramAccess, useActiveSubscription } from "@/lib/queries";
-import { localizedField } from "@/lib/localizedField";
+import { localizedOf } from "@/lib/localizedField";
 import { splitDescription } from "@/lib/programMeta";
 import { useDashboard } from "@/lib/dashboard";
 import type { Workout, WorkoutProgram } from "@donatellox/types";
@@ -165,16 +165,12 @@ function ProgramDetailPage() {
     const seen = new Map<number, string>();
     for (const w of workouts) {
       if (!seen.has(w.weekOrder)) {
-        const label = localizedField(
-          w.weekLabel || `Блок ${w.weekOrder}`,
-          { en: w.weekLabelEn, es: w.weekLabelEs, hy: w.weekLabelHy },
-          i18n.language,
-        );
+        const label = localizedOf(w, "weekLabel", i18n.language) || t("common.block", { n: w.weekOrder });
         seen.set(w.weekOrder, label);
       }
     }
     return Array.from(seen, ([order, label]) => ({ order, label }));
-  }, [workouts, i18n.language]);
+  }, [workouts, i18n.language, t]);
 
   // По умолчанию (пока пользователь сам не переключил вкладку) показываем
   // не первую неделю, а ту, где реально находится следующая доступная
@@ -223,7 +219,7 @@ function ProgramDetailPage() {
 
   if (!program) {
     return (
-      <div className="px-5 pt-8 text-center text-neutral-400">Программа не найдена.</div>
+      <div className="px-5 pt-8 text-center text-neutral-400">{t("programs.notFound")}</div>
     );
   }
 
@@ -239,7 +235,7 @@ function ProgramDetailPage() {
   // Превью программы (Фаза 26): описание без хвоста "Оборудование: …",
   // оборудование — отдельными метками, число тренировок, большая кнопка.
   const { summary, equipment } = splitDescription(
-    localizedField(program.description, { en: program.descriptionEn, es: program.descriptionEs, hy: program.descriptionHy }, i18n.language),
+    localizedOf(program, "description", i18n.language),
   );
   const doneCount = completedWorkoutIds?.size ?? 0;
   const totalCount = workouts?.length ?? 0;
@@ -259,7 +255,7 @@ function ProgramDetailPage() {
       {/* Заголовок как в каталоге: крупно цель, мельче — для кого и где */}
       <h1 className="font-display text-3xl font-bold">
         {t(`programs.goalShort.${program.goal}`, {
-          defaultValue: localizedField(program.title, { en: program.titleEn, es: program.titleEs, hy: program.titleHy }, i18n.language),
+          defaultValue: localizedOf(program, "title", i18n.language),
         })}
       </h1>
       <p className="text-neutral-400">
@@ -314,11 +310,7 @@ function ProgramDetailPage() {
             <p className="mt-3 flex items-start gap-1.5 text-xs text-neutral-400">
               <Info size={13} className="mt-0.5 shrink-0" />
               {t("programs.switchNote", {
-                program: localizedField(
-                  otherActiveProgram.title,
-                  { en: otherActiveProgram.titleEn, es: otherActiveProgram.titleEs, hy: otherActiveProgram.titleHy },
-                  i18n.language,
-                ),
+                program: localizedOf(otherActiveProgram, "title", i18n.language),
               })}
             </p>
           )}
@@ -369,11 +361,7 @@ function ProgramDetailPage() {
           ))}
 
         {visibleWorkouts.map((workout, index) => {
-          const workoutTitle = localizedField(
-            workout.title,
-            { en: workout.titleEn, es: workout.titleEs, hy: workout.titleHy },
-            i18n.language,
-          );
+          const workoutTitle = localizedOf(workout, "title", i18n.language);
 
           if (isLocked) {
             return (
@@ -445,7 +433,7 @@ function ProgramDetailPage() {
 
         {!workoutsLoading && visibleWorkouts.length === 0 && (
           <p className="py-8 text-center text-neutral-500">
-            Тренировки для этой программы скоро появятся.
+            {t("programs.noWorkoutsYet")}
           </p>
         )}
       </div>

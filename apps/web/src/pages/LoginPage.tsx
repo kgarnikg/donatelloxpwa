@@ -5,10 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { loginSchema, type LoginInput } from "@donatellox/validation";
 import { supabase } from "@/lib/supabase";
+import { useValidationMessage } from "@/lib/validationMessage";
 import { PasswordInput } from "@/components/PasswordInput";
 
 export default function LoginPage() {
   const { t } = useTranslation();
+  const vm = useValidationMessage();
   const navigate = useNavigate();
   const location = useLocation();
   const from = (location.state as { from?: Location })?.from?.pathname ?? "/dashboard";
@@ -27,7 +29,7 @@ export default function LoginPage() {
     if (error) {
       setServerError(
         error.message === "Invalid login credentials"
-          ? "Неверный email или пароль"
+          ? t("auth.login.invalidCredentials")
           : error.message,
       );
       return;
@@ -65,7 +67,7 @@ export default function LoginPage() {
               placeholder="you@example.com"
               {...register("email")}
             />
-            {errors.email && <p className="field-error">{errors.email.message}</p>}
+            {errors.email && <p className="field-error">{vm(errors.email.message)}</p>}
           </div>
 
           <div>
@@ -82,7 +84,7 @@ export default function LoginPage() {
               placeholder="••••••••"
               {...register("password")}
             />
-            {errors.password && <p className="field-error">{errors.password.message}</p>}
+            {errors.password && <p className="field-error">{vm(errors.password.message)}</p>}
           </div>
 
           {serverError && (
