@@ -90,6 +90,11 @@
       "resend": "E-Mail erneut senden",
       "resent": "E-Mail wurde erneut gesendet.",
       "failed": "Senden fehlgeschlagen. Versuch es später noch einmal."
+    },
+    "blocked": {
+      "title": "Zugang gesperrt",
+      "text": "Dein Konto wurde gesperrt. Wenn das ein Fehler ist, schreib uns.",
+      "signOut": "Abmelden"
     }
   },
   "onboarding": {
@@ -205,7 +210,11 @@
     "trialTitle": "Kostenlose Woche – bis {{date}}",
     "trialDesc": "„{{program}}“ ist freigeschaltet. Danach: Zugang zu allen Programmen.",
     "expiringTitle": "Zugang bis {{date}}",
-    "expiringDesc": "Verlängere rechtzeitig, damit dein Training nicht unterbrochen wird"
+    "expiringDesc": "Verlängere rechtzeitig, damit dein Training nicht unterbrochen wird",
+    "programWeekSlower_one": "Trainings pro Woche: {{program}} im Programm, {{days}} bei dir. Eine Programmwoche dauert bei dir also etwa {{count}} Tag. Das ist in Ordnung: Die Trainings laufen der Reihe nach, nichts geht verloren.",
+    "programWeekSlower_other": "Trainings pro Woche: {{program}} im Programm, {{days}} bei dir. Eine Programmwoche dauert bei dir also etwa {{count}} Tage. Das ist in Ordnung: Die Trainings laufen der Reihe nach, nichts geht verloren.",
+    "programWeekFaster_one": "Trainings pro Woche: {{program}} im Programm, {{days}} bei dir. Du schaffst eine Programmwoche schneller – in etwa {{count}} Tag. Achte auf deine Erholung.",
+    "programWeekFaster_other": "Trainings pro Woche: {{program}} im Programm, {{days}} bei dir. Du schaffst eine Programmwoche schneller – in etwa {{count}} Tagen. Achte auf deine Erholung."
   },
   "workout": {
     "back": "Zurück",

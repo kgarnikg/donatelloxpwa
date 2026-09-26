@@ -90,6 +90,11 @@
       "resend": "Resend email",
       "resent": "Email sent again.",
       "failed": "Couldn't send it. Please try again later."
+    },
+    "blocked": {
+      "title": "Access blocked",
+      "text": "Your account has been blocked. If you think this is a mistake, contact us.",
+      "signOut": "Sign out"
     }
   },
   "onboarding": {
@@ -205,7 +210,11 @@
     "trialTitle": "Free week — until {{date}}",
     "trialDesc": "“{{program}}” is unlocked. After that, get access to all programs.",
     "expiringTitle": "Access until {{date}}",
-    "expiringDesc": "Renew in advance so your training doesn't stop"
+    "expiringDesc": "Renew in advance so your training doesn't stop",
+    "programWeekSlower_one": "Workouts per week: {{program}} in the program, {{days}} for you. So one program week will take you about {{count}} day. That's fine: workouts go in order and nothing is lost.",
+    "programWeekSlower_other": "Workouts per week: {{program}} in the program, {{days}} for you. So one program week will take you about {{count}} days. That's fine: workouts go in order and nothing is lost.",
+    "programWeekFaster_one": "Workouts per week: {{program}} in the program, {{days}} for you. You'll finish a program week faster — in about {{count}} day. Watch your recovery.",
+    "programWeekFaster_other": "Workouts per week: {{program}} in the program, {{days}} for you. You'll finish a program week faster — in about {{count}} days. Watch your recovery."
   },
   "workout": {
     "back": "Back",

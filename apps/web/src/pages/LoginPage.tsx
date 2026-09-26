@@ -30,7 +30,9 @@ export default function LoginPage() {
       setServerError(
         error.message === "Invalid login credentials"
           ? t("auth.login.invalidCredentials")
-          : error.message,
+          : /banned/i.test(error.message)
+            ? t("auth.blocked.text")
+            : error.message,
       );
       return;
     }

@@ -111,8 +111,9 @@ export default function DashboardPage() {
           <WeekCard
             days={game.thisWeekDays}
             count={game.thisWeekCount}
-            target={program.workoutsPerWeek || 3}
+            target={dash.weeklyTarget}
             streak={game.weekStreak}
+            programPerWeek={program.workoutsPerWeek || 0}
           />
           <ProgramPathCard dash={dash} />
         </>
@@ -303,7 +304,20 @@ function TodayCard({ dash, canTrain }: { dash: NonNullable<ReturnType<typeof use
 // Неделя и серия
 // ---------------------------------------------------------------------------
 
-function WeekCard({ days, count, target, streak }: { days: boolean[]; count: number; target: number; streak: number }) {
+function WeekCard({
+  days,
+  count,
+  target,
+  streak,
+  programPerWeek,
+}: {
+  days: boolean[];
+  count: number;
+  target: number;
+  streak: number;
+  /** Сколько тренировок в неделю заложено в программе (обычно 4). */
+  programPerWeek: number;
+}) {
   const { t, i18n } = useTranslation();
   const monday = startOfWeek(new Date());
   const todayIndex = (new Date().getDay() + 6) % 7;
@@ -355,6 +369,20 @@ function WeekCard({ days, count, target, streak }: { days: boolean[]; count: num
           <span className="text-neutral-400">{t("dashboard.weekStreakStart")}</span>
         )}
       </div>
+
+      {/* Программа рассчитана на N тренировок в неделю, а человек выбрал другое
+          число дней — честно говорим, сколько по календарю займёт одна
+          "неделя" программы. Тренировки идут по порядку, ничего не теряется. */}
+      {programPerWeek > 0 && target !== programPerWeek && (
+        <p className="mt-3 flex items-start gap-1.5 text-xs leading-relaxed text-neutral-400">
+          <Info size={13} className="mt-0.5 shrink-0" />
+          {t(target < programPerWeek ? "dashboard.programWeekSlower" : "dashboard.programWeekFaster", {
+            count: Math.round((7 * programPerWeek) / target),
+            program: programPerWeek,
+            days: target,
+          })}
+        </p>
+      )}
     </div>
   );
 }

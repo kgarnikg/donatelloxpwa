@@ -4,7 +4,7 @@ import { toCamelCase } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 import { withTranslations } from "@/lib/localizedField";
 import { useAuth } from "@/context/AuthContext";
-import { usePrograms, useRecommendedProgram } from "@/lib/queries";
+import { usePrograms, useRecommendedProgram, useUserProfile } from "@/lib/queries";
 import { summarize, type GameLog, type GameSummary } from "@/lib/gamification";
 
 /**
@@ -41,6 +41,11 @@ export interface DashboardData {
   programDone: number;
   programTotal: number;
   game: GameSummary;
+  /**
+   * Сколько тренировок в неделю человек выбрал в анкете (2–6); по нему
+   * считаются план недели и серия. Нет ответа — как в программе.
+   */
+  weeklyTarget: number;
   totalWorkouts: number;
   totalVolumeKg: number;
   hasAnyWorkouts: boolean;
@@ -58,10 +63,12 @@ export function useDashboard() {
   const { authUser } = useAuth();
   const { data: programs } = usePrograms();
   const { data: recommended, isFetched: recommendedFetched } = useRecommendedProgram();
+  const { data: userProfile, isFetched: profileFetched } = useUserProfile();
+  const chosenDays = userProfile?.daysPerWeek ?? null;
 
   return useQuery({
-    queryKey: ["dashboard", authUser?.id, programs?.length, recommended?.id],
-    enabled: !!authUser && !!programs && recommendedFetched,
+    queryKey: ["dashboard", authUser?.id, programs?.length, recommended?.id, chosenDays],
+    enabled: !!authUser && !!programs && recommendedFetched && profileFetched,
     queryFn: async (): Promise<DashboardData> => {
       const { data: logData, error: logError } = await supabase
         .from("workout_logs")
@@ -121,7 +128,8 @@ export function useDashboard() {
         nextPositionInBlock,
         programDone: workouts.filter((w) => doneIds.has(w.id)).length,
         programTotal: workouts.length,
-        game: summarize(gameLogs, program?.workoutsPerWeek ?? 3),
+        game: summarize(gameLogs, chosenDays ?? program?.workoutsPerWeek ?? 3),
+        weeklyTarget: chosenDays ?? program?.workoutsPerWeek ?? 3,
         totalWorkouts: logs.length,
         totalVolumeKg: logs.reduce((sum, l) => sum + (Number(l.total_volume_kg) || 0), 0),
         hasAnyWorkouts: logs.length > 0,

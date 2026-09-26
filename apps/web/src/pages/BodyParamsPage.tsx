@@ -18,6 +18,7 @@ import { useUserProfile } from "@/lib/queries";
 
 const ACTIVITY_LEVELS: ActivityLevel[] = ["sedentary", "light", "moderate", "active", "very_active"];
 const GENDERS: Gender[] = ["male", "female", "unspecified"];
+const DAYS_OPTIONS = [2, 3, 4, 5, 6] as const;
 
 export default function BodyParamsPage() {
   const { t } = useTranslation();
@@ -31,6 +32,8 @@ export default function BodyParamsPage() {
   const [heightCm, setHeightCm] = useState("");
   const [weightKg, setWeightKg] = useState("");
   const [activityLevel, setActivityLevel] = useState<ActivityLevel>("moderate");
+  // Тренировок в неделю — по нему считаются план недели и серия на главной
+  const [daysPerWeek, setDaysPerWeek] = useState<number | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
 
@@ -42,6 +45,7 @@ export default function BodyParamsPage() {
     setHeightCm(profile.heightCm != null ? String(profile.heightCm) : "");
     setWeightKg(profile.weightKg != null ? String(profile.weightKg) : "");
     setActivityLevel(profile.activityLevel ?? "moderate");
+    setDaysPerWeek(profile.daysPerWeek ?? null);
   }, [profile]);
 
   const save = useMutation({
@@ -70,6 +74,7 @@ export default function BodyParamsPage() {
           height_cm: height,
           weight_kg: weight,
           activity_level: activityLevel,
+          ...(daysPerWeek ? { days_per_week: daysPerWeek } : {}),
           updated_at: new Date().toISOString(),
         },
         { onConflict: "user_id" },
@@ -85,6 +90,7 @@ export default function BodyParamsPage() {
       queryClient.invalidateQueries({ queryKey: ["user-profile"] });
       queryClient.invalidateQueries({ queryKey: ["daily-calories"] });
       queryClient.invalidateQueries({ queryKey: ["workout-calorie-stats"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     },
     onError: (err: Error) => setFormError(err.message),
   });
@@ -179,6 +185,29 @@ export default function BodyParamsPage() {
                 </option>
               ))}
             </select>
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-sm font-medium text-neutral-300">
+              {t("onboarding.daysPerWeek")}
+            </label>
+            <div className="grid grid-cols-5 gap-2">
+              {DAYS_OPTIONS.map((d) => (
+                <button
+                  type="button"
+                  key={d}
+                  onClick={() => setDaysPerWeek(d)}
+                  className={clsx(
+                    "rounded-md border py-2.5 text-sm font-semibold transition",
+                    daysPerWeek === d
+                      ? "border-volt-400 bg-volt-400/10 text-volt-300"
+                      : "border-ink-600 bg-ink-800 text-neutral-300",
+                  )}
+                >
+                  {d}
+                </button>
+              ))}
+            </div>
           </div>
 
           {formError && (

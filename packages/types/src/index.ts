@@ -60,6 +60,10 @@ export interface User {
   firstName?: string | null;
   lastName?: string | null;
   country?: string | null;
+  /** Заблокирован в админке (0083). */
+  isBlocked?: boolean;
+  blockedAt?: string | null;
+  blockedReason?: string | null;
   avatarUrl?: string;
   locale: LocaleCode;
   role: UserRole;

@@ -90,6 +90,11 @@
       "resend": "Reinvia email",
       "resent": "Email inviata di nuovo.",
       "failed": "Invio non riuscito. Riprova più tardi."
+    },
+    "blocked": {
+      "title": "Accesso bloccato",
+      "text": "Il tuo account è stato bloccato. Se pensi sia un errore, scrivici.",
+      "signOut": "Esci"
     }
   },
   "onboarding": {
@@ -205,7 +210,11 @@
     "trialTitle": "Settimana gratuita — fino al {{date}}",
     "trialDesc": "«{{program}}» è sbloccato. Poi, accesso a tutti i programmi.",
     "expiringTitle": "Accesso fino al {{date}}",
-    "expiringDesc": "Rinnova in anticipo per non interrompere gli allenamenti"
+    "expiringDesc": "Rinnova in anticipo per non interrompere gli allenamenti",
+    "programWeekSlower_one": "Allenamenti a settimana: {{program}} nel programma, {{days}} per te. Quindi una settimana del programma ti richiederà circa {{count}} giorno. Va bene così: gli allenamenti seguono l'ordine e non si perde nulla.",
+    "programWeekSlower_other": "Allenamenti a settimana: {{program}} nel programma, {{days}} per te. Quindi una settimana del programma ti richiederà circa {{count}} giorni. Va bene così: gli allenamenti seguono l'ordine e non si perde nulla.",
+    "programWeekFaster_one": "Allenamenti a settimana: {{program}} nel programma, {{days}} per te. Completerai una settimana del programma più in fretta, in circa {{count}} giorno. Cura il recupero.",
+    "programWeekFaster_other": "Allenamenti a settimana: {{program}} nel programma, {{days}} per te. Completerai una settimana del programma più in fretta, in circa {{count}} giorni. Cura il recupero."
   },
   "workout": {
     "back": "Indietro",
