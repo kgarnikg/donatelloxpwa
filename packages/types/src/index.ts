@@ -93,6 +93,12 @@ export interface UserProfile {
   preferredLanguage: LocaleCode;
   /** Программа бесплатной недели (0080): ставится один раз — подобранная по анкете. */
   trialProgramId?: UUID | null;
+  /** Для какой программы человек уже выбрал цель "раз в неделю" (0084). */
+  goalProgramId?: UUID | null;
+  /** Когда цель "раз в неделю" последний раз меняли (0084). */
+  goalUpdatedAt?: ISODateString | null;
+  /** Нажал "Нет" на подсказке сменить цель (0084) — молчим 4 недели. */
+  goalSuggestDismissedAt?: ISODateString | null;
   updatedAt: ISODateString;
 }
 

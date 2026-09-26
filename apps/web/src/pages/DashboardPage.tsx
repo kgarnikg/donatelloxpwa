@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, Play, Check, Flame, Sparkles, Info, X, Trophy, Lock } from "lucide-react";
+import { ChevronRight, Play, Check, Flame, Sparkles, Info, X, Trophy, Lock, Target } from "lucide-react";
+import type { WorkoutProgram } from "@donatellox/types";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { localizedOf } from "@/lib/localizedField";
@@ -10,9 +11,10 @@ import {
   usePrograms,
   useAchievements,
   useProgramAccess,
+  useUserProfile,
   useWorkoutCalorieStats,
 } from "@/lib/queries";
-import { useDashboard } from "@/lib/dashboard";
+import { WEEKLY_GOAL_OPTIONS, useDashboard, useSetWeeklyGoal, weeklyGoalState } from "@/lib/dashboard";
 import { XP_RULES, startOfWeek, rankForLevel, type LevelInfo } from "@/lib/gamification";
 import { getDailyQuote } from "@/lib/quotes";
 import { InstallPrompt } from "@/components/InstallPrompt";
@@ -129,7 +131,8 @@ export default function DashboardPage() {
             count={game.thisWeekCount}
             target={dash.weeklyTarget}
             streak={game.weekStreak}
-            programPerWeek={program.workoutsPerWeek || 0}
+            program={program}
+            previousWeekCounts={game.previousWeekCounts}
           />
           <ProgramPathCard dash={dash} />
         </>
@@ -326,16 +329,21 @@ function WeekCard({
   count,
   target,
   streak,
-  programPerWeek,
+  program,
+  previousWeekCounts,
 }: {
   days: boolean[];
   count: number;
   target: number;
   streak: number;
-  /** Сколько тренировок в неделю заложено в программе (обычно 4). */
-  programPerWeek: number;
+  program: WorkoutProgram;
+  previousWeekCounts: [number, number];
 }) {
   const { t, i18n } = useTranslation();
+  const { data: userProfile } = useUserProfile();
+  const setGoal = useSetWeeklyGoal();
+  const [sheetOpen, setSheetOpen] = useState(false);
+
   const monday = startOfWeek(new Date());
   const todayIndex = (new Date().getDay() + 6) % 7;
   const labels = days.map((_, i) => {
@@ -344,13 +352,22 @@ function WeekCard({
     return d.toLocaleDateString(i18n.language, { weekday: "short" }).replace(".", "").slice(0, 2);
   });
   const planDone = count >= target;
+  const extra = count - target;
+  const programPerWeek = program.workoutsPerWeek || 0;
+  const chosen = userProfile?.daysPerWeek ?? target;
+  const goal = weeklyGoalState(userProfile, program, target, previousWeekCounts);
 
   return (
     <div className="card mb-4">
       <div className="mb-3 flex items-center justify-between">
         <p className="font-semibold">{t("dashboard.thisWeek")}</p>
-        <p className={clsx("text-sm font-semibold", planDone ? "text-success" : "text-neutral-400")}>
-          {t("dashboard.weekProgress", { done: Math.min(count, 99), target })} {planDone && "✓"}
+        <p className={clsx("flex items-center gap-1.5 text-sm font-semibold", planDone ? "text-success" : "text-neutral-400")}>
+          {t("dashboard.weekProgress", { done: Math.min(count, target), target })} {planDone && "✓"}
+          {extra > 0 && (
+            <span className="rounded-full bg-volt-400/15 px-2 py-0.5 text-xs font-bold text-volt-300">
+              +{extra}
+            </span>
+          )}
         </p>
       </div>
 
@@ -387,19 +404,153 @@ function WeekCard({
         )}
       </div>
 
-      {/* Программа рассчитана на N тренировок в неделю, а человек выбрал другое
-          число дней — честно говорим, сколько по календарю займёт одна
-          "неделя" программы. Тренировки идут по порядку, ничего не теряется. */}
-      {programPerWeek > 0 && target !== programPerWeek && (
-        <p className="mt-3 flex items-start gap-1.5 text-xs leading-relaxed text-neutral-400">
-          <Info size={13} className="mt-0.5 shrink-0" />
-          {t(target < programPerWeek ? "dashboard.programWeekSlower" : "dashboard.programWeekFaster", {
-            count: Math.round((7 * programPerWeek) / target),
-            program: programPerWeek,
-            days: target,
-          })}
-        </p>
+      {goal.askForProgram ? (
+        // Цель из анкеты не совпадает с программой — спрашиваем один раз
+        <div className="mt-3 rounded-md border border-volt-400/30 bg-volt-400/5 p-3">
+          <p className="text-sm text-neutral-200">{t("dashboard.goalAskTitle", { count: programPerWeek })}</p>
+          <div className="mt-3 grid gap-2">
+            <button
+              disabled={setGoal.isPending}
+              onClick={() => setGoal.mutate({ days: programPerWeek, programId: program.id })}
+              className="btn-primary w-full py-2.5 text-sm"
+            >
+              {t("dashboard.goalAskProgram", { count: programPerWeek })}
+            </button>
+            <button
+              disabled={setGoal.isPending}
+              onClick={() => setGoal.mutate({ days: chosen, programId: program.id })}
+              className="btn-secondary w-full py-2.5 text-sm"
+            >
+              {t(chosen < programPerWeek ? "dashboard.goalAskMineSlower" : "dashboard.goalAskMineFaster", {
+                count: chosen,
+              })}
+            </button>
+          </div>
+        </div>
+      ) : goal.suggest ? (
+        // Две недели подряд занимается чаще/реже цели — предлагаем подстроить
+        <div className="mt-3 rounded-md border border-volt-400/30 bg-volt-400/5 p-3">
+          <p className="text-sm text-neutral-200">{t("dashboard.goalSuggest", { count: goal.suggest })}</p>
+          <div className="mt-3 grid grid-cols-2 gap-2">
+            <button
+              disabled={setGoal.isPending}
+              onClick={() => setGoal.mutate({ days: goal.suggest!, programId: program.id })}
+              className="btn-primary py-2.5 text-sm"
+            >
+              {t("dashboard.goalSuggestYes", { count: goal.suggest })}
+            </button>
+            <button
+              disabled={setGoal.isPending}
+              onClick={() => setGoal.mutate({ dismissSuggest: true })}
+              className="btn-secondary py-2.5 text-sm"
+            >
+              {t("dashboard.goalSuggestNo")}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <button
+          onClick={() => setSheetOpen(true)}
+          className="mt-3 flex w-full items-center justify-between text-sm text-neutral-400 hover:text-neutral-200"
+        >
+          <span className="flex items-center gap-1.5">
+            <Target size={14} />
+            {t("dashboard.goalLine", { count: target })}
+          </span>
+          <span className="font-semibold text-volt-400">{t("dashboard.goalChange")}</span>
+        </button>
       )}
+
+      {sheetOpen && (
+        <WeeklyGoalSheet
+          current={target}
+          programPerWeek={programPerWeek}
+          saving={setGoal.isPending}
+          onSave={(d) =>
+            setGoal.mutate({ days: d, programId: program.id }, { onSuccess: () => setSheetOpen(false) })
+          }
+          onClose={() => setSheetOpen(false)}
+        />
+      )}
+    </div>
+  );
+}
+
+function WeeklyGoalSheet({
+  current,
+  programPerWeek,
+  saving,
+  onSave,
+  onClose,
+}: {
+  current: number;
+  programPerWeek: number;
+  saving: boolean;
+  onSave: (days: number) => void;
+  onClose: () => void;
+}) {
+  const { t } = useTranslation();
+  const [value, setValue] = useState(current);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-[60] flex items-end justify-center bg-black/70 animate-fade-in" onClick={onClose}>
+      <div
+        className="relative w-full max-w-md rounded-t-3xl border border-b-0 border-ink-700 bg-ink-900 px-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-6"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label={t("dashboard.goalSheetTitle")}
+      >
+        <button
+          onClick={onClose}
+          aria-label={t("common.close")}
+          className="absolute end-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-ink-800 text-neutral-400 hover:text-neutral-200"
+        >
+          <X size={16} />
+        </button>
+        <h2 className="pe-10 font-display text-lg font-bold leading-tight">{t("dashboard.goalSheetTitle")}</h2>
+
+        <div className="mt-5 grid grid-cols-5 gap-2">
+          {WEEKLY_GOAL_OPTIONS.map((d) => (
+            <button
+              key={d}
+              onClick={() => setValue(d)}
+              className={clsx(
+                "flex flex-col items-center rounded-md border py-3 transition",
+                value === d
+                  ? "border-volt-400 bg-volt-400/10 text-volt-300"
+                  : "border-ink-600 bg-ink-800 text-neutral-200",
+              )}
+            >
+              <span className="text-lg font-bold">{d}</span>
+              <span className={clsx("mt-0.5 h-3 text-[10px] leading-3", d === programPerWeek ? "text-volt-400" : "")}>
+                {d === programPerWeek ? t("dashboard.goalInProgram") : ""}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        <p className="mt-4 flex min-h-[2.5rem] items-start gap-1.5 text-xs leading-relaxed text-neutral-400">
+          {programPerWeek > 0 && value !== programPerWeek && (
+            <>
+              <Info size={13} className="mt-0.5 shrink-0" />
+              {t(value < programPerWeek ? "dashboard.goalSlower" : "dashboard.goalFaster", {
+                count: Math.round((7 * programPerWeek) / value),
+              })}
+            </>
+          )}
+        </p>
+
+        <button disabled={saving} onClick={() => onSave(value)} className="btn-primary mt-4 w-full py-3.5">
+          {t("common.save")}
+        </button>
+      </div>
     </div>
   );
 }

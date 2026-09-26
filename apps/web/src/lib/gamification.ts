@@ -121,6 +121,8 @@ export interface GameSummary {
   thisWeekDays: boolean[];
   /** Была ли сегодня тренировка в приложении. */
   trainedToday: boolean;
+  /** Реальные тренировки за прошлую и позапрошлую неделю — [прошлая, позапрошлая]. */
+  previousWeekCounts: [number, number];
 }
 
 export function summarize(logs: GameLog[], weeklyTarget: number, now = new Date()): GameSummary {
@@ -187,5 +189,10 @@ export function summarize(logs: GameLog[], weeklyTarget: number, now = new Date(
     thisWeekCount,
     thisWeekDays,
     trainedToday: days.has(localDayKey(now)),
+    previousWeekCounts: [1, 2].map((n) => {
+      const d = new Date(thisWeekStart);
+      d.setDate(d.getDate() - 7 * n);
+      return perWeek.get(weekKey(d)) ?? 0;
+    }) as [number, number],
   };
 }

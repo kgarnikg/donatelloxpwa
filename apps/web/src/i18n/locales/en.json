@@ -151,7 +151,8 @@
       "heightRange": "Height must be 100–250 cm",
       "weightRequired": "Enter your weight",
       "weightRange": "Weight must be 30–300 kg"
-    }
+    },
+    "daysPerWeekRequired": "Choose how many times a week you'll train"
   },
   "dashboard": {
     "greeting": "Hi, {{name}}",
@@ -211,10 +212,26 @@
     "trialDesc": "“{{program}}” is unlocked. After that, get access to all programs.",
     "expiringTitle": "Access until {{date}}",
     "expiringDesc": "Renew in advance so your training doesn't stop",
-    "programWeekSlower_one": "Workouts per week: {{program}} in the program, {{days}} for you. So one program week will take you about {{count}} day. That's fine: workouts go in order and nothing is lost.",
-    "programWeekSlower_other": "Workouts per week: {{program}} in the program, {{days}} for you. So one program week will take you about {{count}} days. That's fine: workouts go in order and nothing is lost.",
-    "programWeekFaster_one": "Workouts per week: {{program}} in the program, {{days}} for you. You'll finish a program week faster — in about {{count}} day. Watch your recovery.",
-    "programWeekFaster_other": "Workouts per week: {{program}} in the program, {{days}} for you. You'll finish a program week faster — in about {{count}} days. Watch your recovery."
+    "goalLine": "Goal: {{count}} per week",
+    "goalChange": "Change",
+    "goalAskTitle_one": "This program is built for {{count}} workout a week. How will you train?",
+    "goalAskTitle_other": "This program is built for {{count}} workouts a week. How will you train?",
+    "goalAskProgram_one": "{{count}} time — like the program",
+    "goalAskProgram_other": "{{count}} times — like the program",
+    "goalAskMineSlower_one": "{{count}} time — program weeks will take longer",
+    "goalAskMineSlower_other": "{{count}} times — program weeks will take longer",
+    "goalAskMineFaster_one": "{{count}} time — I'll get through it faster",
+    "goalAskMineFaster_other": "{{count}} times — I'll get through it faster",
+    "goalSuggest_one": "For the last 2 weeks you've trained {{count}} time a week. Set your goal to {{count}}?",
+    "goalSuggest_other": "For the last 2 weeks you've trained {{count}} times a week. Set your goal to {{count}}?",
+    "goalSuggestYes": "Yes, {{count}}",
+    "goalSuggestNo": "No, keep it",
+    "goalSheetTitle": "How many times a week will you train?",
+    "goalInProgram": "program",
+    "goalSlower_one": "One program week will take you about {{count}} day. Workouts go in order — nothing gets lost.",
+    "goalSlower_other": "One program week will take you about {{count}} days. Workouts go in order — nothing gets lost.",
+    "goalFaster_one": "You'll get through a program week faster — in about {{count}} day. Watch your recovery.",
+    "goalFaster_other": "You'll get through a program week faster — in about {{count}} days. Watch your recovery."
   },
   "workout": {
     "back": "Back",

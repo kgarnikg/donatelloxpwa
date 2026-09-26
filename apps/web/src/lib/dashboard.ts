@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import type { WorkoutProgram } from "@donatellox/types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type { UserProfile, WorkoutProgram } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 import { withTranslations } from "@/lib/localizedField";
@@ -134,6 +134,81 @@ export function useDashboard() {
         totalVolumeKg: logs.reduce((sum, l) => sum + (Number(l.total_volume_kg) || 0), 0),
         hasAnyWorkouts: logs.length > 0,
       };
+    },
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Цель "тренировок в неделю" (0084)
+// ---------------------------------------------------------------------------
+
+export const WEEKLY_GOAL_OPTIONS = [2, 3, 4, 5, 6] as const;
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+export interface WeeklyGoalState {
+  /**
+   * Цель расходится с программой, а человек для этой программы ещё не
+   * выбирал — спрашиваем один раз: "как в программе" или "как у меня".
+   */
+  askForProgram: boolean;
+  /**
+   * Две прошлые недели подряд человек занимался чаще (или реже) цели —
+   * предлагаем поставить это число. null — предлагать нечего.
+   */
+  suggest: number | null;
+}
+
+export function weeklyGoalState(
+  profile: UserProfile | null | undefined,
+  program: WorkoutProgram | null,
+  target: number,
+  previousWeekCounts: [number, number],
+  now = Date.now(),
+): WeeklyGoalState {
+  const programPerWeek = program?.workoutsPerWeek || 0;
+  const askForProgram =
+    !!profile?.daysPerWeek &&
+    !!program &&
+    programPerWeek > 0 &&
+    profile.daysPerWeek !== programPerWeek &&
+    profile.goalProgramId !== program.id;
+
+  let suggest: number | null = null;
+  const [last, before] = previousWeekCounts;
+  const changedAt = profile?.goalUpdatedAt ? new Date(profile.goalUpdatedAt).getTime() : 0;
+  const dismissedAt = profile?.goalSuggestDismissedAt ? new Date(profile.goalSuggestDismissedAt).getTime() : 0;
+  const settled = now - changedAt >= 14 * DAY_MS && now - dismissedAt >= 28 * DAY_MS;
+  // Пустые недели (отпуск, болезнь) — не повод снижать цель
+  if (!askForProgram && settled && last > 0 && before > 0) {
+    const min = WEEKLY_GOAL_OPTIONS[0];
+    const max = WEEKLY_GOAL_OPTIONS[WEEKLY_GOAL_OPTIONS.length - 1];
+    if (last > target && before > target) suggest = Math.min(last, before, max);
+    else if (last < target && before < target) suggest = Math.max(last, before, min);
+    if (suggest === target) suggest = null;
+  }
+  return { askForProgram, suggest };
+}
+
+/** Поставить цель (и отметить, что для этой программы уже выбирали). */
+export function useSetWeeklyGoal() {
+  const { authUser } = useAuth();
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (args: { days?: number; programId?: string | null; dismissSuggest?: boolean }) => {
+      const now = new Date().toISOString();
+      const patch: Record<string, unknown> = { updated_at: now };
+      if (args.days) {
+        patch.days_per_week = args.days;
+        patch.goal_updated_at = now;
+      }
+      if (args.programId) patch.goal_program_id = args.programId;
+      if (args.dismissSuggest) patch.goal_suggest_dismissed_at = now;
+      const { error } = await supabase.from("user_profiles").update(patch).eq("user_id", authUser!.id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user-profile"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     },
   });
 }

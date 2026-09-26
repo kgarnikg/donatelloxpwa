@@ -75,6 +75,8 @@ export default function BodyParamsPage() {
           weight_kg: weight,
           activity_level: activityLevel,
           ...(daysPerWeek ? { days_per_week: daysPerWeek } : {}),
+          // цель "раз в неделю" поменяли руками — подсказку сменить её не показываем 2 недели (0084)
+          ...(daysPerWeek && daysPerWeek !== profile?.daysPerWeek ? { goal_updated_at: new Date().toISOString() } : {}),
           updated_at: new Date().toISOString(),
         },
         { onConflict: "user_id" },

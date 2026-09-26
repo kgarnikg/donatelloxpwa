@@ -151,7 +151,8 @@
       "heightRange": "L'altezza deve essere tra 100 e 250 cm",
       "weightRequired": "Inserisci il peso",
       "weightRange": "Il peso deve essere tra 30 e 300 kg"
-    }
+    },
+    "daysPerWeekRequired": "Scegli quante volte a settimana ti allenerai"
   },
   "dashboard": {
     "greeting": "Ciao, {{name}}",
@@ -211,10 +212,26 @@
     "trialDesc": "«{{program}}» è sbloccato. Poi, accesso a tutti i programmi.",
     "expiringTitle": "Accesso fino al {{date}}",
     "expiringDesc": "Rinnova in anticipo per non interrompere gli allenamenti",
-    "programWeekSlower_one": "Allenamenti a settimana: {{program}} nel programma, {{days}} per te. Quindi una settimana del programma ti richiederà circa {{count}} giorno. Va bene così: gli allenamenti seguono l'ordine e non si perde nulla.",
-    "programWeekSlower_other": "Allenamenti a settimana: {{program}} nel programma, {{days}} per te. Quindi una settimana del programma ti richiederà circa {{count}} giorni. Va bene così: gli allenamenti seguono l'ordine e non si perde nulla.",
-    "programWeekFaster_one": "Allenamenti a settimana: {{program}} nel programma, {{days}} per te. Completerai una settimana del programma più in fretta, in circa {{count}} giorno. Cura il recupero.",
-    "programWeekFaster_other": "Allenamenti a settimana: {{program}} nel programma, {{days}} per te. Completerai una settimana del programma più in fretta, in circa {{count}} giorni. Cura il recupero."
+    "goalLine": "Obiettivo: {{count}} a settimana",
+    "goalChange": "Modifica",
+    "goalAskTitle_one": "Il programma è pensato per {{count}} allenamento a settimana. Come ti allenerai?",
+    "goalAskTitle_other": "Il programma è pensato per {{count}} allenamenti a settimana. Come ti allenerai?",
+    "goalAskProgram_one": "{{count}} volta — come nel programma",
+    "goalAskProgram_other": "{{count}} volte — come nel programma",
+    "goalAskMineSlower_one": "{{count}} volta — la settimana del programma durerà di più",
+    "goalAskMineSlower_other": "{{count}} volte — la settimana del programma durerà di più",
+    "goalAskMineFaster_one": "{{count}} volta — lo completerò più in fretta",
+    "goalAskMineFaster_other": "{{count}} volte — lo completerò più in fretta",
+    "goalSuggest_one": "Nelle ultime 2 settimane ti sei allenato {{count}} volta a settimana. Impostare l'obiettivo a {{count}}?",
+    "goalSuggest_other": "Nelle ultime 2 settimane ti sei allenato {{count}} volte a settimana. Impostare l'obiettivo a {{count}}?",
+    "goalSuggestYes": "Sì, {{count}}",
+    "goalSuggestNo": "No, lascia così",
+    "goalSheetTitle": "Quante volte a settimana ti allenerai?",
+    "goalInProgram": "programma",
+    "goalSlower_one": "Una settimana del programma ti richiederà circa {{count}} giorno. Gli allenamenti vanno in ordine: non si perde nulla.",
+    "goalSlower_other": "Una settimana del programma ti richiederà circa {{count}} giorni. Gli allenamenti vanno in ordine: non si perde nulla.",
+    "goalFaster_one": "Completerai una settimana del programma più in fretta, in circa {{count}} giorno. Cura il recupero.",
+    "goalFaster_other": "Completerai una settimana del programma più in fretta, in circa {{count}} giorni. Cura il recupero."
   },
   "workout": {
     "back": "Indietro",

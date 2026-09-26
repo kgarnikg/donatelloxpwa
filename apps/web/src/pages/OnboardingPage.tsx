@@ -32,6 +32,7 @@ export default function OnboardingPage() {
   const needsCountry = !!profile && !profile.country;
   const [country, setCountry] = useState<string | undefined>(undefined);
   const [serverError, setServerError] = useState<string | null>(null);
+  const [daysError, setDaysError] = useState(false);
 
   const {
     register,
@@ -47,7 +48,8 @@ export default function OnboardingPage() {
       activityLevel: "moderate",
       goals: [],
       trainingFormat: "gym",
-      daysPerWeek: 3,
+      // без готового ответа: раньше тут стояло 3, и многие просто не трогали —
+      // потом на главной было "4 из 3". Теперь выбрать нужно самому.
       preferredLanguage: "ru",
     },
   });
@@ -279,14 +281,17 @@ export default function OnboardingPage() {
 
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-neutral-300">
-                  {t("onboarding.daysPerWeek")}
+                  {t("onboarding.daysPerWeek")} <span className="text-danger">*</span>
                 </label>
                 <div className="grid grid-cols-5 gap-2">
                   {DAYS_OPTIONS.map((d) => (
                     <button
                       type="button"
                       key={d}
-                      onClick={() => setValue("daysPerWeek", d)}
+                      onClick={() => {
+                        setValue("daysPerWeek", d);
+                        setDaysError(false);
+                      }}
                       className={clsx(
                         "rounded-md border py-2.5 text-sm font-semibold transition",
                         daysPerWeek === d
@@ -298,13 +303,24 @@ export default function OnboardingPage() {
                     </button>
                   ))}
                 </div>
+                {daysError && <p className="field-error">{t("onboarding.daysPerWeekRequired")}</p>}
               </div>
 
               <div className="flex gap-3 pt-2">
                 <button type="button" onClick={() => setStep(1)} className="btn-secondary flex-1">
                   {t("common.back")}
                 </button>
-                <button type="button" onClick={() => setStep(3)} className="btn-primary flex-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!daysPerWeek) {
+                      setDaysError(true);
+                      return;
+                    }
+                    setStep(3);
+                  }}
+                  className="btn-primary flex-1"
+                >
                   {t("common.next")}
                 </button>
               </div>
