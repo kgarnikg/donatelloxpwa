@@ -137,5 +137,8 @@ export default async function handler(request: Request): Promise<Response> {
     report.errors.push(String(e));
   }
 
+  // В логах Vercel (Logs → /api/cron/daily) видно, что именно сделано и что сломалось
+  if (report.errors.length) console.error("cron/daily", JSON.stringify(report));
+  else console.log("cron/daily", JSON.stringify(report));
   return Response.json(report, { status: report.errors.length ? 207 : 200 });
 }
