@@ -57,7 +57,9 @@
       "lastName": "Nachname",
       "lastNamePlaceholder": "Müller",
       "country": "Land",
-      "countryPlaceholder": "Land auswählen"
+      "countryPlaceholder": "Land auswählen",
+      "phone": "Telefon",
+      "acceptTermsHealth": "Ich akzeptiere die <terms>Nutzungsbedingungen</terms> und die <privacy>Datenschutzerklärung</privacy> und verstehe, dass die Trainings Empfehlungen und keine medizinische Leistung sind: Vor dem Start lasse ich mich ärztlich beraten."
     },
     "showPassword": "Passwort anzeigen",
     "hidePassword": "Passwort verbergen",
@@ -287,7 +289,13 @@
       "sleep": "7–9 Stunden Schlaf — nachts erholen sich die Muskeln und wachsen.",
       "rest": "Gönn diesen Muskeln 48 Stunden Pause. Morgen tut ein Spaziergang oder leichtes Dehnen gut.",
       "disclaimer": "Allgemeine Empfehlungen, kein Ersatz für ärztlichen oder ernährungsfachlichen Rat.",
-      "done": "Fertig"
+      "done": "Fertig",
+      "shareTitle": "Teile dein Ergebnis",
+      "shareHint": "Instagram, TikTok, WhatsApp — dein Story-Bild ist fertig",
+      "share": "Teilen",
+      "saveImage": "Bild speichern",
+      "saved": "Bild gespeichert",
+      "shareTagline": "Wieder ein Training geschafft 💪"
     }
   },
   "nutrition": {
@@ -518,8 +526,8 @@
       "failedText": "Es wurde nichts abgebucht. Prüfe Kartendaten und Guthaben oder versuche es mit einer anderen Karte.",
       "tryAgain": "Erneut versuchen"
     },
-    "consentTerms": "Ich akzeptiere die <terms>Angebotsbedingungen</terms> und die <refund>Erstattungsrichtlinie</refund>",
-    "consentImmediate": "Ich verlange den Zugang sofort nach der Zahlung. Mir ist bekannt, dass bei Widerruf innerhalb von 14 Tagen der Wert der genutzten Tage einbehalten wird."
+    "consentTerms": "Ich akzeptiere die <terms>Angebotsbedingungen</terms> einschließlich der <refund>Erstattungsrichtlinie</refund>",
+    "accessNote": "Der Zugang startet sofort nach der Zahlung. Wenn du es dir innerhalb von 14 Tagen anders überlegst, erstatten wir die ungenutzten Tage."
   },
   "bodyParams": {
     "title": "Körperdaten",
@@ -714,7 +722,8 @@
     "passwordRequired": "Gib dein Passwort ein",
     "goalsRequired": "Wähle mindestens ein Ziel",
     "lastNameRequired": "Gib deinen Nachnamen ein",
-    "countryRequired": "Wähle dein Land"
+    "countryRequired": "Wähle dein Land",
+    "phoneRequired": "Gib deine Telefonnummer ein"
   },
   "quotes": [
     "Disziplin gewinnt, wenn die Motivation längst weg ist.",
@@ -850,7 +859,7 @@
     "usedValue": "{{used}} von {{period}}",
     "retained": "Einbehalten für diese Tage",
     "refund": "Wir erstatten",
-    "proportionalNote": "Beim Bezahlen hast du den sofortigen Beginn verlangt, daher wird nur der Wert der genutzten Tage einbehalten.",
+    "proportionalNote": "Laut Angebotsbedingungen startete der Zugang sofort nach der Zahlung, daher wird nur der Wert der genutzten Tage einbehalten.",
     "fullRefundNote": "Wir erstatten den vollen Betrag.",
     "reasonLabel": "Grund (optional)",
     "reasonPlaceholder": "Was hat nicht gepasst? Das hilft uns, besser zu werden",

@@ -255,8 +255,54 @@
   "legal": {
     "back": "Zur Startseite",
     "terms": {
-      "title": "Nutzungsbedingungen",
-      "body": "Durch die Nutzung der DonatelleX-App und -Website stimmst du diesen Bedingungen zu. Der vollständige Text der Nutzungsbedingungen wird hier vor dem Produktivstart der Plattform veröffentlicht."
+      "title": "Nutzungsbedingungen (öffentliches Angebot)",
+      "intro": "Bitte lies diese Bedingungen — sie regeln Abo, Zahlung, Erstattung und Trainingssicherheit.",
+      "sections": [
+        {
+          "h": "1. Allgemeines",
+          "p": "Diese Bedingungen sind ein öffentliches Angebot. Mit der Registrierung in der DonatelleX-App oder der Bezahlung eines Abos akzeptierst du sie vollständig. Der Dienst richtet sich an Personen ab 18 Jahren."
+        },
+        {
+          "h": "2. Leistungen",
+          "p": "Zugang zur App app.donatellex.com für den bezahlten Zeitraum: Trainingsprogramme von Coach Vladimir Donatellex, Übungsvideos, Ernährungs- und Erholungsempfehlungen sowie Fortschrittsstatistiken."
+        },
+        {
+          "h": "3. Zahlung und Zugang",
+          "p": "Das Abo wird einmalig für den gewählten Zeitraum bezahlt (1, 3, 6 oder 12 Monate); es gibt keine automatischen Verlängerungen oder Abbuchungen. Der Preis steht auf der Zahlungsseite. Indem du diese Bedingungen beim Bezahlen akzeptierst, verlangst du den sofortigen Beginn — der Zugang öffnet sich automatisch, sobald die Bank die Zahlung bestätigt."
+        },
+        {
+          "h": "4. Widerruf und Erstattung",
+          "p": "Du kannst das Abo innerhalb von 14 Tagen ab Zahlung ohne Angabe von Gründen widerrufen. Da der Zugang sofort beginnt, wird der Wert der genutzten Tage anteilig zur Abolaufzeit einbehalten; den Rest erstatten wir innerhalb von 14 Tagen. Details in der Erstattungsrichtlinie."
+        },
+        {
+          "h": "5. Gesundheit und Sicherheit — wichtig",
+          "p": "Programme, Übungen und Ernährungstipps sind allgemeine Empfehlungen, keine medizinische Leistung, Diagnose oder Behandlung, und berücksichtigen deinen individuellen Gesundheitszustand nicht. Lass dich vor Trainingsbeginn und Ernährungsumstellung ärztlich beraten — unbedingt bei chronischen Erkrankungen, Verletzungen, Herz-, Blutdruck- oder Gelenkproblemen, Schwangerschaft oder kurz nach einer Geburt. Achte auf die Technik, beginne mit machbaren Gewichten und brich eine Übung bei Schmerzen, Schwindel oder Unwohlsein ab."
+        },
+        {
+          "h": "6. Haftung",
+          "p": "Du trainierst freiwillig, eigenständig und auf eigenes Risiko. Soweit gesetzlich zulässig, haften wir nicht für Verletzungen, Verschlechterung der Gesundheit oder sonstige Schäden durch die Übungen oder die Befolgung der Empfehlungen, auch wenn du keinen Arzt konsultiert oder die Technik nicht eingehalten hast. Dies beschränkt keine Haftung, die gesetzlich nicht ausgeschlossen werden kann."
+        },
+        {
+          "h": "7. Konto und Inhalte",
+          "p": "Das Konto ist persönlich — gib den Zugang nicht an andere weiter. Alle Inhalte (Videos, Programme, Texte) sind urheberrechtlich geschützt und dürfen nicht kopiert, aufgezeichnet, veröffentlicht oder verkauft werden. Bei Verstößen können wir das Konto sperren."
+        },
+        {
+          "h": "8. Kostenloser Zugang",
+          "p": "Die Gratiswoche (ein Programm, 7 Tage ab Registrierung), der Monat für eine Freundeseinladung und geschenkte Zugänge sind kostenlos; ihre Bedingungen können sich ändern."
+        },
+        {
+          "h": "9. Änderungen",
+          "p": "Wir können diese Bedingungen aktualisieren; die neue Fassung gilt ab Veröffentlichung auf dieser Seite. Ein bereits bezahlter Zeitraum läuft zu den bisherigen Bedingungen weiter."
+        },
+        {
+          "h": "10. Anwendbares Recht",
+          "p": "Es gilt das Recht der Republik Armenien. Als Verbraucher aus einem anderen Land behältst du die zwingenden Rechte nach dem Recht deines Landes. Streitigkeiten versuchen wir einvernehmlich zu lösen — schreib uns."
+        },
+        {
+          "h": "11. Verkäufer und Kontakt",
+          "p": "Verkäufer ist ein in der Republik Armenien registrierter Einzelunternehmer; die Angaben werden in diesem Abschnitt vor Beginn der Zahlungsannahme veröffentlicht. Kontakt: hello@donatellex.com."
+        }
+      ]
     },
     "privacy": {
       "title": "Datenschutzrichtlinie",
@@ -282,7 +328,7 @@
         },
         {
           "h": "Wie viel wir erstatten",
-          "p": "Wenn du beim Bezahlen den sofortigen Beginn verlangt hast (Häkchen auf der Zahlungsseite), behalten wir den Wert der bereits genutzten Tage anteilig zur Abolaufzeit ein und erstatten den Rest. Beispiel: 3-Monats-Abo (91 Tage), Widerruf am 10. Tag — wir erstatten 81/91 des Betrags. Ohne diesen Wunsch erstatten wir den vollen Betrag."
+          "p": "Wenn du beim Bezahlen die Angebotsbedingungen akzeptiert hast, beginnt der Zugang sofort nach der Zahlung — daher behalten wir beim Widerruf den Wert der bereits genutzten Tage anteilig zur Abolaufzeit ein und erstatten den Rest. Beispiel: 3-Monats-Abo (91 Tage), Widerruf am 10. Tag — wir erstatten 81/91 des Betrags."
         },
         {
           "h": "Frist und Zahlungsweg",

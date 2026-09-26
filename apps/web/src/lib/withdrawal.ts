@@ -11,6 +11,7 @@ import { useAuth } from "@/context/AuthContext";
 
 export const REFUND_POLICY_URL = "https://www.donatellex.com/refund";
 export const TERMS_URL = "https://www.donatellex.com/terms";
+export const PRIVACY_URL = "https://www.donatellex.com/privacy";
 
 export type WithdrawalReason = "no_paid" | "already_requested" | "refunded" | "window_passed" | null;
 export type RefundStatus = "pending" | "approved" | "refunded" | "rejected";

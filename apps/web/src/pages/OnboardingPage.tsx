@@ -8,6 +8,7 @@ import type { FitnessGoal } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 import { CountrySelect } from "@/components/CountrySelect";
+import { PhoneInput } from "@/components/PhoneInput";
 import clsx from "clsx";
 
 const GOALS: FitnessGoal[] = [
@@ -31,6 +32,10 @@ export default function OnboardingPage() {
   // при входе через Google её нет — спрашиваем здесь, на первом шаге.
   const needsCountry = !!profile && !profile.country;
   const [country, setCountry] = useState<string | undefined>(undefined);
+  // Телефон обязателен (0087); вход через Google его не даёт — спрашиваем здесь
+  const needsPhone = !!profile && !profile.phone;
+  const [phone, setPhone] = useState("");
+  const phoneValid = /^\+[1-9]\d{7,14}$/.test(phone);
   const [serverError, setServerError] = useState<string | null>(null);
   const [daysError, setDaysError] = useState(false);
 
@@ -92,7 +97,11 @@ export default function OnboardingPage() {
 
     await supabase
       .from("users")
-      .update({ onboarding_completed: true, ...(needsCountry && country ? { country } : {}) })
+      .update({
+        onboarding_completed: true,
+        ...(needsCountry && country ? { country } : {}),
+        ...(needsPhone && phoneValid ? { phone } : {}),
+      })
       .eq("id", authUser.id);
     await refreshProfile();
     navigate("/dashboard", { replace: true });
@@ -127,6 +136,19 @@ export default function OnboardingPage() {
                   <CountrySelect id="onboarding-country" value={country} onChange={setCountry} />
                 </div>
               )}
+              {needsPhone && (
+                <div className="mb-8">
+                  <label htmlFor="onboarding-phone" className="mb-1.5 block text-sm font-medium text-neutral-300">
+                    {t("auth.register.phone")}
+                  </label>
+                  <PhoneInput
+                    id="onboarding-phone"
+                    value={phone}
+                    country={country ?? profile?.country ?? undefined}
+                    onChange={setPhone}
+                  />
+                </div>
+              )}
               <h1 className="font-display text-2xl font-bold">{t("onboarding.goalsTitle")}</h1>
               <p className="mt-1 text-neutral-400">{t("onboarding.goalsSubtitle")}</p>
               <div className="mt-6 grid grid-cols-1 gap-3">
@@ -150,7 +172,7 @@ export default function OnboardingPage() {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                disabled={!selectedGoals?.length || (needsCountry && !country)}
+                disabled={!selectedGoals?.length || (needsCountry && !country) || (needsPhone && !phoneValid)}
                 className="btn-primary mt-8 w-full"
               >
                 {t("common.next")}

@@ -57,7 +57,9 @@
       "lastName": "Last name",
       "lastNamePlaceholder": "Smith",
       "country": "Country",
-      "countryPlaceholder": "Select your country"
+      "countryPlaceholder": "Select your country",
+      "phone": "Phone",
+      "acceptTermsHealth": "I accept the <terms>terms of use</terms> and the <privacy>privacy policy</privacy> and understand that the workouts are recommendations, not a medical service: I will consult a doctor before I start training."
     },
     "showPassword": "Show password",
     "hidePassword": "Hide password",
@@ -287,7 +289,13 @@
       "sleep": "Sleep 7–9 hours — muscles recover and grow at night.",
       "rest": "Give these muscles 48 hours of rest. A walk or light stretching tomorrow helps.",
       "disclaimer": "General guidance, not a substitute for advice from a doctor or dietitian.",
-      "done": "Done"
+      "done": "Done",
+      "shareTitle": "Share your result",
+      "shareHint": "Instagram, TikTok, WhatsApp — your story image is ready",
+      "share": "Share",
+      "saveImage": "Save image",
+      "saved": "Image saved",
+      "shareTagline": "One more workout in the bank 💪"
     }
   },
   "nutrition": {
@@ -676,8 +684,8 @@
       "failedText": "You haven't been charged. Check your card details and balance, or try another card.",
       "tryAgain": "Try again"
     },
-    "consentTerms": "I accept the <terms>terms of the offer</terms> and the <refund>refund policy</refund>",
-    "consentImmediate": "Please start my access right after payment. I understand that if I withdraw within 14 days, the cost of the days used is kept."
+    "consentTerms": "I accept the <terms>terms of the offer</terms>, including the <refund>refund policy</refund>",
+    "accessNote": "Access opens right after payment. Change your mind within 14 days and we'll refund the unused days."
   },
   "bodyParams": {
     "title": "Body parameters",
@@ -714,7 +722,8 @@
     "passwordRequired": "Enter your password",
     "goalsRequired": "Choose at least one goal",
     "lastNameRequired": "Enter your last name",
-    "countryRequired": "Select your country"
+    "countryRequired": "Select your country",
+    "phoneRequired": "Enter your phone number"
   },
   "quotes": [
     "Discipline wins when motivation runs out.",
@@ -850,7 +859,7 @@
     "usedValue": "{{used}} of {{period}}",
     "retained": "Kept for those days",
     "refund": "We'll refund",
-    "proportionalNote": "At checkout you asked for access to start immediately, so only the cost of the days used is kept.",
+    "proportionalNote": "Under the terms of the offer, access opened right after payment, so only the cost of the days used is kept.",
     "fullRefundNote": "We'll refund the full amount paid.",
     "reasonLabel": "Reason (optional)",
     "reasonPlaceholder": "What didn't work for you? It helps us improve",

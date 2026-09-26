@@ -32,13 +32,25 @@ function HomePage() {
   );
 }
 
+/** Условия использования / публичная оферта (в т.ч. отказ от ответственности за здоровье). */
 function TermsPage() {
+  return <SectionsPage base="legal.terms" />;
+}
+
+/** Юридическая страница из i18n: title, intro, sections[{h, p}]. */
+function SectionsPage({ base }: { base: "legal.terms" | "legal.refund" }) {
   const { t } = useTranslation();
-  const { region } = useRegion();
+  const sections = t(`${base}.sections`, { returnObjects: true }) as { h: string; p: string }[];
   return (
-    <LegalPage title={t("legal.terms.title") as string}>
-      <p>{t("legal.terms.body")}</p>
-      <p className="mt-4">{t(`legal.regionNotes.${region}`)}</p>
+    <LegalPage title={t(`${base}.title`) as string}>
+      <p>{t(`${base}.intro`)}</p>
+      {Array.isArray(sections) &&
+        sections.map((s) => (
+          <section key={s.h} className="mt-6">
+            <h2 className="font-display text-lg font-semibold text-neutral-100">{s.h}</h2>
+            <p className="mt-2">{s.p}</p>
+          </section>
+        ))}
     </LegalPage>
   );
 }
@@ -56,20 +68,7 @@ function PrivacyPage() {
 
 /** Политика возврата (0086): 14 дней на отказ, пропорциональный возврат. */
 function RefundPage() {
-  const { t } = useTranslation();
-  const sections = t("legal.refund.sections", { returnObjects: true }) as { h: string; p: string }[];
-  return (
-    <LegalPage title={t("legal.refund.title") as string}>
-      <p>{t("legal.refund.intro")}</p>
-      {Array.isArray(sections) &&
-        sections.map((s) => (
-          <section key={s.h} className="mt-6">
-            <h2 className="font-display text-lg font-semibold text-neutral-100">{s.h}</h2>
-            <p className="mt-2">{s.p}</p>
-          </section>
-        ))}
-    </LegalPage>
-  );
+  return <SectionsPage base="legal.refund" />;
 }
 
 export default function App() {

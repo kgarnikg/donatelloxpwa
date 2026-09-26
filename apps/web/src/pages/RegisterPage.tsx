@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { registerSchema, type RegisterInput } from "@donatellox/validation";
 import { supabase } from "@/lib/supabase";
 import { useValidationMessage } from "@/lib/validationMessage";
 import { PasswordInput } from "@/components/PasswordInput";
 import { CountrySelect } from "@/components/CountrySelect";
+import { PhoneInput } from "@/components/PhoneInput";
+import { PRIVACY_URL, TERMS_URL } from "@/lib/withdrawal";
 
 const REFERRAL_STORAGE_KEY = "donatellox-referral-code";
 
@@ -50,6 +52,9 @@ export default function RegisterPage() {
           first_name: values.firstName,
           last_name: values.lastName,
           country: values.country,
+          phone: values.phone,
+          // принял условия (в т.ч. "тренировки — рекомендации, не медицина") — 0087
+          terms_accepted_at: new Date().toISOString(),
           locale: i18n.resolvedLanguage ?? i18n.language,
         },
         emailRedirectTo: `${window.location.origin}/onboarding`,
@@ -116,6 +121,20 @@ export default function RegisterPage() {
           </div>
 
           <div>
+            <label htmlFor="register-phone" className="mb-1.5 block text-sm font-medium text-neutral-300">
+              {t("auth.register.phone")}
+            </label>
+            <PhoneInput
+              id="register-phone"
+              value={watch("phone")}
+              country={watch("country")}
+              onChange={(v) => setValue("phone", v, { shouldValidate: !!errors.phone })}
+              invalid={!!errors.phone}
+            />
+            {errors.phone && <p className="field-error">{vm(errors.phone.message)}</p>}
+          </div>
+
+          <div>
             <label className="mb-1.5 block text-sm font-medium text-neutral-300">
               {t("auth.register.email")}
             </label>
@@ -148,7 +167,15 @@ export default function RegisterPage() {
               className="mt-0.5 h-4 w-4 rounded border-ink-600 bg-ink-800 text-volt-400 focus:ring-volt-400"
               {...register("acceptedTerms")}
             />
-            {t("auth.register.acceptTerms")}
+            <span>
+              <Trans
+                i18nKey="auth.register.acceptTermsHealth"
+                components={{
+                  terms: <a href={TERMS_URL} target="_blank" rel="noreferrer" className="text-volt-400 underline" />,
+                  privacy: <a href={PRIVACY_URL} target="_blank" rel="noreferrer" className="text-volt-400 underline" />,
+                }}
+              />
+            </span>
           </label>
           {errors.acceptedTerms && <p className="field-error">{vm(errors.acceptedTerms.message)}</p>}
 

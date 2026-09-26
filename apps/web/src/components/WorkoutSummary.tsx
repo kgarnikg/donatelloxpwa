@@ -1,6 +1,21 @@
+import { useEffect, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { Trophy, Clock, Dumbbell, Flame, Weight, Beef, Wheat, Droplets, Moon, Footprints } from "lucide-react";
-import type { ReactNode } from "react";
+import {
+  Trophy,
+  Clock,
+  Dumbbell,
+  Flame,
+  Weight,
+  Beef,
+  Wheat,
+  Droplets,
+  Moon,
+  Footprints,
+  Share2,
+  Download,
+  Check,
+} from "lucide-react";
+import { downloadImage, renderShareCard, shareImage, type ShareStat } from "@/lib/shareCard";
 
 export interface WorkoutSummaryData {
   title: string;
@@ -40,6 +55,44 @@ export function WorkoutSummary({ data, onDone }: { data: WorkoutSummaryData; onD
   const proteinTo = w ? Math.max(proteinFrom + 5, round(w * 0.4, 5)) : 40;
   const carbs = w ? round(w * 1, 10) : 70;
   const water = Math.min(1000, Math.max(400, round((data.minutes / 60) * 600, 50)));
+  // Картинка для сторис: те же 4 цифры, что в плитках
+  const shareStats: ShareStat[] = [
+    { value: time, label: t("workout.summary.time") },
+    { value: String(data.exercises), label: t("workout.summary.exercises", { count: data.exercises }) },
+    data.kcal != null
+      ? { value: `~${data.kcal.toLocaleString(lang)}`, label: t("workout.summary.kcal"), accent: true }
+      : { value: String(data.sets), label: t("workout.summary.setsDone") },
+    data.volumeKg > 0
+      ? { value: lifted, label: t("workout.summary.lifted") }
+      : { value: String(data.sets), label: t("workout.summary.setsDone") },
+  ];
+  const [card, setCard] = useState<{ blob: Blob; url: string } | null>(null);
+  const [shareState, setShareState] = useState<"idle" | "busy" | "saved">("idle");
+  useEffect(() => {
+    let url = "";
+    let cancelled = false;
+    renderShareCard(data, shareStats, t, lang)
+      .then((blob) => {
+        if (cancelled) return;
+        url = URL.createObjectURL(blob);
+        setCard({ blob, url });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+      if (url) URL.revokeObjectURL(url);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- рисуем один раз
+  }, []);
+  const fileName = `donatellex-${new Date().toISOString().slice(0, 10)}.png`;
+
+  async function onShare() {
+    if (!card) return;
+    setShareState("busy");
+    const result = await shareImage(card.blob, fileName);
+    setShareState(result === "downloaded" ? "saved" : "idle");
+  }
+
   const carbsText =
     data.programGoal === "lose_weight"
       ? t("workout.summary.carbsLoss")
@@ -78,6 +131,40 @@ export function WorkoutSummary({ data, onDone }: { data: WorkoutSummaryData; onD
           ) : (
             <Stat icon={<Dumbbell size={18} />} value={String(data.sets)} label={t("workout.summary.setsDone")} />
           )}
+        </div>
+
+        {/* Поделиться в сторис (Instagram, TikTok…) — готовая картинка 9:16 */}
+        <div className="card mt-4 flex items-center gap-4">
+          <div className="aspect-[9/16] w-24 shrink-0 overflow-hidden rounded-xl border border-ink-700 bg-ink-900">
+            {card ? (
+              <img src={card.url} alt={t("workout.summary.shareTitle")} className="h-full w-full object-cover" />
+            ) : (
+              <div className="h-full w-full animate-pulse bg-ink-800" />
+            )}
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="font-semibold">{t("workout.summary.shareTitle")}</p>
+            <p className="mt-0.5 text-xs text-neutral-400">{t("workout.summary.shareHint")}</p>
+            <button
+              onClick={onShare}
+              disabled={!card || shareState === "busy"}
+              className="btn-primary mt-3 w-full py-2.5 text-sm"
+            >
+              <Share2 size={16} /> {t("workout.summary.share")}
+            </button>
+            <button
+              onClick={() => {
+                if (!card) return;
+                downloadImage(card.blob, fileName);
+                setShareState("saved");
+              }}
+              disabled={!card}
+              className="mt-2 flex w-full items-center justify-center gap-1.5 py-1 text-xs font-medium text-neutral-400 hover:text-neutral-200"
+            >
+              {shareState === "saved" ? <Check size={14} /> : <Download size={14} />}
+              {shareState === "saved" ? t("workout.summary.saved") : t("workout.summary.saveImage")}
+            </button>
+          </div>
         </div>
 
         <Section title={t("workout.summary.nutritionTitle")}>

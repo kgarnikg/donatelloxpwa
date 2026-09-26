@@ -255,8 +255,54 @@
   "legal": {
     "back": "Volver al inicio",
     "terms": {
-      "title": "Condiciones de uso",
-      "body": "Al usar la app y el sitio web de DonatelleX, aceptas estas condiciones. El texto completo de las condiciones de uso se publicará aquí antes del lanzamiento a producción de la plataforma."
+      "title": "Condiciones de uso (oferta pública)",
+      "intro": "Lee estas condiciones: explican la suscripción, el pago, los reembolsos y la seguridad de los entrenamientos.",
+      "sections": [
+        {
+          "h": "1. Disposiciones generales",
+          "p": "Estas condiciones son una oferta pública. Al registrarte en la app DonatelleX o pagar una suscripción, las aceptas íntegramente. El servicio está dirigido a mayores de 18 años."
+        },
+        {
+          "h": "2. Qué ofrecemos",
+          "p": "Acceso a la app app.donatellex.com durante el periodo pagado: programas de entrenamiento del entrenador Vladimir Donatellex, vídeos de ejercicios, recomendaciones de nutrición y recuperación y estadísticas de progreso."
+        },
+        {
+          "h": "3. Pago y acceso",
+          "p": "La suscripción se paga una sola vez por el periodo elegido (1, 3, 6 o 12 meses); no hay renovaciones ni cobros automáticos. El precio figura en la página de pago. Al aceptar estas condiciones en el pago, solicitas que el acceso empiece de inmediato: se abre automáticamente en cuanto el banco confirma el pago."
+        },
+        {
+          "h": "4. Desistimiento y reembolso",
+          "p": "Puedes desistir de la suscripción en los 14 días siguientes al pago sin dar explicaciones. Como el acceso empieza de inmediato, se descuenta el coste de los días usados en proporción a la duración de la suscripción y el resto se devuelve en un máximo de 14 días. Más detalles en la Política de reembolso."
+        },
+        {
+          "h": "5. Salud y seguridad — importante",
+          "p": "Los programas, ejercicios y consejos de nutrición son recomendaciones generales, no un servicio médico, diagnóstico ni tratamiento, y no tienen en cuenta tu estado de salud individual. Consulta a un médico antes de empezar a entrenar o cambiar tu alimentación, sobre todo si tienes enfermedades crónicas, lesiones, problemas de corazón, tensión o articulaciones, o estás embarazada o has dado a luz recientemente. Cuida la técnica, empieza con pesos asumibles y detén el ejercicio si sientes dolor, mareo o malestar."
+        },
+        {
+          "h": "6. Responsabilidad",
+          "p": "Entrenas de forma voluntaria, por tu cuenta y bajo tu propio riesgo. En la medida permitida por la ley, no respondemos de lesiones, empeoramiento de la salud u otros daños derivados de hacer los ejercicios o seguir las recomendaciones, incluso si no consultaste a un médico o no respetaste la técnica. Esto no limita la responsabilidad que la ley no permite excluir."
+        },
+        {
+          "h": "7. Cuenta y contenidos",
+          "p": "La cuenta es personal: no compartas el acceso con otras personas. Todos los materiales (vídeos, programas, textos) están protegidos por derechos de autor y no pueden copiarse, grabarse, publicarse ni venderse. Podemos bloquear la cuenta en caso de infracción."
+        },
+        {
+          "h": "8. Acceso gratuito",
+          "p": "La semana gratis (un programa, 7 días desde el registro), el mes por invitar a un amigo y el acceso de regalo son gratuitos; sus condiciones pueden cambiar."
+        },
+        {
+          "h": "9. Cambios en las condiciones",
+          "p": "Podemos actualizar estas condiciones; la nueva versión rige desde su publicación en esta página. El periodo ya pagado se mantiene con las condiciones anteriores."
+        },
+        {
+          "h": "10. Ley aplicable",
+          "p": "Estas condiciones se rigen por la legislación de la República de Armenia. Si eres consumidor de otro país, conservas los derechos imperativos que te reconoce la ley de tu país. Intentamos resolver las disputas de forma amistosa: escríbenos."
+        },
+        {
+          "h": "11. Vendedor y contacto",
+          "p": "El vendedor es un empresario individual registrado en la República de Armenia; sus datos se publicarán en este apartado antes de empezar a aceptar pagos. Contacto: hello@donatellex.com."
+        }
+      ]
     },
     "privacy": {
       "title": "Política de privacidad",
@@ -282,7 +328,7 @@
         },
         {
           "h": "Cuánto devolvemos",
-          "p": "Si al pagar solicitaste empezar el acceso de inmediato (la casilla de la pantalla de pago), descontamos el coste de los días ya usados, en proporción a la duración de la suscripción, y devolvemos el resto. Ejemplo: suscripción de 3 meses (91 días), desistimiento el día 10 — devolvemos 81/91 del importe. Si no hiciste esa solicitud, devolvemos el importe íntegro."
+          "p": "Si al pagar aceptaste las condiciones de la oferta, el acceso empieza justo después del pago; por eso, al desistir, descontamos el coste de los días ya usados en proporción a la duración de la suscripción y devolvemos el resto. Ejemplo: suscripción de 3 meses (91 días), desistimiento el día 10 — devolvemos 81/91 del importe."
         },
         {
           "h": "Plazo y forma de devolución",

@@ -57,7 +57,9 @@
       "lastName": "Cognome",
       "lastNamePlaceholder": "Rossi",
       "country": "Paese",
-      "countryPlaceholder": "Seleziona il tuo paese"
+      "countryPlaceholder": "Seleziona il tuo paese",
+      "phone": "Telefono",
+      "acceptTermsHealth": "Accetto le <terms>condizioni d'uso</terms> e l'<privacy>informativa sulla privacy</privacy> e capisco che gli allenamenti sono raccomandazioni, non un servizio medico: prima di iniziare consulterò un medico."
     },
     "showPassword": "Mostra password",
     "hidePassword": "Nascondi password",
@@ -287,7 +289,13 @@
       "sleep": "Dormi 7–9 ore: di notte i muscoli si recuperano e crescono.",
       "rest": "Dai a questi muscoli 48 ore di riposo. Domani va bene una passeggiata o stretching leggero.",
       "disclaimer": "Indicazioni generali, non sostituiscono il parere di un medico o nutrizionista.",
-      "done": "Fatto"
+      "done": "Fatto",
+      "shareTitle": "Condividi il risultato",
+      "shareHint": "Instagram, TikTok, WhatsApp — l'immagine per le storie è pronta",
+      "share": "Condividi",
+      "saveImage": "Salva immagine",
+      "saved": "Immagine salvata",
+      "shareTagline": "Un altro allenamento messo in cassaforte 💪"
     }
   },
   "nutrition": {
@@ -518,8 +526,8 @@
       "failedText": "Non è stato addebitato nulla. Controlla i dati e il saldo della carta o prova con un'altra.",
       "tryAgain": "Riprova"
     },
-    "consentTerms": "Accetto le <terms>condizioni dell'offerta</terms> e la <refund>politica di rimborso</refund>",
-    "consentImmediate": "Chiedo di attivare l'accesso subito dopo il pagamento. Capisco che, se recedo entro 14 giorni, viene trattenuto il costo dei giorni usati."
+    "consentTerms": "Accetto le <terms>condizioni dell'offerta</terms>, inclusa la <refund>politica di rimborso</refund>",
+    "accessNote": "L'accesso si attiva subito dopo il pagamento. Se cambi idea entro 14 giorni, rimborsiamo i giorni non usati."
   },
   "bodyParams": {
     "title": "Parametri corporei",
@@ -714,7 +722,8 @@
     "passwordRequired": "Inserisci la password",
     "goalsRequired": "Scegli almeno un obiettivo",
     "lastNameRequired": "Inserisci il cognome",
-    "countryRequired": "Seleziona il tuo paese"
+    "countryRequired": "Seleziona il tuo paese",
+    "phoneRequired": "Inserisci il numero di telefono"
   },
   "quotes": [
     "La disciplina vince quando la motivazione finisce.",
@@ -850,7 +859,7 @@
     "usedValue": "{{used}} di {{period}}",
     "retained": "Trattenuto per quei giorni",
     "refund": "Rimborsiamo",
-    "proportionalNote": "Al pagamento hai chiesto di iniziare subito, quindi viene trattenuto solo il costo dei giorni usati.",
+    "proportionalNote": "Secondo le condizioni dell'offerta l'accesso si è attivato subito dopo il pagamento, quindi viene trattenuto solo il costo dei giorni usati.",
     "fullRefundNote": "Rimborsiamo l'intero importo pagato.",
     "reasonLabel": "Motivo (facoltativo)",
     "reasonPlaceholder": "Cosa non ti ha convinto? Ci aiuta a migliorare",

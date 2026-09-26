@@ -14,6 +14,7 @@ const RU_TO_KEY: Record<string, string> = {
   "Пароль должен содержать хотя бы одну букву": "validation.passwordLetter",
   "Пароль должен содержать хотя бы одну цифру": "validation.passwordDigit",
   "Введите корректный номер телефона в международном формате": "validation.phoneInvalid",
+  "Введите номер телефона": "validation.phoneRequired",
   "Введите имя": "validation.nameRequired",
   "Введите фамилию": "validation.lastNameRequired",
   "Выберите страну": "validation.countryRequired",

@@ -218,7 +218,12 @@ export default function UsersPage() {
       if (!q) return true;
       // Email и есть логин в этой системе (входа по отдельному username нет) —
       // поиск по нему покрывает то, что имеется в виду под "ввести логин".
-      return u.fullName?.toLowerCase().includes(q) || u.email?.toLowerCase().includes(q);
+      const digits = q.replace(/\D/g, "");
+      return (
+        u.fullName?.toLowerCase().includes(q) ||
+        u.email?.toLowerCase().includes(q) ||
+        (digits.length >= 3 && !!u.phone?.replace(/\D/g, "").includes(digits))
+      );
     });
 
     list = [...list].sort((a, b) => {
@@ -255,7 +260,7 @@ export default function UsersPage() {
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Поиск по имени или email…"
+            placeholder="Поиск по имени, email или телефону…"
             className="input-field pl-9"
           />
         </div>
@@ -334,7 +339,14 @@ export default function UsersPage() {
                       )}
                     </div>
                   </td>
-                  <td className="table-td text-neutral-400">{u.email}</td>
+                  <td className="table-td text-neutral-400">
+                    {u.email}
+                    {u.phone && (
+                      <a href={`tel:${u.phone}`} className="block text-xs text-neutral-500 hover:text-volt-400">
+                        {u.phone}
+                      </a>
+                    )}
+                  </td>
                   <td className="table-td whitespace-nowrap text-neutral-300">
                     {u.country ? (
                       <span title={countryNames?.of(u.country) ?? u.country}>

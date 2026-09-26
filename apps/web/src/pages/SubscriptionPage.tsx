@@ -71,12 +71,12 @@ export default function SubscriptionPage() {
     };
   }, []);
   const [error, setError] = useState<string | null>(null);
-  // Согласия перед оплатой (0086): оферта + политика возврата и просьба
-  // открыть доступ сразу (тогда при отказе в 14 дней удерживаются
-  // использованные дни). Без обеих галочек оплатить нельзя.
+  // Одна галочка "Принимаю условия оферты" (0086). В оферте прописано, что
+  // доступ открывается сразу после оплаты и при отказе в 14 дней
+  // удерживаются использованные дни; то же коротко написано под кнопкой.
+  // Без галочки оплатить нельзя.
   const [acceptTerms, setAcceptTerms] = useState(false);
-  const [immediateStart, setImmediateStart] = useState(false);
-  const consentsGiven = acceptTerms && immediateStart;
+  const consentsGiven = acceptTerms;
   const { data: withdrawal } = useWithdrawalInfo();
 
   const discountPercent = profile?.pendingDiscountPercent ?? 0;
@@ -113,7 +113,8 @@ export default function SubscriptionPage() {
           region,
           language: i18n.language,
           acceptTerms,
-          immediateStartConsent: immediateStart,
+          // принимая оферту, человек просит открыть доступ сразу (п. «Оплата и доступ»)
+          immediateStartConsent: acceptTerms,
         }),
       });
 
@@ -317,9 +318,6 @@ export default function SubscriptionPage() {
             }}
           />
         </ConsentCheckbox>
-        <ConsentCheckbox checked={immediateStart} onChange={setImmediateStart}>
-          {t("payment.consentImmediate")}
-        </ConsentCheckbox>
       </div>
 
       {PAYMENTS_ENABLED ? (
@@ -357,6 +355,9 @@ export default function SubscriptionPage() {
       </p>
       <p className="mt-2 text-center text-xs text-neutral-500">
         {t("payment.oneTimeNote")}
+      </p>
+      <p className="mt-2 text-center text-xs text-neutral-500">
+        {t("payment.accessNote")}
       </p>
     </div>
   );

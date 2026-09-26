@@ -49,6 +49,11 @@ export const registerSchema = z
     lastName: z.string().trim().min(1, "Введите фамилию").max(60),
     /** Страна — ISO 3166-1 alpha-2 ("ES", "AM"), 0081. */
     country: countrySchema,
+    /** Телефон в международном формате "+37491234567" (0087), обязателен. */
+    phone: z
+      .string({ required_error: "Введите номер телефона" })
+      .min(1, "Введите номер телефона")
+      .regex(/^\+[1-9]\d{7,14}$/, "Введите корректный номер телефона в международном формате"),
     email: emailSchema,
     password: passwordSchema,
     passwordConfirm: z.string(),

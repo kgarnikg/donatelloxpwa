@@ -269,8 +269,54 @@
   "legal": {
     "back": "Back to home",
     "terms": {
-      "title": "Terms of Use",
-      "body": "By using the DonatelleX app and website, you agree to these terms. The full terms of use will be published here before the platform's production launch."
+      "title": "Terms of use (public offer)",
+      "intro": "Please read these terms — they cover the subscription, payment, refunds and training safety.",
+      "sections": [
+        {
+          "h": "1. General",
+          "p": "These terms are a public offer. By registering in the DonatelleX app or paying for a subscription, you accept them in full. The service is intended for people aged 18 and over."
+        },
+        {
+          "h": "2. What we provide",
+          "p": "Access to the app at app.donatellex.com for the paid period: training programs by coach Vladimir Donatellex, exercise videos, nutrition and recovery recommendations, and progress statistics."
+        },
+        {
+          "h": "3. Payment and access",
+          "p": "The subscription is paid once for the chosen period (1, 3, 6 or 12 months); there are no automatic renewals or charges. The price is shown on the payment page. By accepting these terms at checkout, you request that access starts immediately — it opens automatically as soon as the bank confirms the payment."
+        },
+        {
+          "h": "4. Withdrawal and refunds",
+          "p": "You can withdraw from the subscription within 14 days of payment without giving a reason. Because access starts immediately, the cost of the days used is kept in proportion to the subscription length, and the rest is refunded within 14 days. See the Refund policy for details."
+        },
+        {
+          "h": "5. Health and safety — important",
+          "p": "Programs, exercises and nutrition tips are general recommendations, not a medical service, diagnosis or treatment, and they do not take your individual health into account. Consult a doctor before starting training or changing your diet — especially if you have chronic conditions, injuries, heart, blood pressure or joint problems, or are pregnant or have recently given birth. Use proper technique, start with manageable weights and stop an exercise if you feel pain, dizziness or unwell."
+        },
+        {
+          "h": "6. Liability",
+          "p": "You train voluntarily, independently and at your own risk. To the extent permitted by law, we are not liable for injuries, deterioration of health or other harm arising from doing the exercises or following the recommendations, including where you did not consult a doctor or used incorrect technique. This does not limit any liability that cannot be excluded by law."
+        },
+        {
+          "h": "7. Account and content",
+          "p": "Your account is personal — do not share access with others. All materials (videos, programs, texts) are protected by copyright and may not be copied, recorded, published or sold. We may block an account for violations."
+        },
+        {
+          "h": "8. Free access",
+          "p": "The free week (one program, 7 days from registration), the month for inviting a friend and gifted access are provided free of charge; their conditions may change."
+        },
+        {
+          "h": "9. Changes",
+          "p": "We may update these terms; the new version applies from its publication on this page. A period already paid for continues under the previous terms."
+        },
+        {
+          "h": "10. Governing law",
+          "p": "These terms are governed by the laws of the Republic of Armenia. If you are a consumer in another country, you keep the mandatory rights granted by your country's law. We try to resolve disputes through negotiation — write to us."
+        },
+        {
+          "h": "11. Seller and contact",
+          "p": "The seller is a sole proprietor registered in the Republic of Armenia; the seller's details will be published in this section before payments are accepted. Contact: hello@donatellex.com."
+        }
+      ]
     },
     "privacy": {
       "title": "Privacy Policy",
@@ -296,7 +342,7 @@
         },
         {
           "h": "How much we refund",
-          "p": "If at checkout you asked for access to start immediately (the tick box on the payment screen), we keep the cost of the days you have already used, in proportion to the subscription length, and refund the rest. Example: a 3-month subscription (91 days) cancelled on day 10 — we refund 81/91 of the amount. If you didn't make that request, we refund the full amount."
+          "p": "If you accepted the terms of the offer at checkout, access starts right after payment — so on withdrawal we keep the cost of the days you have already used, in proportion to the subscription length, and refund the rest. Example: a 3-month subscription (91 days) cancelled on day 10 — we refund 81/91 of the amount."
         },
         {
           "h": "Timing and method",
