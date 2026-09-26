@@ -81,6 +81,16 @@ export default async function handler(request: Request): Promise<Response> {
     return new Response("Unauthorized", { status: 401 });
   }
   const missing = ["SUPABASE_SERVICE_ROLE_KEY", "RESEND_API_KEY"].filter((n) => !env(n));
+  // Ключ, скопированный "со звёздочками" (••••) или с невидимыми символами,
+  // браузерный fetch не отправит ("Invalid header value") — говорим прямо.
+  const broken = ["SUPABASE_SERVICE_ROLE_KEY", "RESEND_API_KEY", "CRON_SECRET"].filter(
+    (n) => env(n) && /[^\x21-\x7E]/.test(env(n)),
+  );
+  if (broken.length) {
+    const error = `invalid characters in env: ${broken.join(", ")} — скопируйте ключ заново (открыв его значение) и обновите переменную в Vercel`;
+    console.error("cron/daily", error);
+    return Response.json({ error }, { status: 500 });
+  }
   if (missing.length || !(env("SUPABASE_URL") || env("VITE_SUPABASE_URL"))) {
     return Response.json({ error: `missing env: ${missing.join(", ") || "SUPABASE_URL"}` }, { status: 500 });
   }
