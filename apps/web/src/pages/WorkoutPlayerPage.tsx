@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Check, ChevronLeft, PlayCircle, Video, TrendingUp, X, Timer, ArrowDown, Shuffle } from "lucide-react";
+import { Check, ChevronLeft, PlayCircle, Video, TrendingUp, X, Timer, ArrowDown, Shuffle, Lock } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
@@ -10,7 +10,7 @@ import { localizedOf } from "@/lib/localizedField";
 import { getYouTubeEmbedUrl } from "@/lib/video";
 import { triggerHapticPulse } from "@/lib/haptics";
 import { estimateWorkoutCalories, calculateAge } from "@/lib/calories";
-import { useUserProfile } from "@/lib/queries";
+import { useUserProfile, useProgramAccess } from "@/lib/queries";
 import { RestTimerOverlay } from "@/components/RestTimerOverlay";
 import type { Exercise, WorkoutSet } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
@@ -32,6 +32,8 @@ interface WorkoutWithSets {
   trainingFormat: "home" | "gym";
   /** Цель программы (workout_programs.goal) — задаёт интенсивность для расчёта калорий. */
   programGoal: string | null;
+  /** Программа тренировки — для проверки доступа (подписка / бесплатная неделя, 0080). */
+  programRef: { id: string; slug: string; isPremium: boolean } | null;
 }
 
 interface CompletedSetEntry {
@@ -69,6 +71,7 @@ export default function WorkoutPlayerPage() {
   const queryClient = useQueryClient();
   const { authUser } = useAuth();
   const { data: userProfile } = useUserProfile();
+  const access = useProgramAccess();
   const [completedIds, setCompletedIds] = useState<Set<string>>(new Set());
   const [confirmExit, setConfirmExit] = useState(false);
   const [weights, setWeights] = useState<Record<string, string>>({});
@@ -278,18 +281,21 @@ export default function WorkoutPlayerPage() {
     queryFn: async (): Promise<WorkoutWithSets> => {
       const { data, error } = await supabase
         .from("workouts")
-        .select("*, sets:workout_sets(*, exercise:exercises(*)), program:workout_programs(training_format, goal)")
+        .select("*, sets:workout_sets(*, exercise:exercises(*)), program:workout_programs(id, slug, is_premium, training_format, goal)")
         .eq("id", workoutId)
         .order("order", { referencedTable: "workout_sets", ascending: true })
         .single();
       if (error) throw error;
       const camel = toCamelCase<
-        WorkoutWithSets & { program?: { trainingFormat: "home" | "gym"; goal?: string | null } }
+        WorkoutWithSets & {
+          program?: { id: string; slug: string; isPremium: boolean; trainingFormat: "home" | "gym"; goal?: string | null };
+        }
       >(data);
       return {
         ...camel,
         trainingFormat: camel.program?.trainingFormat ?? "home",
         programGoal: camel.program?.goal ?? null,
+        programRef: camel.program ? { id: camel.program.id, slug: camel.program.slug, isPremium: camel.program.isPremium } : null,
       };
     },
     enabled: !!workoutId,
@@ -464,6 +470,28 @@ export default function WorkoutPlayerPage() {
     return (
       <div className="flex min-h-dvh items-center justify-center bg-ink-950">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-ink-600 border-t-volt-400" />
+      </div>
+    );
+  }
+
+  // Прямая ссылка на тренировку закрытой программы не должна обходить
+  // оплату: та же проверка, что в каталоге и на странице программы.
+  if (access.isReady && workout.programRef && !access.canAccess(workout.programRef)) {
+    return (
+      <div className="flex min-h-dvh flex-col items-center justify-center bg-ink-950 px-6 text-center">
+        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-volt-400/10 text-volt-400">
+          <Lock size={24} />
+        </div>
+        <h1 className="mt-4 font-display text-xl font-bold">{localizedOf(workout, "title", i18n.language)}</h1>
+        <p className="mt-2 max-w-xs text-sm text-neutral-400">
+          {access.trial.active ? t("programs.lockedOtherText") : t("programs.lockedText")}
+        </p>
+        <button onClick={() => navigate("/subscription")} className="btn-primary mt-6 w-full max-w-xs">
+          {t("dashboard.activateSubscription")}
+        </button>
+        <button onClick={() => navigate(-1)} className="mt-3 text-sm text-neutral-400 hover:text-neutral-200">
+          {t("workout.back")}
+        </button>
       </div>
     );
   }

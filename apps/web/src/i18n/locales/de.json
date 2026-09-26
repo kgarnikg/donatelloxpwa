@@ -195,7 +195,9 @@
     "levelUpButton": "Los geht's!",
     "achievementsUnlocked": "Freigeschaltet: {{n}}",
     "achievements": "Erfolge",
-    "achievementsEmpty": "Starte dein Training, um den ersten freizuschalten"
+    "achievementsEmpty": "Starte dein Training, um den ersten freizuschalten",
+    "trialTitle": "Kostenlose Woche – bis {{date}}",
+    "trialDesc": "„{{program}}“ ist freigeschaltet. Danach: Zugang zu allen Programmen."
   },
   "workout": {
     "back": "Zurück",
@@ -518,7 +520,10 @@
     "exercises_one": "{{count}} Übung",
     "exercises_other": "{{count}} Übungen",
     "notFound": "Programm nicht gefunden.",
-    "noWorkoutsYet": "Trainings für dieses Programm folgen in Kürze."
+    "noWorkoutsYet": "Trainings für dieses Programm folgen in Kürze.",
+    "lockedTrialText": "Deine kostenlose Woche gilt für „{{program}}“ – das Programm, das zu deinen Antworten passt. Weitere Programme schaltest du mit dem Zugang frei.",
+    "lockedOtherText": "Deine kostenlose Woche gilt nur für das Programm, das zu deinen Antworten passt. Weitere Programme schaltest du mit dem Zugang frei.",
+    "openTrialProgram": "Mein kostenloses Programm öffnen"
   },
   "achievements": {
     "title": "Erfolge",

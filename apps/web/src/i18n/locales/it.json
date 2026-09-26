@@ -195,7 +195,9 @@
     "levelUpButton": "Andiamo!",
     "achievementsUnlocked": "Sbloccati: {{n}}",
     "achievements": "Traguardi",
-    "achievementsEmpty": "Inizia ad allenarti per sbloccare il primo"
+    "achievementsEmpty": "Inizia ad allenarti per sbloccare il primo",
+    "trialTitle": "Settimana gratuita — fino al {{date}}",
+    "trialDesc": "«{{program}}» è sbloccato. Poi, accesso a tutti i programmi."
   },
   "workout": {
     "back": "Indietro",
@@ -518,7 +520,10 @@
     "exercises_one": "{{count}} esercizio",
     "exercises_other": "{{count}} esercizi",
     "notFound": "Programma non trovato.",
-    "noWorkoutsYet": "Gli allenamenti di questo programma arriveranno presto."
+    "noWorkoutsYet": "Gli allenamenti di questo programma arriveranno presto.",
+    "lockedTrialText": "La tua settimana gratuita vale per «{{program}}», il programma scelto in base alle tue risposte. Gli altri programmi si sbloccano con l'accesso.",
+    "lockedOtherText": "La tua settimana gratuita vale solo per il programma scelto in base alle tue risposte. Gli altri programmi si sbloccano con l'accesso.",
+    "openTrialProgram": "Apri il mio programma gratuito"
   },
   "achievements": {
     "title": "Traguardi",

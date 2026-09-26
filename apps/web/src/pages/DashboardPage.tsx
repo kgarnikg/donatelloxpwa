@@ -9,7 +9,7 @@ import {
   useActiveSubscription,
   usePrograms,
   useAchievements,
-  useFreeProgramAccess,
+  useProgramAccess,
   useWorkoutCalorieStats,
 } from "@/lib/queries";
 import { useDashboard } from "@/lib/dashboard";
@@ -26,7 +26,8 @@ export default function DashboardPage() {
   const { t, i18n } = useTranslation();
   const { profile, authUser } = useAuth();
   const { data: subscription } = useActiveSubscription();
-  const { hasFreeAccess } = useFreeProgramAccess();
+  const access = useProgramAccess();
+  const { data: allPrograms } = usePrograms();
   const { data: dash, isLoading } = useDashboard();
   const { data: achievements } = useAchievements();
   const { data: calories } = useWorkoutCalorieStats();
@@ -47,7 +48,10 @@ export default function DashboardPage() {
   }
 
   const { game, program } = dash;
-  const canTrain = !!program && (!program.isPremium || !!subscription || hasFreeAccess);
+  const canTrain = !!program && (!access.isReady || access.canAccess(program));
+  const trialProgram = access.trial.active
+    ? allPrograms?.find((p) => p.id === access.trial.programId) ?? null
+    : null;
 
   return (
     <div className="px-5 pt-8 pb-6">
@@ -59,8 +63,23 @@ export default function DashboardPage() {
           className="card mb-4 flex items-center justify-between border-ember-400/30 bg-gradient-to-br from-ember-400/10 to-transparent py-4"
         >
           <div>
-            <p className="font-semibold text-ember-300">{t("dashboard.activateSubscription")}</p>
-            <p className="mt-0.5 text-sm text-neutral-400">{t("dashboard.subscriptionDesc")}</p>
+            {trialProgram && access.trial.endsAt ? (
+              <>
+                <p className="font-semibold text-volt-400">
+                  {t("dashboard.trialTitle", {
+                    date: access.trial.endsAt.toLocaleDateString(i18n.language, { day: "numeric", month: "long" }),
+                  })}
+                </p>
+                <p className="mt-0.5 text-sm text-neutral-400">
+                  {t("dashboard.trialDesc", { program: localizedOf(trialProgram, "title", i18n.language) })}
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="font-semibold text-ember-300">{t("dashboard.activateSubscription")}</p>
+                <p className="mt-0.5 text-sm text-neutral-400">{t("dashboard.subscriptionDesc")}</p>
+              </>
+            )}
           </div>
           <ChevronRight className="text-ember-400" />
         </Link>

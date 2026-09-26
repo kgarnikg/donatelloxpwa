@@ -195,7 +195,9 @@
     "quoteOfDay": "Frase del día",
     "chooseProgram": "Elige un programa para empezar",
     "levelUpTitle": "¡Subes de nivel!",
-    "levelUpButton": "¡Vamos!"
+    "levelUpButton": "¡Vamos!",
+    "trialTitle": "Semana gratis — hasta el {{date}}",
+    "trialDesc": "«{{program}}» está desbloqueado. Después, accede a todos los programas."
   },
   "workout": {
     "back": "Atrás",
@@ -551,7 +553,10 @@
     "switchNote": "Tu programa activo es «{{program}}». Tu progreso en él se guarda y puedes volver cuando quieras.",
     "lockedText": "Tu semana gratis ha terminado. Activa el acceso para continuar: desbloquea todos los programas a la vez.",
     "notFound": "Programa no encontrado.",
-    "noWorkoutsYet": "Los entrenamientos de este programa llegarán pronto."
+    "noWorkoutsYet": "Los entrenamientos de este programa llegarán pronto.",
+    "lockedTrialText": "Tu semana gratis incluye «{{program}}», el programa elegido según tus respuestas. Los demás programas se desbloquean con el acceso.",
+    "lockedOtherText": "Tu semana gratis incluye solo el programa elegido según tus respuestas. Los demás programas se desbloquean con el acceso.",
+    "openTrialProgram": "Abrir mi programa gratis"
   },
   "support": {
     "title": "Ayuda",

@@ -83,6 +83,8 @@ export interface UserProfile {
   daysPerWeek?: number;
   healthNotes?: string;
   preferredLanguage: LocaleCode;
+  /** Программа бесплатной недели (0080): ставится один раз — подобранная по анкете. */
+  trialProgramId?: UUID | null;
   updatedAt: ISODateString;
 }
 

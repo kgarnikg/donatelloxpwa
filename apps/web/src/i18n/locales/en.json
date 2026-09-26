@@ -195,7 +195,9 @@
     "quoteOfDay": "Thought of the day",
     "chooseProgram": "Choose a program to get started",
     "levelUpTitle": "Level up!",
-    "levelUpButton": "Let's go!"
+    "levelUpButton": "Let's go!",
+    "trialTitle": "Free week — until {{date}}",
+    "trialDesc": "“{{program}}” is unlocked. After that, get access to all programs."
   },
   "workout": {
     "back": "Back",
@@ -551,7 +553,10 @@
     "switchNote": "Your active program is “{{program}}”. Your progress there is saved and you can go back any time.",
     "lockedText": "Your free week is over. Get access to continue — it unlocks all programs at once.",
     "notFound": "Program not found.",
-    "noWorkoutsYet": "Workouts for this program are coming soon."
+    "noWorkoutsYet": "Workouts for this program are coming soon.",
+    "lockedTrialText": "Your free week covers “{{program}}”, the program matched to your answers. Other programs unlock with access.",
+    "lockedOtherText": "Your free week covers only the program matched to your answers. Other programs unlock with access.",
+    "openTrialProgram": "Open my free program"
   },
   "support": {
     "title": "Help",

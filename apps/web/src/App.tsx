@@ -8,7 +8,7 @@ import { AppShell } from "@/components/AppShell";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
-import { useFreeProgramAccess, useActiveSubscription } from "@/lib/queries";
+import { useProgramAccess, usePrograms } from "@/lib/queries";
 import { localizedOf } from "@/lib/localizedField";
 import { splitDescription } from "@/lib/programMeta";
 import { useDashboard } from "@/lib/dashboard";
@@ -76,8 +76,8 @@ function ProgramDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const { t, i18n } = useTranslation();
   const { session } = useAuth();
-  const { hasFreeAccess } = useFreeProgramAccess();
-  const { data: activeSubscription } = useActiveSubscription();
+  const access = useProgramAccess();
+  const { data: allPrograms } = usePrograms();
   const [activeWeekOrder, setActiveWeekOrder] = useState<number | null>(null);
   const { data: dashboard } = useDashboard();
 
@@ -223,14 +223,13 @@ function ProgramDetailPage() {
     );
   }
 
-  // Заблокирована только премиум-программа без бесплатного пробного окна И
-  // без активной подписки (включая безлимитный gift-доступ — он тоже
-  // приходит через useActiveSubscription, никакой отдельной обработки не
-  // требует). Раньше здесь проверялось только `program.isPremium ||
-  // !hasFreeAccess`, из-за чего премиум-программа была заблокирована
-  // ВСЕГДА, даже при активной подписке — доступ было невозможно получить
-  // ни оплатой, ни через безлимит из CMS.
-  const isLocked = program.isPremium && !hasFreeAccess && !activeSubscription;
+  // Правила доступа — в useProgramAccess (0080): подписка открывает всё,
+  // бесплатная неделя — только программу, подобранную по анкете.
+  const isLocked = access.isReady && !access.canAccess(program);
+  const trialProgram =
+    access.trial.active && access.trial.programId && access.trial.programId !== program.id
+      ? allPrograms?.find((p) => p.id === access.trial.programId) ?? null
+      : null;
 
   // Превью программы (Фаза 26): описание без хвоста "Оборудование: …",
   // оборудование — отдельными метками, число тренировок, большая кнопка.
@@ -326,11 +325,20 @@ function ProgramDetailPage() {
       {isLocked && (
         <div className="card mt-4 border-volt-400/30 bg-volt-400/5">
           <p className="text-sm text-neutral-300">
-            {t("programs.lockedText")}
+            {trialProgram
+              ? t("programs.lockedTrialText", {
+                  program: localizedOf(trialProgram, "title", i18n.language),
+                })
+              : t("programs.lockedText")}
           </p>
           <Link to="/subscription" className="btn-primary mt-3 w-full">
             {t("dashboard.activateSubscription")}
           </Link>
+          {trialProgram && (
+            <Link to={`/programs/${trialProgram.slug}`} className="btn-secondary mt-2 w-full">
+              {t("programs.openTrialProgram")}
+            </Link>
+          )}
         </div>
       )}
 

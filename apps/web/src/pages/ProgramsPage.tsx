@@ -6,8 +6,7 @@ import clsx from "clsx";
 import type { WorkoutProgram } from "@donatellox/types";
 import {
   usePrograms,
-  useFreeProgramAccess,
-  useActiveSubscription,
+  useProgramAccess,
   useRecommendedProgram,
   useUserProfile,
 } from "@/lib/queries";
@@ -36,8 +35,7 @@ export default function ProgramsPage() {
   const { data: recommended } = useRecommendedProgram();
   const { data: dash } = useDashboard();
   const { data: progress } = useProgramsProgress();
-  const { hasFreeAccess } = useFreeProgramAccess();
-  const { data: activeSubscription } = useActiveSubscription();
+  const access = useProgramAccess();
 
   const [goal, setGoal] = useState<GoalFilter>("all");
   const [place, setPlace] = useState<PlaceFilter>("all");
@@ -60,7 +58,8 @@ export default function ProgramsPage() {
     [programs, activeProgram?.id, goal, place, gender, recommended?.id],
   );
 
-  const isLockedFor = (p: WorkoutProgram) => p.isPremium && !hasFreeAccess && !activeSubscription;
+  // Подписка — всё открыто; бесплатная неделя — только подобранная программа (0080).
+  const isLockedFor = (p: WorkoutProgram) => access.isReady && !access.canAccess(p);
 
   return (
     <div className="px-5 pt-8 pb-6">

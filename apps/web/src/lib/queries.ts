@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/lib/supabase";
 import type {
@@ -34,24 +35,62 @@ export function useUserProfile() {
 }
 
 /**
- * Первая программа ("Набор массы для начинающих") — бесплатный подарок на
- * первую неделю для мужчин с целью набора массы, тренирующихся в зале.
- * По истечении 7 дней с регистрации (или если профиль не подходит под
- * условия) программа перестаёт быть бесплатной — нужна подписка.
+ * Доступ к программам (0080).
+ *
+ * - Подписка (в т.ч. безлимит из CMS) — открыто всё.
+ * - Бесплатная неделя — ВСЕМ новым пользователям, 7 дней с регистрации,
+ *   ровно на одну программу: подобранную по анкете (пол, цель, место).
+ *   Она запоминается в user_profiles.trial_program_id при первом заходе
+ *   (дальше её не сменить, см. триггер в 0080), чтобы нельзя было открыть
+ *   все программы по очереди, меняя анкету.
+ * - Программа с is_premium = false — открыта всем (сейчас таких нет).
+ *
+ * Раньше пробная неделя была только у мужчин "зал + набор массы" и
+ * открывала им ВСЕ программы, а остальным — ничего.
  */
-export function useFreeProgramAccess() {
+export function useProgramAccess() {
   const { profile } = useAuth();
-  const { data: userProfile } = useUserProfile();
-
-  const isEligible =
-    userProfile?.gender === "male" &&
-    userProfile?.trainingFormat === "gym" &&
-    (userProfile?.goals ?? []).includes("build_muscle");
+  const { data: userProfile, isFetched: profileFetched } = useUserProfile();
+  const { data: subscription, isFetched: subscriptionFetched } = useActiveSubscription();
+  const { data: recommended, isFetched: recommendedFetched } = useRecommendedProgram();
+  const queryClient = useQueryClient();
 
   const createdAtMs = profile?.createdAt ? new Date(profile.createdAt).getTime() : null;
-  const withinWindow = createdAtMs != null && Date.now() - createdAtMs < FREE_TRIAL_DAYS * 24 * 60 * 60 * 1000;
+  const trialEndsAt = createdAtMs != null ? new Date(createdAtMs + FREE_TRIAL_DAYS * 24 * 60 * 60 * 1000) : null;
+  const trialActive = trialEndsAt != null && Date.now() < trialEndsAt.getTime();
+  const trialProgramId = userProfile?.trialProgramId ?? recommended?.id ?? null;
 
-  return { hasFreeAccess: Boolean(isEligible) && withinWindow };
+  // Запоминаем программу пробной недели один раз (первый заход после
+  // регистрации). Ошибку не показываем — в худшем случае посчитаем её
+  // заново по анкете при следующем открытии.
+  const needsPersist =
+    trialActive && !!userProfile && !userProfile.trialProgramId && !!recommended?.id;
+  useEffect(() => {
+    if (!needsPersist || !userProfile || !recommended) return;
+    supabase
+      .from("user_profiles")
+      .update({ trial_program_id: recommended.id })
+      .eq("user_id", userProfile.userId)
+      .then(({ error }) => {
+        if (!error) queryClient.invalidateQueries({ queryKey: ["user-profile"] });
+      });
+  }, [needsPersist, userProfile, recommended, queryClient]);
+
+  const hasSubscription = !!subscription;
+
+  function canAccess(program: Pick<WorkoutProgram, "id" | "isPremium"> | null | undefined): boolean {
+    if (!program) return false;
+    if (!program.isPremium || hasSubscription) return true;
+    return trialActive && program.id === trialProgramId;
+  }
+
+  return {
+    canAccess,
+    /** Всё нужное для решения уже загружено — до этого замок не показываем. */
+    isReady: profileFetched && subscriptionFetched && recommendedFetched,
+    hasSubscription,
+    trial: { active: trialActive && !hasSubscription, endsAt: trialEndsAt, programId: trialProgramId },
+  };
 }
 
 export function usePrograms() {

@@ -195,7 +195,9 @@
     "levelUpButton": "هيا!",
     "achievementsUnlocked": "المفتوحة: {{n}}",
     "achievements": "الإنجازات",
-    "achievementsEmpty": "ابدأ التمرين لتفتح أول إنجاز لك"
+    "achievementsEmpty": "ابدأ التمرين لتفتح أول إنجاز لك",
+    "trialTitle": "أسبوع مجاني — حتى {{date}}",
+    "trialDesc": "برنامج «{{program}}» مفتوح. بعد ذلك — وصول إلى جميع البرامج."
   },
   "workout": {
     "back": "رجوع",
@@ -534,7 +536,10 @@
     "exercises_many": "{{count}} تمرينًا",
     "exercises_other": "{{count}} تمرين",
     "notFound": "البرنامج غير موجود.",
-    "noWorkoutsYet": "ستتوفر تمارين هذا البرنامج قريبًا."
+    "noWorkoutsYet": "ستتوفر تمارين هذا البرنامج قريبًا.",
+    "lockedTrialText": "أسبوعك المجاني يشمل برنامج «{{program}}» المختار حسب إجاباتك. تُفتح البرامج الأخرى مع الاشتراك.",
+    "lockedOtherText": "أسبوعك المجاني يشمل فقط البرنامج المختار حسب إجاباتك. تُفتح البرامج الأخرى مع الاشتراك.",
+    "openTrialProgram": "افتح برنامجي المجاني"
   },
   "achievements": {
     "title": "الإنجازات",
