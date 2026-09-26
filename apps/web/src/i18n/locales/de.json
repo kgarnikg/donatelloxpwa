@@ -203,7 +203,9 @@
     "achievements": "Erfolge",
     "achievementsEmpty": "Starte dein Training, um den ersten freizuschalten",
     "trialTitle": "Kostenlose Woche – bis {{date}}",
-    "trialDesc": "„{{program}}“ ist freigeschaltet. Danach: Zugang zu allen Programmen."
+    "trialDesc": "„{{program}}“ ist freigeschaltet. Danach: Zugang zu allen Programmen.",
+    "expiringTitle": "Zugang bis {{date}}",
+    "expiringDesc": "Verlängere rechtzeitig, damit dein Training nicht unterbrochen wird"
   },
   "workout": {
     "back": "Zurück",
@@ -411,7 +413,7 @@
   },
   "referral": {
     "title": "Freund einladen",
-    "subtitle": "Dein Freund erhält 50 % Rabatt auf den ersten Monat",
+    "subtitle": "Dein Freund bekommt 50% Rabatt auf den ersten Monat. Du bekommst einen Gratismonat, sobald dein Freund ein Abo abschließt und einen Monat trainiert.",
     "copy": "Kopieren",
     "copied": "Kopiert!",
     "invitedCount_one": "{{count}} Freund eingeladen",

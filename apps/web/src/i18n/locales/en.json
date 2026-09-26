@@ -203,7 +203,9 @@
     "levelUpTitle": "Level up!",
     "levelUpButton": "Let's go!",
     "trialTitle": "Free week — until {{date}}",
-    "trialDesc": "“{{program}}” is unlocked. After that, get access to all programs."
+    "trialDesc": "“{{program}}” is unlocked. After that, get access to all programs.",
+    "expiringTitle": "Access until {{date}}",
+    "expiringDesc": "Renew in advance so your training doesn't stop"
   },
   "workout": {
     "back": "Back",
@@ -411,7 +413,7 @@
   },
   "referral": {
     "title": "Invite a friend",
-    "subtitle": "Your friend gets 50% off their first period",
+    "subtitle": "Your friend gets 50% off the first month. You get a free month once your friend subscribes and trains for a month.",
     "copy": "Copy",
     "copied": "Copied!",
     "invitedCount_one": "{{count}} friend invited",

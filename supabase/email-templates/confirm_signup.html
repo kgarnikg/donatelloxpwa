@@ -1,0 +1,110 @@
+{{ $l := or .Data.locale "en" }}<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>DonatelleX</title></head>
+<body style="margin:0;padding:0;background:#0A0B0D;font-family:Manrope,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,'Noto Sans Armenian','Noto Sans Arabic','Noto Sans Devanagari','Noto Sans Gurmukhi',sans-serif">
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#0A0B0D" style="background:#0A0B0D"><tr><td align="center" style="padding:32px 16px">
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:520px">
+<tr><td style="padding:0 4px 20px">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr>
+<td width="36" height="36" align="center" bgcolor="#A8E000" style="border-radius:10px;font-size:18px;font-weight:800;color:#0A0B0D">D</td>
+<td style="padding-left:10px;font-size:18px;font-weight:800;color:#FFFFFF">DonatelleX</td>
+</tr></table>
+</td></tr>
+<tr><td bgcolor="#111318" style="background:#111318;border:1px solid #23272F;border-radius:20px;padding:36px 28px">
+{{ if eq $l "ru" }}<div dir="ltr" style="text-align:left">
+<h1 style="margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:800;color:#FFFFFF">Добро пожаловать в DonatelleX!</h1>
+<p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:#B4B9C2">Остался один шаг: подтверди свой email, и мы откроем тебе приложение. Твоя бесплатная неделя начнётся сразу.</p>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td align="center" bgcolor="#A8E000" style="border-radius:12px">
+<a href="{{ .ConfirmationURL }}" style="display:block;padding:16px 24px;font-size:16px;font-weight:800;color:#0A0B0D;text-decoration:none;letter-spacing:0.3px">Подтвердить email</a>
+</td></tr></table>
+<p style="margin:28px 0 6px;font-size:13px;line-height:1.5;color:#8A909C">Кнопка не работает? Скопируй ссылку в браузер:</p>
+<p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all"><a href="{{ .ConfirmationURL }}" style="color:#A8E000;text-decoration:underline">{{ .ConfirmationURL }}</a></p>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#666C78">Если это был не ты — просто проигнорируй это письмо.</p>
+</div>{{ else if eq $l "es" }}<div dir="ltr" style="text-align:left">
+<h1 style="margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:800;color:#FFFFFF">¡Bienvenido a DonatelleX!</h1>
+<p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:#B4B9C2">Solo queda un paso: confirma tu email y te abriremos la app. Tu semana gratis empieza al instante.</p>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td align="center" bgcolor="#A8E000" style="border-radius:12px">
+<a href="{{ .ConfirmationURL }}" style="display:block;padding:16px 24px;font-size:16px;font-weight:800;color:#0A0B0D;text-decoration:none;letter-spacing:0.3px">Confirmar email</a>
+</td></tr></table>
+<p style="margin:28px 0 6px;font-size:13px;line-height:1.5;color:#8A909C">¿El botón no funciona? Copia este enlace en tu navegador:</p>
+<p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all"><a href="{{ .ConfirmationURL }}" style="color:#A8E000;text-decoration:underline">{{ .ConfirmationURL }}</a></p>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#666C78">Si no fuiste tú, simplemente ignora este correo.</p>
+</div>{{ else if eq $l "de" }}<div dir="ltr" style="text-align:left">
+<h1 style="margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:800;color:#FFFFFF">Willkommen bei DonatelleX!</h1>
+<p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:#B4B9C2">Nur noch ein Schritt: Bestätige deine E-Mail-Adresse und wir öffnen dir die App. Deine kostenlose Woche beginnt sofort.</p>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td align="center" bgcolor="#A8E000" style="border-radius:12px">
+<a href="{{ .ConfirmationURL }}" style="display:block;padding:16px 24px;font-size:16px;font-weight:800;color:#0A0B0D;text-decoration:none;letter-spacing:0.3px">E-Mail bestätigen</a>
+</td></tr></table>
+<p style="margin:28px 0 6px;font-size:13px;line-height:1.5;color:#8A909C">Button funktioniert nicht? Kopiere diesen Link in deinen Browser:</p>
+<p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all"><a href="{{ .ConfirmationURL }}" style="color:#A8E000;text-decoration:underline">{{ .ConfirmationURL }}</a></p>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#666C78">Wenn du das nicht warst, ignoriere diese E-Mail einfach.</p>
+</div>{{ else if eq $l "it" }}<div dir="ltr" style="text-align:left">
+<h1 style="margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:800;color:#FFFFFF">Benvenuto in DonatelleX!</h1>
+<p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:#B4B9C2">Manca solo un passo: conferma la tua email e ti apriremo l'app. La tua settimana gratuita inizia subito.</p>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td align="center" bgcolor="#A8E000" style="border-radius:12px">
+<a href="{{ .ConfirmationURL }}" style="display:block;padding:16px 24px;font-size:16px;font-weight:800;color:#0A0B0D;text-decoration:none;letter-spacing:0.3px">Conferma email</a>
+</td></tr></table>
+<p style="margin:28px 0 6px;font-size:13px;line-height:1.5;color:#8A909C">Il pulsante non funziona? Copia questo link nel browser:</p>
+<p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all"><a href="{{ .ConfirmationURL }}" style="color:#A8E000;text-decoration:underline">{{ .ConfirmationURL }}</a></p>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#666C78">Se non sei stato tu, ignora questa email.</p>
+</div>{{ else if eq $l "uk" }}<div dir="ltr" style="text-align:left">
+<h1 style="margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:800;color:#FFFFFF">Ласкаво просимо до DonatelleX!</h1>
+<p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:#B4B9C2">Залишився один крок: підтверди свій email, і ми відкриємо тобі застосунок. Твій безкоштовний тиждень почнеться одразу.</p>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td align="center" bgcolor="#A8E000" style="border-radius:12px">
+<a href="{{ .ConfirmationURL }}" style="display:block;padding:16px 24px;font-size:16px;font-weight:800;color:#0A0B0D;text-decoration:none;letter-spacing:0.3px">Підтвердити email</a>
+</td></tr></table>
+<p style="margin:28px 0 6px;font-size:13px;line-height:1.5;color:#8A909C">Кнопка не працює? Скопіюй посилання в браузер:</p>
+<p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all"><a href="{{ .ConfirmationURL }}" style="color:#A8E000;text-decoration:underline">{{ .ConfirmationURL }}</a></p>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#666C78">Якщо це був не ти — просто проігноруй цей лист.</p>
+</div>{{ else if eq $l "hy" }}<div dir="ltr" style="text-align:left">
+<h1 style="margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:800;color:#FFFFFF">Բարի գալուստ DonatelleX!</h1>
+<p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:#B4B9C2">Մնաց մեկ քայլ․ հաստատիր email-ը, և մենք կբացենք հավելվածը։ Անվճար շաբաթը կսկսվի անմիջապես։</p>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td align="center" bgcolor="#A8E000" style="border-radius:12px">
+<a href="{{ .ConfirmationURL }}" style="display:block;padding:16px 24px;font-size:16px;font-weight:800;color:#0A0B0D;text-decoration:none;letter-spacing:0.3px">Հաստատել email-ը</a>
+</td></tr></table>
+<p style="margin:28px 0 6px;font-size:13px;line-height:1.5;color:#8A909C">Կոճակը չի աշխատում? Պատճենիր հղումը բրաուզերում։</p>
+<p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all"><a href="{{ .ConfirmationURL }}" style="color:#A8E000;text-decoration:underline">{{ .ConfirmationURL }}</a></p>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#666C78">Եթե դա դու չէիր, պարզապես անտեսիր այս նամակը։</p>
+</div>{{ else if eq $l "ar" }}<div dir="rtl" style="text-align:right">
+<h1 style="margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:800;color:#FFFFFF">مرحبًا بك في DonatelleX!</h1>
+<p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:#B4B9C2">بقيت خطوة واحدة: أكّد بريدك الإلكتروني وسنفتح لك التطبيق. يبدأ أسبوعك المجاني فورًا.</p>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td align="center" bgcolor="#A8E000" style="border-radius:12px">
+<a href="{{ .ConfirmationURL }}" style="display:block;padding:16px 24px;font-size:16px;font-weight:800;color:#0A0B0D;text-decoration:none;letter-spacing:0.3px">تأكيد البريد</a>
+</td></tr></table>
+<p style="margin:28px 0 6px;font-size:13px;line-height:1.5;color:#8A909C">الزر لا يعمل؟ انسخ هذا الرابط في المتصفح:</p>
+<p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all"><a href="{{ .ConfirmationURL }}" style="color:#A8E000;text-decoration:underline">{{ .ConfirmationURL }}</a></p>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#666C78">إذا لم تكن أنت، تجاهل هذه الرسالة.</p>
+</div>{{ else if eq $l "hi" }}<div dir="ltr" style="text-align:left">
+<h1 style="margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:800;color:#FFFFFF">DonatelleX में आपका स्वागत है!</h1>
+<p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:#B4B9C2">बस एक कदम बाकी है: अपना ईमेल कन्फ़र्म करें और हम आपके लिए ऐप खोल देंगे। आपका मुफ़्त सप्ताह तुरंत शुरू होगा।</p>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td align="center" bgcolor="#A8E000" style="border-radius:12px">
+<a href="{{ .ConfirmationURL }}" style="display:block;padding:16px 24px;font-size:16px;font-weight:800;color:#0A0B0D;text-decoration:none;letter-spacing:0.3px">ईमेल कन्फ़र्म करें</a>
+</td></tr></table>
+<p style="margin:28px 0 6px;font-size:13px;line-height:1.5;color:#8A909C">बटन काम नहीं कर रहा? यह लिंक ब्राउज़र में कॉपी करें:</p>
+<p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all"><a href="{{ .ConfirmationURL }}" style="color:#A8E000;text-decoration:underline">{{ .ConfirmationURL }}</a></p>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#666C78">अगर यह आप नहीं थे, तो इस ईमेल को अनदेखा करें।</p>
+</div>{{ else if eq $l "pa" }}<div dir="ltr" style="text-align:left">
+<h1 style="margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:800;color:#FFFFFF">DonatelleX ਵਿੱਚ ਜੀ ਆਇਆਂ ਨੂੰ!</h1>
+<p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:#B4B9C2">ਬੱਸ ਇੱਕ ਕਦਮ ਬਾਕੀ ਹੈ: ਆਪਣੀ ਈਮੇਲ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ ਅਤੇ ਅਸੀਂ ਤੁਹਾਡੇ ਲਈ ਐਪ ਖੋਲ੍ਹ ਦੇਵਾਂਗੇ। ਤੁਹਾਡਾ ਮੁਫ਼ਤ ਹਫ਼ਤਾ ਤੁਰੰਤ ਸ਼ੁਰੂ ਹੋਵੇਗਾ।</p>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td align="center" bgcolor="#A8E000" style="border-radius:12px">
+<a href="{{ .ConfirmationURL }}" style="display:block;padding:16px 24px;font-size:16px;font-weight:800;color:#0A0B0D;text-decoration:none;letter-spacing:0.3px">ਈਮੇਲ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ</a>
+</td></tr></table>
+<p style="margin:28px 0 6px;font-size:13px;line-height:1.5;color:#8A909C">ਬਟਨ ਕੰਮ ਨਹੀਂ ਕਰ ਰਿਹਾ? ਇਹ ਲਿੰਕ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਕਾਪੀ ਕਰੋ:</p>
+<p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all"><a href="{{ .ConfirmationURL }}" style="color:#A8E000;text-decoration:underline">{{ .ConfirmationURL }}</a></p>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#666C78">ਜੇ ਇਹ ਤੁਸੀਂ ਨਹੀਂ ਸੀ, ਤਾਂ ਇਸ ਈਮੇਲ ਨੂੰ ਨਜ਼ਰਅੰਦਾਜ਼ ਕਰੋ।</p>
+</div>{{ else }}<div dir="ltr" style="text-align:left">
+<h1 style="margin:0 0 14px;font-size:24px;line-height:1.25;font-weight:800;color:#FFFFFF">Welcome to DonatelleX!</h1>
+<p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:#B4B9C2">Just one step left: confirm your email and we'll open the app for you. Your free week starts right away.</p>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"><tr><td align="center" bgcolor="#A8E000" style="border-radius:12px">
+<a href="{{ .ConfirmationURL }}" style="display:block;padding:16px 24px;font-size:16px;font-weight:800;color:#0A0B0D;text-decoration:none;letter-spacing:0.3px">Confirm email</a>
+</td></tr></table>
+<p style="margin:28px 0 6px;font-size:13px;line-height:1.5;color:#8A909C">Button not working? Copy this link into your browser:</p>
+<p style="margin:0 0 24px;font-size:12px;line-height:1.5;word-break:break-all"><a href="{{ .ConfirmationURL }}" style="color:#A8E000;text-decoration:underline">{{ .ConfirmationURL }}</a></p>
+<p style="margin:0;font-size:13px;line-height:1.5;color:#666C78">If this wasn't you, just ignore this email.</p>
+</div>{{ end }}
+</td></tr>
+<tr><td align="center" style="padding:22px 8px 0;font-size:12px;line-height:1.6;color:#4B505A">
+{{ if eq $l "ru" }}Тренировки и прогресс с Владимиром Donatellex{{ else if eq $l "es" }}Entrenamientos y progreso con Vladimir Donatellex{{ else if eq $l "de" }}Training und Fortschritt mit Vladimir Donatellex{{ else if eq $l "it" }}Allenamenti e progressi con Vladimir Donatellex{{ else if eq $l "uk" }}Тренування і прогрес з Володимиром Donatellex{{ else if eq $l "hy" }}Մարզումներ և առաջընթաց Վլադիմիր Donatellex-ի հետ{{ else if eq $l "ar" }}تمارين وتقدّم مع فلاديمير Donatellex{{ else if eq $l "hi" }}व्लादिमीर Donatellex के साथ वर्कआउट और प्रगति{{ else if eq $l "pa" }}ਵਲਾਦੀਮੀਰ Donatellex ਨਾਲ ਕਸਰਤ ਅਤੇ ਤਰੱਕੀ{{ else }}Workouts and progress with Vladimir Donatellex{{ end }}<br>donatellex.com
+</td></tr>
+</table>
+</td></tr></table>
+</body></html>

@@ -203,7 +203,9 @@
     "levelUpTitle": "¡Subes de nivel!",
     "levelUpButton": "¡Vamos!",
     "trialTitle": "Semana gratis — hasta el {{date}}",
-    "trialDesc": "«{{program}}» está desbloqueado. Después, accede a todos los programas."
+    "trialDesc": "«{{program}}» está desbloqueado. Después, accede a todos los programas.",
+    "expiringTitle": "Acceso hasta el {{date}}",
+    "expiringDesc": "Renueva con antelación para no interrumpir tus entrenamientos"
   },
   "workout": {
     "back": "Atrás",
@@ -411,7 +413,7 @@
   },
   "referral": {
     "title": "Invita a un amigo",
-    "subtitle": "Tu amigo obtiene un 50% de descuento en su primer mes",
+    "subtitle": "Tu amigo recibe un 50% de descuento en el primer mes. Tú, un mes gratis cuando tu amigo se suscriba y entrene durante un mes.",
     "copy": "Copiar",
     "copied": "¡Copiado!",
     "invitedCount_one": "Has invitado a {{count}} amigo",

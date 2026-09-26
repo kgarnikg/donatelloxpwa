@@ -10,6 +10,7 @@ import type { Session, User as SupabaseUser } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
 import type { User } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
+import i18n from "@/i18n";
 
 interface AuthContextValue {
   session: Session | null;
@@ -91,6 +92,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       subscription.subscription.unsubscribe();
     };
   }, []);
+
+  // Язык интерфейса → в данные пользователя: по нему Supabase выбирает язык
+  // писем (подтверждение, сброс пароля — supabase/email-templates), а
+  // ежедневная задача — язык напоминаний (users.locale). Обновляем только
+  // если язык реально отличается, чтобы не дёргать сервер при каждом входе.
+  const userId = session?.user?.id;
+  const metaLocale = (session?.user?.user_metadata as { locale?: string } | undefined)?.locale;
+  useEffect(() => {
+    if (!userId) return;
+    function sync() {
+      const lang = i18n.resolvedLanguage ?? i18n.language;
+      if (!lang || lang === metaLocale) return;
+      supabase.auth.updateUser({ data: { locale: lang } }).catch(() => {});
+      supabase.from("users").update({ locale: lang }).eq("id", userId!).then(() => {});
+    }
+    sync();
+    i18n.on("languageChanged", sync);
+    return () => {
+      i18n.off("languageChanged", sync);
+    };
+  }, [userId, metaLocale]);
 
   const value = useMemo<AuthContextValue>(
     () => ({

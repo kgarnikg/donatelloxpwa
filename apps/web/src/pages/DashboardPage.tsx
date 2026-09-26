@@ -57,6 +57,26 @@ export default function DashboardPage() {
     <div className="px-5 pt-8 pb-6">
       <LevelHeader name={firstName} initial={(firstName[0] ?? "?").toUpperCase()} level={game.level} />
 
+      {subscription && isEndingSoon(subscription) && (
+        <Link
+          to="/subscription"
+          className="card mb-4 flex items-center justify-between border-ember-400/30 bg-gradient-to-br from-ember-400/10 to-transparent py-4"
+        >
+          <div>
+            <p className="font-semibold text-ember-300">
+              {t("dashboard.expiringTitle", {
+                date: new Date(subscription.currentPeriodEnd).toLocaleDateString(i18n.language, {
+                  day: "numeric",
+                  month: "long",
+                }),
+              })}
+            </p>
+            <p className="mt-0.5 text-sm text-neutral-400">{t("dashboard.expiringDesc")}</p>
+          </div>
+          <ChevronRight className="text-ember-400" />
+        </Link>
+      )}
+
       {!subscription && (
         <Link
           to="/subscription"
@@ -126,6 +146,13 @@ export default function DashboardPage() {
       {levelUp && <LevelUpOverlay level={levelUp.level} onClose={levelUp.dismiss} />}
     </div>
   );
+}
+
+/** Оплаченный доступ заканчивается в ближайшие 5 дней (безлимит — не в счёт). */
+function isEndingSoon(sub: { plan: string; currentPeriodEnd: string }): boolean {
+  if (sub.plan === "lifetime") return false;
+  const left = new Date(sub.currentPeriodEnd).getTime() - Date.now();
+  return left > 0 && left <= 5 * 24 * 60 * 60 * 1000;
 }
 
 // ---------------------------------------------------------------------------

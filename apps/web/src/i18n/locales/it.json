@@ -203,7 +203,9 @@
     "achievements": "Traguardi",
     "achievementsEmpty": "Inizia ad allenarti per sbloccare il primo",
     "trialTitle": "Settimana gratuita — fino al {{date}}",
-    "trialDesc": "«{{program}}» è sbloccato. Poi, accesso a tutti i programmi."
+    "trialDesc": "«{{program}}» è sbloccato. Poi, accesso a tutti i programmi.",
+    "expiringTitle": "Accesso fino al {{date}}",
+    "expiringDesc": "Rinnova in anticipo per non interrompere gli allenamenti"
   },
   "workout": {
     "back": "Indietro",
@@ -411,7 +413,7 @@
   },
   "referral": {
     "title": "Invita un amico",
-    "subtitle": "Il tuo amico riceve il 50% di sconto sul primo mese",
+    "subtitle": "Il tuo amico ottiene il 50% di sconto sul primo mese. Tu ricevi un mese gratis quando il tuo amico si abbona e si allena per un mese.",
     "copy": "Copia",
     "copied": "Copiato!",
     "invitedCount_one": "{{count}} amico invitato",

@@ -50,7 +50,7 @@ export default function RegisterPage() {
           first_name: values.firstName,
           last_name: values.lastName,
           country: values.country,
-          locale: i18n.language,
+          locale: i18n.resolvedLanguage ?? i18n.language,
         },
         emailRedirectTo: `${window.location.origin}/onboarding`,
       },
