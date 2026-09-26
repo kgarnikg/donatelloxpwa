@@ -267,7 +267,28 @@
     "nextUp": "Prossimo",
     "restAdd": "{{count}} sec",
     "restSkipShort": "Salta",
-    "noReplacement": "Non c'è ancora un'alternativa adatta per questo esercizio"
+    "noReplacement": "Non c'è ancora un'alternativa adatta per questo esercizio",
+    "summary": {
+      "title": "Allenamento completato!",
+      "time": "tempo",
+      "exercises_one": "esercizio",
+      "exercises_other": "esercizi",
+      "kcal": "kcal bruciate",
+      "kcalNoWeight": "Inserisci il tuo peso nel profilo per contare le calorie",
+      "lifted": "sollevati",
+      "setsDone": "serie completate",
+      "nutritionTitle": "Alimentazione dopo l'allenamento",
+      "protein": "{{from}}–{{to}} g di proteine entro 2 ore: ricotta, uova, pollo, pesce o un frullato proteico.",
+      "carbsGain": "Aggiungi carboidrati, circa {{grams}} g: riso, grano saraceno, patate, frutta. Carburante per i muscoli.",
+      "carbsLoss": "Non \"rimangiarti\" l'allenamento: un pasto normale da piano, con proteine e verdure — così si perde grasso.",
+      "carbsBalanced": "Un pasto equilibrato: proteine, carboidrati complessi e verdure.",
+      "water": "Bevi {{ml}} ml d'acqua nella prossima ora.",
+      "recoveryTitle": "Recupero",
+      "sleep": "Dormi 7–9 ore: di notte i muscoli si recuperano e crescono.",
+      "rest": "Dai a questi muscoli 48 ore di riposo. Domani va bene una passeggiata o stretching leggero.",
+      "disclaimer": "Indicazioni generali, non sostituiscono il parere di un medico o nutrizionista.",
+      "done": "Fatto"
+    }
   },
   "nutrition": {
     "title": "Alimentazione",

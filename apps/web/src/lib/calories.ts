@@ -33,6 +33,13 @@ const DEFAULT_WORKOUT_MET = 5;
 
 /** Во сколько раз фактическая длительность может превышать расчётную, прежде чем мы её обрежем. */
 const MAX_DURATION_FACTOR = 1.5;
+/**
+ * Если выполненная часть заняла меньше этой доли расчётного времени —
+ * считаем, что таймер сбился (на iPhone Safari перезагружает страницу при
+ * переключении приложений, и отсчёт начинался заново), и берём расчётное
+ * время. Честно сделать тренировку на 68 минут за 10 нельзя.
+ */
+const MIN_DURATION_FACTOR = 0.5;
 /** Если у тренировки нет расчётной длительности. */
 const FALLBACK_ESTIMATED_MINUTES = 60;
 
@@ -112,8 +119,9 @@ export interface WorkoutCalorieInput {
  * расчётной длительности той части тренировки, что реально выполнена
  * (если сделано полтренировки — и потолок вдвое ниже). Так забытый
  * открытым на полдня плеер не превращается в тысячи калорий.
+ * И снизу: меньше половины расчётного времени — берём расчётное (0085).
  *
- * Та же формула продублирована в SQL миграции 0066 (пересчёт старых
+ * Та же формула продублирована в SQL миграций 0066 и 0085 (пересчёт старых
  * записей) — при изменении менять в обоих местах.
  */
 export function estimateWorkoutCalories(input: WorkoutCalorieInput): number {
@@ -121,8 +129,9 @@ export function estimateWorkoutCalories(input: WorkoutCalorieInput): number {
   const met = (input.programGoal && WORKOUT_MET_BY_GOAL[input.programGoal]) || DEFAULT_WORKOUT_MET;
   const ratio = Math.min(Math.max(input.completionRatio ?? 1, 0), 1);
   const estimated = input.estimatedMinutes && input.estimatedMinutes > 0 ? input.estimatedMinutes : FALLBACK_ESTIMATED_MINUTES;
-  const cap = estimated * MAX_DURATION_FACTOR * ratio;
-  const minutes = Math.min(Math.max(input.actualMinutes, 0), cap);
+  const expected = estimated * ratio;
+  const actual = Math.max(input.actualMinutes, 0);
+  const minutes = actual < expected * MIN_DURATION_FACTOR ? expected : Math.min(actual, expected * MAX_DURATION_FACTOR);
   return Math.max(0, Math.round(met * (bmr / 1440) * minutes));
 }
 

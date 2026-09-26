@@ -267,7 +267,28 @@
     "nextUp": "Als Nächstes",
     "restAdd": "{{count}} Sek.",
     "restSkipShort": "Weiter",
-    "noReplacement": "Für diese Übung gibt es noch keinen passenden Ersatz"
+    "noReplacement": "Für diese Übung gibt es noch keinen passenden Ersatz",
+    "summary": {
+      "title": "Training abgeschlossen!",
+      "time": "Zeit",
+      "exercises_one": "Übung",
+      "exercises_other": "Übungen",
+      "kcal": "kcal verbrannt",
+      "kcalNoWeight": "Trage dein Gewicht im Profil ein, um Kalorien zu zählen",
+      "lifted": "bewegt",
+      "setsDone": "Sätze erledigt",
+      "nutritionTitle": "Ernährung nach dem Training",
+      "protein": "{{from}}–{{to}} g Eiweiß in den nächsten 2 Stunden: Quark, Eier, Hähnchen, Fisch oder ein Proteinshake.",
+      "carbsGain": "Kohlenhydrate dazu — etwa {{grams}} g: Reis, Buchweizen, Kartoffeln, Obst. Treibstoff fürs Muskelwachstum.",
+      "carbsLoss": "Iss das Training nicht \"zurück\": eine normale geplante Mahlzeit mit Eiweiß und Gemüse — so schmilzt Fett.",
+      "carbsBalanced": "Eine ausgewogene Mahlzeit: Eiweiß, komplexe Kohlenhydrate und Gemüse.",
+      "water": "Trink in der nächsten Stunde {{ml}} ml Wasser.",
+      "recoveryTitle": "Erholung",
+      "sleep": "7–9 Stunden Schlaf — nachts erholen sich die Muskeln und wachsen.",
+      "rest": "Gönn diesen Muskeln 48 Stunden Pause. Morgen tut ein Spaziergang oder leichtes Dehnen gut.",
+      "disclaimer": "Allgemeine Empfehlungen, kein Ersatz für ärztlichen oder ernährungsfachlichen Rat.",
+      "done": "Fertig"
+    }
   },
   "nutrition": {
     "title": "Ernährung",

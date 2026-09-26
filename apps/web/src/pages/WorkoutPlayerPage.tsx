@@ -13,6 +13,8 @@ import { estimateWorkoutCalories, calculateAge } from "@/lib/calories";
 import { useUserProfile, useProgramAccess } from "@/lib/queries";
 import { RestTimerOverlay } from "@/components/RestTimerOverlay";
 import { markWorkoutJustFinished } from "@/lib/install";
+import { clearWorkoutSession, loadWorkoutSession, saveWorkoutSession } from "@/lib/workoutSession";
+import { WorkoutSummary, type WorkoutSummaryData } from "@/components/WorkoutSummary";
 import type { Exercise, WorkoutSet } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 
@@ -73,10 +75,14 @@ export default function WorkoutPlayerPage() {
   const { authUser } = useAuth();
   const { data: userProfile } = useUserProfile();
   const access = useProgramAccess();
-  const [completedIds, setCompletedIds] = useState<Set<string>>(new Set());
+  // Незаконченная тренировка восстанавливается после перезагрузки
+  // страницы (iPhone делает это при переключении приложений) — lib/workoutSession.ts
+  const [restored] = useState(() => loadWorkoutSession(workoutId, authUser?.id));
+  const [completedIds, setCompletedIds] = useState<Set<string>>(() => new Set(restored?.completedIds ?? []));
   const [confirmExit, setConfirmExit] = useState(false);
-  const [weights, setWeights] = useState<Record<string, string>>({});
-  const [startedAt] = useState(() => Date.now());
+  const [weights, setWeights] = useState<Record<string, string>>(() => restored?.weights ?? {});
+  const [startedAt] = useState(() => restored?.startedAt ?? Date.now());
+  const [summary, setSummary] = useState<WorkoutSummaryData | null>(null);
   const [activeVideo, setActiveVideo] = useState<Exercise | null>(null);
   const [videoClosing, setVideoClosing] = useState(false);
 
@@ -127,7 +133,7 @@ export default function WorkoutPlayerPage() {
   // компонент перерендерится (в т.ч. принудительно при возврате видимости
   // вкладки, см. ниже), значение будет верным.
   const [restState, setRestState] = useState<{ total: number; endAt: number; kind: "set" | "exercise" } | null>(
-    null,
+    () => (restored?.rest && restored.rest.endAt > Date.now() ? restored.rest : null),
   );
   // Полноэкранный режим таймера: открывается сам при каждом старте отдыха,
   // "Свернуть" — компактная полоска внизу (тап по ней разворачивает обратно).
@@ -273,6 +279,14 @@ export default function WorkoutPlayerPage() {
     return () => document.removeEventListener("visibilitychange", onVisibilityChange);
   }, []);
 
+  // Отдых, восстановленный после перезагрузки, — продолжаем отсчёт
+  useEffect(() => {
+    if (restState && intervalRef.current === null) {
+      intervalRef.current = setInterval(() => forceTick((t) => t + 1), 1000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Чистим интервал при уходе со страницы — иначе он продолжит тикать
   // в фоне и попытается обновлять состояние размонтированного компонента.
   useEffect(() => clearRestInterval, []);
@@ -312,8 +326,25 @@ export default function WorkoutPlayerPage() {
   // тренировки (finishMutation ниже) в историю пишется РЕАЛЬНО
   // выполненное упражнение (после замены, если она была) — иначе личные
   // рекорды и объём по упражнениям задваивались бы неправильному движению.
-  const [orderOverride, setOrderOverride] = useState<string[] | null>(null);
-  const [substitutions, setSubstitutions] = useState<Record<string, Exercise>>({});
+  const [orderOverride, setOrderOverride] = useState<string[] | null>(() => restored?.orderOverride ?? null);
+  const [substitutions, setSubstitutions] = useState<Record<string, Exercise>>(() => restored?.substitutions ?? {});
+
+  // Сохраняем прогресс на телефоне, как только человек реально начал
+  // (отметил подход или вписал вес) — просто открыть и посмотреть не считается.
+  useEffect(() => {
+    if (!workoutId || !authUser || summary) return;
+    const started = completedIds.size > 0 || Object.values(weights).some((v) => v !== "");
+    if (!started) return;
+    saveWorkoutSession(workoutId, {
+      userId: authUser.id,
+      startedAt,
+      completedIds: [...completedIds],
+      weights,
+      orderOverride,
+      substitutions,
+      rest: restState,
+    });
+  }, [workoutId, authUser, summary, startedAt, completedIds, weights, orderOverride, substitutions, restState]);
   const [replacingId, setReplacingId] = useState<string | null>(null);
 
   const orderedGroups = useMemo(() => {
@@ -452,9 +483,23 @@ export default function WorkoutPlayerPage() {
         console.error("Не удалось сохранить тренировку:", error);
         throw new Error(error.message || t("errors.workoutSaveFailed"));
       }
-      return data;
+      const result: WorkoutSummaryData = {
+        title: localizedOf(workout, "title", i18n.language),
+        minutes: durationMinutes,
+        exercises: groups.length,
+        sets: workout.sets.length,
+        kcal: caloriesBurned,
+        volumeKg: totalVolumeKg,
+        programGoal: workout.programGoal ?? null,
+        weightKg: userProfile?.weightKg ?? null,
+      };
+      return { log: data, summary: result };
     },
-    onSuccess: () => {
+    onSuccess: ({ summary: result }) => {
+      clearWorkoutSession(workoutId);
+      clearRestInterval();
+      setRestState(null);
+      clearUndo();
       markWorkoutJustFinished();
       // Без этого страница "Прогресс" могла показывать старый (пустой)
       // снимок истории тренировок ещё до минуты (staleTime=60с в
@@ -464,9 +509,16 @@ export default function WorkoutPlayerPage() {
       queryClient.invalidateQueries({ queryKey: ["progress"] });
       queryClient.invalidateQueries({ queryKey: ["daily-calories"] });
       queryClient.invalidateQueries({ queryKey: ["workout-calorie-stats"] });
-      navigate("/dashboard", { replace: true });
+      queryClient.invalidateQueries({ queryKey: ["dashboard"] });
+      // Вместо мгновенного перехода — экран итогов тренировки
+      setSummary(result);
+      window.scrollTo(0, 0);
     },
   });
+
+  if (summary) {
+    return <WorkoutSummary data={summary} onDone={() => navigate("/dashboard", { replace: true })} />;
+  }
 
   if (isLoading || !workout) {
     return (
@@ -498,7 +550,7 @@ export default function WorkoutPlayerPage() {
     );
   }
 
-  const allDone = completedIds.size === workout.sets.length;
+  const allDone = workout.sets.every((s) => completedIds.has(s.id));
 
   // Следующий неотмеченный подход — показываем на таймере отдыха ("Далее"),
   // чтобы издалека было видно, к какому упражнению возвращаться.
@@ -522,6 +574,7 @@ export default function WorkoutPlayerPage() {
           if (completedIds.size > 0) {
             setConfirmExit(true);
           } else {
+            clearWorkoutSession(workoutId);
             navigate(-1);
           }
         }}
@@ -622,7 +675,12 @@ export default function WorkoutPlayerPage() {
                         if (completedIds.has(set.id)) return;
                         if (!group.sets.slice(0, i).every((s) => completedIds.has(s.id))) return;
                         setCompletedIds((prev) => new Set(prev).add(set.id));
-                        if (isLastSetOfGroup && hasNextGroup && workout.trainingFormat === "gym") {
+                        // Последний подход всей тренировки — отдыхать не нужно,
+                        // сразу "Завершить тренировку"
+                        const isLastOfWorkout = workout.sets.every((s) => s.id === set.id || completedIds.has(s.id));
+                        if (isLastOfWorkout) {
+                          skipRestTimer();
+                        } else if (isLastSetOfGroup && hasNextGroup && workout.trainingFormat === "gym") {
                           startRestTimer(REST_BETWEEN_EXERCISES_SECONDS, "exercise");
                         } else {
                           startRestTimer(set.restSeconds, "set");
@@ -820,7 +878,7 @@ export default function WorkoutPlayerPage() {
               ? t("workout.saving")
               : allDone
                 ? t("workout.finishWorkout")
-                : t("workout.remaining", { count: workout.sets.length - completedIds.size })}
+                : t("workout.remaining", { count: workout.sets.filter((s) => !completedIds.has(s.id)).length })}
           </button>
         </div>
       </div>
@@ -851,7 +909,10 @@ export default function WorkoutPlayerPage() {
                 {t("workout.confirmExitStay")}
               </button>
               <button
-                onClick={() => navigate(-1)}
+                onClick={() => {
+                  clearWorkoutSession(workoutId);
+                  navigate(-1);
+                }}
                 className="flex-1 rounded-md bg-danger px-5 py-3 font-medium text-neutral-0 transition hover:bg-danger/90"
               >
                 {t("workout.confirmExitLeave")}

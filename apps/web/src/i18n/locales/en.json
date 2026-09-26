@@ -267,7 +267,28 @@
     "nextUp": "Up next",
     "restAdd": "{{count}} sec",
     "restSkipShort": "Skip",
-    "noReplacement": "No suitable replacement for this exercise yet"
+    "noReplacement": "No suitable replacement for this exercise yet",
+    "summary": {
+      "title": "Workout complete!",
+      "time": "time",
+      "exercises_one": "exercise",
+      "exercises_other": "exercises",
+      "kcal": "kcal burned",
+      "kcalNoWeight": "Add your weight in the profile to count calories",
+      "lifted": "lifted",
+      "setsDone": "sets done",
+      "nutritionTitle": "Post-workout nutrition",
+      "protein": "{{from}}–{{to}} g of protein within 2 hours: cottage cheese, eggs, chicken, fish or a protein shake.",
+      "carbsGain": "Add carbs — about {{grams}} g: rice, buckwheat, potatoes, fruit. That's fuel for muscle growth.",
+      "carbsLoss": "Don't \"eat back\" the workout: a regular planned meal with protein and vegetables — that's how fat goes.",
+      "carbsBalanced": "A balanced meal: protein, complex carbs and vegetables.",
+      "water": "Drink {{ml}} ml of water within the next hour.",
+      "recoveryTitle": "Recovery",
+      "sleep": "Sleep 7–9 hours — muscles recover and grow at night.",
+      "rest": "Give these muscles 48 hours of rest. A walk or light stretching tomorrow helps.",
+      "disclaimer": "General guidance, not a substitute for advice from a doctor or dietitian.",
+      "done": "Done"
+    }
   },
   "nutrition": {
     "title": "Nutrition",

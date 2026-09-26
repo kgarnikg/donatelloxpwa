@@ -267,7 +267,28 @@
     "nextUp": "A continuación",
     "restAdd": "{{count}} s",
     "restSkipShort": "Saltar",
-    "noReplacement": "Todavía no hay un reemplazo adecuado para este ejercicio"
+    "noReplacement": "Todavía no hay un reemplazo adecuado para este ejercicio",
+    "summary": {
+      "title": "¡Entrenamiento completado!",
+      "time": "tiempo",
+      "exercises_one": "ejercicio",
+      "exercises_other": "ejercicios",
+      "kcal": "kcal quemadas",
+      "kcalNoWeight": "Añade tu peso en el perfil para contar las calorías",
+      "lifted": "levantado",
+      "setsDone": "series hechas",
+      "nutritionTitle": "Nutrición después del entrenamiento",
+      "protein": "{{from}}–{{to}} g de proteína en las próximas 2 horas: requesón, huevos, pollo, pescado o un batido de proteínas.",
+      "carbsGain": "Añade carbohidratos, unos {{grams}} g: arroz, trigo sarraceno, patatas, fruta. Es combustible para el músculo.",
+      "carbsLoss": "No \"te comas\" el entrenamiento: una comida normal según tu plan, con proteína y verduras — así se pierde grasa.",
+      "carbsBalanced": "Una comida equilibrada: proteína, carbohidratos complejos y verduras.",
+      "water": "Bebe {{ml}} ml de agua en la próxima hora.",
+      "recoveryTitle": "Recuperación",
+      "sleep": "Duerme 7–9 horas: por la noche los músculos se recuperan y crecen.",
+      "rest": "Dale a estos músculos 48 horas de descanso. Mañana, un paseo o estiramientos suaves.",
+      "disclaimer": "Recomendaciones orientativas, no sustituyen la consulta con un médico o nutricionista.",
+      "done": "Listo"
+    }
   },
   "nutrition": {
     "title": "Nutrición",
