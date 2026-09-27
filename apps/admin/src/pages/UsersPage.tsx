@@ -266,7 +266,115 @@ export default function UsersPage() {
         </div>
       </div>
 
-      <div className="card mt-6 overflow-x-auto p-0">
+      {/* Телефон: карточки вместо широкой таблицы */}
+      <div className="mt-5 space-y-3 md:hidden">
+        {isLoading &&
+          Array.from({ length: 4 }).map((_, i) => <div key={i} className="card h-28 animate-pulse bg-ink-800" />)}
+        {!isLoading && rows.length === 0 && (
+          <p className="py-8 text-center text-neutral-500">Пользователи не найдены</p>
+        )}
+        {rows.map((u) => {
+          const sub = subscriptionByUser?.get(u.id);
+          const hasGift = sub?.provider === "gift";
+          const isPending = toggleGiftAccess.isPending && toggleGiftAccess.variables?.userId === u.id;
+          const trialEnds = new Date(new Date(u.createdAt).getTime() + TRIAL_DAYS * 24 * 60 * 60 * 1000);
+          const trialActive = !sub && Date.now() < trialEnds.getTime();
+          const refs = referralStats?.get(u.id);
+          return (
+            <div key={u.id} className={clsx("card p-4", u.isBlocked && "border-danger/30 bg-danger/5")}>
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="truncate font-semibold">
+                    {u.country && <span className="mr-1.5">{flagOf(u.country)}</span>}
+                    {u.fullName || "—"}
+                  </p>
+                  <p className="truncate text-sm text-neutral-400">{u.email}</p>
+                  {u.phone && (
+                    <a href={`tel:${u.phone}`} className="text-sm text-volt-400">
+                      {u.phone}
+                    </a>
+                  )}
+                </div>
+                <select
+                  value={u.role}
+                  onChange={(e) => updateRole.mutate({ userId: u.id, role: e.target.value as UserRole })}
+                  className={clsx("badge shrink-0 cursor-pointer border-0", ROLE_BADGE[u.role])}
+                >
+                  {(Object.keys(ROLE_LABEL) as UserRole[]).map((role) => (
+                    <option key={role} value={role}>
+                      {ROLE_LABEL[role]}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                <span className={clsx("badge", sub ? "bg-success/10 text-success" : "bg-neutral-600/20 text-neutral-400")}>
+                  {sub ? PLAN_LABEL[sub.plan] : "Нет подписки"}
+                </span>
+                {!sub && (
+                  <span className={clsx("badge", trialActive ? "bg-volt-400/10 text-volt-400" : "bg-neutral-600/20 text-neutral-400")}>
+                    {trialActive ? `Пробная до ${trialEnds.toLocaleDateString("ru-RU")}` : "Пробная закончилась"}
+                  </span>
+                )}
+                {!u.onboardingCompleted && <span className="badge bg-neutral-600/20 text-neutral-400">Анкета не заполнена</span>}
+                {refs && (
+                  <span className="badge bg-ink-700 text-neutral-300">
+                    Друзья: {refs.invited} · +{refs.rewarded} мес.
+                  </span>
+                )}
+                {!!u.sessionKicks && (
+                  <span className={clsx("badge", u.sessionKicks >= 5 ? "bg-warning/10 text-warning" : "bg-ink-700 text-neutral-400")}>
+                    Вылетов: {u.sessionKicks}
+                  </span>
+                )}
+                {u.isBlocked && <span className="badge bg-danger/10 text-danger">Заблокирован</span>}
+              </div>
+              <p className="mt-2 text-xs text-neutral-500">
+                Регистрация {new Date(u.createdAt).toLocaleDateString("ru-RU")}
+              </p>
+
+              <div className="mt-3 flex flex-wrap gap-2 border-t border-ink-700 pt-3">
+                <button
+                  onClick={() => toggleGiftAccess.mutate({ userId: u.id, grant: !hasGift })}
+                  disabled={isPending}
+                  className={clsx(
+                    "badge inline-flex items-center gap-1.5 border-0 px-3 py-1.5 disabled:opacity-50",
+                    hasGift ? "bg-volt-400/10 text-volt-400" : "bg-neutral-600/20 text-neutral-300",
+                  )}
+                >
+                  <Gift size={12} />
+                  {isPending ? "…" : hasGift ? "Безлимит (отозвать)" : "Подарить безлимит"}
+                </button>
+                {u.isBlocked ? (
+                  <button
+                    onClick={() => setBlocked.mutate({ userId: u.id, blocked: false })}
+                    disabled={setBlocked.isPending}
+                    className="badge inline-flex items-center gap-1 border-0 bg-success/10 px-3 py-1.5 text-success"
+                  >
+                    <Unlock size={12} /> Разблокировать
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => openConfirm({ kind: "block", user: u })}
+                    className="badge inline-flex items-center gap-1 border-0 bg-ember-400/10 px-3 py-1.5 text-ember-400"
+                  >
+                    <Ban size={12} /> Блок
+                  </button>
+                )}
+                <button
+                  onClick={() => openConfirm({ kind: "delete", user: u })}
+                  className="badge inline-flex items-center gap-1 border-0 bg-danger/10 px-3 py-1.5 text-danger"
+                >
+                  <Trash2 size={12} /> Удалить
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="card mt-6 hidden overflow-x-auto p-0 md:block">
         <table className="w-full min-w-[1280px] border-collapse">
           <thead>
             <tr className="border-b border-ink-700">

@@ -15,6 +15,7 @@ import { RestTimerOverlay } from "@/components/RestTimerOverlay";
 import { markWorkoutJustFinished } from "@/lib/install";
 import { clearWorkoutSession, loadWorkoutSession, saveWorkoutSession } from "@/lib/workoutSession";
 import { WorkoutSummary, type WorkoutSummaryData } from "@/components/WorkoutSummary";
+import { useViewportPin } from "@/lib/useViewportPin";
 import type { Exercise, WorkoutSet } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 
@@ -83,6 +84,8 @@ export default function WorkoutPlayerPage() {
   const [weights, setWeights] = useState<Record<string, string>>(() => restored?.weights ?? {});
   const [startedAt] = useState(() => restored?.startedAt ?? Date.now());
   const [summary, setSummary] = useState<WorkoutSummaryData | null>(null);
+  const bottomBarRef = useRef<HTMLDivElement>(null);
+  useViewportPin(bottomBarRef, "bottom");
   const [activeVideo, setActiveVideo] = useState<Exercise | null>(null);
   const [videoClosing, setVideoClosing] = useState(false);
 
@@ -734,7 +737,7 @@ export default function WorkoutPlayerPage() {
                     onChange={(e) =>
                       setWeights((prev) => ({ ...prev, [group.exercise.id]: e.target.value }))
                     }
-                    className="input-field w-40 py-1.5 text-sm"
+                    className="input-field w-40 py-1.5 text-base"
                   />
                   {lastWeight != null && (
                     <p className="mt-1.5 flex items-center gap-1 text-xs text-volt-400">
@@ -802,7 +805,8 @@ export default function WorkoutPlayerPage() {
           );
         })()}
 
-      <div className="fixed inset-x-0 bottom-0 z-40">
+      {/* Прижата к низу экрана и при увеличении страницы пальцами (useViewportPin) */}
+      <div ref={bottomBarRef} className="fixed inset-x-0 bottom-0 z-40">
         {undoSetId && !restOverlayOpen && (
           <div className="border-t border-ink-700 bg-ink-800/95 px-5 py-2.5 backdrop-blur animate-fade-in">
             <div className="mx-auto flex max-w-md items-center justify-between gap-3 text-sm">

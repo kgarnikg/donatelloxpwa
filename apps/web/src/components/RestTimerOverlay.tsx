@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useViewportPin } from "@/lib/useViewportPin";
 import { useTranslation } from "react-i18next";
 import { ChevronDown, Plus, SkipForward, Undo2 } from "lucide-react";
 import clsx from "clsx";
@@ -44,6 +45,8 @@ export function RestTimerOverlay({
   onUndo,
 }: RestTimerOverlayProps) {
   const { t } = useTranslation();
+  const pinRef = useRef<HTMLDivElement>(null);
+  useViewportPin(pinRef, "full");
   const progress = total > 0 ? Math.min(1, Math.max(0, remaining / total)) : 0;
   const isFinal = remaining <= FINAL_SECONDS;
   const minutes = Math.floor(remaining / 60);
@@ -91,8 +94,11 @@ export function RestTimerOverlay({
   }, []);
 
   return (
+    // Внешний слой держится на экране при увеличении страницы (useViewportPin),
+    // внутренний — анимация появления (её transform не должен мешать).
+    <div ref={pinRef} className="fixed inset-0 z-[45]">
     <div
-      className="fixed inset-0 z-[45] flex flex-col bg-ink-950/[0.97] backdrop-blur-md animate-fade-in"
+      className="flex h-full w-full flex-col bg-ink-950/[0.97] backdrop-blur-md animate-fade-in"
       role="dialog"
       aria-modal="true"
       aria-label={kind === "exercise" ? t("workout.restingNextExercise") : t("workout.resting")}
@@ -197,6 +203,7 @@ export function RestTimerOverlay({
           {t("workout.restSkipShort")} <SkipForward size={18} />
         </button>
       </div>
+    </div>
     </div>
   );
 }

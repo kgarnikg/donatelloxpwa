@@ -104,7 +104,7 @@ export default function OverviewPage() {
         />
       </div>
 
-      <div className="card mt-6">
+      <div className="card mt-6 overflow-hidden">
         <h2 className="mb-4 font-semibold">Регистрации по дням</h2>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
@@ -117,7 +117,7 @@ export default function OverviewPage() {
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#23272F" vertical={false} />
               <XAxis dataKey="date" stroke="#8A909C" fontSize={12} tickLine={false} />
-              <YAxis stroke="#8A909C" fontSize={12} tickLine={false} allowDecimals={false} />
+              <YAxis stroke="#8A909C" fontSize={12} tickLine={false} allowDecimals={false} width={28} />
               <Tooltip
                 contentStyle={{
                   background: "#191C22",
