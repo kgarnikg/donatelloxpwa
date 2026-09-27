@@ -237,7 +237,8 @@
     "goalSlower_one": "One program week will take you about {{count}} day. Workouts go in order — nothing gets lost.",
     "goalSlower_other": "One program week will take you about {{count}} days. Workouts go in order — nothing gets lost.",
     "goalFaster_one": "You'll get through a program week faster — in about {{count}} day. Watch your recovery.",
-    "goalFaster_other": "You'll get through a program week faster — in about {{count}} days. Watch your recovery."
+    "goalFaster_other": "You'll get through a program week faster — in about {{count}} days. Watch your recovery.",
+    "blockWeek": "week {{n}} of {{total}}"
   },
   "workout": {
     "back": "Back",
@@ -623,7 +624,10 @@
     "noWorkoutsYet": "Workouts for this program are coming soon.",
     "lockedTrialText": "Your free week covers “{{program}}”, the program matched to your answers. Other programs unlock with access.",
     "lockedOtherText": "Your free week covers only the program matched to your answers. Other programs unlock with access.",
-    "openTrialProgram": "Open my free program"
+    "openTrialProgram": "Open my free program",
+    "blockWeekTab": "Week {{n}}",
+    "blockRepeatHint_one": "These workouts repeat for {{count}} week — add weight as you go.",
+    "blockRepeatHint_other": "These workouts repeat for {{count}} weeks in a row — add weight as you go."
   },
   "support": {
     "title": "Help",

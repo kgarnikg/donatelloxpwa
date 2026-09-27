@@ -241,6 +241,8 @@ export interface Workout {
   titleHy?: string;
   order: number;
   estimatedDurationMinutes: number;
+  /** Сколько раз повторяется недельный набор блока (0089): месяц — 4, "недели 1–2" — 2. */
+  blockRepeats?: number;
   /** Заголовок блока недель, напр. "Недели 1–2 · LEVEL 1A". Добавлено в 0013. */
   weekLabel?: string;
   /** Английский перевод weekLabel. Добавлено в 0029 (Фаза 6). */
@@ -425,3 +427,4 @@ export function toCamelCase<T>(input: unknown): T {
   }
   return input as T;
 }
+export * from "./programProgress";

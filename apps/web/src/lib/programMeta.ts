@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import type { WorkoutProgram } from "@donatellox/types";
+import type { ProgressWorkout, WorkoutProgram } from "@donatellox/types";
+import { computeProgramProgress, countCompletions } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 
@@ -68,18 +69,30 @@ export function useProgramsProgress() {
     enabled: !!authUser,
     queryFn: async (): Promise<Record<string, ProgramProgress>> => {
       const [{ data: workouts, error: wError }, { data: logs, error: lError }] = await Promise.all([
-        supabase.from("workouts").select("id, program_id"),
+        supabase.from("workouts").select("id, program_id, week_order, order, block_repeats"),
         supabase.from("workout_logs").select("workout_id").eq("user_id", authUser!.id),
       ]);
       if (wError) throw wError;
       if (lError) throw lError;
 
-      const done = new Set((logs ?? []).map((l) => l.workout_id as string));
+      // С повторами недель блока (0089) — тот же расчёт, что на главной
+      const counts = countCompletions((logs ?? []) as { workout_id: string }[]);
+      const byProgram = new Map<string, ProgressWorkout[]>();
+      for (const w of (workouts ?? []) as {
+        id: string;
+        program_id: string;
+        week_order: number;
+        order: number;
+        block_repeats: number | null;
+      }[]) {
+        const list = byProgram.get(w.program_id) ?? [];
+        list.push({ id: w.id, weekOrder: w.week_order, order: w.order, blockRepeats: w.block_repeats });
+        byProgram.set(w.program_id, list);
+      }
       const result: Record<string, ProgramProgress> = {};
-      for (const w of (workouts ?? []) as { id: string; program_id: string }[]) {
-        const p = (result[w.program_id] ??= { done: 0, total: 0 });
-        p.total += 1;
-        if (done.has(w.id)) p.done += 1;
+      for (const [programId, list] of byProgram) {
+        const p = computeProgramProgress(list, counts);
+        result[programId] = { done: p.done, total: p.total };
       }
       return result;
     },

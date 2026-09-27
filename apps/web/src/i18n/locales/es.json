@@ -237,7 +237,8 @@
     "goalSlower_one": "Una semana del programa te llevará unos {{count}} día. Los entrenamientos van en orden: no se pierde nada.",
     "goalSlower_other": "Una semana del programa te llevará unos {{count}} días. Los entrenamientos van en orden: no se pierde nada.",
     "goalFaster_one": "Harás cada semana del programa más rápido, en unos {{count}} día. Cuida la recuperación.",
-    "goalFaster_other": "Harás cada semana del programa más rápido, en unos {{count}} días. Cuida la recuperación."
+    "goalFaster_other": "Harás cada semana del programa más rápido, en unos {{count}} días. Cuida la recuperación.",
+    "blockWeek": "semana {{n}} de {{total}}"
   },
   "workout": {
     "back": "Atrás",
@@ -623,7 +624,10 @@
     "noWorkoutsYet": "Los entrenamientos de este programa llegarán pronto.",
     "lockedTrialText": "Tu semana gratis incluye «{{program}}», el programa elegido según tus respuestas. Los demás programas se desbloquean con el acceso.",
     "lockedOtherText": "Tu semana gratis incluye solo el programa elegido según tus respuestas. Los demás programas se desbloquean con el acceso.",
-    "openTrialProgram": "Abrir mi programa gratis"
+    "openTrialProgram": "Abrir mi programa gratis",
+    "blockWeekTab": "Semana {{n}}",
+    "blockRepeatHint_one": "Estos entrenamientos se repiten {{count}} semana: sube el peso poco a poco.",
+    "blockRepeatHint_other": "Estos entrenamientos se repiten {{count}} semanas seguidas: sube el peso poco a poco."
   },
   "support": {
     "title": "Ayuda",

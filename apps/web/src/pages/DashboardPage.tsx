@@ -297,6 +297,7 @@ function TodayCard({ dash, canTrain }: { dash: NonNullable<ReturnType<typeof use
       <p className="mt-1.5 text-sm text-neutral-400">
         {[
           week,
+          dash.nextBlockWeek && t("dashboard.blockWeek", dash.nextBlockWeek),
           dash.nextPositionInBlock && t("dashboard.workoutOf", dash.nextPositionInBlock),
           `${w.estimatedDurationMinutes} ${t("common.min")}`,
         ]

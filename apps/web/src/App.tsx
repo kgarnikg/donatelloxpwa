@@ -13,7 +13,7 @@ import { localizedOf } from "@/lib/localizedField";
 import { splitDescription } from "@/lib/programMeta";
 import { useDashboard } from "@/lib/dashboard";
 import type { Workout, WorkoutProgram } from "@donatellox/types";
-import { toCamelCase } from "@donatellox/types";
+import { computeProgramProgress, countCompletions, toCamelCase } from "@donatellox/types";
 
 import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "@/pages/RegisterPage";
@@ -121,18 +121,20 @@ function ProgramDetailPage() {
   // всей программе, не сбрасывается по неделям — если человек месяц не
   // ходил в зал, следующая тренировка не "откроется по календарю" сама,
   // только по факту выполнения предыдущей.
-  const { data: completedWorkoutIds } = useQuery({
+  const { data: completionCounts } = useQuery({
     queryKey: ["completed-workout-ids", program?.id, session?.user?.id, workouts?.length],
-    queryFn: async (): Promise<Set<string>> => {
+    queryFn: async (): Promise<Map<string, number>> => {
       const workoutIds = (workouts ?? []).map((w) => w.id);
-      if (workoutIds.length === 0) return new Set();
+      if (workoutIds.length === 0) return new Map();
       const { data, error } = await supabase
         .from("workout_logs")
         .select("workout_id")
         .eq("user_id", session!.user.id)
         .in("workout_id", workoutIds);
       if (error) throw error;
-      return new Set((data ?? []).map((row) => row.workout_id as string));
+      // Сколько раз выполнена каждая тренировка — недельный набор блока
+      // повторяется (0089), поэтому считаем количество, а не факт.
+      return countCompletions((data ?? []) as { workout_id: string }[]);
     },
     // Ждём workouts, чтобы точно знать, по каким ID фильтровать — иначе
     // пришлось бы полагаться на менее очевидный синтаксис фильтра через
@@ -146,10 +148,13 @@ function ProgramDetailPage() {
   // completedWorkoutIds ещё не загрузился (undefined) — тогда просто не
   // определяем состояние вообще, чтобы не мигнуть "всё заблокировано" на
   // долю секунды до прихода реальных данных.
-  const nextUnlockedWorkoutId = useMemo(() => {
-    if (!workouts || !completedWorkoutIds) return undefined;
-    return workouts.find((w) => !completedWorkoutIds.has(w.id))?.id ?? null;
-  }, [workouts, completedWorkoutIds]);
+  // Программа развёрнута по неделям блоков (0089): месяц = 4 прохода
+  // одного недельного набора.
+  const progress = useMemo(
+    () => (workouts && completionCounts ? computeProgramProgress(workouts, completionCounts) : undefined),
+    [workouts, completionCounts],
+  );
+  const nextUnlockedWorkoutId = progress === undefined ? undefined : (progress.next?.workout.id ?? null);
 
   // "Уже занимался(-ась) раньше" — раньше было самостоятельной кнопкой
   // прямо здесь, у каждой заблокированной тренировки. Убрано по запросу
@@ -178,16 +183,35 @@ function ProgramDetailPage() {
   // тренировка — иначе человеку на 13-й неделе пришлось бы каждый раз
   // заново пролистывать все прошлые недели, чтобы дойти до своей текущей.
   const defaultWeekOrder = useMemo(() => {
-    if (!workouts || nextUnlockedWorkoutId === undefined) return undefined;
-    if (nextUnlockedWorkoutId === null) return workouts.at(-1)?.weekOrder; // всё пройдено — последняя неделя
-    return workouts.find((w) => w.id === nextUnlockedWorkoutId)?.weekOrder;
-  }, [workouts, nextUnlockedWorkoutId]);
+    if (!workouts || !progress) return undefined;
+    if (!progress.next) return workouts.at(-1)?.weekOrder; // всё пройдено — последняя неделя
+    return progress.next.workout.weekOrder;
+  }, [workouts, progress]);
 
   const effectiveWeekOrder = activeWeekOrder ?? defaultWeekOrder ?? weekBlocks[0]?.order ?? 1;
-  const visibleWorkouts = useMemo(
-    () => (workouts ?? []).filter((w) => w.weekOrder === effectiveWeekOrder),
-    [workouts, effectiveWeekOrder],
+
+  // Недели внутри блока (повторы недельного набора, 0089)
+  const blockSlots = useMemo(
+    () => (progress?.slots ?? []).filter((sl) => sl.workout.weekOrder === effectiveWeekOrder),
+    [progress, effectiveWeekOrder],
   );
+  const blockRepeats = blockSlots[0]?.repeats ?? 1;
+  const [activeRound, setActiveRound] = useState<number | null>(null);
+  const defaultRound = useMemo(() => {
+    const next = blockSlots.find((sl) => !sl.done);
+    return next ? next.round : blockRepeats;
+  }, [blockSlots, blockRepeats]);
+  const effectiveRound = Math.min(activeRound ?? defaultRound, blockRepeats);
+  const visibleSlots = useMemo(() => {
+    if (!workouts) return [];
+    if (!progress) {
+      // счётчики ещё грузятся — показываем тренировки блока без статусов
+      return workouts
+        .filter((w) => w.weekOrder === effectiveWeekOrder)
+        .map((w, i) => ({ workout: w, done: false, positionInBlock: i + 1, index: -1 }));
+    }
+    return blockSlots.filter((sl) => sl.round === effectiveRound);
+  }, [workouts, progress, blockSlots, effectiveWeekOrder, effectiveRound]);
   const hasMultipleBlocks = weekBlocks.length > 1;
 
   // Лента недель прокручивается горизонтально: при открытии программы
@@ -237,8 +261,8 @@ function ProgramDetailPage() {
   const { summary, equipment } = splitDescription(
     localizedOf(program, "description", i18n.language),
   );
-  const doneCount = completedWorkoutIds?.size ?? 0;
-  const totalCount = workouts?.length ?? 0;
+  const doneCount = progress?.done ?? 0;
+  const totalCount = progress?.total ?? workouts?.length ?? 0;
   // Другая программа уже активна (по ней была последняя тренировка) —
   // предупреждаем, что прогресс там сохранится.
   const otherActiveProgram =
@@ -349,7 +373,10 @@ function ProgramDetailPage() {
             <button
               key={block.order}
               data-active={block.order === effectiveWeekOrder}
-              onClick={() => setActiveWeekOrder(block.order)}
+              onClick={() => {
+                setActiveWeekOrder(block.order);
+                setActiveRound(null);
+              }}
               className={clsx(
                 "shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-xs font-semibold transition",
                 block.order === effectiveWeekOrder
@@ -363,19 +390,46 @@ function ProgramDetailPage() {
         </div>
       )}
 
+      {!isLocked && blockRepeats > 1 && (
+        <div className="mt-4">
+          <p className="mb-2 text-xs text-neutral-500">{t("programs.blockRepeatHint", { count: blockRepeats })}</p>
+          <div className="flex flex-wrap gap-2">
+            {Array.from({ length: blockRepeats }, (_, i) => i + 1).map((round) => {
+              const roundDone = blockSlots.filter((sl) => sl.round === round).every((sl) => sl.done);
+              return (
+                <button
+                  key={round}
+                  onClick={() => setActiveRound(round)}
+                  className={clsx(
+                    "flex items-center gap-1 rounded-md border px-3 py-1.5 text-xs font-semibold transition",
+                    round === effectiveRound
+                      ? "border-volt-400 bg-volt-400/10 text-volt-300"
+                      : "border-ink-700 text-neutral-400 hover:border-ink-500",
+                  )}
+                >
+                  {roundDone && <Check size={12} />}
+                  {t("programs.blockWeekTab", { n: round })}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <div className="mt-4 space-y-3">
         {workoutsLoading &&
           Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="card h-20 animate-pulse bg-ink-800" />
           ))}
 
-        {visibleWorkouts.map((workout, index) => {
+        {visibleSlots.map((slot, index) => {
+          const workout = slot.workout;
           const workoutTitle = localizedOf(workout, "title", i18n.language);
 
           if (isLocked) {
             return (
               <Link
-                key={workout.id}
+                key={`${workout.id}-${index}`}
                 to="/subscription"
                 className="card flex items-center justify-between opacity-70 hover:opacity-100"
               >
@@ -388,18 +442,18 @@ function ProgramDetailPage() {
             );
           }
 
-          const isDone = completedWorkoutIds?.has(workout.id) ?? false;
+          const isDone = slot.done;
           // Пока nextUnlockedWorkoutId ещё не вычислен (undefined) — не
           // блокируем на всякий случай, считаем доступной (безопаснее
           // показать лишний Play на долю секунды, чем ложно показать замок
           // на тренировке, которую на самом деле можно проходить).
-          const isNext = nextUnlockedWorkoutId === undefined || workout.id === nextUnlockedWorkoutId;
+          const isNext = !progress || slot.index === progress.next?.index;
           const isSequenceLocked = !isDone && !isNext;
 
           if (isSequenceLocked) {
             return (
               <div
-                key={workout.id}
+                key={`${workout.id}-${index}`}
                 className="card flex items-center justify-between opacity-50"
                 title={t("programs.sequenceLockedHint")}
               >
@@ -414,7 +468,7 @@ function ProgramDetailPage() {
 
           return (
             <Link
-              key={workout.id}
+              key={`${workout.id}-${index}`}
               to={`/workout/${workout.id}`}
               className={clsx(
                 "card flex items-center justify-between hover:border-ink-500",
@@ -440,7 +494,7 @@ function ProgramDetailPage() {
           );
         })}
 
-        {!workoutsLoading && visibleWorkouts.length === 0 && (
+        {!workoutsLoading && visibleSlots.length === 0 && (
           <p className="py-8 text-center text-neutral-500">
             {t("programs.noWorkoutsYet")}
           </p>

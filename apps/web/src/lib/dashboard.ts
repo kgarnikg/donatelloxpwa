@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { UserProfile, WorkoutProgram } from "@donatellox/types";
-import { toCamelCase } from "@donatellox/types";
+import { computeProgramProgress, countCompletions, toCamelCase } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 import { withTranslations } from "@/lib/localizedField";
 import { useAuth } from "@/context/AuthContext";
@@ -28,6 +28,7 @@ export interface DashboardWorkout {
   weekOrder: number;
   order: number;
   estimatedDurationMinutes: number;
+  blockRepeats?: number;
 }
 
 export interface DashboardData {
@@ -38,6 +39,8 @@ export interface DashboardData {
   nextWorkout: DashboardWorkout | null;
   /** Номер следующей тренировки внутри её блока недель и размер блока. */
   nextPositionInBlock: { n: number; total: number } | null;
+  /** Неделя блока (повторы, 0089): "неделя 2 из 4"; null — блок без повторов. */
+  nextBlockWeek: { n: number; total: number } | null;
   programDone: number;
   programTotal: number;
   game: GameSummary;
@@ -96,7 +99,7 @@ export function useDashboard() {
       if (program) {
         const { data, error } = await supabase
           .from("workouts")
-          .select(`id, ${withTranslations("title", "week_label")}, week_order, order, estimated_duration_minutes`)
+          .select(`id, ${withTranslations("title", "week_label")}, week_order, order, estimated_duration_minutes, block_repeats`)
           .eq("program_id", program.id)
           .order("week_order", { ascending: true })
           .order("order", { ascending: true });
@@ -105,13 +108,17 @@ export function useDashboard() {
       }
 
       // Следующая = первая по порядку непройденная (та же логика, что в ProgramDetailPage)
-      const doneIds = new Set(logs.map((l) => l.workout_id));
-      const nextWorkout = workouts.find((w) => !doneIds.has(w.id)) ?? null;
-      let nextPositionInBlock: DashboardData["nextPositionInBlock"] = null;
-      if (nextWorkout) {
-        const block = workouts.filter((w) => w.weekOrder === nextWorkout.weekOrder);
-        nextPositionInBlock = { n: block.indexOf(nextWorkout) + 1, total: block.length };
-      }
+      // Следующая — по развёрнутой программе с повторами недель блока
+      // (0089): "Понедельник" месяца 2 проходится 4 раза, потом — месяц 3.
+      const programIds = new Set(workouts.map((w) => w.id));
+      const progress = computeProgramProgress(
+        workouts,
+        countCompletions(logs.filter((l) => programIds.has(l.workout_id))),
+      );
+      const nextSlot = progress.next;
+      const nextWorkout = nextSlot?.workout ?? null;
+      const nextPositionInBlock = nextSlot ? { n: nextSlot.positionInBlock, total: nextSlot.blockSize } : null;
+      const nextBlockWeek = nextSlot && nextSlot.repeats > 1 ? { n: nextSlot.round, total: nextSlot.repeats } : null;
 
       const gameLogs: GameLog[] = logs.map((l) => ({
         completedAt: l.completed_at,
@@ -126,8 +133,9 @@ export function useDashboard() {
         isActiveProgram,
         nextWorkout,
         nextPositionInBlock,
-        programDone: workouts.filter((w) => doneIds.has(w.id)).length,
-        programTotal: workouts.length,
+        nextBlockWeek,
+        programDone: progress.done,
+        programTotal: progress.total,
         game: summarize(gameLogs, chosenDays ?? program?.workoutsPerWeek ?? 3),
         weeklyTarget: chosenDays ?? program?.workoutsPerWeek ?? 3,
         totalWorkouts: logs.length,

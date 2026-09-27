@@ -4,7 +4,7 @@ import { Search, Check, CheckCircle2 } from "lucide-react";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
 import type { User, Workout, WorkoutProgram } from "@donatellox/types";
-import { toCamelCase } from "@donatellox/types";
+import { computeProgramProgress, countCompletions, toCamelCase, type ProgramSlot } from "@donatellox/types";
 
 /**
  * Форс-мажорное обновление прогресса клиента — раньше было
@@ -64,28 +64,29 @@ export default function CatchUpProgressPage() {
     enabled: !!selectedProgramId,
   });
 
-  const { data: completedIds } = useQuery({
+  // Сколько раз выполнена каждая тренировка — недельный набор блока
+  // повторяется block_repeats раз (0089)
+  const { data: completionCounts } = useQuery({
     queryKey: ["admin-catchup-completed", selectedProgramId, selectedUser?.id, workouts?.length],
-    queryFn: async (): Promise<Set<string>> => {
+    queryFn: async (): Promise<Map<string, number>> => {
       const ids = (workouts ?? []).map((w) => w.id);
-      if (ids.length === 0) return new Set();
+      if (ids.length === 0) return new Map();
       const { data, error } = await supabase
         .from("workout_logs")
         .select("workout_id")
         .eq("user_id", selectedUser!.id)
         .in("workout_id", ids);
       if (error) throw error;
-      return new Set((data ?? []).map((r) => r.workout_id as string));
+      return countCompletions((data ?? []) as { workout_id: string }[]);
     },
     enabled: !!selectedProgramId && !!selectedUser && !!workouts,
   });
 
   const catchUpMutation = useMutation({
-    mutationFn: async (upToWorkout: Workout) => {
-      if (!workouts || !selectedUser || !completedIds) return;
-      const idx = workouts.findIndex((w) => w.id === upToWorkout.id);
-      if (idx === -1) return;
-      const toMark = workouts.slice(0, idx + 1).filter((w) => !completedIds.has(w.id));
+    mutationFn: async (upTo: ProgramSlot<Workout>) => {
+      if (!progress || !selectedUser) return;
+      // все непройденные слоты до выбранного включительно — по записи на каждый
+      const toMark = progress.slots.slice(0, upTo.index + 1).filter((sl) => !sl.done).map((sl) => sl.workout);
       if (toMark.length === 0) return;
       const { error } = await supabase.from("workout_logs").insert(
         toMark.map((w) => ({
@@ -113,8 +114,13 @@ export default function CatchUpProgressPage() {
     return Array.from(seen, ([order, label]) => ({ order, label }));
   }, [workouts]);
 
-  const effectiveWeekOrder = activeWeekOrder ?? weekBlocks[0]?.order ?? 1;
-  const visibleWorkouts = (workouts ?? []).filter((w) => w.weekOrder === effectiveWeekOrder);
+  const progress = useMemo(
+    () => (workouts && completionCounts ? computeProgramProgress(workouts, completionCounts) : undefined),
+    [workouts, completionCounts],
+  );
+  const effectiveWeekOrder =
+    activeWeekOrder ?? progress?.next?.workout.weekOrder ?? weekBlocks[0]?.order ?? 1;
+  const visibleSlots = (progress?.slots ?? []).filter((sl) => sl.workout.weekOrder === effectiveWeekOrder);
 
   return (
     <div>
@@ -216,11 +222,23 @@ export default function CatchUpProgressPage() {
             </div>
           )}
 
+          {progress && (
+            <p className="mb-3 text-sm text-neutral-400">
+              Пройдено {progress.done} из {progress.total} тренировок программы (с повторами недель блоков)
+            </p>
+          )}
           <div className="space-y-3">
-            {visibleWorkouts.map((w) => {
-              const isDone = completedIds?.has(w.id) ?? false;
+            {visibleSlots.map((sl) => {
+              const w = sl.workout;
+              const isDone = sl.done;
               return (
-                <div key={w.id} className="card flex items-center justify-between">
+                <div key={sl.index}>
+                  {sl.repeats > 1 && sl.positionInBlock === 1 && (
+                    <p className="mb-2 mt-4 text-xs font-semibold uppercase tracking-wide text-neutral-500">
+                      Неделя {sl.round} из {sl.repeats}
+                    </p>
+                  )}
+                <div className="card flex items-center justify-between">
                   <p className="font-semibold">{w.title}</p>
                   {isDone ? (
                     <span className="flex items-center gap-1.5 text-sm text-volt-400">
@@ -228,13 +246,14 @@ export default function CatchUpProgressPage() {
                     </span>
                   ) : (
                     <button
-                      onClick={() => catchUpMutation.mutate(w)}
+                      onClick={() => catchUpMutation.mutate(sl)}
                       disabled={catchUpMutation.isPending}
                       className="btn-secondary text-sm disabled:opacity-50"
                     >
                       <Check size={14} /> Отметить (и всё до неё)
                     </button>
                   )}
+                </div>
                 </div>
               );
             })}

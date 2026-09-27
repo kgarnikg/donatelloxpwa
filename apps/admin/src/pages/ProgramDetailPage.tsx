@@ -56,6 +56,8 @@ interface WorkoutRow {
   weekOrder: number;
   weekLabel: string | null;
   estimatedDurationMinutes: number;
+  /** Сколько недель повторяется набор блока (0089). */
+  blockRepeats?: number;
   sets: SetRow[];
 }
 
@@ -159,7 +161,16 @@ function useSaveWorkout(programId: string) {
           .eq("id", input.id);
         if (error) throw error;
       } else {
+        // новая тренировка в существующем блоке — те же повторы недель, что у блока (0089)
+        const { data: sibling } = await supabase
+          .from("workouts")
+          .select("block_repeats")
+          .eq("program_id", programId)
+          .eq("week_order", input.weekOrder)
+          .limit(1)
+          .maybeSingle();
         const { error } = await supabase.from("workouts").insert({
+          block_repeats: (sibling as { block_repeats?: number } | null)?.block_repeats ?? 1,
           program_id: programId,
           title: input.title,
           order: input.order,
@@ -1127,6 +1138,7 @@ export default function ProgramDetailPage() {
   const { data: program, isLoading: programLoading } = useProgram(programId!);
   const { data: workouts, isLoading: workoutsLoading } = useProgramWorkouts(programId!);
   const reorderWorkout = useReorderWorkout(programId!);
+  const queryClient = useQueryClient();
 
   const [editingProgram, setEditingProgram] = useState(false);
   const [workoutModal, setWorkoutModal] = useState<{
@@ -1152,6 +1164,18 @@ export default function ProgramDetailPage() {
   const [activeWeekOrder, setActiveWeekOrder] = useState<number | null>(null);
   const effectiveWeekOrder = activeWeekOrder ?? weekBlocks[0]?.order ?? 1;
 
+  const setBlockRepeats = useMutation({
+    mutationFn: async (repeats: number) => {
+      const { error } = await supabase.rpc("admin_set_block_repeats", {
+        p_program_id: programId,
+        p_week_order: effectiveWeekOrder,
+        p_repeats: repeats,
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin-program-workouts", programId] }),
+  });
+
   const weekWorkouts = useMemo(
     () => (workouts ?? []).filter((w) => w.weekOrder === effectiveWeekOrder).sort((a, b) => a.order - b.order),
     [workouts, effectiveWeekOrder],
@@ -1166,6 +1190,7 @@ export default function ProgramDetailPage() {
   }
 
   const nextWeekOrder = (weekBlocks[weekBlocks.length - 1]?.order ?? 0) + 1;
+  const blockRepeats = weekWorkouts[0]?.blockRepeats ?? 1;
 
   return (
     <div>
@@ -1206,6 +1231,28 @@ export default function ProgramDetailPage() {
           <Plus size={14} /> Новая неделя/месяц
         </button>
       </div>
+
+      {/* Сколько недель повторяется набор этого блока (0089) */}
+      {weekWorkouts.length > 0 && (
+        <div className="card mt-4 flex flex-wrap items-center gap-3 py-3 text-sm">
+          <span className="text-neutral-300">Повторять набор тренировок этого блока:</span>
+          <select
+            value={blockRepeats}
+            disabled={setBlockRepeats.isPending}
+            onChange={(e) => setBlockRepeats.mutate(Number(e.target.value))}
+            className="input-field w-auto py-1.5"
+          >
+            {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
+              <option key={n} value={n}>
+                {n} {n === 1 ? "неделю" : n < 5 ? "недели" : "недель"}
+              </option>
+            ))}
+          </select>
+          <span className="text-xs text-neutral-500">
+            Месяц — 4, «недели 1–2» — 2. Клиент проходит эти {weekWorkouts.length} тренировки столько раз, потом — следующий блок.
+          </span>
+        </div>
+      )}
 
       {/* Тренировки в выбранной неделе */}
       <div className="mt-6 space-y-4">

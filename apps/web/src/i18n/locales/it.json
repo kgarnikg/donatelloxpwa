@@ -237,7 +237,8 @@
     "goalSlower_one": "Una settimana del programma ti richiederà circa {{count}} giorno. Gli allenamenti vanno in ordine: non si perde nulla.",
     "goalSlower_other": "Una settimana del programma ti richiederà circa {{count}} giorni. Gli allenamenti vanno in ordine: non si perde nulla.",
     "goalFaster_one": "Completerai una settimana del programma più in fretta, in circa {{count}} giorno. Cura il recupero.",
-    "goalFaster_other": "Completerai una settimana del programma più in fretta, in circa {{count}} giorni. Cura il recupero."
+    "goalFaster_other": "Completerai una settimana del programma più in fretta, in circa {{count}} giorni. Cura il recupero.",
+    "blockWeek": "settimana {{n}} di {{total}}"
   },
   "workout": {
     "back": "Indietro",
@@ -592,7 +593,10 @@
     "noWorkoutsYet": "Gli allenamenti di questo programma arriveranno presto.",
     "lockedTrialText": "La tua settimana gratuita vale per «{{program}}», il programma scelto in base alle tue risposte. Gli altri programmi si sbloccano con l'accesso.",
     "lockedOtherText": "La tua settimana gratuita vale solo per il programma scelto in base alle tue risposte. Gli altri programmi si sbloccano con l'accesso.",
-    "openTrialProgram": "Apri il mio programma gratuito"
+    "openTrialProgram": "Apri il mio programma gratuito",
+    "blockWeekTab": "Settimana {{n}}",
+    "blockRepeatHint_one": "Questi allenamenti si ripetono per {{count}} settimana: aumenta i carichi.",
+    "blockRepeatHint_other": "Questi allenamenti si ripetono per {{count}} settimane di fila: aumenta i carichi."
   },
   "achievements": {
     "title": "Traguardi",

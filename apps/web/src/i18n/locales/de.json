@@ -237,7 +237,8 @@
     "goalSlower_one": "Eine Programmwoche dauert bei dir etwa {{count}} Tag. Die Trainings laufen der Reihe nach — nichts geht verloren.",
     "goalSlower_other": "Eine Programmwoche dauert bei dir etwa {{count}} Tage. Die Trainings laufen der Reihe nach — nichts geht verloren.",
     "goalFaster_one": "Eine Programmwoche schaffst du schneller — in etwa {{count}} Tag. Achte auf deine Erholung.",
-    "goalFaster_other": "Eine Programmwoche schaffst du schneller — in etwa {{count}} Tagen. Achte auf deine Erholung."
+    "goalFaster_other": "Eine Programmwoche schaffst du schneller — in etwa {{count}} Tagen. Achte auf deine Erholung.",
+    "blockWeek": "Woche {{n}} von {{total}}"
   },
   "workout": {
     "back": "Zurück",
@@ -592,7 +593,10 @@
     "noWorkoutsYet": "Trainings für dieses Programm folgen in Kürze.",
     "lockedTrialText": "Deine kostenlose Woche gilt für „{{program}}“ – das Programm, das zu deinen Antworten passt. Weitere Programme schaltest du mit dem Zugang frei.",
     "lockedOtherText": "Deine kostenlose Woche gilt nur für das Programm, das zu deinen Antworten passt. Weitere Programme schaltest du mit dem Zugang frei.",
-    "openTrialProgram": "Mein kostenloses Programm öffnen"
+    "openTrialProgram": "Mein kostenloses Programm öffnen",
+    "blockWeekTab": "Woche {{n}}",
+    "blockRepeatHint_one": "Diese Trainings wiederholen sich {{count}} Woche — steigere die Gewichte.",
+    "blockRepeatHint_other": "Diese Trainings wiederholen sich {{count}} Wochen lang — steigere die Gewichte."
   },
   "achievements": {
     "title": "Erfolge",
