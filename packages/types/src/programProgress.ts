@@ -60,16 +60,26 @@ export function computeProgramProgress<W extends ProgressWorkout>(
     else blocks.push([w]);
   }
 
+  // Уже перешёл к более позднему блоку — значит, все блоки до него
+  // пройдены, даже если их тренировки выполнены по одному разу. Так было
+  // до повторов недель (0089): люди, ушедшие вперёд, не откатываются в
+  // начало программы, а продолжают с того блока, где остановились.
+  let lastTouchedBlock = -1;
+  blocks.forEach((block, bi) => {
+    if (block.some((w) => (counts.get(w.id) ?? 0) > 0)) lastTouchedBlock = bi;
+  });
+
   const remaining = new Map(counts);
   const slots: ProgramSlot<W>[] = [];
   let next: ProgramSlot<W> | null = null;
-  for (const block of blocks) {
+  blocks.forEach((block, bi) => {
     const repeats = Math.max(1, Math.round(block[0].blockRepeats ?? 1));
+    const passed = bi < lastTouchedBlock;
     for (let round = 1; round <= repeats; round++) {
       block.forEach((workout, i) => {
         const left = remaining.get(workout.id) ?? 0;
-        const done = left > 0;
-        if (done) remaining.set(workout.id, left - 1);
+        const done = passed || left > 0;
+        if (left > 0) remaining.set(workout.id, left - 1);
         const slot: ProgramSlot<W> = {
           workout,
           index: slots.length,
@@ -83,7 +93,7 @@ export function computeProgramProgress<W extends ProgressWorkout>(
         slots.push(slot);
       });
     }
-  }
+  });
   return { slots, done: slots.filter((s) => s.done).length, total: slots.length, next };
 }
 
