@@ -30,7 +30,8 @@
     "@donatellox/types": "workspace:*",
     "@donatellox/validation": "workspace:*",
     "@donatellox/theme": "workspace:*",
-    "workbox-window": "^7.4.1"
+    "workbox-window": "^7.4.1",
+    "three": "^0.170.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.3",
@@ -42,6 +43,7 @@
     "postcss": "^8.4.49",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
+    "@types/three": "^0.170.0",
     "eslint": "^8.57.1",
     "rimraf": "^6.0.1",
     "@typescript-eslint/parser": "^7.18.0",

@@ -42,6 +42,9 @@ export default defineConfig({
         clientsClaim: true,
         cleanupOutdatedCaches: true,
         globPatterns: ["**/*.{js,css,html,svg,png,woff2}"],
+        // 3D-фигура из анкеты (three.js, ~0.5 МБ) нужна один раз при регистрации —
+        // не качаем её заранее каждому пользователю вместе с приложением.
+        globIgnores: ["**/MuscleBody3D-*.js"],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.startsWith("/storage/"),

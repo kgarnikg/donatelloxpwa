@@ -107,6 +107,7 @@
     "steps": [
       "Ziele",
       "Über dich",
+      "Fokus",
       "Format",
       "Fertig"
     ],
@@ -158,7 +159,33 @@
       "weightRequired": "Gib dein Gewicht an",
       "weightRange": "Gewicht: 30–300 kg"
     },
-    "daysPerWeekRequired": "Wähle, wie oft pro Woche du trainierst"
+    "daysPerWeekRequired": "Wähle, wie oft pro Woche du trainierst",
+    "muscles": {
+      "title": "Worauf möchtest du den Fokus legen?",
+      "subtitle": "Tippe auf die Muskeln, die du zuerst trainieren möchtest. Du kannst das überspringen.",
+      "subtitleList": "Wähle die Muskeln, die du zuerst trainieren möchtest. Du kannst das überspringen.",
+      "front": "Vorne",
+      "back": "Hinten",
+      "hint": "Drehen und Muskeln antippen",
+      "loading": "Modell wird geladen…",
+      "figureLabel": "Menschliche Figur: Tippe auf einen Muskel, um ihn auszuwählen",
+      "skip": "Überspringen",
+      "names": {
+        "chest": "Brust",
+        "shoulders": "Schultern",
+        "biceps": "Bizeps",
+        "triceps": "Trizeps",
+        "forearms": "Unterarme",
+        "abs": "Bauch",
+        "traps": "Trapez",
+        "back": "Rücken",
+        "lower_back": "Unterer Rücken",
+        "glutes": "Gesäß",
+        "quads": "Quadrizeps",
+        "hamstrings": "Beinbeuger",
+        "calves": "Waden"
+      }
+    }
   },
   "dashboard": {
     "greeting": "Hallo, {{name}}",

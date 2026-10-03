@@ -47,6 +47,29 @@ export type FitnessGoal =
   | "general_fitness"
   | "rehabilitation";
 
+/**
+ * Мышцы, на которые человек хочет сделать акцент (анкета, 0090).
+ * Порядок важен: номер зоны в 3D-модели (apps/web/src/assets/models) =
+ * позиция в этом списке + 1. Новые зоны — только в конец.
+ */
+export const FOCUS_MUSCLES = [
+  "chest",
+  "shoulders",
+  "biceps",
+  "triceps",
+  "forearms",
+  "abs",
+  "traps",
+  "back",
+  "lower_back",
+  "glutes",
+  "quads",
+  "hamstrings",
+  "calves",
+] as const;
+
+export type FocusMuscle = (typeof FOCUS_MUSCLES)[number];
+
 export type ActivityLevel = "sedentary" | "light" | "moderate" | "active" | "very_active";
 
 export type TrainingFormat = "gym" | "home";
@@ -90,6 +113,8 @@ export interface UserProfile {
   weightKg?: number;
   activityLevel: ActivityLevel;
   goals: FitnessGoal[];
+  /** На какие мышцы сделать акцент (0090). Пусто — не выбирал. */
+  focusMuscles?: FocusMuscle[];
   trainingFormat: TrainingFormat;
   daysPerWeek?: number;
   healthNotes?: string;

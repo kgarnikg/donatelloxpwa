@@ -107,6 +107,7 @@
     "steps": [
       "Goals",
       "About you",
+      "Focus",
       "Format",
       "Done"
     ],
@@ -158,7 +159,33 @@
       "weightRequired": "Enter your weight",
       "weightRange": "Weight must be 30–300 kg"
     },
-    "daysPerWeekRequired": "Choose how many times a week you'll train"
+    "daysPerWeekRequired": "Choose how many times a week you'll train",
+    "muscles": {
+      "title": "What do you want to focus on?",
+      "subtitle": "Tap the muscles you want to work on first. You can skip this.",
+      "subtitleList": "Pick the muscles you want to work on first. You can skip this.",
+      "front": "Front",
+      "back": "Back",
+      "hint": "Rotate and tap the muscles",
+      "loading": "Loading the model…",
+      "figureLabel": "Human figure: tap a muscle to select it",
+      "skip": "Skip",
+      "names": {
+        "chest": "Chest",
+        "shoulders": "Shoulders",
+        "biceps": "Biceps",
+        "triceps": "Triceps",
+        "forearms": "Forearms",
+        "abs": "Abs",
+        "traps": "Traps",
+        "back": "Back",
+        "lower_back": "Lower back",
+        "glutes": "Glutes",
+        "quads": "Quads",
+        "hamstrings": "Hamstrings",
+        "calves": "Calves"
+      }
+    }
   },
   "dashboard": {
     "greeting": "Hi, {{name}}",

@@ -59,6 +59,23 @@ type ConfirmAction =
   | { kind: "delete"; user: User };
 type SortDir = "asc" | "desc";
 
+/** Мышцы из анкеты (0090) — как в приложении, шаг "На что сделать акцент?" */
+const FOCUS_MUSCLE_LABEL: Record<string, string> = {
+  chest: "грудь",
+  shoulders: "плечи",
+  biceps: "бицепс",
+  triceps: "трицепс",
+  forearms: "предплечья",
+  abs: "пресс",
+  traps: "трапеции",
+  back: "спина",
+  lower_back: "поясница",
+  glutes: "ягодицы",
+  quads: "квадрицепсы",
+  hamstrings: "бицепс бедра",
+  calves: "икры",
+};
+
 export default function UsersPage() {
   const [search, setSearch] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("createdAt");
@@ -113,6 +130,25 @@ export default function UsersPage() {
       const map = new Map<string, string>();
       for (const row of (data ?? []) as unknown as Array<{ user_id: string; program: { title: string } | null }>) {
         if (row.program?.title) map.set(row.user_id, row.program.title);
+      }
+      return map;
+    },
+  });
+
+  /**
+   * Анкеты: на какие мышцы человек хочет сделать акцент (0090).
+   * Отдельным запросом: пока миграция 0090 не выполнена, колонки нет —
+   * тогда просто ничего не показываем, остальная таблица работает.
+   */
+  const { data: focusByUser } = useQuery({
+    queryKey: ["admin-focus-muscles"],
+    queryFn: async (): Promise<Map<string, string>> => {
+      const { data, error } = await supabase.from("user_profiles").select("user_id, focus_muscles");
+      const map = new Map<string, string>();
+      if (error) return map;
+      for (const row of (data ?? []) as Array<{ user_id: string; focus_muscles: string[] | null }>) {
+        const names = (row.focus_muscles ?? []).map((m) => FOCUS_MUSCLE_LABEL[m] ?? m);
+        if (names.length) map.set(row.user_id, names.join(", "));
       }
       return map;
     },
@@ -294,6 +330,9 @@ export default function UsersPage() {
                       {u.phone}
                     </a>
                   )}
+                  {focusByUser?.get(u.id) && (
+                    <p className="mt-1 text-xs text-neutral-500">Акцент: {focusByUser.get(u.id)}</p>
+                  )}
                 </div>
                 <select
                   value={u.role}
@@ -460,6 +499,14 @@ export default function UsersPage() {
                         </span>
                       )}
                     </div>
+                    {focusByUser?.get(u.id) && (
+                      <p
+                        className="mt-1 max-w-[260px] truncate text-xs font-normal text-neutral-500"
+                        title={`Хочет сделать акцент на: ${focusByUser.get(u.id)}`}
+                      >
+                        Акцент: {focusByUser.get(u.id)}
+                      </p>
+                    )}
                   </td>
                   <td className="table-td text-neutral-400">
                     {u.email}

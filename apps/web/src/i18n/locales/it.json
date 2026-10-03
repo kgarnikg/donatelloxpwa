@@ -107,6 +107,7 @@
     "steps": [
       "Obiettivi",
       "Su di te",
+      "Focus",
       "Formato",
       "Fatto"
     ],
@@ -158,7 +159,33 @@
       "weightRequired": "Inserisci il peso",
       "weightRange": "Il peso deve essere tra 30 e 300 kg"
     },
-    "daysPerWeekRequired": "Scegli quante volte a settimana ti allenerai"
+    "daysPerWeekRequired": "Scegli quante volte a settimana ti allenerai",
+    "muscles": {
+      "title": "Su cosa vuoi concentrarti?",
+      "subtitle": "Tocca i muscoli che vuoi allenare per primi. Puoi saltare.",
+      "subtitleList": "Seleziona i muscoli che vuoi allenare per primi. Puoi saltare.",
+      "front": "Davanti",
+      "back": "Dietro",
+      "hint": "Ruota e tocca i muscoli",
+      "loading": "Caricamento del modello…",
+      "figureLabel": "Figura umana: tocca un muscolo per selezionarlo",
+      "skip": "Salta",
+      "names": {
+        "chest": "Petto",
+        "shoulders": "Spalle",
+        "biceps": "Bicipiti",
+        "triceps": "Tricipiti",
+        "forearms": "Avambracci",
+        "abs": "Addominali",
+        "traps": "Trapezi",
+        "back": "Schiena",
+        "lower_back": "Lombari",
+        "glutes": "Glutei",
+        "quads": "Quadricipiti",
+        "hamstrings": "Femorali",
+        "calves": "Polpacci"
+      }
+    }
   },
   "dashboard": {
     "greeting": "Ciao, {{name}}",

@@ -4,11 +4,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { onboardingSchema, type OnboardingInput } from "@donatellox/validation";
-import type { FitnessGoal } from "@donatellox/types";
+import type { FitnessGoal, FocusMuscle } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/context/AuthContext";
 import { CountrySelect } from "@/components/CountrySelect";
 import { PhoneInput } from "@/components/PhoneInput";
+import { MusclePicker } from "@/components/MusclePicker";
 import clsx from "clsx";
 
 const GOALS: FitnessGoal[] = [
@@ -38,6 +39,8 @@ export default function OnboardingPage() {
   const phoneValid = /^\+[1-9]\d{7,14}$/.test(phone);
   const [serverError, setServerError] = useState<string | null>(null);
   const [daysError, setDaysError] = useState(false);
+  // На какие мышцы сделать акцент (0090) — необязательный шаг с 3D-фигурой
+  const [focusMuscles, setFocusMuscles] = useState<FocusMuscle[]>([]);
 
   const {
     register,
@@ -75,7 +78,7 @@ export default function OnboardingPage() {
     if (!authUser) return;
     setServerError(null);
 
-    const { error } = await supabase.from("user_profiles").upsert({
+    const row = {
       user_id: authUser.id,
       gender: values.gender,
       birth_date: values.birthDate ?? null,
@@ -88,7 +91,13 @@ export default function OnboardingPage() {
       health_notes: values.healthNotes ?? null,
       preferred_language: values.preferredLanguage,
       updated_at: new Date().toISOString(),
-    });
+    };
+    let { error } = await supabase.from("user_profiles").upsert({ ...row, focus_muscles: focusMuscles });
+    // Колонка focus_muscles появляется с миграцией 0090. Если её ещё нет —
+    // сохраняем анкету без неё: регистрация не должна из-за этого ломаться.
+    if (error && /focus_muscles/.test(error.message)) {
+      ({ error } = await supabase.from("user_profiles").upsert(row));
+    }
 
     if (error) {
       setServerError(error.message);
@@ -275,6 +284,25 @@ export default function OnboardingPage() {
           )}
 
           {step === 2 && (
+            <fieldset>
+              <h1 className="font-display text-2xl font-bold">{t("onboarding.muscles.title")}</h1>
+              <p className="mt-1 text-neutral-400">
+                {t(gender === "female" ? "onboarding.muscles.subtitleList" : "onboarding.muscles.subtitle")}
+              </p>
+              <MusclePicker gender={gender} value={focusMuscles} onChange={setFocusMuscles} />
+              {/* Кнопки всегда на виду: фигура высокая, и до них иначе пришлось бы листать */}
+              <div className="sticky bottom-0 z-10 -mx-6 mt-6 flex gap-3 bg-ink-950/90 px-6 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur">
+                <button type="button" onClick={() => setStep(1)} className="btn-secondary flex-1">
+                  {t("common.back")}
+                </button>
+                <button type="button" onClick={() => setStep(3)} className="btn-primary flex-1">
+                  {focusMuscles.length ? t("common.next") : t("onboarding.muscles.skip")}
+                </button>
+              </div>
+            </fieldset>
+          )}
+
+          {step === 3 && (
             <fieldset className="space-y-5">
               <h1 className="font-display text-2xl font-bold">{t("onboarding.formatTitle")}</h1>
 
@@ -329,7 +357,7 @@ export default function OnboardingPage() {
               </div>
 
               <div className="flex gap-3 pt-2">
-                <button type="button" onClick={() => setStep(1)} className="btn-secondary flex-1">
+                <button type="button" onClick={() => setStep(2)} className="btn-secondary flex-1">
                   {t("common.back")}
                 </button>
                 <button
@@ -339,7 +367,7 @@ export default function OnboardingPage() {
                       setDaysError(true);
                       return;
                     }
-                    setStep(3);
+                    setStep(4);
                   }}
                   className="btn-primary flex-1"
                 >
@@ -349,7 +377,7 @@ export default function OnboardingPage() {
             </fieldset>
           )}
 
-          {step === 3 && (
+          {step === 4 && (
             <fieldset>
               <h1 className="font-display text-2xl font-bold">{t("onboarding.doneTitle")}</h1>
               <p className="mt-1 text-neutral-400">{t("onboarding.doneSubtitle")}</p>
@@ -359,7 +387,7 @@ export default function OnboardingPage() {
                 </div>
               )}
               <div className="mt-8 flex gap-3">
-                <button type="button" onClick={() => setStep(2)} className="btn-secondary flex-1">
+                <button type="button" onClick={() => setStep(3)} className="btn-secondary flex-1">
                   {t("common.back")}
                 </button>
                 <button type="submit" disabled={isSubmitting} className="btn-primary flex-1">
