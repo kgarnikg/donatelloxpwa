@@ -401,26 +401,43 @@ export default function WorkoutPlayerPage() {
     }
   }
 
-  /** Последние зафиксированные рабочие веса по этой тренировке — для подсказки "в прошлый раз". */
+  /**
+   * Последние рабочие веса — для подсказки "в прошлый раз".
+   *
+   * Раньше брали только САМУЮ ПОСЛЕДНЮЮ запись этой тренировки. Если она была
+   * без весов — подсказка пропадала, хотя веса записаны неделей раньше. Так
+   * случалось после "Догнать прогресс" в админке (ставит пустые отметки
+   * поверх настоящих) и когда в этот раз вес просто не вписали. Теперь идём
+   * по истории назад и для каждого упражнения берём последний записанный вес:
+   * сначала из этой же тренировки, а если его там нет (новый блок программы с
+   * тем же упражнением) — из любой другой.
+   */
   const { data: lastWeights } = useQuery({
     queryKey: ["last-weights", workoutId, authUser?.id],
     enabled: !!workoutId && !!authUser,
     queryFn: async (): Promise<Record<string, number>> => {
       const { data, error } = await supabase
         .from("workout_logs")
-        .select("completed_sets, completed_at")
+        .select("workout_id, completed_sets, completed_at")
         .eq("user_id", authUser!.id)
-        .eq("workout_id", workoutId)
         .order("completed_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
+        .limit(150);
       if (error || !data) return {};
 
-      const entries = (data.completed_sets ?? []) as CompletedSetEntry[];
+      const rows = data as Array<{ workout_id: string; completed_sets: CompletedSetEntry[] | null }>;
       const map: Record<string, number> = {};
-      for (const e of entries) {
-        if (e.exerciseId && typeof e.weightKg === "number") map[e.exerciseId] = e.weightKg;
-      }
+      const collect = (sameWorkout: boolean) => {
+        for (const row of rows) {
+          if ((row.workout_id === workoutId) !== sameWorkout) continue;
+          for (const e of row.completed_sets ?? []) {
+            if (e.exerciseId && typeof e.weightKg === "number" && e.weightKg > 0 && map[e.exerciseId] == null) {
+              map[e.exerciseId] = e.weightKg;
+            }
+          }
+        }
+      };
+      collect(true);
+      collect(false);
       return map;
     },
   });
@@ -508,6 +525,7 @@ export default function WorkoutPlayerPage() {
       // снимок истории тренировок ещё до минуты (staleTime=60с в
       // main.tsx) после реального сохранения — данные в базе были, но
       // react-query не знал, что их нужно перезапросить.
+      queryClient.invalidateQueries({ queryKey: ["last-weights"] });
       queryClient.invalidateQueries({ queryKey: ["workout-history"] });
       queryClient.invalidateQueries({ queryKey: ["progress"] });
       queryClient.invalidateQueries({ queryKey: ["daily-calories"] });
@@ -593,7 +611,8 @@ export default function WorkoutPlayerPage() {
 
       <div className="mt-6 space-y-4">
         {orderedGroups.map((group, groupIndex) => {
-          const lastWeight = lastWeights?.[group.exercise.id];
+          // вес записывается под тем упражнением, которое реально делали (с учётом замены)
+          const lastWeight = lastWeights?.[(substitutions[group.exercise.id] ?? group.exercise).id];
           const isWeighted = !group.sets[0].durationSeconds;
           // group.exercise — то, что ПРЕДПИСАНО программой; displayExercise —
           // то, что реально показываем/играем (может быть заменено пользователем
