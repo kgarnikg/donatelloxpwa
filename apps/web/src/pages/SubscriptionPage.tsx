@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { Trans, useTranslation } from "react-i18next";
 import { ArrowLeft, Check, CreditCard, Lock } from "lucide-react";
@@ -78,6 +78,13 @@ export default function SubscriptionPage() {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const consentsGiven = acceptTerms;
   const { data: withdrawal } = useWithdrawalInfo();
+  // Тестовая оплата (vPOS Америабанка, тестовая среда): пока оплата не
+  // открыта всем (VITE_PAYMENTS_ENABLED), кнопку видят только админы.
+  // С действующей подпиской админ попадает сюда по /subscription?test=1.
+  const [searchParams] = useSearchParams();
+  const isAdmin = profile?.role === "admin" || profile?.role === "superadmin";
+  const adminTest = isAdmin && !PAYMENTS_ENABLED;
+  const canPay = PAYMENTS_ENABLED || isAdmin;
 
   const discountPercent = profile?.pendingDiscountPercent ?? 0;
   const prices = getRegionPrices(region);
@@ -133,7 +140,7 @@ export default function SubscriptionPage() {
     onError: (err: Error) => setError(err.message),
   });
 
-  if (activeSubscription) {
+  if (activeSubscription && !(isAdmin && searchParams.get("test") === "1")) {
     // Безлимитные (gift) подписки заведены с датой окончания далеко в
     // будущем (+100 лет, см. 0022/0027) — для человека это "навсегда".
     const periodEnd = new Date(activeSubscription.currentPeriodEnd);
@@ -162,6 +169,14 @@ export default function SubscriptionPage() {
             className="mt-4 block text-center text-sm text-neutral-400 underline hover:text-neutral-200"
           >
             {t("withdrawal.profileItem")}
+          </Link>
+        )}
+        {isAdmin && (
+          <Link
+            to="/subscription?test=1"
+            className="mt-6 block text-center text-sm text-volt-400 underline"
+          >
+            Тестовая оплата vPOS (видно только админам)
           </Link>
         )}
       </div>
@@ -320,7 +335,8 @@ export default function SubscriptionPage() {
         </ConsentCheckbox>
       </div>
 
-      {PAYMENTS_ENABLED ? (
+      {canPay ? (
+        <>
         <button
           onClick={() => checkout.mutate()}
           disabled={checkout.isPending || !consentsGiven}
@@ -328,10 +344,19 @@ export default function SubscriptionPage() {
         >
           {checkout.isPending
             ? t("payment.preparing")
-            : t("payment.payButton", {
-                amount: formatRegionPrice(region, payable),
-              })}
+            : adminTest
+              ? "Тестовая оплата vPOS"
+              : t("payment.payButton", {
+                  amount: formatRegionPrice(region, payable),
+                })}
         </button>
+        {adminTest && (
+          <p className="mt-3 text-center text-xs text-warning">
+            Видно только админам. Тестовая среда банка: спишется 10 ֏ с тестовой карты
+            банка, доступ откроется как после настоящей оплаты.
+          </p>
+        )}
+        </>
       ) : (
         <>
           <button

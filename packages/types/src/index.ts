@@ -159,10 +159,11 @@ export interface Subscription {
 }
 
 /**
- * "ararat" — vPOS Араратбанка (Ереван), основной провайдер с Фазы 3.
- * Остальные оставлены ради совместимости с уже существующими строками в БД.
+ * "ameria" — vPOS Америабанка (Ереван), основной провайдер (0091).
+ * "ararat" — первоначальный план (Араратбанк), остальные — ради совместимости
+ * с уже существующими строками в БД.
  */
-export type PaymentProvider = "stripe" | "paypal" | "yookassa" | "usdt" | "ararat";
+export type PaymentProvider = "stripe" | "paypal" | "yookassa" | "usdt" | "ararat" | "ameria";
 /** provider подписки — то же самое + 'gift' (безлимитный доступ, выдаётся вручную в CMS, никогда не создаёт запись в payments). */
 export type SubscriptionProvider = PaymentProvider | "gift";
 
@@ -171,7 +172,9 @@ export type PaymentStatus =
   | "confirmed"
   | "failed"
   | "refunded"
-  | "expired";
+  | "expired"
+  /** Оплата отменена в банке целиком (CancelPayment, 0091) */
+  | "canceled";
 
 export type Currency = "EUR" | "USD" | "RUB" | "USDT" | "AMD";
 
@@ -196,6 +199,12 @@ export interface Payment {
   rawPayload?: Record<string, unknown>;
   createdAt: ISODateString;
   confirmedAt?: ISODateString;
+  /** OrderID в vPOS (0091) */
+  bankOrderId?: number | null;
+  /** Платёж в тестовой среде банка (0091) */
+  isTest?: boolean;
+  /** Уже возвращено через банк, минорные единицы (0091) */
+  refundedAmount?: number;
 }
 
 // ---------------------------------------------------------------------------

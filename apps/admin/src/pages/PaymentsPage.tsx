@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
 import type { Payment, PaymentProvider, PaymentStatus } from "@donatellox/types";
@@ -11,6 +11,7 @@ const STATUS_BADGE: Record<PaymentStatus, string> = {
   failed: "bg-danger/10 text-danger",
   refunded: "bg-neutral-600/20 text-neutral-400",
   expired: "bg-neutral-600/20 text-neutral-400",
+  canceled: "bg-neutral-600/20 text-neutral-400",
 };
 
 const STATUS_LABEL: Record<PaymentStatus, string> = {
@@ -19,6 +20,7 @@ const STATUS_LABEL: Record<PaymentStatus, string> = {
   failed: "Ошибка",
   refunded: "Возврат",
   expired: "Истёк",
+  canceled: "Отменён",
 };
 
 const PROVIDER_LABEL: Record<PaymentProvider, string> = {
@@ -27,11 +29,74 @@ const PROVIDER_LABEL: Record<PaymentProvider, string> = {
   yookassa: "ЮKassa",
   usdt: "USDT",
   ararat: "Араратбанк",
+  ameria: "Америабанк",
 };
 
-const PROVIDER_FILTERS: Array<PaymentProvider | "all"> = ["all", "ararat", "stripe", "paypal", "yookassa", "usdt"];
+const PROVIDER_FILTERS: Array<PaymentProvider | "all"> = ["all", "ameria", "stripe", "paypal", "yookassa", "usdt"];
+
+/**
+ * Действия с платежом Америабанка — через серверную функцию приложения
+ * (там логин/пароль банка; из админки их не видно).
+ */
+const APP_API = "https://app.donatellex.com/api/admin/vpos";
+type VposAction = "check" | "cancel" | "refund";
+
+async function callVpos(paymentId: string, action: VposAction, amount?: number): Promise<string> {
+  const { data } = await supabase.auth.getSession();
+  const token = data.session?.access_token;
+  if (!token) throw new Error("Сессия истекла — войдите заново");
+  const res = await fetch(APP_API, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ paymentId, action, amount }),
+  });
+  const body = (await res.json().catch(() => ({}))) as {
+    message?: string;
+    details?: { ResponseCode?: string; OrderStatus?: string | number; PaymentState?: string; CardNumber?: string };
+  };
+  if (!res.ok) throw new Error(body.message ?? `Ошибка ${res.status}`);
+  const d = body.details;
+  return d
+    ? `${body.message}: код ${d.ResponseCode ?? "—"}, состояние ${d.PaymentState ?? d.OrderStatus ?? "—"}${d.CardNumber ? `, карта ${d.CardNumber}` : ""}`
+    : (body.message ?? "Готово");
+}
+
+/** Минорные единицы → "10" / "79,90" */
+function money(minor: number): string {
+  const v = Math.round(minor) / 100;
+  return Number.isInteger(v) ? String(v) : v.toFixed(2).replace(".", ",");
+}
 
 export default function PaymentsPage() {
+  const queryClient = useQueryClient();
+  const [notice, setNotice] = useState<{ ok: boolean; text: string } | null>(null);
+  const vposAction = useMutation({
+    mutationFn: async (args: { payment: Payment; action: VposAction }) => {
+      const { payment, action } = args;
+      const left = payment.amount - (payment.refundedAmount ?? 0);
+      if (action === "cancel") {
+        if (!window.confirm(`Отменить платёж на ${money(payment.amount)} ${payment.currency} целиком? Доступ за этот период закроется.`)) return null;
+        return callVpos(payment.id, "cancel");
+      }
+      if (action === "refund") {
+        const input = window.prompt(
+          `Сколько вернуть, ${payment.currency}? (максимум ${money(left)}; вся сумма — доступ за период закроется)`,
+          money(left),
+        );
+        if (input == null) return null;
+        const amount = Math.round(Number(input.replace(",", ".").replace(/\s/g, "")) * 100);
+        if (!(amount > 0) || amount > left) throw new Error("Неверная сумма");
+        return callVpos(payment.id, "refund", amount);
+      }
+      return callVpos(payment.id, "check");
+    },
+    onSuccess: (text) => {
+      if (text) setNotice({ ok: true, text });
+      void queryClient.invalidateQueries({ queryKey: ["admin-payments"] });
+    },
+    onError: (err: Error) => setNotice({ ok: false, text: err.message }),
+  });
+
   const [providerFilter, setProviderFilter] = useState<PaymentProvider | "all">("all");
 
   const { data: payments, isLoading } = useQuery({
@@ -56,9 +121,21 @@ export default function PaymentsPage() {
       <div>
         <h1 className="font-display text-2xl font-bold">Платежи</h1>
         <p className="mt-1 text-neutral-400">
-          История транзакций по всем платёжным провайдерам (Stripe, PayPal, ЮKassa, USDT)
+          История оплат. Платежи Америабанка можно проверить в банке, отменить (в течение
+          72 часов) или вернуть — деньги уйдут на карту, доступ за период закроется.
         </p>
       </div>
+
+      {notice && (
+        <div
+          className={clsx(
+            "mt-4 rounded-md border px-4 py-3 text-sm",
+            notice.ok ? "border-success/30 bg-success/10 text-success" : "border-danger/30 bg-danger/10 text-danger",
+          )}
+        >
+          {notice.text}
+        </div>
+      )}
 
       <div className="mt-4 flex flex-wrap gap-2">
         {PROVIDER_FILTERS.map((p) => (
@@ -78,7 +155,7 @@ export default function PaymentsPage() {
       </div>
 
       <div className="card mt-6 overflow-x-auto p-0">
-        <table className="w-full min-w-[720px] border-collapse">
+        <table className="w-full min-w-[900px] border-collapse">
           <thead>
             <tr className="border-b border-ink-700">
               <th className="table-th">Дата</th>
@@ -86,13 +163,14 @@ export default function PaymentsPage() {
               <th className="table-th">Сумма</th>
               <th className="table-th">Статус</th>
               <th className="table-th">ID транзакции</th>
+              <th className="table-th">Действия</th>
             </tr>
           </thead>
           <tbody>
             {isLoading &&
               Array.from({ length: 6 }).map((_, i) => (
                 <tr key={i} className="border-b border-ink-800">
-                  <td className="table-td" colSpan={5}>
+                  <td className="table-td" colSpan={6}>
                     <div className="h-4 w-full animate-pulse rounded bg-ink-800" />
                   </td>
                 </tr>
@@ -100,7 +178,7 @@ export default function PaymentsPage() {
 
             {!isLoading && filtered.length === 0 && (
               <tr>
-                <td className="table-td py-8 text-center text-neutral-500" colSpan={5}>
+                <td className="table-td py-8 text-center text-neutral-500" colSpan={6}>
                   Платежи не найдены
                 </td>
               </tr>
@@ -112,8 +190,12 @@ export default function PaymentsPage() {
                   {new Date(p.createdAt).toLocaleString("ru-RU")}
                 </td>
                 <td className="table-td font-medium">{PROVIDER_LABEL[p.provider]}</td>
-                <td className="table-td">
-                  {p.amount.toFixed(2)} {p.currency}
+                <td className="table-td whitespace-nowrap">
+                  {p.provider === "ameria" ? money(p.amount) : p.amount.toFixed(2)} {p.currency}
+                  {!!p.refundedAmount && p.status === "confirmed" && (
+                    <span className="block text-xs text-neutral-500">возвращено {money(p.refundedAmount)}</span>
+                  )}
+                  {p.isTest && <span className="badge ml-1.5 bg-warning/10 text-warning">тест</span>}
                 </td>
                 <td className="table-td">
                   <span className={clsx("badge", STATUS_BADGE[p.status])}>
@@ -122,6 +204,34 @@ export default function PaymentsPage() {
                 </td>
                 <td className="table-td font-mono text-xs text-neutral-500">
                   {p.cryptoTxHash ? `${p.cryptoTxHash.slice(0, 10)}…` : p.providerPaymentId}
+                  {p.bankOrderId != null && <span className="block">заказ {p.bankOrderId}</span>}
+                </td>
+                <td className="table-td whitespace-nowrap">
+                  {p.provider === "ameria" && !p.providerPaymentId.startsWith("order-") && (
+                    <div className="flex gap-1.5">
+                      {(["check", "cancel", "refund"] as const)
+                        .filter((a) => a === "check" || p.status === "confirmed")
+                        .filter((a) => a !== "cancel" || Date.now() - new Date(p.createdAt).getTime() < 72 * 3600 * 1000)
+                        .map((a) => (
+                          <button
+                            key={a}
+                            disabled={vposAction.isPending}
+                            onClick={() => {
+                              setNotice(null);
+                              vposAction.mutate({ payment: p, action: a });
+                            }}
+                            className={clsx(
+                              "badge border-0 transition disabled:opacity-50",
+                              a === "check"
+                                ? "bg-ink-700 text-neutral-300 hover:bg-ink-600"
+                                : "bg-danger/10 text-danger hover:bg-danger/20",
+                            )}
+                          >
+                            {a === "check" ? "Проверить" : a === "cancel" ? "Отменить" : "Вернуть"}
+                          </button>
+                        ))}
+                    </div>
+                  )}
                 </td>
               </tr>
             ))}

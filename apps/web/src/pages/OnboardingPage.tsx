@@ -286,9 +286,7 @@ export default function OnboardingPage() {
           {step === 2 && (
             <fieldset>
               <h1 className="font-display text-2xl font-bold">{t("onboarding.muscles.title")}</h1>
-              <p className="mt-1 text-neutral-400">
-                {t(gender === "female" ? "onboarding.muscles.subtitleList" : "onboarding.muscles.subtitle")}
-              </p>
+              <p className="mt-1 text-neutral-400">{t("onboarding.muscles.subtitle")}</p>
               <MusclePicker gender={gender} value={focusMuscles} onChange={setFocusMuscles} />
               {/* Кнопки всегда на виду: фигура высокая, и до них иначе пришлось бы листать */}
               <div className="sticky bottom-0 z-10 -mx-6 mt-6 flex gap-3 bg-ink-950/90 px-6 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur">

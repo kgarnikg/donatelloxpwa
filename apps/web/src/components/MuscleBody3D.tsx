@@ -15,16 +15,18 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 import { FOCUS_MUSCLES, type FocusMuscle } from "@donatellox/types";
 import maleModelUrl from "@/assets/models/body-male.glb?url";
+import femaleModelUrl from "@/assets/models/body-female.glb?url";
 
 /**
  * 3D-фигура для выбора мышц (анкета, шаг "Акцент").
  *
- * Модель (assets/models/body-male.glb) — одна сетка. В цвете каждой вершины
+ * Модели (assets/models/body-male.glb и body-female.glb) — одна сетка. В цвете каждой вершины
  * зашито четыре числа:
  *   r — затенение складок (чтобы рельеф мышц читался без текстур),
  *   g — номер зоны (0 — не мышца: голова, кисти, стопы; 1..13 — FOCUS_MUSCLES),
  *   b — расстояние до границы зоны (по нему шейдер рисует гладкий край подсветки),
- *   a — "шорты" (расстояние до их края, край рисуется шейдером ровной линией).
+ *   a — одежда: шорты, у женской модели ещё спортивный топ (расстояние до
+ *       края, край рисуется шейдером ровной линией).
  * Подсветка выбранных зон — массив uLevel в шейдере: никаких текстур и
  * перекраски вершин, поэтому даже на слабом телефоне всё плавно.
  *
@@ -112,6 +114,8 @@ const FRAGMENT = /* glsl */ `
 `;
 
 export interface MuscleBody3DProps {
+  /** Какую фигуру показать: мужскую или женскую */
+  body: "male" | "female";
   selected: readonly FocusMuscle[];
   onToggle: (muscle: FocusMuscle) => void;
   /** Куда повернуть фигуру; меняется кнопками "Спереди / Сзади" и выбором из списка. */
@@ -132,6 +136,7 @@ interface Engine {
 }
 
 export default function MuscleBody3D({
+  body,
   selected,
   onToggle,
   view,
@@ -159,7 +164,11 @@ export default function MuscleBody3D({
     if (!host) return;
     let engine: Engine | null = null;
     try {
-      engine = createEngine(host, latest);
+      engine = createEngine(
+        host,
+        latest,
+        body === "female" ? femaleModelUrl : maleModelUrl,
+      );
     } catch {
       latest.current.onError();
       return;
@@ -169,7 +178,7 @@ export default function MuscleBody3D({
       engineRef.current = null;
       engine?.dispose();
     };
-  }, []);
+  }, [body]);
 
   useEffect(() => {
     engineRef.current?.setSelected(selected);
@@ -205,7 +214,11 @@ type Latest = RefObject<{
   onError: () => void;
 }>;
 
-function createEngine(host: HTMLDivElement, latest: Latest): Engine {
+function createEngine(
+  host: HTMLDivElement,
+  latest: Latest,
+  modelUrl: string,
+): Engine {
   const renderer = new WebGLRenderer({
     antialias: true,
     alpha: true,
@@ -455,7 +468,7 @@ function createEngine(host: HTMLDivElement, latest: Latest): Engine {
   const loader = new GLTFLoader();
   loader.setMeshoptDecoder(MeshoptDecoder);
   loader.load(
-    maleModelUrl,
+    modelUrl,
     (gltf) => {
       if (disposed) return;
       gltf.scene.traverse((node) => {

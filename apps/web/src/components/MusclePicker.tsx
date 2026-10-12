@@ -38,7 +38,7 @@ interface MusclePickerProps {
  * Выбор мышц для акцента: 3D-фигура (нажать на мышцу) + тот же выбор списком.
  * Список — не запасной вариант, а равноправный: им удобнее на маленьком
  * экране, он работает без WebGL и с экранным диктором.
- * Женской модели пока нет — для женщин показываем только список.
+ * Фигура мужская или женская — по полу из предыдущего шага анкеты.
  */
 export function MusclePicker({ gender, value, onChange }: MusclePickerProps) {
   const { t } = useTranslation();
@@ -52,7 +52,9 @@ export function MusclePicker({ gender, value, onChange }: MusclePickerProps) {
     key: number;
   } | null>(null);
   const flashTimer = useRef<number | undefined>(undefined);
-  const show3d = gender !== "female" && !failed;
+  const show3d = !failed;
+  // "Не указывать" — мужская фигура (женская — только если выбран женский пол)
+  const body = gender === "female" ? "female" : "male";
 
   useEffect(() => () => window.clearTimeout(flashTimer.current), []);
 
@@ -122,6 +124,7 @@ export function MusclePicker({ gender, value, onChange }: MusclePickerProps) {
           />
           <Suspense fallback={null}>
             <MuscleBody3D
+              body={body}
               className={clsx(
                 "absolute inset-x-0 bottom-9 top-0 transition-opacity duration-500",
                 ready ? "opacity-100" : "opacity-0",
