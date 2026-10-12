@@ -32,7 +32,7 @@ import BodyParamsPage from "@/pages/BodyParamsPage";
 import NotificationsSettingsPage from "@/pages/NotificationsSettingsPage";
 import SubscriptionPage from "@/pages/SubscriptionPage";
 import WithdrawalPage from "@/pages/WithdrawalPage";
-import { PaymentSuccessPage, PaymentFailedPage } from "@/pages/PaymentResultPage";
+import { PaymentSuccessPage, PaymentFailedPage, PaymentReturnPage } from "@/pages/PaymentResultPage";
 import WorkoutPlayerPage from "@/pages/WorkoutPlayerPage";
 import AchievementsPage from "@/pages/AchievementsPage";
 import NotFoundPage from "@/pages/NotFoundPage";
@@ -559,6 +559,8 @@ export default function App() {
           </ProtectedRoute>
         }
       />
+      {/* Возврат из банка: без входа — проверка идёт на сервере по номеру платежа */}
+      <Route path="/payment/return" element={<PaymentReturnPage />} />
       <Route
         path="/payment/success"
         element={

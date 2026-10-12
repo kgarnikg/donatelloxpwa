@@ -100,7 +100,7 @@ export default async function handler(request: Request): Promise<Response> {
       Amount: toMajor(amount),
       Currency: VPOS_CURRENCY_CODE[currency],
       OrderID: created.order_id,
-      BackURL: `${origin}/api/payment-return`,
+      BackURL: `${origin}/payment/return`,
       Description: `DonatelleX — ${PLAN_TITLE[plan]}${testMode ? " (test)" : ""}`,
       Opaque: created.payment_id,
     });

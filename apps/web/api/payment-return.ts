@@ -1,4 +1,6 @@
-// GET /api/payment-return — сюда банк возвращает человека после оплаты (BackURL).
+// GET /api/payment-return — проверка оплаты после возврата из банка.
+// Банк возвращает человека на /payment/return (страница приложения), она
+// вызывает эту функцию; прямой переход сюда тоже работает (редирект).
 //
 // Банк добавляет в адрес orderID, resposneCode (sic), paymentID, opaque.
 // Им НЕ верим: по paymentID спрашиваем банк (GetPaymentDetails) и сверяем
@@ -17,7 +19,15 @@ import {
 
 export const config = { runtime: "edge" };
 
+// ?format=json — ответ для страницы приложения /payment/return (она зовёт
+// эту функцию через fetch; так проверка работает даже у тех, у кого старый
+// офлайн-кэш приложения перехватывал переход на /api/*).
 function redirect(request: Request, path: string): Response {
+  if (new URL(request.url).searchParams.get("format") === "json") {
+    return new Response(JSON.stringify({ result: path.endsWith("success") ? "success" : "failed" }), {
+      headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
+    });
+  }
   return Response.redirect(new URL(path, request.url).toString(), 303);
 }
 

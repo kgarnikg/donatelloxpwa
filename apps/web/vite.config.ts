@@ -45,6 +45,9 @@ export default defineConfig({
         // 3D-фигура из анкеты (three.js, ~0.5 МБ) нужна один раз при регистрации —
         // не качаем её заранее каждому пользователю вместе с приложением.
         globIgnores: ["**/MuscleBody3D-*.js"],
+        // Переходы на /api/* (возврат из банка после оплаты) — к серверу, а не
+        // index.html из кэша: иначе вместо проверки оплаты открывалась 404.
+        navigateFallbackDenylist: [/^\/api\//],
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.startsWith("/storage/"),

@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { CheckCircle2, Loader2, XCircle, Clock } from "lucide-react";
 import { useActiveSubscription } from "@/lib/queries";
@@ -16,6 +16,37 @@ import { useActiveSubscription } from "@/lib/queries";
 
 const POLL_INTERVAL_MS = 3000;
 const POLL_TIMEOUT_MS = 45000;
+
+/**
+ * /payment/return — сюда банк возвращает после оплаты (BackURL). Страница
+ * передаёт параметры банка серверной функции /api/payment-return, та
+ * проверяет оплату в самом банке, и мы переходим на "успех" или "ошибку".
+ */
+export function PaymentReturnPage() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    let cancelled = false;
+    const params = new URLSearchParams(window.location.search);
+    params.set("format", "json");
+    fetch(`/api/payment-return?${params.toString()}`, { cache: "no-store" })
+      .then((r) => r.json() as Promise<{ result?: string }>)
+      .catch(() => ({ result: "failed" }))
+      .then((body) => {
+        if (!cancelled) navigate(body.result === "success" ? "/payment/success" : "/payment/failed", { replace: true });
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [navigate]);
+  return (
+    <ResultLayout
+      icon={<Loader2 size={56} className="animate-spin text-volt-400" />}
+      title={t("payment.result.checkingTitle")}
+      text={t("payment.result.checkingText")}
+    />
+  );
+}
 
 export function PaymentSuccessPage() {
   const { t, i18n } = useTranslation();
