@@ -67,6 +67,28 @@ function money(minor: number): string {
   return Number.isInteger(v) ? String(v) : v.toFixed(2).replace(".", ",");
 }
 
+interface PaymentUser {
+  email?: string | null;
+  fullName?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  phone?: string | null;
+}
+type PaymentWithUser = Payment & { user?: PaymentUser | null };
+
+function userName(u?: PaymentUser | null): string {
+  if (!u) return "";
+  const byParts = [u.firstName, u.lastName].filter(Boolean).join(" ").trim();
+  return byParts || u.fullName?.trim() || "";
+}
+
+const PLAN_LABEL: Record<string, string> = {
+  monthly: "1 месяц",
+  quarterly: "3 месяца",
+  semiannual: "6 месяцев",
+  annual: "12 месяцев",
+};
+
 export default function PaymentsPage() {
   const queryClient = useQueryClient();
   const [notice, setNotice] = useState<{ ok: boolean; text: string } | null>(null);
@@ -98,23 +120,30 @@ export default function PaymentsPage() {
   });
 
   const [providerFilter, setProviderFilter] = useState<PaymentProvider | "all">("all");
+  const [search, setSearch] = useState("");
 
   const { data: payments, isLoading } = useQuery({
     queryKey: ["admin-payments"],
-    queryFn: async (): Promise<Payment[]> => {
+    queryFn: async (): Promise<PaymentWithUser[]> => {
       const { data, error } = await supabase
         .from("payments")
-        .select("*")
+        // кто платил — из public.users (payments.user_id → users.id)
+        .select("*, user:users(email, full_name, first_name, last_name, phone)")
         .order("created_at", { ascending: false })
         .limit(200);
       if (error) throw error;
-      return toCamelCase<Payment[]>(data ?? []);
+      return toCamelCase<PaymentWithUser[]>(data ?? []);
     },
   });
 
-  const filtered = (payments ?? []).filter(
-    (p) => providerFilter === "all" || p.provider === providerFilter,
-  );
+  const query = search.trim().toLowerCase();
+  const filtered = (payments ?? []).filter((p) => {
+    if (providerFilter !== "all" && p.provider !== providerFilter) return false;
+    if (!query) return true;
+    return [userName(p.user), p.user?.email, p.user?.phone, p.orderNumber, p.providerPaymentId]
+      .filter(Boolean)
+      .some((v) => String(v).toLowerCase().includes(query));
+  });
 
   return (
     <div>
@@ -152,13 +181,21 @@ export default function PaymentsPage() {
             {p === "all" ? "Все" : PROVIDER_LABEL[p]}
           </button>
         ))}
+        <input
+          type="search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Имя, email, телефон или номер заказа"
+          className="input-field ml-auto w-full py-1.5 text-sm sm:w-72"
+        />
       </div>
 
       <div className="card mt-6 overflow-x-auto p-0">
-        <table className="w-full min-w-[900px] border-collapse">
+        <table className="w-full min-w-[1080px] border-collapse">
           <thead>
             <tr className="border-b border-ink-700">
               <th className="table-th">Дата</th>
+              <th className="table-th">Пользователь</th>
               <th className="table-th">Провайдер</th>
               <th className="table-th">Сумма</th>
               <th className="table-th">Статус</th>
@@ -170,7 +207,7 @@ export default function PaymentsPage() {
             {isLoading &&
               Array.from({ length: 6 }).map((_, i) => (
                 <tr key={i} className="border-b border-ink-800">
-                  <td className="table-td" colSpan={6}>
+                  <td className="table-td" colSpan={7}>
                     <div className="h-4 w-full animate-pulse rounded bg-ink-800" />
                   </td>
                 </tr>
@@ -178,7 +215,7 @@ export default function PaymentsPage() {
 
             {!isLoading && filtered.length === 0 && (
               <tr>
-                <td className="table-td py-8 text-center text-neutral-500" colSpan={6}>
+                <td className="table-td py-8 text-center text-neutral-500" colSpan={7}>
                   Платежи не найдены
                 </td>
               </tr>
@@ -189,7 +226,21 @@ export default function PaymentsPage() {
                 <td className="table-td text-neutral-400">
                   {new Date(p.createdAt).toLocaleString("ru-RU")}
                 </td>
-                <td className="table-td font-medium">{PROVIDER_LABEL[p.provider]}</td>
+                <td className="table-td">
+                  {p.user ? (
+                    <div className="max-w-[220px]">
+                      <p className="truncate font-medium">{userName(p.user) || "—"}</p>
+                      <p className="truncate text-xs text-neutral-500">{p.user.email}</p>
+                      {p.user.phone && <p className="text-xs text-neutral-500">{p.user.phone}</p>}
+                    </div>
+                  ) : (
+                    <span className="text-neutral-600">удалён</span>
+                  )}
+                </td>
+                <td className="table-td">
+                  <span className="font-medium">{PROVIDER_LABEL[p.provider]}</span>
+                  {p.plan && <span className="block text-xs text-neutral-500">{PLAN_LABEL[p.plan] ?? p.plan}</span>}
+                </td>
                 <td className="table-td whitespace-nowrap">
                   {p.provider === "ameria" ? money(p.amount) : p.amount.toFixed(2)} {p.currency}
                   {!!p.refundedAmount && p.status === "confirmed" && (

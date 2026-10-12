@@ -101,7 +101,7 @@ export default async function handler(request: Request): Promise<Response> {
       Currency: VPOS_CURRENCY_CODE[currency],
       OrderID: created.order_id,
       BackURL: `${origin}/payment/return`,
-      Description: `DonatelleX — ${PLAN_TITLE[plan]}${testMode ? " (test)" : ""}`,
+      Description: `DonatelleX - ${PLAN_TITLE[plan]}${testMode ? " (test)" : ""}`,
       Opaque: created.payment_id,
     });
 
