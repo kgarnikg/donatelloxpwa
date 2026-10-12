@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Check, ChevronLeft, PlayCircle, Video, TrendingUp, X, Timer, ArrowDown, Shuffle, Lock } from "lucide-react";
+import { Check, ChevronLeft, PlayCircle, Video, TrendingUp, X, Timer, ArrowDown, Shuffle, Lock, Target } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
@@ -17,7 +17,7 @@ import { clearWorkoutSession, loadWorkoutSession, saveWorkoutSession } from "@/l
 import { WorkoutSummary, type WorkoutSummaryData } from "@/components/WorkoutSummary";
 import { useViewportPin } from "@/lib/useViewportPin";
 import type { Exercise, WorkoutSet } from "@donatellox/types";
-import { toCamelCase } from "@donatellox/types";
+import { exerciseFocusMuscles, toCamelCase, type FocusMuscle } from "@donatellox/types";
 
 interface SetRow extends WorkoutSet {
   id: string;
@@ -442,6 +442,16 @@ export default function WorkoutPlayerPage() {
     },
   });
 
+  // Акцент из анкеты (0090): какие упражнения этой тренировки на выбранные мышцы
+  const userFocus = useMemo(() => new Set<FocusMuscle>(userProfile?.focusMuscles ?? []), [userProfile]);
+  function focusHitsOf(ex: Exercise): FocusMuscle[] {
+    if (!userFocus.size) return [];
+    return exerciseFocusMuscles(ex.swapGroup, ex.muscleGroups).filter((m) => userFocus.has(m));
+  }
+  const focusCount = orderedGroups.filter(
+    (g) => focusHitsOf(substitutions[g.exercise.id] ?? g.exercise).length > 0,
+  ).length;
+
   const finishMutation = useMutation({
     mutationFn: async () => {
       if (!authUser) throw new Error(t("errors.sessionExpiredSave"));
@@ -608,6 +618,11 @@ export default function WorkoutPlayerPage() {
         {localizedOf(workout, "title", i18n.language)}
       </h1>
       <p className="mt-1 text-neutral-400">~{workout.estimatedDurationMinutes} {t("common.min")}</p>
+      {focusCount > 0 && (
+        <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-volt-400/10 px-3 py-1 text-xs font-semibold text-volt-400">
+          <Target size={13} aria-hidden /> {t("focus.inWorkout", { count: focusCount })}
+        </p>
+      )}
 
       <div className="mt-6 space-y-4">
         {orderedGroups.map((group, groupIndex) => {
@@ -621,6 +636,7 @@ export default function WorkoutPlayerPage() {
           const displayExercise = substitutions[group.exercise.id] ?? group.exercise;
           const exerciseTitle = localizedOf(displayExercise, "title", i18n.language);
           const firstSetNotes = localizedOf(group.sets[0], "notes", i18n.language);
+          const focusHits = focusHitsOf(displayExercise);
           return (
             <div key={group.exercise.id} className="card">
               <div className="flex items-start justify-between gap-3">
@@ -630,6 +646,12 @@ export default function WorkoutPlayerPage() {
                     {t("workout.sets", { count: group.sets.length })}
                     {firstSetNotes ? ` · ${firstSetNotes}` : ""}
                   </p>
+                  {focusHits.length > 0 && (
+                    <p className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-volt-400/10 px-2 py-0.5 text-[11px] font-semibold text-volt-400">
+                      <Target size={11} aria-hidden />
+                      {t("focus.badge")} · {focusHits.map((m) => t(`onboarding.muscles.names.${m}`)).join(", ")}
+                    </p>
+                  )}
                 </div>
 
                 {displayExercise.videoUrl ? (

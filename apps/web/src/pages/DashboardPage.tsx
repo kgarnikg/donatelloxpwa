@@ -134,6 +134,7 @@ export default function DashboardPage() {
             program={program}
             previousWeekCounts={game.previousWeekCounts}
           />
+          <FocusCard />
           <ProgramPathCard dash={dash} />
         </>
       ) : (
@@ -559,6 +560,36 @@ function WeeklyGoalSheet({
 // ---------------------------------------------------------------------------
 // Путь по программе
 // ---------------------------------------------------------------------------
+
+/**
+ * Акцент из анкеты (0090): какие мышцы человек хочет проработать. В
+ * тренировке такие упражнения помечены "Акцент". Пусто — короткое
+ * приглашение выбрать.
+ */
+function FocusCard() {
+  const { t } = useTranslation();
+  const { data: userProfile } = useUserProfile();
+  if (!userProfile) return null;
+  const focus = userProfile.focusMuscles ?? [];
+  return (
+    <Link to="/profile/focus" className="card mb-4 flex items-center gap-3 py-3.5 hover:border-ink-500">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-volt-400/10 text-volt-400">
+        <Target size={18} aria-hidden />
+      </div>
+      <div className="min-w-0 flex-1">
+        <p className="text-xs uppercase tracking-wide text-neutral-500">{t("focus.dashboardTitle")}</p>
+        <p className={clsx("truncate text-sm font-medium", focus.length ? "text-neutral-100" : "text-neutral-400")}>
+          {focus.length
+            ? focus.map((m) => t(`onboarding.muscles.names.${m}`)).join(", ")
+            : t("focus.dashboardEmpty")}
+        </p>
+      </div>
+      <span className="shrink-0 text-xs font-medium text-volt-400">
+        {focus.length ? t("focus.change") : t("focus.choose")}
+      </span>
+    </Link>
+  );
+}
 
 function ProgramPathCard({ dash }: { dash: NonNullable<ReturnType<typeof useDashboard>["data"]> }) {
   const { t, i18n } = useTranslation();

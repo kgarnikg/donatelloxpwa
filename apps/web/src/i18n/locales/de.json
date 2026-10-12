@@ -491,7 +491,8 @@
     "body": "Körperdaten",
     "support": "Hilfe",
     "namePlaceholder": "Dein Name",
-    "notificationsSoon": "Push-Benachrichtigungen zu Trainings und deinem Abo gibt es hier bald."
+    "notificationsSoon": "Push-Benachrichtigungen zu Trainings und deinem Abo gibt es hier bald.",
+    "focus": "Muskelfokus"
   },
   "language": {
     "title": "App-Sprache",
@@ -921,5 +922,16 @@
     "error": "Antrag konnte nicht gesendet werden. Versuch es erneut oder schreib dem Support.",
     "profileItem": "Widerruf & Erstattung",
     "profileItemHint": "14 Tage ab Zahlung — ohne Begründung"
+  },
+  "focus": {
+    "title": "Muskelfokus",
+    "subtitle": "Wähle die Muskeln, die du zuerst trainieren möchtest. Passende Übungen werden in deinen Workouts markiert.",
+    "dashboardTitle": "Fokus",
+    "dashboardEmpty": "Wähle die Muskeln, die du trainieren möchtest",
+    "change": "Ändern",
+    "choose": "Wählen",
+    "badge": "Fokus",
+    "inWorkout_one": "Fokus: {{count}} Übung für deine Muskeln",
+    "inWorkout_other": "Fokus: {{count}} Übungen für deine Muskeln"
   }
 }

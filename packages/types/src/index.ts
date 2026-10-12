@@ -70,6 +70,63 @@ export const FOCUS_MUSCLES = [
 
 export type FocusMuscle = (typeof FOCUS_MUSCLES)[number];
 
+/**
+ * Какие мышцы из FOCUS_MUSCLES нагружает упражнение — по его группе замены
+ * (exercises.swap_group, 0079), а если её нет — по грубым muscle_groups.
+ * Нужно, чтобы в тренировке помечать упражнения "на акцент".
+ */
+const FOCUS_BY_SWAP_GROUP: Record<string, readonly FocusMuscle[]> = {
+  chest: ["chest"],
+  block_chest: ["chest"],
+  shoulders: ["shoulders"],
+  block_shoulders: ["shoulders"],
+  rear_delts: ["shoulders"],
+  block_rear_delts: ["shoulders"],
+  biceps: ["biceps"],
+  block_biceps: ["biceps"],
+  triceps: ["triceps"],
+  block_triceps: ["triceps"],
+  block_arms: ["biceps", "triceps", "forearms"],
+  back: ["back"],
+  block_back: ["back"],
+  pullover: ["back"],
+  traps: ["traps"],
+  lower_back: ["lower_back"],
+  core: ["abs"],
+  block_core: ["abs"],
+  quads: ["quads"],
+  hamstrings: ["hamstrings"],
+  glutes: ["glutes"],
+  block_glutes: ["glutes"],
+  calves: ["calves"],
+  vypady: ["quads", "glutes"],
+  block_legs: ["quads", "hamstrings", "glutes", "calves"],
+  deadlift: ["hamstrings", "glutes", "lower_back", "back"],
+  block_deadlift: ["hamstrings", "glutes", "lower_back", "back"],
+  block_push: ["chest", "shoulders", "triceps"],
+  block_pull: ["back", "biceps"],
+  block_upper: ["chest", "back", "shoulders"],
+};
+
+const FOCUS_BY_MUSCLE_GROUP: Record<string, readonly FocusMuscle[]> = {
+  chest: ["chest"],
+  back: ["back"],
+  legs: ["quads", "hamstrings", "glutes", "calves"],
+  shoulders: ["shoulders"],
+  arms: ["biceps", "triceps", "forearms"],
+  core: ["abs"],
+};
+
+export function exerciseFocusMuscles(
+  swapGroup: string | null | undefined,
+  muscleGroups: readonly string[] | null | undefined,
+): FocusMuscle[] {
+  if (swapGroup && FOCUS_BY_SWAP_GROUP[swapGroup]) return [...FOCUS_BY_SWAP_GROUP[swapGroup]];
+  const out = new Set<FocusMuscle>();
+  for (const g of muscleGroups ?? []) for (const m of FOCUS_BY_MUSCLE_GROUP[g] ?? []) out.add(m);
+  return [...out];
+}
+
 export type ActivityLevel = "sedentary" | "light" | "moderate" | "active" | "very_active";
 
 export type TrainingFormat = "gym" | "home";

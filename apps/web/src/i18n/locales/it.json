@@ -491,7 +491,8 @@
     "body": "Parametri corporei",
     "support": "Assistenza",
     "namePlaceholder": "Il tuo nome",
-    "notificationsSoon": "Presto qui arriveranno le notifiche push su allenamenti e abbonamento."
+    "notificationsSoon": "Presto qui arriveranno le notifiche push su allenamenti e abbonamento.",
+    "focus": "Focus muscolare"
   },
   "language": {
     "title": "Lingua dell'app",
@@ -921,5 +922,16 @@
     "error": "Impossibile inviare la richiesta. Riprova o scrivi al supporto.",
     "profileItem": "Recesso e rimborso",
     "profileItemHint": "14 giorni dal pagamento, senza motivazione"
+  },
+  "focus": {
+    "title": "Focus muscolare",
+    "subtitle": "Seleziona i muscoli che vuoi allenare per primi. Gli esercizi corrispondenti saranno segnati nei tuoi allenamenti.",
+    "dashboardTitle": "Focus",
+    "dashboardEmpty": "Scegli i muscoli che vuoi allenare",
+    "change": "Cambia",
+    "choose": "Scegli",
+    "badge": "Focus",
+    "inWorkout_one": "Focus: {{count}} esercizio per i tuoi muscoli",
+    "inWorkout_other": "Focus: {{count}} esercizi per i tuoi muscoli"
   }
 }

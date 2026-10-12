@@ -491,7 +491,8 @@
     "support": "Ayuda",
     "body": "Parámetros corporales",
     "namePlaceholder": "Tu nombre",
-    "notificationsSoon": "Pronto recibirás aquí notificaciones push sobre tus entrenamientos y tu suscripción."
+    "notificationsSoon": "Pronto recibirás aquí notificaciones push sobre tus entrenamientos y tu suscripción.",
+    "focus": "Enfoque muscular"
   },
   "language": {
     "title": "Idioma de la app",
@@ -921,5 +922,16 @@
     "error": "No se pudo enviar la solicitud. Inténtalo de nuevo o escribe a soporte.",
     "profileItem": "Desistimiento y reembolso",
     "profileItemHint": "14 días desde el pago, sin dar explicaciones"
+  },
+  "focus": {
+    "title": "Enfoque muscular",
+    "subtitle": "Marca los músculos que quieres trabajar primero. Los ejercicios correspondientes aparecerán marcados en tus entrenamientos.",
+    "dashboardTitle": "Enfoque",
+    "dashboardEmpty": "Elige los músculos que quieres trabajar",
+    "change": "Cambiar",
+    "choose": "Elegir",
+    "badge": "Enfoque",
+    "inWorkout_one": "Enfoque: {{count}} ejercicio para tus músculos",
+    "inWorkout_other": "Enfoque: {{count}} ejercicios para tus músculos"
   }
 }

@@ -491,7 +491,8 @@
     "support": "Help",
     "body": "Body parameters",
     "namePlaceholder": "Your name",
-    "notificationsSoon": "Push notifications about workouts and your subscription are coming here soon."
+    "notificationsSoon": "Push notifications about workouts and your subscription are coming here soon.",
+    "focus": "Muscle focus"
   },
   "language": {
     "title": "App language",
@@ -921,5 +922,16 @@
     "error": "Couldn't send the request. Try again or contact support.",
     "profileItem": "Cancel subscription & refund",
     "profileItemHint": "14 days from payment — no reason needed"
+  },
+  "focus": {
+    "title": "Muscle focus",
+    "subtitle": "Pick the muscles you want to work on first. Matching exercises will be marked in your workouts.",
+    "dashboardTitle": "Focus",
+    "dashboardEmpty": "Choose the muscles you want to work on",
+    "change": "Change",
+    "choose": "Choose",
+    "badge": "Focus",
+    "inWorkout_one": "Focus: {{count}} exercise for your muscles",
+    "inWorkout_other": "Focus: {{count}} exercises for your muscles"
   }
 }

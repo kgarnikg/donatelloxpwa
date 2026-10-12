@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight, LogOut, CreditCard, Globe, Bell, Pencil, Check, X, Gift, LifeBuoy, Ruler, Smartphone, Undo2 } from "lucide-react";
+import { ChevronRight, LogOut, CreditCard, Globe, Bell, Pencil, Check, X, Gift, LifeBuoy, Ruler, Smartphone, Undo2, Target } from "lucide-react";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { isStandalone } from "@/lib/install";
 import { useWithdrawalInfo } from "@/lib/withdrawal";
@@ -47,6 +47,7 @@ export default function ProfilePage() {
 
   const menuItems = [
     { to: "/profile/body", label: t("profile.body"), icon: Ruler },
+    { to: "/profile/focus", label: t("profile.focus"), icon: Target },
     { to: "/subscription", label: t("profile.subscription"), icon: CreditCard },
     { to: "/profile/language", label: t("profile.language"), icon: Globe },
     { to: "/profile/notifications", label: t("profile.notifications"), icon: Bell },
