@@ -18,10 +18,18 @@ export function env(name: string): string {
   return (process.env[name] ?? "").trim();
 }
 
-export function json(body: unknown, status = 200, headers: Record<string, string> = {}): Response {
+export function json(
+  body: unknown,
+  status = 200,
+  headers: Record<string, string> = {},
+): Response {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", ...headers },
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      ...headers,
+    },
   });
 }
 
@@ -30,7 +38,8 @@ export function json(body: unknown, status = 200, headers: Record<string, string
 // ---------------------------------------------------------------------------
 
 export function vposBaseUrl(): string {
-  const base = env("VPOS_BASE_URL") || "https://servicestest.ameriabank.am/VPOS/";
+  const base =
+    env("VPOS_BASE_URL") || "https://servicestest.ameriabank.am/VPOS/";
   return base.endsWith("/") ? base : `${base}/`;
 }
 
@@ -39,7 +48,11 @@ export function vposTestMode(): boolean {
 }
 
 export function vposConfigured(): boolean {
-  return !!(env("VPOS_CLIENT_ID") && env("VPOS_USERNAME") && env("VPOS_PASSWORD"));
+  return !!(
+    env("VPOS_CLIENT_ID") &&
+    env("VPOS_USERNAME") &&
+    env("VPOS_PASSWORD")
+  );
 }
 
 /** ISO 4217 (числовой код), как ждёт банк. */
@@ -81,16 +94,26 @@ export interface VposPaymentDetails {
 
 /** Вызов метода vPOS. Логин и пароль подставляются здесь. */
 export async function vpos<T = Record<string, unknown>>(
-  method: "InitPayment" | "GetPaymentDetails" | "ConfirmPayment" | "CancelPayment" | "RefundPayment",
+  method:
+    | "InitPayment"
+    | "GetPaymentDetails"
+    | "ConfirmPayment"
+    | "CancelPayment"
+    | "RefundPayment",
   body: Record<string, unknown>,
 ): Promise<T> {
   const res = await fetch(`${vposBaseUrl()}api/VPOS/${method}`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify({ Username: env("VPOS_USERNAME"), Password: env("VPOS_PASSWORD"), ...body }),
+    body: JSON.stringify({
+      Username: env("VPOS_USERNAME"),
+      Password: env("VPOS_PASSWORD"),
+      ...body,
+    }),
   });
   const text = await res.text();
-  if (!res.ok) throw new Error(`vPOS ${method}: HTTP ${res.status} ${text.slice(0, 300)}`);
+  if (!res.ok)
+    throw new Error(`vPOS ${method}: HTTP ${res.status} ${text.slice(0, 300)}`);
   try {
     return JSON.parse(text) as T;
   } catch {
@@ -102,7 +125,8 @@ export async function vpos<T = Record<string, unknown>>(
 export function isDeposited(d: VposPaymentDetails): boolean {
   return (
     String(d.ResponseCode ?? "") === "00" &&
-    (String(d.OrderStatus ?? "") === "2" || String(d.PaymentState ?? "") === "payment_deposited")
+    (String(d.OrderStatus ?? "") === "2" ||
+      String(d.PaymentState ?? "") === "payment_deposited")
   );
 }
 
@@ -110,16 +134,30 @@ export function isDeposited(d: VposPaymentDetails): boolean {
 export function isApprovedOnly(d: VposPaymentDetails): boolean {
   return (
     String(d.ResponseCode ?? "") === "00" &&
-    (String(d.OrderStatus ?? "") === "1" || String(d.PaymentState ?? "") === "payment_approved")
+    (String(d.OrderStatus ?? "") === "1" ||
+      String(d.PaymentState ?? "") === "payment_approved")
   );
 }
 
 /** Только то, что стоит хранить в нашей базе (без лишнего). */
 export function detailsForLog(d: VposPaymentDetails): Record<string, unknown> {
   const keep = [
-    "PaymentID", "OrderID", "Amount", "ApprovedAmount", "DepositedAmount", "RefundedAmount",
-    "Currency", "PaymentState", "OrderStatus", "ResponseCode", "CardNumber", "DateTime",
-    "ApprovalCode", "rrn", "TrxnDescription", "ResponseMessage",
+    "PaymentID",
+    "OrderID",
+    "Amount",
+    "ApprovedAmount",
+    "DepositedAmount",
+    "RefundedAmount",
+    "Currency",
+    "PaymentState",
+    "OrderStatus",
+    "ResponseCode",
+    "CardNumber",
+    "DateTime",
+    "ApprovalCode",
+    "rrn",
+    "TrxnDescription",
+    "ResponseMessage",
   ];
   const out: Record<string, unknown> = {};
   for (const k of keep) if (d[k] !== undefined && d[k] !== null) out[k] = d[k];
@@ -150,7 +188,10 @@ function serviceHeaders(): Record<string, string> {
   };
 }
 
-export async function rpc<T>(fn: string, body: Record<string, unknown>): Promise<T> {
+export async function rpc<T>(
+  fn: string,
+  body: Record<string, unknown>,
+): Promise<T> {
   const res = await fetch(`${supabaseUrl()}/rest/v1/rpc/${fn}`, {
     method: "POST",
     headers: serviceHeaders(),
@@ -162,8 +203,13 @@ export async function rpc<T>(fn: string, body: Record<string, unknown>): Promise
 }
 
 /** select из таблицы с правами сервера; query — строка PostgREST (select=…&id=eq.…) */
-export async function selectRows<T>(table: string, query: string): Promise<T[]> {
-  const res = await fetch(`${supabaseUrl()}/rest/v1/${table}?${query}`, { headers: serviceHeaders() });
+export async function selectRows<T>(
+  table: string,
+  query: string,
+): Promise<T[]> {
+  const res = await fetch(`${supabaseUrl()}/rest/v1/${table}?${query}`, {
+    headers: serviceHeaders(),
+  });
   const text = await res.text();
   if (!res.ok) throw new Error(`${table}: ${res.status} ${text}`);
   return (text ? JSON.parse(text) : []) as T[];
@@ -179,16 +225,26 @@ export interface AuthedUser {
 
 /** Кто вызывает: проверяем токен пользователя в Supabase Auth, роль — из public.users. */
 export async function authUser(request: Request): Promise<AuthedUser | null> {
-  const token = (request.headers.get("authorization") ?? "").replace(/^Bearer\s+/i, "");
+  const token = (request.headers.get("authorization") ?? "").replace(
+    /^Bearer\s+/i,
+    "",
+  );
   if (!token) return null;
-  const anon = env("VITE_SUPABASE_ANON_KEY") || env("SUPABASE_ANON_KEY") || env("SUPABASE_SERVICE_ROLE_KEY");
+  const anon =
+    env("VITE_SUPABASE_ANON_KEY") ||
+    env("SUPABASE_ANON_KEY") ||
+    env("SUPABASE_SERVICE_ROLE_KEY");
   const res = await fetch(`${supabaseUrl()}/auth/v1/user`, {
     headers: { apikey: anon, Authorization: `Bearer ${token}` },
   });
   if (!res.ok) return null;
   const user = (await res.json()) as { id?: string; email?: string };
   if (!user.id) return null;
-  const rows = await selectRows<{ role: string; pending_discount_percent: number | null; is_blocked: boolean | null }>(
+  const rows = await selectRows<{
+    role: string;
+    pending_discount_percent: number | null;
+    is_blocked: boolean | null;
+  }>(
     "users",
     `select=role,pending_discount_percent,is_blocked&id=eq.${encodeURIComponent(user.id)}`,
   );
@@ -218,10 +274,15 @@ export interface PaymentRow {
   created_at: string;
 }
 
-export async function paymentBy(field: "id" | "provider_payment_id", value: string): Promise<PaymentRow | null> {
+export async function paymentBy(
+  field: "id" | "provider_payment_id" | "bank_order_id",
+  value: string,
+): Promise<PaymentRow | null> {
+  // PaymentID банка сравниваем без учёта регистра
+  const op = field === "provider_payment_id" ? "ilike" : "eq";
   const rows = await selectRows<PaymentRow>(
     "payments",
-    `select=id,user_id,provider,provider_payment_id,amount,currency,status,plan,bank_order_id,is_test,refunded_amount,created_at&provider=eq.ameria&${field}=eq.${encodeURIComponent(value)}&limit=1`,
+    `select=id,user_id,provider,provider_payment_id,amount,currency,status,plan,bank_order_id,is_test,refunded_amount,created_at&provider=eq.ameria&${field}=${op}.${encodeURIComponent(value)}&limit=1`,
   );
   return rows[0] ?? null;
 }

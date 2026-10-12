@@ -24,30 +24,64 @@ export const config = { runtime: "edge" };
 // офлайн-кэш приложения перехватывал переход на /api/*).
 function redirect(request: Request, path: string): Response {
   if (new URL(request.url).searchParams.get("format") === "json") {
-    return new Response(JSON.stringify({ result: path.endsWith("success") ? "success" : "failed" }), {
-      headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
-    });
+    return new Response(
+      JSON.stringify({
+        result: path.endsWith("success") ? "success" : "failed",
+      }),
+      {
+        headers: {
+          "content-type": "application/json; charset=utf-8",
+          "cache-control": "no-store",
+        },
+      },
+    );
   }
   return Response.redirect(new URL(path, request.url).toString(), 303);
 }
 
 async function details(paymentId: string): Promise<VposPaymentDetails> {
-  return vpos<VposPaymentDetails>("GetPaymentDetails", { PaymentID: paymentId });
+  return vpos<VposPaymentDetails>("GetPaymentDetails", {
+    PaymentID: paymentId,
+  });
 }
 
 export default async function handler(request: Request): Promise<Response> {
   const url = new URL(request.url);
-  const q = (name: string) => url.searchParams.get(name) ?? url.searchParams.get(name.toLowerCase()) ?? "";
-  const bankPaymentId = q("paymentID");
-  if (!bankPaymentId) return redirect(request, "/payment/failed");
+  // Имена параметров у банка пишутся по-разному (paymentID, PaymentID,
+  // resposneCode…) — ищем без учёта регистра.
+  const params = new Map<string, string>();
+  url.searchParams.forEach((value, key) =>
+    params.set(key.toLowerCase(), value),
+  );
+  const opaque = params.get("opaque") ?? "";
+  const orderId = params.get("orderid") ?? "";
+  const urlPaymentId = params.get("paymentid") ?? "";
 
   try {
-    const payment = await paymentBy("provider_payment_id", bankPaymentId);
+    // Ищем наш платёж: по opaque (там наш id), по номеру заказа, по PaymentID
+    // банка (без учёта регистра — банк может вернуть его строчными буквами).
+    let payment = /^[0-9a-f-]{36}$/i.test(opaque)
+      ? await paymentBy("id", opaque)
+      : null;
+    if (!payment && /^\d+$/.test(orderId))
+      payment = await paymentBy("bank_order_id", orderId);
+    if (!payment && urlPaymentId)
+      payment = await paymentBy("provider_payment_id", urlPaymentId);
     if (!payment) {
-      console.error("payment-return: платёж не найден", bankPaymentId);
+      console.error(
+        "payment-return: платёж не найден",
+        Object.fromEntries(params),
+      );
       return redirect(request, "/payment/failed");
     }
-    if (payment.status === "confirmed") return redirect(request, "/payment/success");
+    if (payment.status === "confirmed")
+      return redirect(request, "/payment/success");
+
+    // Статус спрашиваем по PaymentID, который банк дал нам сам (InitPayment)
+    const bankPaymentId = payment.provider_payment_id.startsWith("order-")
+      ? urlPaymentId
+      : payment.provider_payment_id;
+    if (!bankPaymentId) return redirect(request, "/payment/failed");
 
     let d = await details(bankPaymentId);
 
@@ -62,11 +96,18 @@ export default async function handler(request: Request): Promise<Response> {
     }
 
     const expected = Math.round(Number(payment.amount));
-    const paidMinor = Math.round(Number(d.DepositedAmount || d.Amount || 0) * 100);
-    const sameOrder = d.OrderID === undefined || String(d.OrderID) === String(payment.bank_order_id);
+    const paidMinor = Math.round(
+      Number(d.DepositedAmount || d.Amount || 0) * 100,
+    );
+    const sameOrder =
+      d.OrderID === undefined ||
+      String(d.OrderID) === String(payment.bank_order_id);
 
     if (isDeposited(d) && paidMinor === expected && sameOrder) {
-      await rpc("vpos_payment_paid", { p_payment_id: payment.id, p_details: detailsForLog(d) });
+      await rpc("vpos_payment_paid", {
+        p_payment_id: payment.id,
+        p_details: detailsForLog(d),
+      });
       return redirect(request, "/payment/success");
     }
 
@@ -77,7 +118,10 @@ export default async function handler(request: Request): Promise<Response> {
       paidMinor,
       expected,
     });
-    await rpc("vpos_payment_failed", { p_payment_id: payment.id, p_details: detailsForLog(d) });
+    await rpc("vpos_payment_failed", {
+      p_payment_id: payment.id,
+      p_details: detailsForLog(d),
+    });
     return redirect(request, "/payment/failed");
   } catch (err) {
     console.error("payment-return:", err);
