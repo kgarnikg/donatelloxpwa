@@ -306,7 +306,61 @@
     },
     "privacy": {
       "title": "Informativa sulla privacy",
-      "body": "DonatelleX tratta i dati personali in conformità con la normativa applicabile in materia di protezione dei dati. Il testo completo dell'informativa sulla privacy sarà pubblicato qui prima del lancio in produzione della piattaforma."
+      "intro": "Versione del 12 ottobre 2026. Qui spieghiamo quali dati raccoglie DonatelleX, perché, con chi li condivide e come puoi gestirli.",
+      "sections": [
+        {
+          "h": "1. Chi tratta i dati",
+          "p": "Il titolare del trattamento è il venditore del servizio DonatelleX, imprenditore individuale registrato nella Repubblica di Armenia (i dati sono nelle condizioni d’uso). Domande sui dati: hello@donatellex.com. Il servizio è destinato a persone dai 18 anni in su."
+        },
+        {
+          "h": "2. Quali dati raccogliamo",
+          "p": "Account: nome, cognome, email, telefono, paese, lingua; la password è conservata solo in forma cifrata e, se accedi con Google, riceviamo nome, email e foto del profilo. Questionario: sesso, data di nascita, livello di attività, obiettivi, formato e giorni di allenamento, muscoli su cui concentrarsi. Dati su salute e corpo: altezza, peso, misure, particolarità di salute — solo ciò che inserisci tu. Allenamenti: allenamenti e serie svolti, pesi di lavoro, tempo, calorie stimate, alimentazione, traguardi. Pagamenti: piano, importo, valuta, stato, numero d’ordine e numero di carta mascherato restituito dalla banca. Dati tecnici: ID della sessione, paese in base all’indirizzo IP, impostazioni salvate nel browser."
+        },
+        {
+          "h": "3. Dati della carta",
+          "p": "Numero di carta, scadenza e CVV li inserisci nella pagina sicura della banca (Ameriabank, centro di elaborazione ArCa). Non li riceviamo né li conserviamo: la banca ci comunica solo l’esito del pagamento e il numero di carta mascherato."
+        },
+        {
+          "h": "4. Perché usiamo i dati",
+          "p": "Per fornire il servizio: scegliere il programma, registrare progressi e statistiche, stimare le calorie; incassare i pagamenti, attivare l’accesso e gestire i rimborsi; inviare email di servizio (conferma dell’email, fine dell’accesso, premi per gli inviti); proteggere l’account (un solo dispositivo alla volta, blocco degli abusi); rispondere al supporto; adempiere agli obblighi di legge (registrazione dei pagamenti). Non vendiamo i dati e non li usiamo per pubblicità di terzi."
+        },
+        {
+          "h": "5. Basi giuridiche",
+          "p": "Esecuzione del contratto (condizioni d’uso): account, allenamenti e pagamenti. Il tuo consenso esplicito: dati su salute e corpo (dato nel questionario). Obbligo di legge: conservazione dei dati dei pagamenti. Legittimo interesse: sicurezza del servizio e prevenzione della condivisione dell’account."
+        },
+        {
+          "h": "6. Dati sulla salute",
+          "p": "Altezza, peso, misure e particolarità di salute servono solo a personalizzare gli allenamenti e per i calcoli nell’app. Li vedi tu e, se necessario, l’allenatore e gli amministratori del servizio per aiutarti. Puoi revocare il consenso in qualsiasi momento: elimina questi dati nel profilo o elimina l’account."
+        },
+        {
+          "h": "7. Con chi condividiamo i dati",
+          "p": "Solo con fornitori che fanno funzionare il servizio e trattano i dati per nostro conto: Supabase (database e accesso), Vercel (hosting del sito e dell’app, statistiche delle visite senza cookie), Resend (invio email), Google (se accedi con Google), Ameriabank e il centro di elaborazione ArCa (pagamenti). I video degli esercizi possono essere mostrati tramite YouTube in modalità di privacy avanzata. I dati vengono inoltre comunicati quando lo richiede la legge."
+        },
+        {
+          "h": "8. Trasferimenti all’estero",
+          "p": "I server dei fornitori possono trovarsi fuori dal tuo paese, anche nell’UE e negli Stati Uniti. In questi casi ci basiamo sulle garanzie previste dalla legge (ad esempio le clausole contrattuali tipo dell’UE)."
+        },
+        {
+          "h": "9. Per quanto tempo conserviamo i dati",
+          "p": "Finché hai un account. Quando lo elimini, i dati personali vengono cancellati subito; i dati dei pagamenti sono conservati senza nome ed email per il tempo richiesto dalla normativa fiscale e contabile. I backup del database vengono sovrascritti entro un periodo limitato."
+        },
+        {
+          "h": "10. I tuoi diritti",
+          "p": "Puoi: sapere quali dati conserviamo su di te e ottenerne una copia, anche in formato leggibile da dispositivo automatico; rettificarli (nel profilo); eliminare l’account e tutti i dati (Profilo → «Elimina account»); limitare il trattamento od opporti; revocare il consenso. Scrivi a hello@donatellex.com: rispondiamo entro 30 giorni. Hai anche il diritto di presentare reclamo all’autorità di protezione dei dati del tuo paese (in Italia, il Garante privacy)."
+        },
+        {
+          "h": "11. Cookie e memoria del browser",
+          "p": "Non usiamo cookie pubblicitari o di tracciamento. L’app salva nel browser solo ciò che serve a funzionare: sessione di accesso, lingua, regione dei prezzi, un allenamento non concluso e file per l’uso offline. Le statistiche delle visite al sito sono raccolte senza cookie e senza identificare i visitatori."
+        },
+        {
+          "h": "12. Sicurezza",
+          "p": "La connessione è cifrata (HTTPS). L’accesso ai dati è limitato: ogni utente vede solo i propri dati, allenatore e amministratori solo ciò che serve al loro lavoro. Le password sono conservate in forma cifrata."
+        },
+        {
+          "h": "13. Modifiche",
+          "p": "Possiamo aggiornare questa informativa; la nuova versione si applica dalla pubblicazione su questa pagina. Ti informeremo delle modifiche importanti nell’app o via email."
+        }
+      ]
     },
     "regionNotes": {
       "am": "Per gli utenti in Armenia, i dati personali sono trattati ai sensi della Legge della Repubblica di Armenia «Sulla protezione dei dati personali».",
@@ -324,7 +378,7 @@
         },
         {
           "h": "Come recedere",
-          "p": "Nell'app: Profilo → «Recesso e rimborso» → «Recedi e ottieni il rimborso». Oppure scrivi a hello@donatellex.com indicando l'email dell'account e la data del pagamento."
+          "p": "Nell'app: «Abbonamento e pagamento» → «Recedere dal contratto» → «Recedi e ottieni il rimborso». Oppure scrivi a hello@donatellex.com indicando l'email dell'account e la data del pagamento."
         },
         {
           "h": "Quanto rimborsiamo",

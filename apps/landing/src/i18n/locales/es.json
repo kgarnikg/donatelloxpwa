@@ -306,7 +306,61 @@
     },
     "privacy": {
       "title": "Política de privacidad",
-      "body": "DonatelleX trata los datos personales conforme a la legislación de protección de datos aplicable. El texto completo de la política de privacidad se publicará aquí antes del lanzamiento a producción de la plataforma."
+      "intro": "Versión del 12 de octubre de 2026. Aquí explicamos qué datos recoge DonatelleX, para qué, con quién se comparten y cómo puedes controlarlos.",
+      "sections": [
+        {
+          "h": "1. Quién trata los datos",
+          "p": "El responsable del tratamiento es el vendedor del servicio DonatelleX, empresario individual registrado en la República de Armenia (los datos figuran en las condiciones de uso). Consultas sobre datos: hello@donatellex.com. El servicio está destinado a mayores de 18 años."
+        },
+        {
+          "h": "2. Qué datos recogemos",
+          "p": "Cuenta: nombre, apellidos, email, teléfono, país, idioma; la contraseña se guarda solo cifrada y, si entras con Google, recibimos tu nombre, email y foto de perfil. Cuestionario: sexo, fecha de nacimiento, nivel de actividad, objetivos, formato y días de entrenamiento, músculos de enfoque. Datos de salud y del cuerpo: altura, peso, medidas, particularidades de salud — solo lo que indiques tú. Entrenamientos: entrenamientos y series realizados, pesos de trabajo, tiempo, calorías estimadas, nutrición, logros. Pagos: plan, importe, moneda, estado, número de pedido y número de tarjeta enmascarado que devuelve el banco. Datos técnicos: identificador de la sesión, país según la dirección IP, ajustes guardados en el navegador."
+        },
+        {
+          "h": "3. Datos de la tarjeta",
+          "p": "El número de tarjeta, la fecha de caducidad y el CVV los introduces en la página segura del banco (Ameriabank, centro de procesamiento ArCa). Nunca los recibimos ni los guardamos: el banco solo nos comunica el resultado del pago y el número de tarjeta enmascarado."
+        },
+        {
+          "h": "4. Para qué usamos los datos",
+          "p": "Para prestar el servicio: elegir el programa, llevar el progreso y las estadísticas, estimar calorías; cobrar, dar acceso y tramitar reembolsos; enviar emails de servicio (confirmación del email, fin del acceso, recompensas por invitaciones); proteger la cuenta (un solo dispositivo a la vez, bloqueo de abusos); atender el soporte; cumplir la ley (registro de pagos). No vendemos datos ni los usamos para publicidad de terceros."
+        },
+        {
+          "h": "5. Bases jurídicas",
+          "p": "Ejecución del contrato (condiciones de uso): cuenta, entrenamientos y pagos. Tu consentimiento explícito: datos de salud y del cuerpo (lo das en el cuestionario). Obligación legal: conservación de los registros de pagos. Interés legítimo: seguridad del servicio y prevención del uso compartido de cuentas."
+        },
+        {
+          "h": "6. Datos de salud",
+          "p": "La altura, el peso, las medidas y las particularidades de salud se usan solo para adaptar los entrenamientos y para los cálculos de la app. Los ves tú y, cuando hace falta, el entrenador y los administradores del servicio para ayudarte. Puedes retirar el consentimiento en cualquier momento: elimina estos datos en tu perfil o elimina tu cuenta."
+        },
+        {
+          "h": "7. Con quién compartimos datos",
+          "p": "Solo con proveedores que hacen funcionar el servicio y tratan los datos por encargo nuestro: Supabase (base de datos e inicio de sesión), Vercel (alojamiento de la web y la app, estadísticas de visitas sin cookies), Resend (envío de emails), Google (si entras con Google), Ameriabank y el centro de procesamiento ArCa (pagos). Los vídeos de ejercicios pueden mostrarse mediante YouTube en modo de privacidad mejorada. Además, los datos se comunican cuando lo exige la ley."
+        },
+        {
+          "h": "8. Transferencias internacionales",
+          "p": "Los servidores de los proveedores pueden estar fuera de tu país, incluida la UE y EE. UU. En esos casos nos basamos en las garantías previstas por la ley (por ejemplo, las cláusulas contractuales tipo de la UE)."
+        },
+        {
+          "h": "9. Cuánto tiempo guardamos los datos",
+          "p": "Mientras tengas cuenta. Al eliminarla, los datos personales se borran de inmediato; los registros de pagos se conservan sin nombre ni email durante el tiempo que exige la normativa fiscal y contable. Las copias de seguridad se sobrescriben en un plazo limitado."
+        },
+        {
+          "h": "10. Tus derechos",
+          "p": "Puedes: saber qué datos tenemos sobre ti y obtener una copia, también en formato legible por máquina; rectificarlos (en tu perfil); eliminar la cuenta y todos los datos (Perfil → «Eliminar cuenta»); limitar el tratamiento u oponerte a él; retirar el consentimiento. Escribe a hello@donatellex.com: respondemos en un plazo de 30 días. También puedes reclamar ante la autoridad de protección de datos de tu país (en España, la AEPD)."
+        },
+        {
+          "h": "11. Cookies y almacenamiento del navegador",
+          "p": "No usamos cookies publicitarias ni de seguimiento. La app guarda en tu navegador solo lo necesario para funcionar: la sesión, el idioma, la región de precios, un entrenamiento sin terminar y archivos para usarla sin conexión. Las estadísticas de visitas se recogen sin cookies y sin identificar a los visitantes."
+        },
+        {
+          "h": "12. Seguridad",
+          "p": "La conexión está cifrada (HTTPS). El acceso a los datos está restringido: cada usuario ve solo sus datos; el entrenador y los administradores, solo lo necesario para su trabajo. Las contraseñas se guardan cifradas."
+        },
+        {
+          "h": "13. Cambios en esta política",
+          "p": "Podemos actualizar esta política; la nueva versión se aplica desde su publicación en esta página. Te avisaremos de los cambios importantes en la app o por email."
+        }
+      ]
     },
     "regionNotes": {
       "am": "Para los usuarios de Armenia, los datos personales se tratan conforme a la Ley de la República de Armenia «Sobre la protección de datos personales».",
@@ -324,7 +378,7 @@
         },
         {
           "h": "Cómo desistir",
-          "p": "En la app: Perfil → «Desistimiento y reembolso» → «Desistir y recuperar el dinero». O escribe a hello@donatellex.com indicando el email de tu cuenta y la fecha del pago."
+          "p": "En la app: «Suscripción y pago» → «Desistir del contrato» → «Desistir y recuperar el dinero». O escribe a hello@donatellex.com indicando el email de tu cuenta y la fecha del pago."
         },
         {
           "h": "Cuánto devolvemos",

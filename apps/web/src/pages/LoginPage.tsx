@@ -7,7 +7,7 @@ import { loginSchema, type LoginInput } from "@donatellox/validation";
 import { supabase } from "@/lib/supabase";
 import { useValidationMessage } from "@/lib/validationMessage";
 import { PasswordInput } from "@/components/PasswordInput";
-import { KICKED_KEY } from "@/context/AuthContext";
+import { ACCOUNT_DELETED_KEY, KICKED_KEY } from "@/context/AuthContext";
 
 export default function LoginPage() {
   const { t } = useTranslation();
@@ -21,6 +21,16 @@ export default function LoginPage() {
   const [kicked] = useState(() => {
     try {
       return localStorage.getItem(KICKED_KEY) === "1";
+    } catch {
+      return false;
+    }
+  });
+  // Только что удалил аккаунт (Профиль → Удалить аккаунт, 0092)
+  const [deleted] = useState(() => {
+    try {
+      const v = localStorage.getItem(ACCOUNT_DELETED_KEY) === "1";
+      localStorage.removeItem(ACCOUNT_DELETED_KEY);
+      return v;
     } catch {
       return false;
     }
@@ -74,6 +84,13 @@ export default function LoginPage() {
       <div className="mx-auto w-full max-w-sm animate-fade-in">
         <h1 className="font-display text-3xl font-bold text-neutral-0">{t("auth.login.title")}</h1>
         <p className="mt-2 text-neutral-400">{t("auth.login.subtitle")}</p>
+
+        {deleted && (
+          <div className="mt-6 rounded-md border border-success/30 bg-success/10 px-4 py-3 text-sm text-success">
+            <p className="font-semibold">{t("auth.deleted.title")}</p>
+            <p className="mt-1 text-neutral-300">{t("auth.deleted.text")}</p>
+          </div>
+        )}
 
         {kicked && (
           <div className="mt-6 rounded-md border border-ember-400/30 bg-ember-400/10 px-4 py-3 text-sm text-ember-300">

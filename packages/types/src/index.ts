@@ -148,6 +148,8 @@ export interface User {
   blockedAt?: string | null;
   blockedReason?: string | null;
   avatarUrl?: string;
+  /** Когда принял условия использования и политику конфиденциальности (0087). */
+  termsAcceptedAt?: ISODateString | null;
   locale: LocaleCode;
   role: UserRole;
   authProvider: AuthProvider;
@@ -170,6 +172,8 @@ export interface UserProfile {
   weightKg?: number;
   activityLevel: ActivityLevel;
   goals: FitnessGoal[];
+  /** Когда дал явное согласие на обработку данных о здоровье и теле (0092). */
+  healthConsentAt?: ISODateString | null;
   /** На какие мышцы сделать акцент (0090). Пусто — не выбирал. */
   focusMuscles?: FocusMuscle[];
   trainingFormat: TrainingFormat;

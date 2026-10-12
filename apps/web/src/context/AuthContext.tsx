@@ -25,6 +25,8 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 /** Флаг "вас выкинуло: вход на другом устройстве" — читает экран входа. */
 export const KICKED_KEY = "donatellex-session-kicked";
+/** Флаг для экрана входа: показать "Аккаунт удалён" (Профиль → Удалить аккаунт, 0092). */
+export const ACCOUNT_DELETED_KEY = "donatellex-account-deleted";
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);

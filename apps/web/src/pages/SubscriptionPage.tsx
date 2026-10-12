@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { Trans, useTranslation } from "react-i18next";
-import { ArrowLeft, Check, CreditCard, Lock } from "lucide-react";
+import { ArrowLeft, Check, ChevronRight, CreditCard, Lock, Undo2 } from "lucide-react";
 import clsx from "clsx";
 import {
   PURCHASABLE_PLANS,
@@ -77,7 +77,6 @@ export default function SubscriptionPage() {
   // Без галочки оплатить нельзя.
   const [acceptTerms, setAcceptTerms] = useState(false);
   const consentsGiven = acceptTerms;
-  const { data: withdrawal } = useWithdrawalInfo();
   // Тестовая оплата (vPOS Америабанка, тестовая среда): пока оплата не
   // открыта всем (VITE_PAYMENTS_ENABLED), кнопку видят только админы.
   // С действующей подпиской админ попадает сюда по /subscription?test=1.
@@ -163,14 +162,7 @@ export default function SubscriptionPage() {
                 })}
           </p>
         </div>
-        {withdrawal?.payment_id && (
-          <Link
-            to="/subscription/withdraw"
-            className="mt-4 block text-center text-sm text-neutral-400 underline hover:text-neutral-200"
-          >
-            {t("withdrawal.profileItem")}
-          </Link>
-        )}
+        <WithdrawalLink />
         {isAdmin && (
           <Link
             to="/subscription?test=1"
@@ -193,6 +185,7 @@ export default function SubscriptionPage() {
         {t("payment.title")}
       </h1>
       <p className="mt-1 text-neutral-400">{t("payment.subtitle")}</p>
+      <WithdrawalLink />
 
       {/* Регион — определяет валюту показа цены */}
       <div className="mt-6">
@@ -385,6 +378,40 @@ export default function SubscriptionPage() {
         {t("payment.accessNote")}
       </p>
     </div>
+  );
+}
+
+/**
+ * "Отказаться от договора" (0086). По правилам ЕС (Директива 2023/2673,
+ * с 19.06.2026) кнопка отказа должна быть на виду все 14 дней после оплаты.
+ * Потом она исчезает; если заявка уже есть — ссылка на её статус.
+ * Нажатие ничего не возвращает само: создаётся заявка, решение — в админке.
+ */
+function WithdrawalLink() {
+  const { t, i18n } = useTranslation();
+  const { data: withdrawal } = useWithdrawalInfo();
+  const pending = withdrawal?.request?.status === "pending" || withdrawal?.request?.status === "approved";
+  if (!withdrawal?.eligible && !pending) return null;
+  return (
+    <Link
+      to="/subscription/withdraw"
+      className="card mt-4 flex items-center gap-3 py-3.5 text-left hover:border-ink-500"
+    >
+      <Undo2 size={18} className="shrink-0 text-neutral-400" aria-hidden />
+      <span className="min-w-0 flex-1">
+        <span className="block font-medium">
+          {pending ? t("withdrawal.requestLink") : t("withdrawal.subscriptionLink")}
+        </span>
+        {!pending && withdrawal?.deadline && (
+          <span className="block text-xs text-neutral-500">
+            {t("withdrawal.subscriptionLinkHint", {
+              date: new Date(withdrawal.deadline).toLocaleDateString(i18n.language, { day: "numeric", month: "long" }),
+            })}
+          </span>
+        )}
+      </span>
+      <ChevronRight size={18} className="shrink-0 text-neutral-500" aria-hidden />
+    </Link>
   );
 }
 

@@ -319,8 +319,62 @@
       ]
     },
     "privacy": {
-      "title": "Privacy Policy",
-      "body": "DonatelleX processes personal data in accordance with applicable data protection law. The full privacy policy will be published here before the platform's production launch."
+      "title": "Privacy policy",
+      "intro": "Version of 12 October 2026. This policy explains what data DonatelleX collects, why, who it is shared with and how you can control it.",
+      "sections": [
+        {
+          "h": "1. Who processes your data",
+          "p": "The data controller is the seller of the DonatelleX service, a sole proprietor registered in the Republic of Armenia (details are in the terms of use). Questions about your data: hello@donatellex.com. The service is intended for people aged 18 and over."
+        },
+        {
+          "h": "2. What data we collect",
+          "p": "Account: first and last name, email, phone, country, language; your password is stored only in encrypted form, and if you sign in with Google we receive your name, email and profile photo. Questionnaire: gender, date of birth, activity level, goals, workout format and days, muscle focus. Health and body data: height, weight, measurements, health notes — only what you enter yourself. Workouts: completed workouts and sets, working weights, time, estimated calories, nutrition, achievements. Payments: plan, amount, currency, status, order number and the masked card number returned by the bank. Technical data: sign-in session ID, country based on IP address, settings stored in your browser."
+        },
+        {
+          "h": "3. Bank card data",
+          "p": "You enter your card number, expiry date and CVV on the bank’s secure page (Ameriabank, ArCa processing centre). We never receive or store them — the bank only tells us the payment result and the masked card number."
+        },
+        {
+          "h": "4. Why we use your data",
+          "p": "To provide the service: choose a programme, track progress and statistics, estimate calories; to take payments, grant access and handle refunds; to send service emails (email confirmation, access ending, referral rewards); to protect your account (one device at a time, blocking abuse); to answer support requests; to meet legal obligations (payment records). We do not sell data or use it for third-party advertising."
+        },
+        {
+          "h": "5. Legal bases",
+          "p": "Performance of the contract (terms of use) — for your account, workouts and payments. Your explicit consent — for health and body data (given in the questionnaire). Legal obligation — keeping payment records. Legitimate interest — service security and preventing account sharing."
+        },
+        {
+          "h": "6. Health data",
+          "p": "Height, weight, measurements and health notes are used only to tailor workouts and for calculations in the app. They are visible to you and, when needed, to the coach and service administrators to help you. You can withdraw consent at any time: delete this data in your profile or delete your account."
+        },
+        {
+          "h": "7. Who we share data with",
+          "p": "Only with providers that run the service and process data on our behalf: Supabase (database and sign-in), Vercel (website and app hosting, cookie-free website visit statistics), Resend (sending emails), Google (if you sign in with Google), Ameriabank and the ArCa processing centre (payments). Exercise videos may be shown via YouTube in privacy-enhanced mode. Data is also disclosed when required by law."
+        },
+        {
+          "h": "8. International transfers",
+          "p": "Our providers’ servers may be located outside your country, including in the EU and the USA. In such cases we rely on the safeguards provided by law (for example, EU standard contractual clauses)."
+        },
+        {
+          "h": "9. How long we keep data",
+          "p": "For as long as you have an account. When you delete your account, personal data is deleted immediately; payment records are kept without your name and email for as long as tax and accounting law requires. Database backups are overwritten within a limited period."
+        },
+        {
+          "h": "10. Your rights",
+          "p": "You can: find out what data we hold about you and get a copy, including in a machine-readable format; correct it (in your profile); delete your account and all data (Profile → “Delete account”); restrict or object to processing; withdraw consent. Email hello@donatellex.com — we reply within 30 days. You also have the right to complain to the data protection authority in your country."
+        },
+        {
+          "h": "11. Cookies and browser storage",
+          "p": "We do not use advertising or tracking cookies. The app stores in your browser only what it needs to work: your sign-in session, language, price region, an unfinished workout and files for offline use. Website visit statistics are collected without cookies and without identifying visitors."
+        },
+        {
+          "h": "12. Security",
+          "p": "Connections are encrypted (HTTPS). Access to data in the database is restricted: each user sees only their own data, the coach and administrators see only what they need for their work. Passwords are stored in encrypted form."
+        },
+        {
+          "h": "13. Changes to this policy",
+          "p": "We may update this policy; the new version applies from the moment it is published on this page. We will inform you about significant changes in the app or by email."
+        }
+      ]
     },
     "regionNotes": {
       "am": "For users in Armenia, personal data is processed in accordance with the Law of the Republic of Armenia “On Protection of Personal Data”.",
@@ -338,7 +392,7 @@
         },
         {
           "h": "How to withdraw",
-          "p": "In the app: Profile → “Cancel subscription & refund” → “Withdraw and get a refund”. Or email hello@donatellex.com with your account email and payment date."
+          "p": "In the app: “Subscription & billing” → “Withdraw from the contract” → “Withdraw and get a refund”. Or email hello@donatellex.com with your account email and payment date."
         },
         {
           "h": "How much we refund",

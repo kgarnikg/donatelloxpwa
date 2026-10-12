@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { onboardingSchema, type OnboardingInput } from "@donatellox/validation";
 import type { FitnessGoal, FocusMuscle } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
@@ -10,6 +10,7 @@ import { useAuth } from "@/context/AuthContext";
 import { CountrySelect } from "@/components/CountrySelect";
 import { PhoneInput } from "@/components/PhoneInput";
 import { MusclePicker } from "@/components/MusclePicker";
+import { PRIVACY_URL, TERMS_URL } from "@/lib/withdrawal";
 import clsx from "clsx";
 
 const GOALS: FitnessGoal[] = [
@@ -39,6 +40,13 @@ export default function OnboardingPage() {
   const phoneValid = /^\+[1-9]\d{7,14}$/.test(phone);
   const [serverError, setServerError] = useState<string | null>(null);
   const [daysError, setDaysError] = useState(false);
+  // Вход через Google проходит мимо экрана регистрации с галочкой условий —
+  // спрашиваем здесь (users.terms_accepted_at, 0087).
+  const needsTerms = !!profile && !profile.termsAcceptedAt;
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  // Явное согласие на данные о здоровье и теле (GDPR ст. 9, 0092) — шаг "О себе"
+  const [healthConsent, setHealthConsent] = useState(false);
+  const [healthConsentError, setHealthConsentError] = useState(false);
   // На какие мышцы сделать акцент (0090) — необязательный шаг с 3D-фигурой
   const [focusMuscles, setFocusMuscles] = useState<FocusMuscle[]>([]);
 
@@ -92,13 +100,20 @@ export default function OnboardingPage() {
       preferred_language: values.preferredLanguage,
       updated_at: new Date().toISOString(),
     };
-    let { error } = await supabase.from("user_profiles").upsert({ ...row, focus_muscles: focusMuscles });
-    // Колонка focus_muscles появляется с миграцией 0090. Если её ещё нет —
-    // сохраняем анкету без неё: регистрация не должна из-за этого ломаться.
-    if (error && /focus_muscles/.test(error.message)) {
-      ({ error } = await supabase.from("user_profiles").upsert(row));
+    // focus_muscles (0090) и health_consent_at (0092) появляются с миграциями.
+    // Если какой-то колонки ещё нет — сохраняем анкету без неё: регистрация
+    // не должна из-за этого ломаться.
+    const extras: Record<string, unknown> = {
+      focus_muscles: focusMuscles,
+      health_consent_at: healthConsent ? new Date().toISOString() : null,
+    };
+    let { error } = await supabase.from("user_profiles").upsert({ ...row, ...extras });
+    for (let attempt = 0; error && attempt < 2; attempt++) {
+      const missing = Object.keys(extras).find((k) => error!.message.includes(k));
+      if (!missing) break;
+      delete extras[missing];
+      ({ error } = await supabase.from("user_profiles").upsert({ ...row, ...extras }));
     }
-
     if (error) {
       setServerError(error.message);
       return;
@@ -110,6 +125,7 @@ export default function OnboardingPage() {
         onboarding_completed: true,
         ...(needsCountry && country ? { country } : {}),
         ...(needsPhone && phoneValid ? { phone } : {}),
+        ...(needsTerms && acceptTerms ? { terms_accepted_at: new Date().toISOString() } : {}),
       })
       .eq("id", authUser.id);
     await refreshProfile();
@@ -177,11 +193,35 @@ export default function OnboardingPage() {
                   </button>
                 ))}
               </div>
+              {needsTerms && (
+                <label className="mt-6 flex items-start gap-2.5 text-sm text-neutral-400">
+                  <input
+                    type="checkbox"
+                    checked={acceptTerms}
+                    onChange={(e) => setAcceptTerms(e.target.checked)}
+                    className="mt-0.5 h-4 w-4 shrink-0 rounded border-ink-600 bg-ink-800 text-volt-400 focus:ring-volt-400"
+                  />
+                  <span>
+                    <Trans
+                      i18nKey="auth.register.acceptTermsHealth"
+                      components={{
+                        terms: <a href={TERMS_URL} target="_blank" rel="noreferrer" className="text-volt-400 underline" />,
+                        privacy: <a href={PRIVACY_URL} target="_blank" rel="noreferrer" className="text-volt-400 underline" />,
+                      }}
+                    />
+                  </span>
+                </label>
+              )}
               {errors.goals && <p className="field-error">{t(errors.goals.message === "Выберите хотя бы одну цель" ? "validation.goalsRequired" : (errors.goals.message ?? ""), { defaultValue: errors.goals.message })}</p>}
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                disabled={!selectedGoals?.length || (needsCountry && !country) || (needsPhone && !phoneValid)}
+                disabled={
+                  !selectedGoals?.length ||
+                  (needsCountry && !country) ||
+                  (needsPhone && !phoneValid) ||
+                  (needsTerms && !acceptTerms)
+                }
                 className="btn-primary mt-8 w-full"
               >
                 {t("common.next")}
@@ -262,6 +302,27 @@ export default function OnboardingPage() {
                 <textarea rows={3} className="input-field resize-none" {...register("healthNotes")} />
               </div>
 
+              <label className="flex items-start gap-2.5 text-sm text-neutral-400">
+                <input
+                  type="checkbox"
+                  checked={healthConsent}
+                  onChange={(e) => {
+                    setHealthConsent(e.target.checked);
+                    if (e.target.checked) setHealthConsentError(false);
+                  }}
+                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-ink-600 bg-ink-800 text-volt-400 focus:ring-volt-400"
+                />
+                <span>
+                  <Trans
+                    i18nKey="onboarding.healthConsent"
+                    components={{
+                      privacy: <a href={PRIVACY_URL} target="_blank" rel="noreferrer" className="text-volt-400 underline" />,
+                    }}
+                  />
+                </span>
+              </label>
+              {healthConsentError && <p className="field-error">{t("onboarding.healthConsentRequired")}</p>}
+
               <div className="flex gap-3 pt-2">
                 <button type="button" onClick={() => setStep(0)} className="btn-secondary flex-1">
                   {t("common.back")}
@@ -273,7 +334,8 @@ export default function OnboardingPage() {
                     // иначе ошибки всплыли бы только на последнем шаге,
                     // где этих полей уже не видно.
                     const ok = await trigger(["birthDate", "heightCm", "weightKg"]);
-                    if (ok) setStep(2);
+                    if (!healthConsent) setHealthConsentError(true);
+                    if (ok && healthConsent) setStep(2);
                   }}
                   className="btn-primary flex-1"
                 >

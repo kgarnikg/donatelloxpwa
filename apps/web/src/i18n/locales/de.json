@@ -101,6 +101,10 @@
     "kicked": {
       "title": "Du hast dich auf einem anderen Gerät angemeldet",
       "text": "Das Konto kann jeweils nur auf einem Gerät genutzt werden. Melde dich erneut an, um hier weiterzumachen — die Sitzung auf dem anderen Gerät endet dann."
+    },
+    "deleted": {
+      "title": "Konto gelöscht",
+      "text": "Alle deine Daten wurden gelöscht. Danke, dass du dabei warst."
     }
   },
   "onboarding": {
@@ -185,7 +189,9 @@
         "hamstrings": "Beinbeuger",
         "calves": "Waden"
       }
-    }
+    },
+    "healthConsent": "Ich willige in die Verarbeitung von Daten zu meiner Gesundheit und meinem Körper (Größe, Gewicht, Maße, gesundheitliche Besonderheiten) zur Anpassung der Trainings ein – mehr in der <privacy>Datenschutzerklärung</privacy>. Ich kann die Einwilligung widerrufen, indem ich diese Daten oder mein Konto lösche.",
+    "healthConsentRequired": "Ohne diese Einwilligung können wir keine Trainings anpassen und keine Kalorien berechnen"
   },
   "dashboard": {
     "greeting": "Hallo, {{name}}",
@@ -921,7 +927,10 @@
     "policyLink": "Erstattungsrichtlinie",
     "error": "Antrag konnte nicht gesendet werden. Versuch es erneut oder schreib dem Support.",
     "profileItem": "Widerruf & Erstattung",
-    "profileItemHint": "14 Tage ab Zahlung — ohne Begründung"
+    "profileItemHint": "14 Tage ab Zahlung — ohne Begründung",
+    "subscriptionLink": "Vom Vertrag zurücktreten",
+    "subscriptionLinkHint": "Möglich bis {{date}} – 14 Tage ab Zahlung, ohne Angabe von Gründen",
+    "requestLink": "Widerrufs- und Erstattungsantrag"
   },
   "focus": {
     "title": "Muskelfokus",
@@ -933,5 +942,20 @@
     "badge": "Fokus",
     "inWorkout_one": "Fokus: {{count}} Übung für deine Muskeln",
     "inWorkout_other": "Fokus: {{count}} Übungen für deine Muskeln"
+  },
+  "deleteAccount": {
+    "item": "Konto löschen",
+    "title": "Konto löschen",
+    "intro": "Dein Konto und alle deine Daten werden endgültig gelöscht – das lässt sich nicht rückgängig machen.",
+    "whatDeleted": "Gelöscht werden: Profil und Fragebogen, Größe, Gewicht und Maße, Trainingsverlauf und Arbeitsgewichte, Ernährung, Erfolge, Support-Anfragen.",
+    "whatKept": "Zahlungsdatensätze bleiben ohne deinen Namen und deine E-Mail erhalten – das Gesetz schreibt ihre Aufbewahrung vor.",
+    "subscriptionWarning": "Dein Zugang ist bis {{date}} bezahlt. Beim Löschen verfällt er; Geld wird nicht automatisch erstattet.",
+    "subscriptionLink": "Zuerst vom Vertrag zurücktreten",
+    "typeWord": "Zur Bestätigung gib das Wort {{word}} ein",
+    "word": "LÖSCHEN",
+    "button": "Mein Konto endgültig löschen",
+    "deleting": "Wird gelöscht…",
+    "error": "Das Konto konnte nicht gelöscht werden. Versuche es erneut oder schreib dem Support.",
+    "staff": "Admin- und Trainerkonten werden manuell gelöscht – schreib dem Support."
   }
 }

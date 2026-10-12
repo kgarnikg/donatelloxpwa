@@ -38,7 +38,7 @@ export default function WithdrawalPage() {
   return (
     <div className="min-h-dvh bg-ink-950 px-5 pb-10 pt-8">
       <button
-        onClick={() => (window.history.length > 1 ? navigate(-1) : navigate("/profile"))}
+        onClick={() => (window.history.length > 1 ? navigate(-1) : navigate("/subscription"))}
         className="inline-flex items-center gap-1 text-sm text-neutral-400 hover:text-white"
       >
         <ArrowLeft size={16} /> {t("common.back")}

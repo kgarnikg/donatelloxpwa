@@ -101,6 +101,10 @@
     "kicked": {
       "title": "You signed in on another device",
       "text": "Your account can be used on only one device at a time. Sign in again to continue here — the session on the other device will end."
+    },
+    "deleted": {
+      "title": "Account deleted",
+      "text": "All your data has been deleted. Thank you for being with us."
     }
   },
   "onboarding": {
@@ -185,7 +189,9 @@
         "hamstrings": "Hamstrings",
         "calves": "Calves"
       }
-    }
+    },
+    "healthConsent": "I consent to the processing of data about my health and body (height, weight, measurements, health notes) to tailor my workouts — see the <privacy>privacy policy</privacy>. I can withdraw consent by deleting this data or my account.",
+    "healthConsentRequired": "Without this consent we cannot tailor workouts or estimate calories"
   },
   "dashboard": {
     "greeting": "Hi, {{name}}",
@@ -921,7 +927,10 @@
     "policyLink": "Refund policy",
     "error": "Couldn't send the request. Try again or contact support.",
     "profileItem": "Cancel subscription & refund",
-    "profileItemHint": "14 days from payment — no reason needed"
+    "profileItemHint": "14 days from payment — no reason needed",
+    "subscriptionLink": "Withdraw from the contract",
+    "subscriptionLinkHint": "Possible until {{date}} — 14 days from payment, no reason needed",
+    "requestLink": "Withdrawal and refund request"
   },
   "focus": {
     "title": "Muscle focus",
@@ -933,5 +942,20 @@
     "badge": "Focus",
     "inWorkout_one": "Focus: {{count}} exercise for your muscles",
     "inWorkout_other": "Focus: {{count}} exercises for your muscles"
+  },
+  "deleteAccount": {
+    "item": "Delete account",
+    "title": "Delete account",
+    "intro": "Your account and all your data will be deleted permanently — this cannot be undone.",
+    "whatDeleted": "Deleted: profile and questionnaire, height, weight and measurements, workout history and working weights, nutrition, achievements, support requests.",
+    "whatKept": "Payment records are kept without your name and email — the law requires us to keep them.",
+    "subscriptionWarning": "Your access is paid until {{date}}. It will be lost if you delete the account; money is not refunded automatically.",
+    "subscriptionLink": "Withdraw from the contract first",
+    "typeWord": "To confirm, type the word {{word}}",
+    "word": "DELETE",
+    "button": "Delete my account permanently",
+    "deleting": "Deleting…",
+    "error": "Could not delete the account. Please try again or contact support.",
+    "staff": "Admin and coach accounts are deleted manually — please contact support."
   }
 }

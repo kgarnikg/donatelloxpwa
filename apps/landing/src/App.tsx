@@ -38,7 +38,7 @@ function TermsPage() {
 }
 
 /** Юридическая страница из i18n: title, intro, sections[{h, p}]. */
-function SectionsPage({ base }: { base: "legal.terms" | "legal.refund" }) {
+function SectionsPage({ base, footer }: { base: "legal.terms" | "legal.refund" | "legal.privacy"; footer?: string }) {
   const { t } = useTranslation();
   const sections = t(`${base}.sections`, { returnObjects: true }) as { h: string; p: string }[];
   return (
@@ -51,19 +51,16 @@ function SectionsPage({ base }: { base: "legal.terms" | "legal.refund" }) {
             <p className="mt-2">{s.p}</p>
           </section>
         ))}
+      {footer && <p className="mt-6">{footer}</p>}
     </LegalPage>
   );
 }
 
+/** Политика конфиденциальности (0092): что собираем, зачем, кому, права. */
 function PrivacyPage() {
   const { t } = useTranslation();
   const { region } = useRegion();
-  return (
-    <LegalPage title={t("legal.privacy.title") as string}>
-      <p>{t("legal.privacy.body")}</p>
-      <p className="mt-4">{t(`legal.regionNotes.${region}`)}</p>
-    </LegalPage>
-  );
+  return <SectionsPage base="legal.privacy" footer={t(`legal.regionNotes.${region}`) as string} />;
 }
 
 /** Политика возврата (0086): 14 дней на отказ, пропорциональный возврат. */

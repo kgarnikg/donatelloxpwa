@@ -101,6 +101,10 @@
     "kicked": {
       "title": "Has iniciado sesión en otro dispositivo",
       "text": "La cuenta solo puede usarse en un dispositivo a la vez. Vuelve a iniciar sesión para continuar aquí: la sesión del otro dispositivo se cerrará."
+    },
+    "deleted": {
+      "title": "Cuenta eliminada",
+      "text": "Todos tus datos se han eliminado. Gracias por haber estado con nosotros."
     }
   },
   "onboarding": {
@@ -185,7 +189,9 @@
         "hamstrings": "Isquiotibiales",
         "calves": "Gemelos"
       }
-    }
+    },
+    "healthConsent": "Doy mi consentimiento para el tratamiento de datos sobre mi salud y mi cuerpo (altura, peso, medidas, particularidades de salud) para adaptar los entrenamientos; más información en la <privacy>política de privacidad</privacy>. Puedo retirarlo eliminando estos datos o mi cuenta.",
+    "healthConsentRequired": "Sin este consentimiento no podemos adaptar los entrenamientos ni calcular las calorías"
   },
   "dashboard": {
     "greeting": "Hola, {{name}}",
@@ -921,7 +927,10 @@
     "policyLink": "Política de reembolso",
     "error": "No se pudo enviar la solicitud. Inténtalo de nuevo o escribe a soporte.",
     "profileItem": "Desistimiento y reembolso",
-    "profileItemHint": "14 días desde el pago, sin dar explicaciones"
+    "profileItemHint": "14 días desde el pago, sin dar explicaciones",
+    "subscriptionLink": "Desistir del contrato",
+    "subscriptionLinkHint": "Hasta el {{date}}: 14 días desde el pago, sin dar motivos",
+    "requestLink": "Solicitud de desistimiento y reembolso"
   },
   "focus": {
     "title": "Enfoque muscular",
@@ -933,5 +942,20 @@
     "badge": "Enfoque",
     "inWorkout_one": "Enfoque: {{count}} ejercicio para tus músculos",
     "inWorkout_other": "Enfoque: {{count}} ejercicios para tus músculos"
+  },
+  "deleteAccount": {
+    "item": "Eliminar cuenta",
+    "title": "Eliminar cuenta",
+    "intro": "Tu cuenta y todos tus datos se eliminarán para siempre; no se podrán recuperar.",
+    "whatDeleted": "Se eliminan: perfil y cuestionario, altura, peso y medidas, historial de entrenamientos y pesos de trabajo, nutrición, logros y consultas al soporte.",
+    "whatKept": "Los registros de pagos se conservan sin tu nombre ni tu email: la ley obliga a guardarlos.",
+    "subscriptionWarning": "Tienes acceso pagado hasta el {{date}}. Si eliminas la cuenta lo perderás; el dinero no se devuelve automáticamente.",
+    "subscriptionLink": "Desistir primero del contrato",
+    "typeWord": "Para confirmar, escribe la palabra {{word}}",
+    "word": "ELIMINAR",
+    "button": "Eliminar mi cuenta para siempre",
+    "deleting": "Eliminando…",
+    "error": "No se pudo eliminar la cuenta. Inténtalo de nuevo o escribe al soporte.",
+    "staff": "Las cuentas de administrador o entrenador se eliminan manualmente: escribe al soporte."
   }
 }

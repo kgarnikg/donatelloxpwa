@@ -30,6 +30,7 @@ import SupportPage from "@/pages/SupportPage";
 import LanguageSettingsPage from "@/pages/LanguageSettingsPage";
 import BodyParamsPage from "@/pages/BodyParamsPage";
 import FocusMusclesPage from "@/pages/FocusMusclesPage";
+import DeleteAccountPage from "@/pages/DeleteAccountPage";
 import NotificationsSettingsPage from "@/pages/NotificationsSettingsPage";
 import SubscriptionPage from "@/pages/SubscriptionPage";
 import WithdrawalPage from "@/pages/WithdrawalPage";
@@ -601,6 +602,14 @@ export default function App() {
         element={
           <ProtectedRoute>
             <BodyParamsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile/delete"
+        element={
+          <ProtectedRoute>
+            <DeleteAccountPage />
           </ProtectedRoute>
         }
       />

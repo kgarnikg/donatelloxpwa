@@ -101,6 +101,10 @@
     "kicked": {
       "title": "Hai effettuato l'accesso su un altro dispositivo",
       "text": "L'account può essere usato su un solo dispositivo alla volta. Accedi di nuovo per continuare qui: la sessione sull'altro dispositivo verrà chiusa."
+    },
+    "deleted": {
+      "title": "Account eliminato",
+      "text": "Tutti i tuoi dati sono stati eliminati. Grazie per essere stato con noi."
     }
   },
   "onboarding": {
@@ -185,7 +189,9 @@
         "hamstrings": "Femorali",
         "calves": "Polpacci"
       }
-    }
+    },
+    "healthConsent": "Acconsento al trattamento dei dati sulla mia salute e sul mio corpo (altezza, peso, misure, particolarità di salute) per personalizzare gli allenamenti; dettagli nell’<privacy>informativa sulla privacy</privacy>. Posso revocare il consenso eliminando questi dati o l’account.",
+    "healthConsentRequired": "Senza questo consenso non possiamo personalizzare gli allenamenti né calcolare le calorie"
   },
   "dashboard": {
     "greeting": "Ciao, {{name}}",
@@ -921,7 +927,10 @@
     "policyLink": "Politica di rimborso",
     "error": "Impossibile inviare la richiesta. Riprova o scrivi al supporto.",
     "profileItem": "Recesso e rimborso",
-    "profileItemHint": "14 giorni dal pagamento, senza motivazione"
+    "profileItemHint": "14 giorni dal pagamento, senza motivazione",
+    "subscriptionLink": "Recedere dal contratto",
+    "subscriptionLinkHint": "Possibile fino al {{date}}: 14 giorni dal pagamento, senza motivazione",
+    "requestLink": "Richiesta di recesso e rimborso"
   },
   "focus": {
     "title": "Focus muscolare",
@@ -933,5 +942,20 @@
     "badge": "Focus",
     "inWorkout_one": "Focus: {{count}} esercizio per i tuoi muscoli",
     "inWorkout_other": "Focus: {{count}} esercizi per i tuoi muscoli"
+  },
+  "deleteAccount": {
+    "item": "Elimina account",
+    "title": "Elimina account",
+    "intro": "Il tuo account e tutti i tuoi dati saranno eliminati per sempre: non sarà possibile recuperarli.",
+    "whatDeleted": "Verranno eliminati: profilo e questionario, altezza, peso e misure, storico degli allenamenti e pesi di lavoro, alimentazione, traguardi, richieste al supporto.",
+    "whatKept": "I dati dei pagamenti restano senza il tuo nome e la tua email: la legge ne impone la conservazione.",
+    "subscriptionWarning": "Hai un accesso pagato fino al {{date}}. Eliminando l’account andrà perso; il denaro non viene rimborsato automaticamente.",
+    "subscriptionLink": "Prima recedi dal contratto",
+    "typeWord": "Per confermare, scrivi la parola {{word}}",
+    "word": "ELIMINA",
+    "button": "Elimina il mio account per sempre",
+    "deleting": "Eliminazione…",
+    "error": "Non è stato possibile eliminare l’account. Riprova o scrivi al supporto.",
+    "staff": "Gli account di amministratori e allenatori si eliminano manualmente: scrivi al supporto."
   }
 }
