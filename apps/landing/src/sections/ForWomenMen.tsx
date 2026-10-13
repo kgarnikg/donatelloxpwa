@@ -1,4 +1,5 @@
 import { ArrowRight, Flame, Dumbbell, Home, Sparkles, TrendingUp, Zap, Target } from "lucide-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { APP_URL } from "@/lib/appUrl";
 import photo from "@/assets/women-men.webp";
@@ -20,13 +21,16 @@ const MEN_TAGS = [
 
 export function ForWomenMen() {
   const { t } = useTranslation();
+  // Телефон: одна колонка с переключателем «Для женщин / Для мужчин»
+  const [active, setActive] = useState<"women" | "men">("women");
+  const activeTags = active === "women" ? WOMEN_TAGS : MEN_TAGS;
 
   return (
     <section className="relative overflow-hidden bg-ink-950 pb-20 sm:pb-28 lg:flex lg:min-h-[760px] lg:items-center lg:py-24">
       {/* Фото тренеров: на компьютере — фоном по центру между колонками
           (женщина слева, мужчина справа — как и тексты), края растворяются
           в фоне. На телефоне — сверху секции, текст наезжает на низ фото. */}
-      <div className="pointer-events-none relative mx-auto -mb-28 max-w-md sm:-mb-36 lg:absolute lg:inset-y-0 lg:left-1/2 lg:mb-0 lg:max-w-none lg:-translate-x-1/2">
+      <div className="pointer-events-none relative mx-auto -mb-14 max-w-md sm:-mb-20 lg:absolute lg:inset-y-0 lg:left-1/2 lg:mb-0 lg:max-w-none lg:-translate-x-1/2">
         <img
           src={photo}
           srcSet={`${photoSmall} 800w, ${photo} 1600w`}
@@ -59,7 +63,52 @@ export function ForWomenMen() {
       />
 
       <div className="section-container relative lg:max-w-7xl">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+        {/* Телефон и планшет: вкладки поверх низа фото, под ними текст выбранной */}
+        <div className="text-center lg:hidden">
+          <div role="tablist" className="flex justify-center gap-3">
+            {(["women", "men"] as const).map((key) => {
+              const on = active === key;
+              // Обе кнопки объёмные (заливка + свечение), выбранная — крупнее, с белой обводкой
+              const color =
+                key === "women"
+                  ? "bg-gradient-to-r from-pink-500 to-fuchsia-500 shadow-[0_0_28px_rgba(236,72,153,0.55)]"
+                  : "bg-gradient-to-r from-blue-500 to-sky-500 shadow-[0_0_28px_rgba(59,130,246,0.6)]";
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  role="tab"
+                  aria-selected={on}
+                  onClick={() => setActive(key)}
+                  className={`rounded-full px-5 py-2.5 text-sm font-bold uppercase tracking-wide backdrop-blur transition-all duration-200 text-white ${color} ${on ? "scale-105 ring-2 ring-white/70" : ""}`}
+                >
+                  {t(`forWomenMen.${key}.badge`)}
+                </button>
+              );
+            })}
+          </div>
+
+          <div key={active} className="animate-fade-in">
+            <h2 className="mx-auto mt-6 max-w-md font-display text-3xl uppercase leading-tight tracking-tight">
+              {t(`forWomenMen.${active}.title`)}
+            </h2>
+            <p className="mx-auto mt-3 max-w-md text-neutral-400">{t(`forWomenMen.${active}.description`)}</p>
+            <div className="mt-6 flex flex-wrap justify-center gap-2">
+              {activeTags.map(({ icon: Icon, key }) => (
+                <span
+                  key={key}
+                  className="flex items-center gap-1.5 rounded-full border border-ink-700 bg-ink-900/60 px-3 py-1.5 text-sm text-neutral-200"
+                >
+                  <Icon size={14} className={active === "women" ? "text-pink-400" : "text-info"} />
+                  {t(`forWomenMen.${active}.tags.${key}`)}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Компьютер: две колонки по краям фото */}
+        <div className="hidden lg:grid lg:grid-cols-2 lg:gap-16">
           {/* Для женщин */}
           <div className="lg:max-w-[23rem]">
             <span className="inline-flex items-center rounded-full bg-pink-500 px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-white">
@@ -105,7 +154,7 @@ export function ForWomenMen() {
           </div>
         </div>
 
-        <div className="mt-12 flex justify-center lg:mt-40">
+        <div className="mt-10 flex justify-center lg:mt-40">
           <a
             href={`${APP_URL}/register`}
             className="btn-primary transition-transform duration-200 hover:scale-105 hover:shadow-[0_0_36px_rgba(168,224,0,0.45)]"
