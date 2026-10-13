@@ -118,13 +118,16 @@ export default function UsersPage() {
     },
   });
 
-  /** Анкеты: программа бесплатной недели (0080). */
+  /**
+   * Анкеты: программа бесплатной недели (0080). Связь указана явно: после
+   * 0084 (goal_program_id) у user_profiles две ссылки на workout_programs.
+   */
   const { data: trialProgramByUser } = useQuery({
     queryKey: ["admin-trial-programs"],
     queryFn: async (): Promise<Map<string, string>> => {
       const { data, error } = await supabase
         .from("user_profiles")
-        .select("user_id, trial_program_id, program:workout_programs(title)")
+        .select("user_id, trial_program_id, program:workout_programs!user_profiles_trial_program_id_fkey(title)")
         .not("trial_program_id", "is", null);
       if (error) throw error;
       const map = new Map<string, string>();
