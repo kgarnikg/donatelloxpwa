@@ -22,6 +22,7 @@ import {
   vposConfigured,
   type VposPaymentDetails,
 } from "../_lib/vpos";
+import { logServerError } from "../_lib/log";
 
 export const config = { runtime: "edge" };
 
@@ -112,7 +113,7 @@ export default async function handler(request: Request): Promise<Response> {
     });
     return json({ message: "Деньги возвращены", result: res }, 200, headers);
   } catch (err) {
-    console.error("admin/vpos:", err);
+    await logServerError("admin/vpos", err, { paymentId: body.paymentId, action: body.action }, "critical", admin.id);
     return json({ message: err instanceof Error ? err.message : "Ошибка" }, 500, headers);
   }
 }

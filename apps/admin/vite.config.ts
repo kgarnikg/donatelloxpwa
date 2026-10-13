@@ -3,6 +3,10 @@ import react from "@vitejs/plugin-react";
 import path from "node:path";
 
 export default defineConfig({
+  // Версия сборки (первые 7 символов коммита) — пишется в журнал ошибок
+  define: {
+    __APP_VERSION__: JSON.stringify((process.env.VERCEL_GIT_COMMIT_SHA || "dev").slice(0, 7)),
+  },
   plugins: [react()],
   resolve: {
     alias: {

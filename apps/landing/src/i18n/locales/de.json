@@ -314,7 +314,7 @@
         },
         {
           "h": "2. Welche Daten wir erheben",
-          "p": "Konto: Vor- und Nachname, E-Mail, Telefon, Land, Sprache; das Passwort wird nur verschlüsselt gespeichert, bei der Anmeldung mit Google erhalten wir Name, E-Mail und Profilbild. Fragebogen: Geschlecht, Geburtsdatum, Aktivitätsniveau, Ziele, Trainingsformat und -tage, Muskelfokus. Gesundheits- und Körperdaten: Größe, Gewicht, Maße, gesundheitliche Besonderheiten – nur was du selbst angibst. Training: absolvierte Trainings und Sätze, Arbeitsgewichte, Zeit, geschätzte Kalorien, Ernährung, Erfolge. Zahlungen: Tarif, Betrag, Währung, Status, Bestellnummer und die maskierte Kartennummer aus der Antwort der Bank. Technische Daten: Sitzungs-ID, Land anhand der IP-Adresse, im Browser gespeicherte Einstellungen."
+          "p": "Konto: Vor- und Nachname, E-Mail, Telefon, Land, Sprache; das Passwort wird nur verschlüsselt gespeichert, bei der Anmeldung mit Google erhalten wir Name, E-Mail und Profilbild. Fragebogen: Geschlecht, Geburtsdatum, Aktivitätsniveau, Ziele, Trainingsformat und -tage, Muskelfokus. Gesundheits- und Körperdaten: Größe, Gewicht, Maße, gesundheitliche Besonderheiten – nur was du selbst angibst. Training: absolvierte Trainings und Sätze, Arbeitsgewichte, Zeit, geschätzte Kalorien, Ernährung, Erfolge. Zahlungen: Tarif, Betrag, Währung, Status, Bestellnummer und die maskierte Kartennummer aus der Antwort der Bank. Technische Daten: Sitzungs-ID, Land anhand der IP-Adresse, im Browser gespeicherte Einstellungen. Technische Daten: Tritt auf der Website oder in der App ein Fehler auf, speichern wir Zeitpunkt, Seite, Browser- und Gerätetyp, App-Version und eine Beschreibung des Fehlers (und, wenn du angemeldet bist, zu welchem Konto er gehört), damit wir das Problem finden und beheben können. Diese Einträge werden 90 Tage aufbewahrt."
         },
         {
           "h": "3. Kartendaten",
@@ -453,5 +453,10 @@
   },
   "languageSwitcher": {
     "ariaLabel": "Sprache wählen"
+  },
+  "errorBoundary": {
+    "title": "Etwas ist schiefgelaufen",
+    "text": "Wir haben bereits einen Fehlerbericht erhalten. Lade die Seite neu – das hilft meistens.",
+    "reload": "Neu laden"
   }
 }

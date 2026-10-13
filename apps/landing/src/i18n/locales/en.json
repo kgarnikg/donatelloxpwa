@@ -328,7 +328,7 @@
         },
         {
           "h": "2. What data we collect",
-          "p": "Account: first and last name, email, phone, country, language; your password is stored only in encrypted form, and if you sign in with Google we receive your name, email and profile photo. Questionnaire: gender, date of birth, activity level, goals, workout format and days, muscle focus. Health and body data: height, weight, measurements, health notes — only what you enter yourself. Workouts: completed workouts and sets, working weights, time, estimated calories, nutrition, achievements. Payments: plan, amount, currency, status, order number and the masked card number returned by the bank. Technical data: sign-in session ID, country based on IP address, settings stored in your browser."
+          "p": "Account: first and last name, email, phone, country, language; your password is stored only in encrypted form, and if you sign in with Google we receive your name, email and profile photo. Questionnaire: gender, date of birth, activity level, goals, workout format and days, muscle focus. Health and body data: height, weight, measurements, health notes — only what you enter yourself. Workouts: completed workouts and sets, working weights, time, estimated calories, nutrition, achievements. Payments: plan, amount, currency, status, order number and the masked card number returned by the bank. Technical data: sign-in session ID, country based on IP address, settings stored in your browser. Technical data: if something fails on the website or in the app, we record the time, page, browser and device type, app version and a description of the error (and, if you are signed in, which account it relates to) so we can find and fix the problem. These records are kept for 90 days."
         },
         {
           "h": "3. Bank card data",
@@ -467,5 +467,10 @@
   },
   "languageSwitcher": {
     "ariaLabel": "Select language"
+  },
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "text": "We've already received an error report. Reload the page — that usually helps.",
+    "reload": "Reload"
   }
 }

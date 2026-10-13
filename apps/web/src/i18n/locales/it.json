@@ -957,5 +957,10 @@
     "deleting": "Eliminazione…",
     "error": "Non è stato possibile eliminare l’account. Riprova o scrivi al supporto.",
     "staff": "Gli account di amministratori e allenatori si eliminano manualmente: scrivi al supporto."
+  },
+  "errorBoundary": {
+    "title": "Qualcosa è andato storto",
+    "text": "Abbiamo già ricevuto la segnalazione dell'errore. Ricarica la pagina: di solito risolve.",
+    "reload": "Ricarica"
   }
 }

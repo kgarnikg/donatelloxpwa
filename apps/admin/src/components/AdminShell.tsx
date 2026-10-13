@@ -12,6 +12,7 @@ import {
   LogOut,
   Undo2,
   Menu,
+  Bug,
   X,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -26,6 +27,7 @@ const NAV_ITEMS = [
   { to: "/payments", label: "Платежи", icon: CreditCard },
   { to: "/refunds", label: "Возвраты", icon: Undo2 },
   { to: "/catch-up", label: "Догнать прогресс", icon: RotateCcw },
+  { to: "/errors", label: "Ошибки", icon: Bug },
   { to: "/settings", label: "Настройки сайта", icon: Settings },
 ];
 
@@ -44,6 +46,21 @@ export function AdminShell({ children }: { children: ReactNode }) {
         .in("status", ["pending", "approved"]);
       if (error) return 0;
       return count ?? 0;
+    },
+  });
+
+  // Ошибки за сутки, кроме предупреждений и решённых (журнал 0093)
+  const { data: freshErrors } = useQuery({
+    queryKey: ["admin-errors-badge"],
+    refetchInterval: 5 * 60 * 1000,
+    queryFn: async () => {
+      const { data, error } = await supabase.rpc("admin_error_groups", {
+        p_since: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+        p_app: null,
+        p_include_resolved: false,
+      });
+      if (error) return 0;
+      return ((data ?? []) as { level: string }[]).filter((g) => g.level !== "warning").length;
     },
   });
 
@@ -93,6 +110,9 @@ export function AdminShell({ children }: { children: ReactNode }) {
             <span className="flex-1">{label}</span>
             {to === "/refunds" && !!openRefunds && (
               <span className="rounded-full bg-danger px-2 py-0.5 text-xs font-bold text-neutral-0">{openRefunds}</span>
+            )}
+            {to === "/errors" && !!freshErrors && (
+              <span className="rounded-full bg-warning px-2 py-0.5 text-xs font-bold text-ink-950">{freshErrors}</span>
             )}
           </NavLink>
         ))}
@@ -151,7 +171,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
             className="relative -ml-1 rounded-md p-2 text-neutral-200 hover:bg-ink-800"
           >
             <Menu size={22} />
-            {!!openRefunds && <span className="absolute right-1.5 top-1.5 h-2.5 w-2.5 rounded-full bg-danger" />}
+            {(!!openRefunds || !!freshErrors) && <span className="absolute right-1.5 top-1.5 h-2.5 w-2.5 rounded-full bg-danger" />}
           </button>
           <current.icon size={18} className="text-volt-400" />
           <span className="truncate font-display text-base font-bold">{current.label}</span>

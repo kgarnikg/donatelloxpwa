@@ -13,6 +13,7 @@
 //   RESEND_API_KEY, CRON_SECRET (Vercel сам присылает его в заголовке
 //   Authorization — так чужой запрос на /api/cron/daily ничего не запустит).
 import { buildEmail, formatDate, pickLang } from "../_lib/email";
+import { logServerError } from "../_lib/log";
 
 export const config = { runtime: "edge" };
 
@@ -195,7 +196,14 @@ export default async function handler(request: Request): Promise<Response> {
   }
 
   // В логах Vercel (Logs → /api/cron/daily) видно, что именно сделано и что сломалось
-  if (report.errors.length) console.error("cron/daily", JSON.stringify(report));
+  // 4. Журнал ошибок: записи старше 90 дней удаляются (0093)
+  try {
+    await rpc("purge_app_errors", {});
+  } catch {
+    // миграция 0093 ещё не выполнена — не страшно
+  }
+
+  if (report.errors.length) await logServerError("cron/daily", report.errors.join("\n"), report, "error");
   else console.log("cron/daily", JSON.stringify(report));
   return Response.json(report, { status: report.errors.length ? 207 : 200 });
 }

@@ -30,6 +30,7 @@ import {
   vposTestMode,
   VPOS_CURRENCY_CODE,
 } from "./_lib/vpos";
+import { logServerError } from "./_lib/log";
 
 export const config = { runtime: "edge" };
 
@@ -114,10 +115,12 @@ export default async function handler(request: Request): Promise<Response> {
           ResponseMessage: init.ResponseMessage,
         },
       });
-      console.error(
-        "InitPayment отклонён:",
-        init.ResponseCode,
-        init.ResponseMessage,
+      await logServerError(
+        "create-checkout",
+        `InitPayment отклонён: ${init.ResponseCode} ${init.ResponseMessage ?? ""}`,
+        { payment: created.payment_id, order: created.order_id, plan, currency, amount, test: testMode },
+        "critical",
+        user.id,
       );
       return json(
         { message: "Банк не принял платёж. Попробуйте ещё раз чуть позже." },
@@ -133,7 +136,7 @@ export default async function handler(request: Request): Promise<Response> {
     const redirectUrl = `${vposBaseUrl()}Payments/Pay?id=${encodeURIComponent(init.PaymentID)}&lang=${vposLang(body.language)}`;
     return json({ redirectUrl });
   } catch (err) {
-    console.error("create-checkout:", err);
+    await logServerError("create-checkout", err, { plan, region: body.region, test: testMode }, "critical", user.id);
     return json(
       { message: "Не удалось начать оплату. Попробуйте ещё раз." },
       500,

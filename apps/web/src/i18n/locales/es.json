@@ -957,5 +957,10 @@
     "deleting": "Eliminando…",
     "error": "No se pudo eliminar la cuenta. Inténtalo de nuevo o escribe al soporte.",
     "staff": "Las cuentas de administrador o entrenador se eliminan manualmente: escribe al soporte."
+  },
+  "errorBoundary": {
+    "title": "Algo salió mal",
+    "text": "Ya hemos recibido el informe del error. Recarga la página: normalmente se soluciona así.",
+    "reload": "Recargar"
   }
 }

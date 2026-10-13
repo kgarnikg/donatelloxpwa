@@ -314,7 +314,7 @@
         },
         {
           "h": "2. Qué datos recogemos",
-          "p": "Cuenta: nombre, apellidos, email, teléfono, país, idioma; la contraseña se guarda solo cifrada y, si entras con Google, recibimos tu nombre, email y foto de perfil. Cuestionario: sexo, fecha de nacimiento, nivel de actividad, objetivos, formato y días de entrenamiento, músculos de enfoque. Datos de salud y del cuerpo: altura, peso, medidas, particularidades de salud — solo lo que indiques tú. Entrenamientos: entrenamientos y series realizados, pesos de trabajo, tiempo, calorías estimadas, nutrición, logros. Pagos: plan, importe, moneda, estado, número de pedido y número de tarjeta enmascarado que devuelve el banco. Datos técnicos: identificador de la sesión, país según la dirección IP, ajustes guardados en el navegador."
+          "p": "Cuenta: nombre, apellidos, email, teléfono, país, idioma; la contraseña se guarda solo cifrada y, si entras con Google, recibimos tu nombre, email y foto de perfil. Cuestionario: sexo, fecha de nacimiento, nivel de actividad, objetivos, formato y días de entrenamiento, músculos de enfoque. Datos de salud y del cuerpo: altura, peso, medidas, particularidades de salud — solo lo que indiques tú. Entrenamientos: entrenamientos y series realizados, pesos de trabajo, tiempo, calorías estimadas, nutrición, logros. Pagos: plan, importe, moneda, estado, número de pedido y número de tarjeta enmascarado que devuelve el banco. Datos técnicos: identificador de la sesión, país según la dirección IP, ajustes guardados en el navegador. Datos técnicos: si se produce un fallo en el sitio web o en la aplicación, registramos la hora, la página, el tipo de navegador y de dispositivo, la versión de la aplicación y la descripción del error (y, si has iniciado sesión, a qué cuenta corresponde) para poder encontrar y corregir el problema. Estos registros se conservan 90 días."
         },
         {
           "h": "3. Datos de la tarjeta",
@@ -453,5 +453,10 @@
   },
   "languageSwitcher": {
     "ariaLabel": "Seleccionar idioma"
+  },
+  "errorBoundary": {
+    "title": "Algo salió mal",
+    "text": "Ya hemos recibido el informe del error. Recarga la página: normalmente se soluciona así.",
+    "reload": "Recargar"
   }
 }

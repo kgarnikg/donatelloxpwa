@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { registerSW } from "virtual:pwa-register";
 import { Analytics } from "@vercel/analytics/react";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { installErrorLog } from "@/lib/errorLog";
 import App from "./App";
 import "./index.css";
 import "./i18n";
@@ -12,6 +14,9 @@ import "./i18n";
 // проверяем при возврате на вкладку и раз в 5 минут — новая версия
 // применяется перезагрузкой. На лендинге нечего терять, в отличие от
 // плеера тренировки в apps/web (см. apps/web/src/lib/pwaUpdate.ts).
+// Журнал ошибок (0093): всё необработанное уходит в админку → «Ошибки»
+installErrorLog();
+
 registerSW({
   immediate: true,
   onRegisteredSW(swUrl, registration) {
@@ -32,7 +37,9 @@ registerSW({
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
       {/* Vercel Web Analytics — бесплатно до 50 000 событий/мес на Hobby-
           тарифе, без cookies. Компонент сам подхватывает домен на Vercel и
           ничего не делает при локальной разработке (не шлёт события). */}

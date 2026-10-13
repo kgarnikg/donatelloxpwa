@@ -7,6 +7,7 @@
 // заявка (последние 10 минут), — так эндпоинт нельзя использовать для спама.
 // Переменные: ADMIN_NOTIFY_EMAIL, RESEND_API_KEY (+ доступ к Supabase).
 import { authUser, env, json, selectRows } from "./_lib/vpos";
+import { logServerError } from "./_lib/log";
 
 export const config = { runtime: "edge" };
 
@@ -87,7 +88,7 @@ export default async function handler(request: Request): Promise<Response> {
     if (!res.ok) throw new Error(`resend: ${res.status} ${await res.text()}`);
     return json({ sent: true });
   } catch (err) {
-    console.error("notify-withdrawal:", err);
+    await logServerError("notify-withdrawal", err, {}, "critical", user.id);
     return json({ sent: false }, 500);
   }
 }

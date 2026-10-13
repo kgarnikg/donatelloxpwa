@@ -16,6 +16,7 @@ import {
   vpos,
   type VposPaymentDetails,
 } from "./_lib/vpos";
+import { logServerError } from "./_lib/log";
 
 export const config = { runtime: "edge" };
 
@@ -68,9 +69,12 @@ export default async function handler(request: Request): Promise<Response> {
     if (!payment && urlPaymentId)
       payment = await paymentBy("provider_payment_id", urlPaymentId);
     if (!payment) {
-      console.error(
-        "payment-return: платёж не найден",
-        Object.fromEntries(params),
+      await logServerError(
+        "payment-return",
+        "Платёж не найден по ответу банка",
+        { params: Object.fromEntries(params) },
+        // открыли адрес без параметров банка — не повод для тревоги
+        opaque || orderId || urlPaymentId ? "critical" : "warning",
       );
       return redirect(request, "/payment/failed");
     }
@@ -111,20 +115,32 @@ export default async function handler(request: Request): Promise<Response> {
       return redirect(request, "/payment/success");
     }
 
-    console.warn("payment-return: оплата не подтверждена", {
-      payment: payment.id,
-      responseCode: d.ResponseCode,
-      orderStatus: d.OrderStatus,
-      paidMinor,
-      expected,
-    });
+    // Обычный отказ банка (нет денег, отмена) — предупреждение; деньги
+    // списаны, но сумма/заказ не совпали — критично, нужно разбираться.
+    const moneyTaken = isDeposited(d);
+    await logServerError(
+      "payment-return",
+      moneyTaken ? "Оплата прошла, но сумма или заказ не совпали" : "Оплата не подтверждена банком",
+      {
+        payment: payment.id,
+        order: payment.bank_order_id,
+        responseCode: d.ResponseCode,
+        orderStatus: d.OrderStatus,
+        state: d.PaymentState,
+        paidMinor,
+        expected,
+        test: payment.is_test,
+      },
+      moneyTaken ? "critical" : "warning",
+      payment.user_id,
+    );
     await rpc("vpos_payment_failed", {
       p_payment_id: payment.id,
       p_details: detailsForLog(d),
     });
     return redirect(request, "/payment/failed");
   } catch (err) {
-    console.error("payment-return:", err);
+    await logServerError("payment-return", err, { params: Object.fromEntries(params) }, "critical");
     return redirect(request, "/payment/failed");
   }
 }

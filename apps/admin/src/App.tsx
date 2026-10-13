@@ -11,6 +11,7 @@ import PaymentsPage from "@/pages/PaymentsPage";
 import RefundsPage from "@/pages/RefundsPage";
 import SettingsPage from "@/pages/SettingsPage";
 import CatchUpProgressPage from "@/pages/CatchUpProgressPage";
+import ErrorsPage from "@/pages/ErrorsPage";
 
 function AuthorizedLayout() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
         <Route path="/refunds" element={<RefundsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/catch-up" element={<CatchUpProgressPage />} />
+        <Route path="/errors" element={<ErrorsPage />} />
       </Route>
 
       <Route

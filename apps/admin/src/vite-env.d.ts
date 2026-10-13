@@ -9,3 +9,6 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+/** Версия сборки (коммит), задаётся в vite.config.ts */
+declare const __APP_VERSION__: string;

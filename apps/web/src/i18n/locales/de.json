@@ -957,5 +957,10 @@
     "deleting": "Wird gelöscht…",
     "error": "Das Konto konnte nicht gelöscht werden. Versuche es erneut oder schreib dem Support.",
     "staff": "Admin- und Trainerkonten werden manuell gelöscht – schreib dem Support."
+  },
+  "errorBoundary": {
+    "title": "Etwas ist schiefgelaufen",
+    "text": "Wir haben bereits einen Fehlerbericht erhalten. Lade die Seite neu – das hilft meistens.",
+    "reload": "Neu laden"
   }
 }
