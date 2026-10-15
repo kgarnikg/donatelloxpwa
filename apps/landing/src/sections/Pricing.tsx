@@ -1,9 +1,10 @@
 import { Check, Flame, Trophy } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { PaymentLogos } from "@/components/PaymentLogos";
 import clsx from "clsx";
 import { formatRegionPrice, getRegionPrices } from "@donatellox/types";
 import { useRegion } from "@/context/RegionContext";
-import { REGION_PAYMENT_METHODS, type PurchasablePlan } from "@/lib/regionPricing";
+import { type PurchasablePlan } from "@/lib/regionPricing";
 import { APP_URL } from "@/lib/appUrl";
 
 type Highlight = "popular" | "best-value";
@@ -27,7 +28,6 @@ export function Pricing() {
   const { region } = useRegion();
   const prices = getRegionPrices(region);
   const baseFeatures = t("pricing.baseFeatures", { returnObjects: true }) as string[];
-  const paymentMethods = REGION_PAYMENT_METHODS[region];
   const price = (minor: number) => formatRegionPrice(region, minor);
 
   return (
@@ -157,13 +157,9 @@ export function Pricing() {
           })}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-neutral-500">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-neutral-500">
           <span>{t("pricing.paymentMethodsLabel")}</span>
-          {paymentMethods.map((m) => (
-            <span key={m} className="rounded-full border border-ink-700 px-3 py-1">
-              {m}
-            </span>
-          ))}
+          <PaymentLogos />
         </div>
       </div>
     </section>

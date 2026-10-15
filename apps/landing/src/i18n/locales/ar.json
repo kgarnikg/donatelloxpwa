@@ -122,7 +122,9 @@
     "paymentMethods": [
       "Visa",
       "Mastercard",
-      "ArCa"
+      "ArCa",
+      "Apple Pay",
+      "Google Pay"
     ],
     "baseFeatures": [
       "جميع برامج التمارين",
@@ -204,7 +206,7 @@
       },
       {
         "question": "ما طرق الدفع المدعومة؟",
-        "answer": "بطاقات Visa وMastercard وArCa المصرفية. تتم عملية الدفع على صفحة البنك الآمنة — لا نرى بيانات بطاقتك ولا نخزنها. الدفع لمرة واحدة، دون تجديد تلقائي."
+        "answer": "بطاقات Visa وMastercard وArCa المصرفية، بالإضافة إلى Apple Pay وGoogle Pay. تتم عملية الدفع على صفحة البنك الآمنة — لا نرى بيانات بطاقتك ولا نخزنها. الدفع لمرة واحدة، دون تجديد تلقائي."
       },
       {
         "question": "هل يعمل التطبيق دون اتصال بالإنترنت؟",
@@ -250,7 +252,7 @@
       }
     },
     "copyright": "© {{year}} DonatelleX. جميع الحقوق محفوظة.",
-    "paymentLine": "الدفع: Visa · Mastercard · ArCa"
+    "paymentLine": "الدفع:"
   },
   "legal": {
     "back": "العودة للرئيسية",

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { Trans, useTranslation } from "react-i18next";
+import { PaymentLogos } from "@/components/PaymentLogos";
 import { ArrowLeft, Check, ChevronRight, CreditCard, Lock, Undo2 } from "lucide-react";
 import clsx from "clsx";
 import {
@@ -298,16 +299,7 @@ export default function SubscriptionPage() {
             </p>
           </div>
         </div>
-        <div className="flex gap-1.5">
-          {["Visa", "Mastercard", "ArCa"].map((brand) => (
-            <span
-              key={brand}
-              className="rounded border border-ink-600 px-1.5 py-0.5 text-[10px] font-semibold text-neutral-300"
-            >
-              {brand}
-            </span>
-          ))}
-        </div>
+        <PaymentLogos size="sm" className="justify-end" />
       </div>
 
       {error && (

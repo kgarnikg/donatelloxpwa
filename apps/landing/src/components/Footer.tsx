@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { COMPANY } from "@/lib/company";
+import { PaymentLogos } from "@/components/PaymentLogos";
 
 const GROUP_KEYS = ["product", "company", "legal"] as const;
 const GROUP_LINK_HREFS: Record<(typeof GROUP_KEYS)[number], Record<string, string>> = {
@@ -74,7 +75,10 @@ export function Footer() {
 
         <div className="mt-6 flex flex-col items-center justify-between gap-4 text-sm text-neutral-600 sm:flex-row">
           <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
-          <p>{t("footer.paymentLine")}</p>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <span>{t("footer.paymentLine")}</span>
+            <PaymentLogos size="sm" />
+          </div>
         </div>
       </div>
     </footer>

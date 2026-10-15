@@ -610,7 +610,13 @@ width/height) не учла флаг поворота (-90°) в метадан�
   на 10 языках — ключи company.* / contact.*
 - [x] Оферта §11 «Продавец и контакты» заполнена реквизитами (10 языков);
   hello@donatellex.com заменён на donatellex@gmail.com везде (лендинг, приложение)
-- [ ] Логотипы Visa/Mastercard/ArCa цветные, «О нас» — если банк попросит
+- [x] Цветные логотипы Visa, Mastercard, ArCa, Apple Pay, Google Pay (банк
+  подтвердил Apple Pay/Google Pay): компонент PaymentLogos (лендинг и
+  приложение, assets/payments/*.svg; Visa/MC/Apple/Google — @iconify-json/logos
+  CC0, ArCa — официальный SVG с arca.am). Где: лендинг — под тарифами и в
+  подвале каждой страницы; приложение — экран оплаты. FAQ «Как оплатить» —
+  добавлены Apple Pay и Google Pay (10 языков)
+- [ ] «О нас» — если банк попросит
 
 **Фаза 28.22 — Журнал ошибок** ✅ (13.10)
 - [x] Миграция 0093: таблица app_errors (app web/landing/admin/api, уровень

@@ -58,10 +58,10 @@ export function getRegionAmounts(region: Region): Record<PurchasablePlan, PlanAm
 // Принимаются ли российские карты — открытый вопрос к банку, поэтому для
 // региона "ru" пока показываем то же самое, без обещаний про СБП/ЮKassa.
 export const REGION_PAYMENT_METHODS: Record<Region, string[]> = {
-  am: ["Visa", "Mastercard", "ArCa"],
-  us: ["Visa", "Mastercard", "ArCa"],
-  eu: ["Visa", "Mastercard", "ArCa"],
-  ru: ["Visa", "Mastercard", "ArCa"],
+  am: ["Visa", "Mastercard", "ArCa", "Apple Pay", "Google Pay"],
+  us: ["Visa", "Mastercard", "ArCa", "Apple Pay", "Google Pay"],
+  eu: ["Visa", "Mastercard", "ArCa", "Apple Pay", "Google Pay"],
+  ru: ["Visa", "Mastercard", "ArCa", "Apple Pay", "Google Pay"],
 };
 
 /** Быстрая догадка без сети при первом визите: часовой пояс (Asia/Yerevan → Армения), иначе язык браузера. */

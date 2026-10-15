@@ -122,7 +122,9 @@
     "paymentMethods": [
       "Visa",
       "Mastercard",
-      "ArCa"
+      "ArCa",
+      "Apple Pay",
+      "Google Pay"
     ],
     "baseFeatures": [
       "Todos los programas de entrenamiento",
@@ -204,7 +206,7 @@
       },
       {
         "question": "¿Qué métodos de pago aceptan?",
-        "answer": "Tarjetas bancarias Visa, Mastercard y ArCa. El pago se realiza en la página segura del banco: nunca vemos ni guardamos los datos de tu tarjeta. Es un pago único, sin renovaciones automáticas."
+        "answer": "Tarjetas bancarias Visa, Mastercard y ArCa, además de Apple Pay y Google Pay. El pago se realiza en la página segura del banco: nunca vemos ni guardamos los datos de tu tarjeta. Es un pago único, sin renovaciones automáticas."
       },
       {
         "question": "¿Funciona la app sin conexión?",
@@ -250,7 +252,7 @@
       }
     },
     "copyright": "© {{year}} DonatelleX. Todos los derechos reservados.",
-    "paymentLine": "Pagos: Visa · Mastercard · ArCa"
+    "paymentLine": "Pagos:"
   },
   "legal": {
     "back": "Volver al inicio",
