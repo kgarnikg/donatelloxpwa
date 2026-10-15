@@ -14,6 +14,7 @@ import { Pricing } from "@/sections/Pricing";
 import { Steps } from "@/sections/Steps";
 import { Faq } from "@/sections/Faq";
 import { CallToAction } from "@/sections/CallToAction";
+import { Contact } from "@/sections/Contact";
 import { ExitIntentModal } from "@/components/ExitIntentModal";
 
 function HomePage() {
@@ -28,6 +29,7 @@ function HomePage() {
       <Steps />
       <Faq />
       <CallToAction />
+      <Contact />
     </>
   );
 }
@@ -68,6 +70,17 @@ function RefundPage() {
   return <SectionsPage base="legal.refund" />;
 }
 
+/** «Свяжитесь с нами» отдельной страницей — прямая ссылка для банка */
+function ContactPage() {
+  const { t } = useTranslation();
+  return (
+    <LegalPage title={t("contact.title") as string}>
+      <p className="mb-8">{t("contact.subtitle")}</p>
+      <Contact asPage />
+    </LegalPage>
+  );
+}
+
 export default function App() {
   return (
     <RegionProvider>
@@ -87,6 +100,7 @@ export default function App() {
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/refund" element={<RefundPage />} />
+        <Route path="/contact" element={<ContactPage />} />
       </Routes>
       {/* На мобильном эти же переключатели — в Header.tsx, рядом с кнопкой
           меню (variant="inline"), а не здесь внизу справа, где раньше

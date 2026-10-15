@@ -31,8 +31,8 @@ export function ProtectedRoute({ children }: { children: ReactNode }) {
         </div>
         <h1 className="mt-4 font-display text-xl font-bold">{t("auth.blocked.title")}</h1>
         <p className="mt-2 max-w-xs text-sm text-neutral-400">{t("auth.blocked.text")}</p>
-        <a href="mailto:hello@donatellex.com" className="mt-4 text-sm font-semibold text-volt-400">
-          hello@donatellex.com
+        <a href="mailto:donatellex@gmail.com" className="mt-4 text-sm font-semibold text-volt-400">
+          donatellex@gmail.com
         </a>
         <button onClick={() => signOut()} className="btn-secondary mt-6 w-full max-w-xs">
           {t("auth.blocked.signOut")}

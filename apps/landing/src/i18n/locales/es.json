@@ -300,7 +300,7 @@
         },
         {
           "h": "11. Vendedor y contacto",
-          "p": "El vendedor es un empresario individual registrado en la República de Armenia; sus datos se publicarán en este apartado antes de empezar a aceptar pagos. Contacto: hello@donatellex.com."
+          "p": "Vendedor: Anushik Nikoghosyan, empresaria individual. NIF (TIN): 20436549. N.º de registro: 286.1617787. Dirección: Calle Yeznik Koghbatsi 1, apto. 52, Kentron, Ereván 0015, Armenia. Teléfono: +374 43 537 716. Email: donatellex@gmail.com."
         }
       ]
     },
@@ -310,7 +310,7 @@
       "sections": [
         {
           "h": "1. Quién trata los datos",
-          "p": "El responsable del tratamiento es el vendedor del servicio DonatelleX, empresario individual registrado en la República de Armenia (los datos figuran en las condiciones de uso). Consultas sobre datos: hello@donatellex.com. El servicio está destinado a mayores de 18 años."
+          "p": "El responsable del tratamiento es el vendedor del servicio DonatelleX, empresario individual registrado en la República de Armenia (los datos figuran en las condiciones de uso). Consultas sobre datos: donatellex@gmail.com. El servicio está destinado a mayores de 18 años."
         },
         {
           "h": "2. Qué datos recogemos",
@@ -346,7 +346,7 @@
         },
         {
           "h": "10. Tus derechos",
-          "p": "Puedes: saber qué datos tenemos sobre ti y obtener una copia, también en formato legible por máquina; rectificarlos (en tu perfil); eliminar la cuenta y todos los datos (Perfil → «Eliminar cuenta»); limitar el tratamiento u oponerte a él; retirar el consentimiento. Escribe a hello@donatellex.com: respondemos en un plazo de 30 días. También puedes reclamar ante la autoridad de protección de datos de tu país (en España, la AEPD)."
+          "p": "Puedes: saber qué datos tenemos sobre ti y obtener una copia, también en formato legible por máquina; rectificarlos (en tu perfil); eliminar la cuenta y todos los datos (Perfil → «Eliminar cuenta»); limitar el tratamiento u oponerte a él; retirar el consentimiento. Escribe a donatellex@gmail.com: respondemos en un plazo de 30 días. También puedes reclamar ante la autoridad de protección de datos de tu país (en España, la AEPD)."
         },
         {
           "h": "11. Cookies y almacenamiento del navegador",
@@ -378,7 +378,7 @@
         },
         {
           "h": "Cómo desistir",
-          "p": "En la app: «Suscripción y pago» → «Desistir del contrato» → «Desistir y recuperar el dinero». O escribe a hello@donatellex.com indicando el email de tu cuenta y la fecha del pago."
+          "p": "En la app: «Suscripción y pago» → «Desistir del contrato» → «Desistir y recuperar el dinero». O escribe a donatellex@gmail.com indicando el email de tu cuenta y la fecha del pago."
         },
         {
           "h": "Cuánto devolvemos",
@@ -390,7 +390,7 @@
         },
         {
           "h": "Pasados 14 días",
-          "p": "Pasados 14 días no se reembolsa el periodo restante y mantienes el acceso hasta el final del periodo pagado. No hay renovaciones ni cobros automáticos. Si el servicio no se prestó o no funcionó como se describe por causa nuestra, escribe a hello@donatellex.com y te devolveremos el periodo no prestado."
+          "p": "Pasados 14 días no se reembolsa el periodo restante y mantienes el acceso hasta el final del periodo pagado. No hay renovaciones ni cobros automáticos. Si el servicio no se prestó o no funcionó como se describe por causa nuestra, escribe a donatellex@gmail.com y te devolveremos el periodo no prestado."
         },
         {
           "h": "Acceso gratuito y de regalo",
@@ -402,7 +402,7 @@
         },
         {
           "h": "Contacto",
-          "p": "Dudas sobre reembolsos: hello@donatellex.com. Los datos del vendedor figuran en las condiciones de uso."
+          "p": "Dudas sobre reembolsos: donatellex@gmail.com. Los datos del vendedor figuran en las condiciones de uso."
         }
       ]
     }
@@ -458,5 +458,24 @@
     "title": "Algo salió mal",
     "text": "Ya hemos recibido el informe del error. Recarga la página: normalmente se soluciona así.",
     "reload": "Recargar"
+  },
+  "company": {
+    "name": "Anushik Nikoghosyan, empresaria individual",
+    "address": "Calle Yeznik Koghbatsi 1, apto. 52, Kentron, Ereván 0015, Armenia",
+    "tinLabel": "NIF (TIN)",
+    "regLabel": "N.º de registro"
+  },
+  "contact": {
+    "eyebrow": "Contacto",
+    "title": "Contáctanos",
+    "subtitle": "Dudas sobre programas, pagos o acceso: escríbenos o llámanos.",
+    "email": "Email",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "seller": "Vendedor",
+    "write": "Escribir",
+    "call": "Llamar",
+    "map": "Ver en el mapa",
+    "pageTitle": "Contacto"
   }
 }

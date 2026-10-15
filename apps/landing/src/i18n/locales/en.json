@@ -314,7 +314,7 @@
         },
         {
           "h": "11. Seller and contact",
-          "p": "The seller is a sole proprietor registered in the Republic of Armenia; the seller's details will be published in this section before payments are accepted. Contact: hello@donatellex.com."
+          "p": "Seller: Anushik Nikoghosyan, Individual Entrepreneur. Tax ID (TIN): 20436549. State registration No.: 286.1617787. Address: 1 Yeznik Koghbatsi St., Apt. 52, Kentron, Yerevan 0015, Armenia. Phone: +374 43 537 716. Email: donatellex@gmail.com."
         }
       ]
     },
@@ -324,7 +324,7 @@
       "sections": [
         {
           "h": "1. Who processes your data",
-          "p": "The data controller is the seller of the DonatelleX service, a sole proprietor registered in the Republic of Armenia (details are in the terms of use). Questions about your data: hello@donatellex.com. The service is intended for people aged 18 and over."
+          "p": "The data controller is the seller of the DonatelleX service, a sole proprietor registered in the Republic of Armenia (details are in the terms of use). Questions about your data: donatellex@gmail.com. The service is intended for people aged 18 and over."
         },
         {
           "h": "2. What data we collect",
@@ -360,7 +360,7 @@
         },
         {
           "h": "10. Your rights",
-          "p": "You can: find out what data we hold about you and get a copy, including in a machine-readable format; correct it (in your profile); delete your account and all data (Profile → “Delete account”); restrict or object to processing; withdraw consent. Email hello@donatellex.com — we reply within 30 days. You also have the right to complain to the data protection authority in your country."
+          "p": "You can: find out what data we hold about you and get a copy, including in a machine-readable format; correct it (in your profile); delete your account and all data (Profile → “Delete account”); restrict or object to processing; withdraw consent. Email donatellex@gmail.com — we reply within 30 days. You also have the right to complain to the data protection authority in your country."
         },
         {
           "h": "11. Cookies and browser storage",
@@ -392,7 +392,7 @@
         },
         {
           "h": "How to withdraw",
-          "p": "In the app: “Subscription & billing” → “Withdraw from the contract” → “Withdraw and get a refund”. Or email hello@donatellex.com with your account email and payment date."
+          "p": "In the app: “Subscription & billing” → “Withdraw from the contract” → “Withdraw and get a refund”. Or email donatellex@gmail.com with your account email and payment date."
         },
         {
           "h": "How much we refund",
@@ -404,7 +404,7 @@
         },
         {
           "h": "After 14 days",
-          "p": "After 14 days the remaining period is not refunded, and you keep access until the end of the paid period. There are no automatic renewals or charges. If the service was not provided or did not work as described through our fault, email hello@donatellex.com and we'll refund the period not provided."
+          "p": "After 14 days the remaining period is not refunded, and you keep access until the end of the paid period. There are no automatic renewals or charges. If the service was not provided or did not work as described through our fault, email donatellex@gmail.com and we'll refund the period not provided."
         },
         {
           "h": "Free and bonus access",
@@ -416,7 +416,7 @@
         },
         {
           "h": "Contact",
-          "p": "Refund questions: hello@donatellex.com. The seller's details are listed in the terms of use."
+          "p": "Refund questions: donatellex@gmail.com. The seller's details are listed in the terms of use."
         }
       ]
     }
@@ -472,5 +472,24 @@
     "title": "Something went wrong",
     "text": "We've already received an error report. Reload the page — that usually helps.",
     "reload": "Reload"
+  },
+  "company": {
+    "name": "Anushik Nikoghosyan, Individual Entrepreneur",
+    "address": "1 Yeznik Koghbatsi St., Apt. 52, Kentron, Yerevan 0015, Armenia",
+    "tinLabel": "Tax ID (TIN)",
+    "regLabel": "State registration No."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Contact us",
+    "subtitle": "Questions about programs, payment or access — email or call us.",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "seller": "Seller",
+    "write": "Write",
+    "call": "Call",
+    "map": "Open map",
+    "pageTitle": "Contact"
   }
 }
