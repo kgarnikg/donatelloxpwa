@@ -22,8 +22,8 @@ function HomePage() {
     <>
       <Hero />
       <HeroMobileDetails />
-      <Pricing />
       <ForWomenMen />
+      <Pricing />
       <Modules />
       <WeeklyPlan />
       <Steps />
