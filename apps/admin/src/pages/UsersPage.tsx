@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Search, Gift, ArrowUp, ArrowDown, ArrowUpDown, Ban, Trash2, Unlock, X } from "lucide-react";
 import clsx from "clsx";
 import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/context/AuthContext";
 import type { User, UserRole, Subscription, SubscriptionPlan } from "@donatellox/types";
 import { toCamelCase } from "@donatellox/types";
 
@@ -19,6 +20,59 @@ const ROLE_LABEL: Record<UserRole, string> = {
   admin: "Админ",
   superadmin: "Суперадмин",
 };
+
+const ALL_ROLES = Object.keys(ROLE_LABEL) as UserRole[];
+
+/**
+ * Какие роли текущий админ может поставить человеку (0094):
+ * • себе роль не меняет никто;
+ * • суперадмин — любые роли;
+ * • обычный админ — только «Пользователь» / «Тренер», и не трогает
+ *   админов и суперадминов.
+ * Те же правила проверяет база (триггер), здесь — чтобы не предлагать лишнего.
+ */
+function allowedRoles(myRole: UserRole | undefined, myId: string | undefined, target: User): UserRole[] {
+  if (!myRole || target.id === myId) return [target.role];
+  if (myRole === "superadmin") return ALL_ROLES;
+  if (target.role === "admin" || target.role === "superadmin") return [target.role];
+  return ["athlete", "coach"];
+}
+
+function RoleSelect({
+  user,
+  options,
+  onChange,
+  className,
+}: {
+  user: User;
+  options: UserRole[];
+  onChange: (role: UserRole) => void;
+  className?: string;
+}) {
+  if (options.length <= 1) {
+    return (
+      <span
+        className={clsx("badge", ROLE_BADGE[user.role], className)}
+        title="Роль админов меняет только суперадмин; свою роль поменять нельзя"
+      >
+        {ROLE_LABEL[user.role]}
+      </span>
+    );
+  }
+  return (
+    <select
+      value={user.role}
+      onChange={(e) => onChange(e.target.value as UserRole)}
+      className={clsx("badge cursor-pointer border-0", ROLE_BADGE[user.role], className)}
+    >
+      {options.map((role) => (
+        <option key={role} value={role}>
+          {ROLE_LABEL[role]}
+        </option>
+      ))}
+    </select>
+  );
+}
 
 const PLAN_LABEL: Record<SubscriptionPlan, string> = {
   monthly: "Месяц",
@@ -81,6 +135,8 @@ export default function UsersPage() {
   const [sortKey, setSortKey] = useState<SortKey>("createdAt");
   const [sortDir, setSortDir] = useState<SortDir>("desc");
   const queryClient = useQueryClient();
+  const { profile: me } = useAuth();
+  const [roleError, setRoleError] = useState<string | null>(null);
 
   const { data: users, isLoading } = useQuery({
     queryKey: ["admin-users"],
@@ -221,7 +277,14 @@ export default function UsersPage() {
       const { error } = await supabase.from("users").update({ role }).eq("id", userId);
       if (error) throw error;
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin-users"] }),
+    onSuccess: () => {
+      setRoleError(null);
+      queryClient.invalidateQueries({ queryKey: ["admin-users"] });
+    },
+    onError: (e: Error) => {
+      setRoleError(e.message);
+      queryClient.invalidateQueries({ queryKey: ["admin-users"] });
+    },
   });
 
   /**
@@ -305,6 +368,15 @@ export default function UsersPage() {
         </div>
       </div>
 
+      {roleError && (
+        <div className="mt-4 flex items-start justify-between gap-3 rounded-md border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">
+          <span>Роль не изменена: {roleError}</span>
+          <button onClick={() => setRoleError(null)} aria-label="Закрыть">
+            <X size={16} />
+          </button>
+        </div>
+      )}
+
       {/* Телефон: карточки вместо широкой таблицы */}
       <div className="mt-5 space-y-3 md:hidden">
         {isLoading &&
@@ -337,17 +409,12 @@ export default function UsersPage() {
                     <p className="mt-1 text-xs text-neutral-500">Акцент: {focusByUser.get(u.id)}</p>
                   )}
                 </div>
-                <select
-                  value={u.role}
-                  onChange={(e) => updateRole.mutate({ userId: u.id, role: e.target.value as UserRole })}
-                  className={clsx("badge shrink-0 cursor-pointer border-0", ROLE_BADGE[u.role])}
-                >
-                  {(Object.keys(ROLE_LABEL) as UserRole[]).map((role) => (
-                    <option key={role} value={role}>
-                      {ROLE_LABEL[role]}
-                    </option>
-                  ))}
-                </select>
+                <RoleSelect
+                  user={u}
+                  options={allowedRoles(me?.role, me?.id, u)}
+                  onChange={(role) => updateRole.mutate({ userId: u.id, role })}
+                  className="shrink-0"
+                />
               </div>
 
               <div className="mt-3 flex flex-wrap gap-1.5">
@@ -529,22 +596,11 @@ export default function UsersPage() {
                     )}
                   </td>
                   <td className="table-td">
-                    <select
-                      value={u.role}
-                      onChange={(e) =>
-                        updateRole.mutate({ userId: u.id, role: e.target.value as UserRole })
-                      }
-                      className={clsx(
-                        "badge cursor-pointer border-0",
-                        ROLE_BADGE[u.role],
-                      )}
-                    >
-                      {(Object.keys(ROLE_LABEL) as UserRole[]).map((role) => (
-                        <option key={role} value={role}>
-                          {ROLE_LABEL[role]}
-                        </option>
-                      ))}
-                    </select>
+                    <RoleSelect
+                      user={u}
+                      options={allowedRoles(me?.role, me?.id, u)}
+                      onChange={(role) => updateRole.mutate({ userId: u.id, role })}
+                    />
                   </td>
                   <td className="table-td">
                     <div className="flex items-center gap-2">
