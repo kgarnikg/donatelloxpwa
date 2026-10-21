@@ -30,7 +30,9 @@ function scrub(text: string): string {
     .replace(/("?(password|Password|token|apikey|Authorization)"?\s*[:=]\s*)"?[^",\s}]+"?/g, "$1[скрыто]")
     .replace(/Bearer\s+[A-Za-z0-9._-]+/g, "Bearer [скрыто]")
     .replace(/eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+/g, "[jwt]")
-    .replace(/\b\d{12,19}\b/g, "[число]");
+    // длинные числа (номера карт) скрываем, но не «support ID» защиты банка —
+    // его нужно переслать банку
+    .replace(/(support ID is:\s*)?\b(\d{12,19})\b/gi, (m, keep: string | undefined, num: string) => (keep ? `${keep}${num}` : "[число]"));
 }
 
 function describe(err: unknown): { message: string; stack: string | null } {

@@ -104,7 +104,13 @@ export async function vpos<T = Record<string, unknown>>(
 ): Promise<T> {
   const res = await fetch(`${vposBaseUrl()}api/VPOS/${method}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    // Боевой шлюз стоит за защитой (WAF) — представляемся как обычный клиент
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "User-Agent": "DonatelleX/1.0 (+https://www.donatellex.com)",
+      "Accept-Language": "en-US,en;q=0.9",
+    },
     body: JSON.stringify({
       Username: env("VPOS_USERNAME"),
       Password: env("VPOS_PASSWORD"),
