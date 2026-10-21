@@ -54,7 +54,10 @@ export default async function handler(request: Request): Promise<Response> {
   if (!user) return json({ message: "Войдите в аккаунт заново" }, 401);
 
   const testMode = vposTestMode();
-  if (testMode && !user.isAdmin) {
+  // Тестовая среда — только админы. Боевая, пока оплата не открыта всем
+  // (VITE_PAYMENTS_ENABLED=true), — тоже только админы: проверка перед запуском.
+  const openToAll = env("VITE_PAYMENTS_ENABLED") === "true";
+  if ((testMode || !openToAll) && !user.isAdmin) {
     return json({ message: "Оплата скоро заработает" }, 403);
   }
 

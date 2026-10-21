@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Trans, useTranslation } from "react-i18next";
 import { PaymentLogos } from "@/components/PaymentLogos";
 import { ArrowLeft, Check, ChevronRight, CreditCard, Lock, Undo2 } from "lucide-react";
@@ -30,9 +30,10 @@ import { REFUND_POLICY_URL, TERMS_URL, useWithdrawalInfo } from "@/lib/withdrawa
  *   что у лендинга и у серверной функции. Сумма здесь — только для показа:
  *   сервер пересчитывает её сам по плану/региону/скидке из БД.
  * - Оплата разовая за период, без автосписаний (см. ARCHITECTURE.md, 4.3).
- * - Провайдер — vPOS Араратбанка. Пока серверная функция не подключена
- *   (ждём документацию и тестовый доступ от банка), кнопка оплаты
- *   выключена флагом VITE_PAYMENTS_ENABLED — честное "скоро", а не ошибка.
+ * - Провайдер — vPOS Америабанка (api/create-checkout.ts). Пока оплата не
+ *   открыта всем флагом VITE_PAYMENTS_ENABLED, кнопку видят только админы
+ *   (тестовая или уже боевая среда — см. api/payment-mode.ts), остальные
+ *   видят честное "скоро".
  */
 
 const REGION_STORAGE_KEY = "donatellox-region";
@@ -85,6 +86,19 @@ export default function SubscriptionPage() {
   const isAdmin = profile?.role === "admin" || profile?.role === "superadmin";
   const adminTest = isAdmin && !PAYMENTS_ENABLED;
   const canPay = PAYMENTS_ENABLED || isAdmin;
+  // Админ до открытия оплаты: тестовая среда банка (10 ֏) или уже боевая
+  // (настоящие деньги) — подписи на кнопке разные (api/payment-mode.ts).
+  const { data: paymentMode } = useQuery({
+    queryKey: ["payment-mode"],
+    enabled: adminTest,
+    staleTime: 60_000,
+    queryFn: async (): Promise<{ test: boolean; open: boolean }> => {
+      const res = await fetch("/api/payment-mode", { cache: "no-store" });
+      if (!res.ok) return { test: true, open: false };
+      return (await res.json()) as { test: boolean; open: boolean };
+    },
+  });
+  const adminLive = adminTest && paymentMode?.test === false;
 
   const discountPercent = profile?.pendingDiscountPercent ?? 0;
   const prices = getRegionPrices(region);
@@ -169,7 +183,7 @@ export default function SubscriptionPage() {
             to="/subscription?test=1"
             className="mt-6 block text-center text-sm text-volt-400 underline"
           >
-            Тестовая оплата vPOS (видно только админам)
+            Проверочная оплата (видно только админам)
           </Link>
         )}
       </div>
@@ -329,7 +343,7 @@ export default function SubscriptionPage() {
         >
           {checkout.isPending
             ? t("payment.preparing")
-            : adminTest
+            : adminTest && !adminLive
               ? "Тестовая оплата vPOS"
               : t("payment.payButton", {
                   amount: formatRegionPrice(region, payable),
@@ -337,8 +351,9 @@ export default function SubscriptionPage() {
         </button>
         {adminTest && (
           <p className="mt-3 text-center text-xs text-warning">
-            Видно только админам. Тестовая среда банка: спишется 10 ֏ с тестовой карты
-            банка, доступ откроется как после настоящей оплаты.
+            {adminLive
+              ? "Видно только админам. Боевой режим: спишутся настоящие деньги с настоящей карты. Вернуть — в админке → Платежи → «Вернуть»."
+              : "Видно только админам. Тестовая среда банка: спишется 10 ֏ с тестовой карты банка, доступ откроется как после настоящей оплаты."}
           </p>
         )}
         </>
