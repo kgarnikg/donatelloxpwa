@@ -727,7 +727,8 @@
       "tryAgain": "Try again"
     },
     "consentTerms": "I accept the <terms>terms of the offer</terms>, including the <refund>refund policy</refund>",
-    "accessNote": "Access opens right after payment. Change your mind within 14 days and we'll refund the unused days."
+    "accessNote": "Access opens right after payment. Change your mind within 14 days and we'll refund the unused days.",
+    "amdNote": "Payment is made in Armenian drams (֏). If your card is in another currency, your bank converts the amount at its own rate."
   },
   "bodyParams": {
     "title": "Body parameters",

@@ -566,7 +566,8 @@
       "tryAgain": "Riprova"
     },
     "consentTerms": "Accetto le <terms>condizioni dell'offerta</terms>, inclusa la <refund>politica di rimborso</refund>",
-    "accessNote": "L'accesso si attiva subito dopo il pagamento. Se cambi idea entro 14 giorni, rimborsiamo i giorni non usati."
+    "accessNote": "L'accesso si attiva subito dopo il pagamento. Se cambi idea entro 14 giorni, rimborsiamo i giorni non usati.",
+    "amdNote": "Il pagamento avviene in dram armeni (֏). Se la tua carta è in un’altra valuta, la tua banca converte l’importo al proprio tasso."
   },
   "bodyParams": {
     "title": "Parametri corporei",

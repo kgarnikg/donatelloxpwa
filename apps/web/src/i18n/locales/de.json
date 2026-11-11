@@ -566,7 +566,8 @@
       "tryAgain": "Erneut versuchen"
     },
     "consentTerms": "Ich akzeptiere die <terms>Angebotsbedingungen</terms> einschließlich der <refund>Erstattungsrichtlinie</refund>",
-    "accessNote": "Der Zugang startet sofort nach der Zahlung. Wenn du es dir innerhalb von 14 Tagen anders überlegst, erstatten wir die ungenutzten Tage."
+    "accessNote": "Der Zugang startet sofort nach der Zahlung. Wenn du es dir innerhalb von 14 Tagen anders überlegst, erstatten wir die ungenutzten Tage.",
+    "amdNote": "Die Zahlung erfolgt in armenischen Dram (֏). Ist deine Karte in einer anderen Währung, rechnet deine Bank den Betrag zu ihrem Kurs um."
   },
   "bodyParams": {
     "title": "Körperdaten",

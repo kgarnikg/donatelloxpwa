@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Trans, useTranslation } from "react-i18next";
@@ -7,20 +7,16 @@ import { ArrowLeft, Check, ChevronRight, CreditCard, Lock, Undo2 } from "lucide-
 import clsx from "clsx";
 import {
   PURCHASABLE_PLANS,
-  REGIONS,
   formatRegionPrice,
   getPayableAmount,
   getRegionPrices,
-  guessRegionFromDevice,
   isDiscountApplicable,
-  isRegion,
   type PurchasablePlan,
   type Region,
 } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 import { useActiveSubscription } from "@/lib/queries";
 import { useAuth } from "@/context/AuthContext";
-import { detectRegionByCountry } from "@/lib/detectRegion";
 import { REFUND_POLICY_URL, TERMS_URL, useWithdrawalInfo } from "@/lib/withdrawal";
 
 /**
@@ -36,42 +32,20 @@ import { REFUND_POLICY_URL, TERMS_URL, useWithdrawalInfo } from "@/lib/withdrawa
  *   видят честное "скоро".
  */
 
-const REGION_STORAGE_KEY = "donatellox-region";
+/**
+ * Оплата только в драмах: банк (Америабанк vPOS) принимает лишь AMD — EUR/USD/RUB
+ * он отклоняет. Карта любой страны оплачивает AMD, курс считает банк карты.
+ * Тот же регион «am» принудительно ставит сервер (api/create-checkout.ts).
+ */
+const PAY_REGION: Region = "am";
 const PAYMENTS_ENABLED = import.meta.env.VITE_PAYMENTS_ENABLED === "true";
-
-function readStoredRegion(): Region | null {
-  try {
-    const stored = localStorage.getItem(REGION_STORAGE_KEY);
-    if (isRegion(stored)) return stored;
-  } catch {
-    // localStorage недоступен (приватный режим и т.п.) — просто угадываем
-  }
-  return null;
-}
 
 export default function SubscriptionPage() {
   const { t, i18n } = useTranslation();
   const { profile } = useAuth();
   const { data: activeSubscription } = useActiveSubscription();
   const [plan, setPlan] = useState<PurchasablePlan>("quarterly");
-  const [region, setRegionState] = useState<Region>(
-    () =>
-      readStoredRegion() ??
-      guessRegionFromDevice(i18n.language || navigator.language),
-  );
-
-  // Регион ещё не выбирали — уточняем по стране (IP, api/geo.ts): гость из
-  // Армении сразу видит цены в драмах. Выбор человека не перетираем.
-  useEffect(() => {
-    if (readStoredRegion()) return;
-    let cancelled = false;
-    detectRegionByCountry().then((byCountry) => {
-      if (!cancelled && byCountry && !readStoredRegion()) setRegionState(byCountry);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const region = PAY_REGION;
   const [error, setError] = useState<string | null>(null);
   // Одна галочка "Принимаю условия оферты" (0086). В оферте прописано, что
   // доступ открывается сразу после оплаты и при отказе в 14 дней
@@ -102,15 +76,6 @@ export default function SubscriptionPage() {
 
   const discountPercent = profile?.pendingDiscountPercent ?? 0;
   const prices = getRegionPrices(region);
-
-  function setRegion(next: Region) {
-    setRegionState(next);
-    try {
-      localStorage.setItem(REGION_STORAGE_KEY, next);
-    } catch {
-      // не критично — регион просто не запомнится
-    }
-  }
 
   const checkout = useMutation({
     mutationFn: async () => {
@@ -202,28 +167,7 @@ export default function SubscriptionPage() {
       <p className="mt-1 text-neutral-400">{t("payment.subtitle")}</p>
       <WithdrawalLink />
 
-      {/* Регион — определяет валюту показа цены */}
-      <div className="mt-6">
-        <p className="mb-2 text-xs uppercase tracking-wide text-neutral-500">
-          {t("payment.regionLabel")}
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {REGIONS.map((r) => (
-            <button
-              key={r}
-              onClick={() => setRegion(r)}
-              className={clsx(
-                "rounded-full border px-4 py-1.5 text-sm transition",
-                region === r
-                  ? "border-volt-400 bg-volt-400/10 text-volt-400"
-                  : "border-ink-600 text-neutral-300 hover:border-ink-500",
-              )}
-            >
-              {t(`payment.regions.${r}`)}
-            </button>
-          ))}
-        </div>
-      </div>
+      <p className="mt-4 text-xs text-neutral-500">{t("payment.amdNote")}</p>
 
       {discountPercent > 0 && (
         <div className="mt-5 rounded-md border border-volt-400/30 bg-volt-400/10 px-4 py-3 text-sm text-volt-400">

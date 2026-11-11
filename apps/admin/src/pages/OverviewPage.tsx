@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { AreaChart, Area, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
 import { Users, CreditCard, Dumbbell, TrendingUp } from "lucide-react";
+import { CURRENCY_SYMBOL, formatMinorAmount, type DisplayCurrency } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 
 interface OverviewStats {
   totalUsers: number;
   activeSubscriptions: number;
   totalPrograms: number;
-  revenueLast30Days: number;
+  /** Доход по валютам, в минорных единицах (тестовые платежи и возвраты вычтены) */
+  revenueLast30Days: Record<string, number>;
   signupsByDay: { date: string; count: number }[];
 }
 
@@ -20,15 +22,25 @@ async function fetchOverviewStats(): Promise<OverviewStats> {
     supabase.from("workout_programs").select("id", { count: "exact" }),
     supabase
       .from("payments")
-      .select("amount, created_at")
+      .select("amount, currency, refunded_amount, is_test, created_at")
       .eq("status", "confirmed")
       .gte("created_at", thirtyDaysAgo),
   ]);
 
-  const revenueLast30Days = (paymentsRes.data ?? []).reduce(
-    (sum, p) => sum + (Number((p as { amount: number }).amount) || 0),
-    0,
-  );
+  // Суммы в базе — в минорных единицах (7 900 ֏ = 790000), валюты не
+  // складываем между собой; тестовые платежи банка не считаем.
+  const revenueLast30Days: Record<string, number> = {};
+  for (const row of (paymentsRes.data ?? []) as Array<{
+    amount: number;
+    currency: string | null;
+    refunded_amount: number | null;
+    is_test: boolean | null;
+  }>) {
+    if (row.is_test) continue;
+    const cur = row.currency ?? "AMD";
+    const net = (Number(row.amount) || 0) - (Number(row.refunded_amount) || 0);
+    revenueLast30Days[cur] = (revenueLast30Days[cur] ?? 0) + net;
+  }
 
   const signupsByDayMap = new Map<string, number>();
   for (const u of usersRes.data ?? []) {
@@ -48,6 +60,13 @@ async function fetchOverviewStats(): Promise<OverviewStats> {
     revenueLast30Days,
     signupsByDay,
   };
+}
+
+function formatRevenue(byCurrency: Record<string, number>): string {
+  const parts = Object.entries(byCurrency)
+    .filter(([, minor]) => minor !== 0)
+    .map(([cur, minor]) => `${formatMinorAmount(minor)} ${CURRENCY_SYMBOL[cur as DisplayCurrency] ?? cur}`);
+  return parts.length ? parts.join(" · ") : "0";
 }
 
 function StatCard({
@@ -100,7 +119,7 @@ export default function OverviewPage() {
         <StatCard
           icon={TrendingUp}
           label="Доход за 30 дней"
-          value={isLoading ? "…" : `$${(data?.revenueLast30Days ?? 0).toFixed(2)}`}
+          value={isLoading ? "…" : formatRevenue(data?.revenueLast30Days ?? {})}
         />
       </div>
 

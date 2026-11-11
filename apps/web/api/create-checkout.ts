@@ -12,10 +12,10 @@
 // пакеты монорепозитория (сборка падала: "referencing unsupported modules").
 import {
   getPayableAmount,
-  isRegion,
   PURCHASABLE_PLANS,
   REGION_CURRENCY,
   type PurchasablePlan,
+  type Region,
 } from "../../../packages/types/src/pricing";
 import {
   authUser,
@@ -69,16 +69,18 @@ export default async function handler(request: Request): Promise<Response> {
     immediateStartConsent?: boolean;
   };
   const plan = PURCHASABLE_PLANS.find((p) => p === body.plan);
-  if (!plan || !isRegion(body.region))
-    return json({ message: "Неверный тариф" }, 400);
+  if (!plan) return json({ message: "Неверный тариф" }, 400);
+  // Банк принимает только драмы (EUR/USD/RUB отклоняет) — платят все по
+  // армянскому прайсу в AMD, что бы ни прислал браузер.
+  const region: Region = "am";
   if (body.acceptTerms !== true)
     return json({ message: "Нужно принять условия оферты" }, 400);
 
-  const currency = testMode ? "AMD" : REGION_CURRENCY[body.region];
+  const currency = testMode ? "AMD" : REGION_CURRENCY[region];
   const discount = user.pendingDiscountPercent;
   const amount = testMode
     ? TEST_AMOUNT_MINOR
-    : getPayableAmount(body.region, plan, discount);
+    : getPayableAmount(region, plan, discount);
 
   // Запись платежа — чтобы при сбое пометить её «Ошибка», а не оставить
   // висеть «В обработке»
@@ -151,7 +153,7 @@ export default async function handler(request: Request): Promise<Response> {
     await logServerError(
       "create-checkout",
       err,
-      { plan, region: body.region, test: testMode, order: created?.order_id },
+      { plan, region: body.region ?? null, test: testMode, order: created?.order_id },
       "critical",
       user.id,
     );
