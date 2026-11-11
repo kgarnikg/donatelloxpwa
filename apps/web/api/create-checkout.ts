@@ -80,8 +80,11 @@ export default async function handler(request: Request): Promise<Response> {
     ? TEST_AMOUNT_MINOR
     : getPayableAmount(body.region, plan, discount);
 
+  // Запись платежа — чтобы при сбое пометить её «Ошибка», а не оставить
+  // висеть «В обработке»
+  let created: { payment_id: string; order_id: number } | null = null;
   try {
-    const created = await rpc<{ payment_id: string; order_id: number }>(
+    created = await rpc<{ payment_id: string; order_id: number }>(
       "vpos_create_payment",
       {
         p_user_id: user.id,
@@ -139,7 +142,19 @@ export default async function handler(request: Request): Promise<Response> {
     const redirectUrl = `${vposBaseUrl()}Payments/Pay?id=${encodeURIComponent(init.PaymentID)}&lang=${vposLang(body.language)}`;
     return json({ redirectUrl });
   } catch (err) {
-    await logServerError("create-checkout", err, { plan, region: body.region, test: testMode }, "critical", user.id);
+    if (created) {
+      await rpc("vpos_payment_failed", {
+        p_payment_id: created.payment_id,
+        p_details: { step: "InitPayment", error: String(err).slice(0, 300) },
+      }).catch(() => {});
+    }
+    await logServerError(
+      "create-checkout",
+      err,
+      { plan, region: body.region, test: testMode, order: created?.order_id },
+      "critical",
+      user.id,
+    );
     return json(
       { message: "Не удалось начать оплату. Попробуйте ещё раз." },
       500,

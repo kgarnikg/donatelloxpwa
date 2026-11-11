@@ -142,6 +142,12 @@ achievements (каталог наград, см. 4.4) — справочник, 
 `packages/types/src/pricing.ts` (единый источник цен для лендинга,
 приложения и сервера). `useActiveSubscription()` фильтрует по
 `current_period_end > now()` — доступ закрывается сам по истечении срока.
+Все запросы в банк идут через `api/vpos-call.ts` (Node.js, не Edge!):
+Edge-среда Vercel добавляет к исходящим fetch заголовок
+`x-middleware-subrequest`, а защита боевого шлюза банка блокирует любые
+заголовки сверх документации. Не переводить vpos-call на Edge и не
+добавлять в него импорты из проекта (Node-функции не бандлятся, ESM-импорты
+без расширения ломаются).
 Поток: `api/create-checkout.ts` (InitPayment, сумма с сервера) → страница
 банка → `/payment/return` (SPA) → `api/payment-return.ts?format=json`
 (GetPaymentDetails, сверка суммы и заказа, `vpos_payment_paid`). Админка →

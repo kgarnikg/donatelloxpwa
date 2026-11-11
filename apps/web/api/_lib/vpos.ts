@@ -92,7 +92,22 @@ export interface VposPaymentDetails {
   [key: string]: unknown;
 }
 
-/** Вызов метода vPOS. Логин и пароль подставляются здесь. */
+/** Адрес нашего приложения — для вызова api/vpos-call. */
+function appBaseUrl(): string {
+  return (env("APP_URL") || "https://app.donatellex.com").replace(/\/$/, "");
+}
+
+async function sha256Hex(text: string): Promise<string> {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+/**
+ * Вызов метода vPOS. Сам запрос в банк делает api/vpos-call.ts (Node.js):
+ * Edge-среда Vercel добавляет к исходящим запросам заголовок
+ * x-middleware-subrequest, и защита боевого шлюза банка их блокирует.
+ * Логин и пароль банка подставляет vpos-call — отсюда они не уходят.
+ */
 export async function vpos<T = Record<string, unknown>>(
   method:
     | "InitPayment"
@@ -102,24 +117,20 @@ export async function vpos<T = Record<string, unknown>>(
     | "RefundPayment",
   body: Record<string, unknown>,
 ): Promise<T> {
-  const res = await fetch(`${vposBaseUrl()}api/VPOS/${method}`, {
+  const res = await fetch(`${appBaseUrl()}/api/vpos-call`, {
     method: "POST",
-    // Боевой шлюз стоит за защитой (WAF) — представляемся как обычный клиент
     headers: {
       "Content-Type": "application/json",
-      Accept: "application/json",
-      "User-Agent": "DonatelleX/1.0 (+https://www.donatellex.com)",
-      "Accept-Language": "en-US,en;q=0.9",
+      "x-vpos-proxy": await sha256Hex(`vpos-proxy:${env("VPOS_PASSWORD")}`),
     },
-    body: JSON.stringify({
-      Username: env("VPOS_USERNAME"),
-      Password: env("VPOS_PASSWORD"),
-      ...body,
-    }),
+    body: JSON.stringify({ method, body }),
   });
-  const text = await res.text();
+  const proxyText = await res.text();
   if (!res.ok)
-    throw new Error(`vPOS ${method}: HTTP ${res.status} ${text.slice(0, 300)}`);
+    throw new Error(`vPOS ${method}: прокси HTTP ${res.status} ${proxyText.slice(0, 300)}`);
+  const { status, text } = JSON.parse(proxyText) as { status: number; text: string };
+  if (status < 200 || status >= 300)
+    throw new Error(`vPOS ${method}: HTTP ${status} ${text.slice(0, 300)}`);
   try {
     return JSON.parse(text) as T;
   } catch {
