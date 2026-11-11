@@ -567,7 +567,8 @@
     },
     "consentTerms": "Ich akzeptiere die <terms>Angebotsbedingungen</terms> einschließlich der <refund>Erstattungsrichtlinie</refund>",
     "accessNote": "Der Zugang startet sofort nach der Zahlung. Wenn du es dir innerhalb von 14 Tagen anders überlegst, erstatten wir die ungenutzten Tage.",
-    "amdNote": "Die Zahlung erfolgt in armenischen Dram (֏). Ist deine Karte in einer anderen Währung, rechnet deine Bank den Betrag zu ihrem Kurs um."
+    "amdNote": "Die Zahlung erfolgt in armenischen Dram (֏). Ist deine Karte in einer anderen Währung, rechnet deine Bank den Betrag zu ihrem Kurs um.",
+    "amdNoteLocal": "Preise werden in der Währung deiner Region angezeigt, wie auf der Website. Bezahlt wird in armenischen Dram: Der zu zahlende Betrag steht in Klammern. Ist deine Karte in einer anderen Währung, rechnet deine Bank zu ihrem Kurs um."
   },
   "bodyParams": {
     "title": "Körperdaten",

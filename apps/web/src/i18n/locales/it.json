@@ -567,7 +567,8 @@
     },
     "consentTerms": "Accetto le <terms>condizioni dell'offerta</terms>, inclusa la <refund>politica di rimborso</refund>",
     "accessNote": "L'accesso si attiva subito dopo il pagamento. Se cambi idea entro 14 giorni, rimborsiamo i giorni non usati.",
-    "amdNote": "Il pagamento avviene in dram armeni (֏). Se la tua carta è in un’altra valuta, la tua banca converte l’importo al proprio tasso."
+    "amdNote": "Il pagamento avviene in dram armeni (֏). Se la tua carta è in un’altra valuta, la tua banca converte l’importo al proprio tasso.",
+    "amdNoteLocal": "I prezzi sono mostrati nella valuta della tua regione, come sul sito. Il pagamento avviene in dram armeni: l’importo da pagare è tra parentesi. Se la tua carta è in un’altra valuta, la tua banca lo converte al proprio tasso."
   },
   "bodyParams": {
     "title": "Parametri corporei",

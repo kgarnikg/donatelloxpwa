@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Trans, useTranslation } from "react-i18next";
@@ -10,13 +10,16 @@ import {
   formatRegionPrice,
   getPayableAmount,
   getRegionPrices,
+  guessRegionFromDevice,
   isDiscountApplicable,
+  isRegion,
   type PurchasablePlan,
   type Region,
 } from "@donatellox/types";
 import { supabase } from "@/lib/supabase";
 import { useActiveSubscription } from "@/lib/queries";
 import { useAuth } from "@/context/AuthContext";
+import { detectRegionByCountry } from "@/lib/detectRegion";
 import { REFUND_POLICY_URL, TERMS_URL, useWithdrawalInfo } from "@/lib/withdrawal";
 
 /**
@@ -36,8 +39,21 @@ import { REFUND_POLICY_URL, TERMS_URL, useWithdrawalInfo } from "@/lib/withdrawa
  * Оплата только в драмах: банк (Америабанк vPOS) принимает лишь AMD — EUR/USD/RUB
  * он отклоняет. Карта любой страны оплачивает AMD, курс считает банк карты.
  * Тот же регион «am» принудительно ставит сервер (api/create-checkout.ts).
+ * Для ориентира цены показываются ещё и в валюте региона посетителя (как на
+ * лендинге), а сумма к оплате в драмах — рядом в скобках.
  */
 const PAY_REGION: Region = "am";
+const REGION_STORAGE_KEY = "donatellox-region";
+
+function readStoredRegion(): Region | null {
+  try {
+    const stored = localStorage.getItem(REGION_STORAGE_KEY);
+    if (isRegion(stored)) return stored;
+  } catch {
+    // localStorage недоступен — просто угадываем
+  }
+  return null;
+}
 const PAYMENTS_ENABLED = import.meta.env.VITE_PAYMENTS_ENABLED === "true";
 
 export default function SubscriptionPage() {
@@ -46,6 +62,22 @@ export default function SubscriptionPage() {
   const { data: activeSubscription } = useActiveSubscription();
   const [plan, setPlan] = useState<PurchasablePlan>("quarterly");
   const region = PAY_REGION;
+  // Регион только для показа цены (по сохранённому выбору, устройству, IP)
+  const [viewRegion, setViewRegion] = useState<Region>(
+    () => readStoredRegion() ?? guessRegionFromDevice(i18n.language || navigator.language),
+  );
+  useEffect(() => {
+    if (readStoredRegion()) return;
+    let cancelled = false;
+    detectRegionByCountry().then((byCountry) => {
+      if (!cancelled && byCountry) setViewRegion(byCountry);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  const showLocal = viewRegion !== PAY_REGION;
+  const localPrices = getRegionPrices(viewRegion);
   const [error, setError] = useState<string | null>(null);
   // Одна галочка "Принимаю условия оферты" (0086). В оферте прописано, что
   // доступ открывается сразу после оплаты и при отказе в 14 дней
@@ -167,7 +199,7 @@ export default function SubscriptionPage() {
       <p className="mt-1 text-neutral-400">{t("payment.subtitle")}</p>
       <WithdrawalLink />
 
-      <p className="mt-4 text-xs text-neutral-500">{t("payment.amdNote")}</p>
+      <p className="mt-4 text-xs text-neutral-500">{t(showLocal ? "payment.amdNoteLocal" : "payment.amdNote")}</p>
 
       {discountPercent > 0 && (
         <div className="mt-5 rounded-md border border-volt-400/30 bg-volt-400/10 px-4 py-3 text-sm text-volt-400">
@@ -180,7 +212,10 @@ export default function SubscriptionPage() {
           const price = prices[p];
           const discounted = discountPercent > 0 && isDiscountApplicable(p);
           const finalAmount = getPayableAmount(region, p, discountPercent);
-          const strikeAmount = discounted ? price.total : price.original;
+          // Для показа: цена в валюте региона (главная), драмы — в скобках
+          const local = localPrices[p];
+          const localFinal = getPayableAmount(viewRegion, p, discountPercent);
+          const localStrike = discounted ? local.total : local.original;
           const savingsPercent = price.original
             ? Math.round((1 - price.total / price.original) * 100)
             : 0;
@@ -214,7 +249,7 @@ export default function SubscriptionPage() {
                   {p !== "monthly" && (
                     <p className="text-xs text-volt-400">
                       {t("payment.perMonth", {
-                        amount: formatRegionPrice(region, price.perMonth),
+                        amount: formatRegionPrice(viewRegion, local.perMonth),
                       })}
                       {savingsPercent > 0 &&
                         ` · ${t("payment.savings", { percent: savingsPercent })}`}
@@ -230,14 +265,19 @@ export default function SubscriptionPage() {
                 </div>
               </div>
               <div className="text-right">
-                {strikeAmount !== undefined && (
+                {localStrike !== undefined && (
                   <p className="text-xs text-neutral-500 line-through">
-                    {formatRegionPrice(region, strikeAmount)}
+                    {formatRegionPrice(viewRegion, localStrike)}
                   </p>
                 )}
                 <p className="font-display text-lg font-bold">
-                  {formatRegionPrice(region, finalAmount)}
+                  {formatRegionPrice(viewRegion, localFinal)}
                 </p>
+                {showLocal && (
+                  <p className="text-xs text-neutral-400">
+                    ({formatRegionPrice(region, finalAmount)})
+                  </p>
+                )}
               </div>
             </button>
           );
